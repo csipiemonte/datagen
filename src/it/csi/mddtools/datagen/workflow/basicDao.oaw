@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!--
+Parametri:
+ - daoTargetProjectName: 
+   - nome del progetto dove generare i dao java
+   - default: no
+ - daoBeansFilePosition: 
+   - percorso (relativo alla root del progetto [daoTargetProjectName] dove
+     generare il file dao-beans.xml
+   - default: /conf
+ - dbTargetProjectName: 
+   - nome del progetto dove generare il componente DB
+   - default: no
+ 
+-->
+<workflow>
+
+   
+	<!-- valorizzare con il nome del progetto eclipse target dove verranno
+	     generati gli artefatti. Corrisponde la nome del progetto SVN relativo
+	     al componente SW -->
+	
+	<property name="src-gen-dao" value="../${daoTargetProjectName}" />
+	<property name="src-gen-db"  value="../${dbTargetProjectName}" />
+	<property name="src-gen-dao" value="../${daoTargetProjectName}" />
+	
+	<!-- set up EMF for standalone execution -->
+		<bean class="org.eclipse.mwe.emf.StandaloneSetup" >
+		<platformUri value=".." />
+		<registerGeneratedEPackage value="it.csi.mddtools.datagen.DatagenPackage"/>
+		<registerGeneratedEPackage value="it.csi.mddtools.rdbmdl.RdbmdlPackage"/>
+		
+	</bean>
+	
+	<!-- Clean de build directory -->
+	<!--<component class="org.openarchitectureware.workflow.common.DirectoryCleaner">
+		<directory value="${src-gen}/build" />
+	</component>-->
+
+	<!-- load model and store it in slot 'model' -->
+	<component class="org.eclipse.mwe.emf.Reader">
+		<uri value="platform:/resource/${model}" />
+		<modelSlot value="model" />
+	</component>
+
+	<!-- check model (common checks) -->
+	<component class="oaw.check.CheckComponent">
+		<metaModel id="mm"
+			class="org.eclipse.m2t.type.emf.EmfRegistryMetaModel"/>
+		<checkFile value="metamodel::DatagenChecks" />
+		<emfAllChildrenSlot value="model" />
+	</component>
+	
+
+	<!--  generate code -->
+	<component class="org.openarchitectureware.xpand2.Generator" id="mygenerator">
+		<metaModel idRef="mm"/>
+		<expand
+			value="template::datagen::Main::main FOR model" />
+		<!--  protected regions configurator --> 
+	    <prSrcPaths value="${src-gen}" /> 
+	    <prDefaultExcludes value="true" /> 
+	    <prExcludes value="*.jar, *.svn-base, .metadata" />
+		<outlet path="${src-gen}" >
+			<postprocessor class="org.openarchitectureware.xpand2.output.JavaBeautifier" />
+		</outlet>
+	</component>
+	
+</workflow>
