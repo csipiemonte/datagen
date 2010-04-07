@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/datagen/src"
+    editDirectory="/datagen/src" modelPluginID="datagen" modelName="Datagen" rootExtendsInterface="org.eclipse.emf.cdo.CDOObject"
+    rootExtendsClass="org.eclipse.emf.internal.cdo.CDOObjectImpl" reflectiveDelegation="true"
+    importerID="org.eclipse.emf.importer.cdo" featureDelegation="Reflective" complianceLevel="5.0"
+    copyrightFields="false" usedGenPackages="rdbmdl.genmodel#//rdbmdl">
+  <foreignModel>datagen.ecore</foreignModel>
+  <modelPluginVariables>CDO=org.eclipse.emf.cdo</modelPluginVariables>
+  <genPackages prefix="Datagen" basePackage="it.csi.mddtools" disposableProviderFactory="true"
+      ecorePackage="datagen.ecore#/">
+    <genClasses ecoreClass="datagen.ecore#//DBAccessModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//DBAccessModel/dao"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#//DBAccessModel/schema"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#//DataAccessObject">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#//DataAccessObject/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#//DataAccessObject/mainTable"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

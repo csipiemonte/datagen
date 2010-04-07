@@ -1,0 +1,10 @@
+import datagen;
+import rdbmdl;
+
+extension template::DatagenExtensions; 
+
+context DBAccessModel ERROR "codice prodotto mancante" :
+	!isNullOrEmpty(codProdotto);
+	
+context DBAccessModel ERROR "codice componente mancante" :
+	!isNullOrEmpty(codComponente);

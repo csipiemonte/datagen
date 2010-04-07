@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/datagen/src"
+    editDirectory="/datagen/src" modelPluginID="datagen" modelName="Rdbmdl" rootExtendsInterface="org.eclipse.emf.cdo.CDOObject"
+    rootExtendsClass="org.eclipse.emf.internal.cdo.CDOObjectImpl" reflectiveDelegation="true"
+    importerID="org.eclipse.emf.importer.cdo" featureDelegation="Reflective" complianceLevel="5.0"
+    copyrightFields="false">
+  <foreignModel>rdbmdl.ecore</foreignModel>
+  <modelPluginVariables>CDO=org.eclipse.emf.cdo</modelPluginVariables>
+  <genPackages prefix="Rdbmdl" basePackage="it.csi.mddtools" disposableProviderFactory="true"
+      ecorePackage="rdbmdl.ecore#/">
+    <genClasses ecoreClass="rdbmdl.ecore#//Element">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rdbmdl.ecore#//Element/parent"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="rdbmdl.ecore#//NamedColumnSet"/>
+    <genClasses image="false" ecoreClass="rdbmdl.ecore#//NamedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rdbmdl.ecore#//NamedElement/name"/>
+    </genClasses>
+    <genClasses ecoreClass="rdbmdl.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rdbmdl.ecore#//Model/schemas"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rdbmdl.ecore#//Model/server_id"/>
+    </genClasses>
+    <genClasses ecoreClass="rdbmdl.ecore#//Schema">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rdbmdl.ecore#//Schema/elements"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="rdbmdl.ecore#//SchemaElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rdbmdl.ecore#//SchemaElement/owner"/>
+    </genClasses>
+    <genClasses ecoreClass="rdbmdl.ecore#//Table">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rdbmdl.ecore#//Table/columns"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rdbmdl.ecore#//Table/primaryKey"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rdbmdl.ecore#//Table/uniqueConstraints"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rdbmdl.ecore#//Table/foreignKeys"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rdbmdl.ecore#//Table/indices"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rdbmdl.ecore#//Table/checks"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="rdbmdl.ecore#//Column"/>
+    <genClasses ecoreClass="rdbmdl.ecore#//TableColumn">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference rdbmdl.ecore#//TableColumn/domain"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rdbmdl.ecore#//TableColumn/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rdbmdl.ecore#//TableColumn/isPrimaryKey"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rdbmdl.ecore#//TableColumn/isForeignKey"/>
+    </genClasses>
+    <nestedGenPackages prefix="Constraints" disposableProviderFactory="true" ecorePackage="rdbmdl.ecore#//constraints">
+      <genClasses image="false" ecoreClass="rdbmdl.ecore#//constraints/Constraint"/>
+      <genClasses ecoreClass="rdbmdl.ecore#//constraints/CheckConstraint">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rdbmdl.ecore#//constraints/CheckConstraint/expression"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="rdbmdl.ecore#//constraints/ColumnRefConstraint">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference rdbmdl.ecore#//constraints/ColumnRefConstraint/includedColumns"/>
+      </genClasses>
+      <genClasses ecoreClass="rdbmdl.ecore#//constraints/UniqueConstraint"/>
+      <genClasses ecoreClass="rdbmdl.ecore#//constraints/PrimaryKey"/>
+      <genClasses ecoreClass="rdbmdl.ecore#//constraints/ForeignKey">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference rdbmdl.ecore#//constraints/ForeignKey/referredUC"/>
+      </genClasses>
+      <genClasses ecoreClass="rdbmdl.ecore#//constraints/Index">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rdbmdl.ecore#//constraints/Index/indexedColumns"/>
+      </genClasses>
+      <genClasses ecoreClass="rdbmdl.ecore#//constraints/IndexedColumn">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rdbmdl.ecore#//constraints/IndexedColumn/ascending"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference rdbmdl.ecore#//constraints/IndexedColumn/refColumn"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Datatypes" disposableProviderFactory="true" ecorePackage="rdbmdl.ecore#//datatypes">
+      <genClasses ecoreClass="rdbmdl.ecore#//datatypes/Domain">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference rdbmdl.ecore#//datatypes/Domain/parentDomain"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="rdbmdl.ecore#//datatypes/DataType">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rdbmdl.ecore#//datatypes/DataType/size"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rdbmdl.ecore#//datatypes/DataType/decimalDigits"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rdbmdl.ecore#//datatypes/DataType/nullable"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rdbmdl.ecore#//datatypes/DataType/default"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rdbmdl.ecore#//datatypes/DataType/check"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rdbmdl.ecore#//datatypes/DataType/var"/>
+      </genClasses>
+      <genClasses ecoreClass="rdbmdl.ecore#//datatypes/PrimitiveDataType">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rdbmdl.ecore#//datatypes/PrimitiveDataType/type"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="View" disposableProviderFactory="true" ecorePackage="rdbmdl.ecore#//view">
+      <genClasses ecoreClass="rdbmdl.ecore#//view/View">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rdbmdl.ecore#//view/View/columns"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rdbmdl.ecore#//view/View/referencedTablesAndViews"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rdbmdl.ecore#//view/View/ddl"/>
+      </genClasses>
+      <genClasses ecoreClass="rdbmdl.ecore#//view/ViewAlias">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference rdbmdl.ecore#//view/ViewAlias/referencedTableOrView"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="rdbmdl.ecore#//view/ViewColumn"/>
+      <genClasses ecoreClass="rdbmdl.ecore#//view/ViewExpressionColumn">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rdbmdl.ecore#//view/ViewExpressionColumn/expression"/>
+      </genClasses>
+      <genClasses ecoreClass="rdbmdl.ecore#//view/ReferencedViewColumn">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference rdbmdl.ecore#//view/ReferencedViewColumn/refColumn"/>
+      </genClasses>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>
