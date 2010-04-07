@@ -7,8 +7,9 @@
 
 «EXTENSION template::DatagenExtensions»
 
-«DEFINE main FOR DBAccessModel»
+«DEFINE main(String daoBeansFilePos) FOR DBAccessModel»
 «EXPAND template::datagen::dto::dtoFiles::dtoFiles FOR this»
 «EXPAND template::datagen::dao::daoFiles::daoFiles FOR this»
+«EXPAND template::datagen::spring::configFiles::daoBeansFile(daoBeansFilePos) FOR this»
 «EXPAND template::datagen::spring::configFiles::configFiles FOR this»
 «ENDDEFINE»
