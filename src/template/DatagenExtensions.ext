@@ -3,12 +3,15 @@ import datagen;
 import rdbmdl;
 import rdbmdl::datatypes;
 
+String javaSrcRoot() :
+	"src/java";
+	
 String getDALayerBasePkg(DBAccessModel model) :
 	"it.csi."+model.codProdotto.toLowerCase()+"."+model.codComponente.toLowerCase()+"."+
 	"business.dao";
 
 String getDALayerBaseDir(DBAccessModel model) :
-	"it/csi/"+model.codProdotto.toLowerCase()+"/"+model.codComponente.toLowerCase()+"/"+
+	javaSrcRoot()+"/it/csi/"+model.codProdotto.toLowerCase()+"/"+model.codComponente.toLowerCase()+"/"+
 	"business/dao";
 
 String getPkgPackage(DaoPackage pkg, DBAccessModel model) :
@@ -116,6 +119,9 @@ String getValueFromRS(TableColumn col, int i) :
 
 boolean isNullOrEmpty(String s) :
 	s==null || s.length==0;
+
+String getRegionUID(String sourceId) : JAVA
+	it.csi.mddtools.datagen.genutils.GenUtils.getRegionUID(java.lang.String);
 
 // TODO da rivedere...
 String toJavaId(String original) :
