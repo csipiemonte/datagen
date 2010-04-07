@@ -22,7 +22,8 @@ Parametri:
 	
 	<property name="src-gen-dao" value="../${daoTargetProjectName}" />
 	<property name="src-gen-db"  value="../${dbTargetProjectName}" />
-	<property name="src-gen-dao" value="../${daoTargetProjectName}" />
+	<!-- override if needed! -->
+	<property name="daoBeansFilePosition" value="/conf" />
 	
 	<!-- set up EMF for standalone execution -->
 		<bean class="org.eclipse.mwe.emf.StandaloneSetup" >
@@ -51,17 +52,16 @@ Parametri:
 		<emfAllChildrenSlot value="model" />
 	</component>
 	
-
 	<!--  generate code -->
 	<component class="org.openarchitectureware.xpand2.Generator" id="mygenerator">
 		<metaModel idRef="mm"/>
 		<expand
-			value="template::datagen::Main::main FOR model" />
+			value="template::datagen::Main::main('${daoBeansFilePosition}') FOR model" />
 		<!--  protected regions configurator --> 
-	    <prSrcPaths value="${src-gen}" /> 
+	    <prSrcPaths value="${src-gen-dao}" /> 
 	    <prDefaultExcludes value="true" /> 
 	    <prExcludes value="*.jar, *.svn-base, .metadata" />
-		<outlet path="${src-gen}" >
+		<outlet path="${src-gen-dao}" >
 			<postprocessor class="org.openarchitectureware.xpand2.output.JavaBeautifier" />
 		</outlet>
 	</component>
