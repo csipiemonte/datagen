@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<workflow>
+    <cartridge file="it/csi/mddtools/datagen/workflow/basicDao.oaw"
+		model="datagen/src/testmodel/test_datagen.xmi" 
+		targetProjectName="testdatagen"   	
+    />
+</workflow>

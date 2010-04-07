@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ASCII"?>
+<datagen:DBAccessModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:datagen="http://www.csi.it/mddtools/datagen" xsi:schemaLocation="http://www.csi.it/mddtools/datagen ../metamodel/datagen.ecore" codProdotto="comp" codComponente="prod">
+  <schema href="test_schema.xmi#/"/>
+  <daopkgs name="prova">
+    <dao name="Dipendente">
+      <mainTable href="test_schema.xmi#//@elements.0"/>
+    </dao>
+    <dao name="Progetto">
+      <mainTable href="test_schema.xmi#//@elements.1"/>
+    </dao>
+  </daopkgs>
+</datagen:DBAccessModel>
