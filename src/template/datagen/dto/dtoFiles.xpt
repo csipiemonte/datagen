@@ -1,0 +1,217 @@
+«IMPORT ecore»
+«IMPORT datagen»
+«IMPORT rdbmdl»
+«IMPORT rdbmdl::constraints»
+«IMPORT rdbmdl::datatypes»
+«IMPORT rdbmdl::view»
+
+«EXTENSION template::DatagenExtensions»
+
+«DEFINE dtoFiles FOR DBAccessModel»
+«EXPAND dtoFiles(this) FOREACH daopkgs»
+«ENDDEFINE»
+
+«DEFINE dtoFiles (DBAccessModel model) FOR DaoPackage»
+«EXPAND dtoFile(model) FOREACH dao»
+«EXPAND dtoPkFile(model) FOREACH dao»
+«ENDDEFINE»
+
+«DEFINE dtoPkFile(DBAccessModel model) FOR DataAccessObject»
+«LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-»
+«FILE getPkFullPath(this, model)»package «pkgPackage».dto;
+
+import «pkgPackage».dao.*;
+import «pkgPackage».exceptions.*;
+import java.io.Serializable;
+import java.util.*;
+
+/**
+ * @generated
+ */
+public class «getPkClassName()» implements Serializable {
+		protected Integer idClasseEff;
+
+	«EXPAND columnJavaProperty FOREACH this.mainTable.primaryKey.includedColumns»
+	
+	/**
+	 * @generated
+	 */
+	public «getPkClassName()»()
+	{
+	}
+
+	/**
+	 * @generated
+	 */
+	public «getPkClassName()»(
+		«FOREACH mainTable.primaryKey.includedColumns AS currPKCol SEPARATOR ","»
+		final «javaPropertyTypeFromColumn(currPKCol)» «javaPropertyNameFromColumn(currPKCol)»
+		«ENDFOREACH»
+	)
+	{
+		«FOREACH mainTable.primaryKey.includedColumns AS currPKCol SEPARATOR ","»
+		this._«javaPropertyNameFromColumn(currPKCol)» = «javaPropertyNameFromColumn(currPKCol)»;
+		«ENDFOREACH»
+	}
+
+	/**
+	 * Method 'equals'
+	 * 
+	 * @param _other
+	 * @return boolean
+	 */
+	public boolean equals(Object _other)
+	{
+		if (_other == null) {
+			return false;
+		}
+		
+		if (_other == this) {
+			return true;
+		}
+		
+		if (!(_other instanceof «getPkClassName()»)) {
+			return false;
+		}
+		
+		final «getPkClassName()» _cast = («getPkClassName()») _other;
+		
+		«FOREACH mainTable.primaryKey.includedColumns AS currPKCol SEPARATOR ","»
+		if (_«javaPropertyNameFromColumn(currPKCol)» == null ? _cast.get«javaPropertyNameFromColumn(currPKCol).toFirstUpper()»() != _«javaPropertyNameFromColumn(currPKCol)» : !_«javaPropertyNameFromColumn(currPKCol)».equals( _cast.get«javaPropertyNameFromColumn(currPKCol).toFirstUpper()»() )) {
+			return false;
+		}
+		«ENDFOREACH»
+		
+		return true;
+	}
+
+	/**
+	 * Method 'hashCode'
+	 * 
+	 * @return int
+	 */
+	public int hashCode()
+	{
+		int _hashCode = 0;
+		if (idClasseEff != null) {
+			_hashCode = 29 * _hashCode + idClasseEff.hashCode();
+		}
+		
+		return _hashCode;
+	}
+
+	/**
+	 * Method 'toString'
+	 * 
+	 * @return String
+	 */
+	public String toString()
+	{
+		StringBuffer ret = new StringBuffer();
+		ret.append( "it.csi.sicee.siceeweb.business.dao.dto.SiceeDClasseEfficienzaPk: " );
+		ret.append( "idClasseEff=" + idClasseEff );
+		return ret.toString();
+	}
+}
+
+«ENDFILE»
+«ENDLET»
+«ENDDEFINE»
+
+«DEFINE dtoFile(DBAccessModel model) FOR DataAccessObject»
+«LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-»
+«FILE getDtoFullPath(this, model)»package «pkgPackage».dto;
+
+import «pkgPackage».dao.*;
+import «pkgPackage».exceptions.*;
+import java.io.Serializable;
+import java.util.*;
+
+/**
+ * @generated
+ */
+public class «getDtoClassName()» implements Serializable
+{
+
+	«EXPAND columnJavaProperty FOREACH this.mainTable.columns»
+
+	/**
+	 * Method 'equals'
+	 * 
+	 * @param _other
+	 * @return boolean
+	 * @generated
+	 */
+	public boolean equals(Object _other)
+	{
+		// TODO
+		return super.equals(_other);
+	}
+
+	/**
+	 * Method 'hashCode'
+	 * 
+	 * @return int
+	 * @generated
+	 */
+	public int hashCode()
+	{
+		// TODO
+		return super.hashCode();
+	}
+
+	/**
+	 * Method 'createPk'
+	 * 
+	 * @return «getPkClassName()»
+	 * @generated
+	 */
+	public «getPkClassName()» createPk()
+	{
+		return new «getPkClassName()»(
+		«FOREACH this.mainTable.primaryKey.includedColumns AS pkColumn SEPARATOR ","-»
+			_«javaPropertyNameFromColumn(pkColumn)»
+		«ENDFOREACH-»
+		);
+	}
+
+	/**
+	 * Method 'toString'
+	 * 
+	 * @return String
+	 * @generated
+	 */
+	public String toString()
+	{
+		// TODO
+		return super.toString();
+	}
+
+}
+
+
+«ENDFILE»
+«ENDLET-»
+«ENDDEFINE»
+
+«DEFINE columnJavaProperty FOR TableColumn-»
+	/**
+	 * @generated
+	 */
+	private «javaPropertyTypeFromColumn()» _«javaPropertyNameFromColumn()»;
+	
+	/**
+	 * @generated
+	 */
+	public void set«javaPropertyNameFromColumn().toFirstUpper()» («javaPropertyTypeFromColumn()» val){
+		_«javaPropertyNameFromColumn()» = val;
+	}
+	
+	/**
+	 * @generated
+	 */
+	public «javaPropertyTypeFromColumn()» get«javaPropertyNameFromColumn().toFirstUpper()»(){
+		return _«javaPropertyNameFromColumn()»;
+	}
+	
+«ENDDEFINE»

@@ -1,0 +1,122 @@
+import ecore;
+import datagen;
+import rdbmdl;
+import rdbmdl::datatypes;
+
+String getDALayerBasePkg(DBAccessModel model) :
+	"it.csi."+model.codProdotto.toLowerCase()+"."+model.codComponente.toLowerCase()+"."+
+	"business.dao";
+
+String getDALayerBaseDir(DBAccessModel model) :
+	"it/csi/"+model.codProdotto.toLowerCase()+"/"+model.codComponente.toLowerCase()+"/"+
+	"business/dao";
+
+String getPkgPackage(DaoPackage pkg, DBAccessModel model) :
+	getDALayerBasePkg(model)+"."+pkg.name;
+
+String getPkgDir(DaoPackage pkg, DBAccessModel model) :
+	getDALayerBaseDir(model)+"/"+pkg.name;
+		
+// DAO
+
+String getDaoClassName(DataAccessObject dao) :
+	dao.name.toFirstUpper()+"Dao";
+
+String getDaoFQN(DataAccessObject dao, DBAccessModel model) :
+	getPkgPackage((DaoPackage)(dao.eContainer), model)+".dao."+getDaoClassName(dao);
+
+String getDaoFullPath(DataAccessObject dao, DBAccessModel model) :
+	getPkgDir((DaoPackage)(dao.eContainer), model)+"/dao/"+getDaoClassName(dao)+".java";
+
+String getDaoImplClassName(DataAccessObject dao) :
+	dao.name.toFirstUpper()+"DaoImpl";
+
+String getDaoImplFQN(DataAccessObject dao, DBAccessModel model) :
+	getPkgPackage((DaoPackage)(dao.eContainer), model)+".dao.impl."+getDaoClassName(dao);
+
+String getDaoImplFullPath(DataAccessObject dao, DBAccessModel model) :
+	getPkgDir((DaoPackage)(dao.eContainer), model)+"/dao/impl/"+getDaoImplClassName(dao)+".java";
+
+String getDaoExcClassName(DataAccessObject dao) :
+	dao.name.toFirstUpper()+"DaoException";
+
+String getDaoExcFQN(DataAccessObject dao, DBAccessModel model) :
+	getPkgPackage((DaoPackage)(dao.eContainer), model)+".exceptions."+getDaoExcClassName(dao);
+
+String getDaoExcFullPath(DataAccessObject dao, DBAccessModel model) :
+	getPkgDir((DaoPackage)(dao.eContainer), model)+"/exceptions/"+getDaoExcClassName(dao)+".java";
+
+
+// DTO
+
+String getDtoClassName(DataAccessObject dao) :
+	dao.name.toFirstUpper()+"Dto";
+
+String getDtoFQN(DataAccessObject dao, DBAccessModel model) :
+	getPkgPackage((DaoPackage)(dao.eContainer), model)+".dto."+getDtoClassName(dao);
+
+String getDtoFullPath(DataAccessObject dao, DBAccessModel model) :
+	getPkgDir((DaoPackage)(dao.eContainer), model)+"/dto/"+getDtoClassName(dao)+".java";
+	
+// DTO PK
+String getPkClassName(DataAccessObject dao) :
+	dao.name.toFirstUpper()+"Pk";
+
+String getPkFQN(DataAccessObject dao, DBAccessModel model) :
+	getPkgPackage((DaoPackage)(dao.eContainer), model)+".dto."+getPkClassName(dao);
+
+String getPkFullPath(DataAccessObject dao, DBAccessModel model) :
+	getPkgDir((DaoPackage)(dao.eContainer), model)+"/dto/"+getPkClassName(dao)+".java";
+	
+//// 
+
+String javaPropertyNameFromColumn(TableColumn col) :
+	toJavaId(col.name);
+
+// TODO!!!
+String javaPropertyTypeFromColumn(TableColumn col) :
+	let code = col.type.type :
+	switch(code){
+		case PrimitiveTypeCodes::VARCHAR2 :
+			"String"
+		case PrimitiveTypeCodes::NUMBER :
+			 (col.type.decimalDigits >0 ?
+				"java.lang.Double" :
+				"java.lang.Long")
+		case PrimitiveTypeCodes::DATE :
+			"java.sql.Date"
+		case PrimitiveTypeCodes::TIMESTAMP :
+			"java.sql.Timestamp"
+		case PrimitiveTypeCodes::BLOB : 
+			"java.sql.Blob"
+		case PrimitiveTypeCodes::CLOB :
+			"java.sql.Clob"
+		default :"???"
+	};
+		
+String getValueFromRS(TableColumn col, int i) :
+	let code = col.type.type :
+	switch(code){
+		case PrimitiveTypeCodes::VARCHAR2 :
+			"rs.getString("+i+")"
+		case PrimitiveTypeCodes::NUMBER :
+			 (col.type.decimalDigits >0 ?
+				"new java.lang.Double(rs.getDouble("+i+"))" :
+				"new java.lang.Long(rs.getLong("+i+"))")
+		case PrimitiveTypeCodes::DATE :
+			"rs.getDate("+i+")"
+		case PrimitiveTypeCodes::TIMESTAMP :
+			"rs.getTimestamp("+i+")"
+		case PrimitiveTypeCodes::BLOB : 
+			"java.sql.Blob???"
+		case PrimitiveTypeCodes::CLOB :
+			"java.sql.Clob???"
+		default :"???"
+	};
+
+boolean isNullOrEmpty(String s) :
+	s==null || s.length==0;
+
+// TODO da rivedere...
+String toJavaId(String original) :
+	original.toFirstLower();

@@ -1,0 +1,14 @@
+«IMPORT ecore»
+«IMPORT datagen»
+«IMPORT rdbmdl»
+«IMPORT rdbmdl::constraints»
+«IMPORT rdbmdl::datatypes»
+«IMPORT rdbmdl::view»
+
+«EXTENSION template::DatagenExtensions»
+
+«DEFINE main FOR DBAccessModel»
+«EXPAND template::datagen::dto::dtoFiles::dtoFiles FOR this»
+«EXPAND template::datagen::dao::daoFiles::daoFiles FOR this»
+«EXPAND template::datagen::spring::configFiles::configFiles FOR this»
+«ENDDEFINE»

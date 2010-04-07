@@ -1,0 +1,443 @@
+«IMPORT ecore»
+«IMPORT datagen»
+«IMPORT rdbmdl»
+«IMPORT rdbmdl::constraints»
+«IMPORT rdbmdl::datatypes»
+«IMPORT rdbmdl::view»
+
+«EXTENSION template::DatagenExtensions»
+
+«DEFINE daoFiles FOR DBAccessModel»
+«EXPAND daoFiles(this) FOREACH daopkgs»
+«ENDDEFINE»
+
+«DEFINE daoFiles (DBAccessModel model) FOR DaoPackage»
+«EXPAND commonDaoFiles(model) FOR this»
+«EXPAND daoFiles(model) FOREACH dao»
+«ENDDEFINE»
+
+«DEFINE daoFiles(DBAccessModel model) FOR DataAccessObject»
+«EXPAND daoFile(model) FOR this»
+«EXPAND daoImplFile(model) FOR this»
+«EXPAND daoExceptionFile(model) FOR this»
+«ENDDEFINE»
+
+«DEFINE daoExceptionFile(DBAccessModel model) FOR DataAccessObject»
+«LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-»
+«FILE getDaoExcFullPath(this, model)»package «pkgPackage».exceptions;
+
+public class «getDaoExcClassName()» extends DaoException
+{
+	/** 
+	 * @param message
+	 */
+	public «getDaoExcClassName()»(String message)
+	{
+		super(message);
+	}
+
+	/**
+	 * @param message
+	 * @param cause
+	 */
+	public «getDaoExcClassName()»(String message, Throwable cause)
+	{
+		super(message, cause);
+	}
+
+}
+«ENDFILE»
+«ENDLET»
+«ENDDEFINE»
+
+«DEFINE daoFile(DBAccessModel model) FOR DataAccessObject»
+«LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-»
+«FILE getDaoFullPath(this, model)»package «pkgPackage».dao;
+
+/**
+ * @generated
+ */
+public interface «getDaoClassName()» {
+
+}
+«ENDFILE-»
+«ENDLET-»
+«ENDDEFINE»
+
+«DEFINE daoImplFile(DBAccessModel model) FOR DataAccessObject»
+«LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-»
+«FILE getDaoImplFullPath(this, model)»package «pkgPackage».dao.impl;
+
+import «pkgPackage».dao.*;
+import «pkgPackage».dto.*;
+import «pkgPackage».exceptions.*;
+import java.util.List;
+import javax.sql.DataSource;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
+import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @generated
+ */
+public class «getDaoImplClassName()» extends AbstractDAO implements ParameterizedRowMapper<«getDtoClassName()»>, «getDaoClassName()»
+{
+	protected SimpleJdbcTemplate jdbcTemplate;
+
+	protected DataSource dataSource;
+
+	/**
+	 * Method 'setDataSource'
+	 * 
+	 * @param dataSource
+	 */
+	public void setDataSource(DataSource dataSource)
+	{
+		this.dataSource = dataSource;
+		jdbcTemplate = new SimpleJdbcTemplate(dataSource);
+	}
+
+	«EXPAND insertMethod(model) FOR this»
+	
+	«EXPAND updateMethod(model) FOR this»
+	
+	«EXPAND deleteMethod(model) FOR this»
+	
+	«EXPAND mapRowMethod(model) FOR this»
+
+
+	/**
+	 * Method 'getTableName'
+	 * 
+	 * @return String
+	 */
+	public String getTableName()
+	{
+		return "«mainTable.name»";
+	}
+
+	«EXPAND findByPkMethod(model) FOR this»
+	
+	«EXPAND findAllMethod(model) FOR this»
+
+
+}
+
+«ENDFILE-»
+«ENDLET-»
+«ENDDEFINE»
+
+«DEFINE columnNameList FOR List[TableColumn]-»
+«FOREACH this AS currCol SEPARATOR ","-»«((TableColumn)currCol).name»«ENDFOREACH-»
+«ENDDEFINE»
+
+«DEFINE setColumnSetValuePlaceholderList FOR List[TableColumn]-»
+«FOREACH this AS currCol SEPARATOR ","-» SET «((TableColumn)currCol).name» = ? «ENDFOREACH-»
+«ENDDEFINE»
+
+«DEFINE setColumnEqPlaceholderList(String separator) FOR List[TableColumn]-»
+«FOREACH this AS currCol SEPARATOR separator-»«((TableColumn)currCol).name» = ? «ENDFOREACH-»
+«ENDDEFINE»
+
+«DEFINE paramPlaceholderList FOR List[TableColumn]-»
+«FOREACH this AS currCol SEPARATOR ","-» ? «ENDFOREACH-»
+«ENDDEFINE»
+
+«DEFINE paramValorizationList(String dtoVarName) FOR List[TableColumn]-»
+«FOREACH this AS currCol SEPARATOR ","-»«dtoVarName».get«javaPropertyNameFromColumn(currCol).toFirstUpper()»()«ENDFOREACH-»
+«ENDDEFINE»
+
+
+«DEFINE insertMethod(DBAccessModel model) FOR DataAccessObject»
+	/**
+	 * Method 'insert'
+	 * 
+	 * @param dto
+	 * @return «getPkClassName()»
+	 * @generated
+	 */
+	public «getPkClassName()» insert(«getDtoClassName()» dto)
+	{
+		jdbcTemplate.update("INSERT INTO " + getTableName() + " ( «EXPAND columnNameList FOR this.mainTable.columns-» ) VALUES ( «EXPAND paramPlaceholderList FOR this.mainTable.columns-» )",		
+		«EXPAND paramValorizationList("dto") FOR this.mainTable.columns-»
+		);
+		return dto.createPk();
+	}
+«ENDDEFINE»
+
+«DEFINE updateMethod(DBAccessModel model) FOR DataAccessObject»
+	/** 
+	 * Updates a single row in the «mainTable.name» table.
+	 * @generated
+	 */
+	public void update(«getPkClassName()» pk, «getDtoClassName()» dto) throws «getDaoExcClassName()»
+	{
+		jdbcTemplate.update("UPDATE " + getTableName() + " «EXPAND setColumnSetValuePlaceholderList FOR this.mainTable.columns-»",
+		«EXPAND paramValorizationList("dto") FOR this.mainTable.columns»
+		);
+	}
+
+«ENDDEFINE»
+
+«DEFINE deleteMethod(DBAccessModel model) FOR DataAccessObject»
+	/** 
+	 * Deletes a single row in the «mainTable.name» table.
+	 * @generated
+	 */
+	
+	public void delete(«getPkClassName()» pk) throws «getDaoExcClassName()»
+	{
+		jdbcTemplate.update("DELETE FROM " + getTableName() + " WHERE «EXPAND setColumnEqPlaceholderList(",") FOR this.mainTable.primaryKey.includedColumns»",
+		«EXPAND paramValorizationList("pk") FOR this.mainTable.primaryKey.includedColumns»
+		);
+	}
+«ENDDEFINE»
+
+«DEFINE mapRowMethod(DBAccessModel model) FOR DataAccessObject»
+	/**
+	 * Method 'mapRow'
+	 * 
+	 * @param rs
+	 * @param row
+	 * @throws SQLException
+	 * @return «getDtoClassName()»
+	 * @generated
+	 */
+	public «getDtoClassName()» mapRow(ResultSet rs, int row) throws SQLException
+	{
+		«getDtoClassName()» dto = new «getDtoClassName()»();
+		«FOREACH mainTable.columns AS currCol ITERATOR i»
+		dto.set«javaPropertyNameFromColumn(currCol).toFirstUpper()»(
+			«getValueFromRS(currCol, i.counter1)»
+		);
+		«ENDFOREACH»
+		return dto;
+	}
+«ENDDEFINE»
+
+«DEFINE findByPkMethod(DBAccessModel model) FOR DataAccessObject»
+	/** 
+	 * Returns all rows from the «mainTable.name» table that match the primary key criteria
+	 * @generated
+	 */
+	public «getDtoClassName()» findByPrimaryKey(«getPkClassName()» pk) throws «getDaoExcClassName()»
+	{
+		try {
+			List<«getDtoClassName()»> list = jdbcTemplate.query("SELECT «EXPAND columnNameList FOR this.mainTable.columns» FROM " + getTableName() + " «EXPAND setColumnEqPlaceholderList(" AND ") FOR this.mainTable.primaryKey.includedColumns»", this,«EXPAND paramValorizationList("pk") FOR this.mainTable.primaryKey.includedColumns»);
+			return list.size() == 0 ? null : list.get(0);
+		}
+		catch (Exception e) {
+			throw new «getDaoExcClassName()»("Query failed", e);
+		}		
+	}
+«ENDDEFINE»
+
+«DEFINE findAllMethod(DBAccessModel model) FOR DataAccessObject»
+	/** 
+	 * Returns all rows from the «mainTable.name» table that match the criteria ''.
+	 * @generated
+	 */
+	public List<«getDtoClassName()»> findAll() throws «getDaoExcClassName()»
+	{
+		try {
+			return jdbcTemplate.query("SELECT «EXPAND columnNameList FOR this.mainTable.columns» FROM " + getTableName() , this);
+		}
+		catch (Exception e) {
+			throw new «getDaoExcClassName()»("Query failed", e);
+		}
+	}
+«ENDDEFINE»
+
+«DEFINE commonDaoFiles(DBAccessModel model) FOR DaoPackage»
+«FILE getPkgDir(this, model)+"/dao/impl/AbstractDAO.java"»package «getPkgPackage(this, model)».dao.impl;
+
+import java.io.*;
+import java.sql.*;
+
+import org.springframework.jdbc.support.incrementer.DataFieldMaxValueIncrementer;
+
+import oracle.sql.BLOB;
+import oracle.sql.CLOB;
+
+/**
+ * Base class for Oracle 9i DAO classes.
+ *
+ * This is a customizable template within FireStorm/DAO.
+ * @generated
+ */
+public class AbstractDAO
+{
+	
+	protected DataFieldMaxValueIncrementer incrementer;
+	   
+	public void setIncrementer(DataFieldMaxValueIncrementer incrementer) {
+		this.incrementer = incrementer;
+	}
+
+	
+    public void updateClob(Clob clob, String data) throws IOException, SQLException 
+    {
+        if (clob == null || data == null) {
+            return;
+        }
+
+        Reader reader = new StringReader( data );
+         Writer clobWriter = ((oracle.sql.CLOB)clob).getCharacterOutputStream();
+        char[] cbuffer = new char[10* 1024];
+        int nread = 0;
+        while( (nread= reader.read(cbuffer)) != -1 )
+          clobWriter.write( cbuffer, 0, nread);
+        reader.close();
+        clobWriter.close();
+    }
+
+    public void updateBlob(Blob blob, byte[] data) throws IOException, SQLException
+    {
+        if (blob == null || data == null) {
+            return;
+        }
+
+        OutputStream os = ((oracle.sql.BLOB)blob).getBinaryOutputStream();
+        InputStream is = new ByteArrayInputStream(data);
+        byte[] buffer = new byte[10* 1024];
+        int nread = 0;
+        while( (nread= is.read(buffer)) != -1 ) {
+          os.write(buffer, 0, nread);
+      }
+        is.close();
+        os.close();
+    }
+
+
+    public byte[] getBlobColumn(ResultSet rs, int columnIndex)
+            throws SQLException
+    {
+        try {
+
+            int type = rs.getMetaData().getColumnType( columnIndex );
+            if (type == Types.LONGVARBINARY) {
+                return rs.getBytes( columnIndex );
+            }
+
+            Blob blob = rs.getBlob( columnIndex );
+            if (blob == null) {
+                return null;
+            }
+
+            InputStream is = blob.getBinaryStream();
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+            if (is == null) {
+                return null;
+            }
+            else {
+                byte buffer[] = new byte[ 64 ];
+                int c = is.read( buffer );
+                while (c>0) {
+                    bos.write( buffer, 0, c );
+                    c = is.read( buffer );
+                }
+                return bos.toByteArray();
+            }
+        }
+        catch (IOException e) {
+            throw new SQLException( "Failed to read BLOB column due to IOException: " + e.getMessage() );
+        }
+    }
+
+    public void setBlobColumn(PreparedStatement stmt, int parameterIndex, byte[] value)
+            throws SQLException
+    {
+        if (value == null) {
+            stmt.setNull( parameterIndex, Types.BLOB );
+        }
+        else {
+            stmt.setBinaryStream( parameterIndex, new ByteArrayInputStream(value), value.length );
+        }
+    }
+
+    public String getClobColumn(ResultSet rs, int columnIndex)
+        throws SQLException
+    {
+        try {
+            Clob clob = rs.getClob( columnIndex );
+            if (clob == null) {
+                return null;
+            }
+
+            StringBuffer ret = new StringBuffer();
+            InputStream is = clob.getAsciiStream();
+
+            if (is == null) {
+                return null;
+            }
+            else {
+                byte buffer[] = new byte[ 64 ];
+                int c = is.read( buffer );
+                while (c>0) {
+                    ret.append( new String(buffer, 0, c) );
+                    c = is.read( buffer );
+                }
+                return ret.toString();
+            }
+        }
+        catch (IOException e) {
+            throw new SQLException( "Failed to read CLOB column due to IOException: " + e.getMessage() );
+        }
+    }
+
+    public void setClobColumn(PreparedStatement stmt, int parameterIndex, String value)
+        throws SQLException
+    {
+        if (value == null) {
+            stmt.setNull( parameterIndex, Types.CLOB );
+        }
+        else {
+            stmt.setAsciiStream( parameterIndex, new ByteArrayInputStream(value.getBytes()), value.length() );
+        }
+    }
+}
+«ENDFILE»
+
+«FILE getPkgDir(this, model)+"/exceptions/DaoException.java"»package «getPkgPackage(this, model)».exceptions;
+public class DaoException extends Exception
+{
+	protected Throwable throwable;
+
+	/**
+	 * Method 'DaoException'
+	 * 
+	 * @param message
+	 */
+	public DaoException(String message)
+	{
+		super(message);
+	}
+
+	/**
+	 * Method 'DaoException'
+	 * 
+	 * @param message
+	 * @param throwable
+	 */
+	public DaoException(String message, Throwable throwable)
+	{
+		super(message);
+		this.throwable = throwable;
+	}
+
+	/**
+	 * Method 'getCause'
+	 * 
+	 * @return Throwable
+	 */
+	public Throwable getCause()
+	{
+		return throwable;
+	}
+
+}
+«ENDFILE»
+«ENDDEFINE»
