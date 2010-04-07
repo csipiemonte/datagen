@@ -9,3 +9,68 @@
 
 «DEFINE configFiles FOR DBAccessModel»
 «ENDDEFINE»
+
+
+«DEFINE daoBeansFile(String filePosition) FOR DBAccessModel»
+«FILE filePosition+"/dao-beans.xml"»<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+«PROTECT CSTART '/*' CEND '*/' ID getRegionUID("dao-beans-global-datasourcedefs")»
+	<!-- 
+		Esempio di configurazione di datasource, transaction manager, incrementer e dao 
+	-->
+  <!--<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+      <property name="url" value="jdbc:oracle:thin:@TST-DB-01.CSI.IT:1522:TEST10B" /> 
+    <property name="url" value="jdbc:oracle:thin:@SVIL10A.CSI.IT:1555:SVIL10A" />  
+    <property name="username" value="sicee" />
+    <property name="password" value="mypass" />
+  </bean>-->
+  
+  <bean id="myDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="siceeweb/jdbc/SiceeDS" />
+		<property name="proxyInterface" value="javax.sql.DataSource" />
+	</bean>
+	
+  <!--  <tx:annotation-driven xmlns:tx="http://www.springframework.org/schema/tx" transaction-manager="txManager" />
+  <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+  	<property name="dataSource" ref="myDataSource" />
+  </bean>-->
+  
+	<tx:annotation-driven transaction-manager="txManager" proxy-target-class="true" />
+	<bean id="txManager" class="org.springframework.transaction.jta.WebLogicJtaTransactionManager">
+  	</bean>
+
+«ENDPROTECT»
+«FOREACH daopkgs AS currPkg-»
+«FOREACH currPkg.dao AS currDao-»
+	<bean id="«getDaoClassName(currDao)»" class="«getDaoImplFQN(currDao, this)»" scope="singleton">
+    	<property name="dataSource" ref="myDataSource" />
+    	<!-- TODO: <property name="incrementer" ref="SiceeTAzienda_ID_Incrementer" />-->
+  	</bean>
+«ENDFOREACH-»
+«ENDFOREACH-»  
+    	
+ 
+  <bean id="SiceeTTransazione_ID_Incrementer"
+		class="org.springframework.jdbc.support.incrementer.OracleSequenceMaxValueIncrementer">
+		<constructor-arg>
+			<ref bean="myDataSource" />
+		</constructor-arg>
+		<constructor-arg>
+			<value>SEQ_SICEE_T_TRANSAZIONE</value>
+		</constructor-arg>
+	</bean>
+	
+ 
+  
+  
+</beans>
+
+«ENDFILE»
+«ENDDEFINE»
