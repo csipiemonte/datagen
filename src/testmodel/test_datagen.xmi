@@ -7,6 +7,7 @@
     </dao>
     <dao name="Progetto">
       <mainTable href="test_schema.xmi#//@elements.1"/>
+      <pkGenerator xsi:type="datagen:SequencePKGenerator" sequenceName="SEQ_COD_PROGETTO"/>
     </dao>
   </daopkgs>
 </datagen:DBAccessModel>

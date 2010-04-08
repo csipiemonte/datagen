@@ -145,6 +145,29 @@ public class DatagenItemProviderAdapterFactory extends DatagenAdapterFactory imp
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link it.csi.mddtools.datagen.SequencePKGenerator} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SequencePKGeneratorItemProvider sequencePKGeneratorItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.csi.mddtools.datagen.SequencePKGenerator}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createSequencePKGeneratorAdapter() {
+		if (sequencePKGeneratorItemProvider == null) {
+			sequencePKGeneratorItemProvider = new SequencePKGeneratorItemProvider(this);
+		}
+
+		return sequencePKGeneratorItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -246,6 +269,7 @@ public class DatagenItemProviderAdapterFactory extends DatagenAdapterFactory imp
 		if (dbAccessModelItemProvider != null) dbAccessModelItemProvider.dispose();
 		if (dataAccessObjectItemProvider != null) dataAccessObjectItemProvider.dispose();
 		if (daoPackageItemProvider != null) daoPackageItemProvider.dispose();
+		if (sequencePKGeneratorItemProvider != null) sequencePKGeneratorItemProvider.dispose();
 	}
 
 }

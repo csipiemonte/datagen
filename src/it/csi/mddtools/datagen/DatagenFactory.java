@@ -53,6 +53,15 @@ public interface DatagenFactory extends EFactory {
 	DaoPackage createDaoPackage();
 
 	/**
+	 * Returns a new object of class '<em>Sequence PK Generator</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Sequence PK Generator</em>'.
+	 * @generated
+	 */
+	SequencePKGenerator createSequencePKGenerator();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

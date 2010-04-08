@@ -14,10 +14,17 @@
   <eClassifiers xsi:type="ecore:EClass" name="DataAccessObject">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="mainTable" eType="ecore:EClass rdbmdl.ecore#//Table"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pkGenerator" eType="#//PKGenerator"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DaoPackage">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dao" upperBound="-1" eType="#//DataAccessObject"
         containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PKGenerator" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SequencePKGenerator" eSuperTypes="#//PKGenerator">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sequenceName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

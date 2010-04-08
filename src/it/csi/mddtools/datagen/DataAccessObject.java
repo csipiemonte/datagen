@@ -20,6 +20,7 @@ import org.eclipse.emf.cdo.CDOObject;
  * <ul>
  *   <li>{@link it.csi.mddtools.datagen.DataAccessObject#getName <em>Name</em>}</li>
  *   <li>{@link it.csi.mddtools.datagen.DataAccessObject#getMainTable <em>Main Table</em>}</li>
+ *   <li>{@link it.csi.mddtools.datagen.DataAccessObject#getPkGenerator <em>Pk Generator</em>}</li>
  * </ul>
  * </p>
  *
@@ -80,5 +81,31 @@ public interface DataAccessObject extends CDOObject {
 	 * @generated
 	 */
 	void setMainTable(Table value);
+
+	/**
+	 * Returns the value of the '<em><b>Pk Generator</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Pk Generator</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Pk Generator</em>' containment reference.
+	 * @see #setPkGenerator(PKGenerator)
+	 * @see it.csi.mddtools.datagen.DatagenPackage#getDataAccessObject_PkGenerator()
+	 * @model containment="true"
+	 * @generated
+	 */
+	PKGenerator getPkGenerator();
+
+	/**
+	 * Sets the value of the '{@link it.csi.mddtools.datagen.DataAccessObject#getPkGenerator <em>Pk Generator</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Pk Generator</em>' containment reference.
+	 * @see #getPkGenerator()
+	 * @generated
+	 */
+	void setPkGenerator(PKGenerator value);
 
 } // DataAccessObject

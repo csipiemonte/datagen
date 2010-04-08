@@ -63,6 +63,7 @@ public class DatagenFactoryImpl extends EFactoryImpl implements DatagenFactory {
 			case DatagenPackage.DB_ACCESS_MODEL: return (EObject)createDBAccessModel();
 			case DatagenPackage.DATA_ACCESS_OBJECT: return (EObject)createDataAccessObject();
 			case DatagenPackage.DAO_PACKAGE: return (EObject)createDaoPackage();
+			case DatagenPackage.SEQUENCE_PK_GENERATOR: return (EObject)createSequencePKGenerator();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -96,6 +97,16 @@ public class DatagenFactoryImpl extends EFactoryImpl implements DatagenFactory {
 	public DaoPackage createDaoPackage() {
 		DaoPackageImpl daoPackage = new DaoPackageImpl();
 		return daoPackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SequencePKGenerator createSequencePKGenerator() {
+		SequencePKGeneratorImpl sequencePKGenerator = new SequencePKGeneratorImpl();
+		return sequencePKGenerator;
 	}
 
 	/**

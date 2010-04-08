@@ -143,13 +143,22 @@ public interface DatagenPackage extends EPackage {
 	int DATA_ACCESS_OBJECT__MAIN_TABLE = 1;
 
 	/**
+	 * The feature id for the '<em><b>Pk Generator</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_ACCESS_OBJECT__PK_GENERATOR = 2;
+
+	/**
 	 * The number of structural features of the '<em>Data Access Object</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_ACCESS_OBJECT_FEATURE_COUNT = 2;
+	int DATA_ACCESS_OBJECT_FEATURE_COUNT = 3;
 
 
 	/**
@@ -188,6 +197,54 @@ public interface DatagenPackage extends EPackage {
 	 * @ordered
 	 */
 	int DAO_PACKAGE_FEATURE_COUNT = 2;
+
+
+	/**
+	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.PKGeneratorImpl <em>PK Generator</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see it.csi.mddtools.datagen.impl.PKGeneratorImpl
+	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getPKGenerator()
+	 * @generated
+	 */
+	int PK_GENERATOR = 3;
+
+	/**
+	 * The number of structural features of the '<em>PK Generator</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PK_GENERATOR_FEATURE_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.SequencePKGeneratorImpl <em>Sequence PK Generator</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see it.csi.mddtools.datagen.impl.SequencePKGeneratorImpl
+	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getSequencePKGenerator()
+	 * @generated
+	 */
+	int SEQUENCE_PK_GENERATOR = 4;
+
+	/**
+	 * The feature id for the '<em><b>Sequence Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEQUENCE_PK_GENERATOR__SEQUENCE_NAME = PK_GENERATOR_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Sequence PK Generator</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEQUENCE_PK_GENERATOR_FEATURE_COUNT = PK_GENERATOR_FEATURE_COUNT + 1;
 
 
 	/**
@@ -277,6 +334,17 @@ public interface DatagenPackage extends EPackage {
 	EReference getDataAccessObject_MainTable();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link it.csi.mddtools.datagen.DataAccessObject#getPkGenerator <em>Pk Generator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Pk Generator</em>'.
+	 * @see it.csi.mddtools.datagen.DataAccessObject#getPkGenerator()
+	 * @see #getDataAccessObject()
+	 * @generated
+	 */
+	EReference getDataAccessObject_PkGenerator();
+
+	/**
 	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.DaoPackage <em>Dao Package</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -307,6 +375,37 @@ public interface DatagenPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDaoPackage_Dao();
+
+	/**
+	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.PKGenerator <em>PK Generator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>PK Generator</em>'.
+	 * @see it.csi.mddtools.datagen.PKGenerator
+	 * @generated
+	 */
+	EClass getPKGenerator();
+
+	/**
+	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.SequencePKGenerator <em>Sequence PK Generator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Sequence PK Generator</em>'.
+	 * @see it.csi.mddtools.datagen.SequencePKGenerator
+	 * @generated
+	 */
+	EClass getSequencePKGenerator();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.csi.mddtools.datagen.SequencePKGenerator#getSequenceName <em>Sequence Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Sequence Name</em>'.
+	 * @see it.csi.mddtools.datagen.SequencePKGenerator#getSequenceName()
+	 * @see #getSequencePKGenerator()
+	 * @generated
+	 */
+	EAttribute getSequencePKGenerator_SequenceName();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -399,6 +498,14 @@ public interface DatagenPackage extends EPackage {
 		EReference DATA_ACCESS_OBJECT__MAIN_TABLE = eINSTANCE.getDataAccessObject_MainTable();
 
 		/**
+		 * The meta object literal for the '<em><b>Pk Generator</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DATA_ACCESS_OBJECT__PK_GENERATOR = eINSTANCE.getDataAccessObject_PkGenerator();
+
+		/**
 		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.DaoPackageImpl <em>Dao Package</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -423,6 +530,34 @@ public interface DatagenPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DAO_PACKAGE__DAO = eINSTANCE.getDaoPackage_Dao();
+
+		/**
+		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.PKGeneratorImpl <em>PK Generator</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see it.csi.mddtools.datagen.impl.PKGeneratorImpl
+		 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getPKGenerator()
+		 * @generated
+		 */
+		EClass PK_GENERATOR = eINSTANCE.getPKGenerator();
+
+		/**
+		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.SequencePKGeneratorImpl <em>Sequence PK Generator</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see it.csi.mddtools.datagen.impl.SequencePKGeneratorImpl
+		 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getSequencePKGenerator()
+		 * @generated
+		 */
+		EClass SEQUENCE_PK_GENERATOR = eINSTANCE.getSequencePKGenerator();
+
+		/**
+		 * The meta object literal for the '<em><b>Sequence Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SEQUENCE_PK_GENERATOR__SEQUENCE_NAME = eINSTANCE.getSequencePKGenerator_SequenceName();
 
 	}
 

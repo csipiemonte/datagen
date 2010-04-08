@@ -12,6 +12,8 @@ import it.csi.mddtools.datagen.DataAccessObject;
 import it.csi.mddtools.datagen.DatagenFactory;
 import it.csi.mddtools.datagen.DatagenPackage;
 
+import it.csi.mddtools.datagen.PKGenerator;
+import it.csi.mddtools.datagen.SequencePKGenerator;
 import it.csi.mddtools.rdbmdl.RdbmdlPackage;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -48,6 +50,20 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 	 * @generated
 	 */
 	private EClass daoPackageEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass pkGeneratorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass sequencePKGeneratorEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -190,6 +206,15 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getDataAccessObject_PkGenerator() {
+		return (EReference)dataAccessObjectEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getDaoPackage() {
 		return daoPackageEClass;
 	}
@@ -210,6 +235,33 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 	 */
 	public EReference getDaoPackage_Dao() {
 		return (EReference)daoPackageEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPKGenerator() {
+		return pkGeneratorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getSequencePKGenerator() {
+		return sequencePKGeneratorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSequencePKGenerator_SequenceName() {
+		return (EAttribute)sequencePKGeneratorEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -249,10 +301,16 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		dataAccessObjectEClass = createEClass(DATA_ACCESS_OBJECT);
 		createEAttribute(dataAccessObjectEClass, DATA_ACCESS_OBJECT__NAME);
 		createEReference(dataAccessObjectEClass, DATA_ACCESS_OBJECT__MAIN_TABLE);
+		createEReference(dataAccessObjectEClass, DATA_ACCESS_OBJECT__PK_GENERATOR);
 
 		daoPackageEClass = createEClass(DAO_PACKAGE);
 		createEAttribute(daoPackageEClass, DAO_PACKAGE__NAME);
 		createEReference(daoPackageEClass, DAO_PACKAGE__DAO);
+
+		pkGeneratorEClass = createEClass(PK_GENERATOR);
+
+		sequencePKGeneratorEClass = createEClass(SEQUENCE_PK_GENERATOR);
+		createEAttribute(sequencePKGeneratorEClass, SEQUENCE_PK_GENERATOR__SEQUENCE_NAME);
 	}
 
 	/**
@@ -286,6 +344,7 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		sequencePKGeneratorEClass.getESuperTypes().add(this.getPKGenerator());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(dbAccessModelEClass, DBAccessModel.class, "DBAccessModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -297,10 +356,16 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		initEClass(dataAccessObjectEClass, DataAccessObject.class, "DataAccessObject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDataAccessObject_Name(), ecorePackage.getEString(), "name", null, 0, 1, DataAccessObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDataAccessObject_MainTable(), theRdbmdlPackage.getTable(), null, "mainTable", null, 0, 1, DataAccessObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDataAccessObject_PkGenerator(), this.getPKGenerator(), null, "pkGenerator", null, 0, 1, DataAccessObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(daoPackageEClass, DaoPackage.class, "DaoPackage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDaoPackage_Name(), ecorePackage.getEString(), "name", null, 0, 1, DaoPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDaoPackage_Dao(), this.getDataAccessObject(), null, "dao", null, 0, -1, DaoPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(pkGeneratorEClass, PKGenerator.class, "PKGenerator", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(sequencePKGeneratorEClass, SequencePKGenerator.class, "SequencePKGenerator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSequencePKGenerator_SequenceName(), ecorePackage.getEString(), "sequenceName", null, 1, 1, SequencePKGenerator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

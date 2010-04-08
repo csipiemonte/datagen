@@ -105,6 +105,19 @@ public class DatagenSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case DatagenPackage.PK_GENERATOR: {
+				PKGenerator pkGenerator = (PKGenerator)theEObject;
+				T result = casePKGenerator(pkGenerator);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DatagenPackage.SEQUENCE_PK_GENERATOR: {
+				SequencePKGenerator sequencePKGenerator = (SequencePKGenerator)theEObject;
+				T result = caseSequencePKGenerator(sequencePKGenerator);
+				if (result == null) result = casePKGenerator(sequencePKGenerator);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -151,6 +164,36 @@ public class DatagenSwitch<T> {
 	 * @generated
 	 */
 	public T caseDaoPackage(DaoPackage object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>PK Generator</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>PK Generator</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePKGenerator(PKGenerator object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Sequence PK Generator</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Sequence PK Generator</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSequencePKGenerator(SequencePKGenerator object) {
 		return null;
 	}
 

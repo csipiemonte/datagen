@@ -51,26 +51,43 @@
 «FOREACH currPkg.dao AS currDao-»
 	<bean id="«getDaoClassName(currDao)»" class="«getDaoImplFQN(currDao, this)»" scope="singleton">
     	<property name="dataSource" ref="myDataSource" />
-    	<!-- TODO: <property name="incrementer" ref="SiceeTAzienda_ID_Incrementer" />-->
+    	«IF currDao.pkGenerator!=null-»
+    	<property name="incrementer" ref="«currDao.name»_«currDao.mainTable.primaryKey.includedColumns.first().name»_Incrementer" />
+    	«ENDIF-»
   	</bean>
+  	
+  	«IF currDao.pkGenerator!=null-»
+  	«EXPAND pkGeneratorBeanDef(currDao) FOR currDao.pkGenerator-»
+  	«ENDIF-»
 «ENDFOREACH-»
 «ENDFOREACH-»  
     	
- 
-  <bean id="SiceeTTransazione_ID_Incrementer"
-		class="org.springframework.jdbc.support.incrementer.OracleSequenceMaxValueIncrementer">
-		<constructor-arg>
-			<ref bean="myDataSource" />
-		</constructor-arg>
-		<constructor-arg>
-			<value>SEQ_SICEE_T_TRANSAZIONE</value>
-		</constructor-arg>
-	</bean>
-	
- 
-  
   
 </beans>
 
 «ENDFILE»
 «ENDDEFINE»
+
+«DEFINE pkGeneratorBeanDef(DataAccessObject dao) FOR PKGenerator»
+«ERROR "PKGenerator "+this.metaType+ " non supportato"»
+«ENDDEFINE»
+
+«DEFINE pkGeneratorBeanDef(DataAccessObject dao) FOR SequencePKGenerator»
+«IF dao.mainTable.primaryKey.includedColumns.size==1-»
+	<bean id="«dao.name»_«dao.mainTable.primaryKey.includedColumns.first().name»_Incrementer"
+		class="org.springframework.jdbc.support.incrementer.OracleSequenceMaxValueIncrementer">
+		<constructor-arg>
+			<ref bean="myDataSource" />
+		</constructor-arg>
+		<constructor-arg>
+			<value>«this.sequenceName»</value>
+		</constructor-arg>
+	</bean>
+
+«ELSE-»
+	«ERROR "impossibile definire un incrementer per la PK di "+dao.name+" perchè non ha una sola colonna"-»
+«ENDIF-»
+
+
+«ENDDEFINE»
+

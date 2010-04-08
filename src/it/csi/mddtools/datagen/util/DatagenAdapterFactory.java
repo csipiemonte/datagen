@@ -84,6 +84,14 @@ public class DatagenAdapterFactory extends AdapterFactoryImpl {
 				return createDaoPackageAdapter();
 			}
 			@Override
+			public Adapter casePKGenerator(PKGenerator object) {
+				return createPKGeneratorAdapter();
+			}
+			@Override
+			public Adapter caseSequencePKGenerator(SequencePKGenerator object) {
+				return createSequencePKGeneratorAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -142,6 +150,34 @@ public class DatagenAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDaoPackageAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.PKGenerator <em>PK Generator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.PKGenerator
+	 * @generated
+	 */
+	public Adapter createPKGeneratorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.SequencePKGenerator <em>Sequence PK Generator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.SequencePKGenerator
+	 * @generated
+	 */
+	public Adapter createSequencePKGeneratorAdapter() {
 		return null;
 	}
 
