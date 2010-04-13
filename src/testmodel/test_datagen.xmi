@@ -4,6 +4,7 @@
   <daopkgs name="prova">
     <dao name="Dipendente">
       <mainTable href="test_schema.xmi#//@elements.0"/>
+      <pkGenerator xsi:type="datagen:SequencePKGenerator" sequenceName="SEQ_MATRICOLA_DIPENDENTE"/>
     </dao>
     <dao name="Progetto">
       <mainTable href="test_schema.xmi#//@elements.1"/>

@@ -5,4 +5,9 @@
 		daoTargetProjectName="testdatagenjava"
 		dbTargetProjectName="testdatagendb"   	
     />
+    
+    <cartridge file="it/csi/mddtools/datagen/workflow/basicSql.oaw"
+		model="datagen/src/testmodel/test_datagen.xmi" 
+		dbTargetProjectName="testdatagendb"   	
+    />
 </workflow>

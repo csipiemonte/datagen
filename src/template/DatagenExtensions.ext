@@ -5,6 +5,16 @@ import rdbmdl::datatypes;
 
 String javaSrcRoot() :
 	"src/java";
+
+String sqlSrcRoot() :
+	"src/sql";
+
+/// SQL
+String getSchemaCreationSQLPath(Schema sch) :
+	"createSchema_"+sch.name+".sql";
+
+String getSchemaDropSQLPath(Schema sch) :
+	"dropSchema_"+sch.name+".sql";
 	
 String getDALayerBasePkg(DBAccessModel model) :
 	"it.csi."+model.codProdotto.toLowerCase()+"."+model.codComponente.toLowerCase()+"."+
@@ -35,7 +45,7 @@ String getDaoImplClassName(DataAccessObject dao) :
 	dao.name.toFirstUpper()+"DaoImpl";
 
 String getDaoImplFQN(DataAccessObject dao, DBAccessModel model) :
-	getPkgPackage((DaoPackage)(dao.eContainer), model)+".dao.impl."+getDaoClassName(dao);
+	getPkgPackage((DaoPackage)(dao.eContainer), model)+".dao.impl."+getDaoImplClassName(dao);
 
 String getDaoImplFullPath(DataAccessObject dao, DBAccessModel model) :
 	getPkgDir((DaoPackage)(dao.eContainer), model)+"/dao/impl/"+getDaoImplClassName(dao)+".java";
@@ -116,6 +126,27 @@ String getValueFromRS(TableColumn col, int i) :
 			"java.sql.Clob???"
 		default :"???"
 	};
+
+String getSQLType(TableColumn col) :
+	let code = col.type.type :
+	switch(code){
+		case PrimitiveTypeCodes::VARCHAR2 :
+			"VARCHAR2("+col.type.size+")"
+		case PrimitiveTypeCodes::NUMBER :
+			 "NUMBER("+col.type.size+","+col.type.decimalDigits+")"
+		case PrimitiveTypeCodes::DATE :
+			"DATE"
+		case PrimitiveTypeCodes::TIMESTAMP :
+			"TIMESTAMP"
+		case PrimitiveTypeCodes::BLOB : 
+			"BLOB"
+		case PrimitiveTypeCodes::CLOB :
+			"CLOB"
+		default :"???"
+	};
+	
+String getColumnModifier(TableColumn col) :
+	col.type.nullable ? "NULL" : "NOT NULL";
 
 boolean isNullOrEmpty(String s) :
 	s==null || s.length==0;

@@ -26,10 +26,15 @@
 «LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-»
 «FILE getDaoExcFullPath(this, model)»package «pkgPackage».exceptions;
 
+/**
+ *
+ * @generated
+ */
 public class «getDaoExcClassName()» extends DaoException
 {
 	/** 
 	 * @param message
+	 * @generated
 	 */
 	public «getDaoExcClassName()»(String message)
 	{
@@ -39,6 +44,7 @@ public class «getDaoExcClassName()» extends DaoException
 	/**
 	 * @param message
 	 * @param cause
+	 * @generated
 	 */
 	public «getDaoExcClassName()»(String message, Throwable cause)
 	{
@@ -54,11 +60,27 @@ public class «getDaoExcClassName()» extends DaoException
 «LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-»
 «FILE getDaoFullPath(this, model)»package «pkgPackage».dao;
 
+import «pkgPackage».dto.*;
+import «pkgPackage».exceptions.*;
+import java.util.List;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  * @generated
  */
 public interface «getDaoClassName()» {
-
+	«EXPAND insertMethod(model, false) FOR this»
+	
+	«EXPAND updateMethod(model, false) FOR this»
+	
+	«EXPAND deleteMethod(model, false) FOR this»
+	
+	«EXPAND mapRowMethod(model, false) FOR this»
+	
+	«EXPAND findByPkMethod(model, false) FOR this»
+	
+	«EXPAND findAllMethod(model, false) FOR this»
 }
 «ENDFILE-»
 «ENDLET-»
@@ -84,14 +106,21 @@ import org.springframework.transaction.annotation.Transactional;
  */
 public class «getDaoImplClassName()» extends AbstractDAO implements ParameterizedRowMapper<«getDtoClassName()»>, «getDaoClassName()»
 {
+	/**
+	 * @generated
+	 */
 	protected SimpleJdbcTemplate jdbcTemplate;
 
+	/**
+	 * @generated
+	 */
 	protected DataSource dataSource;
 
 	/**
 	 * Method 'setDataSource'
 	 * 
 	 * @param dataSource
+	 * @generated
 	 */
 	public void setDataSource(DataSource dataSource)
 	{
@@ -99,28 +128,29 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameterize
 		jdbcTemplate = new SimpleJdbcTemplate(dataSource);
 	}
 
-	«EXPAND insertMethod(model) FOR this»
+	«EXPAND insertMethod(model, true) FOR this»
 	
-	«EXPAND updateMethod(model) FOR this»
+	«EXPAND updateMethod(model, true) FOR this»
 	
-	«EXPAND deleteMethod(model) FOR this»
+	«EXPAND deleteMethod(model, true) FOR this»
 	
-	«EXPAND mapRowMethod(model) FOR this»
+	«EXPAND mapRowMethod(model, true) FOR this»
 
 
 	/**
 	 * Method 'getTableName'
 	 * 
 	 * @return String
+	 * @generated
 	 */
 	public String getTableName()
 	{
 		return "«mainTable.name»";
 	}
 
-	«EXPAND findByPkMethod(model) FOR this»
+	«EXPAND findByPkMethod(model, true) FOR this»
 	
-	«EXPAND findAllMethod(model) FOR this»
+	«EXPAND findAllMethod(model, true) FOR this»
 
 
 }
@@ -149,8 +179,31 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameterize
 «FOREACH this AS currCol SEPARATOR ","-»«dtoVarName».get«javaPropertyNameFromColumn(currCol).toFirstUpper()»()«ENDFOREACH-»
 «ENDDEFINE»
 
+«DEFINE paramValorizationList(String dtoVarName, PKGenerator pkgen) FOR List[TableColumn]-»
+«ERROR "valorizzazione parametri non gestita per DAO con PKGenerator di tipo "+pkgen.metaType»
+«ENDDEFINE»
 
-«DEFINE insertMethod(DBAccessModel model) FOR DataAccessObject»
+«DEFINE paramValorizationList(String dtoVarName, SequencePKGenerator pkgen) FOR List[TableColumn]-»
+«LET (DataAccessObject)(pkgen.eContainer) AS dao-»
+«LET dao.mainTable.primaryKey.includedColumns.first() AS pkCol-»
+«FOREACH this AS currCol SEPARATOR ","-»«currCol==pkCol?" newKey ":dtoVarName+".get"+javaPropertyNameFromColumn(currCol).toFirstUpper()+"()"»«ENDFOREACH-»
+«ENDLET-»
+«ENDLET-»
+«ENDDEFINE»
+
+
+«DEFINE incrementerUse FOR TableColumn-»
+«IF type.type == PrimitiveTypeCodes::VARCHAR2-»
+	«javaPropertyTypeFromColumn()» newKey = incrementer.nextStringValue();
+«ELSEIF type.type == PrimitiveTypeCodes::NUMBER && type.decimalDigits==0-»
+	«javaPropertyTypeFromColumn()» newKey = incrementer.nextLongValue();
+«ELSE»
+	«ERROR "impossibile usare incrementer per il tipo di colonna "+type.type+","+type.size+","+type.decimalDigits»
+«ENDIF-»
+		
+«ENDDEFINE»
+
+«DEFINE insertMethod(DBAccessModel model, boolean body) FOR DataAccessObject»
 	/**
 	 * Method 'insert'
 	 * 
@@ -159,43 +212,65 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameterize
 	 * @generated
 	 */
 	public «getPkClassName()» insert(«getDtoClassName()» dto)
+	«IF body-»
 	{
+		«IF mainTable.primaryKey!=null-»
+		«EXPAND incrementerUse FOR this.mainTable.primaryKey.includedColumns.first()»
+		«ENDIF-»
 		jdbcTemplate.update("INSERT INTO " + getTableName() + " ( «EXPAND columnNameList FOR this.mainTable.columns-» ) VALUES ( «EXPAND paramPlaceholderList FOR this.mainTable.columns-» )",		
+		«IF pkGenerator!=null-»
+		«EXPAND paramValorizationList("dto",pkGenerator) FOR this.mainTable.columns-»
+		«ELSE»
 		«EXPAND paramValorizationList("dto") FOR this.mainTable.columns-»
+		«ENDIF-»
 		);
 		return dto.createPk();
 	}
+	«ELSE-»
+	;
+	«ENDIF-»
+	
 «ENDDEFINE»
 
-«DEFINE updateMethod(DBAccessModel model) FOR DataAccessObject»
+«DEFINE updateMethod(DBAccessModel model, boolean body) FOR DataAccessObject»
 	/** 
 	 * Updates a single row in the «mainTable.name» table.
 	 * @generated
 	 */
 	public void update(«getPkClassName()» pk, «getDtoClassName()» dto) throws «getDaoExcClassName()»
+	«IF body-»
 	{
 		jdbcTemplate.update("UPDATE " + getTableName() + " «EXPAND setColumnSetValuePlaceholderList FOR this.mainTable.columns-»",
 		«EXPAND paramValorizationList("dto") FOR this.mainTable.columns»
 		);
 	}
+	«ELSE-»
+	;
+	«ENDIF-»
+	
 
 «ENDDEFINE»
 
-«DEFINE deleteMethod(DBAccessModel model) FOR DataAccessObject»
+«DEFINE deleteMethod(DBAccessModel model, boolean body) FOR DataAccessObject»
 	/** 
 	 * Deletes a single row in the «mainTable.name» table.
 	 * @generated
 	 */
 	
 	public void delete(«getPkClassName()» pk) throws «getDaoExcClassName()»
+	«IF body-»
 	{
 		jdbcTemplate.update("DELETE FROM " + getTableName() + " WHERE «EXPAND setColumnEqPlaceholderList(",") FOR this.mainTable.primaryKey.includedColumns»",
 		«EXPAND paramValorizationList("pk") FOR this.mainTable.primaryKey.includedColumns»
 		);
 	}
+	«ELSE-»
+	;
+	«ENDIF-»
+	
 «ENDDEFINE»
 
-«DEFINE mapRowMethod(DBAccessModel model) FOR DataAccessObject»
+«DEFINE mapRowMethod(DBAccessModel model, boolean body) FOR DataAccessObject»
 	/**
 	 * Method 'mapRow'
 	 * 
@@ -206,6 +281,7 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameterize
 	 * @generated
 	 */
 	public «getDtoClassName()» mapRow(ResultSet rs, int row) throws SQLException
+	«IF body-»
 	{
 		«getDtoClassName()» dto = new «getDtoClassName()»();
 		«FOREACH mainTable.columns AS currCol ITERATOR i»
@@ -215,14 +291,19 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameterize
 		«ENDFOREACH»
 		return dto;
 	}
+	«ELSE-»
+	;
+	«ENDIF-»
+	
 «ENDDEFINE»
 
-«DEFINE findByPkMethod(DBAccessModel model) FOR DataAccessObject»
+«DEFINE findByPkMethod(DBAccessModel model, boolean body) FOR DataAccessObject»
 	/** 
 	 * Returns all rows from the «mainTable.name» table that match the primary key criteria
 	 * @generated
 	 */
 	public «getDtoClassName()» findByPrimaryKey(«getPkClassName()» pk) throws «getDaoExcClassName()»
+	«IF body-»
 	{
 		try {
 			List<«getDtoClassName()»> list = jdbcTemplate.query("SELECT «EXPAND columnNameList FOR this.mainTable.columns» FROM " + getTableName() + " «EXPAND setColumnEqPlaceholderList(" AND ") FOR this.mainTable.primaryKey.includedColumns»", this,«EXPAND paramValorizationList("pk") FOR this.mainTable.primaryKey.includedColumns»);
@@ -232,14 +313,19 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameterize
 			throw new «getDaoExcClassName()»("Query failed", e);
 		}		
 	}
+	«ELSE-»
+	;
+	«ENDIF-»
+	
 «ENDDEFINE»
 
-«DEFINE findAllMethod(DBAccessModel model) FOR DataAccessObject»
+«DEFINE findAllMethod(DBAccessModel model, boolean body) FOR DataAccessObject»
 	/** 
 	 * Returns all rows from the «mainTable.name» table that match the criteria ''.
 	 * @generated
 	 */
 	public List<«getDtoClassName()»> findAll() throws «getDaoExcClassName()»
+	«IF body-»
 	{
 		try {
 			return jdbcTemplate.query("SELECT «EXPAND columnNameList FOR this.mainTable.columns» FROM " + getTableName() , this);
@@ -248,6 +334,10 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameterize
 			throw new «getDaoExcClassName()»("Query failed", e);
 		}
 	}
+	«ELSE-»
+	;
+	«ENDIF-»
+	
 «ENDDEFINE»
 
 «DEFINE commonDaoFiles(DBAccessModel model) FOR DaoPackage»
@@ -269,14 +359,21 @@ import oracle.sql.CLOB;
  */
 public class AbstractDAO
 {
-	
+	/**
+	 * @generated
+	 */
 	protected DataFieldMaxValueIncrementer incrementer;
-	   
+	
+	/**
+	 * @generated
+	 */   
 	public void setIncrementer(DataFieldMaxValueIncrementer incrementer) {
 		this.incrementer = incrementer;
 	}
 
-	
+	/**
+	 * @generated
+	 */
     public void updateClob(Clob clob, String data) throws IOException, SQLException 
     {
         if (clob == null || data == null) {
@@ -293,6 +390,9 @@ public class AbstractDAO
         clobWriter.close();
     }
 
+	/**
+	 * @generated
+	 */
     public void updateBlob(Blob blob, byte[] data) throws IOException, SQLException
     {
         if (blob == null || data == null) {
@@ -310,7 +410,9 @@ public class AbstractDAO
         os.close();
     }
 
-
+	/**
+	 * @generated
+	 */
     public byte[] getBlobColumn(ResultSet rs, int columnIndex)
             throws SQLException
     {
@@ -347,6 +449,9 @@ public class AbstractDAO
         }
     }
 
+	/**
+	 * @generated
+	 */
     public void setBlobColumn(PreparedStatement stmt, int parameterIndex, byte[] value)
             throws SQLException
     {
@@ -358,6 +463,9 @@ public class AbstractDAO
         }
     }
 
+	/**
+	 * @generated
+	 */
     public String getClobColumn(ResultSet rs, int columnIndex)
         throws SQLException
     {
@@ -388,6 +496,9 @@ public class AbstractDAO
         }
     }
 
+	/**
+	 * @generated
+	 */
     public void setClobColumn(PreparedStatement stmt, int parameterIndex, String value)
         throws SQLException
     {
@@ -402,14 +513,22 @@ public class AbstractDAO
 «ENDFILE»
 
 «FILE getPkgDir(this, model)+"/exceptions/DaoException.java"»package «getPkgPackage(this, model)».exceptions;
+
+/**
+ * @generated
+ */
 public class DaoException extends Exception
 {
+	/**
+	 * @generated
+	 */
 	protected Throwable throwable;
 
 	/**
 	 * Method 'DaoException'
 	 * 
 	 * @param message
+	 * @generated
 	 */
 	public DaoException(String message)
 	{
@@ -421,6 +540,7 @@ public class DaoException extends Exception
 	 * 
 	 * @param message
 	 * @param throwable
+	 * @generated
 	 */
 	public DaoException(String message, Throwable throwable)
 	{
@@ -432,6 +552,7 @@ public class DaoException extends Exception
 	 * Method 'getCause'
 	 * 
 	 * @return Throwable
+	 * @generated
 	 */
 	public Throwable getCause()
 	{

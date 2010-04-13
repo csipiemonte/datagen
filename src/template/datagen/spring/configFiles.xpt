@@ -20,7 +20,7 @@
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
-«PROTECT CSTART '/*' CEND '*/' ID getRegionUID("dao-beans-global-datasourcedefs")»
+«PROTECT CSTART '<!--' CEND '-->' ID getRegionUID("dao-beans-global-datasourcedefs")»
 	<!-- 
 		Esempio di configurazione di datasource, transaction manager, incrementer e dao 
 	-->

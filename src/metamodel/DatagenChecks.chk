@@ -8,3 +8,8 @@ context DBAccessModel ERROR "codice prodotto mancante" :
 	
 context DBAccessModel ERROR "codice componente mancante" :
 	!isNullOrEmpty(codComponente);
+
+
+context DataAccessObject if (pkGenerator != null && pkGenerator.metaType == SequencePKGenerator) 
+ERROR "Il SequencePKGenerator è utilizzabile solo con PK di 1 sola colonna":
+	mainTable.primaryKey.includedColumns.size == 1;
