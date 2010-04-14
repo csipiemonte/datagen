@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: datagen;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.0.001
 Bundle-ClassPath: .
 Bundle-Activator: Erdesignerschema30.provider.Erdesignerschema_3EditPlugin$Implementation
 Bundle-Vendor: %providerName
@@ -20,9 +20,11 @@ Export-Package: it.csi.mddtools.datagen,
  it.csi.mddtools.datagen.Erdesignerschema30.impl,
  it.csi.mddtools.datagen.Erdesignerschema30.provider,
  it.csi.mddtools.datagen.Erdesignerschema30.util,
+ it.csi.mddtools.datagen.genutils,
  it.csi.mddtools.datagen.impl,
  it.csi.mddtools.datagen.provider,
  it.csi.mddtools.datagen.util,
+ it.csi.mddtools.datagen.workflow,
  it.csi.mddtools.rdbmdl,
  it.csi.mddtools.rdbmdl.constraints,
  it.csi.mddtools.rdbmdl.constraints.impl,
