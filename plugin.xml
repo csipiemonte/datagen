@@ -34,5 +34,40 @@
             type="erdesignerschema30"
             class="Erdesignerschema30.util.Erdesignerschema30ResourceFactoryImpl"/>
    </extension>
+   <extension
+         point="org.eclipse.emf.ecore.generated_package">
+      <package
+            class="it.csi.mddtools.datagen.DatagenPackage"
+            uri="http://www.csi.it/mddtools/datagen">
+      </package>
+   </extension>
+   <extension
+         point="org.eclipse.emf.ecore.generated_package">
+      <package
+            class="it.csi.mddtools.rdbmdl.RdbmdlPackage"
+            uri="http://www.csi.it/mddtools/rdbmdl">
+      </package>
+   </extension>
+   <extension
+         point="org.eclipse.emf.ecore.generated_package">
+      <package
+            class="it.csi.mddtools.rdbmdl.datatypes.DatatypesPackage"
+            uri="http://www.csi.it/mddtools/rdbmdl/datatypes">
+      </package>
+   </extension>
+   <extension
+         point="org.eclipse.emf.ecore.generated_package">
+      <package
+            class="it.csi.mddtools.rdbmdl.constraints.ConstraintsPackage"
+            uri="http://www.csi.it/mddtools/rdbmdl/constraints">
+      </package>
+   </extension>
+   <extension
+         point="org.eclipse.emf.ecore.generated_package">
+      <package
+            class="it.csi.mddtools.rdbmdl.view.ViewPackage"
+            uri="http://www.csi.it/mddtools/rdbmdl/view">
+      </package>
+   </extension>
 
 </plugin>
