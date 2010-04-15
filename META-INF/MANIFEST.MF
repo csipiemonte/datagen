@@ -4,7 +4,6 @@ Bundle-Name: %pluginName
 Bundle-SymbolicName: datagen;singleton:=true
 Bundle-Version: 1.0.0.001
 Bundle-ClassPath: .
-Bundle-Activator: Erdesignerschema30.provider.Erdesignerschema_3EditPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
@@ -40,4 +39,12 @@ Export-Package: it.csi.mddtools.datagen,
  it.csi.mddtools.rdbmdl.view,
  it.csi.mddtools.rdbmdl.view.impl,
  it.csi.mddtools.rdbmdl.view.provider,
- it.csi.mddtools.rdbmdl.view.util
+ it.csi.mddtools.rdbmdl.view.util,
+ metamodel,
+ template,
+ template.custom,
+ template.datagen,
+ template.datagen.dao,
+ template.datagen.dto,
+ template.datagen.spring,
+ template.datagen.sql
