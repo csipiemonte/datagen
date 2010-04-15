@@ -43,7 +43,7 @@ public interface ConstraintsPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.eclipse.org/qvt/1.0.0/Operational/examples/rdb/constraints";
+	String eNS_URI = "http://www.csi.it/mddtools/rdbmdl/constraints";
 
 	/**
 	 * The package namespace name.

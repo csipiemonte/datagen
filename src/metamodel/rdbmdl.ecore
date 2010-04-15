@@ -44,7 +44,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isPrimaryKey" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isForeignKey" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
   </eClassifiers>
-  <eSubpackages name="constraints" nsURI="http://www.eclipse.org/qvt/1.0.0/Operational/examples/rdb/constraints"
+  <eSubpackages name="constraints" nsURI="http://www.csi.it/mddtools/rdbmdl/constraints"
       nsPrefix="constraints">
     <eClassifiers xsi:type="ecore:EClass" name="Constraint" abstract="true" eSuperTypes="#//NamedElement"/>
     <eClassifiers xsi:type="ecore:EClass" name="CheckConstraint" eSuperTypes="#//constraints/Constraint">
@@ -71,7 +71,7 @@
           eType="#//TableColumn"/>
     </eClassifiers>
   </eSubpackages>
-  <eSubpackages name="datatypes" nsURI="http://www.eclipse.org/qvt/1.0.0/Operational/examples/rdb/datatypes"
+  <eSubpackages name="datatypes" nsURI="http://www.csi.it/mddtools/rdbmdl/datatypes"
       nsPrefix="datatypes">
     <eClassifiers xsi:type="ecore:EClass" name="Domain" eSuperTypes="#//SchemaElement #//datatypes/PrimitiveDataType">
       <eStructuralFeatures xsi:type="ecore:EReference" name="parentDomain" eType="#//datatypes/Domain"/>
@@ -97,8 +97,7 @@
       <eLiterals name="BLOB" value="7"/>
     </eClassifiers>
   </eSubpackages>
-  <eSubpackages name="view" nsURI="http://www.eclipse.org/qvt/1.0.0/Operational/examples/rdb/view"
-      nsPrefix="view">
+  <eSubpackages name="view" nsURI="http://www.csi.it/mddtools/rdbmdl/view" nsPrefix="view">
     <eClassifiers xsi:type="ecore:EClass" name="View" eSuperTypes="#//NamedColumnSet">
       <eStructuralFeatures xsi:type="ecore:EReference" name="columns" lowerBound="1"
           upperBound="-1" eType="#//view/ViewColumn" containment="true"/>

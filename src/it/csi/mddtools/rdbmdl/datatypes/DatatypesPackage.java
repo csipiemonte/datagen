@@ -44,7 +44,7 @@ public interface DatatypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.eclipse.org/qvt/1.0.0/Operational/examples/rdb/datatypes";
+	String eNS_URI = "http://www.csi.it/mddtools/rdbmdl/datatypes";
 
 	/**
 	 * The package namespace name.

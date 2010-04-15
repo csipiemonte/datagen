@@ -43,7 +43,7 @@ public interface ViewPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.eclipse.org/qvt/1.0.0/Operational/examples/rdb/view";
+	String eNS_URI = "http://www.csi.it/mddtools/rdbmdl/view";
 
 	/**
 	 * The package namespace name.
