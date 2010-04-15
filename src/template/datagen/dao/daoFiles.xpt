@@ -78,9 +78,7 @@ public interface «getDaoClassName()» {
 	
 	«EXPAND mapRowMethod(model, false) FOR this»
 	
-	«EXPAND findByPkMethod(model, false) FOR this»
-	
-	«EXPAND findAllMethod(model, false) FOR this»
+	«EXPAND template::datagen::dao::finders::finders(model, false) FOR this»
 }
 «ENDFILE-»
 «ENDLET-»
@@ -148,11 +146,8 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameterize
 		return "«mainTable.name»";
 	}
 
-	«EXPAND findByPkMethod(model, true) FOR this»
-	
-	«EXPAND findAllMethod(model, true) FOR this»
 
-
+	«EXPAND template::datagen::dao::finders::finders(model, true) FOR this»
 }
 
 «ENDFILE-»
@@ -297,48 +292,6 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameterize
 	
 «ENDDEFINE»
 
-«DEFINE findByPkMethod(DBAccessModel model, boolean body) FOR DataAccessObject»
-	/** 
-	 * Returns all rows from the «mainTable.name» table that match the primary key criteria
-	 * @generated
-	 */
-	public «getDtoClassName()» findByPrimaryKey(«getPkClassName()» pk) throws «getDaoExcClassName()»
-	«IF body-»
-	{
-		try {
-			List<«getDtoClassName()»> list = jdbcTemplate.query("SELECT «EXPAND columnNameList FOR this.mainTable.columns» FROM " + getTableName() + " «EXPAND setColumnEqPlaceholderList(" AND ") FOR this.mainTable.primaryKey.includedColumns»", this,«EXPAND paramValorizationList("pk") FOR this.mainTable.primaryKey.includedColumns»);
-			return list.size() == 0 ? null : list.get(0);
-		}
-		catch (Exception e) {
-			throw new «getDaoExcClassName()»("Query failed", e);
-		}		
-	}
-	«ELSE-»
-	;
-	«ENDIF-»
-	
-«ENDDEFINE»
-
-«DEFINE findAllMethod(DBAccessModel model, boolean body) FOR DataAccessObject»
-	/** 
-	 * Returns all rows from the «mainTable.name» table that match the criteria ''.
-	 * @generated
-	 */
-	public List<«getDtoClassName()»> findAll() throws «getDaoExcClassName()»
-	«IF body-»
-	{
-		try {
-			return jdbcTemplate.query("SELECT «EXPAND columnNameList FOR this.mainTable.columns» FROM " + getTableName() , this);
-		}
-		catch (Exception e) {
-			throw new «getDaoExcClassName()»("Query failed", e);
-		}
-	}
-	«ELSE-»
-	;
-	«ENDIF-»
-	
-«ENDDEFINE»
 
 «DEFINE commonDaoFiles(DBAccessModel model) FOR DaoPackage»
 «FILE getPkgDir(this, model)+"/dao/impl/AbstractDAO.java"»package «getPkgPackage(this, model)».dao.impl;

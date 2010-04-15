@@ -92,6 +92,62 @@ public class DatagenAdapterFactory extends AdapterFactoryImpl {
 				return createSequencePKGeneratorAdapter();
 			}
 			@Override
+			public Adapter caseDBCommand(DBCommand object) {
+				return createDBCommandAdapter();
+			}
+			@Override
+			public Adapter caseInserter(Inserter object) {
+				return createInserterAdapter();
+			}
+			@Override
+			public Adapter caseFinders(Finders object) {
+				return createFindersAdapter();
+			}
+			@Override
+			public Adapter caseFinder(Finder object) {
+				return createFinderAdapter();
+			}
+			@Override
+			public Adapter caseFindByPK(FindByPK object) {
+				return createFindByPKAdapter();
+			}
+			@Override
+			public Adapter caseFindAll(FindAll object) {
+				return createFindAllAdapter();
+			}
+			@Override
+			public Adapter caseQBEFinder(QBEFinder object) {
+				return createQBEFinderAdapter();
+			}
+			@Override
+			public Adapter caseCustomFinder(CustomFinder object) {
+				return createCustomFinderAdapter();
+			}
+			@Override
+			public Adapter caseUpdaters(Updaters object) {
+				return createUpdatersAdapter();
+			}
+			@Override
+			public Adapter caseUpdater(Updater object) {
+				return createUpdaterAdapter();
+			}
+			@Override
+			public Adapter caseUpdateRow(UpdateRow object) {
+				return createUpdateRowAdapter();
+			}
+			@Override
+			public Adapter caseDeleters(Deleters object) {
+				return createDeletersAdapter();
+			}
+			@Override
+			public Adapter caseDeleter(Deleter object) {
+				return createDeleterAdapter();
+			}
+			@Override
+			public Adapter caseDeleteByPK(DeleteByPK object) {
+				return createDeleteByPKAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -178,6 +234,202 @@ public class DatagenAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSequencePKGeneratorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.DBCommand <em>DB Command</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.DBCommand
+	 * @generated
+	 */
+	public Adapter createDBCommandAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.Inserter <em>Inserter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.Inserter
+	 * @generated
+	 */
+	public Adapter createInserterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.Finder <em>Finder</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.Finder
+	 * @generated
+	 */
+	public Adapter createFinderAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.FindByPK <em>Find By PK</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.FindByPK
+	 * @generated
+	 */
+	public Adapter createFindByPKAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.FindAll <em>Find All</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.FindAll
+	 * @generated
+	 */
+	public Adapter createFindAllAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.QBEFinder <em>QBE Finder</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.QBEFinder
+	 * @generated
+	 */
+	public Adapter createQBEFinderAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.CustomFinder <em>Custom Finder</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.CustomFinder
+	 * @generated
+	 */
+	public Adapter createCustomFinderAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.Updaters <em>Updaters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.Updaters
+	 * @generated
+	 */
+	public Adapter createUpdatersAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.Updater <em>Updater</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.Updater
+	 * @generated
+	 */
+	public Adapter createUpdaterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.UpdateRow <em>Update Row</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.UpdateRow
+	 * @generated
+	 */
+	public Adapter createUpdateRowAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.Deleters <em>Deleters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.Deleters
+	 * @generated
+	 */
+	public Adapter createDeletersAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.Deleter <em>Deleter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.Deleter
+	 * @generated
+	 */
+	public Adapter createDeleterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.DeleteByPK <em>Delete By PK</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.DeleteByPK
+	 * @generated
+	 */
+	public Adapter createDeleteByPKAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.Finders <em>Finders</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.Finders
+	 * @generated
+	 */
+	public Adapter createFindersAdapter() {
 		return null;
 	}
 

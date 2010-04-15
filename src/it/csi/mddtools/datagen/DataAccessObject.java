@@ -21,6 +21,10 @@ import org.eclipse.emf.cdo.CDOObject;
  *   <li>{@link it.csi.mddtools.datagen.DataAccessObject#getName <em>Name</em>}</li>
  *   <li>{@link it.csi.mddtools.datagen.DataAccessObject#getMainTable <em>Main Table</em>}</li>
  *   <li>{@link it.csi.mddtools.datagen.DataAccessObject#getPkGenerator <em>Pk Generator</em>}</li>
+ *   <li>{@link it.csi.mddtools.datagen.DataAccessObject#getInserter <em>Inserter</em>}</li>
+ *   <li>{@link it.csi.mddtools.datagen.DataAccessObject#getFinders <em>Finders</em>}</li>
+ *   <li>{@link it.csi.mddtools.datagen.DataAccessObject#getUpdaters <em>Updaters</em>}</li>
+ *   <li>{@link it.csi.mddtools.datagen.DataAccessObject#getDeleters <em>Deleters</em>}</li>
  * </ul>
  * </p>
  *
@@ -107,5 +111,109 @@ public interface DataAccessObject extends CDOObject {
 	 * @generated
 	 */
 	void setPkGenerator(PKGenerator value);
+
+	/**
+	 * Returns the value of the '<em><b>Inserter</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Inserter</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Inserter</em>' containment reference.
+	 * @see #setInserter(Inserter)
+	 * @see it.csi.mddtools.datagen.DatagenPackage#getDataAccessObject_Inserter()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Inserter getInserter();
+
+	/**
+	 * Sets the value of the '{@link it.csi.mddtools.datagen.DataAccessObject#getInserter <em>Inserter</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Inserter</em>' containment reference.
+	 * @see #getInserter()
+	 * @generated
+	 */
+	void setInserter(Inserter value);
+
+	/**
+	 * Returns the value of the '<em><b>Finders</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Finders</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Finders</em>' containment reference.
+	 * @see #setFinders(Finders)
+	 * @see it.csi.mddtools.datagen.DatagenPackage#getDataAccessObject_Finders()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Finders getFinders();
+
+	/**
+	 * Sets the value of the '{@link it.csi.mddtools.datagen.DataAccessObject#getFinders <em>Finders</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Finders</em>' containment reference.
+	 * @see #getFinders()
+	 * @generated
+	 */
+	void setFinders(Finders value);
+
+	/**
+	 * Returns the value of the '<em><b>Updaters</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Updaters</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Updaters</em>' containment reference.
+	 * @see #setUpdaters(Updaters)
+	 * @see it.csi.mddtools.datagen.DatagenPackage#getDataAccessObject_Updaters()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Updaters getUpdaters();
+
+	/**
+	 * Sets the value of the '{@link it.csi.mddtools.datagen.DataAccessObject#getUpdaters <em>Updaters</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Updaters</em>' containment reference.
+	 * @see #getUpdaters()
+	 * @generated
+	 */
+	void setUpdaters(Updaters value);
+
+	/**
+	 * Returns the value of the '<em><b>Deleters</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Deleters</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Deleters</em>' containment reference.
+	 * @see #setDeleters(Deleters)
+	 * @see it.csi.mddtools.datagen.DatagenPackage#getDataAccessObject_Deleters()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Deleters getDeleters();
+
+	/**
+	 * Sets the value of the '{@link it.csi.mddtools.datagen.DataAccessObject#getDeleters <em>Deleters</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Deleters</em>' containment reference.
+	 * @see #getDeleters()
+	 * @generated
+	 */
+	void setDeleters(Deleters value);
 
 } // DataAccessObject

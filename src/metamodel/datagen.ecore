@@ -16,6 +16,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="mainTable" eType="ecore:EClass rdbmdl.ecore#//Table"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="pkGenerator" eType="#//PKGenerator"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inserter" eType="#//Inserter"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="finders" eType="#//Finders"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="updaters" eType="#//Updaters"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="deleters" eType="#//Deleters"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DaoPackage">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -27,4 +35,29 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sequenceName" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DBCommand" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Inserter" eSuperTypes="#//DBCommand"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Finders">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="finders" upperBound="-1"
+        eType="#//Finder" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Finder" abstract="true" eSuperTypes="#//DBCommand"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FindByPK" eSuperTypes="#//Finder"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FindAll" eSuperTypes="#//Finder"/>
+  <eClassifiers xsi:type="ecore:EClass" name="QBEFinder" eSuperTypes="#//Finder"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CustomFinder" eSuperTypes="#//Finder"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Updaters">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="updaters" upperBound="-1"
+        eType="#//Updater" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Updater" abstract="true" eSuperTypes="#//DBCommand"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UpdateRow" eSuperTypes="#//Updater"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Deleters">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="deleters" upperBound="-1"
+        eType="#//Deleter" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Deleter" abstract="true" eSuperTypes="#//DBCommand"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DeleteByPK" eSuperTypes="#//Deleter"/>
 </ecore:EPackage>

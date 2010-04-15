@@ -118,6 +118,106 @@ public class DatagenSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case DatagenPackage.DB_COMMAND: {
+				DBCommand dbCommand = (DBCommand)theEObject;
+				T result = caseDBCommand(dbCommand);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DatagenPackage.INSERTER: {
+				Inserter inserter = (Inserter)theEObject;
+				T result = caseInserter(inserter);
+				if (result == null) result = caseDBCommand(inserter);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DatagenPackage.FINDERS: {
+				Finders finders = (Finders)theEObject;
+				T result = caseFinders(finders);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DatagenPackage.FINDER: {
+				Finder finder = (Finder)theEObject;
+				T result = caseFinder(finder);
+				if (result == null) result = caseDBCommand(finder);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DatagenPackage.FIND_BY_PK: {
+				FindByPK findByPK = (FindByPK)theEObject;
+				T result = caseFindByPK(findByPK);
+				if (result == null) result = caseFinder(findByPK);
+				if (result == null) result = caseDBCommand(findByPK);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DatagenPackage.FIND_ALL: {
+				FindAll findAll = (FindAll)theEObject;
+				T result = caseFindAll(findAll);
+				if (result == null) result = caseFinder(findAll);
+				if (result == null) result = caseDBCommand(findAll);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DatagenPackage.QBE_FINDER: {
+				QBEFinder qbeFinder = (QBEFinder)theEObject;
+				T result = caseQBEFinder(qbeFinder);
+				if (result == null) result = caseFinder(qbeFinder);
+				if (result == null) result = caseDBCommand(qbeFinder);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DatagenPackage.CUSTOM_FINDER: {
+				CustomFinder customFinder = (CustomFinder)theEObject;
+				T result = caseCustomFinder(customFinder);
+				if (result == null) result = caseFinder(customFinder);
+				if (result == null) result = caseDBCommand(customFinder);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DatagenPackage.UPDATERS: {
+				Updaters updaters = (Updaters)theEObject;
+				T result = caseUpdaters(updaters);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DatagenPackage.UPDATER: {
+				Updater updater = (Updater)theEObject;
+				T result = caseUpdater(updater);
+				if (result == null) result = caseDBCommand(updater);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DatagenPackage.UPDATE_ROW: {
+				UpdateRow updateRow = (UpdateRow)theEObject;
+				T result = caseUpdateRow(updateRow);
+				if (result == null) result = caseUpdater(updateRow);
+				if (result == null) result = caseDBCommand(updateRow);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DatagenPackage.DELETERS: {
+				Deleters deleters = (Deleters)theEObject;
+				T result = caseDeleters(deleters);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DatagenPackage.DELETER: {
+				Deleter deleter = (Deleter)theEObject;
+				T result = caseDeleter(deleter);
+				if (result == null) result = caseDBCommand(deleter);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DatagenPackage.DELETE_BY_PK: {
+				DeleteByPK deleteByPK = (DeleteByPK)theEObject;
+				T result = caseDeleteByPK(deleteByPK);
+				if (result == null) result = caseDeleter(deleteByPK);
+				if (result == null) result = caseDBCommand(deleteByPK);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -194,6 +294,216 @@ public class DatagenSwitch<T> {
 	 * @generated
 	 */
 	public T caseSequencePKGenerator(SequencePKGenerator object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>DB Command</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>DB Command</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDBCommand(DBCommand object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Inserter</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Inserter</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseInserter(Inserter object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Finder</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Finder</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFinder(Finder object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Find By PK</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Find By PK</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFindByPK(FindByPK object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Find All</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Find All</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFindAll(FindAll object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>QBE Finder</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>QBE Finder</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseQBEFinder(QBEFinder object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Custom Finder</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Custom Finder</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCustomFinder(CustomFinder object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Updaters</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Updaters</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUpdaters(Updaters object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Updater</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Updater</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUpdater(Updater object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Update Row</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Update Row</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUpdateRow(UpdateRow object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Deleters</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Deleters</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDeleters(Deleters object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Deleter</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Deleter</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDeleter(Deleter object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Delete By PK</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Delete By PK</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDeleteByPK(DeleteByPK object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Finders</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Finders</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFinders(Finders object) {
 		return null;
 	}
 

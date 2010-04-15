@@ -9,7 +9,29 @@ context DBAccessModel ERROR "codice prodotto mancante" :
 context DBAccessModel ERROR "codice componente mancante" :
 	!isNullOrEmpty(codComponente);
 
+context DataAccessObject ERROR "Occorre specificare il nome del DAO:" :
+	!isNullOrEmpty(name);
 
 context DataAccessObject if (pkGenerator != null && pkGenerator.metaType == SequencePKGenerator) 
 ERROR "Il SequencePKGenerator è utilizzabile solo con PK di 1 sola colonna":
 	mainTable.primaryKey.includedColumns.size == 1;
+	
+/// verifiche sui finder
+context DataAccessObject ERROR "occorre definire almeno i finder base (findByPK e findAll):"+this.name :
+	finders != null && finders.finders.select(f| (f.metaType==FindAll || f.metaType==FindByPK)).size==2;
+
+context DataAccessObject ERROR "occorre definire l'inserter:"+this.name :
+	inserter != null;
+
+context DataAccessObject ERROR "occorre definire almeno l'updater di base (UpdateRow):"+this.name :
+	updaters != null && updaters.updaters.select(f| (f.metaType==UpdateRow)).size==1;
+
+
+context Finder if (metaType != FindByPK && metaType != FindAll) ERROR "E' necessario specificare il nome dei finder (esclusi il findByPK o findAll)"+((DataAccessObject)(this.eContainer.eContainer)).name:
+	!isNullOrEmpty(name);
+	
+context Updater if (metaType != UpdateRow) ERROR "E' necessario specificare il nome degli updater (escluso l'UpdateRow)"+((DataAccessObject)(this.eContainer.eContainer)).name:
+	!isNullOrEmpty(name);
+
+context Deleter if (metaType != DeleteByPK) ERROR "E' necessario specificare il nome dei deleter (escluso il DeleteByPK)"+((DataAccessObject)(this.eContainer.eContainer)).name:
+	!isNullOrEmpty(name);

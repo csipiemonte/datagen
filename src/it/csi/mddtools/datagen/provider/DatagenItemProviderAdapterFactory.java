@@ -168,6 +168,236 @@ public class DatagenItemProviderAdapterFactory extends DatagenAdapterFactory imp
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link it.csi.mddtools.datagen.Inserter} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected InserterItemProvider inserterItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.csi.mddtools.datagen.Inserter}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createInserterAdapter() {
+		if (inserterItemProvider == null) {
+			inserterItemProvider = new InserterItemProvider(this);
+		}
+
+		return inserterItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link it.csi.mddtools.datagen.FindByPK} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected FindByPKItemProvider findByPKItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.csi.mddtools.datagen.FindByPK}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createFindByPKAdapter() {
+		if (findByPKItemProvider == null) {
+			findByPKItemProvider = new FindByPKItemProvider(this);
+		}
+
+		return findByPKItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link it.csi.mddtools.datagen.FindAll} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected FindAllItemProvider findAllItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.csi.mddtools.datagen.FindAll}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createFindAllAdapter() {
+		if (findAllItemProvider == null) {
+			findAllItemProvider = new FindAllItemProvider(this);
+		}
+
+		return findAllItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link it.csi.mddtools.datagen.QBEFinder} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected QBEFinderItemProvider qbeFinderItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.csi.mddtools.datagen.QBEFinder}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createQBEFinderAdapter() {
+		if (qbeFinderItemProvider == null) {
+			qbeFinderItemProvider = new QBEFinderItemProvider(this);
+		}
+
+		return qbeFinderItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link it.csi.mddtools.datagen.CustomFinder} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CustomFinderItemProvider customFinderItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.csi.mddtools.datagen.CustomFinder}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createCustomFinderAdapter() {
+		if (customFinderItemProvider == null) {
+			customFinderItemProvider = new CustomFinderItemProvider(this);
+		}
+
+		return customFinderItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link it.csi.mddtools.datagen.Updaters} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected UpdatersItemProvider updatersItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.csi.mddtools.datagen.Updaters}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createUpdatersAdapter() {
+		if (updatersItemProvider == null) {
+			updatersItemProvider = new UpdatersItemProvider(this);
+		}
+
+		return updatersItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link it.csi.mddtools.datagen.UpdateRow} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected UpdateRowItemProvider updateRowItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.csi.mddtools.datagen.UpdateRow}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createUpdateRowAdapter() {
+		if (updateRowItemProvider == null) {
+			updateRowItemProvider = new UpdateRowItemProvider(this);
+		}
+
+		return updateRowItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link it.csi.mddtools.datagen.Deleters} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DeletersItemProvider deletersItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.csi.mddtools.datagen.Deleters}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDeletersAdapter() {
+		if (deletersItemProvider == null) {
+			deletersItemProvider = new DeletersItemProvider(this);
+		}
+
+		return deletersItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link it.csi.mddtools.datagen.DeleteByPK} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DeleteByPKItemProvider deleteByPKItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.csi.mddtools.datagen.DeleteByPK}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDeleteByPKAdapter() {
+		if (deleteByPKItemProvider == null) {
+			deleteByPKItemProvider = new DeleteByPKItemProvider(this);
+		}
+
+		return deleteByPKItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link it.csi.mddtools.datagen.Finders} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected FindersItemProvider findersItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.csi.mddtools.datagen.Finders}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createFindersAdapter() {
+		if (findersItemProvider == null) {
+			findersItemProvider = new FindersItemProvider(this);
+		}
+
+		return findersItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -270,6 +500,16 @@ public class DatagenItemProviderAdapterFactory extends DatagenAdapterFactory imp
 		if (dataAccessObjectItemProvider != null) dataAccessObjectItemProvider.dispose();
 		if (daoPackageItemProvider != null) daoPackageItemProvider.dispose();
 		if (sequencePKGeneratorItemProvider != null) sequencePKGeneratorItemProvider.dispose();
+		if (inserterItemProvider != null) inserterItemProvider.dispose();
+		if (findersItemProvider != null) findersItemProvider.dispose();
+		if (findByPKItemProvider != null) findByPKItemProvider.dispose();
+		if (findAllItemProvider != null) findAllItemProvider.dispose();
+		if (qbeFinderItemProvider != null) qbeFinderItemProvider.dispose();
+		if (customFinderItemProvider != null) customFinderItemProvider.dispose();
+		if (updatersItemProvider != null) updatersItemProvider.dispose();
+		if (updateRowItemProvider != null) updateRowItemProvider.dispose();
+		if (deletersItemProvider != null) deletersItemProvider.dispose();
+		if (deleteByPKItemProvider != null) deleteByPKItemProvider.dispose();
 	}
 
 }

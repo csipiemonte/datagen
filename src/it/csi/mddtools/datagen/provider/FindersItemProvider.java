@@ -7,9 +7,9 @@
 package it.csi.mddtools.datagen.provider;
 
 
-import it.csi.mddtools.datagen.DataAccessObject;
 import it.csi.mddtools.datagen.DatagenFactory;
 import it.csi.mddtools.datagen.DatagenPackage;
+import it.csi.mddtools.datagen.Finders;
 
 import java.util.Collection;
 import java.util.List;
@@ -20,24 +20,23 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
+
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link it.csi.mddtools.datagen.DataAccessObject} object.
+ * This is the item provider adapter for a {@link it.csi.mddtools.datagen.Finders} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class DataAccessObjectItemProvider
+public class FindersItemProvider
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
@@ -51,7 +50,7 @@ public class DataAccessObjectItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DataAccessObjectItemProvider(AdapterFactory adapterFactory) {
+	public FindersItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -66,54 +65,8 @@ public class DataAccessObjectItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addNamePropertyDescriptor(object);
-			addMainTablePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Name feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_DataAccessObject_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_DataAccessObject_name_feature", "_UI_DataAccessObject_type"),
-				 DatagenPackage.Literals.DATA_ACCESS_OBJECT__NAME,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Main Table feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addMainTablePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_DataAccessObject_mainTable_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_DataAccessObject_mainTable_feature", "_UI_DataAccessObject_type"),
-				 DatagenPackage.Literals.DATA_ACCESS_OBJECT__MAIN_TABLE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
 	}
 
 	/**
@@ -128,11 +81,7 @@ public class DataAccessObjectItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(DatagenPackage.Literals.DATA_ACCESS_OBJECT__PK_GENERATOR);
-			childrenFeatures.add(DatagenPackage.Literals.DATA_ACCESS_OBJECT__INSERTER);
-			childrenFeatures.add(DatagenPackage.Literals.DATA_ACCESS_OBJECT__FINDERS);
-			childrenFeatures.add(DatagenPackage.Literals.DATA_ACCESS_OBJECT__UPDATERS);
-			childrenFeatures.add(DatagenPackage.Literals.DATA_ACCESS_OBJECT__DELETERS);
+			childrenFeatures.add(DatagenPackage.Literals.FINDERS__FINDERS);
 		}
 		return childrenFeatures;
 	}
@@ -151,14 +100,14 @@ public class DataAccessObjectItemProvider
 	}
 
 	/**
-	 * This returns DataAccessObject.gif.
+	 * This returns Finders.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/DataAccessObject"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Finders"));
 	}
 
 	/**
@@ -169,10 +118,7 @@ public class DataAccessObjectItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((DataAccessObject)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_DataAccessObject_type") :
-			getString("_UI_DataAccessObject_type") + " " + label;
+		return getString("_UI_Finders_type");
 	}
 
 	/**
@@ -186,15 +132,8 @@ public class DataAccessObjectItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(DataAccessObject.class)) {
-			case DatagenPackage.DATA_ACCESS_OBJECT__NAME:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-			case DatagenPackage.DATA_ACCESS_OBJECT__PK_GENERATOR:
-			case DatagenPackage.DATA_ACCESS_OBJECT__INSERTER:
-			case DatagenPackage.DATA_ACCESS_OBJECT__FINDERS:
-			case DatagenPackage.DATA_ACCESS_OBJECT__UPDATERS:
-			case DatagenPackage.DATA_ACCESS_OBJECT__DELETERS:
+		switch (notification.getFeatureID(Finders.class)) {
+			case DatagenPackage.FINDERS__FINDERS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -214,28 +153,23 @@ public class DataAccessObjectItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(DatagenPackage.Literals.DATA_ACCESS_OBJECT__PK_GENERATOR,
-				 DatagenFactory.eINSTANCE.createSequencePKGenerator()));
+				(DatagenPackage.Literals.FINDERS__FINDERS,
+				 DatagenFactory.eINSTANCE.createFindByPK()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(DatagenPackage.Literals.DATA_ACCESS_OBJECT__INSERTER,
-				 DatagenFactory.eINSTANCE.createInserter()));
+				(DatagenPackage.Literals.FINDERS__FINDERS,
+				 DatagenFactory.eINSTANCE.createFindAll()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(DatagenPackage.Literals.DATA_ACCESS_OBJECT__FINDERS,
-				 DatagenFactory.eINSTANCE.createFinders()));
+				(DatagenPackage.Literals.FINDERS__FINDERS,
+				 DatagenFactory.eINSTANCE.createQBEFinder()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(DatagenPackage.Literals.DATA_ACCESS_OBJECT__UPDATERS,
-				 DatagenFactory.eINSTANCE.createUpdaters()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(DatagenPackage.Literals.DATA_ACCESS_OBJECT__DELETERS,
-				 DatagenFactory.eINSTANCE.createDeleters()));
+				(DatagenPackage.Literals.FINDERS__FINDERS,
+				 DatagenFactory.eINSTANCE.createCustomFinder()));
 	}
 
 	/**

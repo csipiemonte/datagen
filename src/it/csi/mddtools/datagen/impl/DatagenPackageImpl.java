@@ -6,14 +6,28 @@
  */
 package it.csi.mddtools.datagen.impl;
 
+import it.csi.mddtools.datagen.CustomFinder;
 import it.csi.mddtools.datagen.DBAccessModel;
+import it.csi.mddtools.datagen.DBCommand;
 import it.csi.mddtools.datagen.DaoPackage;
 import it.csi.mddtools.datagen.DataAccessObject;
 import it.csi.mddtools.datagen.DatagenFactory;
 import it.csi.mddtools.datagen.DatagenPackage;
 
+import it.csi.mddtools.datagen.DeleteByPK;
+import it.csi.mddtools.datagen.Deleter;
+import it.csi.mddtools.datagen.Deleters;
+import it.csi.mddtools.datagen.FindAll;
+import it.csi.mddtools.datagen.FindByPK;
+import it.csi.mddtools.datagen.Finder;
+import it.csi.mddtools.datagen.Finders;
+import it.csi.mddtools.datagen.Inserter;
 import it.csi.mddtools.datagen.PKGenerator;
+import it.csi.mddtools.datagen.QBEFinder;
 import it.csi.mddtools.datagen.SequencePKGenerator;
+import it.csi.mddtools.datagen.UpdateRow;
+import it.csi.mddtools.datagen.Updater;
+import it.csi.mddtools.datagen.Updaters;
 import it.csi.mddtools.rdbmdl.RdbmdlPackage;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -64,6 +78,104 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 	 * @generated
 	 */
 	private EClass sequencePKGeneratorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dbCommandEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass inserterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass finderEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass findByPKEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass findAllEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass qbeFinderEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass customFinderEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass updatersEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass updaterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass updateRowEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass deletersEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass deleterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass deleteByPKEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass findersEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -215,6 +327,42 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getDataAccessObject_Inserter() {
+		return (EReference)dataAccessObjectEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDataAccessObject_Finders() {
+		return (EReference)dataAccessObjectEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDataAccessObject_Updaters() {
+		return (EReference)dataAccessObjectEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDataAccessObject_Deleters() {
+		return (EReference)dataAccessObjectEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getDaoPackage() {
 		return daoPackageEClass;
 	}
@@ -269,6 +417,168 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getDBCommand() {
+		return dbCommandEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDBCommand_Name() {
+		return (EAttribute)dbCommandEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getInserter() {
+		return inserterEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFinder() {
+		return finderEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFindByPK() {
+		return findByPKEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFindAll() {
+		return findAllEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getQBEFinder() {
+		return qbeFinderEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCustomFinder() {
+		return customFinderEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getUpdaters() {
+		return updatersEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getUpdaters_Updaters() {
+		return (EReference)updatersEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getUpdater() {
+		return updaterEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getUpdateRow() {
+		return updateRowEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getDeleters() {
+		return deletersEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDeleters_Deleters() {
+		return (EReference)deletersEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getDeleter() {
+		return deleterEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getDeleteByPK() {
+		return deleteByPKEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFinders() {
+		return findersEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getFinders_Finders() {
+		return (EReference)findersEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public DatagenFactory getDatagenFactory() {
 		return (DatagenFactory)getEFactoryInstance();
 	}
@@ -302,6 +612,10 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		createEAttribute(dataAccessObjectEClass, DATA_ACCESS_OBJECT__NAME);
 		createEReference(dataAccessObjectEClass, DATA_ACCESS_OBJECT__MAIN_TABLE);
 		createEReference(dataAccessObjectEClass, DATA_ACCESS_OBJECT__PK_GENERATOR);
+		createEReference(dataAccessObjectEClass, DATA_ACCESS_OBJECT__INSERTER);
+		createEReference(dataAccessObjectEClass, DATA_ACCESS_OBJECT__FINDERS);
+		createEReference(dataAccessObjectEClass, DATA_ACCESS_OBJECT__UPDATERS);
+		createEReference(dataAccessObjectEClass, DATA_ACCESS_OBJECT__DELETERS);
 
 		daoPackageEClass = createEClass(DAO_PACKAGE);
 		createEAttribute(daoPackageEClass, DAO_PACKAGE__NAME);
@@ -311,6 +625,38 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 
 		sequencePKGeneratorEClass = createEClass(SEQUENCE_PK_GENERATOR);
 		createEAttribute(sequencePKGeneratorEClass, SEQUENCE_PK_GENERATOR__SEQUENCE_NAME);
+
+		dbCommandEClass = createEClass(DB_COMMAND);
+		createEAttribute(dbCommandEClass, DB_COMMAND__NAME);
+
+		inserterEClass = createEClass(INSERTER);
+
+		findersEClass = createEClass(FINDERS);
+		createEReference(findersEClass, FINDERS__FINDERS);
+
+		finderEClass = createEClass(FINDER);
+
+		findByPKEClass = createEClass(FIND_BY_PK);
+
+		findAllEClass = createEClass(FIND_ALL);
+
+		qbeFinderEClass = createEClass(QBE_FINDER);
+
+		customFinderEClass = createEClass(CUSTOM_FINDER);
+
+		updatersEClass = createEClass(UPDATERS);
+		createEReference(updatersEClass, UPDATERS__UPDATERS);
+
+		updaterEClass = createEClass(UPDATER);
+
+		updateRowEClass = createEClass(UPDATE_ROW);
+
+		deletersEClass = createEClass(DELETERS);
+		createEReference(deletersEClass, DELETERS__DELETERS);
+
+		deleterEClass = createEClass(DELETER);
+
+		deleteByPKEClass = createEClass(DELETE_BY_PK);
 	}
 
 	/**
@@ -345,6 +691,16 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 
 		// Add supertypes to classes
 		sequencePKGeneratorEClass.getESuperTypes().add(this.getPKGenerator());
+		inserterEClass.getESuperTypes().add(this.getDBCommand());
+		finderEClass.getESuperTypes().add(this.getDBCommand());
+		findByPKEClass.getESuperTypes().add(this.getFinder());
+		findAllEClass.getESuperTypes().add(this.getFinder());
+		qbeFinderEClass.getESuperTypes().add(this.getFinder());
+		customFinderEClass.getESuperTypes().add(this.getFinder());
+		updaterEClass.getESuperTypes().add(this.getDBCommand());
+		updateRowEClass.getESuperTypes().add(this.getUpdater());
+		deleterEClass.getESuperTypes().add(this.getDBCommand());
+		deleteByPKEClass.getESuperTypes().add(this.getDeleter());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(dbAccessModelEClass, DBAccessModel.class, "DBAccessModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -357,6 +713,10 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		initEAttribute(getDataAccessObject_Name(), ecorePackage.getEString(), "name", null, 0, 1, DataAccessObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDataAccessObject_MainTable(), theRdbmdlPackage.getTable(), null, "mainTable", null, 0, 1, DataAccessObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDataAccessObject_PkGenerator(), this.getPKGenerator(), null, "pkGenerator", null, 0, 1, DataAccessObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDataAccessObject_Inserter(), this.getInserter(), null, "inserter", null, 0, 1, DataAccessObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDataAccessObject_Finders(), this.getFinders(), null, "finders", null, 0, 1, DataAccessObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDataAccessObject_Updaters(), this.getUpdaters(), null, "updaters", null, 0, 1, DataAccessObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDataAccessObject_Deleters(), this.getDeleters(), null, "deleters", null, 0, 1, DataAccessObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(daoPackageEClass, DaoPackage.class, "DaoPackage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDaoPackage_Name(), ecorePackage.getEString(), "name", null, 0, 1, DaoPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -366,6 +726,38 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 
 		initEClass(sequencePKGeneratorEClass, SequencePKGenerator.class, "SequencePKGenerator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSequencePKGenerator_SequenceName(), ecorePackage.getEString(), "sequenceName", null, 1, 1, SequencePKGenerator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(dbCommandEClass, DBCommand.class, "DBCommand", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDBCommand_Name(), ecorePackage.getEString(), "name", null, 0, 1, DBCommand.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(inserterEClass, Inserter.class, "Inserter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(findersEClass, Finders.class, "Finders", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getFinders_Finders(), this.getFinder(), null, "finders", null, 0, -1, Finders.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(finderEClass, Finder.class, "Finder", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(findByPKEClass, FindByPK.class, "FindByPK", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(findAllEClass, FindAll.class, "FindAll", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(qbeFinderEClass, QBEFinder.class, "QBEFinder", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(customFinderEClass, CustomFinder.class, "CustomFinder", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(updatersEClass, Updaters.class, "Updaters", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getUpdaters_Updaters(), this.getUpdater(), null, "updaters", null, 0, -1, Updaters.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(updaterEClass, Updater.class, "Updater", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(updateRowEClass, UpdateRow.class, "UpdateRow", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(deletersEClass, Deleters.class, "Deleters", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDeleters_Deleters(), this.getDeleter(), null, "deleters", null, 0, -1, Deleters.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(deleterEClass, Deleter.class, "Deleter", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(deleteByPKEClass, DeleteByPK.class, "DeleteByPK", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

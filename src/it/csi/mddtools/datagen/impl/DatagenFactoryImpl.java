@@ -64,6 +64,16 @@ public class DatagenFactoryImpl extends EFactoryImpl implements DatagenFactory {
 			case DatagenPackage.DATA_ACCESS_OBJECT: return (EObject)createDataAccessObject();
 			case DatagenPackage.DAO_PACKAGE: return (EObject)createDaoPackage();
 			case DatagenPackage.SEQUENCE_PK_GENERATOR: return (EObject)createSequencePKGenerator();
+			case DatagenPackage.INSERTER: return (EObject)createInserter();
+			case DatagenPackage.FINDERS: return (EObject)createFinders();
+			case DatagenPackage.FIND_BY_PK: return (EObject)createFindByPK();
+			case DatagenPackage.FIND_ALL: return (EObject)createFindAll();
+			case DatagenPackage.QBE_FINDER: return (EObject)createQBEFinder();
+			case DatagenPackage.CUSTOM_FINDER: return (EObject)createCustomFinder();
+			case DatagenPackage.UPDATERS: return (EObject)createUpdaters();
+			case DatagenPackage.UPDATE_ROW: return (EObject)createUpdateRow();
+			case DatagenPackage.DELETERS: return (EObject)createDeleters();
+			case DatagenPackage.DELETE_BY_PK: return (EObject)createDeleteByPK();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -107,6 +117,106 @@ public class DatagenFactoryImpl extends EFactoryImpl implements DatagenFactory {
 	public SequencePKGenerator createSequencePKGenerator() {
 		SequencePKGeneratorImpl sequencePKGenerator = new SequencePKGeneratorImpl();
 		return sequencePKGenerator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Inserter createInserter() {
+		InserterImpl inserter = new InserterImpl();
+		return inserter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FindByPK createFindByPK() {
+		FindByPKImpl findByPK = new FindByPKImpl();
+		return findByPK;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FindAll createFindAll() {
+		FindAllImpl findAll = new FindAllImpl();
+		return findAll;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public QBEFinder createQBEFinder() {
+		QBEFinderImpl qbeFinder = new QBEFinderImpl();
+		return qbeFinder;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CustomFinder createCustomFinder() {
+		CustomFinderImpl customFinder = new CustomFinderImpl();
+		return customFinder;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Updaters createUpdaters() {
+		UpdatersImpl updaters = new UpdatersImpl();
+		return updaters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UpdateRow createUpdateRow() {
+		UpdateRowImpl updateRow = new UpdateRowImpl();
+		return updateRow;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Deleters createDeleters() {
+		DeletersImpl deleters = new DeletersImpl();
+		return deleters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DeleteByPK createDeleteByPK() {
+		DeleteByPKImpl deleteByPK = new DeleteByPKImpl();
+		return deleteByPK;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Finders createFinders() {
+		FindersImpl finders = new FindersImpl();
+		return finders;
 	}
 
 	/**

@@ -5,10 +5,28 @@
     <dao name="Dipendente">
       <mainTable href="test_schema.xmi#//@elements.0"/>
       <pkGenerator xsi:type="datagen:SequencePKGenerator" sequenceName="SEQ_MATRICOLA_DIPENDENTE"/>
+      <inserter/>
+      <finders>
+        <finders xsi:type="datagen:CustomFinder" name="ByNome"/>
+        <finders xsi:type="datagen:FindAll"/>
+        <finders xsi:type="datagen:FindByPK"/>
+      </finders>
+      <updaters>
+        <updaters xsi:type="datagen:UpdateRow"/>
+      </updaters>
     </dao>
     <dao name="Progetto">
       <mainTable href="test_schema.xmi#//@elements.1"/>
       <pkGenerator xsi:type="datagen:SequencePKGenerator" sequenceName="SEQ_COD_PROGETTO"/>
+      <inserter/>
+      <finders>
+        <finders xsi:type="datagen:FindByPK"/>
+        <finders xsi:type="datagen:FindAll"/>
+        <finders xsi:type="datagen:CustomFinder" name="byMuzz"/>
+      </finders>
+      <updaters>
+        <updaters xsi:type="datagen:UpdateRow"/>
+      </updaters>
     </dao>
   </daopkgs>
 </datagen:DBAccessModel>

@@ -62,6 +62,96 @@ public interface DatagenFactory extends EFactory {
 	SequencePKGenerator createSequencePKGenerator();
 
 	/**
+	 * Returns a new object of class '<em>Inserter</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Inserter</em>'.
+	 * @generated
+	 */
+	Inserter createInserter();
+
+	/**
+	 * Returns a new object of class '<em>Find By PK</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Find By PK</em>'.
+	 * @generated
+	 */
+	FindByPK createFindByPK();
+
+	/**
+	 * Returns a new object of class '<em>Find All</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Find All</em>'.
+	 * @generated
+	 */
+	FindAll createFindAll();
+
+	/**
+	 * Returns a new object of class '<em>QBE Finder</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>QBE Finder</em>'.
+	 * @generated
+	 */
+	QBEFinder createQBEFinder();
+
+	/**
+	 * Returns a new object of class '<em>Custom Finder</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Custom Finder</em>'.
+	 * @generated
+	 */
+	CustomFinder createCustomFinder();
+
+	/**
+	 * Returns a new object of class '<em>Updaters</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Updaters</em>'.
+	 * @generated
+	 */
+	Updaters createUpdaters();
+
+	/**
+	 * Returns a new object of class '<em>Update Row</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Update Row</em>'.
+	 * @generated
+	 */
+	UpdateRow createUpdateRow();
+
+	/**
+	 * Returns a new object of class '<em>Deleters</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Deleters</em>'.
+	 * @generated
+	 */
+	Deleters createDeleters();
+
+	/**
+	 * Returns a new object of class '<em>Delete By PK</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Delete By PK</em>'.
+	 * @generated
+	 */
+	DeleteByPK createDeleteByPK();
+
+	/**
+	 * Returns a new object of class '<em>Finders</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Finders</em>'.
+	 * @generated
+	 */
+	Finders createFinders();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
