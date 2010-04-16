@@ -72,9 +72,9 @@ import java.sql.SQLException;
 public interface «getDaoClassName()» {
 	«EXPAND insertMethod(model, false) FOR this»
 	
-	«EXPAND updateMethod(model, false) FOR this»
+	«EXPAND template::datagen::dao::updaters::updaters(model, false) FOR this»
 	
-	«EXPAND deleteMethod(model, false) FOR this»
+	«EXPAND template::datagen::dao::deleters::deleters(model, false) FOR this»
 	
 	«EXPAND mapRowMethod(model, false) FOR this»
 	
@@ -128,9 +128,9 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameterize
 
 	«EXPAND insertMethod(model, true) FOR this»
 	
-	«EXPAND updateMethod(model, true) FOR this»
+	«EXPAND template::datagen::dao::updaters::updaters(model, true) FOR this»
 	
-	«EXPAND deleteMethod(model, true) FOR this»
+	«EXPAND template::datagen::dao::deleters::deleters(model, true) FOR this»
 	
 	«EXPAND mapRowMethod(model, true) FOR this»
 
@@ -227,43 +227,6 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameterize
 	
 «ENDDEFINE»
 
-«DEFINE updateMethod(DBAccessModel model, boolean body) FOR DataAccessObject»
-	/** 
-	 * Updates a single row in the «mainTable.name» table.
-	 * @generated
-	 */
-	public void update(«getPkClassName()» pk, «getDtoClassName()» dto) throws «getDaoExcClassName()»
-	«IF body-»
-	{
-		jdbcTemplate.update("UPDATE " + getTableName() + " «EXPAND setColumnSetValuePlaceholderList FOR this.mainTable.columns-»",
-		«EXPAND paramValorizationList("dto") FOR this.mainTable.columns»
-		);
-	}
-	«ELSE-»
-	;
-	«ENDIF-»
-	
-
-«ENDDEFINE»
-
-«DEFINE deleteMethod(DBAccessModel model, boolean body) FOR DataAccessObject»
-	/** 
-	 * Deletes a single row in the «mainTable.name» table.
-	 * @generated
-	 */
-	
-	public void delete(«getPkClassName()» pk) throws «getDaoExcClassName()»
-	«IF body-»
-	{
-		jdbcTemplate.update("DELETE FROM " + getTableName() + " WHERE «EXPAND setColumnEqPlaceholderList(",") FOR this.mainTable.primaryKey.includedColumns»",
-		«EXPAND paramValorizationList("pk") FOR this.mainTable.primaryKey.includedColumns»
-		);
-	}
-	«ELSE-»
-	;
-	«ENDIF-»
-	
-«ENDDEFINE»
 
 «DEFINE mapRowMethod(DBAccessModel model, boolean body) FOR DataAccessObject»
 	/**

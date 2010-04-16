@@ -1,0 +1,96 @@
+«IMPORT ecore»
+«IMPORT datagen»
+«IMPORT rdbmdl»
+«IMPORT rdbmdl::constraints»
+«IMPORT rdbmdl::datatypes»
+«IMPORT rdbmdl::view»
+
+«EXTENSION template::DatagenExtensions»
+
+«DEFINE deleters(DBAccessModel model, boolean body) FOR DataAccessObject-»
+«IF deleters!=null-»
+«EXPAND deleter(model, this, body) FOREACH this.deleters.deleters-»
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE deleter(DBAccessModel model, DataAccessObject dao, boolean body) FOR Deleter»
+«ERROR "deleter non gestito:"+metaType»
+«ENDDEFINE»
+
+«DEFINE deleter(DBAccessModel model, DataAccessObject dao, boolean body) FOR DeleteByPK»
+	/** 
+	 * Deletes a single row in the «dao.mainTable.name» table.
+	 * @generated
+	 */
+	
+	public void delete(«getPkClassName(dao)» pk) throws «getDaoExcClassName(dao)»
+	«IF body-»
+	{
+		jdbcTemplate.update("DELETE FROM " + getTableName() + " WHERE «EXPAND template::datagen::dao::daoFiles::setColumnEqPlaceholderList(",") FOR dao.mainTable.primaryKey.includedColumns»",
+		«EXPAND template::datagen::dao::daoFiles::paramValorizationList("pk") FOR dao.mainTable.primaryKey.includedColumns»
+		);
+	}
+	«ELSE-»
+	;
+	«ENDIF-»
+	
+«ENDDEFINE»
+
+«DEFINE finder(DBAccessModel model, DataAccessObject dao, boolean body) FOR FindAll»
+	/** 
+	 * Returns all rows from the «dao.mainTable.name» table that match the criteria ''.
+	 * @generated
+	 */
+	public List<«getDtoClassName(dao)»> findAll() throws «getDaoExcClassName(dao)»
+	«IF body-»
+	{
+		try {
+			return jdbcTemplate.query("SELECT «EXPAND template::datagen::dao::daoFiles::columnNameList FOR dao.mainTable.columns» FROM " + getTableName() , this);
+		}
+		catch (Exception e) {
+			throw new «getDaoExcClassName(dao)»("Query failed", e);
+		}
+	}
+	«ELSE-»
+	;
+	«ENDIF-»
+	
+«ENDDEFINE»
+
+
+
+«DEFINE finder(DBAccessModel model, DataAccessObject dao, boolean body) FOR Finder»
+«ERROR "finder "+this.metaType+" non gestito"»
+«ENDDEFINE»
+
+«DEFINE finder(DBAccessModel model, DataAccessObject dao, boolean body) FOR CustomFinder»
+	/** 
+	 * Implementazione del finder «name»
+	 * @generated
+	 */
+	public List<«getDtoClassName(dao)»> find«name.toFirstUpper()»(Object input) throws «getDaoExcClassName(dao)»
+	«IF body-»
+	{
+		try {
+			«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"queryandvalues")»
+			// personalizzare la query SQL relativa al finder
+			String queryString = "SELECT * from «dao.mainTable.name»";
+			
+			// personalizzare l'elenco dei parametri da passare al jdbctemplate (devono corrispondere in tipo e
+			// numero ai parametri definiti nella queryString - tramite "?")
+			Object [] params = new Object[]{};
+			«ENDPROTECT»
+			List<«getDtoClassName(dao)»> list = 
+				jdbcTemplate.query(queryString, this, params);
+			return list;
+		}
+		catch (Exception e) {
+			throw new «getDaoExcClassName(dao)»("Query failed", e);
+		}		
+	}
+	«ELSE-»
+	;
+	«ENDIF-»
+	
+«ENDDEFINE»
+

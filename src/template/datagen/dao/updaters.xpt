@@ -1,0 +1,37 @@
+«IMPORT ecore»
+«IMPORT datagen»
+«IMPORT rdbmdl»
+«IMPORT rdbmdl::constraints»
+«IMPORT rdbmdl::datatypes»
+«IMPORT rdbmdl::view»
+
+«EXTENSION template::DatagenExtensions»
+
+«DEFINE updaters(DBAccessModel model, boolean body) FOR DataAccessObject-»
+«IF updaters!=null-»
+«EXPAND updater(model, this, body) FOREACH this.updaters.updaters-»
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE updater(DBAccessModel model, DataAccessObject dao, boolean body) FOR Updater»
+«ERROR "updater non gestito:"+metaType»
+«ENDDEFINE»
+
+«DEFINE updater(DBAccessModel model, DataAccessObject dao, boolean body) FOR UpdateRow»
+	/** 
+	 * Updates a single row in the «dao.mainTable.name» table.
+	 * @generated
+	 */
+	public void update(«getPkClassName(dao)» pk, «getDtoClassName(dao)» dto) throws «getDaoExcClassName(dao)»
+	«IF body-»
+	{
+		jdbcTemplate.update("UPDATE " + getTableName() + " «EXPAND template::datagen::dao::daoFiles::setColumnSetValuePlaceholderList FOR dao.mainTable.columns-»",
+		«EXPAND template::datagen::dao::daoFiles::paramValorizationList("dto") FOR dao.mainTable.columns»
+		);
+	}
+	«ELSE-»
+	;
+	«ENDIF-»
+	
+
+«ENDDEFINE»
