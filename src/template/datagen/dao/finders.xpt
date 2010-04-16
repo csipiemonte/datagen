@@ -13,6 +13,10 @@
 «ENDIF-»
 «ENDDEFINE»
 
+«DEFINE finder(DBAccessModel model, DataAccessObject dao, boolean body) FOR Finder»
+«ERROR "finder "+this.metaType+" non gestito"»
+«ENDDEFINE»
+
 
 «DEFINE finder(DBAccessModel model, DataAccessObject dao, boolean body) FOR FindByPK»
 	/** 
@@ -58,17 +62,13 @@
 «ENDDEFINE»
 
 
-
-«DEFINE finder(DBAccessModel model, DataAccessObject dao, boolean body) FOR Finder»
-«ERROR "finder "+this.metaType+" non gestito"»
-«ENDDEFINE»
-
 «DEFINE finder(DBAccessModel model, DataAccessObject dao, boolean body) FOR CustomFinder»
 	/** 
 	 * Implementazione del finder «name»
 	 * @generated
 	 */
-	public List<«getDtoClassName(dao)»> find«name.toFirstUpper()»(Object input) throws «getDaoExcClassName(dao)»
+«LET isNullOrEmpty(filterClassFQN) ? "java.lang.Object" : (filterClassFQN=="$dto" ? getDtoFQN(dao, model) : (filterClassFQN=="$dto[]"? "java.util.ArrayList<"+getDtoFQN(dao, model)+">" : filterClassFQN) ) AS filterJavaType-»
+	public List<«getDtoClassName(dao)»> find«name.toFirstUpper()»(«filterJavaType» input) throws «getDaoExcClassName(dao)»
 	«IF body-»
 	{
 		try {
@@ -91,6 +91,6 @@
 	«ELSE-»
 	;
 	«ENDIF-»
-	
+«ENDLET-»	
 «ENDDEFINE»
 

@@ -15,6 +15,10 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Finders</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Insieme dei <b>Finder</b> messi a disposizione dal <b>DataAccessObject</b>
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -37,6 +41,9 @@ public interface Finders extends CDOObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Elenco dei <b>Finder</b>
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Finders</em>' containment reference list.
 	 * @see it.csi.mddtools.datagen.DatagenPackage#getFinders_Finders()
 	 * @model containment="true"

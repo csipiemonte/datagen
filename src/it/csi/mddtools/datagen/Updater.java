@@ -12,6 +12,10 @@ package it.csi.mddtools.datagen;
  * A representation of the model object '<em><b>Updater</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Superclasse astratta di tutte le operazioni di aggiornamento dati
+ * <!-- end-model-doc -->
+ *
  *
  * @see it.csi.mddtools.datagen.DatagenPackage#getUpdater()
  * @model abstract="true"

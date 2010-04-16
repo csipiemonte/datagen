@@ -13,6 +13,10 @@ import org.eclipse.emf.cdo.CDOObject;
  * A representation of the model object '<em><b>Finder</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Superclasse astratta di tutte le operazioni di ricerca
+ * <!-- end-model-doc -->
+ *
  *
  * @see it.csi.mddtools.datagen.DatagenPackage#getFinder()
  * @model abstract="true"

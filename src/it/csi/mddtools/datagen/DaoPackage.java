@@ -15,6 +15,10 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Dao Package</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Raggruppamento logico di <b>DataAccessObject</b>
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -37,6 +41,9 @@ public interface DaoPackage extends CDOObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * nome logico del package. deve essere un identificativo valido per un package java
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see it.csi.mddtools.datagen.DatagenPackage#getDaoPackage_Name()
@@ -64,6 +71,9 @@ public interface DaoPackage extends CDOObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Elenco dei <b>DataAccessObject</b> contenuti nel package.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Dao</em>' containment reference list.
 	 * @see it.csi.mddtools.datagen.DatagenPackage#getDaoPackage_Dao()
 	 * @model containment="true"

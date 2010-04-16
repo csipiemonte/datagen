@@ -15,6 +15,10 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Updaters</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Insieme degli <b>Updater</b> messia a disposizione dal <b>DataAccessObject</b>
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -37,6 +41,9 @@ public interface Updaters extends CDOObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Elenco degli <b>Updater</b>
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Updaters</em>' containment reference list.
 	 * @see it.csi.mddtools.datagen.DatagenPackage#getUpdaters_Updaters()
 	 * @model containment="true"

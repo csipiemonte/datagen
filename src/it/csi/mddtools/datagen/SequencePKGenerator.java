@@ -12,6 +12,10 @@ package it.csi.mddtools.datagen;
  * A representation of the model object '<em><b>Sequence PK Generator</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Generatorew di primary key basato su SEQUENCE
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -32,6 +36,9 @@ public interface SequencePKGenerator extends PKGenerator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Nome della SEQUENCE utilizzata dal generatore di primary key
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Sequence Name</em>' attribute.
 	 * @see #setSequenceName(String)
 	 * @see it.csi.mddtools.datagen.DatagenPackage#getSequencePKGenerator_SequenceName()

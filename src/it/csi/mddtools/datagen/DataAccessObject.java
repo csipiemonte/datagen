@@ -15,6 +15,10 @@ import org.eclipse.emf.cdo.CDOObject;
  * A representation of the model object '<em><b>Data Access Object</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Agente deputato alla manipolazione dei dati di una singola tabella
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -42,6 +46,9 @@ public interface DataAccessObject extends CDOObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Nome logico del <b>DAO</b>. Deve essere un identificativo vlaido di classe java.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see it.csi.mddtools.datagen.DatagenPackage#getDataAccessObject_Name()
@@ -68,6 +75,9 @@ public interface DataAccessObject extends CDOObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Tabella su cui opera il <b>DAO</b>
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Main Table</em>' reference.
 	 * @see #setMainTable(Table)
 	 * @see it.csi.mddtools.datagen.DatagenPackage#getDataAccessObject_MainTable()
@@ -94,6 +104,9 @@ public interface DataAccessObject extends CDOObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Generatore di primary key (opzionale). Se definito e' utilizzato nelle operazioni di inserimento
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Pk Generator</em>' containment reference.
 	 * @see #setPkGenerator(PKGenerator)
 	 * @see it.csi.mddtools.datagen.DatagenPackage#getDataAccessObject_PkGenerator()
@@ -120,6 +133,9 @@ public interface DataAccessObject extends CDOObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Operazione di inserimento di un record
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Inserter</em>' containment reference.
 	 * @see #setInserter(Inserter)
 	 * @see it.csi.mddtools.datagen.DatagenPackage#getDataAccessObject_Inserter()
@@ -146,6 +162,9 @@ public interface DataAccessObject extends CDOObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Insieme dei possibili finder definiti per questo <b>DAO</b>
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Finders</em>' containment reference.
 	 * @see #setFinders(Finders)
 	 * @see it.csi.mddtools.datagen.DatagenPackage#getDataAccessObject_Finders()
@@ -172,6 +191,9 @@ public interface DataAccessObject extends CDOObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Insieme dei possibili updater definiti per questo <b>DAO</b>
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Updaters</em>' containment reference.
 	 * @see #setUpdaters(Updaters)
 	 * @see it.csi.mddtools.datagen.DatagenPackage#getDataAccessObject_Updaters()
@@ -198,6 +220,9 @@ public interface DataAccessObject extends CDOObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Insieme dei possibili deleter definiti per questo <b>DAO</b>
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Deleters</em>' containment reference.
 	 * @see #setDeleters(Deleters)
 	 * @see it.csi.mddtools.datagen.DatagenPackage#getDataAccessObject_Deleters()

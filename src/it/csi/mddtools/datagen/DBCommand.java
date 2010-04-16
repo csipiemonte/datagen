@@ -13,6 +13,11 @@ import org.eclipse.emf.cdo.CDOObject;
  * A representation of the model object '<em><b>DB Command</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Superclasse astratta di tutte le classi che rappresentano le operazioni che il
+ * <b>DataAccessObject</b> pu&ograve; esporre
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -34,6 +39,10 @@ public interface DBCommand extends CDOObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * nome logico dell'operazione. Obbligatorio per alcune tipologie di operazioni.
+	 * Deve essere un identificativo valido di metodo java
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see it.csi.mddtools.datagen.DatagenPackage#getDBCommand_Name()

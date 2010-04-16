@@ -17,6 +17,10 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>DB Access Model</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Modellazione dello strato di accesso ai dati
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -41,6 +45,10 @@ public interface DBAccessModel extends CDOObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Schema DB di cui viene modellato l'accesso
+	 * 
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Schema</em>' reference.
 	 * @see #setSchema(Schema)
 	 * @see it.csi.mddtools.datagen.DatagenPackage#getDBAccessModel_Schema()
@@ -68,6 +76,9 @@ public interface DBAccessModel extends CDOObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * I <b>DataAccessObject</b> sono suddivisi in gruppi logici
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Daopkgs</em>' containment reference list.
 	 * @see it.csi.mddtools.datagen.DatagenPackage#getDBAccessModel_Daopkgs()
 	 * @model containment="true"
@@ -83,6 +94,9 @@ public interface DBAccessModel extends CDOObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Codice prodotto di appartenenza
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Cod Prodotto</em>' attribute.
 	 * @see #setCodProdotto(String)
 	 * @see it.csi.mddtools.datagen.DatagenPackage#getDBAccessModel_CodProdotto()
@@ -109,6 +123,9 @@ public interface DBAccessModel extends CDOObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Codice componente di appartenenza
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Cod Componente</em>' attribute.
 	 * @see #setCodComponente(String)
 	 * @see it.csi.mddtools.datagen.DatagenPackage#getDBAccessModel_CodComponente()

@@ -22,6 +22,9 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
+ * <!-- begin-model-doc -->
+ * Modellazione dello strato di accesso ai dati
+ * <!-- end-model-doc -->
  * @see it.csi.mddtools.datagen.DatagenFactory
  * @model kind="package"
  * @generated
@@ -559,13 +562,22 @@ public interface DatagenPackage extends EPackage {
 	int CUSTOM_FINDER__NAME = FINDER__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Filter Class FQN</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOM_FINDER__FILTER_CLASS_FQN = FINDER_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Custom Finder</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CUSTOM_FINDER_FEATURE_COUNT = FINDER_FEATURE_COUNT + 0;
+	int CUSTOM_FINDER_FEATURE_COUNT = FINDER_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Updaters</b></em>' containment reference list.
@@ -962,6 +974,17 @@ public interface DatagenPackage extends EPackage {
 	EClass getCustomFinder();
 
 	/**
+	 * Returns the meta object for the attribute '{@link it.csi.mddtools.datagen.CustomFinder#getFilterClassFQN <em>Filter Class FQN</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Filter Class FQN</em>'.
+	 * @see it.csi.mddtools.datagen.CustomFinder#getFilterClassFQN()
+	 * @see #getCustomFinder()
+	 * @generated
+	 */
+	EAttribute getCustomFinder_FilterClassFQN();
+
+	/**
 	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.Updaters <em>Updaters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1325,6 +1348,14 @@ public interface DatagenPackage extends EPackage {
 		 * @generated
 		 */
 		EClass CUSTOM_FINDER = eINSTANCE.getCustomFinder();
+
+		/**
+		 * The meta object literal for the '<em><b>Filter Class FQN</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CUSTOM_FINDER__FILTER_CLASS_FQN = eINSTANCE.getCustomFinder_FilterClassFQN();
 
 		/**
 		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.UpdatersImpl <em>Updaters</em>}' class.

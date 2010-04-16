@@ -7,7 +7,7 @@
       <pkGenerator xsi:type="datagen:SequencePKGenerator" sequenceName="SEQ_MATRICOLA_DIPENDENTE"/>
       <inserter/>
       <finders>
-        <finders xsi:type="datagen:CustomFinder" name="ByNome"/>
+        <finders xsi:type="datagen:CustomFinder" name="ByNome" filterClassFQN="java.lang.String"/>
         <finders xsi:type="datagen:FindAll"/>
         <finders xsi:type="datagen:FindByPK"/>
       </finders>

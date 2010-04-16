@@ -489,6 +489,15 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getCustomFinder_FilterClassFQN() {
+		return (EAttribute)customFinderEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getUpdaters() {
 		return updatersEClass;
 	}
@@ -643,6 +652,7 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		qbeFinderEClass = createEClass(QBE_FINDER);
 
 		customFinderEClass = createEClass(CUSTOM_FINDER);
+		createEAttribute(customFinderEClass, CUSTOM_FINDER__FILTER_CLASS_FQN);
 
 		updatersEClass = createEClass(UPDATERS);
 		createEReference(updatersEClass, UPDATERS__UPDATERS);
@@ -744,6 +754,7 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		initEClass(qbeFinderEClass, QBEFinder.class, "QBEFinder", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(customFinderEClass, CustomFinder.class, "CustomFinder", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCustomFinder_FilterClassFQN(), ecorePackage.getEString(), "filterClassFQN", null, 0, 1, CustomFinder.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(updatersEClass, Updaters.class, "Updaters", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getUpdaters_Updaters(), this.getUpdater(), null, "updaters", null, 0, -1, Updaters.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

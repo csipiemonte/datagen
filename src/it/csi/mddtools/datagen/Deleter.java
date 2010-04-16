@@ -12,6 +12,10 @@ package it.csi.mddtools.datagen;
  * A representation of the model object '<em><b>Deleter</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Superclasse astratta di tutte le operazioni dicancellazione di record dati
+ * <!-- end-model-doc -->
+ *
  *
  * @see it.csi.mddtools.datagen.DatagenPackage#getDeleter()
  * @model abstract="true"

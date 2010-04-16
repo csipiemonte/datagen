@@ -12,6 +12,10 @@ package it.csi.mddtools.datagen;
  * A representation of the model object '<em><b>QBE Finder</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Operazione di ricerca by example
+ * <!-- end-model-doc -->
+ *
  *
  * @see it.csi.mddtools.datagen.DatagenPackage#getQBEFinder()
  * @model
