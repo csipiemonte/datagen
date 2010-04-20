@@ -14,6 +14,9 @@
       <updaters>
         <updaters xsi:type="datagen:UpdateRow"/>
       </updaters>
+      <deleters>
+        <deleters xsi:type="datagen:DeleteByPK"/>
+      </deleters>
     </dao>
     <dao name="Progetto">
       <mainTable href="test_schema.xmi#//@elements.1"/>
@@ -27,6 +30,9 @@
       <updaters>
         <updaters xsi:type="datagen:UpdateRow"/>
       </updaters>
+      <deleters>
+        <deleters xsi:type="datagen:DeleteByPK"/>
+      </deleters>
     </dao>
   </daopkgs>
 </datagen:DBAccessModel>
