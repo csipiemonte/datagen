@@ -9,6 +9,7 @@
 
 «DEFINE daoFiles FOR DBAccessModel»
 «EXPAND daoFiles(this) FOREACH daopkgs»
+«EXPAND utilFiles FOR this»
 «ENDDEFINE»
 
 «DEFINE daoFiles (DBAccessModel model) FOR DaoPackage»
@@ -91,39 +92,39 @@ public interface «getDaoClassName()» {
 import «pkgPackage».dao.*;
 import «pkgPackage».dto.*;
 import «pkgPackage».exceptions.*;
+import «getDALayerBasePkg(model)».util.*;
 import java.util.List;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.transaction.annotation.Transactional;
+import it.csi.util.performance.StopWatch;
+import org.apache.log4j.Logger;
+import java.util.Map;
+import java.util.TreeMap;
+
+«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(getDaoImplClassName()+"queryandvalues")»
+«ENDPROTECT»
 
 /**
  * @generated
  */
 public class «getDaoImplClassName()» extends AbstractDAO implements ParameterizedRowMapper<«getDtoClassName()»>, «getDaoClassName()»
 {
+	protected static Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
 	/**
 	 * @generated
 	 */
-	protected SimpleJdbcTemplate jdbcTemplate;
-
+	protected NamedParameterJdbcTemplate jdbcTemplate;
+	
 	/**
 	 * @generated
 	 */
-	protected DataSource dataSource;
-
-	/**
-	 * Method 'setDataSource'
-	 * 
-	 * @param dataSource
-	 * @generated
-	 */
-	public void setDataSource(DataSource dataSource)
-	{
-		this.dataSource = dataSource;
-		jdbcTemplate = new SimpleJdbcTemplate(dataSource);
+	public void setJdbcTemplate(NamedParameterJdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
 	}
 
 	«EXPAND insertMethod(model, true) FOR this»
@@ -159,19 +160,21 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameterize
 «ENDDEFINE»
 
 «DEFINE setColumnSetValuePlaceholderList FOR List[TableColumn]-»
-«FOREACH this AS currCol SEPARATOR ","-» SET «((TableColumn)currCol).name» = ? «ENDFOREACH-»
+SET «FOREACH this AS currCol SEPARATOR ","-»«((TableColumn)currCol).name» = :«((TableColumn)currCol).name» «ENDFOREACH-»
 «ENDDEFINE»
 
 «DEFINE setColumnEqPlaceholderList(String separator) FOR List[TableColumn]-»
-«FOREACH this AS currCol SEPARATOR separator-»«((TableColumn)currCol).name» = ? «ENDFOREACH-»
+«FOREACH this AS currCol SEPARATOR separator-»«((TableColumn)currCol).name» = :«((TableColumn)currCol).name» «ENDFOREACH-»
 «ENDDEFINE»
 
 «DEFINE paramPlaceholderList FOR List[TableColumn]-»
-«FOREACH this AS currCol SEPARATOR ","-» ? «ENDFOREACH-»
+«FOREACH this AS currCol SEPARATOR ","-» :«((TableColumn)currCol).name» «ENDFOREACH-»
 «ENDDEFINE»
 
 «DEFINE paramValorizationList(String dtoVarName) FOR List[TableColumn]-»
-«FOREACH this AS currCol SEPARATOR ","-»«dtoVarName».get«javaPropertyNameFromColumn(currCol).toFirstUpper()»()«ENDFOREACH-»
+«FOREACH this AS currCol-»
+	params.addValue("«((TableColumn)currCol).name»", «dtoVarName».get«javaPropertyNameFromColumn(currCol).toFirstUpper()»() );	
+«ENDFOREACH-»
 «ENDDEFINE»
 
 «DEFINE paramValorizationList(String dtoVarName, PKGenerator pkgen) FOR List[TableColumn]-»
@@ -181,7 +184,9 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameterize
 «DEFINE paramValorizationList(String dtoVarName, SequencePKGenerator pkgen) FOR List[TableColumn]-»
 «LET (DataAccessObject)(pkgen.eContainer) AS dao-»
 «LET dao.mainTable.primaryKey.includedColumns.first() AS pkCol-»
-«FOREACH this AS currCol SEPARATOR ","-»«currCol==pkCol?" newKey ":dtoVarName+".get"+javaPropertyNameFromColumn(currCol).toFirstUpper()+"()"»«ENDFOREACH-»
+«FOREACH this AS currCol-»
+	params.addValue("«((TableColumn)currCol).name»", «currCol==pkCol?" newKey ":dtoVarName+".get"+javaPropertyNameFromColumn(currCol).toFirstUpper()+"()"» );
+«ENDFOREACH-»
 «ENDLET-»
 «ENDLET-»
 «ENDDEFINE»
@@ -212,13 +217,26 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameterize
 		«IF mainTable.primaryKey!=null-»
 		«EXPAND incrementerUse FOR this.mainTable.primaryKey.includedColumns.first()»
 		«ENDIF-»
-		jdbcTemplate.update("INSERT INTO " + getTableName() + " ( «EXPAND columnNameList FOR this.mainTable.columns-» ) VALUES ( «EXPAND paramPlaceholderList FOR this.mainTable.columns-» )",		
+		final String sql = "INSERT INTO " + getTableName() + " ( «EXPAND columnNameList FOR this.mainTable.columns-» ) VALUES ( «EXPAND paramPlaceholderList FOR this.mainTable.columns-» )";
+		
+		MapSqlParameterSource params = new MapSqlParameterSource();
 		«IF pkGenerator!=null-»
 		«EXPAND paramValorizationList("dto",pkGenerator) FOR this.mainTable.columns-»
 		«ELSE»
 		«EXPAND paramValorizationList("dto") FOR this.mainTable.columns-»
 		«ENDIF-»
-		);
+		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
+		try {
+			stopWatch.start();
+			jdbcTemplate.update(sql.toString(), params);
+		} catch (RuntimeException ex) {
+			log.error("[«getDaoImplClassName()»::insert] esecuzione query",ex);
+			throw ex;
+		} finally {
+			stopWatch.dumpElapsed("«getDaoImplClassName()»", "insert","esecuzione query", sql);
+			log.debug("[«getDaoImplClassName()»::insert] END");
+		}
+		
 		return dto.createPk();
 	}
 	«ELSE-»
@@ -478,3 +496,24 @@ public class DaoException extends Exception
 }
 «ENDFILE»
 «ENDDEFINE»
+
+
+«REM»gestire l'univocità della regione protetta per la compatibilità con servicegen«ENDREM»
+«DEFINE utilFiles FOR DBAccessModel»
+«FILE getDALayerBaseDir(this)+"/util/Constants.java"»package «getDALayerBasePkg(this)».util;
+/**
+* @generated
+*/
+public final class Constants {
+	/**
+	 * identificativo dell'applicativo.
+	 */
+	public static final String APPLICATION_CODE = "«this.codComponente.toUpperCase()»";
+	
+	«PROTECT CSTART '/*' CEND '*/' ID getRegionUID("DaoConstants")»
+	
+	«ENDPROTECT»
+}
+«ENDFILE»
+«ENDDEFINE»
+

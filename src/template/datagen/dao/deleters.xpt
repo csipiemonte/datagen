@@ -26,9 +26,22 @@
 	public void delete(«getPkClassName(dao)» pk) throws «getDaoExcClassName(dao)»
 	«IF body-»
 	{
-		jdbcTemplate.update("DELETE FROM " + getTableName() + " WHERE «EXPAND template::datagen::dao::daoFiles::setColumnEqPlaceholderList(",") FOR dao.mainTable.primaryKey.includedColumns»",
+		final String sql = "DELETE FROM " + getTableName() + " WHERE «EXPAND template::datagen::dao::daoFiles::setColumnEqPlaceholderList(",") FOR dao.mainTable.primaryKey.includedColumns»";
+		
+		MapSqlParameterSource params = new MapSqlParameterSource();
 		«EXPAND template::datagen::dao::daoFiles::paramValorizationList("pk") FOR dao.mainTable.primaryKey.includedColumns»
-		);
+		
+		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
+		try {
+			stopWatch.start();
+			jdbcTemplate.update(sql.toString(), params);
+		} catch (RuntimeException ex) {
+			log.error("[«getDaoImplClassName(dao)»::delete] esecuzione query",ex);
+			throw new «getDaoExcClassName(dao)»("Query failed", ex);
+		} finally {
+			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "delete","esecuzione query", sql);
+			log.debug("[«getDaoImplClassName(dao)»::delete] END");
+		}
 	}
 	«ELSE-»
 	;

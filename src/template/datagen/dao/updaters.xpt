@@ -25,9 +25,21 @@
 	public void update(«getPkClassName(dao)» pk, «getDtoClassName(dao)» dto) throws «getDaoExcClassName(dao)»
 	«IF body-»
 	{
-		jdbcTemplate.update("UPDATE " + getTableName() + " «EXPAND template::datagen::dao::daoFiles::setColumnSetValuePlaceholderList FOR dao.mainTable.columns-»",
+		final String sql = "UPDATE " + getTableName() + " «EXPAND template::datagen::dao::daoFiles::setColumnSetValuePlaceholderList FOR dao.mainTable.columns-»";
+		
+		MapSqlParameterSource params = new MapSqlParameterSource();
 		«EXPAND template::datagen::dao::daoFiles::paramValorizationList("dto") FOR dao.mainTable.columns»
-		);
+		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
+		try {
+			stopWatch.start();
+			jdbcTemplate.update(sql.toString(), params);
+		} catch (RuntimeException ex) {
+			log.error("[«getDaoImplClassName(dao)»::update] esecuzione query",ex);
+			throw new «getDaoExcClassName(dao)»("Query failed", ex);
+		} finally {
+			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "update","esecuzione query", sql);
+			log.debug("[«getDaoImplClassName(dao)»::update] END");
+		}
 	}
 	«ELSE-»
 	;

@@ -37,29 +37,38 @@
 		<property name="jndiName" value="siceeweb/jdbc/SiceeDS" />
 		<property name="proxyInterface" value="javax.sql.DataSource" />
 	</bean>
-	
-  <!--  <tx:annotation-driven xmlns:tx="http://www.springframework.org/schema/tx" transaction-manager="txManager" />
-  <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-  	<property name="dataSource" ref="myDataSource" />
-  </bean>-->
   
-	<tx:annotation-driven transaction-manager="txManager" proxy-target-class="true" />
-	<bean id="txManager" class="org.springframework.transaction.jta.WebLogicJtaTransactionManager">
+  <tx:annotation-driven transaction-manager="txManager" proxy-target-class="true" />
+  
+  <!--
+		transaction manager bea <bean id="txManager"
+		class="org.springframework.transaction.jta.WebLogicJtaTransactionManager"
+		/>
+	-->
+	<!-- jboss -->
+		
+	<bean id="txManager" class="org.springframework.transaction.jta.JtaTransactionManager">
   	</bean>
 
 «ENDPROTECT»
+
+	<bean id="namedJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+		<constructor-arg ref="myDataSource" />
+	</bean>
+	
 «FOREACH daopkgs AS currPkg-»
 «FOREACH currPkg.dao AS currDao-»
-	<bean id="«getDaoClassName(currDao)»" class="«getDaoImplFQN(currDao, this)»" scope="singleton">
-    	<property name="dataSource" ref="myDataSource" />
+	«IF currDao.pkGenerator!=null-»
+  	«EXPAND pkGeneratorBeanDef(currDao) FOR currDao.pkGenerator-»
+  	«ENDIF-»
+  	
+	<bean id="«getDaoClassName(currDao)»" class="«getDaoImplFQN(currDao, this)»">
+    	<property name="jdbcTemplate" ref="namedJdbcTemplate" />
     	«IF currDao.pkGenerator!=null-»
     	<property name="incrementer" ref="«currDao.name»_«currDao.mainTable.primaryKey.includedColumns.first().name»_Incrementer" />
     	«ENDIF-»
   	</bean>
   	
-  	«IF currDao.pkGenerator!=null-»
-  	«EXPAND pkGeneratorBeanDef(currDao) FOR currDao.pkGenerator-»
-  	«ENDIF-»
 «ENDFOREACH-»
 «ENDFOREACH-»  
     	

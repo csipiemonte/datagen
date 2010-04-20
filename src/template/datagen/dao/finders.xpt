@@ -23,16 +23,32 @@
 	 * Returns all rows from the «dao.mainTable.name» table that match the primary key criteria
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	public «getDtoClassName(dao)» findByPrimaryKey(«getPkClassName(dao)» pk) throws «getDaoExcClassName(dao)»
 	«IF body-»
 	{
+		
+		final String sql = "SELECT «EXPAND template::datagen::dao::daoFiles::columnNameList FOR dao.mainTable.columns» FROM " + getTableName() + "WHERE «EXPAND template::datagen::dao::daoFiles::setColumnEqPlaceholderList(" AND ") FOR dao.mainTable.primaryKey.includedColumns»";
+		
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		«EXPAND template::datagen::dao::daoFiles::paramValorizationList("pk") FOR dao.mainTable.primaryKey.includedColumns»
+		List<«getDtoClassName(dao)»> list = null;
+		
+		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
-			List<«getDtoClassName(dao)»> list = jdbcTemplate.query("SELECT «EXPAND template::datagen::dao::daoFiles::columnNameList FOR dao.mainTable.columns» FROM " + getTableName() + " «EXPAND template::datagen::dao::daoFiles::setColumnEqPlaceholderList(" AND ") FOR dao.mainTable.primaryKey.includedColumns»", this,«EXPAND template::datagen::dao::daoFiles::paramValorizationList("pk") FOR dao.mainTable.primaryKey.includedColumns»);
-			return list.size() == 0 ? null : list.get(0);
+			stopWatch.start();
+			list = jdbcTemplate.query(sql, params, this);
+			
+		} catch (RuntimeException ex) {
+			log.error("[«getDaoImplClassName(dao)»::findByPrimaryKey] esecuzione query",ex);
+			throw new «getDaoExcClassName(dao)»("Query failed", ex);
+		} finally {
+			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "findByPrimaryKey","esecuzione query", sql);
+			log.debug("[«getDaoImplClassName(dao)»::findByPrimaryKey] END");
 		}
-		catch (Exception e) {
-			throw new «getDaoExcClassName(dao)»("Query failed", e);
-		}		
+
+		return list.size() == 0 ? null : list.get(0);
+		
 	}
 	«ELSE-»
 	;
@@ -48,12 +64,27 @@
 	public List<«getDtoClassName(dao)»> findAll() throws «getDaoExcClassName(dao)»
 	«IF body-»
 	{
+		final String sql = "SELECT «EXPAND template::datagen::dao::daoFiles::columnNameList FOR dao.mainTable.columns» FROM " + getTableName();
+		
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		
+		List<«getDtoClassName(dao)»> list = null;
+		
+		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
-			return jdbcTemplate.query("SELECT «EXPAND template::datagen::dao::daoFiles::columnNameList FOR dao.mainTable.columns» FROM " + getTableName() , this);
+			stopWatch.start();
+			list = jdbcTemplate.query(sql, params, this);
+			
+		} catch (RuntimeException ex) {
+			log.error("[«getDaoImplClassName(dao)»::findAll] esecuzione query",ex);
+			throw new «getDaoExcClassName(dao)»("Query failed", ex);
+		} finally {
+			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "findAll","esecuzione query", sql);
+			log.debug("[«getDaoImplClassName(dao)»::findAll] END");
 		}
-		catch (Exception e) {
-			throw new «getDaoExcClassName(dao)»("Query failed", e);
-		}
+
+		return list;
+		
 	}
 	«ELSE-»
 	;
@@ -71,22 +102,33 @@
 	public List<«getDtoClassName(dao)»> find«name.toFirstUpper()»(«filterJavaType» input) throws «getDaoExcClassName(dao)»
 	«IF body-»
 	{
+		
+		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"queryandvalues")»
+		// personalizzare la query SQL relativa al finder
+		String sql = "SELECT * from «dao.mainTable.name» WHERE ";
+		
+		// personalizzare l'elenco dei parametri da passare al jdbctemplate (devono corrispondere in tipo e
+		// numero ai parametri definiti nella queryString)
+		sql +="nome = :nome";
+		//***aggiungere tutte le condizioni
+		Map<String, Object> paramMap = new TreeMap<String, Object>();
+		paramMap.put("nome", input);
+		
+		«ENDPROTECT»
+		List<«getDtoClassName(dao)»> list = null;
+					StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
-			«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"queryandvalues")»
-			// personalizzare la query SQL relativa al finder
-			String queryString = "SELECT * from «dao.mainTable.name»";
+			stopWatch.start();
+			list = jdbcTemplate.query(sql, paramMap, this);
 			
-			// personalizzare l'elenco dei parametri da passare al jdbctemplate (devono corrispondere in tipo e
-			// numero ai parametri definiti nella queryString - tramite "?")
-			Object [] params = new Object[]{};
-			«ENDPROTECT»
-			List<«getDtoClassName(dao)»> list = 
-				jdbcTemplate.query(queryString, this, params);
-			return list;
+		} catch (RuntimeException ex) {
+			log.error("[«getDaoImplClassName(dao)»::find«name.toFirstUpper()»] esecuzione query",ex);
+			throw new «getDaoExcClassName(dao)»("Query failed", ex);
+		} finally {
+			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "find«name.toFirstUpper()»","esecuzione query", sql);
+			log.debug("[«getDaoImplClassName(dao)»::find«name.toFirstUpper()»] END");
 		}
-		catch (Exception e) {
-			throw new «getDaoExcClassName(dao)»("Query failed", e);
-		}		
+		return list;	
 	}
 	«ELSE-»
 	;
