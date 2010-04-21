@@ -193,9 +193,9 @@ SET «FOREACH this AS currCol SEPARATOR ","-»«((TableColumn)currCol).name» = :«((
 
 
 «DEFINE incrementerUse FOR TableColumn-»
-«IF type.type == PrimitiveTypeCodes::VARCHAR2-»
+«IF type.type == PrimitiveTypeCodes::VARCHAR-»
 	«javaPropertyTypeFromColumn()» newKey = incrementer.nextStringValue();
-«ELSEIF type.type == PrimitiveTypeCodes::NUMBER && type.decimalDigits==0-»
+«ELSEIF type.type == PrimitiveTypeCodes::NUMERIC && type.decimalDigits==0-»
 	«javaPropertyTypeFromColumn()» newKey = incrementer.nextLongValue();
 «ELSE»
 	«ERROR "impossibile usare incrementer per il tipo di colonna "+type.type+","+type.size+","+type.decimalDigits»

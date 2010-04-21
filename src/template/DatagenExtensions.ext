@@ -90,9 +90,9 @@ String javaPropertyNameFromColumn(TableColumn col) :
 String javaPropertyTypeFromColumn(TableColumn col) :
 	let code = col.type.type :
 	switch(code){
-		case PrimitiveTypeCodes::VARCHAR2 :
+		case PrimitiveTypeCodes::VARCHAR :
 			"String"
-		case PrimitiveTypeCodes::NUMBER :
+		case PrimitiveTypeCodes::NUMERIC :
 			 (col.type.decimalDigits >0 ?
 				"java.lang.Double" :
 				"java.lang.Long")
@@ -110,9 +110,9 @@ String javaPropertyTypeFromColumn(TableColumn col) :
 String getValueFromRS(TableColumn col, int i) :
 	let code = col.type.type :
 	switch(code){
-		case PrimitiveTypeCodes::VARCHAR2 :
+		case PrimitiveTypeCodes::VARCHAR :
 			"rs.getString("+i+")"
-		case PrimitiveTypeCodes::NUMBER :
+		case PrimitiveTypeCodes::NUMERIC :
 			 (col.type.decimalDigits >0 ?
 				"new java.lang.Double(rs.getDouble("+i+"))" :
 				"new java.lang.Long(rs.getLong("+i+"))")
@@ -130,9 +130,9 @@ String getValueFromRS(TableColumn col, int i) :
 String getSQLType(TableColumn col) :
 	let code = col.type.type :
 	switch(code){
-		case PrimitiveTypeCodes::VARCHAR2 :
+		case PrimitiveTypeCodes::VARCHAR :
 			"VARCHAR2("+col.type.size+")"
-		case PrimitiveTypeCodes::NUMBER :
+		case PrimitiveTypeCodes::NUMERIC :
 			 "NUMBER("+col.type.size+","+col.type.decimalDigits+")"
 		case PrimitiveTypeCodes::DATE :
 			"DATE"

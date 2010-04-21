@@ -347,13 +347,42 @@ public class DatatypesPackageImpl extends EPackageImpl implements DatatypesPacka
 
 		// Initialize enums and add enum literals
 		initEEnum(primitiveTypeCodesEEnum, PrimitiveTypeCodes.class, "PrimitiveTypeCodes");
-		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.NUMBER);
-		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.CHAR);
-		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.VARCHAR2);
-		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.DATE);
-		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.TIMESTAMP);
-		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.CLOB);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.ARRAY);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.BIGINT);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.BINARY);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.BIT);
 		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.BLOB);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.BOOLEAN);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.CHAR);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.CLOB);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.DATALINK);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.DATE);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.DECIMAL);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.DISTINCT);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.DOUBLE);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.FLOAT);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.INTEGER);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.JAVA_OBJECT);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.LONGNVARCHAR);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.LONGVARBINARY);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.LONGVARCHAR);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.NCHAR);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.NCLOB);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.NULL);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.NUMERIC);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.NVARCHAR);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.OTHER);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.REAL);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.REF);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.ROWID);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.SMALLINT);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.SQLXML);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.STRUCT);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.TIME);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.TIMESTAMP);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.TINYINT);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.VARBINARY);
+		addEEnumLiteral(primitiveTypeCodesEEnum, PrimitiveTypeCodes.VARCHAR);
 	}
 
 } //DatatypesPackageImpl

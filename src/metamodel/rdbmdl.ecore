@@ -88,13 +88,42 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//datatypes/PrimitiveTypeCodes"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EEnum" name="PrimitiveTypeCodes">
-      <eLiterals name="NUMBER" value="1"/>
-      <eLiterals name="CHAR" value="2"/>
-      <eLiterals name="VARCHAR2" value="3"/>
-      <eLiterals name="DATE" value="4"/>
-      <eLiterals name="TIMESTAMP" value="5"/>
-      <eLiterals name="CLOB" value="6"/>
-      <eLiterals name="BLOB" value="7"/>
+      <eLiterals name="ARRAY" value="2003"/>
+      <eLiterals name="BIGINT" value="-5"/>
+      <eLiterals name="BINARY" value="-2"/>
+      <eLiterals name="BIT" value="-7"/>
+      <eLiterals name="BLOB" value="2004"/>
+      <eLiterals name="BOOLEAN" value="16"/>
+      <eLiterals name="CHAR" value="1"/>
+      <eLiterals name="CLOB" value="2005"/>
+      <eLiterals name="DATALINK" value="70"/>
+      <eLiterals name="DATE" value="91"/>
+      <eLiterals name="DECIMAL" value="3"/>
+      <eLiterals name="DISTINCT" value="2001"/>
+      <eLiterals name="DOUBLE" value="8"/>
+      <eLiterals name="FLOAT" value="6"/>
+      <eLiterals name="INTEGER" value="4"/>
+      <eLiterals name="JAVA_OBJECT" value="2000"/>
+      <eLiterals name="LONGNVARCHAR" value="-16"/>
+      <eLiterals name="LONGVARBINARY" value="-4"/>
+      <eLiterals name="LONGVARCHAR" value="-1"/>
+      <eLiterals name="NCHAR" value="-15"/>
+      <eLiterals name="NCLOB" value="2011"/>
+      <eLiterals name="NULL"/>
+      <eLiterals name="NUMERIC" value="2"/>
+      <eLiterals name="NVARCHAR" value="-9"/>
+      <eLiterals name="OTHER" value="1111"/>
+      <eLiterals name="REAL" value="7"/>
+      <eLiterals name="REF" value="2006"/>
+      <eLiterals name="ROWID" value="-8"/>
+      <eLiterals name="SMALLINT" value="5"/>
+      <eLiterals name="SQLXML" value="2009"/>
+      <eLiterals name="STRUCT" value="2002"/>
+      <eLiterals name="TIME" value="92"/>
+      <eLiterals name="TIMESTAMP" value="93"/>
+      <eLiterals name="TINYINT" value="-6"/>
+      <eLiterals name="VARBINARY" value="2003"/>
+      <eLiterals name="VARCHAR" value="12"/>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="view" nsURI="http://www.csi.it/mddtools/rdbmdl/view" nsPrefix="view">
