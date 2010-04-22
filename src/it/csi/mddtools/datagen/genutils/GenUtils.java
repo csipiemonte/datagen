@@ -1,6 +1,7 @@
 package it.csi.mddtools.datagen.genutils;
 
 import java.util.Properties;
+import java.util.StringTokenizer;
 
 public class GenUtils {
 	
@@ -54,4 +55,27 @@ public class GenUtils {
 		props.put(name, val);
 		org.openarchitectureware.util.stdlib.PropertiesExtension.setProperties(props);
 	}
+	
+	public static String toJavaId(String sourceId){
+		
+		String formattedSource = "";
+		StringTokenizer tok = new StringTokenizer(sourceId, "_");
+		
+		int n = tok.countTokens();
+		if(n == 0){
+			return sourceId.toLowerCase();
+		}
+		
+		int i = 0;
+		while (tok.hasMoreTokens()) {
+			String tmp = tok.nextToken().toLowerCase();
+			if(i > 0){
+				tmp = tmp.substring(0, 1).toUpperCase() + tmp.substring(1);
+			}
+			formattedSource += tmp;
+			i++;
+		}
+		return formattedSource;
+	}
+	
 }

@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EClass;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link it.csi.mddtools.rdbmdl.impl.NamedElementImpl#getUid <em>Uid</em>}</li>
  *   <li>{@link it.csi.mddtools.rdbmdl.impl.NamedElementImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
@@ -42,6 +43,24 @@ public abstract class NamedElementImpl extends ElementImpl implements NamedEleme
 	@Override
 	protected EClass eStaticClass() {
 		return RdbmdlPackage.Literals.NAMED_ELEMENT;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getUid() {
+		return (String)eGet(RdbmdlPackage.Literals.NAMED_ELEMENT__UID, true);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setUid(String newUid) {
+		eSet(RdbmdlPackage.Literals.NAMED_ELEMENT__UID, newUid);
 	}
 
 	/**

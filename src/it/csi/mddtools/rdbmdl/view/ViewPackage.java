@@ -81,6 +81,15 @@ public interface ViewPackage extends EPackage {
 	int VIEW__PARENT = RdbmdlPackage.NAMED_COLUMN_SET__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Uid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIEW__UID = RdbmdlPackage.NAMED_COLUMN_SET__UID;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -154,6 +163,15 @@ public interface ViewPackage extends EPackage {
 	int VIEW_ALIAS__PARENT = RdbmdlPackage.NAMED_ELEMENT__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Uid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIEW_ALIAS__UID = RdbmdlPackage.NAMED_ELEMENT__UID;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -200,6 +218,15 @@ public interface ViewPackage extends EPackage {
 	int VIEW_COLUMN__PARENT = RdbmdlPackage.COLUMN__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Uid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIEW_COLUMN__UID = RdbmdlPackage.COLUMN__UID;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -235,6 +262,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int VIEW_EXPRESSION_COLUMN__PARENT = VIEW_COLUMN__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Uid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIEW_EXPRESSION_COLUMN__UID = VIEW_COLUMN__UID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -281,6 +317,15 @@ public interface ViewPackage extends EPackage {
 	 * @ordered
 	 */
 	int REFERENCED_VIEW_COLUMN__PARENT = VIEW_COLUMN__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Uid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCED_VIEW_COLUMN__UID = VIEW_COLUMN__UID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.

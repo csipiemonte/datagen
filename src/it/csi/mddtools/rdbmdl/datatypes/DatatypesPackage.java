@@ -82,6 +82,15 @@ public interface DatatypesPackage extends EPackage {
 	int DOMAIN__PARENT = RdbmdlPackage.SCHEMA_ELEMENT__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Uid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN__UID = RdbmdlPackage.SCHEMA_ELEMENT__UID;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -200,6 +209,15 @@ public interface DatatypesPackage extends EPackage {
 	int DATA_TYPE__PARENT = RdbmdlPackage.NAMED_ELEMENT__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Uid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE__UID = RdbmdlPackage.NAMED_ELEMENT__UID;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -289,6 +307,15 @@ public interface DatatypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int PRIMITIVE_DATA_TYPE__PARENT = DATA_TYPE__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Uid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_DATA_TYPE__UID = DATA_TYPE__UID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.

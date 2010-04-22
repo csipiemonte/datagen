@@ -220,8 +220,17 @@ public class RdbmdlPackageImpl extends EPackageImpl implements RdbmdlPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getNamedElement_Name() {
+	public EAttribute getNamedElement_Uid() {
 		return (EAttribute)namedElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getNamedElement_Name() {
+		return (EAttribute)namedElementEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -438,6 +447,7 @@ public class RdbmdlPackageImpl extends EPackageImpl implements RdbmdlPackage {
 		namedColumnSetEClass = createEClass(NAMED_COLUMN_SET);
 
 		namedElementEClass = createEClass(NAMED_ELEMENT);
+		createEAttribute(namedElementEClass, NAMED_ELEMENT__UID);
 		createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
 
 		modelEClass = createEClass(MODEL);
@@ -521,6 +531,7 @@ public class RdbmdlPackageImpl extends EPackageImpl implements RdbmdlPackage {
 		initEClass(namedColumnSetEClass, NamedColumnSet.class, "NamedColumnSet", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(namedElementEClass, NamedElement.class, "NamedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getNamedElement_Uid(), ecorePackage.getEString(), "uid", null, 0, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNamedElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

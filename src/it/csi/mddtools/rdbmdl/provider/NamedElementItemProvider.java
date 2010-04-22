@@ -61,9 +61,32 @@ public class NamedElementItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addUidPropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Uid feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addUidPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_NamedElement_uid_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NamedElement_uid_feature", "_UI_NamedElement_type"),
+				 RdbmdlPackage.Literals.NAMED_ELEMENT__UID,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -114,6 +137,7 @@ public class NamedElementItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(NamedElement.class)) {
+			case RdbmdlPackage.NAMED_ELEMENT__UID:
 			case RdbmdlPackage.NAMED_ELEMENT__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

@@ -61,6 +61,7 @@
 	 * Returns all rows from the «dao.mainTable.name» table that match the criteria ''.
 	 * @generated
 	 */
+	 @SuppressWarnings("unchecked")
 	public List<«getDtoClassName(dao)»> findAll() throws «getDaoExcClassName(dao)»
 	«IF body-»
 	{
@@ -98,6 +99,7 @@
 	 * Implementazione del finder «name»
 	 * @generated
 	 */
+	 @SuppressWarnings("unchecked")
 «LET isNullOrEmpty(filterClassFQN) ? "java.lang.Object" : (filterClassFQN=="$dto" ? getDtoFQN(dao, model) : (filterClassFQN=="$dto[]"? "java.util.ArrayList<"+getDtoFQN(dao, model)+">" : filterClassFQN) ) AS filterJavaType-»
 	public List<«getDtoClassName(dao)»> find«name.toFirstUpper()»(«filterJavaType» input) throws «getDaoExcClassName(dao)»
 	«IF body-»

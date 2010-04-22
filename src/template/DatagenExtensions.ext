@@ -108,58 +108,188 @@ String javaPropertyNameFromColumn(TableColumn col) :
 String javaPropertyTypeFromColumn(TableColumn col) :
 	let code = col.type.type :
 	switch(code){
-		case PrimitiveTypeCodes::VARCHAR :
-			"String"
+		case PrimitiveTypeCodes::BIT :
+			"Boolean"
+		case PrimitiveTypeCodes::TINYINT :
+			"Integer"
+		case PrimitiveTypeCodes::SMALLINT :
+			"Integer"
+		case PrimitiveTypeCodes::INTEGER :
+			"Integer"		
+		case PrimitiveTypeCodes::BIGINT :
+			"Long"
+		case PrimitiveTypeCodes::FLOAT :
+			"Double" 
+		case PrimitiveTypeCodes::REAL :
+			"Float"	
+		case PrimitiveTypeCodes::DOUBLE :
+			"Double" 
 		case PrimitiveTypeCodes::NUMERIC :
-			 (col.type.decimalDigits >0 ?
-				"java.lang.Double" :
-				"java.lang.Long")
+			"java.math.BigDecimal" 
+		case PrimitiveTypeCodes::DECIMAL :
+			"java.math.BigDecimal" 
+		case PrimitiveTypeCodes::CHAR :
+			"String" 
+		case PrimitiveTypeCodes::VARCHAR :
+			"String" 
+		case PrimitiveTypeCodes::LONGVARCHAR :
+			"String" 
 		case PrimitiveTypeCodes::DATE :
-			"java.sql.Date"
+			"java.sql.Date" 
+		case PrimitiveTypeCodes::TIME :
+			"java.sql.Time" 
 		case PrimitiveTypeCodes::TIMESTAMP :
-			"java.sql.Timestamp"
-		case PrimitiveTypeCodes::BLOB : 
-			"java.sql.Blob"
+			"java.sql.Timestamp" 
+		case PrimitiveTypeCodes::BINARY :
+			"byte[]" 
+		case PrimitiveTypeCodes::VARBINARY :
+			"byte[]" 
+		case PrimitiveTypeCodes::LONGVARBINARY :
+			"byte[]" 
+		case PrimitiveTypeCodes::OTHER :
+			"String" 
+		case PrimitiveTypeCodes::JAVA_OBJECT :
+			"Class" 
+		case PrimitiveTypeCodes::DISTINCT :
+			"Object" 
+		case PrimitiveTypeCodes::STRUCT :
+			"java.sql.Struct" 
+		case PrimitiveTypeCodes::ARRAY :
+			"java.sql.Array" 
+		case PrimitiveTypeCodes::BLOB :
+			"byte[]" 
 		case PrimitiveTypeCodes::CLOB :
-			"java.sql.Clob"
+			"String" 
+		case PrimitiveTypeCodes::REF :
+			"java.sql.Ref" 
+		case PrimitiveTypeCodes::BOOLEAN :
+			"Boolean" 
 		default :"???"
 	};
 		
 String getValueFromRS(TableColumn col, int i) :
 	let code = col.type.type :
 	switch(code){
-		case PrimitiveTypeCodes::VARCHAR :
-			"rs.getString("+i+")"
+		case PrimitiveTypeCodes::BIT :
+			"rs.getInt("+i+") == 0 ? false : true"
+		case PrimitiveTypeCodes::TINYINT :
+			"rs.getInteger("+i+")"
+		case PrimitiveTypeCodes::SMALLINT :
+			"rs.getInteger("+i+")"
+		case PrimitiveTypeCodes::INTEGER :
+			"rs.getInteger("+i+")"		
+		case PrimitiveTypeCodes::BIGINT :
+			"rs.getLong("+i+")"
+		case PrimitiveTypeCodes::FLOAT :
+			"rs.getDouble("+i+")" 
+		case PrimitiveTypeCodes::REAL :
+			"rs.getFloat("+i+")"	
+		case PrimitiveTypeCodes::DOUBLE :
+			"rs.getDouble("+i+")" 
 		case PrimitiveTypeCodes::NUMERIC :
-			 (col.type.decimalDigits >0 ?
-				"new java.lang.Double(rs.getDouble("+i+"))" :
-				"new java.lang.Long(rs.getLong("+i+"))")
+			"rs.getBigDecimal("+i+")" 
+		case PrimitiveTypeCodes::DECIMAL :
+			"rs.getBigDecimal("+i+")" 
+		case PrimitiveTypeCodes::CHAR :
+			"rs.getString("+i+")" 
+		case PrimitiveTypeCodes::VARCHAR :
+			"rs.getString("+i+")" 
+		case PrimitiveTypeCodes::LONGVARCHAR :
+			"rs.getString("+i+")" 
 		case PrimitiveTypeCodes::DATE :
-			"rs.getDate("+i+")"
+			"rs.getDate("+i+")" 
+		case PrimitiveTypeCodes::TIME :
+			"rs.getTime("+i+")" 
 		case PrimitiveTypeCodes::TIMESTAMP :
-			"rs.getTimestamp("+i+")"
-		case PrimitiveTypeCodes::BLOB : 
-			"java.sql.Blob???"
+			"rs.getTimestamp("+i+")" 
+		case PrimitiveTypeCodes::BINARY :
+			"rs.getBytes("+i+")" 
+		case PrimitiveTypeCodes::VARBINARY :
+			"rs.getBytes("+i+")" 
+		case PrimitiveTypeCodes::LONGVARBINARY :
+			"rs.getBytes("+i+")" 
+		case PrimitiveTypeCodes::OTHER :
+			"getClobColumn(rs, "+i+")"  
+		case PrimitiveTypeCodes::JAVA_OBJECT :
+			"rs.getObject("+i+")" 
+		case PrimitiveTypeCodes::DISTINCT :
+			"rs.getObject("+i+")" 
+		case PrimitiveTypeCodes::STRUCT :
+			"rs.getObject("+i+")" 
+		case PrimitiveTypeCodes::ARRAY :
+			"rs.getArray("+i+")" 
+		case PrimitiveTypeCodes::BLOB :
+			"getBlobColumn(rs, "+i+")" 
 		case PrimitiveTypeCodes::CLOB :
-			"java.sql.Clob???"
+			"getClobColumn(rs, "+i+")" 
+		case PrimitiveTypeCodes::REF :
+			"rs.getRef("+i+")" 
+		case PrimitiveTypeCodes::BOOLEAN :
+			"rs.getBoolean("+i+")" 
+	
 		default :"???"
 	};
 
 String getSQLType(TableColumn col) :
 	let code = col.type.type :
 	switch(code){
-		case PrimitiveTypeCodes::VARCHAR :
-			"VARCHAR2("+col.type.size+")"
+		case PrimitiveTypeCodes::BIT :
+			"SMALLINT"
+		case PrimitiveTypeCodes::TINYINT :
+			"INT"
+		case PrimitiveTypeCodes::SMALLINT :
+			"SMALLINT"
+		case PrimitiveTypeCodes::INTEGER :
+			"INTEGER"		
+		case PrimitiveTypeCodes::BIGINT :
+			"NUMERIC("+col.type.size+")"
+		case PrimitiveTypeCodes::FLOAT :
+			"NUMERIC("+col.type.size+","+col.type.decimalDigits+")" 
+		case PrimitiveTypeCodes::REAL :
+			"NUMERIC("+col.type.size+","+col.type.decimalDigits+")"	
+		case PrimitiveTypeCodes::DOUBLE :
+			"NUMERIC("+col.type.size+","+col.type.decimalDigits+")" 
 		case PrimitiveTypeCodes::NUMERIC :
-			 "NUMBER("+col.type.size+","+col.type.decimalDigits+")"
+			"NUMERIC("+col.type.size+","+col.type.decimalDigits+")" 
+		case PrimitiveTypeCodes::DECIMAL :
+			"NUMERIC("+col.type.size+","+col.type.decimalDigits+")" 
+		case PrimitiveTypeCodes::CHAR :
+			"CHAR("+col.type.size+")" 
+		case PrimitiveTypeCodes::VARCHAR :
+			"VARCHAR2("+col.type.size+")" 
+		case PrimitiveTypeCodes::LONGVARCHAR :
+			"VARCHAR2("+col.type.size+")" 
 		case PrimitiveTypeCodes::DATE :
-			"DATE"
+			"DATE" 
+		case PrimitiveTypeCodes::TIME :
+			"DATE" 
 		case PrimitiveTypeCodes::TIMESTAMP :
-			"TIMESTAMP"
-		case PrimitiveTypeCodes::BLOB : 
-			"BLOB"
+			"DATE" 
+		case PrimitiveTypeCodes::BINARY :
+			"BINARY_DOUBLE" 
+		case PrimitiveTypeCodes::VARBINARY :
+			"BINARY_DOUBLE" 
+		case PrimitiveTypeCodes::LONGVARBINARY :
+			"BINARY_DOUBLE" 
+		case PrimitiveTypeCodes::OTHER :
+			"VARCHAR2("+col.type.size+")" 
+		case PrimitiveTypeCodes::JAVA_OBJECT :
+			"CLOB" 
+		case PrimitiveTypeCodes::DISTINCT :
+			"CLOB" 
+		case PrimitiveTypeCodes::STRUCT :
+			"CLOB" 
+		case PrimitiveTypeCodes::ARRAY :
+			"CLOB" 
+		case PrimitiveTypeCodes::BLOB :
+			"BLOB" 
 		case PrimitiveTypeCodes::CLOB :
-			"CLOB"
+			"CLOB" 
+		case PrimitiveTypeCodes::REF :
+			"CLOB" 
+		case PrimitiveTypeCodes::BOOLEAN :
+			"SMALLINT" 
+			
 		default :"???"
 	};
 	
@@ -173,8 +303,8 @@ String getRegionUID(String sourceId) : JAVA
 	it.csi.mddtools.datagen.genutils.GenUtils.getRegionUID(java.lang.String);
 
 // TODO da rivedere...
-String toJavaId(String original) :
-	original.toFirstLower();
+String toJavaId(String original) : JAVA
+	it.csi.mddtools.datagen.genutils.GenUtils.toJavaId(java.lang.String);
 	
 // JAVA 
 String pkg2Path(String pkg) : JAVA

@@ -15,6 +15,7 @@ package it.csi.mddtools.rdbmdl;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link it.csi.mddtools.rdbmdl.NamedElement#getUid <em>Uid</em>}</li>
  *   <li>{@link it.csi.mddtools.rdbmdl.NamedElement#getName <em>Name</em>}</li>
  * </ul>
  * </p>
@@ -24,6 +25,32 @@ package it.csi.mddtools.rdbmdl;
  * @generated
  */
 public interface NamedElement extends Element {
+	/**
+	 * Returns the value of the '<em><b>Uid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Uid</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Uid</em>' attribute.
+	 * @see #setUid(String)
+	 * @see it.csi.mddtools.rdbmdl.RdbmdlPackage#getNamedElement_Uid()
+	 * @model id="true"
+	 * @generated
+	 */
+	String getUid();
+
+	/**
+	 * Sets the value of the '{@link it.csi.mddtools.rdbmdl.NamedElement#getUid <em>Uid</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Uid</em>' attribute.
+	 * @see #getUid()
+	 * @generated
+	 */
+	void setUid(String value);
+
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->

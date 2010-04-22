@@ -20,10 +20,10 @@ ERROR "Il SequencePKGenerator è utilizzabile solo con PK di 1 sola colonna":
 context DataAccessObject ERROR "occorre definire almeno i finder base (findByPK e findAll):"+this.name :
 	finders != null && finders.finders.select(f| (f.metaType==FindAll || f.metaType==FindByPK)).size==2;
 
-context DataAccessObject ERROR "occorre definire l'inserter:"+this.name :
+context DataAccessObject WARNING "il dao: "+this.name+" non definisce nessun inserter" :
 	inserter != null;
 
-context DataAccessObject ERROR "occorre definire almeno l'updater di base (UpdateRow):"+this.name :
+context DataAccessObject WARNING "il dao: "+this.name+" non definisce nessun updater di base (UpdateRow)" :
 	updaters != null && updaters.updaters.select(f| (f.metaType==UpdateRow)).size==1;
 
 

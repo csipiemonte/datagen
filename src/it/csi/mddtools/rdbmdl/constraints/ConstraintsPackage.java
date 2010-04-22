@@ -81,6 +81,15 @@ public interface ConstraintsPackage extends EPackage {
 	int CONSTRAINT__PARENT = RdbmdlPackage.NAMED_ELEMENT__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Uid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT__UID = RdbmdlPackage.NAMED_ELEMENT__UID;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -116,6 +125,15 @@ public interface ConstraintsPackage extends EPackage {
 	 * @ordered
 	 */
 	int CHECK_CONSTRAINT__PARENT = CONSTRAINT__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Uid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHECK_CONSTRAINT__UID = CONSTRAINT__UID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -164,6 +182,15 @@ public interface ConstraintsPackage extends EPackage {
 	int COLUMN_REF_CONSTRAINT__PARENT = CONSTRAINT__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Uid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN_REF_CONSTRAINT__UID = CONSTRAINT__UID;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -208,6 +235,15 @@ public interface ConstraintsPackage extends EPackage {
 	 * @ordered
 	 */
 	int UNIQUE_CONSTRAINT__PARENT = COLUMN_REF_CONSTRAINT__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Uid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNIQUE_CONSTRAINT__UID = COLUMN_REF_CONSTRAINT__UID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -256,6 +292,15 @@ public interface ConstraintsPackage extends EPackage {
 	int PRIMARY_KEY__PARENT = UNIQUE_CONSTRAINT__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Uid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMARY_KEY__UID = UNIQUE_CONSTRAINT__UID;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -300,6 +345,15 @@ public interface ConstraintsPackage extends EPackage {
 	 * @ordered
 	 */
 	int FOREIGN_KEY__PARENT = COLUMN_REF_CONSTRAINT__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Uid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOREIGN_KEY__UID = COLUMN_REF_CONSTRAINT__UID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -357,6 +411,15 @@ public interface ConstraintsPackage extends EPackage {
 	int INDEX__PARENT = CONSTRAINT__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Uid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INDEX__UID = CONSTRAINT__UID;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -401,6 +464,15 @@ public interface ConstraintsPackage extends EPackage {
 	 * @ordered
 	 */
 	int INDEXED_COLUMN__PARENT = RdbmdlPackage.NAMED_ELEMENT__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Uid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INDEXED_COLUMN__UID = RdbmdlPackage.NAMED_ELEMENT__UID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.

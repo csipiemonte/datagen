@@ -107,13 +107,22 @@ public interface RdbmdlPackage extends EPackage {
 	int NAMED_ELEMENT__PARENT = ELEMENT__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Uid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_ELEMENT__UID = ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_ELEMENT__NAME = ELEMENT_FEATURE_COUNT + 0;
+	int NAMED_ELEMENT__NAME = ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Named Element</em>' class.
@@ -122,7 +131,7 @@ public interface RdbmdlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_ELEMENT_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 1;
+	int NAMED_ELEMENT_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link it.csi.mddtools.rdbmdl.impl.SchemaElementImpl <em>Schema Element</em>}' class.
@@ -142,6 +151,15 @@ public interface RdbmdlPackage extends EPackage {
 	 * @ordered
 	 */
 	int SCHEMA_ELEMENT__PARENT = NAMED_ELEMENT__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Uid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEMA_ELEMENT__UID = NAMED_ELEMENT__UID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -190,6 +208,15 @@ public interface RdbmdlPackage extends EPackage {
 	int NAMED_COLUMN_SET__PARENT = SCHEMA_ELEMENT__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Uid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_COLUMN_SET__UID = SCHEMA_ELEMENT__UID;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -234,6 +261,15 @@ public interface RdbmdlPackage extends EPackage {
 	 * @ordered
 	 */
 	int MODEL__PARENT = NAMED_ELEMENT__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Uid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__UID = NAMED_ELEMENT__UID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -291,6 +327,15 @@ public interface RdbmdlPackage extends EPackage {
 	int SCHEMA__PARENT = NAMED_ELEMENT__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Uid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEMA__UID = NAMED_ELEMENT__UID;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -335,6 +380,15 @@ public interface RdbmdlPackage extends EPackage {
 	 * @ordered
 	 */
 	int TABLE__PARENT = NAMED_COLUMN_SET__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Uid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TABLE__UID = NAMED_COLUMN_SET__UID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -437,6 +491,15 @@ public interface RdbmdlPackage extends EPackage {
 	int COLUMN__PARENT = NAMED_ELEMENT__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Uid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN__UID = NAMED_ELEMENT__UID;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -472,6 +535,15 @@ public interface RdbmdlPackage extends EPackage {
 	 * @ordered
 	 */
 	int TABLE_COLUMN__PARENT = COLUMN__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Uid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TABLE_COLUMN__UID = COLUMN__UID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -568,6 +640,17 @@ public interface RdbmdlPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getNamedElement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.csi.mddtools.rdbmdl.NamedElement#getUid <em>Uid</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Uid</em>'.
+	 * @see it.csi.mddtools.rdbmdl.NamedElement#getUid()
+	 * @see #getNamedElement()
+	 * @generated
+	 */
+	EAttribute getNamedElement_Uid();
 
 	/**
 	 * Returns the meta object for the attribute '{@link it.csi.mddtools.rdbmdl.NamedElement#getName <em>Name</em>}'.
@@ -853,6 +936,14 @@ public interface RdbmdlPackage extends EPackage {
 		 * @generated
 		 */
 		EClass NAMED_ELEMENT = eINSTANCE.getNamedElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Uid</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NAMED_ELEMENT__UID = eINSTANCE.getNamedElement_Uid();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
