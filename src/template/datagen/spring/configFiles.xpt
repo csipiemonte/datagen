@@ -11,8 +11,8 @@
 «ENDDEFINE»
 
 
-«DEFINE daoBeansFile(String filePosition) FOR DBAccessModel»
-«FILE filePosition+"/dao-beans.xml"»<?xml version="1.0" encoding="UTF-8"?>
+«DEFINE daoBeansFile(String fileName) FOR DBAccessModel»
+«FILE fileName»<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:tx="http://www.springframework.org/schema/tx"

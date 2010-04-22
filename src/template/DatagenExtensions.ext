@@ -17,12 +17,19 @@ String getSchemaDropSQLPath(Schema sch) :
 	"dropSchema_"+sch.name+".sql";
 	
 String getDALayerBasePkg(DBAccessModel model) :
-	"it.csi."+model.codProdotto.toLowerCase()+"."+model.codComponente.toLowerCase()+"."+
-	"business.dao";
+	(!isNullOrEmpty(getProperty("basePackage"))?getProperty("basePackage"):
+	"it.csi."+model.codProdotto.toLowerCase()+"."+model.codComponente.toLowerCase())
+	+".business.dao";
+	
 
 String getDALayerBaseDir(DBAccessModel model) :
-	javaSrcRoot()+"/it/csi/"+model.codProdotto.toLowerCase()+"/"+model.codComponente.toLowerCase()+"/"+
-	"business/dao";
+javaSrcRoot()+"/"+
+   (!isNullOrEmpty(getProperty("basePackage")) ? 
+   pkg2Path(getProperty("basePackage"))
+   :
+   "it/csi/"+model.codProdotto.toLowerCase()+"/"+model.codComponente.toLowerCase()
+   )
+	+"/business/dao";
 
 String getPkgPackage(DaoPackage pkg, DBAccessModel model) :
 	getDALayerBasePkg(model)+"."+pkg.name;
@@ -80,6 +87,17 @@ String getPkFQN(DataAccessObject dao, DBAccessModel model) :
 
 String getPkFullPath(DataAccessObject dao, DBAccessModel model) :
 	getPkgDir((DaoPackage)(dao.eContainer), model)+"/dto/"+getPkClassName(dao)+".java";
+	
+// QBE
+
+String getQbeExClassName(DataAccessObject dao) :
+	dao.name.toFirstUpper()+"Example";
+
+String getQbeExFQN(DataAccessObject dao, DBAccessModel model) :
+	getPkgPackage((DaoPackage)(dao.eContainer), model)+".qbe."+getQbeExClassName(dao);
+
+String getQbeExFullPath(DataAccessObject dao, DBAccessModel model) :
+	getPkgDir((DaoPackage)(dao.eContainer), model)+"/qbe/"+getQbeExClassName(dao)+".java";
 	
 //// 
 
@@ -157,3 +175,22 @@ String getRegionUID(String sourceId) : JAVA
 // TODO da rivedere...
 String toJavaId(String original) :
 	original.toFirstLower();
+	
+// JAVA 
+String pkg2Path(String pkg) : JAVA
+	it.csi.mddtools.datagen.genutils.GenUtils.pkg2Path(java.lang.String);
+
+String getProperty(String name) : JAVA
+  org.openarchitectureware.util.stdlib.PropertiesExtension.getProperty(java.lang.String);
+
+Void dumpProperties() : JAVA
+  it.csi.mddtools.datagen.genutils.GenUtils.dumpProperties();
+
+Void backupProperties() : JAVA
+  it.csi.mddtools.datagen.genutils.GenUtils.backupProperties();
+
+Void restoreProperties() : JAVA
+  it.csi.mddtools.datagen.genutils.GenUtils.restoreProperties();
+
+Void setProperty(String name, String val) : JAVA
+  it.csi.mddtools.datagen.genutils.GenUtils.setProperty(java.lang.String, java.lang.String);

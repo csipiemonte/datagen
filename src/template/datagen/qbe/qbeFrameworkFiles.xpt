@@ -1,0 +1,225 @@
+«IMPORT ecore»
+«IMPORT datagen»
+«IMPORT rdbmdl»
+«IMPORT rdbmdl::constraints»
+«IMPORT rdbmdl::datatypes»
+«IMPORT rdbmdl::view»
+
+«EXTENSION template::DatagenExtensions»
+
+«DEFINE frameworkFiles FOR DBAccessModel»
+«EXPAND abstractExampleFile FOR this»
+«EXPAND eqChkFile FOR this»
+«EXPAND fieldChkFile FOR this»
+«EXPAND inSetChkFile FOR this»
+«EXPAND nullChkFile FOR this»
+«EXPAND rangeChkFile FOR this»
+«EXPAND regexpChkFile FOR this»
+«ENDDEFINE»
+
+«DEFINE abstractExampleFile FOR DBAccessModel»
+«FILE getDALayerBaseDir()+"/qbe/AbstractExample.java"»package «getDALayerBasePkg()».qbe;
+
+/**
+ * 
+ * @generated
+ *
+ */
+public class AbstractExample {
+
+}
+
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE fieldChkFile FOR DBAccessModel»
+«FILE getDALayerBaseDir()+"/qbe/FieldChk.java"»package «getDALayerBasePkg()».qbe;
+
+/**
+ * 
+ * @generated
+ *
+ */
+public abstract class FieldChk {
+	
+	/**
+	 * @generated
+	 */
+	protected boolean _negate=false;
+	
+	/**
+	 * @generated
+	 */
+	public void setNegate(boolean val){
+		_negate=val;
+	}
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE eqChkFile FOR DBAccessModel»
+«FILE getDALayerBaseDir()+"/qbe/EqChk.java"»package «getDALayerBasePkg()».qbe;
+
+/**
+ * 
+ * Verifica di uguaglianza del valore del campo con un valore costante. 
+ * @generated
+ */
+public class EqChk extends FieldChk{
+	
+	private Object _exVal;
+	
+	/**
+	 * @param equalsTo valore di confronto
+	 * @param negate indica se occorre invertire il check 
+	 * @generated
+	 */
+	public EqChk(Object equalsTo, boolean negate){
+		assert equalsTo != null;
+		_exVal=equalsTo;
+		_negate=negate;
+	}
+
+	
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE inSetChkFile FOR DBAccessModel»
+«FILE getDALayerBaseDir()+"/qbe/InSetChk.java"»package «getDALayerBasePkg()».qbe;
+
+/**
+ * 
+ * Verifica di appartenenza ad un insieme discreto di valori costanti 
+ * @generated
+ */
+public class InSetChk extends FieldChk{
+	
+	/**
+	 * @generated
+	 */
+	private Object [] _items;
+	
+	/**
+	 * 
+	 * @param items insieme degli elementi dell'insieme di riferimento
+	 * @param negate indica se occorre invertire il check 
+	 * @generated
+	 */
+	public InSetChk(Object [] items, boolean negate){
+		assert items != null && items.length>0;
+		_items=items;
+		_negate=negate;
+	}	
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE rangeChkFile FOR DBAccessModel»
+«FILE getDALayerBaseDir()+"/qbe/RangeChk.java"»package «getDALayerBasePkg()».qbe;
+
+/**
+ * 
+ * Verifica di appartenenza ad un range continuo 
+ * @generated
+ */
+public class RangeChk extends FieldChk{
+	
+	/**
+	 * @generated
+	 */
+	private Object _lowerBound;
+	
+	/**
+	 * @generated
+	 */
+	private Object _upperBound;
+	
+	/**
+	 * @generated
+	 */
+	private boolean _includeLB;
+	
+	/**
+	 * @generated
+	 */
+	private boolean _includeUB;
+	
+	
+	/**
+	 * @param lowerBound l'estremo inferiore del range (se non specificato il check è a -infinito)
+	 * @param upperBound l'estremo superiore del range (se non specificato il check è a +infinito)
+	 * @param includeLB include o meno il lowerbound tra i valori ammessi
+	 * @param includeUB include o meno l'upperbound tra i valori ammessi
+	 * @param negate indica se occorre invertire il check 
+	 * @generated
+	 */
+	public RangeChk(Object lowerBound, Object upperBound, boolean includeLB, boolean includeUB, boolean negate){
+		assert lowerBound != null || upperBound!=null;
+		_lowerBound=lowerBound;
+		_upperBound=upperBound;
+		_includeLB=includeLB;
+		_includeUB=includeUB;
+		_negate=negate;
+	}	
+}
+
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE regexpChkFile FOR DBAccessModel»
+«FILE getDALayerBaseDir()+"/qbe/RegexpChk.java"»package «getDALayerBasePkg()».qbe;
+
+/**
+ * 
+ * Verifica di conformita' con una regular expression 
+ * @generated
+ */
+public class RegexpChk extends FieldChk{
+	
+	/**
+	 * @generated
+	 */
+	private String _regexp;
+	
+	/**
+	 * @param equalsTo valore di confronto
+	 * @param negate indica se occorre invertire il check 
+	 * @generated
+	 */
+	public RegexpChk(String regexp, boolean negate){
+		assert regexp != null && regexp.length()>0;
+		_regexp=regexp;
+		_negate=negate;
+	}
+
+	
+}
+
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE nullChkFile FOR DBAccessModel»
+«FILE getDALayerBaseDir()+"/qbe/NullChk.java"»package «getDALayerBasePkg()».qbe;
+
+/**
+ * 
+ * Verifica di valorizzazione del campo.
+ * se "negate" == true => l'esito del check è true se il campo è valorizzato.
+ * se "negate" == false => l'esito del check è true se il campo NON è valorizzato. 
+ * @generated
+ */
+public class NullChk extends FieldChk{
+	
+	/**
+	 * @param mustBeNull se true il check significa che il valore del
+	 * campo deve essere 'null'; se false il valore deve essere 'not null' 
+	 * @generated
+	 */
+	public NullChk(boolean mustBeNull){
+		_negate=mustBeNull;
+	}	
+}
+
+«ENDFILE»
+«ENDDEFINE»
