@@ -62,10 +62,10 @@
   	«EXPAND pkGeneratorBeanDef(currDao) FOR currDao.pkGenerator-»
   	«ENDIF-»
   	
-	<bean id="«getDaoClassName(currDao)»" class="«getDaoImplFQN(currDao, this)»">
+	<bean id="«getDaoIdName(currDao)»" class="«getDaoImplFQN(currDao, this)»">
     	<property name="jdbcTemplate" ref="namedJdbcTemplate" />
     	«IF currDao.pkGenerator!=null-»
-    	<property name="incrementer" ref="«currDao.name»_«currDao.mainTable.primaryKey.includedColumns.first().name»_Incrementer" />
+    	<property name="incrementer" ref="«getDaoIdName(currDao)»Incrementer" />
     	«ENDIF-»
   	</bean>
   	
@@ -84,7 +84,7 @@
 
 «DEFINE pkGeneratorBeanDef(DataAccessObject dao) FOR SequencePKGenerator»
 «IF dao.mainTable.primaryKey.includedColumns.size==1-»
-	<bean id="«dao.name»_«dao.mainTable.primaryKey.includedColumns.first().name»_Incrementer"
+	<bean id="«getDaoIdName(dao)»Incrementer"
 		class="org.springframework.jdbc.support.incrementer.OracleSequenceMaxValueIncrementer">
 		<constructor-arg>
 			<ref bean="myDataSource" />

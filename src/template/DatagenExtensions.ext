@@ -41,6 +41,9 @@ String getPkgDir(DaoPackage pkg, DBAccessModel model) :
 
 String getDaoClassName(DataAccessObject dao) :
 	dao.name.toFirstUpper()+"Dao";
+	
+String getDaoIdName(DataAccessObject dao) :
+	dao.name.toFirstLower()+"Dao";
 
 String getDaoFQN(DataAccessObject dao, DBAccessModel model) :
 	getPkgPackage((DaoPackage)(dao.eContainer), model)+".dao."+getDaoClassName(dao);
