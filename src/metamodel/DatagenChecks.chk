@@ -17,7 +17,7 @@ ERROR "Il SequencePKGenerator è utilizzabile solo con PK di 1 sola colonna":
 	mainTable.primaryKey.includedColumns.size == 1;
 	
 /// verifiche sui finder
-context DataAccessObject ERROR "occorre definire almeno i finder base (findByPK e findAll):"+this.name :
+context DataAccessObject WARNING "il dao:"+this.name+" non definisce i finder base (findByPK e findAll)" :
 	finders != null && finders.finders.select(f| (f.metaType==FindAll || f.metaType==FindByPK)).size==2;
 
 context DataAccessObject WARNING "il dao: "+this.name+" non definisce nessun inserter" :

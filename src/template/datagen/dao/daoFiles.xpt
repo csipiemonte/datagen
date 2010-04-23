@@ -71,15 +71,17 @@ import java.sql.SQLException;
  * @generated
  */
 public interface «getDaoClassName()» {
-	«EXPAND insertMethod(model, false) FOR this»
+	«IF inserter != null-»
+		«EXPAND insertMethod(model, false) FOR this-»
+	«ENDIF-»	
 	
-	«EXPAND template::datagen::dao::updaters::updaters(model, false) FOR this»
+	«EXPAND template::datagen::dao::updaters::updaters(model, false) FOR this-»
 	
-	«EXPAND template::datagen::dao::deleters::deleters(model, false) FOR this»
+	«EXPAND template::datagen::dao::deleters::deleters(model, false) FOR this-»
 	
-	«EXPAND mapRowMethod(model, false) FOR this»
+	«EXPAND mapRowMethod(model, false) FOR this-»
 	
-	«EXPAND template::datagen::dao::finders::finders(model, false) FOR this»
+	«EXPAND template::datagen::dao::finders::finders(model, false) FOR this-»
 }
 «ENDFILE-»
 «ENDLET-»
@@ -94,13 +96,11 @@ import «pkgPackage».dto.*;
 import «pkgPackage».exceptions.*;
 import «getDALayerBasePkg(model)».util.*;
 import java.util.List;
-import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
-import org.springframework.transaction.annotation.Transactional;
 import it.csi.util.performance.StopWatch;
 import org.apache.log4j.Logger;
 import java.util.Map;
@@ -129,7 +129,9 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameterize
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
-	«EXPAND insertMethod(model, true) FOR this»
+	«IF inserter != null-»
+		«EXPAND insertMethod(model, true) FOR this»
+	«ENDIF»
 	
 	«EXPAND template::datagen::dao::updaters::updaters(model, true) FOR this»
 	
