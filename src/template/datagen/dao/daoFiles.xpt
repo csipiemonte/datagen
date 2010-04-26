@@ -163,8 +163,8 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameterize
 «FOREACH this AS currCol SEPARATOR ","-»«((TableColumn)currCol).name»«ENDFOREACH-»
 «ENDDEFINE»
 
-«DEFINE setColumnSetValuePlaceholderList FOR List[TableColumn]-»
-SET «FOREACH this AS currCol SEPARATOR ","-»«((TableColumn)currCol).name» = :«((TableColumn)currCol).name» «ENDFOREACH-»
+«DEFINE setColumnSetValuePlaceholderList(DataAccessObject dao) FOR List[TableColumn]-»
+SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c)) AS currCol SEPARATOR ","-»«((TableColumn)currCol).name» = :«((TableColumn)currCol).name-» «ENDFOREACH-»
 «ENDDEFINE»
 
 «DEFINE setColumnEqPlaceholderList(String separator) FOR List[TableColumn]-»
@@ -455,7 +455,7 @@ public class AbstractDAO
 /**
  * @generated
  */
-public class DaoException extends Exception
+public class DaoException extends RuntimeException
 {
 	/**
 	 * @generated

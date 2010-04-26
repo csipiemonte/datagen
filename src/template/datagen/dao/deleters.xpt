@@ -28,6 +28,11 @@
 	{
 		final String sql = "DELETE FROM " + getTableName() + " WHERE «EXPAND template::datagen::dao::daoFiles::setColumnEqPlaceholderList(",") FOR dao.mainTable.primaryKey.includedColumns»";
 		
+		if(pk == null){
+			log.error("[«getDaoImplClassName(dao)»::delete] chiave primaria non impostata");
+			throw new «getDaoExcClassName(dao)»("Chiave primaria non impostata");
+		}
+		
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		«EXPAND template::datagen::dao::daoFiles::paramValorizationList("pk") FOR dao.mainTable.primaryKey.includedColumns»
 		
