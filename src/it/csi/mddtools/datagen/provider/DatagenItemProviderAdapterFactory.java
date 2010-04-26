@@ -329,6 +329,29 @@ public class DatagenItemProviderAdapterFactory extends DatagenAdapterFactory imp
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link it.csi.mddtools.datagen.UpdateColumns} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected UpdateColumnsItemProvider updateColumnsItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.csi.mddtools.datagen.UpdateColumns}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createUpdateColumnsAdapter() {
+		if (updateColumnsItemProvider == null) {
+			updateColumnsItemProvider = new UpdateColumnsItemProvider(this);
+		}
+
+		return updateColumnsItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link it.csi.mddtools.datagen.Deleters} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -508,6 +531,7 @@ public class DatagenItemProviderAdapterFactory extends DatagenAdapterFactory imp
 		if (customFinderItemProvider != null) customFinderItemProvider.dispose();
 		if (updatersItemProvider != null) updatersItemProvider.dispose();
 		if (updateRowItemProvider != null) updateRowItemProvider.dispose();
+		if (updateColumnsItemProvider != null) updateColumnsItemProvider.dispose();
 		if (deletersItemProvider != null) deletersItemProvider.dispose();
 		if (deleteByPKItemProvider != null) deleteByPKItemProvider.dispose();
 	}

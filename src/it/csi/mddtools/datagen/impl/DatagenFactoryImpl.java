@@ -72,6 +72,7 @@ public class DatagenFactoryImpl extends EFactoryImpl implements DatagenFactory {
 			case DatagenPackage.CUSTOM_FINDER: return (EObject)createCustomFinder();
 			case DatagenPackage.UPDATERS: return (EObject)createUpdaters();
 			case DatagenPackage.UPDATE_ROW: return (EObject)createUpdateRow();
+			case DatagenPackage.UPDATE_COLUMNS: return (EObject)createUpdateColumns();
 			case DatagenPackage.DELETERS: return (EObject)createDeleters();
 			case DatagenPackage.DELETE_BY_PK: return (EObject)createDeleteByPK();
 			default:
@@ -187,6 +188,16 @@ public class DatagenFactoryImpl extends EFactoryImpl implements DatagenFactory {
 	public UpdateRow createUpdateRow() {
 		UpdateRowImpl updateRow = new UpdateRowImpl();
 		return updateRow;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UpdateColumns createUpdateColumns() {
+		UpdateColumnsImpl updateColumns = new UpdateColumnsImpl();
+		return updateColumns;
 	}
 
 	/**

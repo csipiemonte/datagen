@@ -136,6 +136,10 @@ public class DatagenAdapterFactory extends AdapterFactoryImpl {
 				return createUpdateRowAdapter();
 			}
 			@Override
+			public Adapter caseUpdateColumns(UpdateColumns object) {
+				return createUpdateColumnsAdapter();
+			}
+			@Override
 			public Adapter caseDeleters(Deleters object) {
 				return createDeletersAdapter();
 			}
@@ -374,6 +378,20 @@ public class DatagenAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createUpdateRowAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.UpdateColumns <em>Update Columns</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.UpdateColumns
+	 * @generated
+	 */
+	public Adapter createUpdateColumnsAdapter() {
 		return null;
 	}
 

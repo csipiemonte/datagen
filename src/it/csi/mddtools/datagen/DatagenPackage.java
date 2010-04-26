@@ -430,7 +430,7 @@ public interface DatagenPackage extends EPackage {
 	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getDeleters()
 	 * @generated
 	 */
-	int DELETERS = 16;
+	int DELETERS = 17;
 
 	/**
 	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.DeleterImpl <em>Deleter</em>}' class.
@@ -440,7 +440,7 @@ public interface DatagenPackage extends EPackage {
 	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getDeleter()
 	 * @generated
 	 */
-	int DELETER = 17;
+	int DELETER = 18;
 
 	/**
 	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.DeleteByPKImpl <em>Delete By PK</em>}' class.
@@ -450,7 +450,7 @@ public interface DatagenPackage extends EPackage {
 	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getDeleteByPK()
 	 * @generated
 	 */
-	int DELETE_BY_PK = 18;
+	int DELETE_BY_PK = 19;
 
 	/**
 	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.FindersImpl <em>Finders</em>}' class.
@@ -632,6 +632,43 @@ public interface DatagenPackage extends EPackage {
 	 * @ordered
 	 */
 	int UPDATE_ROW_FEATURE_COUNT = UPDATER_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.UpdateColumnsImpl <em>Update Columns</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see it.csi.mddtools.datagen.impl.UpdateColumnsImpl
+	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getUpdateColumns()
+	 * @generated
+	 */
+	int UPDATE_COLUMNS = 16;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UPDATE_COLUMNS__NAME = UPDATER__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Columns</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UPDATE_COLUMNS__COLUMNS = UPDATER_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Update Columns</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UPDATE_COLUMNS_FEATURE_COUNT = UPDATER_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Deleters</b></em>' containment reference list.
@@ -1026,6 +1063,27 @@ public interface DatagenPackage extends EPackage {
 	EClass getUpdateRow();
 
 	/**
+	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.UpdateColumns <em>Update Columns</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Update Columns</em>'.
+	 * @see it.csi.mddtools.datagen.UpdateColumns
+	 * @generated
+	 */
+	EClass getUpdateColumns();
+
+	/**
+	 * Returns the meta object for the reference list '{@link it.csi.mddtools.datagen.UpdateColumns#getColumns <em>Columns</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Columns</em>'.
+	 * @see it.csi.mddtools.datagen.UpdateColumns#getColumns()
+	 * @see #getUpdateColumns()
+	 * @generated
+	 */
+	EReference getUpdateColumns_Columns();
+
+	/**
 	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.Deleters <em>Deleters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1394,6 +1452,24 @@ public interface DatagenPackage extends EPackage {
 		 * @generated
 		 */
 		EClass UPDATE_ROW = eINSTANCE.getUpdateRow();
+
+		/**
+		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.UpdateColumnsImpl <em>Update Columns</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see it.csi.mddtools.datagen.impl.UpdateColumnsImpl
+		 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getUpdateColumns()
+		 * @generated
+		 */
+		EClass UPDATE_COLUMNS = eINSTANCE.getUpdateColumns();
+
+		/**
+		 * The meta object literal for the '<em><b>Columns</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference UPDATE_COLUMNS__COLUMNS = eINSTANCE.getUpdateColumns_Columns();
 
 		/**
 		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.DeletersImpl <em>Deleters</em>}' class.

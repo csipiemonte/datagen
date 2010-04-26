@@ -125,6 +125,15 @@ public interface DatagenFactory extends EFactory {
 	UpdateRow createUpdateRow();
 
 	/**
+	 * Returns a new object of class '<em>Update Columns</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Update Columns</em>'.
+	 * @generated
+	 */
+	UpdateColumns createUpdateColumns();
+
+	/**
 	 * Returns a new object of class '<em>Deleters</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

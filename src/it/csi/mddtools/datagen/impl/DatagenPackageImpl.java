@@ -25,6 +25,7 @@ import it.csi.mddtools.datagen.Inserter;
 import it.csi.mddtools.datagen.PKGenerator;
 import it.csi.mddtools.datagen.QBEFinder;
 import it.csi.mddtools.datagen.SequencePKGenerator;
+import it.csi.mddtools.datagen.UpdateColumns;
 import it.csi.mddtools.datagen.UpdateRow;
 import it.csi.mddtools.datagen.Updater;
 import it.csi.mddtools.datagen.Updaters;
@@ -148,6 +149,13 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 	 * @generated
 	 */
 	private EClass updateRowEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass updateColumnsEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -534,6 +542,24 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getUpdateColumns() {
+		return updateColumnsEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getUpdateColumns_Columns() {
+		return (EReference)updateColumnsEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getDeleters() {
 		return deletersEClass;
 	}
@@ -661,6 +687,9 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 
 		updateRowEClass = createEClass(UPDATE_ROW);
 
+		updateColumnsEClass = createEClass(UPDATE_COLUMNS);
+		createEReference(updateColumnsEClass, UPDATE_COLUMNS__COLUMNS);
+
 		deletersEClass = createEClass(DELETERS);
 		createEReference(deletersEClass, DELETERS__DELETERS);
 
@@ -709,6 +738,7 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		customFinderEClass.getESuperTypes().add(this.getFinder());
 		updaterEClass.getESuperTypes().add(this.getDBCommand());
 		updateRowEClass.getESuperTypes().add(this.getUpdater());
+		updateColumnsEClass.getESuperTypes().add(this.getUpdater());
 		deleterEClass.getESuperTypes().add(this.getDBCommand());
 		deleteByPKEClass.getESuperTypes().add(this.getDeleter());
 
@@ -762,6 +792,9 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		initEClass(updaterEClass, Updater.class, "Updater", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(updateRowEClass, UpdateRow.class, "UpdateRow", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(updateColumnsEClass, UpdateColumns.class, "UpdateColumns", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getUpdateColumns_Columns(), theRdbmdlPackage.getTableColumn(), null, "columns", null, 0, -1, UpdateColumns.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(deletersEClass, Deleters.class, "Deleters", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDeleters_Deleters(), this.getDeleter(), null, "deleters", null, 0, -1, Deleters.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

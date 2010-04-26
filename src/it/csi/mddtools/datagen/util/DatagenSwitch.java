@@ -197,6 +197,14 @@ public class DatagenSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case DatagenPackage.UPDATE_COLUMNS: {
+				UpdateColumns updateColumns = (UpdateColumns)theEObject;
+				T result = caseUpdateColumns(updateColumns);
+				if (result == null) result = caseUpdater(updateColumns);
+				if (result == null) result = caseDBCommand(updateColumns);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case DatagenPackage.DELETERS: {
 				Deleters deleters = (Deleters)theEObject;
 				T result = caseDeleters(deleters);
@@ -444,6 +452,21 @@ public class DatagenSwitch<T> {
 	 * @generated
 	 */
 	public T caseUpdateRow(UpdateRow object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Update Columns</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Update Columns</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUpdateColumns(UpdateColumns object) {
 		return null;
 	}
 
