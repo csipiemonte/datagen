@@ -297,9 +297,8 @@ import oracle.sql.BLOB;
 import oracle.sql.CLOB;
 
 /**
- * Base class for Oracle 9i DAO classes.
+ * Base class for Oracle DAO classes.
  *
- * This is a customizable template within FireStorm/DAO.
  * @generated
  */
 public class AbstractDAO
