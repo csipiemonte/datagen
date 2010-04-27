@@ -726,6 +726,35 @@ public interface DatagenPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.CustomUpdaterImpl <em>Custom Updater</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see it.csi.mddtools.datagen.impl.CustomUpdaterImpl
+	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getCustomUpdater()
+	 * @generated
+	 */
+	int CUSTOM_UPDATER = 20;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOM_UPDATER__NAME = UPDATER__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Custom Updater</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOM_UPDATER_FEATURE_COUNT = UPDATER_FEATURE_COUNT + 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.DBAccessModel <em>DB Access Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1125,6 +1154,16 @@ public interface DatagenPackage extends EPackage {
 	EClass getDeleteByPK();
 
 	/**
+	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.CustomUpdater <em>Custom Updater</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Custom Updater</em>'.
+	 * @see it.csi.mddtools.datagen.CustomUpdater
+	 * @generated
+	 */
+	EClass getCustomUpdater();
+
+	/**
 	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.Finders <em>Finders</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1508,6 +1547,16 @@ public interface DatagenPackage extends EPackage {
 		 * @generated
 		 */
 		EClass DELETE_BY_PK = eINSTANCE.getDeleteByPK();
+
+		/**
+		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.CustomUpdaterImpl <em>Custom Updater</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see it.csi.mddtools.datagen.impl.CustomUpdaterImpl
+		 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getCustomUpdater()
+		 * @generated
+		 */
+		EClass CUSTOM_UPDATER = eINSTANCE.getCustomUpdater();
 
 		/**
 		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.FindersImpl <em>Finders</em>}' class.

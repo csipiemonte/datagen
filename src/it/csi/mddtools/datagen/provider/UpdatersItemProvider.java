@@ -160,6 +160,11 @@ public class UpdatersItemProvider
 			(createChildParameter
 				(DatagenPackage.Literals.UPDATERS__UPDATERS,
 				 DatagenFactory.eINSTANCE.createUpdateColumns()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(DatagenPackage.Literals.UPDATERS__UPDATERS,
+				 DatagenFactory.eINSTANCE.createCustomUpdater()));
 	}
 
 	/**

@@ -152,6 +152,15 @@ public interface DatagenFactory extends EFactory {
 	DeleteByPK createDeleteByPK();
 
 	/**
+	 * Returns a new object of class '<em>Custom Updater</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Custom Updater</em>'.
+	 * @generated
+	 */
+	CustomUpdater createCustomUpdater();
+
+	/**
 	 * Returns a new object of class '<em>Finders</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

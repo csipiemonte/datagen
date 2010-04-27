@@ -7,6 +7,7 @@
 package it.csi.mddtools.datagen.impl;
 
 import it.csi.mddtools.datagen.CustomFinder;
+import it.csi.mddtools.datagen.CustomUpdater;
 import it.csi.mddtools.datagen.DBAccessModel;
 import it.csi.mddtools.datagen.DBCommand;
 import it.csi.mddtools.datagen.DaoPackage;
@@ -177,6 +178,13 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 	 * @generated
 	 */
 	private EClass deleteByPKEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass customUpdaterEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -596,6 +604,15 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getCustomUpdater() {
+		return customUpdaterEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getFinders() {
 		return findersEClass;
 	}
@@ -696,6 +713,8 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		deleterEClass = createEClass(DELETER);
 
 		deleteByPKEClass = createEClass(DELETE_BY_PK);
+
+		customUpdaterEClass = createEClass(CUSTOM_UPDATER);
 	}
 
 	/**
@@ -741,6 +760,7 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		updateColumnsEClass.getESuperTypes().add(this.getUpdater());
 		deleterEClass.getESuperTypes().add(this.getDBCommand());
 		deleteByPKEClass.getESuperTypes().add(this.getDeleter());
+		customUpdaterEClass.getESuperTypes().add(this.getUpdater());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(dbAccessModelEClass, DBAccessModel.class, "DBAccessModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -802,6 +822,8 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		initEClass(deleterEClass, Deleter.class, "Deleter", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(deleteByPKEClass, DeleteByPK.class, "DeleteByPK", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(customUpdaterEClass, CustomUpdater.class, "CustomUpdater", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

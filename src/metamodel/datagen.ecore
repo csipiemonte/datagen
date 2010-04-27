@@ -215,4 +215,9 @@
       <details key="documentation" value="Operazione di cancellazione che permette di cancellare una singola riga identificata &#xD;&#xA;tramite primary key"/>
     </eAnnotations>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CustomUpdater" eSuperTypes="#//Updater">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Operazione di aggiornamento dati altamente personalizzabile, tramite scrittura di codice custom.&#xD;&#xA;E' utile, ad esempio, nel caso si debbano realizzare delle operazioni di aggiornamento di un insieme di righe e non&#xD;&#xA;di una singola riga identificata da PK."/>
+    </eAnnotations>
+  </eClassifiers>
 </ecore:EPackage>

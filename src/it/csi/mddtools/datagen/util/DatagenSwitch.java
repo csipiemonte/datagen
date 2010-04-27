@@ -226,6 +226,14 @@ public class DatagenSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case DatagenPackage.CUSTOM_UPDATER: {
+				CustomUpdater customUpdater = (CustomUpdater)theEObject;
+				T result = caseCustomUpdater(customUpdater);
+				if (result == null) result = caseUpdater(customUpdater);
+				if (result == null) result = caseDBCommand(customUpdater);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -512,6 +520,21 @@ public class DatagenSwitch<T> {
 	 * @generated
 	 */
 	public T caseDeleteByPK(DeleteByPK object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Custom Updater</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Custom Updater</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCustomUpdater(CustomUpdater object) {
 		return null;
 	}
 

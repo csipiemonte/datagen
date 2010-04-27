@@ -11,12 +11,55 @@
   <genPackages prefix="Datagen" basePackage="it.csi.mddtools" disposableProviderFactory="true"
       ecorePackage="datagen.ecore#/">
     <genClasses ecoreClass="datagen.ecore#//DBAccessModel">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//DBAccessModel/dao"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#//DBAccessModel/schema"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//DBAccessModel/daopkgs"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#//DBAccessModel/codProdotto"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#//DBAccessModel/codComponente"/>
     </genClasses>
     <genClasses ecoreClass="datagen.ecore#//DataAccessObject">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#//DataAccessObject/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#//DataAccessObject/mainTable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//DataAccessObject/pkGenerator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//DataAccessObject/inserter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//DataAccessObject/finders"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//DataAccessObject/updaters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//DataAccessObject/deleters"/>
     </genClasses>
+    <genClasses ecoreClass="datagen.ecore#//DaoPackage">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#//DaoPackage/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//DaoPackage/dao"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="datagen.ecore#//PKGenerator"/>
+    <genClasses ecoreClass="datagen.ecore#//SequencePKGenerator">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#//SequencePKGenerator/sequenceName"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="datagen.ecore#//DBCommand">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#//DBCommand/name"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#//Inserter"/>
+    <genClasses ecoreClass="datagen.ecore#//Finders">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//Finders/finders"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="datagen.ecore#//Finder"/>
+    <genClasses ecoreClass="datagen.ecore#//FindByPK"/>
+    <genClasses ecoreClass="datagen.ecore#//FindAll"/>
+    <genClasses ecoreClass="datagen.ecore#//QBEFinder"/>
+    <genClasses ecoreClass="datagen.ecore#//CustomFinder">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#//CustomFinder/filterClassFQN"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#//Updaters">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//Updaters/updaters"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="datagen.ecore#//Updater"/>
+    <genClasses ecoreClass="datagen.ecore#//UpdateRow"/>
+    <genClasses ecoreClass="datagen.ecore#//UpdateColumns">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#//UpdateColumns/columns"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#//CustomUpdater"/>
+    <genClasses ecoreClass="datagen.ecore#//Deleters">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//Deleters/deleters"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="datagen.ecore#//Deleter"/>
+    <genClasses ecoreClass="datagen.ecore#//DeleteByPK"/>
   </genPackages>
 </genmodel:GenModel>
