@@ -155,6 +155,11 @@ public class DeletersItemProvider
 			(createChildParameter
 				(DatagenPackage.Literals.DELETERS__DELETERS,
 				 DatagenFactory.eINSTANCE.createDeleteByPK()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(DatagenPackage.Literals.DELETERS__DELETERS,
+				 DatagenFactory.eINSTANCE.createCustomDeleter()));
 	}
 
 	/**

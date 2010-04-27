@@ -745,13 +745,69 @@ public interface DatagenPackage extends EPackage {
 	int CUSTOM_UPDATER__NAME = UPDATER__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Filter Class FQN</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOM_UPDATER__FILTER_CLASS_FQN = UPDATER_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Value Class FQN</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOM_UPDATER__VALUE_CLASS_FQN = UPDATER_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Custom Updater</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CUSTOM_UPDATER_FEATURE_COUNT = UPDATER_FEATURE_COUNT + 0;
+	int CUSTOM_UPDATER_FEATURE_COUNT = UPDATER_FEATURE_COUNT + 2;
+
+
+	/**
+	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.CustomDeleterImpl <em>Custom Deleter</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see it.csi.mddtools.datagen.impl.CustomDeleterImpl
+	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getCustomDeleter()
+	 * @generated
+	 */
+	int CUSTOM_DELETER = 21;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOM_DELETER__NAME = DELETER__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Filter Class FQN</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOM_DELETER__FILTER_CLASS_FQN = DELETER_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Custom Deleter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOM_DELETER_FEATURE_COUNT = DELETER_FEATURE_COUNT + 1;
 
 
 	/**
@@ -1164,6 +1220,49 @@ public interface DatagenPackage extends EPackage {
 	EClass getCustomUpdater();
 
 	/**
+	 * Returns the meta object for the attribute '{@link it.csi.mddtools.datagen.CustomUpdater#getFilterClassFQN <em>Filter Class FQN</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Filter Class FQN</em>'.
+	 * @see it.csi.mddtools.datagen.CustomUpdater#getFilterClassFQN()
+	 * @see #getCustomUpdater()
+	 * @generated
+	 */
+	EAttribute getCustomUpdater_FilterClassFQN();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.csi.mddtools.datagen.CustomUpdater#getValueClassFQN <em>Value Class FQN</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value Class FQN</em>'.
+	 * @see it.csi.mddtools.datagen.CustomUpdater#getValueClassFQN()
+	 * @see #getCustomUpdater()
+	 * @generated
+	 */
+	EAttribute getCustomUpdater_ValueClassFQN();
+
+	/**
+	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.CustomDeleter <em>Custom Deleter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Custom Deleter</em>'.
+	 * @see it.csi.mddtools.datagen.CustomDeleter
+	 * @generated
+	 */
+	EClass getCustomDeleter();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.csi.mddtools.datagen.CustomDeleter#getFilterClassFQN <em>Filter Class FQN</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Filter Class FQN</em>'.
+	 * @see it.csi.mddtools.datagen.CustomDeleter#getFilterClassFQN()
+	 * @see #getCustomDeleter()
+	 * @generated
+	 */
+	EAttribute getCustomDeleter_FilterClassFQN();
+
+	/**
 	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.Finders <em>Finders</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1557,6 +1656,40 @@ public interface DatagenPackage extends EPackage {
 		 * @generated
 		 */
 		EClass CUSTOM_UPDATER = eINSTANCE.getCustomUpdater();
+
+		/**
+		 * The meta object literal for the '<em><b>Filter Class FQN</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CUSTOM_UPDATER__FILTER_CLASS_FQN = eINSTANCE.getCustomUpdater_FilterClassFQN();
+
+		/**
+		 * The meta object literal for the '<em><b>Value Class FQN</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CUSTOM_UPDATER__VALUE_CLASS_FQN = eINSTANCE.getCustomUpdater_ValueClassFQN();
+
+		/**
+		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.CustomDeleterImpl <em>Custom Deleter</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see it.csi.mddtools.datagen.impl.CustomDeleterImpl
+		 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getCustomDeleter()
+		 * @generated
+		 */
+		EClass CUSTOM_DELETER = eINSTANCE.getCustomDeleter();
+
+		/**
+		 * The meta object literal for the '<em><b>Filter Class FQN</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CUSTOM_DELETER__FILTER_CLASS_FQN = eINSTANCE.getCustomDeleter_FilterClassFQN();
 
 		/**
 		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.FindersImpl <em>Finders</em>}' class.

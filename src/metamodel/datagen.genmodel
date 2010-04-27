@@ -55,11 +55,17 @@
     <genClasses ecoreClass="datagen.ecore#//UpdateColumns">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#//UpdateColumns/columns"/>
     </genClasses>
-    <genClasses ecoreClass="datagen.ecore#//CustomUpdater"/>
+    <genClasses ecoreClass="datagen.ecore#//CustomUpdater">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#//CustomUpdater/filterClassFQN"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#//CustomUpdater/valueClassFQN"/>
+    </genClasses>
     <genClasses ecoreClass="datagen.ecore#//Deleters">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//Deleters/deleters"/>
     </genClasses>
     <genClasses image="false" ecoreClass="datagen.ecore#//Deleter"/>
     <genClasses ecoreClass="datagen.ecore#//DeleteByPK"/>
+    <genClasses ecoreClass="datagen.ecore#//CustomDeleter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#//CustomDeleter/filterClassFQN"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

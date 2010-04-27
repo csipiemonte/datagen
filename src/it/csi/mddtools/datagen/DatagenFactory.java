@@ -161,6 +161,15 @@ public interface DatagenFactory extends EFactory {
 	CustomUpdater createCustomUpdater();
 
 	/**
+	 * Returns a new object of class '<em>Custom Deleter</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Custom Deleter</em>'.
+	 * @generated
+	 */
+	CustomDeleter createCustomDeleter();
+
+	/**
 	 * Returns a new object of class '<em>Finders</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

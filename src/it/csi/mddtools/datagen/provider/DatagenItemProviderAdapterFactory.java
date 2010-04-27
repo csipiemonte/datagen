@@ -421,6 +421,29 @@ public class DatagenItemProviderAdapterFactory extends DatagenAdapterFactory imp
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link it.csi.mddtools.datagen.CustomDeleter} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CustomDeleterItemProvider customDeleterItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.csi.mddtools.datagen.CustomDeleter}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createCustomDeleterAdapter() {
+		if (customDeleterItemProvider == null) {
+			customDeleterItemProvider = new CustomDeleterItemProvider(this);
+		}
+
+		return customDeleterItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link it.csi.mddtools.datagen.Finders} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -558,6 +581,7 @@ public class DatagenItemProviderAdapterFactory extends DatagenAdapterFactory imp
 		if (deletersItemProvider != null) deletersItemProvider.dispose();
 		if (deleteByPKItemProvider != null) deleteByPKItemProvider.dispose();
 		if (customUpdaterItemProvider != null) customUpdaterItemProvider.dispose();
+		if (customDeleterItemProvider != null) customDeleterItemProvider.dispose();
 	}
 
 }

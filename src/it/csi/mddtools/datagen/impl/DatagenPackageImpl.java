@@ -6,6 +6,7 @@
  */
 package it.csi.mddtools.datagen.impl;
 
+import it.csi.mddtools.datagen.CustomDeleter;
 import it.csi.mddtools.datagen.CustomFinder;
 import it.csi.mddtools.datagen.CustomUpdater;
 import it.csi.mddtools.datagen.DBAccessModel;
@@ -185,6 +186,13 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 	 * @generated
 	 */
 	private EClass customUpdaterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass customDeleterEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -613,6 +621,42 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getCustomUpdater_FilterClassFQN() {
+		return (EAttribute)customUpdaterEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCustomUpdater_ValueClassFQN() {
+		return (EAttribute)customUpdaterEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCustomDeleter() {
+		return customDeleterEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCustomDeleter_FilterClassFQN() {
+		return (EAttribute)customDeleterEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getFinders() {
 		return findersEClass;
 	}
@@ -715,6 +759,11 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		deleteByPKEClass = createEClass(DELETE_BY_PK);
 
 		customUpdaterEClass = createEClass(CUSTOM_UPDATER);
+		createEAttribute(customUpdaterEClass, CUSTOM_UPDATER__FILTER_CLASS_FQN);
+		createEAttribute(customUpdaterEClass, CUSTOM_UPDATER__VALUE_CLASS_FQN);
+
+		customDeleterEClass = createEClass(CUSTOM_DELETER);
+		createEAttribute(customDeleterEClass, CUSTOM_DELETER__FILTER_CLASS_FQN);
 	}
 
 	/**
@@ -761,6 +810,7 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		deleterEClass.getESuperTypes().add(this.getDBCommand());
 		deleteByPKEClass.getESuperTypes().add(this.getDeleter());
 		customUpdaterEClass.getESuperTypes().add(this.getUpdater());
+		customDeleterEClass.getESuperTypes().add(this.getDeleter());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(dbAccessModelEClass, DBAccessModel.class, "DBAccessModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -824,6 +874,11 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		initEClass(deleteByPKEClass, DeleteByPK.class, "DeleteByPK", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(customUpdaterEClass, CustomUpdater.class, "CustomUpdater", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCustomUpdater_FilterClassFQN(), ecorePackage.getEString(), "filterClassFQN", null, 0, 1, CustomUpdater.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCustomUpdater_ValueClassFQN(), ecorePackage.getEString(), "valueClassFQN", null, 0, 1, CustomUpdater.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(customDeleterEClass, CustomDeleter.class, "CustomDeleter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCustomDeleter_FilterClassFQN(), ecorePackage.getEString(), "filterClassFQN", null, 0, 1, CustomDeleter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

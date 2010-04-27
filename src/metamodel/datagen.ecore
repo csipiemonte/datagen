@@ -219,5 +219,25 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Operazione di aggiornamento dati altamente personalizzabile, tramite scrittura di codice custom.&#xD;&#xA;E' utile, ad esempio, nel caso si debbano realizzare delle operazioni di aggiornamento di un insieme di righe e non&#xD;&#xA;di una singola riga identificata da PK."/>
     </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="filterClassFQN" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Full qualified name della classe che deve essere utilizzata come primo parametro di input per il finder.&#xD;&#xA;Serve per determinare l'inisieme di righe su cui operare la modifica&#xD;&#xA;Possibili valori:&#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>Se non si specifica la proipriet&amp;agrave; la classe utilizzata sar&amp;agrave; &lt;i>java.lang.Object&lt;/i>.&lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto, sar&amp;agrave; utilizzata la classe del dto associato. &lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto[], sar&amp;agrave; utilizzata una ArrayList costituita da oggetti del tipo del dto associato. &lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueClassFQN" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Full qualified name della classe che deve essere utilizzata come secondo parametro parametro di input per l'updater.&#xD;&#xA;Serve per specificare i valori da impostare&#xD;&#xA;&#xD;&#xA;Possibili valori:&#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>Se non si specifica la proipriet&amp;agrave; la classe utilizzata sar&amp;agrave; &lt;i>java.lang.Object&lt;/i>.&lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto, sar&amp;agrave; utilizzata la classe del dto associato. &lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto[], sar&amp;agrave; utilizzata una ArrayList costituita da oggetti del tipo del dto associato. &lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CustomDeleter" eSuperTypes="#//Deleter">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Operazione di cancellazioen righe altamente personalizzabile, tramite scrittura di codice custom.&#xD;&#xA;E' utile nel caso si debbano realizzare delle operazioni di cancellazione di un insieme di righe e non&#xD;&#xA;di una singola riga identificata da PK."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="filterClassFQN" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Full qualified name della classe che deve essere utilizzata come parametro di input per il deleter.&#xD;&#xA;Possibili valori:&#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>Se non si specifica la proipriet&amp;agrave; la classe utilizzata sar&amp;agrave; &lt;i>java.lang.Object&lt;/i>.&lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto, sar&amp;agrave; utilizzata la classe del dto associato. &lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto[], sar&amp;agrave; utilizzata una ArrayList costituita da oggetti del tipo del dto associato. &lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
 </ecore:EPackage>

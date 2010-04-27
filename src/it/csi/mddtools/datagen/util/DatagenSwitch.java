@@ -234,6 +234,14 @@ public class DatagenSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case DatagenPackage.CUSTOM_DELETER: {
+				CustomDeleter customDeleter = (CustomDeleter)theEObject;
+				T result = caseCustomDeleter(customDeleter);
+				if (result == null) result = caseDeleter(customDeleter);
+				if (result == null) result = caseDBCommand(customDeleter);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -535,6 +543,21 @@ public class DatagenSwitch<T> {
 	 * @generated
 	 */
 	public T caseCustomUpdater(CustomUpdater object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Custom Deleter</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Custom Deleter</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCustomDeleter(CustomDeleter object) {
 		return null;
 	}
 

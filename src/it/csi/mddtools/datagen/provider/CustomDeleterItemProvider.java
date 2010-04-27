@@ -7,9 +7,9 @@
 package it.csi.mddtools.datagen.provider;
 
 
-import it.csi.mddtools.datagen.CustomUpdater;
-
+import it.csi.mddtools.datagen.CustomDeleter;
 import it.csi.mddtools.datagen.DatagenPackage;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -27,13 +27,13 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link it.csi.mddtools.datagen.CustomUpdater} object.
+ * This is the item provider adapter for a {@link it.csi.mddtools.datagen.CustomDeleter} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class CustomUpdaterItemProvider
-	extends UpdaterItemProvider
+public class CustomDeleterItemProvider
+	extends DeleterItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -46,7 +46,7 @@ public class CustomUpdaterItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CustomUpdaterItemProvider(AdapterFactory adapterFactory) {
+	public CustomDeleterItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -62,7 +62,6 @@ public class CustomUpdaterItemProvider
 			super.getPropertyDescriptors(object);
 
 			addFilterClassFQNPropertyDescriptor(object);
-			addValueClassFQNPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -78,9 +77,9 @@ public class CustomUpdaterItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_CustomUpdater_filterClassFQN_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_CustomUpdater_filterClassFQN_feature", "_UI_CustomUpdater_type"),
-				 DatagenPackage.Literals.CUSTOM_UPDATER__FILTER_CLASS_FQN,
+				 getString("_UI_CustomDeleter_filterClassFQN_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_CustomDeleter_filterClassFQN_feature", "_UI_CustomDeleter_type"),
+				 DatagenPackage.Literals.CUSTOM_DELETER__FILTER_CLASS_FQN,
 				 true,
 				 false,
 				 false,
@@ -90,36 +89,14 @@ public class CustomUpdaterItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Value Class FQN feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addValueClassFQNPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_CustomUpdater_valueClassFQN_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_CustomUpdater_valueClassFQN_feature", "_UI_CustomUpdater_type"),
-				 DatagenPackage.Literals.CUSTOM_UPDATER__VALUE_CLASS_FQN,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This returns CustomUpdater.gif.
+	 * This returns CustomDeleter.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/CustomUpdater"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/CustomDeleter"));
 	}
 
 	/**
@@ -130,10 +107,10 @@ public class CustomUpdaterItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((CustomUpdater)object).getName();
+		String label = ((CustomDeleter)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_CustomUpdater_type") :
-			getString("_UI_CustomUpdater_type") + " " + label;
+			getString("_UI_CustomDeleter_type") :
+			getString("_UI_CustomDeleter_type") + " " + label;
 	}
 
 	/**
@@ -147,9 +124,8 @@ public class CustomUpdaterItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(CustomUpdater.class)) {
-			case DatagenPackage.CUSTOM_UPDATER__FILTER_CLASS_FQN:
-			case DatagenPackage.CUSTOM_UPDATER__VALUE_CLASS_FQN:
+		switch (notification.getFeatureID(CustomDeleter.class)) {
+			case DatagenPackage.CUSTOM_DELETER__FILTER_CLASS_FQN:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

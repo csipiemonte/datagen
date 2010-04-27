@@ -76,6 +76,7 @@ public class DatagenFactoryImpl extends EFactoryImpl implements DatagenFactory {
 			case DatagenPackage.DELETERS: return (EObject)createDeleters();
 			case DatagenPackage.DELETE_BY_PK: return (EObject)createDeleteByPK();
 			case DatagenPackage.CUSTOM_UPDATER: return (EObject)createCustomUpdater();
+			case DatagenPackage.CUSTOM_DELETER: return (EObject)createCustomDeleter();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -229,6 +230,16 @@ public class DatagenFactoryImpl extends EFactoryImpl implements DatagenFactory {
 	public CustomUpdater createCustomUpdater() {
 		CustomUpdaterImpl customUpdater = new CustomUpdaterImpl();
 		return customUpdater;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CustomDeleter createCustomDeleter() {
+		CustomDeleterImpl customDeleter = new CustomDeleterImpl();
+		return customDeleter;
 	}
 
 	/**
