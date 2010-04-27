@@ -29,7 +29,6 @@ import java.util.*;
  * @generated
  */
 public class «getPkClassName()» implements Serializable {
-		protected Integer idClasseEff;
 
 	«EXPAND columnJavaProperty FOREACH this.mainTable.primaryKey.includedColumns»
 	
@@ -49,7 +48,7 @@ public class «getPkClassName()» implements Serializable {
 		«ENDFOREACH»
 	)
 	{
-		«FOREACH mainTable.primaryKey.includedColumns AS currPKCol SEPARATOR ","»
+		«FOREACH mainTable.primaryKey.includedColumns AS currPKCol»
 		this._«javaPropertyNameFromColumn(currPKCol)» = «javaPropertyNameFromColumn(currPKCol)»;
 		«ENDFOREACH»
 	}
@@ -76,7 +75,7 @@ public class «getPkClassName()» implements Serializable {
 		
 		final «getPkClassName()» _cast = («getPkClassName()») _other;
 		
-		«FOREACH mainTable.primaryKey.includedColumns AS currPKCol SEPARATOR ","»
+		«FOREACH mainTable.primaryKey.includedColumns AS currPKCol»
 		if (_«javaPropertyNameFromColumn(currPKCol)» == null ? _cast.get«javaPropertyNameFromColumn(currPKCol).toFirstUpper()»() != _«javaPropertyNameFromColumn(currPKCol)» : !_«javaPropertyNameFromColumn(currPKCol)».equals( _cast.get«javaPropertyNameFromColumn(currPKCol).toFirstUpper()»() )) {
 			return false;
 		}
@@ -93,9 +92,12 @@ public class «getPkClassName()» implements Serializable {
 	public int hashCode()
 	{
 		int _hashCode = 0;
-		if (idClasseEff != null) {
-			_hashCode = 29 * _hashCode + idClasseEff.hashCode();
+		
+		«FOREACH mainTable.primaryKey.includedColumns AS currPKCol»
+		if (_«javaPropertyNameFromColumn(currPKCol)» != null) {
+			_hashCode = 29 * _hashCode + _«javaPropertyNameFromColumn(currPKCol)».hashCode();
 		}
+		«ENDFOREACH»
 		
 		return _hashCode;
 	}
@@ -108,8 +110,10 @@ public class «getPkClassName()» implements Serializable {
 	public String toString()
 	{
 		StringBuffer ret = new StringBuffer();
-		ret.append( "it.csi.sicee.siceeweb.business.dao.dto.SiceeDClasseEfficienzaPk: " );
-		ret.append( "idClasseEff=" + idClasseEff );
+		«FOREACH mainTable.primaryKey.includedColumns AS currPKCol»
+		ret.append( "«pkgPackage».dto.«getPkClassName()»: " );
+		ret.append( "_«javaPropertyNameFromColumn(currPKCol)»=" + _«javaPropertyNameFromColumn(currPKCol)» );
+		«ENDFOREACH»
 		return ret.toString();
 	}
 }
