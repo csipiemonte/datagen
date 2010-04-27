@@ -13,7 +13,7 @@
 
 «DEFINE dtoFiles (DBAccessModel model) FOR DaoPackage»
 «EXPAND dtoFile(model) FOREACH dao»
-«EXPAND dtoPkFile(model) FOREACH dao»
+«EXPAND dtoPkFile(model) FOREACH dao.select(d|d.mainTable.primaryKey != null)»
 «ENDDEFINE»
 
 «DEFINE dtoPkFile(DBAccessModel model) FOR DataAccessObject»
@@ -160,7 +160,8 @@ public class «getDtoClassName()» implements Serializable
 		return super.hashCode();
 	}
 
-	/**
+	«IF this.mainTable.primaryKey != null»
+		/**
 	 * Method 'createPk'
 	 * 
 	 * @return «getPkClassName()»
@@ -174,6 +175,7 @@ public class «getDtoClassName()» implements Serializable
 		«ENDFOREACH-»
 		);
 	}
+	«ENDIF»
 
 	/**
 	 * Method 'toString'

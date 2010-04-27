@@ -215,7 +215,11 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c)
 	 * @return «getPkClassName()»
 	 * @generated
 	 */
+	«IF this.mainTable.primaryKey != null»
 	public «getPkClassName()» insert(«getDtoClassName()» dto)
+	«ELSE»
+	public void insert(«getDtoClassName()» dto)
+	«ENDIF»	
 	«IF body-»
 	{
 		«IF mainTable.primaryKey!=null-»
@@ -241,7 +245,10 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c)
 			log.debug("[«getDaoImplClassName()»::insert] END");
 		}
 		
+		«IF this.mainTable.primaryKey != null»
 		return dto.createPk();
+		«ENDIF»	
+		
 	}
 	«ELSE-»
 	;

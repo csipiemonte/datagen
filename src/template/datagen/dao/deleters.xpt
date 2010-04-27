@@ -17,6 +17,39 @@
 «ERROR "deleter non gestito:"+metaType»
 «ENDDEFINE»
 
+«DEFINE deleter(DBAccessModel model, DataAccessObject dao, boolean body) FOR CustomDeleter»
+«LET isNullOrEmpty(filterClassFQN) ? "java.lang.Object" : (filterClassFQN=="$dto" ? getDtoFQN(dao, model) : (filterClassFQN=="$dto[]"? "java.util.ArrayList<"+getDtoFQN(dao, model)+">" : filterClassFQN) ) AS filterJavaType-»
+	/** 
+	 * Custom deleter in the «dao.mainTable.name» table.
+	 * @generated
+	 */	
+	public void customDeleter«name.toFirstUpper()»(«filterJavaType» filter) throws «getDaoExcClassName(dao)»
+	«IF body-»
+	{
+		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(getDaoImplFQN(dao, model)+"customDeleter"+name.toFirstUpper())»
+		//***scrivere la custom query
+		final String sql = "DELETE FROM " + getTableName() + " WHERE ";
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("parametro", filter);
+		«ENDPROTECT»
+		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
+		try {
+			stopWatch.start();
+			jdbcTemplate.update(sql.toString(), params);
+		} catch (RuntimeException ex) {
+			log.error("[«getDaoImplClassName(dao)»::delete] esecuzione query",ex);
+			throw new «getDaoExcClassName(dao)»("Query failed", ex);
+		} finally {
+			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "delete","esecuzione query", sql);
+			log.debug("[«getDaoImplClassName(dao)»::delete] END");
+		}
+	}
+	«ELSE-»
+	;
+	«ENDIF-»
+«ENDLET»
+«ENDDEFINE»
+
 «DEFINE deleter(DBAccessModel model, DataAccessObject dao, boolean body) FOR DeleteByPK»
 	/** 
 	 * Deletes a single row in the «dao.mainTable.name» table.
