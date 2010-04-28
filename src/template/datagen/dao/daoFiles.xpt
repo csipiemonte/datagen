@@ -61,9 +61,14 @@ public class «getDaoExcClassName()» extends DaoException
 «LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-»
 «FILE getDaoFullPath(this, model)»package «pkgPackage».dao;
 
+import «pkgPackage».dao.*;
 import «pkgPackage».dto.*;
+import «pkgPackage».qbe.*;
+import «pkgPackage».metadata.*;
 import «pkgPackage».exceptions.*;
-import java.util.List;
+import «getDALayerBasePkg(model)».util.*;
+import «getDALayerBasePkg(model)».qbe.*;
+import java.util.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -93,9 +98,12 @@ public interface «getDaoClassName()» {
 
 import «pkgPackage».dao.*;
 import «pkgPackage».dto.*;
+import «pkgPackage».qbe.*;
+import «pkgPackage».metadata.*;
 import «pkgPackage».exceptions.*;
 import «getDALayerBasePkg(model)».util.*;
-import java.util.List;
+import «getDALayerBasePkg(model)».qbe.*;
+import java.util.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -150,7 +158,6 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameterize
 	{
 		return "«mainTable.name»";
 	}
-
 
 	«EXPAND template::datagen::dao::finders::finders(model, true) FOR this»
 }
@@ -301,7 +308,7 @@ import oracle.sql.CLOB;
  *
  * @generated
  */
-public class AbstractDAO
+public abstract class AbstractDAO
 {
 	/**
 	 * @generated
@@ -315,6 +322,14 @@ public class AbstractDAO
 		this.incrementer = incrementer;
 	}
 
+	/**
+	 * Method 'getTableName'
+	 * 
+	 * @return String
+	 * @generated
+	 */
+	public abstract String getTableName();
+	
 	/**
 	 * @generated
 	 */

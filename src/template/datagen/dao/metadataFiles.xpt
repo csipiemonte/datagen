@@ -1,0 +1,188 @@
+«IMPORT ecore»
+«IMPORT datagen»
+«IMPORT rdbmdl»
+«IMPORT rdbmdl::constraints»
+«IMPORT rdbmdl::datatypes»
+«IMPORT rdbmdl::view»
+
+«EXTENSION template::DatagenExtensions»
+
+«DEFINE metadataFiles FOR DBAccessModel»
+«EXPAND metadataFiles(this) FOREACH daopkgs»
+«ENDDEFINE»
+
+«DEFINE metadataFiles (DBAccessModel model) FOR DaoPackage»
+«EXPAND commonMetadataFiles(model) FOR this»
+«EXPAND metadataFiles(model) FOREACH dao»
+«ENDDEFINE»
+
+«DEFINE metadataFiles(DBAccessModel model) FOR DataAccessObject»
+«EXPAND metadataFile(model) FOR this»
+«ENDDEFINE»
+
+
+«DEFINE metadataFile(DBAccessModel model) FOR DataAccessObject»
+«LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-»
+«FILE getMetadataFullPath(this, model)»package «pkgPackage».metadata;
+
+import «pkgPackage».dto.*;
+import «getDALayerBasePkg(model)».metadata.*;
+import java.util.List;
+
+/**
+ * @generated
+ */
+public class «getMetadataClassName()» implements DAOMetadata{
+	
+	
+	/**
+	 * Method 'getTableName'
+	 * 
+	 * @return String
+	 * @generated
+	 */
+	public String getTableName()
+	{
+		return "«mainTable.name»";
+	}
+
+	«EXPAND getColumnNameMethod(this) FOR this.mainTable»	
+}
+«ENDFILE-»
+«ENDLET-»
+«ENDDEFINE»
+
+
+«DEFINE getColumnNameMethod(DataAccessObject dao) FOR Table»
+	/**
+	 * Method 'getColumnName'
+	 * 
+	 * @param propName
+	 * @return String
+	 * @generated
+	 */
+	public String getColumnName(String propName){
+		«FOREACH columns AS currCol-»
+		if ("«javaPropertyNameFromColumn(currCol)»".equals(propName)){
+			return "«currCol.name»";
+		}
+		«ENDFOREACH-»
+		/// se non trovato
+		throw new IllegalArgumentException("proprieta' "+propName+" non trovata per il DTO «getDtoClassName(dao)»");
+	}
+«ENDDEFINE»
+
+
+
+«DEFINE commonMetadataFiles(DBAccessModel model) FOR DaoPackage»
+«FILE getDALayerBaseDir(model)+"/metadata/DAOMetadata.java"»package «getDALayerBasePkg(model)».metadata;
+
+import java.io.*;
+import java.sql.*;
+
+import oracle.sql.BLOB;
+import oracle.sql.CLOB;
+
+/**
+ * Interface for DAO Metadata.
+ *
+ * @generated
+ */
+public interface DAOMetadata
+{
+	
+	/**
+	 * Method 'getTableName'
+	 * 
+	 * @return String
+	 * @generated
+	 */
+	public abstract String getTableName();
+	
+	/**
+	 * Method 'getColumnName'
+	 * 
+	 * @param propName
+	 * @return String
+	 * @generated
+	 */
+	public abstract String getColumnName(String propName);
+	
+	
+	
+	
+	
+}
+«ENDFILE»
+
+«FILE getPkgDir(this, model)+"/exceptions/DaoException.java"»package «getPkgPackage(this, model)».exceptions;
+
+/**
+ * @generated
+ */
+public class DaoException extends Exception
+{
+	/**
+	 * @generated
+	 */
+	protected Throwable throwable;
+
+	/**
+	 * Method 'DaoException'
+	 * 
+	 * @param message
+	 * @generated
+	 */
+	public DaoException(String message)
+	{
+		super(message);
+	}
+
+	/**
+	 * Method 'DaoException'
+	 * 
+	 * @param message
+	 * @param throwable
+	 * @generated
+	 */
+	public DaoException(String message, Throwable throwable)
+	{
+		super(message);
+		this.throwable = throwable;
+	}
+
+	/**
+	 * Method 'getCause'
+	 * 
+	 * @return Throwable
+	 * @generated
+	 */
+	public Throwable getCause()
+	{
+		return throwable;
+	}
+
+}
+«ENDFILE»
+«ENDDEFINE»
+
+
+«REM»gestire l'univocità della regione protetta per la compatibilità con servicegen«ENDREM»
+«DEFINE utilFiles FOR DBAccessModel»
+«FILE getDALayerBaseDir(this)+"/util/Constants.java"»package «getDALayerBasePkg(this)».util;
+/**
+* @generated
+*/
+public final class Constants {
+	/**
+	 * identificativo dell'applicativo.
+	 */
+	public static final String APPLICATION_CODE = "«this.codComponente.toUpperCase()»";
+	
+	«PROTECT CSTART '/*' CEND '*/' ID getRegionUID("DaoConstants")»
+	
+	«ENDPROTECT»
+}
+«ENDFILE»
+«ENDDEFINE»
+

@@ -70,6 +70,16 @@ String getDaoExcFullPath(DataAccessObject dao, DBAccessModel model) :
 	getPkgDir((DaoPackage)(dao.eContainer), model)+"/exceptions/"+getDaoExcClassName(dao)+".java";
 
 
+
+String getMetadataClassName(DataAccessObject dao) :
+	dao.name.toFirstUpper()+"Metadata";
+
+String getMetadataFQN(DataAccessObject dao, DBAccessModel model) :
+	getPkgPackage((DaoPackage)(dao.eContainer), model)+".metadata."+getMetadataClassName(dao);
+
+String getMetadataFullPath(DataAccessObject dao, DBAccessModel model) :
+	getPkgDir((DaoPackage)(dao.eContainer), model)+"/metadata/"+getMetadataClassName(dao)+".java";
+
 // DTO
 
 String getDtoClassName(DataAccessObject dao) :

@@ -27,7 +27,7 @@ context DataAccessObject WARNING "il dao: "+this.name+" non definisce nessun upd
 	updaters != null && updaters.updaters.select(f| (f.metaType==UpdateRow)).size==1;
 
 
-context Finder if (metaType != FindByPK && metaType != FindAll) ERROR "E' necessario specificare il nome dei finder (esclusi il findByPK o findAll)"+((DataAccessObject)(this.eContainer.eContainer)).name:
+context Finder if (metaType != FindByPK && metaType != FindAll && metaType != QBEFinder) ERROR "E' necessario specificare il nome dei finder (esclusi il findByPK, findAll, QBEFinder)"+((DataAccessObject)(this.eContainer.eContainer)).name:
 	!isNullOrEmpty(name);
 	
 context Updater if (metaType != UpdateRow) ERROR "E' necessario specificare il nome degli updater (escluso l'UpdateRow)"+((DataAccessObject)(this.eContainer.eContainer)).name:

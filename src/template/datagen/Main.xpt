@@ -17,6 +17,7 @@
 «EXPAND template::datagen::dto::dtoFiles::dtoFiles FOR this»
 «EXPAND template::datagen::qbe::qbeExampleFiles::qbeExamplesFiles FOR this»
 «EXPAND template::datagen::dao::daoFiles::daoFiles FOR this»
+«EXPAND template::datagen::dao::metadataFiles::metadataFiles FOR this»
 «EXPAND template::datagen::qbe::qbeFrameworkFiles::frameworkFiles FOR this»
 «EXPAND template::datagen::spring::configFiles::daoBeansFile(daoBeansFileName) FOR this»
 «EXPAND template::datagen::spring::configFiles::configFiles FOR this»

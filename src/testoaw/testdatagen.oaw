@@ -3,7 +3,7 @@
     <cartridge file="it/csi/mddtools/datagen/workflow/basicDao.oaw"
 		model="datagen/src/testmodel/test_datagen.xmi" 
 		daoTargetProjectName="testdatagenjava"
-		dbTargetProjectName="testdatagendb"   	
+		basePackage="it.csi.comp.prod"   	
     />
     
     <cartridge file="it/csi/mddtools/datagen/workflow/basicSql.oaw"

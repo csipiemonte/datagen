@@ -10,6 +10,7 @@
         <finders xsi:type="datagen:CustomFinder" name="ByNome" filterClassFQN="java.lang.String"/>
         <finders xsi:type="datagen:FindAll"/>
         <finders xsi:type="datagen:FindByPK"/>
+        <finders xsi:type="datagen:QBEFinder"/>
       </finders>
       <updaters>
         <updaters xsi:type="datagen:UpdateRow"/>

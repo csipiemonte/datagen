@@ -20,9 +20,9 @@ public class GenUtils {
 	}
 	
 	public static String pkg2Path(String pkg){
-		System.out.println("from:"+pkg);
+		//System.out.println("from:"+pkg);
 		String path= pkg.replaceAll("\\p{Punct}", "/"); 
-		System.out.println("to:"+path);
+		//System.out.println("to:"+path);
 		return path;
 	}
 	
