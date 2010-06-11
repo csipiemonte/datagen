@@ -92,6 +92,7 @@ public abstract class FieldChk {
 public class EqChk extends FieldChk{
 	
 	private Object _exVal;
+	private boolean _ignoreCase=false;
 	
 	/**
 	 * @param equalsTo valore di confronto 
@@ -100,6 +101,29 @@ public class EqChk extends FieldChk{
 	public EqChk(Object equalsTo){
 		assert equalsTo != null;
 		_exVal=equalsTo;
+		_ignoreCase=false;
+	}
+	
+	/**
+	 * @generated
+	 */
+	public boolean valueHasWildcards(){
+		if (_exVal == null || !(_exVal instanceof String))
+			return false;
+		else {
+			return (((String)_exVal).indexOf("%")>-1);
+		}	
+	}
+	 
+	/**
+	 * @param equalsTo valore di confronto 
+	 * @param ignoreCase ignora il case in caso di tipo stringa
+	 * @generated
+	 */
+	public EqChk(Object equalsTo, boolean ignoreCase){
+		assert equalsTo != null;
+		_exVal=equalsTo;
+		_ignoreCase=ignoreCase;
 	}
 	/**
 	 * @generated
@@ -107,6 +131,13 @@ public class EqChk extends FieldChk{
 	public Object getExVal(){
 		return _exVal;
 	}
+	
+	/**
+	 * @generated
+	 */
+	 public boolean isIgnoreCase(){
+	 	return _ignoreCase;
+	 }
 }
 «ENDFILE»
 «ENDDEFINE»
@@ -440,7 +471,14 @@ public class QBEQueryBuilder<TEX extends AbstractExample> {
 	public String createTerm4FieldChk(EqChk chk, PropertyDescriptor pd){
 		String colName = _metadata.getColumnName(pd.getName());
 		String term = "(";
-		term+=colName+(chk.isNegate()?" <> ":" = ")+formatValue(chk.getExVal());
+		String lside = chk.isIgnoreCase() ? "UPPER("+colName+")" : colName;
+		String rside = chk.isIgnoreCase() ? "UPPER("+formatValue(chk.getExVal())+")" : formatValue(chk.getExVal());
+		if (!chk.valueHasWildcards()){
+			term += lside+(chk.isNegate()?" <> ":" = ")+rside;
+		}
+		else{
+			term += lside+(chk.isNegate()?" NOT LIKE( ":" LIKE( ")+rside+")";
+		}
 		term+=")";
 		return term;
 	}
