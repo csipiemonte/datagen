@@ -38,10 +38,10 @@ Parametri:
 		
 	</bean>
 	
-	<!-- Clean de build directory -->
-	<!--<component class="org.openarchitectureware.workflow.common.DirectoryCleaner">
-		<directory value="${src-gen}/build" />
-	</component>-->
+	<!-- Clean della build directory -->
+	<component class="org.openarchitectureware.workflow.common.DirectoryCleaner">
+		<directory value="${src-gen-dao}/build" />
+	</component>
 
 	<!-- load model and store it in slot 'model' -->
 	<component class="org.eclipse.mwe.emf.Reader">
