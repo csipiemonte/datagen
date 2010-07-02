@@ -47,5 +47,12 @@
             uri="http://www.csi.it/mddtools/rdbmdl/view">
       </package>
    </extension>
+   <extension
+         point="org.eclipse.epsilon.ewl.emf.wizards">
+      <wizards
+            file="src/ewl/newDaoWizards.ewl"
+            namespaceURI="http://www.csi.it/mddtools/datagen">
+      </wizards>
+   </extension>
 
 </plugin>
