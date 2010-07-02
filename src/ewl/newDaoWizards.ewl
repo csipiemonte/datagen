@@ -1,0 +1,57 @@
+
+/**
+ * Crea un DAO associato ad una Table, con varie opzioni
+ */
+wizard newDaoFromTable {
+	guard : (self.isTypeOf(Sequence) and self.at(0).isTypeOf(DaoPackage) and self.at(1).isTypeOf(Table))
+	title : 'Crea un DAO nel package ['+self.at(0).name+'] per maneggiare la tabella ['+self.at(1).name+']'
+	do {
+		var pkg : DaoPackage := self.at(0);
+		var tbl : Table := self.at(1);
+		var daoName := UserInput.prompt('nome del DAO', 'DAO'+tbl.name.firstToUpperCase());
+		var ro := UserInput.choose('Si desidera accedere alla tabella in sola lettura?', Sequence{'si','no'}, 'no');
+		
+		var dao : new DataAccessObject;
+		
+		var pkGenTypes := Sequence{'1- nessun generatore', '2- generatore basato su Sequence'};
+		var pkGenFlag := UserInput.choose('per l\' inserimento è necessario utilizzare un generatore?', pkGenTypes, '1- nessun generatore');
+		if (pkGenFlag.startsWith('2-')){
+			var seqName := UserInput.prompt('nome della sequence:', 'SEQ_PK'+tbl.name);
+			var pkGen : new SequencePKGenerator;
+			pkGen.sequenceName := seqName;
+			dao.pkGenerator := pkGen;	 
+		}
+		
+		
+		dao.name := daoName;
+		pkg.dao.add(dao);
+		if (ro <> 'si') {
+			// inserter e updater di base
+			var inserter : new Inserter;
+			dao.updaters := new Updaters;
+			dao.inserter := inserter;
+			inserter.name := 'inserter';
+			dao.finders := new Finders;
+			dao.deleters := new Deleters;
+			
+			var updateRow : new UpdateRow;
+			updateRow.name := 'updateRow';
+			dao.updaters.updaters.add(updateRow);
+			
+			var delRow : new DeleteByPK;
+			delRow.name := 'delByPK';
+			dao.deleters.deleters.add(delRow);
+		}
+		var findAll : new FindAll;
+		findAll.name := 'findAll';
+		dao.finders.finders.add(findAll);
+			
+		var findByPk : new FindByPK;
+		findByPk.name := 'findByPk';
+		dao.finders.finders.add(findByPk);
+		
+		var findQBE : new QBEFinder;
+		findQBE.name := 'findByExample';
+		dao.finders.finders.add(findQBE);
+	}
+}
