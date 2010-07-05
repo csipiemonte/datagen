@@ -24,6 +24,7 @@ wizard newDaoFromTable {
 		
 		
 		dao.name := daoName;
+		dao.mainTable := tbl;
 		pkg.dao.add(dao);
 		if (ro <> 'si') {
 			// inserter e updater di base
