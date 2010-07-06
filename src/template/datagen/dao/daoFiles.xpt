@@ -229,7 +229,7 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c)
 	«ENDIF»	
 	«IF body-»
 	{
-		«IF mainTable.primaryKey!=null-»
+		«IF mainTable.primaryKey!=null && pkGenerator!=null-»
 		«EXPAND incrementerUse FOR this.mainTable.primaryKey.includedColumns.first()»
 		«ENDIF-»
 		final String sql = "INSERT INTO " + getTableName() + " ( «EXPAND columnNameList FOR this.mainTable.columns-» ) VALUES ( «EXPAND paramPlaceholderList FOR this.mainTable.columns-» )";
