@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ASCII"?>
+<rdbmdl:Schema xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rdbmdl="http://www.csi.it/mddtools/rdbmdl" xsi:schemaLocation="http://www.csi.it/mddtools/rdbmdl ../metamodel/rdbmdl.ecore" name="Prova">
+  <elements xsi:type="rdbmdl:Table" name="Dipendente">
+    <columns name="matricola" isPrimaryKey="true" isForeignKey="false">
+      <type name="" size="10" type="VARCHAR"/>
+    </columns>
+    <columns name="nome" isPrimaryKey="false" isForeignKey="false">
+      <type size="50" nullable="true" type="VARCHAR"/>
+    </columns>
+    <columns name="cognome" isPrimaryKey="false" isForeignKey="false">
+      <type size="50" nullable="true" type="VARCHAR"/>
+    </columns>
+    <primaryKey name="pk_dipendente" includedColumns="//@elements.0/@columns.0"/>
+  </elements>
+  <elements xsi:type="rdbmdl:Table" name="Progetto">
+    <columns name="codice" isPrimaryKey="true" isForeignKey="false">
+      <type size="10" type="VARCHAR"/>
+    </columns>
+    <columns name="nome" isPrimaryKey="false" isForeignKey="false">
+      <type size="50" nullable="true" type="VARCHAR"/>
+    </columns>
+    <columns name="fk_projectManager" isPrimaryKey="false" isForeignKey="true">
+      <type name="" size="10" type="VARCHAR"/>
+    </columns>
+    <primaryKey name="pk_progetto" includedColumns="//@elements.1/@columns.0"/>
+    <foreignKeys name="fk_project_manager" includedColumns="//@elements.1/@columns.2" referredUC="//@elements.0/@primaryKey"/>
+  </elements>
+</rdbmdl:Schema>

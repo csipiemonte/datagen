@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<workflow>
+    <cartridge file="it/csi/mddtools/datagen/workflow/basicDao.oaw"
+		model="datagen/src/testmodel/test_datagen.xmi" 
+		daoTargetProjectName="testdatagenjava"
+		basePackage="it.csi.comp.prod"   	
+    />
+    
+    <cartridge file="it/csi/mddtools/datagen/workflow/basicSql.oaw"
+		model="datagen/src/testmodel/test_datagen.xmi" 
+		dbTargetProjectName="testdatagendb"   	
+    />
+</workflow>

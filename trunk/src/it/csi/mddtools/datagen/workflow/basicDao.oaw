@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!--
+Parametri:
+ - daoTargetProjectName: 
+   - nome del progetto dove generare i dao java
+   - default: no
+ - daoBeansFileName: 
+   - percorso (relativo alla root del progetto [daoTargetProjectName] dove
+     generare il file contenente i bean spring dei dao (tipicamente dao-beans.xml)
+   - default: /conf
+ - basePackage:
+   - il package base al di sotto del quale sara' generato il package DAO. Va configurato a seconda
+     del tipo di progetto master (es. guigen o servicegen) e a seconda del modulo (ad esempio nel caso di
+     servicegen c'e' un modulo per servizio)	 
+   - default: no, se non impostato viene utilizzato il pattern it.csi.[prodotto].[componente].business.dao, che peraltro
+     corrisponde con lo standard utilizzato nei progetti guigen
+ 
+-->
+<workflow>
+   
+	<!-- valorizzare con il nome del progetto eclipse target dove verranno
+	     generati gli artefatti. Corrisponde la nome del progetto SVN relativo
+	     al componente SW -->
+	
+	<property name="src-gen-dao" value="../${daoTargetProjectName}" />
+	<!-- override if needed! -->
+	<property name="daoBeansFileName" value="/conf/dao-beans.xml" />
+	
+	<!-- override if needed! -->
+	<property name="basePackage" value="" />
+	
+	
+	<!-- set up EMF for standalone execution -->
+		<bean class="org.eclipse.mwe.emf.StandaloneSetup" >
+		<platformUri value=".." />
+		<registerGeneratedEPackage value="it.csi.mddtools.datagen.DatagenPackage"/>
+		<registerGeneratedEPackage value="it.csi.mddtools.rdbmdl.RdbmdlPackage"/>
+		
+	</bean>
+	
+	<!-- Clean della build directory -->
+	<component class="org.openarchitectureware.workflow.common.DirectoryCleaner">
+		<directory value="${src-gen-dao}/build" />
+	</component>
+
+	<!-- load model and store it in slot 'model' -->
+	<component class="org.eclipse.mwe.emf.Reader">
+		<uri value="platform:/resource/${model}" />
+		<modelSlot value="model" />
+	</component>
+
+	<!-- check model (common checks) -->
+	<component class="oaw.check.CheckComponent">
+		<metaModel id="mm"
+			class="org.eclipse.m2t.type.emf.EmfRegistryMetaModel"/>
+		<checkFile value="metamodel::DatagenChecks" />
+		<emfAllChildrenSlot value="model" />
+	</component>
+	
+	<!--  generate code -->
+	<component class="org.openarchitectureware.xpand2.Generator" id="mygenerator">
+		<metaModel idRef="mm"/>
+		<expand
+			value="template::datagen::Main::main('${daoBeansFileName}', '${basePackage}') FOR model" />
+		<!--  protected regions configurator --> 
+	    <prSrcPaths value="${src-gen-dao}" /> 
+	    <prDefaultExcludes value="true" /> 
+	    <prExcludes value="*.jar, *.svn-base, .metadata" />
+		<outlet path="${src-gen-dao}" >
+			<postprocessor class="org.openarchitectureware.xpand2.output.JavaBeautifier" />
+		</outlet>
+	</component>
+	
+</workflow>

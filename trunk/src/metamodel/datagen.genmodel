@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/datagen/src"
+    editDirectory="/datagen/src" modelPluginID="datagen" modelName="Datagen" rootExtendsInterface="org.eclipse.emf.cdo.CDOObject"
+    rootExtendsClass="org.eclipse.emf.internal.cdo.CDOObjectImpl" reflectiveDelegation="true"
+    importerID="org.eclipse.emf.importer.cdo" featureDelegation="Reflective" complianceLevel="5.0"
+    copyrightFields="false" usedGenPackages="rdbmdl.genmodel#//rdbmdl">
+  <foreignModel>datagen.ecore</foreignModel>
+  <modelPluginVariables>CDO=org.eclipse.emf.cdo</modelPluginVariables>
+  <genPackages prefix="Datagen" basePackage="it.csi.mddtools" disposableProviderFactory="true"
+      ecorePackage="datagen.ecore#/">
+    <genClasses ecoreClass="datagen.ecore#//DBAccessModel">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#//DBAccessModel/schema"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//DBAccessModel/daopkgs"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#//DBAccessModel/codProdotto"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#//DBAccessModel/codComponente"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#//DataAccessObject">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#//DataAccessObject/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#//DataAccessObject/mainTable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//DataAccessObject/pkGenerator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//DataAccessObject/inserter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//DataAccessObject/finders"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//DataAccessObject/updaters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//DataAccessObject/deleters"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#//DaoPackage">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#//DaoPackage/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//DaoPackage/dao"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="datagen.ecore#//PKGenerator"/>
+    <genClasses ecoreClass="datagen.ecore#//SequencePKGenerator">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#//SequencePKGenerator/sequenceName"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="datagen.ecore#//DBCommand">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#//DBCommand/name"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#//Inserter"/>
+    <genClasses ecoreClass="datagen.ecore#//Finders">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//Finders/finders"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="datagen.ecore#//Finder"/>
+    <genClasses ecoreClass="datagen.ecore#//FindByPK"/>
+    <genClasses ecoreClass="datagen.ecore#//FindAll"/>
+    <genClasses ecoreClass="datagen.ecore#//QBEFinder"/>
+    <genClasses ecoreClass="datagen.ecore#//CustomFinder">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#//CustomFinder/filterClassFQN"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#//Updaters">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//Updaters/updaters"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="datagen.ecore#//Updater"/>
+    <genClasses ecoreClass="datagen.ecore#//UpdateRow"/>
+    <genClasses ecoreClass="datagen.ecore#//UpdateColumns">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#//UpdateColumns/columns"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#//CustomUpdater">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#//CustomUpdater/filterClassFQN"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#//CustomUpdater/valueClassFQN"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#//Deleters">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//Deleters/deleters"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="datagen.ecore#//Deleter"/>
+    <genClasses ecoreClass="datagen.ecore#//DeleteByPK"/>
+    <genClasses ecoreClass="datagen.ecore#//CustomDeleter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#//CustomDeleter/filterClassFQN"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

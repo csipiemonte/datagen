@@ -1,0 +1,66 @@
+«IMPORT ecore»
+«IMPORT datagen»
+«IMPORT rdbmdl»
+«IMPORT rdbmdl::constraints»
+«IMPORT rdbmdl::datatypes»
+«IMPORT rdbmdl::view»
+
+«EXTENSION template::DatagenExtensions»
+
+«DEFINE qbeExamplesFiles FOR DBAccessModel»
+«EXPAND qbeExamplesFiles(this) FOREACH daopkgs»
+«ENDDEFINE»
+
+«DEFINE qbeExamplesFiles (DBAccessModel model) FOR DaoPackage»
+«EXPAND qbeExampleFile(model) FOREACH dao»
+«ENDDEFINE»
+
+
+«DEFINE qbeExampleFile(DBAccessModel model) FOR DataAccessObject»
+«LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-»
+«FILE getQbeExFullPath(this, model)»package «pkgPackage».qbe;
+
+import «pkgPackage».dao.*;
+import «pkgPackage».dto.*;
+import «getDALayerBasePkg(model)».qbe.*;
+import «pkgPackage».exceptions.*;
+import java.io.Serializable;
+import java.util.*;
+
+/**
+ * @generated
+ */
+public class «getQbeExClassName()» extends AbstractExample
+{
+
+	«EXPAND columnChkFieldProperty(model) FOREACH this.mainTable.columns»
+
+	
+}
+
+
+«ENDFILE»
+«ENDLET-»
+«ENDDEFINE»
+
+«DEFINE columnChkFieldProperty(DBAccessModel model) FOR TableColumn-»
+	/**
+	 * @generated
+	 */
+	private «getDALayerBasePkg(model)».qbe.FieldChk _«javaPropertyNameFromColumn()»;
+	
+	/**
+	 * @generated
+	 */
+	public void set«javaPropertyNameFromColumn().toFirstUpper()» («getDALayerBasePkg(model)».qbe.FieldChk chk){
+		_«javaPropertyNameFromColumn()» = chk;
+	}
+	
+	/**
+	 * @generated
+	 */
+	public «getDALayerBasePkg(model)».qbe.FieldChk get«javaPropertyNameFromColumn().toFirstUpper()»(){
+		return _«javaPropertyNameFromColumn()»;
+	}
+	
+«ENDDEFINE»

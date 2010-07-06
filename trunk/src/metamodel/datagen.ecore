@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="datagen"
+    nsURI="http://www.csi.it/mddtools/datagen" nsPrefix="datagen">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+    <details key="documentation" value="Modellazione dello strato di accesso ai dati"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="DBAccessModel">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Modellazione dello strato di accesso ai dati"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="schema" lowerBound="1"
+        eType="ecore:EClass rdbmdl.ecore#//Schema">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Schema DB di cui viene modellato l'accesso&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="daopkgs" upperBound="-1"
+        eType="#//DaoPackage" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="I &lt;b>DataAccessObject&lt;/b> sono suddivisi in gruppi logici"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="codProdotto" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Codice prodotto di appartenenza"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="codComponente" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Codice componente di appartenenza"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataAccessObject">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Agente deputato alla manipolazione dei dati di una singola tabella"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Nome logico del &lt;b>DAO&lt;/b>. Deve essere un identificativo vlaido di classe java."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mainTable" eType="ecore:EClass rdbmdl.ecore#//Table">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Tabella su cui opera il &lt;b>DAO&lt;/b>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pkGenerator" eType="#//PKGenerator"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Generatore di primary key (opzionale). Se definito e' utilizzato nelle operazioni di inserimento"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inserter" eType="#//Inserter"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Operazione di inserimento di un record"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="finders" eType="#//Finders"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Insieme dei possibili finder definiti per questo &lt;b>DAO&lt;/b>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="updaters" eType="#//Updaters"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Insieme dei possibili updater definiti per questo &lt;b>DAO&lt;/b>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="deleters" eType="#//Deleters"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Insieme dei possibili deleter definiti per questo &lt;b>DAO&lt;/b>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DaoPackage">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Raggruppamento logico di &lt;b>DataAccessObject&lt;/b>"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="nome logico del package. deve essere un identificativo valido per un package java"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dao" upperBound="-1" eType="#//DataAccessObject"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Elenco dei &lt;b>DataAccessObject&lt;/b> contenuti nel package."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PKGenerator" abstract="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Superclasse astratta dei generatori di primary key"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SequencePKGenerator" eSuperTypes="#//PKGenerator">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Generatorew di primary key basato su SEQUENCE"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sequenceName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Nome della SEQUENCE utilizzata dal generatore di primary key"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DBCommand" abstract="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Superclasse astratta di tutte le classi che rappresentano le operazioni che il&#xD;&#xA;&lt;b>DataAccessObject&lt;/b> pu&amp;ograve; esporre"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="nome logico dell'operazione. Obbligatorio per alcune tipologie di operazioni.&#xD;&#xA;Deve essere un identificativo valido di metodo java"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Inserter" eSuperTypes="#//DBCommand">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Superclasse astratta di tutte le operazioni di inserimento dati"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Finders">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Insieme dei &lt;b>Finder&lt;/b> messi a disposizione dal &lt;b>DataAccessObject&lt;/b>"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="finders" upperBound="-1"
+        eType="#//Finder" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Elenco dei &lt;b>Finder&lt;/b>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Finder" abstract="true" eSuperTypes="#//DBCommand">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Superclasse astratta di tutte le operazioni di ricerca"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FindByPK" eSuperTypes="#//Finder">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Operazione che permette la ricerca di un singolo record tramite primary key"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FindAll" eSuperTypes="#//Finder">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Operazione che permette l'estrazione dell'insieme completo dei dati dalla tabella&#xD;&#xA;associata al &lt;b>DataAccessObject&lt;/b>, senza filtri"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QBEFinder" eSuperTypes="#//Finder">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Operazione di ricerca by example"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CustomFinder" eSuperTypes="#//Finder">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Operazione di ricerca con logica custom"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="filterClassFQN" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Full qualified name della classe che deve essere utilizzata come parametro di input per il finder.&#xD;&#xA;Possibili valori:&#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>Se non si specifica la proipriet&amp;agrave; la classe utilizzata sar&amp;agrave; &lt;i>java.lang.Object&lt;/i>.&lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto, sar&amp;agrave; utilizzata la classe del dto associato. &lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto[], sar&amp;agrave; utilizzata una ArrayList costituita da oggetti del tipo del dto associato. &lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Updaters">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Insieme degli &lt;b>Updater&lt;/b> messia a disposizione dal &lt;b>DataAccessObject&lt;/b>"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="updaters" upperBound="-1"
+        eType="#//Updater" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Elenco degli &lt;b>Updater&lt;/b>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Updater" abstract="true" eSuperTypes="#//DBCommand">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Superclasse astratta di tutte le operazioni di aggiornamento dati"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UpdateRow" eSuperTypes="#//Updater">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Operazione di aggiornamento dati che permette di aggiornate tutte le&#xD;&#xA;colonne della tabella relativamente ad un singolo record identitficato tramite &#xD;&#xA;primary key"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UpdateColumns" eSuperTypes="#//Updater">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Operazione di aggiornamento dati che permette di aggiornate selettivamente un sottoinsieme&#xD;&#xA;colonne della tabella relativamente ad un singolo record identitficato tramite &#xD;&#xA;primary key"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="columns" upperBound="-1"
+        eType="ecore:EClass rdbmdl.ecore#//TableColumn"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Deleters">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Insieme dei &lt;b>Deleter&lt;/b> messi a disposizione dal &lt;b>DataAccessObject&lt;/b>"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="deleters" upperBound="-1"
+        eType="#//Deleter" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Elenco dei &lt;b>Deleter&lt;/b>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Deleter" abstract="true" eSuperTypes="#//DBCommand">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Superclasse astratta di tutte le operazioni dicancellazione di record dati"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DeleteByPK" eSuperTypes="#//Deleter">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Operazione di cancellazione che permette di cancellare una singola riga identificata &#xD;&#xA;tramite primary key"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CustomUpdater" eSuperTypes="#//Updater">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Operazione di aggiornamento dati altamente personalizzabile, tramite scrittura di codice custom.&#xD;&#xA;E' utile, ad esempio, nel caso si debbano realizzare delle operazioni di aggiornamento di un insieme di righe e non&#xD;&#xA;di una singola riga identificata da PK."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="filterClassFQN" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Full qualified name della classe che deve essere utilizzata come primo parametro di input per il finder.&#xD;&#xA;Serve per determinare l'inisieme di righe su cui operare la modifica&#xD;&#xA;Possibili valori:&#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>Se non si specifica la proipriet&amp;agrave; la classe utilizzata sar&amp;agrave; &lt;i>java.lang.Object&lt;/i>.&lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto, sar&amp;agrave; utilizzata la classe del dto associato. &lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto[], sar&amp;agrave; utilizzata una ArrayList costituita da oggetti del tipo del dto associato. &lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueClassFQN" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Full qualified name della classe che deve essere utilizzata come secondo parametro parametro di input per l'updater.&#xD;&#xA;Serve per specificare i valori da impostare&#xD;&#xA;&#xD;&#xA;Possibili valori:&#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>Se non si specifica la proipriet&amp;agrave; la classe utilizzata sar&amp;agrave; &lt;i>java.lang.Object&lt;/i>.&lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto, sar&amp;agrave; utilizzata la classe del dto associato. &lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto[], sar&amp;agrave; utilizzata una ArrayList costituita da oggetti del tipo del dto associato. &lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CustomDeleter" eSuperTypes="#//Deleter">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Operazione di cancellazioen righe altamente personalizzabile, tramite scrittura di codice custom.&#xD;&#xA;E' utile nel caso si debbano realizzare delle operazioni di cancellazione di un insieme di righe e non&#xD;&#xA;di una singola riga identificata da PK."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="filterClassFQN" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Full qualified name della classe che deve essere utilizzata come parametro di input per il deleter.&#xD;&#xA;Possibili valori:&#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>Se non si specifica la proipriet&amp;agrave; la classe utilizzata sar&amp;agrave; &lt;i>java.lang.Object&lt;/i>.&lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto, sar&amp;agrave; utilizzata la classe del dto associato. &lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto[], sar&amp;agrave; utilizzata una ArrayList costituita da oggetti del tipo del dto associato. &lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+</ecore:EPackage>

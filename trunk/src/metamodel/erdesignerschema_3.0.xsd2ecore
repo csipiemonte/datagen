@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd2ecore:XSD2EcoreMappingRoot xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsd2ecore="http://www.eclipse.org/emf/2002/XSD2Ecore" inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#/"
+    outputs="Erdesignerschema30.ecore#/" topToBottom="true">
+  <nested inputs="bundleentry://623.fwk21414356/cache/www.w3.org/2001/XMLSchema.xsd#//string;XSDSimpleTypeDefinition=9"
+      outputs="http://www.eclipse.org/emf/2003/XMLType#//String"/>
+  <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//PropertyType;XSDComplexTypeDefinition"
+      outputs="Erdesignerschema30.ecore#//PropertyType">
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//PropertyType;XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="Erdesignerschema30.ecore#//PropertyType/name"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//PropertyType;XSDComplexTypeDefinition/XSDAttributeUse=1"
+        outputs="Erdesignerschema30.ecore#//PropertyType/value"/>
+  </nested>
+  <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Configuration;XSDElementDeclaration/XSDComplexTypeDefinition"
+      outputs="Erdesignerschema30.ecore#//ConfigurationType">
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Configuration;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle"
+        outputs="Erdesignerschema30.ecore#//ConfigurationType/group"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Configuration;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Erdesignerschema30.ecore#//ConfigurationType/property"/>
+  </nested>
+  <nested inputs="bundleentry://623.fwk21414356/cache/www.w3.org/2001/MagicXMLSchema.xsd#//anySimpleType;XSDSimpleTypeDefinition=1"
+      outputs="http://www.eclipse.org/emf/2003/XMLType#//AnySimpleType"/>
+  <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1/Domains;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Domain;XSDElementDeclaration/XSDComplexTypeDefinition"
+      outputs="Erdesignerschema30.ecore#//DomainType">
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1/Domains;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Domain;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=3"
+        outputs="Erdesignerschema30.ecore#//DomainType/datatype"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1/Domains;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Domain;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=1"
+        outputs="Erdesignerschema30.ecore#//DomainType/fraction"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1/Domains;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Domain;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=4"
+        outputs="Erdesignerschema30.ecore#//DomainType/id"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1/Domains;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Domain;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=5"
+        outputs="Erdesignerschema30.ecore#//DomainType/name"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1/Domains;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Domain;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=6"
+        outputs="Erdesignerschema30.ecore#//DomainType/nullable"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1/Domains;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Domain;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=2"
+        outputs="Erdesignerschema30.ecore#//DomainType/scale"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1/Domains;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Domain;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="Erdesignerschema30.ecore#//DomainType/size"/>
+  </nested>
+  <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1/Domains;XSDElementDeclaration/XSDComplexTypeDefinition"
+      outputs="Erdesignerschema30.ecore#//DomainsType">
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1/Domains;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle"
+        outputs="Erdesignerschema30.ecore#//DomainsType/group"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1/Domains;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Erdesignerschema30.ecore#//DomainsType/domain"/>
+  </nested>
+  <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//CommentType;XSDSimpleTypeDefinition"
+      outputs="Erdesignerschema30.ecore#//CommentType1"/>
+  <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Table;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Attribute;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Comment;XSDElementDeclaration/XSDSimpleTypeDefinition"
+      outputs="Erdesignerschema30.ecore#//CommentType"/>
+  <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Table;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Attribute;XSDElementDeclaration/XSDComplexTypeDefinition"
+      outputs="Erdesignerschema30.ecore#//AttributeType">
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Table;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Attribute;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Erdesignerschema30.ecore#//AttributeType/comment"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Table;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Attribute;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=3"
+        outputs="Erdesignerschema30.ecore#//AttributeType/datatype"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Table;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Attribute;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=4"
+        outputs="Erdesignerschema30.ecore#//AttributeType/defaultvalue"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Table;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Attribute;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=5"
+        outputs="Erdesignerschema30.ecore#//AttributeType/extra"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Table;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Attribute;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=1"
+        outputs="Erdesignerschema30.ecore#//AttributeType/fraction"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Table;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Attribute;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=6"
+        outputs="Erdesignerschema30.ecore#//AttributeType/id"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Table;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Attribute;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=7"
+        outputs="Erdesignerschema30.ecore#//AttributeType/name"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Table;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Attribute;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=8"
+        outputs="Erdesignerschema30.ecore#//AttributeType/nullable"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Table;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Attribute;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=2"
+        outputs="Erdesignerschema30.ecore#//AttributeType/scale"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Table;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Attribute;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="Erdesignerschema30.ecore#//AttributeType/size"/>
+  </nested>
+  <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Table;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/Index;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Indexattribute;XSDElementDeclaration/XSDComplexTypeDefinition"
+      outputs="Erdesignerschema30.ecore#//IndexattributeType">
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Table;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/Index;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Indexattribute;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=1"
+        outputs="Erdesignerschema30.ecore#//IndexattributeType/attributerefid"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Table;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/Index;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Indexattribute;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=2"
+        outputs="Erdesignerschema30.ecore#//IndexattributeType/expression"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Table;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/Index;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Indexattribute;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="Erdesignerschema30.ecore#//IndexattributeType/id"/>
+  </nested>
+  <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Table;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/Index;XSDElementDeclaration/XSDComplexTypeDefinition"
+      outputs="Erdesignerschema30.ecore#//IndexType">
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Table;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/Index;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle"
+        outputs="Erdesignerschema30.ecore#//IndexType/group"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Table;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/Index;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Erdesignerschema30.ecore#//IndexType/indexattribute"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Table;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/Index;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="Erdesignerschema30.ecore#//IndexType/id"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Table;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/Index;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=1"
+        outputs="Erdesignerschema30.ecore#//IndexType/indextype"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Table;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/Index;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=2"
+        outputs="Erdesignerschema30.ecore#//IndexType/name"/>
+  </nested>
+  <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Table;XSDElementDeclaration/XSDComplexTypeDefinition"
+      outputs="Erdesignerschema30.ecore#//TableType">
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Table;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Erdesignerschema30.ecore#//TableType/property"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Table;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="Erdesignerschema30.ecore#//TableType/comment"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Table;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2"
+        outputs="Erdesignerschema30.ecore#//TableType/attribute"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Table;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3"
+        outputs="Erdesignerschema30.ecore#//TableType/index"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Table;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="Erdesignerschema30.ecore#//TableType/id"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Table;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=1"
+        outputs="Erdesignerschema30.ecore#//TableType/name"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Table;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=2"
+        outputs="Erdesignerschema30.ecore#//TableType/schema"/>
+  </nested>
+  <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition"
+      outputs="Erdesignerschema30.ecore#//TablesType">
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle"
+        outputs="Erdesignerschema30.ecore#//TablesType/group"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Tables;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Erdesignerschema30.ecore#//TablesType/table"/>
+  </nested>
+  <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/Relations;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Relation;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Mapping;XSDElementDeclaration/XSDComplexTypeDefinition"
+      outputs="Erdesignerschema30.ecore#//MappingType">
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/Relations;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Relation;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Mapping;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="Erdesignerschema30.ecore#//MappingType/exportingexpressionrefid"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/Relations;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Relation;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2/Mapping;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=1"
+        outputs="Erdesignerschema30.ecore#//MappingType/importingattributerefid"/>
+  </nested>
+  <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/Relations;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Relation;XSDElementDeclaration/XSDComplexTypeDefinition"
+      outputs="Erdesignerschema30.ecore#//RelationType">
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/Relations;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Relation;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle"
+        outputs="Erdesignerschema30.ecore#//RelationType/group"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/Relations;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Relation;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Erdesignerschema30.ecore#//RelationType/property"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/Relations;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Relation;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="Erdesignerschema30.ecore#//RelationType/comment"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/Relations;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Relation;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2"
+        outputs="Erdesignerschema30.ecore#//RelationType/mapping"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/Relations;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Relation;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=4"
+        outputs="Erdesignerschema30.ecore#//RelationType/exportingtablerefid"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/Relations;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Relation;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="Erdesignerschema30.ecore#//RelationType/id"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/Relations;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Relation;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=5"
+        outputs="Erdesignerschema30.ecore#//RelationType/importingtablerefid"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/Relations;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Relation;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=1"
+        outputs="Erdesignerschema30.ecore#//RelationType/name"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/Relations;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Relation;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=2"
+        outputs="Erdesignerschema30.ecore#//RelationType/ondelete"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/Relations;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Relation;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=3"
+        outputs="Erdesignerschema30.ecore#//RelationType/onupdate"/>
+  </nested>
+  <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/Relations;XSDElementDeclaration/XSDComplexTypeDefinition"
+      outputs="Erdesignerschema30.ecore#//RelationsType">
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/Relations;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle"
+        outputs="Erdesignerschema30.ecore#//RelationsType/group"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/Relations;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Erdesignerschema30.ecore#//RelationsType/relation"/>
+  </nested>
+  <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=4/Views;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/View;XSDElementDeclaration/XSDComplexTypeDefinition"
+      outputs="Erdesignerschema30.ecore#//ViewType">
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=4/Views;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/View;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle"
+        outputs="Erdesignerschema30.ecore#//ViewType/group"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=4/Views;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/View;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Erdesignerschema30.ecore#//ViewType/property"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=4/Views;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/View;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="Erdesignerschema30.ecore#//ViewType/comment"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=4/Views;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/View;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2"
+        outputs="Erdesignerschema30.ecore#//ViewType/sql"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=4/Views;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/View;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="Erdesignerschema30.ecore#//ViewType/id"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=4/Views;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/View;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=1"
+        outputs="Erdesignerschema30.ecore#//ViewType/name"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=4/Views;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/View;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=2"
+        outputs="Erdesignerschema30.ecore#//ViewType/schema"/>
+  </nested>
+  <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=4/Views;XSDElementDeclaration/XSDComplexTypeDefinition"
+      outputs="Erdesignerschema30.ecore#//ViewsType">
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=4/Views;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle"
+        outputs="Erdesignerschema30.ecore#//ViewsType/group"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=4/Views;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Erdesignerschema30.ecore#//ViewsType/view"/>
+  </nested>
+  <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=5/Subjectareas;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Subjectarea;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Item;XSDElementDeclaration/XSDComplexTypeDefinition"
+      outputs="Erdesignerschema30.ecore#//ItemType">
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=5/Subjectareas;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Subjectarea;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Item;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=2"
+        outputs="Erdesignerschema30.ecore#//ItemType/commentrefid"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=5/Subjectareas;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Subjectarea;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Item;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="Erdesignerschema30.ecore#//ItemType/tablerefid"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=5/Subjectareas;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Subjectarea;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Item;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=1"
+        outputs="Erdesignerschema30.ecore#//ItemType/viewrefid"/>
+  </nested>
+  <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=5/Subjectareas;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Subjectarea;XSDElementDeclaration/XSDComplexTypeDefinition"
+      outputs="Erdesignerschema30.ecore#//SubjectareaType">
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=5/Subjectareas;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Subjectarea;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle"
+        outputs="Erdesignerschema30.ecore#//SubjectareaType/group"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=5/Subjectareas;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Subjectarea;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Erdesignerschema30.ecore#//SubjectareaType/item"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=5/Subjectareas;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Subjectarea;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=3"
+        outputs="Erdesignerschema30.ecore#//SubjectareaType/color"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=5/Subjectareas;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Subjectarea;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="Erdesignerschema30.ecore#//SubjectareaType/id"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=5/Subjectareas;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Subjectarea;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=1"
+        outputs="Erdesignerschema30.ecore#//SubjectareaType/name"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=5/Subjectareas;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Subjectarea;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=2"
+        outputs="Erdesignerschema30.ecore#//SubjectareaType/visible"/>
+  </nested>
+  <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=5/Subjectareas;XSDElementDeclaration/XSDComplexTypeDefinition"
+      outputs="Erdesignerschema30.ecore#//SubjectareasType">
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=5/Subjectareas;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle"
+        outputs="Erdesignerschema30.ecore#//SubjectareasType/group"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=5/Subjectareas;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Erdesignerschema30.ecore#//SubjectareasType/subjectarea"/>
+  </nested>
+  <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=6/Comments;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/ModelComment;XSDElementDeclaration/XSDComplexTypeDefinition"
+      outputs="Erdesignerschema30.ecore#//ModelCommentType">
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=6/Comments;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/ModelComment;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle"
+        outputs="Erdesignerschema30.ecore#//ModelCommentType/group"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=6/Comments;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/ModelComment;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Erdesignerschema30.ecore#//ModelCommentType/property"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=6/Comments;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/ModelComment;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="Erdesignerschema30.ecore#//ModelCommentType/comment"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=6/Comments;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/ModelComment;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="Erdesignerschema30.ecore#//ModelCommentType/id"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=6/Comments;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/ModelComment;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=1"
+        outputs="Erdesignerschema30.ecore#//ModelCommentType/name"/>
+  </nested>
+  <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=6/Comments;XSDElementDeclaration/XSDComplexTypeDefinition"
+      outputs="Erdesignerschema30.ecore#//CommentsType">
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=6/Comments;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle"
+        outputs="Erdesignerschema30.ecore#//CommentsType/group"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=6/Comments;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Erdesignerschema30.ecore#//CommentsType/modelComment"/>
+  </nested>
+  <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition"
+      outputs="Erdesignerschema30.ecore#//ModelType">
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Erdesignerschema30.ecore#//ModelType/configuration"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="Erdesignerschema30.ecore#//ModelType/domains"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2"
+        outputs="Erdesignerschema30.ecore#//ModelType/tables"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3"
+        outputs="Erdesignerschema30.ecore#//ModelType/relations"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=4"
+        outputs="Erdesignerschema30.ecore#//ModelType/views"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=5"
+        outputs="Erdesignerschema30.ecore#//ModelType/subjectareas"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=6"
+        outputs="Erdesignerschema30.ecore#//ModelType/comments"/>
+    <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="Erdesignerschema30.ecore#//ModelType/version"/>
+  </nested>
+  <nested inputs="../../datagen/src/metamodel/erdesignerschema_3.0.xsd#//Model;XSDElementDeclaration"
+      outputs="Erdesignerschema30.ecore#//DocumentRoot/model"/>
+</xsd2ecore:XSD2EcoreMappingRoot>

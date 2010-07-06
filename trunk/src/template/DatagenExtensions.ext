@@ -1,0 +1,339 @@
+import ecore;
+import datagen;
+import rdbmdl;
+import rdbmdl::datatypes;
+
+String javaSrcRoot() :
+	"src/java";
+
+String sqlSrcRoot() :
+	"src/sql";
+
+/// SQL
+String getSchemaCreationSQLPath(Schema sch) :
+	"createSchema_"+sch.name+".sql";
+
+String getSchemaDropSQLPath(Schema sch) :
+	"dropSchema_"+sch.name+".sql";
+	
+String getDALayerBasePkg(DBAccessModel model) :
+	(!isNullOrEmpty(getProperty("basePackage"))?getProperty("basePackage"):
+	"it.csi."+model.codProdotto.toLowerCase()+"."+model.codComponente.toLowerCase())
+	+".business.dao";
+	
+
+String getDALayerBaseDir(DBAccessModel model) :
+javaSrcRoot()+"/"+
+   (!isNullOrEmpty(getProperty("basePackage")) ? 
+   pkg2Path(getProperty("basePackage"))
+   :
+   "it/csi/"+model.codProdotto.toLowerCase()+"/"+model.codComponente.toLowerCase()
+   )
+	+"/business/dao";
+
+String getPkgPackage(DaoPackage pkg, DBAccessModel model) :
+	getDALayerBasePkg(model)+"."+pkg.name;
+
+String getPkgDir(DaoPackage pkg, DBAccessModel model) :
+	getDALayerBaseDir(model)+"/"+pkg.name;
+		
+// DAO
+
+String getDaoClassName(DataAccessObject dao) :
+	dao.name.toFirstUpper()+"Dao";
+	
+String getDaoIdName(DataAccessObject dao) :
+	dao.name.toFirstLower()+"Dao";
+
+String getDaoFQN(DataAccessObject dao, DBAccessModel model) :
+	getPkgPackage((DaoPackage)(dao.eContainer), model)+".dao."+getDaoClassName(dao);
+
+String getDaoFullPath(DataAccessObject dao, DBAccessModel model) :
+	getPkgDir((DaoPackage)(dao.eContainer), model)+"/dao/"+getDaoClassName(dao)+".java";
+
+String getDaoImplClassName(DataAccessObject dao) :
+	dao.name.toFirstUpper()+"DaoImpl";
+
+String getDaoImplFQN(DataAccessObject dao, DBAccessModel model) :
+	getPkgPackage((DaoPackage)(dao.eContainer), model)+".dao.impl."+getDaoImplClassName(dao);
+
+String getDaoImplFullPath(DataAccessObject dao, DBAccessModel model) :
+	getPkgDir((DaoPackage)(dao.eContainer), model)+"/dao/impl/"+getDaoImplClassName(dao)+".java";
+
+String getDaoExcClassName(DataAccessObject dao) :
+	dao.name.toFirstUpper()+"DaoException";
+
+String getDaoExcFQN(DataAccessObject dao, DBAccessModel model) :
+	getPkgPackage((DaoPackage)(dao.eContainer), model)+".exceptions."+getDaoExcClassName(dao);
+
+String getDaoExcFullPath(DataAccessObject dao, DBAccessModel model) :
+	getPkgDir((DaoPackage)(dao.eContainer), model)+"/exceptions/"+getDaoExcClassName(dao)+".java";
+
+
+
+String getMetadataClassName(DataAccessObject dao) :
+	dao.name.toFirstUpper()+"Metadata";
+
+String getMetadataFQN(DataAccessObject dao, DBAccessModel model) :
+	getPkgPackage((DaoPackage)(dao.eContainer), model)+".metadata."+getMetadataClassName(dao);
+
+String getMetadataFullPath(DataAccessObject dao, DBAccessModel model) :
+	getPkgDir((DaoPackage)(dao.eContainer), model)+"/metadata/"+getMetadataClassName(dao)+".java";
+
+// DTO
+
+String getDtoClassName(DataAccessObject dao) :
+	dao.name.toFirstUpper()+"Dto";
+
+String getDtoFQN(DataAccessObject dao, DBAccessModel model) :
+	getPkgPackage((DaoPackage)(dao.eContainer), model)+".dto."+getDtoClassName(dao);
+
+String getDtoFullPath(DataAccessObject dao, DBAccessModel model) :
+	getPkgDir((DaoPackage)(dao.eContainer), model)+"/dto/"+getDtoClassName(dao)+".java";
+	
+// DTO PK
+String getPkClassName(DataAccessObject dao) :
+	dao.name.toFirstUpper()+"Pk";
+
+String getPkFQN(DataAccessObject dao, DBAccessModel model) :
+	getPkgPackage((DaoPackage)(dao.eContainer), model)+".dto."+getPkClassName(dao);
+
+String getPkFullPath(DataAccessObject dao, DBAccessModel model) :
+	getPkgDir((DaoPackage)(dao.eContainer), model)+"/dto/"+getPkClassName(dao)+".java";
+	
+// QBE
+
+String getQbeExClassName(DataAccessObject dao) :
+	dao.name.toFirstUpper()+"Example";
+
+String getQbeExFQN(DataAccessObject dao, DBAccessModel model) :
+	getPkgPackage((DaoPackage)(dao.eContainer), model)+".qbe."+getQbeExClassName(dao);
+
+String getQbeExFullPath(DataAccessObject dao, DBAccessModel model) :
+	getPkgDir((DaoPackage)(dao.eContainer), model)+"/qbe/"+getQbeExClassName(dao)+".java";
+	
+//// 
+
+String javaPropertyNameFromColumn(TableColumn col) :
+	toJavaId(col.name);
+
+// TODO!!!
+String javaPropertyTypeFromColumn(TableColumn col) :
+	let code = col.type.type :
+	switch(code){
+		case PrimitiveTypeCodes::BIT :
+			"Boolean"
+		case PrimitiveTypeCodes::TINYINT :
+			"Integer"
+		case PrimitiveTypeCodes::SMALLINT :
+			"Integer"
+		case PrimitiveTypeCodes::INTEGER :
+			"Integer"		
+		case PrimitiveTypeCodes::BIGINT :
+			"Long"
+		case PrimitiveTypeCodes::FLOAT :
+			"Double" 
+		case PrimitiveTypeCodes::REAL :
+			"Float"	
+		case PrimitiveTypeCodes::DOUBLE :
+			"Double" 
+		case PrimitiveTypeCodes::NUMERIC :
+			"java.math.BigDecimal" 
+		case PrimitiveTypeCodes::DECIMAL :
+			"java.math.BigDecimal" 
+		case PrimitiveTypeCodes::CHAR :
+			"String" 
+		case PrimitiveTypeCodes::VARCHAR :
+			"String" 
+		case PrimitiveTypeCodes::LONGVARCHAR :
+			"String" 
+		case PrimitiveTypeCodes::DATE :
+			"java.sql.Date" 
+		case PrimitiveTypeCodes::TIME :
+			"java.sql.Time" 
+		case PrimitiveTypeCodes::TIMESTAMP :
+			"java.sql.Timestamp" 
+		case PrimitiveTypeCodes::BINARY :
+			"byte[]" 
+		case PrimitiveTypeCodes::VARBINARY :
+			"byte[]" 
+		case PrimitiveTypeCodes::LONGVARBINARY :
+			"byte[]" 
+		case PrimitiveTypeCodes::OTHER :
+			"String" 
+		case PrimitiveTypeCodes::JAVA_OBJECT :
+			"Class" 
+		case PrimitiveTypeCodes::DISTINCT :
+			"Object" 
+		case PrimitiveTypeCodes::STRUCT :
+			"java.sql.Struct" 
+		case PrimitiveTypeCodes::ARRAY :
+			"java.sql.Array" 
+		case PrimitiveTypeCodes::BLOB :
+			"byte[]" 
+		case PrimitiveTypeCodes::CLOB :
+			"String" 
+		case PrimitiveTypeCodes::REF :
+			"java.sql.Ref" 
+		case PrimitiveTypeCodes::BOOLEAN :
+			"Boolean" 
+		default :"???"
+	};
+		
+String getValueFromRS(TableColumn col, int i) :
+	let code = col.type.type :
+	switch(code){
+		case PrimitiveTypeCodes::BIT :
+			"rs.getInt("+i+") == 0 ? false : true"
+		case PrimitiveTypeCodes::TINYINT :
+			"rs.getInteger("+i+")"
+		case PrimitiveTypeCodes::SMALLINT :
+			"rs.getInteger("+i+")"
+		case PrimitiveTypeCodes::INTEGER :
+			"rs.getInteger("+i+")"		
+		case PrimitiveTypeCodes::BIGINT :
+			"rs.getLong("+i+")"
+		case PrimitiveTypeCodes::FLOAT :
+			"rs.getDouble("+i+")" 
+		case PrimitiveTypeCodes::REAL :
+			"rs.getFloat("+i+")"	
+		case PrimitiveTypeCodes::DOUBLE :
+			"rs.getDouble("+i+")" 
+		case PrimitiveTypeCodes::NUMERIC :
+			"rs.getBigDecimal("+i+")" 
+		case PrimitiveTypeCodes::DECIMAL :
+			"rs.getBigDecimal("+i+")" 
+		case PrimitiveTypeCodes::CHAR :
+			"rs.getString("+i+")" 
+		case PrimitiveTypeCodes::VARCHAR :
+			"rs.getString("+i+")" 
+		case PrimitiveTypeCodes::LONGVARCHAR :
+			"rs.getString("+i+")" 
+		case PrimitiveTypeCodes::DATE :
+			"rs.getDate("+i+")" 
+		case PrimitiveTypeCodes::TIME :
+			"rs.getTime("+i+")" 
+		case PrimitiveTypeCodes::TIMESTAMP :
+			"rs.getTimestamp("+i+")" 
+		case PrimitiveTypeCodes::BINARY :
+			"rs.getBytes("+i+")" 
+		case PrimitiveTypeCodes::VARBINARY :
+			"rs.getBytes("+i+")" 
+		case PrimitiveTypeCodes::LONGVARBINARY :
+			"rs.getBytes("+i+")" 
+		case PrimitiveTypeCodes::OTHER :
+			"getClobColumn(rs, "+i+")"  
+		case PrimitiveTypeCodes::JAVA_OBJECT :
+			"rs.getObject("+i+")" 
+		case PrimitiveTypeCodes::DISTINCT :
+			"rs.getObject("+i+")" 
+		case PrimitiveTypeCodes::STRUCT :
+			"rs.getObject("+i+")" 
+		case PrimitiveTypeCodes::ARRAY :
+			"rs.getArray("+i+")" 
+		case PrimitiveTypeCodes::BLOB :
+			"getBlobColumn(rs, "+i+")" 
+		case PrimitiveTypeCodes::CLOB :
+			"getClobColumn(rs, "+i+")" 
+		case PrimitiveTypeCodes::REF :
+			"rs.getRef("+i+")" 
+		case PrimitiveTypeCodes::BOOLEAN :
+			"rs.getBoolean("+i+")" 
+	
+		default :"???"
+	};
+
+String getSQLType(TableColumn col) :
+	let code = col.type.type :
+	switch(code){
+		case PrimitiveTypeCodes::BIT :
+			"SMALLINT"
+		case PrimitiveTypeCodes::TINYINT :
+			"INT"
+		case PrimitiveTypeCodes::SMALLINT :
+			"SMALLINT"
+		case PrimitiveTypeCodes::INTEGER :
+			"INTEGER"		
+		case PrimitiveTypeCodes::BIGINT :
+			"NUMERIC("+col.type.size+")"
+		case PrimitiveTypeCodes::FLOAT :
+			"NUMERIC("+col.type.size+","+col.type.decimalDigits+")" 
+		case PrimitiveTypeCodes::REAL :
+			"NUMERIC("+col.type.size+","+col.type.decimalDigits+")"	
+		case PrimitiveTypeCodes::DOUBLE :
+			"NUMERIC("+col.type.size+","+col.type.decimalDigits+")" 
+		case PrimitiveTypeCodes::NUMERIC :
+			"NUMERIC("+col.type.size+","+col.type.decimalDigits+")" 
+		case PrimitiveTypeCodes::DECIMAL :
+			"NUMERIC("+col.type.size+","+col.type.decimalDigits+")" 
+		case PrimitiveTypeCodes::CHAR :
+			"CHAR("+col.type.size+")" 
+		case PrimitiveTypeCodes::VARCHAR :
+			"VARCHAR2("+col.type.size+")" 
+		case PrimitiveTypeCodes::LONGVARCHAR :
+			"VARCHAR2("+col.type.size+")" 
+		case PrimitiveTypeCodes::DATE :
+			"DATE" 
+		case PrimitiveTypeCodes::TIME :
+			"DATE" 
+		case PrimitiveTypeCodes::TIMESTAMP :
+			"DATE" 
+		case PrimitiveTypeCodes::BINARY :
+			"BINARY_DOUBLE" 
+		case PrimitiveTypeCodes::VARBINARY :
+			"BINARY_DOUBLE" 
+		case PrimitiveTypeCodes::LONGVARBINARY :
+			"BINARY_DOUBLE" 
+		case PrimitiveTypeCodes::OTHER :
+			"VARCHAR2("+col.type.size+")" 
+		case PrimitiveTypeCodes::JAVA_OBJECT :
+			"CLOB" 
+		case PrimitiveTypeCodes::DISTINCT :
+			"CLOB" 
+		case PrimitiveTypeCodes::STRUCT :
+			"CLOB" 
+		case PrimitiveTypeCodes::ARRAY :
+			"CLOB" 
+		case PrimitiveTypeCodes::BLOB :
+			"BLOB" 
+		case PrimitiveTypeCodes::CLOB :
+			"CLOB" 
+		case PrimitiveTypeCodes::REF :
+			"CLOB" 
+		case PrimitiveTypeCodes::BOOLEAN :
+			"SMALLINT" 
+			
+		default :"???"
+	};
+	
+String getColumnModifier(TableColumn col) :
+	col.type.nullable ? "NULL" : "NOT NULL";
+
+boolean isNullOrEmpty(String s) :
+	s==null || s.length==0;
+
+String getRegionUID(String sourceId) : JAVA
+	it.csi.mddtools.datagen.genutils.GenUtils.getRegionUID(java.lang.String);
+
+// TODO da rivedere...
+String toJavaId(String original) : JAVA
+	it.csi.mddtools.datagen.genutils.GenUtils.toJavaId(java.lang.String);
+	
+// JAVA 
+String pkg2Path(String pkg) : JAVA
+	it.csi.mddtools.datagen.genutils.GenUtils.pkg2Path(java.lang.String);
+
+String getProperty(String name) : JAVA
+  org.openarchitectureware.util.stdlib.PropertiesExtension.getProperty(java.lang.String);
+
+Void dumpProperties() : JAVA
+  it.csi.mddtools.datagen.genutils.GenUtils.dumpProperties();
+
+Void backupProperties() : JAVA
+  it.csi.mddtools.datagen.genutils.GenUtils.backupProperties();
+
+Void restoreProperties() : JAVA
+  it.csi.mddtools.datagen.genutils.GenUtils.restoreProperties();
+
+Void setProperty(String name, String val) : JAVA
+  it.csi.mddtools.datagen.genutils.GenUtils.setProperty(java.lang.String, java.lang.String);

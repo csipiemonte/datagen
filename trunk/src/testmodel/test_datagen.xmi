@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ASCII"?>
+<datagen:DBAccessModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:datagen="http://www.csi.it/mddtools/datagen" xsi:schemaLocation="http://www.csi.it/mddtools/datagen ../metamodel/datagen.ecore" codProdotto="comp" codComponente="prod">
+  <schema href="test_schema.xmi#/"/>
+  <daopkgs name="prova">
+    <dao name="Dipendente">
+      <mainTable href="test_schema.xmi#//@elements.0"/>
+      <pkGenerator xsi:type="datagen:SequencePKGenerator" sequenceName="SEQ_MATRICOLA_DIPENDENTE"/>
+      <inserter/>
+      <finders>
+        <finders xsi:type="datagen:CustomFinder" name="ByNome" filterClassFQN="java.lang.String"/>
+        <finders xsi:type="datagen:FindAll"/>
+        <finders xsi:type="datagen:FindByPK"/>
+        <finders xsi:type="datagen:QBEFinder"/>
+      </finders>
+      <updaters>
+        <updaters xsi:type="datagen:UpdateRow"/>
+      </updaters>
+      <deleters>
+        <deleters xsi:type="datagen:DeleteByPK"/>
+      </deleters>
+    </dao>
+    <dao name="Progetto">
+      <mainTable href="test_schema.xmi#//@elements.1"/>
+      <pkGenerator xsi:type="datagen:SequencePKGenerator" sequenceName="SEQ_COD_PROGETTO"/>
+      <inserter/>
+      <finders>
+        <finders xsi:type="datagen:FindByPK"/>
+        <finders xsi:type="datagen:FindAll"/>
+        <finders xsi:type="datagen:CustomFinder" name="byMuzz"/>
+      </finders>
+      <updaters>
+        <updaters xsi:type="datagen:UpdateRow"/>
+      </updaters>
+      <deleters>
+        <deleters xsi:type="datagen:DeleteByPK"/>
+      </deleters>
+    </dao>
+  </daopkgs>
+</datagen:DBAccessModel>

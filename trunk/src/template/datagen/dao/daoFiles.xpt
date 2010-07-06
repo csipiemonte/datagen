@@ -1,0 +1,544 @@
+«IMPORT ecore»
+«IMPORT datagen»
+«IMPORT rdbmdl»
+«IMPORT rdbmdl::constraints»
+«IMPORT rdbmdl::datatypes»
+«IMPORT rdbmdl::view»
+
+«EXTENSION template::DatagenExtensions»
+
+«DEFINE daoFiles FOR DBAccessModel»
+«EXPAND daoFiles(this) FOREACH daopkgs»
+«EXPAND utilFiles FOR this»
+«ENDDEFINE»
+
+«DEFINE daoFiles (DBAccessModel model) FOR DaoPackage»
+«EXPAND commonDaoFiles(model) FOR this»
+«EXPAND daoFiles(model) FOREACH dao»
+«ENDDEFINE»
+
+«DEFINE daoFiles(DBAccessModel model) FOR DataAccessObject»
+«EXPAND daoFile(model) FOR this»
+«EXPAND daoImplFile(model) FOR this»
+«EXPAND daoExceptionFile(model) FOR this»
+«ENDDEFINE»
+
+«DEFINE daoExceptionFile(DBAccessModel model) FOR DataAccessObject»
+«LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-»
+«FILE getDaoExcFullPath(this, model)»package «pkgPackage».exceptions;
+
+/**
+ *
+ * @generated
+ */
+public class «getDaoExcClassName()» extends DaoException
+{
+	/** 
+	 * @param message
+	 * @generated
+	 */
+	public «getDaoExcClassName()»(String message)
+	{
+		super(message);
+	}
+
+	/**
+	 * @param message
+	 * @param cause
+	 * @generated
+	 */
+	public «getDaoExcClassName()»(String message, Throwable cause)
+	{
+		super(message, cause);
+	}
+
+}
+«ENDFILE»
+«ENDLET»
+«ENDDEFINE»
+
+«DEFINE daoFile(DBAccessModel model) FOR DataAccessObject»
+«LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-»
+«FILE getDaoFullPath(this, model)»package «pkgPackage».dao;
+
+import «pkgPackage».dao.*;
+import «pkgPackage».dto.*;
+import «pkgPackage».qbe.*;
+import «pkgPackage».metadata.*;
+import «pkgPackage».exceptions.*;
+import «getDALayerBasePkg(model)».util.*;
+import «getDALayerBasePkg(model)».qbe.*;
+import java.util.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+/**
+ * @generated
+ */
+public interface «getDaoClassName()» {
+	«IF inserter != null-»
+		«EXPAND insertMethod(model, false) FOR this-»
+	«ENDIF-»	
+	
+	«EXPAND template::datagen::dao::updaters::updaters(model, false) FOR this-»
+	
+	«EXPAND template::datagen::dao::deleters::deleters(model, false) FOR this-»
+	
+	«EXPAND mapRowMethod(model, false) FOR this-»
+	
+	«EXPAND template::datagen::dao::finders::finders(model, false) FOR this-»
+}
+«ENDFILE-»
+«ENDLET-»
+«ENDDEFINE»
+
+«DEFINE daoImplFile(DBAccessModel model) FOR DataAccessObject»
+«LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-»
+«FILE getDaoImplFullPath(this, model)»package «pkgPackage».dao.impl;
+
+import «pkgPackage».dao.*;
+import «pkgPackage».dto.*;
+import «pkgPackage».qbe.*;
+import «pkgPackage».metadata.*;
+import «pkgPackage».exceptions.*;
+import «getDALayerBasePkg(model)».util.*;
+import «getDALayerBasePkg(model)».qbe.*;
+import java.util.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
+import it.csi.util.performance.StopWatch;
+import org.apache.log4j.Logger;
+import java.util.Map;
+import java.util.TreeMap;
+
+
+«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(getDaoImplFQN(this,model)+"extraimport")»
+// aggiungere qui eventuali import custom. 
+«ENDPROTECT»
+
+/**
+ * @generated
+ */
+public class «getDaoImplClassName()» extends AbstractDAO implements ParameterizedRowMapper<«getDtoClassName()»>, «getDaoClassName()»
+{
+	protected static Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
+	/**
+	 * @generated
+	 */
+	protected NamedParameterJdbcTemplate jdbcTemplate;
+	
+	/**
+	 * @generated
+	 */
+	public void setJdbcTemplate(NamedParameterJdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
+
+	«IF inserter != null-»
+		«EXPAND insertMethod(model, true) FOR this»
+	«ENDIF»
+	
+	«EXPAND template::datagen::dao::updaters::updaters(model, true) FOR this»
+	
+	«EXPAND template::datagen::dao::deleters::deleters(model, true) FOR this»
+	
+	«EXPAND mapRowMethod(model, true) FOR this»
+
+
+	/**
+	 * Method 'getTableName'
+	 * 
+	 * @return String
+	 * @generated
+	 */
+	public String getTableName()
+	{
+		return "«mainTable.name»";
+	}
+
+	«EXPAND template::datagen::dao::finders::finders(model, true) FOR this»
+}
+
+«ENDFILE-»
+«ENDLET-»
+«ENDDEFINE»
+
+«DEFINE columnNameList FOR List[TableColumn]-»
+«FOREACH this AS currCol SEPARATOR ","-»«((TableColumn)currCol).name»«ENDFOREACH-»
+«ENDDEFINE»
+
+«DEFINE setColumnSetValuePlaceholderList(DataAccessObject dao) FOR List[TableColumn]-»
+SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c)) AS currCol SEPARATOR ","-»«((TableColumn)currCol).name» = :«((TableColumn)currCol).name-» «ENDFOREACH-»
+«ENDDEFINE»
+
+«DEFINE setColumnEqPlaceholderList(String separator) FOR List[TableColumn]-»
+«FOREACH this AS currCol SEPARATOR separator-»«((TableColumn)currCol).name» = :«((TableColumn)currCol).name» «ENDFOREACH-»
+«ENDDEFINE»
+
+«DEFINE paramPlaceholderList FOR List[TableColumn]-»
+«FOREACH this AS currCol SEPARATOR ","-» :«((TableColumn)currCol).name» «ENDFOREACH-»
+«ENDDEFINE»
+
+«DEFINE paramValorizationList(String dtoVarName) FOR List[TableColumn]-»
+«FOREACH this AS currCol-»
+	params.addValue("«((TableColumn)currCol).name»", «dtoVarName».get«javaPropertyNameFromColumn(currCol).toFirstUpper()»() );	
+«ENDFOREACH-»
+«ENDDEFINE»
+
+«DEFINE paramValorizationList(String dtoVarName, PKGenerator pkgen) FOR List[TableColumn]-»
+«ERROR "valorizzazione parametri non gestita per DAO con PKGenerator di tipo "+pkgen.metaType»
+«ENDDEFINE»
+
+«DEFINE paramValorizationList(String dtoVarName, SequencePKGenerator pkgen) FOR List[TableColumn]-»
+«LET (DataAccessObject)(pkgen.eContainer) AS dao-»
+«LET dao.mainTable.primaryKey.includedColumns.first() AS pkCol-»
+«FOREACH this AS currCol-»
+	params.addValue("«((TableColumn)currCol).name»", «currCol==pkCol?" newKey ":dtoVarName+".get"+javaPropertyNameFromColumn(currCol).toFirstUpper()+"()"» );
+«ENDFOREACH-»
+«ENDLET-»
+«ENDLET-»
+«ENDDEFINE»
+
+
+«DEFINE incrementerUse FOR TableColumn-»
+«IF type.type == PrimitiveTypeCodes::VARCHAR-»
+	«javaPropertyTypeFromColumn()» newKey = incrementer.nextStringValue();
+«ELSEIF (type.type == PrimitiveTypeCodes::NUMERIC || type.type == PrimitiveTypeCodes::DECIMAL) && type.decimalDigits==0-»
+	«javaPropertyTypeFromColumn()» newKey = new «javaPropertyTypeFromColumn()»(incrementer.nextLongValue());
+«ELSE»
+	«ERROR "impossibile usare incrementer per il tipo di colonna "+type.type+","+type.size+","+type.decimalDigits»
+«ENDIF-»
+		
+«ENDDEFINE»
+
+«DEFINE insertMethod(DBAccessModel model, boolean body) FOR DataAccessObject»
+	/**
+	 * Method 'insert'
+	 * 
+	 * @param dto
+	 * @return «getPkClassName()»
+	 * @generated
+	 */
+	«IF this.mainTable.primaryKey != null»
+	public «getPkClassName()» insert(«getDtoClassName()» dto)
+	«ELSE»
+	public void insert(«getDtoClassName()» dto)
+	«ENDIF»	
+	«IF body-»
+	{
+		«IF mainTable.primaryKey!=null && pkGenerator!=null-»
+		«EXPAND incrementerUse FOR this.mainTable.primaryKey.includedColumns.first()»
+		«ENDIF-»
+		final String sql = "INSERT INTO " + getTableName() + " ( «EXPAND columnNameList FOR this.mainTable.columns-» ) VALUES ( «EXPAND paramPlaceholderList FOR this.mainTable.columns-» )";
+		
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		«IF pkGenerator!=null-»
+		«EXPAND paramValorizationList("dto",pkGenerator) FOR this.mainTable.columns-»
+		«ELSE»
+		«EXPAND paramValorizationList("dto") FOR this.mainTable.columns-»
+		«ENDIF-»
+		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
+		try {
+			stopWatch.start();
+			jdbcTemplate.update(sql.toString(), params);
+		} catch (RuntimeException ex) {
+			log.error("[«getDaoImplClassName()»::insert] esecuzione query",ex);
+			throw ex;
+		} finally {
+			stopWatch.dumpElapsed("«getDaoImplClassName()»", "insert","esecuzione query", sql);
+			log.debug("[«getDaoImplClassName()»::insert] END");
+		}
+		
+		«IF this.mainTable.primaryKey != null»
+		return dto.createPk();
+		«ENDIF»	
+		
+	}
+	«ELSE-»
+	;
+	«ENDIF-»
+	
+«ENDDEFINE»
+
+
+«DEFINE mapRowMethod(DBAccessModel model, boolean body) FOR DataAccessObject»
+	/**
+	 * Method 'mapRow'
+	 * 
+	 * @param rs
+	 * @param row
+	 * @throws SQLException
+	 * @return «getDtoClassName()»
+	 * @generated
+	 */
+	public «getDtoClassName()» mapRow(ResultSet rs, int row) throws SQLException
+	«IF body-»
+	{
+		«getDtoClassName()» dto = new «getDtoClassName()»();
+		«FOREACH mainTable.columns AS currCol ITERATOR i»
+		dto.set«javaPropertyNameFromColumn(currCol).toFirstUpper()»(
+			«getValueFromRS(currCol, i.counter1)»
+		);
+		«ENDFOREACH»
+		return dto;
+	}
+	«ELSE-»
+	;
+	«ENDIF-»
+	
+«ENDDEFINE»
+
+
+«DEFINE commonDaoFiles(DBAccessModel model) FOR DaoPackage»
+«FILE getPkgDir(this, model)+"/dao/impl/AbstractDAO.java"»package «getPkgPackage(this, model)».dao.impl;
+
+import java.io.*;
+import java.sql.*;
+
+import org.springframework.jdbc.support.incrementer.DataFieldMaxValueIncrementer;
+
+import oracle.sql.BLOB;
+import oracle.sql.CLOB;
+
+/**
+ * Base class for Oracle DAO classes.
+ *
+ * @generated
+ */
+public abstract class AbstractDAO
+{
+	/**
+	 * @generated
+	 */
+	protected DataFieldMaxValueIncrementer incrementer;
+	
+	/**
+	 * @generated
+	 */   
+	public void setIncrementer(DataFieldMaxValueIncrementer incrementer) {
+		this.incrementer = incrementer;
+	}
+
+	/**
+	 * Method 'getTableName'
+	 * 
+	 * @return String
+	 * @generated
+	 */
+	public abstract String getTableName();
+	
+	/**
+	 * @generated
+	 */
+    public void updateClob(Clob clob, String data) throws IOException, SQLException 
+    {
+        if (clob == null || data == null) {
+            return;
+        }
+
+        Reader reader = new StringReader( data );
+         Writer clobWriter = ((oracle.sql.CLOB)clob).setCharacterStream(0L);
+        char[] cbuffer = new char[10* 1024];
+        int nread = 0;
+        while( (nread= reader.read(cbuffer)) != -1 )
+          clobWriter.write( cbuffer, 0, nread);
+        reader.close();
+        clobWriter.close();
+    }
+
+	/**
+	 * @generated
+	 */
+    public void updateBlob(Blob blob, byte[] data) throws IOException, SQLException
+    {
+        if (blob == null || data == null) {
+            return;
+        }
+
+        OutputStream os = ((oracle.sql.BLOB)blob).setBinaryStream(0L);
+        InputStream is = new ByteArrayInputStream(data);
+        byte[] buffer = new byte[10* 1024];
+        int nread = 0;
+        while( (nread= is.read(buffer)) != -1 ) {
+          os.write(buffer, 0, nread);
+      }
+        is.close();
+        os.close();
+    }
+
+	/**
+	 * @generated
+	 */
+    public byte[] getBlobColumn(ResultSet rs, int columnIndex)
+            throws SQLException
+    {
+        try {
+
+            int type = rs.getMetaData().getColumnType( columnIndex );
+            if (type == Types.LONGVARBINARY) {
+                return rs.getBytes( columnIndex );
+            }
+
+            Blob blob = rs.getBlob( columnIndex );
+            if (blob == null) {
+                return null;
+            }
+
+            InputStream is = blob.getBinaryStream();
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+            if (is == null) {
+                return null;
+            }
+            else {
+                byte buffer[] = new byte[ 64 ];
+                int c = is.read( buffer );
+                while (c>0) {
+                    bos.write( buffer, 0, c );
+                    c = is.read( buffer );
+                }
+                return bos.toByteArray();
+            }
+        }
+        catch (IOException e) {
+            throw new SQLException( "Failed to read BLOB column due to IOException: " + e.getMessage() );
+        }
+    }
+
+	/**
+	 * @generated
+	 */
+    public void setBlobColumn(PreparedStatement stmt, int parameterIndex, byte[] value)
+            throws SQLException
+    {
+        if (value == null) {
+            stmt.setNull( parameterIndex, Types.BLOB );
+        }
+        else {
+            stmt.setBinaryStream( parameterIndex, new ByteArrayInputStream(value), value.length );
+        }
+    }
+
+	/**
+	 * @generated
+	 */
+    public String getClobColumn(ResultSet rs, int columnIndex)
+        throws SQLException
+    {
+        try {
+            Clob clob = rs.getClob( columnIndex );
+            if (clob == null) {
+                return null;
+            }
+
+            StringBuffer ret = new StringBuffer();
+            InputStream is = clob.getAsciiStream();
+
+            if (is == null) {
+                return null;
+            }
+            else {
+                byte buffer[] = new byte[ 64 ];
+                int c = is.read( buffer );
+                while (c>0) {
+                    ret.append( new String(buffer, 0, c) );
+                    c = is.read( buffer );
+                }
+                return ret.toString();
+            }
+        }
+        catch (IOException e) {
+            throw new SQLException( "Failed to read CLOB column due to IOException: " + e.getMessage() );
+        }
+    }
+
+	/**
+	 * @generated
+	 */
+    public void setClobColumn(PreparedStatement stmt, int parameterIndex, String value)
+        throws SQLException
+    {
+        if (value == null) {
+            stmt.setNull( parameterIndex, Types.CLOB );
+        }
+        else {
+            stmt.setAsciiStream( parameterIndex, new ByteArrayInputStream(value.getBytes()), value.length() );
+        }
+    }
+}
+«ENDFILE»
+
+«FILE getPkgDir(this, model)+"/exceptions/DaoException.java"»package «getPkgPackage(this, model)».exceptions;
+
+/**
+ * @generated
+ */
+public class DaoException extends RuntimeException
+{
+	/**
+	 * @generated
+	 */
+	protected Throwable throwable;
+
+	/**
+	 * Method 'DaoException'
+	 * 
+	 * @param message
+	 * @generated
+	 */
+	public DaoException(String message)
+	{
+		super(message);
+	}
+
+	/**
+	 * Method 'DaoException'
+	 * 
+	 * @param message
+	 * @param throwable
+	 * @generated
+	 */
+	public DaoException(String message, Throwable throwable)
+	{
+		super(message);
+		this.throwable = throwable;
+	}
+
+	/**
+	 * Method 'getCause'
+	 * 
+	 * @return Throwable
+	 * @generated
+	 */
+	public Throwable getCause()
+	{
+		return throwable;
+	}
+
+}
+«ENDFILE»
+«ENDDEFINE»
+
+
+«REM»gestire l'univocità della regione protetta per la compatibilità con servicegen«ENDREM»
+«DEFINE utilFiles FOR DBAccessModel»
+«FILE getDALayerBaseDir(this)+"/util/Constants.java"»package «getDALayerBasePkg(this)».util;
+/**
+* @generated
+*/
+public final class Constants {
+	/**
+	 * identificativo dell'applicativo.
+	 */
+	public static final String APPLICATION_CODE = "«this.codComponente.toUpperCase()»";
+	
+	«PROTECT CSTART '/*' CEND '*/' ID getRegionUID("DaoConstants")»
+	
+	«ENDPROTECT»
+}
+«ENDFILE»
+«ENDDEFINE»
+

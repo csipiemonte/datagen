@@ -1,0 +1,514 @@
+«IMPORT ecore»
+«IMPORT datagen»
+«IMPORT rdbmdl»
+«IMPORT rdbmdl::constraints»
+«IMPORT rdbmdl::datatypes»
+«IMPORT rdbmdl::view»
+
+«EXTENSION template::DatagenExtensions»
+
+«DEFINE frameworkFiles FOR DBAccessModel»
+«EXPAND abstractExampleFile FOR this»
+«EXPAND eqChkFile FOR this»
+«EXPAND fieldChkFile FOR this»
+«EXPAND inSetChkFile FOR this»
+«EXPAND nullChkFile FOR this»
+«EXPAND rangeChkFile FOR this»
+«EXPAND regexpChkFile FOR this»
+«EXPAND qbeQueryBuilderFile FOR this»
+«ENDDEFINE»
+
+«DEFINE abstractExampleFile FOR DBAccessModel»
+«FILE getDALayerBaseDir()+"/qbe/AbstractExample.java"»package «getDALayerBasePkg()».qbe;
+
+/**
+ * 
+ * @generated
+ *
+ */
+public class AbstractExample {
+
+}
+
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE fieldChkFile FOR DBAccessModel»
+«FILE getDALayerBaseDir()+"/qbe/FieldChk.java"»package «getDALayerBasePkg()».qbe;
+
+/**
+ * 
+ * @generated
+ *
+ */
+public abstract class FieldChk {
+	
+	/**
+	 * @generated
+	 */
+	public FieldChk mustBeTrue(){
+		this._negate=false;
+		return this;
+	}
+
+	/**
+	 * @generated
+	 */
+	public FieldChk mustBeFalse(){
+		this._negate=true;
+		return this;
+	} 
+	
+	/**
+	 * @generated
+	 */
+	protected boolean _negate=false;
+	
+	/**
+	 * @generated
+	 */
+	public void setNegate(boolean val){
+		_negate=val;
+	}
+	
+	/**
+	 * @generated
+	 */
+	public boolean isNegate(){
+		return _negate;
+	}
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE eqChkFile FOR DBAccessModel»
+«FILE getDALayerBaseDir()+"/qbe/EqChk.java"»package «getDALayerBasePkg()».qbe;
+
+/**
+ * 
+ * Verifica di uguaglianza del valore del campo con un valore costante. 
+ * @generated
+ */
+public class EqChk extends FieldChk{
+	
+	private Object _exVal;
+	private boolean _ignoreCase=false;
+	
+	/**
+	 * @param equalsTo valore di confronto 
+	 * @generated
+	 */
+	public EqChk(Object equalsTo){
+		assert equalsTo != null;
+		_exVal=equalsTo;
+		_ignoreCase=false;
+	}
+	
+	/**
+	 * @generated
+	 */
+	public boolean valueHasWildcards(){
+		if (_exVal == null || !(_exVal instanceof String))
+			return false;
+		else {
+			return (((String)_exVal).indexOf("%")>-1);
+		}	
+	}
+	 
+	/**
+	 * @param equalsTo valore di confronto 
+	 * @param ignoreCase ignora il case in caso di tipo stringa
+	 * @generated
+	 */
+	public EqChk(Object equalsTo, boolean ignoreCase){
+		assert equalsTo != null;
+		_exVal=equalsTo;
+		_ignoreCase=ignoreCase;
+	}
+	/**
+	 * @generated
+	 */
+	public Object getExVal(){
+		return _exVal;
+	}
+	
+	/**
+	 * @generated
+	 */
+	 public boolean isIgnoreCase(){
+	 	return _ignoreCase;
+	 }
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE inSetChkFile FOR DBAccessModel»
+«FILE getDALayerBaseDir()+"/qbe/InSetChk.java"»package «getDALayerBasePkg()».qbe;
+
+/**
+ * 
+ * Verifica di appartenenza ad un insieme discreto di valori costanti 
+ * @generated
+ */
+public class InSetChk extends FieldChk{
+	
+	/**
+	 * @generated
+	 */
+	private Object [] _items;
+	
+	/**
+	 * 
+	 * @param items insieme degli elementi dell'insieme di riferimento 
+	 * @generated
+	 */
+	public InSetChk(Object [] items){
+		assert items != null && items.length>0;
+		_items=items;
+	}	
+	/**
+	 * @generated
+	 */
+	public Object[] getItems(){
+		return _items;
+	}
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE rangeChkFile FOR DBAccessModel»
+«FILE getDALayerBaseDir()+"/qbe/RangeChk.java"»package «getDALayerBasePkg()».qbe;
+
+/**
+ * 
+ * Verifica di appartenenza ad un range continuo 
+ * @generated
+ */
+public class RangeChk extends FieldChk{
+	
+	/**
+	 * @generated
+	 */
+	private Object _lowerBound;
+	
+	/**
+	 * @generated
+	 */
+	private Object _upperBound;
+	
+	/**
+	 * @generated
+	 */
+	private boolean _includeLB;
+	
+	/**
+	 * @generated
+	 */
+	private boolean _includeUB;
+	
+	
+	/**
+	 * @param lowerBound l'estremo inferiore del range (se non specificato il check è a -infinito)
+	 * @param upperBound l'estremo superiore del range (se non specificato il check è a +infinito)
+	 * @param includeLB include o meno il lowerbound tra i valori ammessi
+	 * @param includeUB include o meno l'upperbound tra i valori ammessi 
+	 * @generated
+	 */
+	public RangeChk(Object lowerBound, Object upperBound, boolean includeLB, boolean includeUB){
+		assert lowerBound != null || upperBound!=null;
+		_lowerBound=lowerBound;
+		_upperBound=upperBound;
+		_includeLB=includeLB;
+		_includeUB=includeUB;
+	}	
+	
+	/**
+	 * @generated
+	 */
+	public Object getLowerBound(){
+		return _lowerBound;
+	}
+	
+	/**
+	 * @generated
+	 */
+	public Object getUpperBound(){
+		return _upperBound;
+	}
+	
+	/**
+	 * @generated
+	 */
+	public boolean isLBIncluded(){
+		return _includeLB;
+	}
+	
+	/**
+	 * @generated
+	 */
+	public boolean isUBIncluded(){
+		return _includeLB;
+	}
+}
+
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE regexpChkFile FOR DBAccessModel»
+«FILE getDALayerBaseDir()+"/qbe/RegexpChk.java"»package «getDALayerBasePkg()».qbe;
+
+/**
+ * 
+ * Verifica di conformita' con una regular expression 
+ * @generated
+ */
+public class RegexpChk extends FieldChk{
+	
+	/**
+	 * @generated
+	 */
+	private String _regexp;
+	
+	/**
+	 * @param equalsTo valore di confronto 
+	 * @generated
+	 */
+	public RegexpChk(String regexp){
+		assert regexp != null && regexp.length()>0;
+		_regexp=regexp;
+	}
+
+	/**
+	 * @generated
+	 */
+	public String getRegexp(){
+		return _regexp;
+	}
+}
+
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE nullChkFile FOR DBAccessModel»
+«FILE getDALayerBaseDir()+"/qbe/NullChk.java"»package «getDALayerBasePkg()».qbe;
+
+/**
+ * 
+ * Verifica di valorizzazione del campo.
+ * @generated
+ */
+public class NullChk extends FieldChk{
+	
+	/** 
+	 * @generated
+	 */
+	public NullChk(){
+	}	
+}
+
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE qbeQueryBuilderFile FOR DBAccessModel»
+«FILE getDALayerBaseDir()+"/qbe/QBEQueryBuilder.java"»package «getDALayerBasePkg()».qbe;
+
+import «getDALayerBasePkg()».metadata.DAOMetadata;
+
+import java.beans.BeanInfo;
+import java.beans.IntrospectionException;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.List;
+
+/**
+ * @generated
+ * @param <TEX> classe degli esempi
+ */
+public class QBEQueryBuilder<TEX extends AbstractExample> {
+
+	/**
+	 * @generated
+	 */
+	private DAOMetadata _metadata;
+	
+	/**
+	 * @generated
+	 * @param metadata i metadati del DAO
+	 */
+	public QBEQueryBuilder(DAOMetadata metadata){
+		this._metadata=metadata;
+	}
+	
+	/**
+	 * @generated
+	 * @param posEx
+	 * @param negEx
+	 * @return
+	 */
+	public String createFromExamples(List<TEX> posEx, List<TEX> negEx){
+		String sql = "SELECT * FROM "+_metadata.getTableName()+" WHERE ";
+		String where = "";
+		String posExClause = "";
+		String negExClause = "";
+		if (posEx!=null && posEx.size()>0){
+			posExClause = createFromExamples(posEx, false);
+		}
+		if (negEx != null && negEx.size()>0){
+			negExClause = createFromExamples(negEx, false);
+		}
+		if (posExClause.length()>0 && negExClause.length()>0){
+			where+=posExClause+ " AND NOT "+negExClause;
+		}
+		else
+			where=posExClause+negExClause; // uno dei due e' ""
+		// rimuovo l'ultimo AND
+		sql+="("+where+")";
+		return sql;
+	}
+	
+	/**
+	 * 
+	 * @param examples lista di esempi
+	 * @param conjunctive se true le singolke clausole sono unite dall'operatore AND, 
+	 * se false da OR.
+	 * @return la clausola derivante dalla concatenazione delle singole espressioni
+	 * relative agli esempi, concatenate con AND o OR a seconda del valore del parametro
+	 * conjunctive. Tutta la clausola è racchiusa da "(" e "(".
+	 * (<expr_ex_1> AND|OR <expr_ex2> AND|OR ... <expr_ex_n>)
+	 */
+	public String createFromExamples(List<TEX> examples, boolean conjunctive){
+		String clause = "";
+		String operator = conjunctive ? "AND ": " OR ";
+		for (TEX ex : examples) {
+			String currExClause = createWhereClauseForSingleExample(ex);
+			clause+= currExClause;
+			if (!(examples.get(examples.size()-1) == ex))
+				clause+= operator;
+		}	
+		return "("+clause+")"; 
+	}
+	
+	/**
+	 * Crea una parte di clausola where a fronte di un singolo esempio.
+	 * Per ogni FieldChk valorizzato aggiunge un termine della clausola.
+	 * @param example
+	 * @return l'espressione associata all'esempio.
+	 * (<term_chk_1> AND <term_chk_2> .... <term_chk_n>)
+	 */
+	public String createWhereClauseForSingleExample(TEX example){
+		String clause = "";
+		try {
+			BeanInfo bi = Introspector.getBeanInfo(example.getClass());
+			PropertyDescriptor pd [] = bi.getPropertyDescriptors();
+			for (int i = 0; i < pd.length; i++) {
+				PropertyDescriptor currPD = pd[i];
+				if (FieldChk.class.isAssignableFrom(currPD.getPropertyType())){
+					FieldChk currChk = (FieldChk)(currPD.getReadMethod().invoke(example, new Object[]{}));
+					if (currChk==null)
+						continue;
+					String term = createTerm4FieldChk(currChk,currPD);
+					clause += term + " AND ";
+				}
+			}
+			// alla fine rimuove l'ultimo "AND"
+			clause = clause.substring(0, clause.length()-5);
+		} catch (IntrospectionException e) {
+			// TODO
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "("+clause+")";
+	}
+	
+	/**
+	 * Formatta l'oggetto in modo che sia utilizzabile nella query costruita a partire
+	 * dagli esempi.
+	 * @param val
+	 * @return
+	 */
+	public String formatValue(Object val) {
+		if (val == null)
+			return "null";
+		else {
+			if (val instanceof String) {
+				return "'" + val + "'";
+			} 
+			else
+				return val.toString(); // TODO
+		}
+
+	}
+	
+	/**
+	 * 
+	 * @param chk
+	 * @return
+	 */
+	public String createTerm4FieldChk(FieldChk chk, PropertyDescriptor pd){
+		if (chk instanceof EqChk)
+			return createTerm4FieldChk((EqChk)chk, pd);
+		else if (chk instanceof RangeChk)
+			return createTerm4FieldChk((RangeChk)chk, pd);
+		else if (chk instanceof RegexpChk)
+			return createTerm4FieldChk((RegexpChk)chk, pd);
+		else if (chk instanceof NullChk)
+			return createTerm4FieldChk((NullChk)chk, pd);
+		else if (chk instanceof InSetChk)
+			return createTerm4FieldChk((InSetChk)chk, pd);
+		else
+			throw new IllegalArgumentException("field check non gestito:"+chk.getClass());
+	}
+	
+	public String createTerm4FieldChk(EqChk chk, PropertyDescriptor pd){
+		String colName = _metadata.getColumnName(pd.getName());
+		String term = "(";
+		String lside = chk.isIgnoreCase() ? "UPPER("+colName+")" : colName;
+		String rside = chk.isIgnoreCase() ? "UPPER("+formatValue(chk.getExVal())+")" : formatValue(chk.getExVal());
+		if (!chk.valueHasWildcards()){
+			term += lside+(chk.isNegate()?" <> ":" = ")+rside;
+		}
+		else{
+			term += lside+(chk.isNegate()?" NOT LIKE( ":" LIKE( ")+rside+")";
+		}
+		term+=")";
+		return term;
+	}
+	
+	public String createTerm4FieldChk(NullChk chk, PropertyDescriptor pd){
+		String colName = _metadata.getColumnName(pd.getName());
+		String term = "(";
+		term+=colName+" IS "+(chk.isNegate()?" NOT":"")+" NULL";
+		term+=")";
+		return term;
+	}
+	
+	public String createTerm4FieldChk(RangeChk chk, PropertyDescriptor pd){
+		String colName = _metadata.getColumnName(pd.getName());
+		String term = "(";
+		if (chk.isNegate())
+			term+="NOT ";
+		if (chk.isLBIncluded()&&chk.isUBIncluded()){
+			term+=colName+" BETWEEN "+formatValue(chk.getLowerBound())+ " AND "+formatValue(chk.getUpperBound());
+		}
+		else{
+			term+=colName+(chk.isLBIncluded()?" >= ": " > ")+formatValue(chk.getLowerBound());
+			term+=" AND "+colName+(chk.isUBIncluded()?" <= ": " < ")+formatValue(chk.getUpperBound());
+			if (chk.isNegate()){
+				term = "(NOT "+term+")";
+			}
+		}
+		term+=")";
+		return term;
+	}
+}
+«ENDFILE»
+«ENDDEFINE»
