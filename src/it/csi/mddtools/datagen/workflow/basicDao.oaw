@@ -29,6 +29,12 @@ Parametri:
 	<!-- override if needed! -->
 	<property name="basePackage" value="" />
 	
+	<!-- TRACK! -->
+	<bean class="it.csi.mddtools.datagen.workflow.component.TrackingInvoker">
+		<modelName value="${model}"/>
+		<targetProjectName value="${daoTargetProjectName}"/>
+		<track value="true"/>
+	</bean>
 	
 	<!-- set up EMF for standalone execution -->
 		<bean class="org.eclipse.mwe.emf.StandaloneSetup" >
