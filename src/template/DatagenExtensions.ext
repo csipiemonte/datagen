@@ -312,6 +312,9 @@ String getColumnModifier(TableColumn col) :
 boolean isNullOrEmpty(String s) :
 	s==null || s.length==0;
 
+String getPluginVersion() : JAVA
+	it.csi.mddtools.datagen.genutils.MiscUtils.getPluginVersion();
+
 String getRegionUID(String sourceId) : JAVA
 	it.csi.mddtools.datagen.genutils.GenUtils.getRegionUID(java.lang.String);
 

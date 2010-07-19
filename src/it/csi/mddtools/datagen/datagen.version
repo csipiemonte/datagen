@@ -1,0 +1,5 @@
+# informazioni utilizzate a runtime in tutti i punti in cui
+# serva sapere qual'e' la versione del plugin
+
+plugin.name=datagen
+plugin.version=1.0.0.009

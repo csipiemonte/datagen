@@ -1,5 +1,7 @@
 package it.csi.mddtools.datagen.workflow.component;
 
+import it.csi.mddtools.datagen.genutils.MiscUtils;
+
 import java.util.Properties;
 
 import mddtools.usagetracking.ProfilingPacketBuilder;
@@ -24,7 +26,7 @@ public class TrackingInvoker extends org.openarchitectureware.workflow.lib.Abstr
 
 	public void setTrack(boolean b){
 		System.out.println("setTrack:"+modelName);
-		Properties info = ProfilingPacketBuilder.packGenerateInfo("datagen", "1.0.0.009", modelName, "?", targetProjectName);
+		Properties info = ProfilingPacketBuilder.packGenerateInfo(MiscUtils.getPluginName(), MiscUtils.getPluginVersion(), modelName, "?", targetProjectName);
 		System.out.println("333");
 		TrackingSender.sendTrackingInfo(info);
 	}
