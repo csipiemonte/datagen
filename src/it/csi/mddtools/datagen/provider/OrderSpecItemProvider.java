@@ -7,17 +7,21 @@
 package it.csi.mddtools.datagen.provider;
 
 
+import it.csi.mddtools.datagen.DataAccessObject;
 import it.csi.mddtools.datagen.DatagenPackage;
 import it.csi.mddtools.datagen.OrderSpec;
+import it.csi.mddtools.datagen.OrderSpecs;
+import it.csi.mddtools.rdbmdl.Column;
+import it.csi.mddtools.rdbmdl.Table;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -74,22 +78,43 @@ public class OrderSpecItemProvider
 	 * This adds a property descriptor for the Column feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	protected void addColumnPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_OrderSpec_column_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_OrderSpec_column_feature", "_UI_OrderSpec_type"),
-				 DatagenPackage.Literals.ORDER_SPEC__COLUMN,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
+		itemPropertyDescriptors.add(new ItemPropertyDescriptor(
+				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getString("_UI_OrderSpec_column_feature"), 
+				getString("_UI_PropertyDescriptor_description",
+						  "_UI_OrderSpec_column_feature",
+						  "_UI_OrderSpec_type"),
+				DatagenPackage.eINSTANCE.getOrderSpec_Column(),
+				true) {
+					@SuppressWarnings("unchecked")
+					protected Collection getComboBoxObjects(Object object) {
+						HashMap<String, OrderSpec> hmSpecsAlreadyUsed = new HashMap<String, OrderSpec>();
+						ArrayList<Column> result = new ArrayList<Column>();
+						OrderSpec orderSpec = (OrderSpec)object;
+//						Salgo l'albero fino ad OrderSpecs
+						OrderSpecs orderSpecs = (OrderSpecs)orderSpec.eContainer();
+						for (OrderSpec s : orderSpecs.getSpecs()) {
+							if (s.getColumn()!=null){
+								hmSpecsAlreadyUsed.put(s.getColumn().getName(), s);
+							}
+						}						
+//						Salgo l'albero fino a Data Access Object						
+						DataAccessObject dao = (DataAccessObject)orderSpecs.eContainer().eContainer().eContainer();
+						Table table = dao.getMainTable();
+						if (table!=null && table.getColumns()!=null && !table.getColumns().isEmpty()){
+							for(Column c : table.getColumns()){
+								if (!hmSpecsAlreadyUsed.containsKey(c.getName())){									
+									result.add(c);
+								}
+							}
+						}
+						return result;						
+					}
+				}
+			);
 	}
 
 	/**
@@ -118,11 +143,17 @@ public class OrderSpecItemProvider
 	 * This returns OrderSpec.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/OrderSpec"));
+		OrderSpec orderSpec = (OrderSpec)object;
+		if (orderSpec.isAscending()){
+			return overlayImage(object, getResourceLocator().getImage("full/obj16/OrderSpec"));
+		}
+		else{
+			return overlayImage(object, getResourceLocator().getImage("full/obj16/OrderSpec-desc"));
+		}
 	}
 
 	/**
@@ -133,8 +164,11 @@ public class OrderSpecItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
+		
 		OrderSpec orderSpec = (OrderSpec)object;
-		return getString("_UI_OrderSpec_type") + " " + orderSpec.isAscending();
+		return getString("_UI_OrderSpec_type") 
+				+ " " + (orderSpec.getColumn()!=null ? orderSpec.getColumn().getName() : "")
+				+ " " + (orderSpec.isAscending() ? "ASC" : "DESC");
 	}
 
 	/**
