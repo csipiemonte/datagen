@@ -179,6 +179,24 @@ public interface DatagenFactory extends EFactory {
 	Finders createFinders();
 
 	/**
+	 * Returns a new object of class '<em>Order Spec</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Order Spec</em>'.
+	 * @generated
+	 */
+	OrderSpec createOrderSpec();
+
+	/**
+	 * Returns a new object of class '<em>Order Specs</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Order Specs</em>'.
+	 * @generated
+	 */
+	OrderSpecs createOrderSpecs();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

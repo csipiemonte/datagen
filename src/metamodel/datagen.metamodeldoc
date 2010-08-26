@@ -1,0 +1,1525 @@
+<?xml version="1.0" encoding="ASCII"?>
+<net.randomice.metamodeldoc:DMetamodelDocumentation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:net.randomice.metamodeldoc="http://www.randomice.net/metamodeldoc" nsURI="http://www.csi.it/mddtools/datagen" nsPrefix="datagen" name="datagen">
+  <rootPackages _imageResource="/icons/ecore/EPackage.gif" _imageFileName="ecore/EPackage.gif" name="datagen" nsURI="http://www.csi.it/mddtools/datagen" nsPrefix="datagen">
+    <refId refIdString="http://www.csi.it/mddtools/datagen"/>
+    <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+      <refId refIdString="http://www.csi.it/mddtools/datagen/http://www.eclipse.org/emf/2002/GenModel"/>
+      <details key="default" value="Modellazione dello strato di accesso ai dati"/>
+    </metamodelDocAnnotation>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="CustomDeleter">
+      <refId refIdString="http://www.csi.it/mddtools/datagen/CustomDeleter" referencedBy="//@rootPackages.0/@classes.8/@subTypes.0"/>
+      <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/CustomDeleter/http://www.eclipse.org/emf/2002/GenModel"/>
+        <details key="default" value="Operazione di cancellazioen righe altamente personalizzabile, tramite scrittura di codice custom.&#xD;&#xA;E' utile nel caso si debbano realizzare delle operazioni di cancellazione di un insieme di righe e non&#xD;&#xA;di una singola riga identificata da PK."/>
+      </metamodelDocAnnotation>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="filterClassFQN" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/CustomDeleter/filterClassFQN"/>
+        <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+          <refId refIdString="http://www.csi.it/mddtools/datagen/CustomDeleter/filterClassFQN/http://www.eclipse.org/emf/2002/GenModel"/>
+          <details key="default" value="Full qualified name della classe che deve essere utilizzata come parametro di input per il deleter.&#xD;&#xA;Possibili valori:&#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>Se non si specifica la proipriet&amp;agrave; la classe utilizzata sar&amp;agrave; &lt;i>java.lang.Object&lt;/i>.&lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto, sar&amp;agrave; utilizzata la classe del dto associato. &lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto[], sar&amp;agrave; utilizzata una ArrayList costituita da oggetti del tipo del dto associato. &lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+        </metamodelDocAnnotation>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+      </attributes>
+      <superTypes refIdString="http://www.csi.it/mddtools/datagen/Deleter" reference="http://www.csi.it/mddtools/datagen/Deleter"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="CustomFinder">
+      <refId refIdString="http://www.csi.it/mddtools/datagen/CustomFinder" referencedBy="//@rootPackages.0/@classes.12/@subTypes.0"/>
+      <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/CustomFinder/http://www.eclipse.org/emf/2002/GenModel"/>
+        <details key="default" value="Operazione di ricerca con logica custom"/>
+      </metamodelDocAnnotation>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="filterClassFQN" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/CustomFinder/filterClassFQN"/>
+        <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+          <refId refIdString="http://www.csi.it/mddtools/datagen/CustomFinder/filterClassFQN/http://www.eclipse.org/emf/2002/GenModel"/>
+          <details key="default" value="Full qualified name della classe che deve essere utilizzata come parametro di input per il finder.&#xD;&#xA;Possibili valori:&#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>Se non si specifica la proipriet&amp;agrave; la classe utilizzata sar&amp;agrave; &lt;i>java.lang.Object&lt;/i>.&lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto, sar&amp;agrave; utilizzata la classe del dto associato. &lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto[], sar&amp;agrave; utilizzata una ArrayList costituita da oggetti del tipo del dto associato. &lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+        </metamodelDocAnnotation>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+      </attributes>
+      <superTypes refIdString="http://www.csi.it/mddtools/datagen/Finder" reference="http://www.csi.it/mddtools/datagen/Finder"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="CustomUpdater">
+      <refId refIdString="http://www.csi.it/mddtools/datagen/CustomUpdater" referencedBy="//@rootPackages.0/@classes.20/@subTypes.0"/>
+      <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/CustomUpdater/http://www.eclipse.org/emf/2002/GenModel"/>
+        <details key="default" value="Operazione di aggiornamento dati altamente personalizzabile, tramite scrittura di codice custom.&#xD;&#xA;E' utile, ad esempio, nel caso si debbano realizzare delle operazioni di aggiornamento di un insieme di righe e non&#xD;&#xA;di una singola riga identificata da PK."/>
+      </metamodelDocAnnotation>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="filterClassFQN" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/CustomUpdater/filterClassFQN"/>
+        <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+          <refId refIdString="http://www.csi.it/mddtools/datagen/CustomUpdater/filterClassFQN/http://www.eclipse.org/emf/2002/GenModel"/>
+          <details key="default" value="Full qualified name della classe che deve essere utilizzata come primo parametro di input per il finder.&#xD;&#xA;Serve per determinare l'inisieme di righe su cui operare la modifica&#xD;&#xA;Possibili valori:&#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>Se non si specifica la proipriet&amp;agrave; la classe utilizzata sar&amp;agrave; &lt;i>java.lang.Object&lt;/i>.&lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto, sar&amp;agrave; utilizzata la classe del dto associato. &lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto[], sar&amp;agrave; utilizzata una ArrayList costituita da oggetti del tipo del dto associato. &lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+        </metamodelDocAnnotation>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+      </attributes>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="valueClassFQN" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/CustomUpdater/valueClassFQN"/>
+        <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+          <refId refIdString="http://www.csi.it/mddtools/datagen/CustomUpdater/valueClassFQN/http://www.eclipse.org/emf/2002/GenModel"/>
+          <details key="default" value="Full qualified name della classe che deve essere utilizzata come secondo parametro parametro di input per l'updater.&#xD;&#xA;Serve per specificare i valori da impostare&#xD;&#xA;&#xD;&#xA;Possibili valori:&#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>Se non si specifica la proipriet&amp;agrave; la classe utilizzata sar&amp;agrave; &lt;i>java.lang.Object&lt;/i>.&lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto, sar&amp;agrave; utilizzata la classe del dto associato. &lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto[], sar&amp;agrave; utilizzata una ArrayList costituita da oggetti del tipo del dto associato. &lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+        </metamodelDocAnnotation>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+      </attributes>
+      <superTypes refIdString="http://www.csi.it/mddtools/datagen/Updater" reference="http://www.csi.it/mddtools/datagen/Updater"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="DBAccessModel">
+      <refId refIdString="http://www.csi.it/mddtools/datagen/DBAccessModel"/>
+      <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/DBAccessModel/http://www.eclipse.org/emf/2002/GenModel"/>
+        <details key="default" value="Modellazione dello strato di accesso ai dati"/>
+      </metamodelDocAnnotation>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="daopkgs" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" containment="true" resolveProxies="true">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/DBAccessModel/daopkgs"/>
+        <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+          <refId refIdString="http://www.csi.it/mddtools/datagen/DBAccessModel/daopkgs/http://www.eclipse.org/emf/2002/GenModel"/>
+          <details key="default" value="I &lt;b>DataAccessObject&lt;/b> sono suddivisi in gruppi logici"/>
+        </metamodelDocAnnotation>
+        <type refIdString="http://www.csi.it/mddtools/datagen/DaoPackage" reference="http://www.csi.it/mddtools/datagen/DaoPackage"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="schema" _cardinality="1" ordered="true" unique="true" lowerBound="1" upperBound="1" changeable="true" resolveProxies="true">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/DBAccessModel/schema"/>
+        <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+          <refId refIdString="http://www.csi.it/mddtools/datagen/DBAccessModel/schema/http://www.eclipse.org/emf/2002/GenModel"/>
+          <details key="default" value="Schema DB di cui viene modellato l'accesso&#xD;&#xA;"/>
+        </metamodelDocAnnotation>
+        <type refIdString="http://www.csi.it/mddtools/rdbmdl/Schema" reference="http://www.csi.it/mddtools/rdbmdl/Schema"/>
+      </references>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="codComponente" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/DBAccessModel/codComponente"/>
+        <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+          <refId refIdString="http://www.csi.it/mddtools/datagen/DBAccessModel/codComponente/http://www.eclipse.org/emf/2002/GenModel"/>
+          <details key="default" value="Codice componente di appartenenza"/>
+        </metamodelDocAnnotation>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+      </attributes>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="codProdotto" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/DBAccessModel/codProdotto"/>
+        <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+          <refId refIdString="http://www.csi.it/mddtools/datagen/DBAccessModel/codProdotto/http://www.eclipse.org/emf/2002/GenModel"/>
+          <details key="default" value="Codice prodotto di appartenenza"/>
+        </metamodelDocAnnotation>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+      </attributes>
+    </classes>
+    <classes _imageResource="/icons/ecore/DAbstractClass.gif" _imageFileName="ecore/DAbstractClass.gif" name="DBCommand" abstract="true">
+      <refId refIdString="http://www.csi.it/mddtools/datagen/DBCommand" referencedBy="//@rootPackages.0/@classes.8/@superTypes.0 //@rootPackages.0/@classes.14/@superTypes.0 //@rootPackages.0/@classes.20/@superTypes.0 //@rootPackages.0/@classes.12/@superTypes.0"/>
+      <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/DBCommand/http://www.eclipse.org/emf/2002/GenModel"/>
+        <details key="default" value="Superclasse astratta di tutte le classi che rappresentano le operazioni che il&#xD;&#xA;&lt;b>DataAccessObject&lt;/b> pu&amp;ograve; esporre"/>
+      </metamodelDocAnnotation>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="name" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/DBCommand/name"/>
+        <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+          <refId refIdString="http://www.csi.it/mddtools/datagen/DBCommand/name/http://www.eclipse.org/emf/2002/GenModel"/>
+          <details key="default" value="nome logico dell'operazione. Obbligatorio per alcune tipologie di operazioni.&#xD;&#xA;Deve essere un identificativo valido di metodo java"/>
+        </metamodelDocAnnotation>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+      </attributes>
+      <subTypes refIdString="http://www.csi.it/mddtools/datagen/Deleter" reference="http://www.csi.it/mddtools/datagen/Deleter"/>
+      <subTypes refIdString="http://www.csi.it/mddtools/datagen/Finder" reference="http://www.csi.it/mddtools/datagen/Finder"/>
+      <subTypes refIdString="http://www.csi.it/mddtools/datagen/Inserter" reference="http://www.csi.it/mddtools/datagen/Inserter"/>
+      <subTypes refIdString="http://www.csi.it/mddtools/datagen/Updater" reference="http://www.csi.it/mddtools/datagen/Updater"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="DaoPackage">
+      <refId refIdString="http://www.csi.it/mddtools/datagen/DaoPackage" referencedBy="//@rootPackages.0/@classes.3/@references.0/@type"/>
+      <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/DaoPackage/http://www.eclipse.org/emf/2002/GenModel"/>
+        <details key="default" value="Raggruppamento logico di &lt;b>DataAccessObject&lt;/b>"/>
+      </metamodelDocAnnotation>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="dao" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" containment="true" resolveProxies="true">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/DaoPackage/dao"/>
+        <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+          <refId refIdString="http://www.csi.it/mddtools/datagen/DaoPackage/dao/http://www.eclipse.org/emf/2002/GenModel"/>
+          <details key="default" value="Elenco dei &lt;b>DataAccessObject&lt;/b> contenuti nel package."/>
+        </metamodelDocAnnotation>
+        <type refIdString="http://www.csi.it/mddtools/datagen/DataAccessObject" reference="http://www.csi.it/mddtools/datagen/DataAccessObject"/>
+      </references>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="name" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/DaoPackage/name"/>
+        <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+          <refId refIdString="http://www.csi.it/mddtools/datagen/DaoPackage/name/http://www.eclipse.org/emf/2002/GenModel"/>
+          <details key="default" value="nome logico del package. deve essere un identificativo valido per un package java"/>
+        </metamodelDocAnnotation>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+      </attributes>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="DataAccessObject">
+      <refId refIdString="http://www.csi.it/mddtools/datagen/DataAccessObject" referencedBy="//@rootPackages.0/@classes.5/@references.0/@type"/>
+      <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/DataAccessObject/http://www.eclipse.org/emf/2002/GenModel"/>
+        <details key="default" value="Agente deputato alla manipolazione dei dati di una singola tabella"/>
+      </metamodelDocAnnotation>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="deleters" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true" containment="true" resolveProxies="true">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/DataAccessObject/deleters"/>
+        <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+          <refId refIdString="http://www.csi.it/mddtools/datagen/DataAccessObject/deleters/http://www.eclipse.org/emf/2002/GenModel"/>
+          <details key="default" value="Insieme dei possibili deleter definiti per questo &lt;b>DAO&lt;/b>"/>
+        </metamodelDocAnnotation>
+        <type refIdString="http://www.csi.it/mddtools/datagen/Deleters" reference="http://www.csi.it/mddtools/datagen/Deleters"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="finders" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true" containment="true" resolveProxies="true">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/DataAccessObject/finders"/>
+        <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+          <refId refIdString="http://www.csi.it/mddtools/datagen/DataAccessObject/finders/http://www.eclipse.org/emf/2002/GenModel"/>
+          <details key="default" value="Insieme dei possibili finder definiti per questo &lt;b>DAO&lt;/b>"/>
+        </metamodelDocAnnotation>
+        <type refIdString="http://www.csi.it/mddtools/datagen/Finders" reference="http://www.csi.it/mddtools/datagen/Finders"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="inserter" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true" containment="true" resolveProxies="true">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/DataAccessObject/inserter"/>
+        <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+          <refId refIdString="http://www.csi.it/mddtools/datagen/DataAccessObject/inserter/http://www.eclipse.org/emf/2002/GenModel"/>
+          <details key="default" value="Operazione di inserimento di un record"/>
+        </metamodelDocAnnotation>
+        <type refIdString="http://www.csi.it/mddtools/datagen/Inserter" reference="http://www.csi.it/mddtools/datagen/Inserter"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="mainTable" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true" resolveProxies="true">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/DataAccessObject/mainTable"/>
+        <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+          <refId refIdString="http://www.csi.it/mddtools/datagen/DataAccessObject/mainTable/http://www.eclipse.org/emf/2002/GenModel"/>
+          <details key="default" value="Tabella su cui opera il &lt;b>DAO&lt;/b>"/>
+        </metamodelDocAnnotation>
+        <type refIdString="http://www.csi.it/mddtools/rdbmdl/Table" reference="http://www.csi.it/mddtools/rdbmdl/Table"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="pkGenerator" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true" containment="true" resolveProxies="true">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/DataAccessObject/pkGenerator"/>
+        <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+          <refId refIdString="http://www.csi.it/mddtools/datagen/DataAccessObject/pkGenerator/http://www.eclipse.org/emf/2002/GenModel"/>
+          <details key="default" value="Generatore di primary key (opzionale). Se definito e' utilizzato nelle operazioni di inserimento"/>
+        </metamodelDocAnnotation>
+        <type refIdString="http://www.csi.it/mddtools/datagen/PKGenerator" reference="http://www.csi.it/mddtools/datagen/PKGenerator"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="updaters" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true" containment="true" resolveProxies="true">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/DataAccessObject/updaters"/>
+        <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+          <refId refIdString="http://www.csi.it/mddtools/datagen/DataAccessObject/updaters/http://www.eclipse.org/emf/2002/GenModel"/>
+          <details key="default" value="Insieme dei possibili updater definiti per questo &lt;b>DAO&lt;/b>"/>
+        </metamodelDocAnnotation>
+        <type refIdString="http://www.csi.it/mddtools/datagen/Updaters" reference="http://www.csi.it/mddtools/datagen/Updaters"/>
+      </references>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="name" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/DataAccessObject/name"/>
+        <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+          <refId refIdString="http://www.csi.it/mddtools/datagen/DataAccessObject/name/http://www.eclipse.org/emf/2002/GenModel"/>
+          <details key="default" value="Nome logico del &lt;b>DAO&lt;/b>. Deve essere un identificativo vlaido di classe java."/>
+        </metamodelDocAnnotation>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+      </attributes>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="DeleteByPK">
+      <refId refIdString="http://www.csi.it/mddtools/datagen/DeleteByPK" referencedBy="//@rootPackages.0/@classes.8/@subTypes.1"/>
+      <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/DeleteByPK/http://www.eclipse.org/emf/2002/GenModel"/>
+        <details key="default" value="Operazione di cancellazione che permette di cancellare una singola riga identificata &#xD;&#xA;tramite primary key"/>
+      </metamodelDocAnnotation>
+      <superTypes refIdString="http://www.csi.it/mddtools/datagen/Deleter" reference="http://www.csi.it/mddtools/datagen/Deleter"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/DAbstractClass.gif" _imageFileName="ecore/DAbstractClass.gif" name="Deleter" abstract="true">
+      <refId refIdString="http://www.csi.it/mddtools/datagen/Deleter" referencedBy="//@rootPackages.0/@classes.9/@references.0/@type //@rootPackages.0/@classes.0/@superTypes.0 //@rootPackages.0/@classes.7/@superTypes.0 //@rootPackages.0/@classes.4/@subTypes.0"/>
+      <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/Deleter/http://www.eclipse.org/emf/2002/GenModel"/>
+        <details key="default" value="Superclasse astratta di tutte le operazioni dicancellazione di record dati"/>
+      </metamodelDocAnnotation>
+      <superTypes refIdString="http://www.csi.it/mddtools/datagen/DBCommand" reference="http://www.csi.it/mddtools/datagen/DBCommand"/>
+      <subTypes refIdString="http://www.csi.it/mddtools/datagen/CustomDeleter" reference="http://www.csi.it/mddtools/datagen/CustomDeleter"/>
+      <subTypes refIdString="http://www.csi.it/mddtools/datagen/DeleteByPK" reference="http://www.csi.it/mddtools/datagen/DeleteByPK"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="Deleters">
+      <refId refIdString="http://www.csi.it/mddtools/datagen/Deleters" referencedBy="//@rootPackages.0/@classes.6/@references.0/@type"/>
+      <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/Deleters/http://www.eclipse.org/emf/2002/GenModel"/>
+        <details key="default" value="Insieme dei &lt;b>Deleter&lt;/b> messi a disposizione dal &lt;b>DataAccessObject&lt;/b>"/>
+      </metamodelDocAnnotation>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="deleters" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" containment="true" resolveProxies="true">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/Deleters/deleters"/>
+        <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+          <refId refIdString="http://www.csi.it/mddtools/datagen/Deleters/deleters/http://www.eclipse.org/emf/2002/GenModel"/>
+          <details key="default" value="Elenco dei &lt;b>Deleter&lt;/b>"/>
+        </metamodelDocAnnotation>
+        <type refIdString="http://www.csi.it/mddtools/datagen/Deleter" reference="http://www.csi.it/mddtools/datagen/Deleter"/>
+      </references>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="FindAll">
+      <refId refIdString="http://www.csi.it/mddtools/datagen/FindAll" referencedBy="//@rootPackages.0/@classes.12/@subTypes.1"/>
+      <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/FindAll/http://www.eclipse.org/emf/2002/GenModel"/>
+        <details key="default" value="Operazione che permette l'estrazione dell'insieme completo dei dati dalla tabella&#xD;&#xA;associata al &lt;b>DataAccessObject&lt;/b>, senza filtri"/>
+      </metamodelDocAnnotation>
+      <superTypes refIdString="http://www.csi.it/mddtools/datagen/Finder" reference="http://www.csi.it/mddtools/datagen/Finder"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="FindByPK">
+      <refId refIdString="http://www.csi.it/mddtools/datagen/FindByPK" referencedBy="//@rootPackages.0/@classes.12/@subTypes.2"/>
+      <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/FindByPK/http://www.eclipse.org/emf/2002/GenModel"/>
+        <details key="default" value="Operazione che permette la ricerca di un singolo record tramite primary key"/>
+      </metamodelDocAnnotation>
+      <superTypes refIdString="http://www.csi.it/mddtools/datagen/Finder" reference="http://www.csi.it/mddtools/datagen/Finder"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/DAbstractClass.gif" _imageFileName="ecore/DAbstractClass.gif" name="Finder" abstract="true">
+      <refId refIdString="http://www.csi.it/mddtools/datagen/Finder" referencedBy="//@rootPackages.0/@classes.11/@superTypes.0 //@rootPackages.0/@classes.10/@superTypes.0 //@rootPackages.0/@classes.13/@references.0/@type //@rootPackages.0/@classes.16/@superTypes.0 //@rootPackages.0/@classes.1/@superTypes.0 //@rootPackages.0/@classes.4/@subTypes.1"/>
+      <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/Finder/http://www.eclipse.org/emf/2002/GenModel"/>
+        <details key="default" value="Superclasse astratta di tutte le operazioni di ricerca"/>
+      </metamodelDocAnnotation>
+      <superTypes refIdString="http://www.csi.it/mddtools/datagen/DBCommand" reference="http://www.csi.it/mddtools/datagen/DBCommand"/>
+      <subTypes refIdString="http://www.csi.it/mddtools/datagen/CustomFinder" reference="http://www.csi.it/mddtools/datagen/CustomFinder"/>
+      <subTypes refIdString="http://www.csi.it/mddtools/datagen/FindAll" reference="http://www.csi.it/mddtools/datagen/FindAll"/>
+      <subTypes refIdString="http://www.csi.it/mddtools/datagen/FindByPK" reference="http://www.csi.it/mddtools/datagen/FindByPK"/>
+      <subTypes refIdString="http://www.csi.it/mddtools/datagen/QBEFinder" reference="http://www.csi.it/mddtools/datagen/QBEFinder"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="Finders">
+      <refId refIdString="http://www.csi.it/mddtools/datagen/Finders" referencedBy="//@rootPackages.0/@classes.6/@references.1/@type"/>
+      <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/Finders/http://www.eclipse.org/emf/2002/GenModel"/>
+        <details key="default" value="Insieme dei &lt;b>Finder&lt;/b> messi a disposizione dal &lt;b>DataAccessObject&lt;/b>"/>
+      </metamodelDocAnnotation>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="finders" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" containment="true" resolveProxies="true">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/Finders/finders"/>
+        <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+          <refId refIdString="http://www.csi.it/mddtools/datagen/Finders/finders/http://www.eclipse.org/emf/2002/GenModel"/>
+          <details key="default" value="Elenco dei &lt;b>Finder&lt;/b>"/>
+        </metamodelDocAnnotation>
+        <type refIdString="http://www.csi.it/mddtools/datagen/Finder" reference="http://www.csi.it/mddtools/datagen/Finder"/>
+      </references>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="Inserter">
+      <refId refIdString="http://www.csi.it/mddtools/datagen/Inserter" referencedBy="//@rootPackages.0/@classes.6/@references.2/@type //@rootPackages.0/@classes.4/@subTypes.2"/>
+      <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/Inserter/http://www.eclipse.org/emf/2002/GenModel"/>
+        <details key="default" value="Superclasse astratta di tutte le operazioni di inserimento dati"/>
+      </metamodelDocAnnotation>
+      <superTypes refIdString="http://www.csi.it/mddtools/datagen/DBCommand" reference="http://www.csi.it/mddtools/datagen/DBCommand"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/DAbstractClass.gif" _imageFileName="ecore/DAbstractClass.gif" name="PKGenerator" abstract="true">
+      <refId refIdString="http://www.csi.it/mddtools/datagen/PKGenerator" referencedBy="//@rootPackages.0/@classes.6/@references.4/@type //@rootPackages.0/@classes.17/@superTypes.0"/>
+      <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/PKGenerator/http://www.eclipse.org/emf/2002/GenModel"/>
+        <details key="default" value="Superclasse astratta dei generatori di primary key"/>
+      </metamodelDocAnnotation>
+      <subTypes refIdString="http://www.csi.it/mddtools/datagen/SequencePKGenerator" reference="http://www.csi.it/mddtools/datagen/SequencePKGenerator"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="QBEFinder">
+      <refId refIdString="http://www.csi.it/mddtools/datagen/QBEFinder" referencedBy="//@rootPackages.0/@classes.12/@subTypes.3"/>
+      <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/QBEFinder/http://www.eclipse.org/emf/2002/GenModel"/>
+        <details key="default" value="Operazione di ricerca by example"/>
+      </metamodelDocAnnotation>
+      <superTypes refIdString="http://www.csi.it/mddtools/datagen/Finder" reference="http://www.csi.it/mddtools/datagen/Finder"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="SequencePKGenerator">
+      <refId refIdString="http://www.csi.it/mddtools/datagen/SequencePKGenerator" referencedBy="//@rootPackages.0/@classes.15/@subTypes.0"/>
+      <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/SequencePKGenerator/http://www.eclipse.org/emf/2002/GenModel"/>
+        <details key="default" value="Generatorew di primary key basato su SEQUENCE"/>
+      </metamodelDocAnnotation>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="sequenceName" _cardinality="1" ordered="true" unique="true" lowerBound="1" upperBound="1" changeable="true">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/SequencePKGenerator/sequenceName"/>
+        <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+          <refId refIdString="http://www.csi.it/mddtools/datagen/SequencePKGenerator/sequenceName/http://www.eclipse.org/emf/2002/GenModel"/>
+          <details key="default" value="Nome della SEQUENCE utilizzata dal generatore di primary key"/>
+        </metamodelDocAnnotation>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+      </attributes>
+      <superTypes refIdString="http://www.csi.it/mddtools/datagen/PKGenerator" reference="http://www.csi.it/mddtools/datagen/PKGenerator"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="UpdateColumns">
+      <refId refIdString="http://www.csi.it/mddtools/datagen/UpdateColumns" referencedBy="//@rootPackages.0/@classes.20/@subTypes.1"/>
+      <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/UpdateColumns/http://www.eclipse.org/emf/2002/GenModel"/>
+        <details key="default" value="Operazione di aggiornamento dati che permette di aggiornate selettivamente un sottoinsieme&#xD;&#xA;colonne della tabella relativamente ad un singolo record identitficato tramite &#xD;&#xA;primary key"/>
+      </metamodelDocAnnotation>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="columns" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" resolveProxies="true">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/UpdateColumns/columns"/>
+        <type refIdString="http://www.csi.it/mddtools/rdbmdl/TableColumn" reference="http://www.csi.it/mddtools/rdbmdl/TableColumn"/>
+      </references>
+      <superTypes refIdString="http://www.csi.it/mddtools/datagen/Updater" reference="http://www.csi.it/mddtools/datagen/Updater"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="UpdateRow">
+      <refId refIdString="http://www.csi.it/mddtools/datagen/UpdateRow" referencedBy="//@rootPackages.0/@classes.20/@subTypes.2"/>
+      <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/UpdateRow/http://www.eclipse.org/emf/2002/GenModel"/>
+        <details key="default" value="Operazione di aggiornamento dati che permette di aggiornate tutte le&#xD;&#xA;colonne della tabella relativamente ad un singolo record identitficato tramite &#xD;&#xA;primary key"/>
+      </metamodelDocAnnotation>
+      <superTypes refIdString="http://www.csi.it/mddtools/datagen/Updater" reference="http://www.csi.it/mddtools/datagen/Updater"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/DAbstractClass.gif" _imageFileName="ecore/DAbstractClass.gif" name="Updater" abstract="true">
+      <refId refIdString="http://www.csi.it/mddtools/datagen/Updater" referencedBy="//@rootPackages.0/@classes.21/@references.0/@type //@rootPackages.0/@classes.18/@superTypes.0 //@rootPackages.0/@classes.2/@superTypes.0 //@rootPackages.0/@classes.19/@superTypes.0 //@rootPackages.0/@classes.4/@subTypes.3"/>
+      <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/Updater/http://www.eclipse.org/emf/2002/GenModel"/>
+        <details key="default" value="Superclasse astratta di tutte le operazioni di aggiornamento dati"/>
+      </metamodelDocAnnotation>
+      <superTypes refIdString="http://www.csi.it/mddtools/datagen/DBCommand" reference="http://www.csi.it/mddtools/datagen/DBCommand"/>
+      <subTypes refIdString="http://www.csi.it/mddtools/datagen/CustomUpdater" reference="http://www.csi.it/mddtools/datagen/CustomUpdater"/>
+      <subTypes refIdString="http://www.csi.it/mddtools/datagen/UpdateColumns" reference="http://www.csi.it/mddtools/datagen/UpdateColumns"/>
+      <subTypes refIdString="http://www.csi.it/mddtools/datagen/UpdateRow" reference="http://www.csi.it/mddtools/datagen/UpdateRow"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="Updaters">
+      <refId refIdString="http://www.csi.it/mddtools/datagen/Updaters" referencedBy="//@rootPackages.0/@classes.6/@references.5/@type"/>
+      <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/Updaters/http://www.eclipse.org/emf/2002/GenModel"/>
+        <details key="default" value="Insieme degli &lt;b>Updater&lt;/b> messia a disposizione dal &lt;b>DataAccessObject&lt;/b>"/>
+      </metamodelDocAnnotation>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="updaters" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" containment="true" resolveProxies="true">
+        <refId refIdString="http://www.csi.it/mddtools/datagen/Updaters/updaters"/>
+        <metamodelDocAnnotation _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http://www.eclipse.org/emf/2002/GenModel">
+          <refId refIdString="http://www.csi.it/mddtools/datagen/Updaters/updaters/http://www.eclipse.org/emf/2002/GenModel"/>
+          <details key="default" value="Elenco degli &lt;b>Updater&lt;/b>"/>
+        </metamodelDocAnnotation>
+        <type refIdString="http://www.csi.it/mddtools/datagen/Updater" reference="http://www.csi.it/mddtools/datagen/Updater"/>
+      </references>
+    </classes>
+  </rootPackages>
+  <rootPackages _imageResource="/icons/ecore/EPackage.gif" _imageFileName="ecore/EPackage.gif" name="rdbmdl" nsURI="http://www.csi.it/mddtools/rdbmdl" nsPrefix="rdbmdl">
+    <refId refIdString="http://www.csi.it/mddtools/rdbmdl"/>
+    <subPackages _imageResource="/icons/ecore/EPackage.gif" _imageFileName="ecore/EPackage.gif" name="constraints" nsURI="http://www.csi.it/mddtools/rdbmdl/constraints" nsPrefix="constraints">
+      <refId refIdString="http://www.csi.it/mddtools/rdbmdl/constraints"/>
+      <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="CheckConstraint">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/CheckConstraint" referencedBy="//@rootPackages.1/@classes.7/@references.0/@type //@rootPackages.1/@subPackages.0/@classes.2/@subTypes.0"/>
+        <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="expression" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+          <refId refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/CheckConstraint/expression"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+        </attributes>
+        <superTypes refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/Constraint" reference="http://www.csi.it/mddtools/rdbmdl/constraints/Constraint"/>
+      </classes>
+      <classes _imageResource="/icons/ecore/DAbstractClass.gif" _imageFileName="ecore/DAbstractClass.gif" name="ColumnRefConstraint" abstract="true">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/ColumnRefConstraint" referencedBy="//@rootPackages.1/@subPackages.0/@classes.7/@superTypes.0 //@rootPackages.1/@subPackages.0/@classes.3/@superTypes.0 //@rootPackages.1/@subPackages.0/@classes.2/@subTypes.1"/>
+        <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="includedColumns" _cardinality="1..*" ordered="true" unique="true" lowerBound="1" upperBound="-1" changeable="true" resolveProxies="true">
+          <refId refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/ColumnRefConstraint/includedColumns"/>
+          <type refIdString="http://www.csi.it/mddtools/rdbmdl/TableColumn" reference="http://www.csi.it/mddtools/rdbmdl/TableColumn"/>
+        </references>
+        <superTypes refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/Constraint" reference="http://www.csi.it/mddtools/rdbmdl/constraints/Constraint"/>
+        <subTypes refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/ForeignKey" reference="http://www.csi.it/mddtools/rdbmdl/constraints/ForeignKey"/>
+        <subTypes refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/UniqueConstraint" reference="http://www.csi.it/mddtools/rdbmdl/constraints/UniqueConstraint"/>
+      </classes>
+      <classes _imageResource="/icons/ecore/DAbstractClass.gif" _imageFileName="ecore/DAbstractClass.gif" name="Constraint" abstract="true">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/Constraint" referencedBy="//@rootPackages.1/@subPackages.0/@classes.0/@superTypes.0 //@rootPackages.1/@subPackages.0/@classes.1/@superTypes.0 //@rootPackages.1/@subPackages.0/@classes.4/@superTypes.0 //@rootPackages.1/@classes.4/@subTypes.1"/>
+        <superTypes refIdString="http://www.csi.it/mddtools/rdbmdl/NamedElement" reference="http://www.csi.it/mddtools/rdbmdl/NamedElement"/>
+        <subTypes refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/CheckConstraint" reference="http://www.csi.it/mddtools/rdbmdl/constraints/CheckConstraint"/>
+        <subTypes refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/ColumnRefConstraint" reference="http://www.csi.it/mddtools/rdbmdl/constraints/ColumnRefConstraint"/>
+        <subTypes refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/Index" reference="http://www.csi.it/mddtools/rdbmdl/constraints/Index"/>
+      </classes>
+      <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="ForeignKey">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/ForeignKey" referencedBy="//@rootPackages.1/@classes.7/@references.2/@type //@rootPackages.1/@subPackages.0/@classes.1/@subTypes.0"/>
+        <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="referredUC" _cardinality="1" ordered="true" unique="true" lowerBound="1" upperBound="1" changeable="true" resolveProxies="true">
+          <refId refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/ForeignKey/referredUC"/>
+          <type refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/UniqueConstraint" reference="http://www.csi.it/mddtools/rdbmdl/constraints/UniqueConstraint"/>
+        </references>
+        <superTypes refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/ColumnRefConstraint" reference="http://www.csi.it/mddtools/rdbmdl/constraints/ColumnRefConstraint"/>
+      </classes>
+      <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="Index">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/Index" referencedBy="//@rootPackages.1/@classes.7/@references.3/@type //@rootPackages.1/@subPackages.0/@classes.2/@subTypes.2"/>
+        <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="indexedColumns" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" containment="true" resolveProxies="true">
+          <refId refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/Index/indexedColumns"/>
+          <type refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/IndexedColumn" reference="http://www.csi.it/mddtools/rdbmdl/constraints/IndexedColumn"/>
+        </references>
+        <superTypes refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/Constraint" reference="http://www.csi.it/mddtools/rdbmdl/constraints/Constraint"/>
+      </classes>
+      <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="IndexedColumn">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/IndexedColumn" referencedBy="//@rootPackages.1/@subPackages.0/@classes.4/@references.0/@type //@rootPackages.1/@classes.4/@subTypes.3"/>
+        <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="refColumn" _cardinality="1" ordered="true" unique="true" lowerBound="1" upperBound="1" changeable="true" resolveProxies="true">
+          <refId refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/IndexedColumn/refColumn"/>
+          <type refIdString="http://www.csi.it/mddtools/rdbmdl/TableColumn" reference="http://www.csi.it/mddtools/rdbmdl/TableColumn"/>
+        </references>
+        <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="ascending" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+          <refId refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/IndexedColumn/ascending"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EBoolean" reference="http://www.eclipse.org/emf/2002/Ecore/EBoolean"/>
+        </attributes>
+        <superTypes refIdString="http://www.csi.it/mddtools/rdbmdl/NamedElement" reference="http://www.csi.it/mddtools/rdbmdl/NamedElement"/>
+      </classes>
+      <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="PrimaryKey">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/PrimaryKey" referencedBy="//@rootPackages.1/@classes.7/@references.4/@type //@rootPackages.1/@subPackages.0/@classes.7/@subTypes.0"/>
+        <superTypes refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/UniqueConstraint" reference="http://www.csi.it/mddtools/rdbmdl/constraints/UniqueConstraint"/>
+      </classes>
+      <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="UniqueConstraint">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/UniqueConstraint" referencedBy="//@rootPackages.1/@subPackages.0/@classes.3/@references.0/@type //@rootPackages.1/@classes.7/@references.5/@type //@rootPackages.1/@subPackages.0/@classes.6/@superTypes.0 //@rootPackages.1/@subPackages.0/@classes.1/@subTypes.1"/>
+        <superTypes refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/ColumnRefConstraint" reference="http://www.csi.it/mddtools/rdbmdl/constraints/ColumnRefConstraint"/>
+        <subTypes refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/PrimaryKey" reference="http://www.csi.it/mddtools/rdbmdl/constraints/PrimaryKey"/>
+      </classes>
+    </subPackages>
+    <subPackages _imageResource="/icons/ecore/EPackage.gif" _imageFileName="ecore/EPackage.gif" name="datatypes" nsURI="http://www.csi.it/mddtools/rdbmdl/datatypes" nsPrefix="datatypes">
+      <refId refIdString="http://www.csi.it/mddtools/rdbmdl/datatypes"/>
+      <classes _imageResource="/icons/ecore/DAbstractClass.gif" _imageFileName="ecore/DAbstractClass.gif" name="DataType" abstract="true">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/datatypes/DataType" referencedBy="//@rootPackages.1/@subPackages.1/@classes.2/@superTypes.0 //@rootPackages.1/@classes.4/@subTypes.2"/>
+        <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="check" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+          <refId refIdString="http://www.csi.it/mddtools/rdbmdl/datatypes/DataType/check"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+        </attributes>
+        <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="decimalDigits" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+          <refId refIdString="http://www.csi.it/mddtools/rdbmdl/datatypes/DataType/decimalDigits"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EInt" reference="http://www.eclipse.org/emf/2002/Ecore/EInt"/>
+        </attributes>
+        <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="default" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+          <refId refIdString="http://www.csi.it/mddtools/rdbmdl/datatypes/DataType/default"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+        </attributes>
+        <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="nullable" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+          <refId refIdString="http://www.csi.it/mddtools/rdbmdl/datatypes/DataType/nullable"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EBoolean" reference="http://www.eclipse.org/emf/2002/Ecore/EBoolean"/>
+        </attributes>
+        <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="size" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+          <refId refIdString="http://www.csi.it/mddtools/rdbmdl/datatypes/DataType/size"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EInt" reference="http://www.eclipse.org/emf/2002/Ecore/EInt"/>
+        </attributes>
+        <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="var" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+          <refId refIdString="http://www.csi.it/mddtools/rdbmdl/datatypes/DataType/var"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+        </attributes>
+        <superTypes refIdString="http://www.csi.it/mddtools/rdbmdl/NamedElement" reference="http://www.csi.it/mddtools/rdbmdl/NamedElement"/>
+        <subTypes refIdString="http://www.csi.it/mddtools/rdbmdl/datatypes/PrimitiveDataType" reference="http://www.csi.it/mddtools/rdbmdl/datatypes/PrimitiveDataType"/>
+      </classes>
+      <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="Domain">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/datatypes/Domain" referencedBy="//@rootPackages.1/@subPackages.1/@classes.1/@references.0/@type //@rootPackages.1/@classes.8/@references.0/@type //@rootPackages.1/@classes.6/@subTypes.0 //@rootPackages.1/@subPackages.1/@classes.2/@subTypes.0"/>
+        <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="parentDomain" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true" resolveProxies="true">
+          <refId refIdString="http://www.csi.it/mddtools/rdbmdl/datatypes/Domain/parentDomain"/>
+          <type refIdString="http://www.csi.it/mddtools/rdbmdl/datatypes/Domain" reference="http://www.csi.it/mddtools/rdbmdl/datatypes/Domain"/>
+        </references>
+        <superTypes refIdString="http://www.csi.it/mddtools/rdbmdl/SchemaElement" reference="http://www.csi.it/mddtools/rdbmdl/SchemaElement"/>
+        <superTypes refIdString="http://www.csi.it/mddtools/rdbmdl/datatypes/PrimitiveDataType" reference="http://www.csi.it/mddtools/rdbmdl/datatypes/PrimitiveDataType"/>
+      </classes>
+      <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="PrimitiveDataType">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/datatypes/PrimitiveDataType" referencedBy="//@rootPackages.1/@subPackages.1/@classes.1/@superTypes.1 //@rootPackages.1/@classes.8/@references.1/@type //@rootPackages.1/@subPackages.1/@classes.0/@subTypes.0"/>
+        <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="type" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+          <refId refIdString="http://www.csi.it/mddtools/rdbmdl/datatypes/PrimitiveDataType/type"/>
+          <type refIdString="http://www.csi.it/mddtools/rdbmdl/datatypes/PrimitiveTypeCodes" reference="http://www.csi.it/mddtools/rdbmdl/datatypes/PrimitiveTypeCodes"/>
+        </attributes>
+        <superTypes refIdString="http://www.csi.it/mddtools/rdbmdl/datatypes/DataType" reference="http://www.csi.it/mddtools/rdbmdl/datatypes/DataType"/>
+        <subTypes refIdString="http://www.csi.it/mddtools/rdbmdl/datatypes/Domain" reference="http://www.csi.it/mddtools/rdbmdl/datatypes/Domain"/>
+      </classes>
+      <enums _imageResource="/icons/ecore/EEnum.gif" _imageFileName="ecore/EEnum.gif" name="PrimitiveTypeCodes" serializable="true">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/datatypes/PrimitiveTypeCodes" referencedBy="//@rootPackages.1/@subPackages.1/@classes.2/@attributes.0/@type"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="ARRAY" value="2003" literal="ARRAY"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="BIGINT" value="-5" literal="BIGINT"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="BINARY" value="-2" literal="BINARY"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="BIT" value="-7" literal="BIT"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="BLOB" value="2004" literal="BLOB"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="BOOLEAN" value="16" literal="BOOLEAN"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="CHAR" value="1" literal="CHAR"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="CLOB" value="2005" literal="CLOB"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="DATALINK" value="70" literal="DATALINK"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="DATE" value="91" literal="DATE"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="DECIMAL" value="3" literal="DECIMAL"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="DISTINCT" value="2001" literal="DISTINCT"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="DOUBLE" value="8" literal="DOUBLE"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="FLOAT" value="6" literal="FLOAT"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="INTEGER" value="4" literal="INTEGER"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="JAVA_OBJECT" value="2000" literal="JAVA_OBJECT"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="LONGNVARCHAR" value="-16" literal="LONGNVARCHAR"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="LONGVARBINARY" value="-4" literal="LONGVARBINARY"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="LONGVARCHAR" value="-1" literal="LONGVARCHAR"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="NCHAR" value="-15" literal="NCHAR"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="NCLOB" value="2011" literal="NCLOB"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="NULL" literal="NULL"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="NUMERIC" value="2" literal="NUMERIC"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="NVARCHAR" value="-9" literal="NVARCHAR"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="OTHER" value="1111" literal="OTHER"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="REAL" value="7" literal="REAL"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="REF" value="2006" literal="REF"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="ROWID" value="-8" literal="ROWID"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="SMALLINT" value="5" literal="SMALLINT"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="SQLXML" value="2009" literal="SQLXML"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="STRUCT" value="2002" literal="STRUCT"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="TIME" value="92" literal="TIME"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="TIMESTAMP" value="93" literal="TIMESTAMP"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="TINYINT" value="-6" literal="TINYINT"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="VARBINARY" value="2003" literal="VARBINARY"/>
+        <literals _imageResource="/icons/ecore/EEnumLiteral.gif" _imageFileName="ecore/EEnumLiteral.gif" name="VARCHAR" value="12" literal="VARCHAR"/>
+      </enums>
+    </subPackages>
+    <subPackages _imageResource="/icons/ecore/EPackage.gif" _imageFileName="ecore/EPackage.gif" name="view" nsURI="http://www.csi.it/mddtools/rdbmdl/view" nsPrefix="view">
+      <refId refIdString="http://www.csi.it/mddtools/rdbmdl/view"/>
+      <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="ReferencedViewColumn">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/view/ReferencedViewColumn" referencedBy="//@rootPackages.1/@subPackages.2/@classes.3/@subTypes.0"/>
+        <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="refColumn" _cardinality="1" ordered="true" unique="true" lowerBound="1" upperBound="1" changeable="true" resolveProxies="true">
+          <refId refIdString="http://www.csi.it/mddtools/rdbmdl/view/ReferencedViewColumn/refColumn"/>
+          <type refIdString="http://www.csi.it/mddtools/rdbmdl/Column" reference="http://www.csi.it/mddtools/rdbmdl/Column"/>
+        </references>
+        <superTypes refIdString="http://www.csi.it/mddtools/rdbmdl/view/ViewColumn" reference="http://www.csi.it/mddtools/rdbmdl/view/ViewColumn"/>
+      </classes>
+      <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="View">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/view/View" referencedBy="//@rootPackages.1/@classes.3/@subTypes.1"/>
+        <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="columns" _cardinality="1..*" ordered="true" unique="true" lowerBound="1" upperBound="-1" changeable="true" containment="true" resolveProxies="true">
+          <refId refIdString="http://www.csi.it/mddtools/rdbmdl/view/View/columns"/>
+          <type refIdString="http://www.csi.it/mddtools/rdbmdl/view/ViewColumn" reference="http://www.csi.it/mddtools/rdbmdl/view/ViewColumn"/>
+        </references>
+        <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="referencedTablesAndViews" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" containment="true" resolveProxies="true">
+          <refId refIdString="http://www.csi.it/mddtools/rdbmdl/view/View/referencedTablesAndViews"/>
+          <type refIdString="http://www.csi.it/mddtools/rdbmdl/view/ViewAlias" reference="http://www.csi.it/mddtools/rdbmdl/view/ViewAlias"/>
+        </references>
+        <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="ddl" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+          <refId refIdString="http://www.csi.it/mddtools/rdbmdl/view/View/ddl"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+        </attributes>
+        <superTypes refIdString="http://www.csi.it/mddtools/rdbmdl/NamedColumnSet" reference="http://www.csi.it/mddtools/rdbmdl/NamedColumnSet"/>
+      </classes>
+      <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="ViewAlias">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/view/ViewAlias" referencedBy="//@rootPackages.1/@subPackages.2/@classes.1/@references.1/@type //@rootPackages.1/@classes.4/@subTypes.7"/>
+        <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="referencedTableOrView" _cardinality="1" ordered="true" unique="true" lowerBound="1" upperBound="1" changeable="true" resolveProxies="true">
+          <refId refIdString="http://www.csi.it/mddtools/rdbmdl/view/ViewAlias/referencedTableOrView"/>
+          <type refIdString="http://www.csi.it/mddtools/rdbmdl/NamedColumnSet" reference="http://www.csi.it/mddtools/rdbmdl/NamedColumnSet"/>
+        </references>
+        <superTypes refIdString="http://www.csi.it/mddtools/rdbmdl/NamedElement" reference="http://www.csi.it/mddtools/rdbmdl/NamedElement"/>
+      </classes>
+      <classes _imageResource="/icons/ecore/DAbstractClass.gif" _imageFileName="ecore/DAbstractClass.gif" name="ViewColumn" abstract="true">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/view/ViewColumn" referencedBy="//@rootPackages.1/@subPackages.2/@classes.0/@superTypes.0 //@rootPackages.1/@subPackages.2/@classes.1/@references.0/@type //@rootPackages.1/@subPackages.2/@classes.4/@superTypes.0 //@rootPackages.1/@classes.0/@subTypes.1"/>
+        <superTypes refIdString="http://www.csi.it/mddtools/rdbmdl/Column" reference="http://www.csi.it/mddtools/rdbmdl/Column"/>
+        <subTypes refIdString="http://www.csi.it/mddtools/rdbmdl/view/ReferencedViewColumn" reference="http://www.csi.it/mddtools/rdbmdl/view/ReferencedViewColumn"/>
+        <subTypes refIdString="http://www.csi.it/mddtools/rdbmdl/view/ViewExpressionColumn" reference="http://www.csi.it/mddtools/rdbmdl/view/ViewExpressionColumn"/>
+      </classes>
+      <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="ViewExpressionColumn">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/view/ViewExpressionColumn" referencedBy="//@rootPackages.1/@subPackages.2/@classes.3/@subTypes.1"/>
+        <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="expression" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+          <refId refIdString="http://www.csi.it/mddtools/rdbmdl/view/ViewExpressionColumn/expression"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+        </attributes>
+        <superTypes refIdString="http://www.csi.it/mddtools/rdbmdl/view/ViewColumn" reference="http://www.csi.it/mddtools/rdbmdl/view/ViewColumn"/>
+      </classes>
+    </subPackages>
+    <classes _imageResource="/icons/ecore/DAbstractClass.gif" _imageFileName="ecore/DAbstractClass.gif" name="Column" abstract="true">
+      <refId refIdString="http://www.csi.it/mddtools/rdbmdl/Column" referencedBy="//@rootPackages.1/@subPackages.2/@classes.3/@superTypes.0 //@rootPackages.1/@classes.8/@superTypes.0 //@rootPackages.1/@subPackages.2/@classes.0/@references.0/@type //@rootPackages.1/@classes.4/@subTypes.0"/>
+      <superTypes refIdString="http://www.csi.it/mddtools/rdbmdl/NamedElement" reference="http://www.csi.it/mddtools/rdbmdl/NamedElement"/>
+      <subTypes refIdString="http://www.csi.it/mddtools/rdbmdl/TableColumn" reference="http://www.csi.it/mddtools/rdbmdl/TableColumn"/>
+      <subTypes refIdString="http://www.csi.it/mddtools/rdbmdl/view/ViewColumn" reference="http://www.csi.it/mddtools/rdbmdl/view/ViewColumn"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="Element">
+      <refId refIdString="http://www.csi.it/mddtools/rdbmdl/Element" referencedBy="//@rootPackages.1/@classes.1/@references.0/@type //@rootPackages.1/@classes.4/@superTypes.0"/>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="parent" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true" resolveProxies="true">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/Element/parent"/>
+        <type refIdString="http://www.csi.it/mddtools/rdbmdl/Element" reference="http://www.csi.it/mddtools/rdbmdl/Element"/>
+      </references>
+      <subTypes refIdString="http://www.csi.it/mddtools/rdbmdl/NamedElement" reference="http://www.csi.it/mddtools/rdbmdl/NamedElement"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="Model">
+      <refId refIdString="http://www.csi.it/mddtools/rdbmdl/Model" referencedBy="//@rootPackages.1/@classes.4/@subTypes.4"/>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="schemas" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" containment="true" resolveProxies="true">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/Model/schemas"/>
+        <type refIdString="http://www.csi.it/mddtools/rdbmdl/Schema" reference="http://www.csi.it/mddtools/rdbmdl/Schema"/>
+      </references>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="server_id" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/Model/server_id"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+      </attributes>
+      <superTypes refIdString="http://www.csi.it/mddtools/rdbmdl/NamedElement" reference="http://www.csi.it/mddtools/rdbmdl/NamedElement"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/DAbstractClass.gif" _imageFileName="ecore/DAbstractClass.gif" name="NamedColumnSet" abstract="true">
+      <refId refIdString="http://www.csi.it/mddtools/rdbmdl/NamedColumnSet" referencedBy="//@rootPackages.1/@classes.7/@superTypes.0 //@rootPackages.1/@subPackages.2/@classes.2/@references.0/@type //@rootPackages.1/@subPackages.2/@classes.1/@superTypes.0 //@rootPackages.1/@classes.6/@subTypes.1"/>
+      <superTypes refIdString="http://www.csi.it/mddtools/rdbmdl/SchemaElement" reference="http://www.csi.it/mddtools/rdbmdl/SchemaElement"/>
+      <subTypes refIdString="http://www.csi.it/mddtools/rdbmdl/Table" reference="http://www.csi.it/mddtools/rdbmdl/Table"/>
+      <subTypes refIdString="http://www.csi.it/mddtools/rdbmdl/view/View" reference="http://www.csi.it/mddtools/rdbmdl/view/View"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/DAbstractClass.gif" _imageFileName="ecore/DAbstractClass.gif" name="NamedElement" abstract="true">
+      <refId refIdString="http://www.csi.it/mddtools/rdbmdl/NamedElement" referencedBy="//@rootPackages.1/@subPackages.2/@classes.2/@superTypes.0 //@rootPackages.1/@subPackages.0/@classes.5/@superTypes.0 //@rootPackages.1/@classes.0/@superTypes.0 //@rootPackages.1/@subPackages.0/@classes.2/@superTypes.0 //@rootPackages.1/@subPackages.1/@classes.0/@superTypes.0 //@rootPackages.1/@classes.2/@superTypes.0 //@rootPackages.1/@classes.6/@superTypes.0 //@rootPackages.1/@classes.5/@superTypes.0 //@rootPackages.1/@classes.1/@subTypes.0"/>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="name" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/NamedElement/name"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+      </attributes>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="uid" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true" iD="true">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/NamedElement/uid"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+      </attributes>
+      <superTypes refIdString="http://www.csi.it/mddtools/rdbmdl/Element" reference="http://www.csi.it/mddtools/rdbmdl/Element"/>
+      <subTypes refIdString="http://www.csi.it/mddtools/rdbmdl/Column" reference="http://www.csi.it/mddtools/rdbmdl/Column"/>
+      <subTypes refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/Constraint" reference="http://www.csi.it/mddtools/rdbmdl/constraints/Constraint"/>
+      <subTypes refIdString="http://www.csi.it/mddtools/rdbmdl/datatypes/DataType" reference="http://www.csi.it/mddtools/rdbmdl/datatypes/DataType"/>
+      <subTypes refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/IndexedColumn" reference="http://www.csi.it/mddtools/rdbmdl/constraints/IndexedColumn"/>
+      <subTypes refIdString="http://www.csi.it/mddtools/rdbmdl/Model" reference="http://www.csi.it/mddtools/rdbmdl/Model"/>
+      <subTypes refIdString="http://www.csi.it/mddtools/rdbmdl/Schema" reference="http://www.csi.it/mddtools/rdbmdl/Schema"/>
+      <subTypes refIdString="http://www.csi.it/mddtools/rdbmdl/SchemaElement" reference="http://www.csi.it/mddtools/rdbmdl/SchemaElement"/>
+      <subTypes refIdString="http://www.csi.it/mddtools/rdbmdl/view/ViewAlias" reference="http://www.csi.it/mddtools/rdbmdl/view/ViewAlias"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="Schema">
+      <refId refIdString="http://www.csi.it/mddtools/rdbmdl/Schema" referencedBy="//@rootPackages.1/@classes.2/@references.0/@type //@rootPackages.0/@classes.3/@references.1/@type //@rootPackages.1/@classes.4/@subTypes.5"/>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="elements" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" containment="true" resolveProxies="true">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/Schema/elements"/>
+        <type refIdString="http://www.csi.it/mddtools/rdbmdl/SchemaElement" reference="http://www.csi.it/mddtools/rdbmdl/SchemaElement"/>
+      </references>
+      <superTypes refIdString="http://www.csi.it/mddtools/rdbmdl/NamedElement" reference="http://www.csi.it/mddtools/rdbmdl/NamedElement"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/DAbstractClass.gif" _imageFileName="ecore/DAbstractClass.gif" name="SchemaElement" abstract="true">
+      <refId refIdString="http://www.csi.it/mddtools/rdbmdl/SchemaElement" referencedBy="//@rootPackages.1/@classes.3/@superTypes.0 //@rootPackages.1/@classes.5/@references.0/@type //@rootPackages.1/@subPackages.1/@classes.1/@superTypes.0 //@rootPackages.1/@classes.4/@subTypes.6"/>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="owner" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/SchemaElement/owner"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+      </attributes>
+      <superTypes refIdString="http://www.csi.it/mddtools/rdbmdl/NamedElement" reference="http://www.csi.it/mddtools/rdbmdl/NamedElement"/>
+      <subTypes refIdString="http://www.csi.it/mddtools/rdbmdl/datatypes/Domain" reference="http://www.csi.it/mddtools/rdbmdl/datatypes/Domain"/>
+      <subTypes refIdString="http://www.csi.it/mddtools/rdbmdl/NamedColumnSet" reference="http://www.csi.it/mddtools/rdbmdl/NamedColumnSet"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="Table">
+      <refId refIdString="http://www.csi.it/mddtools/rdbmdl/Table" referencedBy="//@rootPackages.0/@classes.6/@references.3/@type //@rootPackages.1/@classes.3/@subTypes.0"/>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="checks" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" containment="true" resolveProxies="true">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/Table/checks"/>
+        <type refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/CheckConstraint" reference="http://www.csi.it/mddtools/rdbmdl/constraints/CheckConstraint"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="columns" _cardinality="1..*" ordered="true" unique="true" lowerBound="1" upperBound="-1" changeable="true" containment="true" resolveProxies="true">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/Table/columns"/>
+        <type refIdString="http://www.csi.it/mddtools/rdbmdl/TableColumn" reference="http://www.csi.it/mddtools/rdbmdl/TableColumn"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="foreignKeys" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" containment="true" resolveProxies="true">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/Table/foreignKeys"/>
+        <type refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/ForeignKey" reference="http://www.csi.it/mddtools/rdbmdl/constraints/ForeignKey"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="indices" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" containment="true" resolveProxies="true">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/Table/indices"/>
+        <type refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/Index" reference="http://www.csi.it/mddtools/rdbmdl/constraints/Index"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="primaryKey" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true" containment="true" resolveProxies="true">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/Table/primaryKey"/>
+        <type refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/PrimaryKey" reference="http://www.csi.it/mddtools/rdbmdl/constraints/PrimaryKey"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="uniqueConstraints" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" containment="true">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/Table/uniqueConstraints"/>
+        <type refIdString="http://www.csi.it/mddtools/rdbmdl/constraints/UniqueConstraint" reference="http://www.csi.it/mddtools/rdbmdl/constraints/UniqueConstraint"/>
+      </references>
+      <superTypes refIdString="http://www.csi.it/mddtools/rdbmdl/NamedColumnSet" reference="http://www.csi.it/mddtools/rdbmdl/NamedColumnSet"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="TableColumn">
+      <refId refIdString="http://www.csi.it/mddtools/rdbmdl/TableColumn" referencedBy="//@rootPackages.0/@classes.18/@references.0/@type //@rootPackages.1/@subPackages.0/@classes.5/@references.0/@type //@rootPackages.1/@subPackages.0/@classes.1/@references.0/@type //@rootPackages.1/@classes.7/@references.1/@type //@rootPackages.1/@classes.0/@subTypes.0"/>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="domain" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true" resolveProxies="true">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/TableColumn/domain"/>
+        <type refIdString="http://www.csi.it/mddtools/rdbmdl/datatypes/Domain" reference="http://www.csi.it/mddtools/rdbmdl/datatypes/Domain"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="type" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true" containment="true" resolveProxies="true">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/TableColumn/type"/>
+        <type refIdString="http://www.csi.it/mddtools/rdbmdl/datatypes/PrimitiveDataType" reference="http://www.csi.it/mddtools/rdbmdl/datatypes/PrimitiveDataType"/>
+      </references>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="isForeignKey" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/TableColumn/isForeignKey"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EBooleanObject" reference="http://www.eclipse.org/emf/2002/Ecore/EBooleanObject"/>
+      </attributes>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="isPrimaryKey" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.csi.it/mddtools/rdbmdl/TableColumn/isPrimaryKey"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EBooleanObject" reference="http://www.eclipse.org/emf/2002/Ecore/EBooleanObject"/>
+      </attributes>
+      <superTypes refIdString="http://www.csi.it/mddtools/rdbmdl/Column" reference="http://www.csi.it/mddtools/rdbmdl/Column"/>
+    </classes>
+  </rootPackages>
+  <rootPackages _imageResource="/icons/ecore/EPackage.gif" _imageFileName="ecore/EPackage.gif" name="ecore" nsURI="http://www.eclipse.org/emf/2002/Ecore" nsPrefix="ecore">
+    <refId refIdString="http://www.eclipse.org/emf/2002/Ecore"/>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="EAnnotation" instanceClassName="org.eclipse.emf.ecore.EAnnotation" instanceTypeName="org.eclipse.emf.ecore.EAnnotation">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EAnnotation" referencedBy="//@rootPackages.2/@classes.9/@references.0/@type //@rootPackages.2/@classes.9/@operations.0/@type //@rootPackages.2/@classes.9/@subTypes.0"/>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="contents" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" containment="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EAnnotation/contents"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EObject" reference="http://www.eclipse.org/emf/2002/Ecore/EObject"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="details" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" containment="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EAnnotation/details"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EStringToStringMapEntry" reference="http://www.eclipse.org/emf/2002/Ecore/EStringToStringMapEntry"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eModelElement" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true" transient="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EAnnotation/eModelElement" referencedBy="//@rootPackages.2/@classes.9/@references.0/@opposite"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EModelElement" reference="http://www.eclipse.org/emf/2002/Ecore/EModelElement"/>
+        <opposite refIdString="http://www.eclipse.org/emf/2002/Ecore/EModelElement/eAnnotations" reference="http://www.eclipse.org/emf/2002/Ecore/EModelElement/eAnnotations"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="references" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" resolveProxies="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EAnnotation/references"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EObject" reference="http://www.eclipse.org/emf/2002/Ecore/EObject"/>
+      </references>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="source" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EAnnotation/source"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+      </attributes>
+      <superTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/EModelElement" reference="http://www.eclipse.org/emf/2002/Ecore/EModelElement"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="EAttribute" instanceClassName="org.eclipse.emf.ecore.EAttribute" instanceTypeName="org.eclipse.emf.ecore.EAttribute">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EAttribute" referencedBy="//@rootPackages.2/@classes.15/@references.0/@type //@rootPackages.2/@classes.2/@references.0/@type //@rootPackages.2/@classes.2/@references.7/@type //@rootPackages.2/@classes.2/@references.9/@type //@rootPackages.2/@classes.17/@subTypes.0"/>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eAttributeType" _cardinality="1" ordered="true" unique="true" lowerBound="1" upperBound="1" volatile="true" transient="true" derived="true" resolveProxies="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EAttribute/eAttributeType"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EDataType" reference="http://www.eclipse.org/emf/2002/Ecore/EDataType"/>
+      </references>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="iD" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EAttribute/iD"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EBoolean" reference="http://www.eclipse.org/emf/2002/Ecore/EBoolean"/>
+      </attributes>
+      <superTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature" reference="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="EClass" instanceClassName="org.eclipse.emf.ecore.EClass" instanceTypeName="org.eclipse.emf.ecore.EClass">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass" referencedBy="//@rootPackages.2/@classes.11/@operations.1/@type //@rootPackages.2/@classes.2/@references.6/@type //@rootPackages.2/@classes.2/@references.13/@type //@rootPackages.2/@classes.17/@references.0/@type //@rootPackages.2/@classes.15/@references.2/@type //@rootPackages.2/@classes.7/@operations.1/@parameters.0/@type //@rootPackages.2/@classes.12/@references.0/@type //@rootPackages.2/@classes.2/@operations.4/@parameters.0/@type //@rootPackages.2/@classes.3/@subTypes.0"/>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="getEStructuralFeature" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass/getEStructuralFeature"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature" reference="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature"/>
+        <parameters _imageResource="/icons/ecore/EParameter.gif" _imageFileName="ecore/EParameter.gif" name="featureID" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+          <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass/getEStructuralFeature/featureID"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EInt" reference="http://www.eclipse.org/emf/2002/Ecore/EInt"/>
+        </parameters>
+      </operations>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="getEStructuralFeature" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass/getEStructuralFeature"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature" reference="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature"/>
+        <parameters _imageResource="/icons/ecore/EParameter.gif" _imageFileName="ecore/EParameter.gif" name="featureName" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+          <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass/getEStructuralFeature/featureName"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+        </parameters>
+      </operations>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="getFeatureCount" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass/getFeatureCount"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EInt" reference="http://www.eclipse.org/emf/2002/Ecore/EInt"/>
+      </operations>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="getFeatureID" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass/getFeatureID"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EInt" reference="http://www.eclipse.org/emf/2002/Ecore/EInt"/>
+        <parameters _imageResource="/icons/ecore/EParameter.gif" _imageFileName="ecore/EParameter.gif" name="feature" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+          <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass/getFeatureID/feature"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature" reference="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature"/>
+        </parameters>
+      </operations>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="isSuperTypeOf" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass/isSuperTypeOf"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EBoolean" reference="http://www.eclipse.org/emf/2002/Ecore/EBoolean"/>
+        <parameters _imageResource="/icons/ecore/EParameter.gif" _imageFileName="ecore/EParameter.gif" name="someClass" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+          <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass/isSuperTypeOf/someClass"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass" reference="http://www.eclipse.org/emf/2002/Ecore/EClass"/>
+        </parameters>
+      </operations>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eAllAttributes" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" volatile="true" transient="true" derived="true" resolveProxies="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass/eAllAttributes"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EAttribute" reference="http://www.eclipse.org/emf/2002/Ecore/EAttribute"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eAllContainments" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" volatile="true" transient="true" derived="true" resolveProxies="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass/eAllContainments"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EReference" reference="http://www.eclipse.org/emf/2002/Ecore/EReference"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eAllGenericSuperTypes" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" volatile="true" transient="true" derived="true" resolveProxies="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass/eAllGenericSuperTypes"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EGenericType" reference="http://www.eclipse.org/emf/2002/Ecore/EGenericType"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eAllOperations" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" volatile="true" transient="true" derived="true" resolveProxies="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass/eAllOperations"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EOperation" reference="http://www.eclipse.org/emf/2002/Ecore/EOperation"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eAllReferences" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" volatile="true" transient="true" derived="true" resolveProxies="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass/eAllReferences"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EReference" reference="http://www.eclipse.org/emf/2002/Ecore/EReference"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eAllStructuralFeatures" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" volatile="true" transient="true" derived="true" resolveProxies="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass/eAllStructuralFeatures"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature" reference="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eAllSuperTypes" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" volatile="true" transient="true" derived="true" resolveProxies="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass/eAllSuperTypes"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass" reference="http://www.eclipse.org/emf/2002/Ecore/EClass"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eAttributes" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" volatile="true" transient="true" derived="true" resolveProxies="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass/eAttributes"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EAttribute" reference="http://www.eclipse.org/emf/2002/Ecore/EAttribute"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eGenericSuperTypes" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" unsettable="true" containment="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass/eGenericSuperTypes"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EGenericType" reference="http://www.eclipse.org/emf/2002/Ecore/EGenericType"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eIDAttribute" _cardinality="0..1" ordered="true" unique="true" upperBound="1" volatile="true" transient="true" derived="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass/eIDAttribute"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EAttribute" reference="http://www.eclipse.org/emf/2002/Ecore/EAttribute"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eOperations" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" containment="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass/eOperations" referencedBy="//@rootPackages.2/@classes.12/@references.0/@opposite"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EOperation" reference="http://www.eclipse.org/emf/2002/Ecore/EOperation"/>
+        <opposite refIdString="http://www.eclipse.org/emf/2002/Ecore/EOperation/eContainingClass" reference="http://www.eclipse.org/emf/2002/Ecore/EOperation/eContainingClass"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eReferences" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" volatile="true" transient="true" derived="true" resolveProxies="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass/eReferences"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EReference" reference="http://www.eclipse.org/emf/2002/Ecore/EReference"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eStructuralFeatures" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" containment="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass/eStructuralFeatures" referencedBy="//@rootPackages.2/@classes.17/@references.0/@opposite"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature" reference="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature"/>
+        <opposite refIdString="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature/eContainingClass" reference="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature/eContainingClass"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eSuperTypes" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" unsettable="true" resolveProxies="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass/eSuperTypes"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass" reference="http://www.eclipse.org/emf/2002/Ecore/EClass"/>
+      </references>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="abstract" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass/abstract"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EBoolean" reference="http://www.eclipse.org/emf/2002/Ecore/EBoolean"/>
+      </attributes>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="interface" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass/interface"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EBoolean" reference="http://www.eclipse.org/emf/2002/Ecore/EBoolean"/>
+      </attributes>
+      <superTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/EClassifier" reference="http://www.eclipse.org/emf/2002/Ecore/EClassifier"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/DAbstractClass.gif" _imageFileName="ecore/DAbstractClass.gif" name="EClassifier" instanceClassName="org.eclipse.emf.ecore.EClassifier" instanceTypeName="org.eclipse.emf.ecore.EClassifier" abstract="true">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClassifier" referencedBy="//@rootPackages.2/@classes.4/@superTypes.0 //@rootPackages.2/@classes.8/@references.0/@type //@rootPackages.2/@classes.13/@operations.0/@type //@rootPackages.2/@classes.2/@superTypes.0 //@rootPackages.2/@classes.8/@references.2/@type //@rootPackages.2/@classes.12/@references.1/@type //@rootPackages.2/@classes.13/@references.0/@type //@rootPackages.2/@classes.19/@references.1/@type //@rootPackages.2/@classes.10/@subTypes.0"/>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="getClassifierID" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClassifier/getClassifierID"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EInt" reference="http://www.eclipse.org/emf/2002/Ecore/EInt"/>
+      </operations>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="isInstance" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClassifier/isInstance"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EBoolean" reference="http://www.eclipse.org/emf/2002/Ecore/EBoolean"/>
+        <parameters _imageResource="/icons/ecore/EParameter.gif" _imageFileName="ecore/EParameter.gif" name="object" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+          <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClassifier/isInstance/object"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EJavaObject" reference="http://www.eclipse.org/emf/2002/Ecore/EJavaObject"/>
+        </parameters>
+      </operations>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="ePackage" _cardinality="0..1" ordered="true" unique="true" upperBound="1" transient="true" resolveProxies="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClassifier/ePackage" referencedBy="//@rootPackages.2/@classes.13/@references.0/@opposite"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EPackage" reference="http://www.eclipse.org/emf/2002/Ecore/EPackage"/>
+        <opposite refIdString="http://www.eclipse.org/emf/2002/Ecore/EPackage/eClassifiers" reference="http://www.eclipse.org/emf/2002/Ecore/EPackage/eClassifiers"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eTypeParameters" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" containment="true" resolveProxies="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClassifier/eTypeParameters"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/ETypeParameter" reference="http://www.eclipse.org/emf/2002/Ecore/ETypeParameter"/>
+      </references>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="defaultValue" _cardinality="0..1" ordered="true" unique="true" upperBound="1" volatile="true" transient="true" derived="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClassifier/defaultValue"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EJavaObject" reference="http://www.eclipse.org/emf/2002/Ecore/EJavaObject"/>
+      </attributes>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="instanceClass" _cardinality="0..1" ordered="true" unique="true" upperBound="1" volatile="true" transient="true" derived="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClassifier/instanceClass"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EJavaClass" reference="http://www.eclipse.org/emf/2002/Ecore/EJavaClass"/>
+      </attributes>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="instanceClassName" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true" volatile="true" unsettable="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClassifier/instanceClassName"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+      </attributes>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="instanceTypeName" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true" volatile="true" unsettable="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EClassifier/instanceTypeName"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+      </attributes>
+      <superTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/ENamedElement" reference="http://www.eclipse.org/emf/2002/Ecore/ENamedElement"/>
+      <subTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass" reference="http://www.eclipse.org/emf/2002/Ecore/EClass"/>
+      <subTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/EDataType" reference="http://www.eclipse.org/emf/2002/Ecore/EDataType"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="EDataType" instanceClassName="org.eclipse.emf.ecore.EDataType" instanceTypeName="org.eclipse.emf.ecore.EDataType">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EDataType" referencedBy="//@rootPackages.2/@classes.1/@references.0/@type //@rootPackages.2/@classes.5/@superTypes.0 //@rootPackages.2/@classes.7/@operations.0/@parameters.0/@type //@rootPackages.2/@classes.7/@operations.2/@parameters.0/@type //@rootPackages.2/@classes.3/@subTypes.1"/>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="serializable" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true" defaultValueLiteral="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EDataType/serializable"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EBoolean" reference="http://www.eclipse.org/emf/2002/Ecore/EBoolean"/>
+      </attributes>
+      <superTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/EClassifier" reference="http://www.eclipse.org/emf/2002/Ecore/EClassifier"/>
+      <subTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/EEnum" reference="http://www.eclipse.org/emf/2002/Ecore/EEnum"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="EEnum" instanceClassName="org.eclipse.emf.ecore.EEnum" instanceTypeName="org.eclipse.emf.ecore.EEnum">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EEnum" referencedBy="//@rootPackages.2/@classes.6/@references.0/@type //@rootPackages.2/@classes.4/@subTypes.0"/>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="getEEnumLiteral" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EEnum/getEEnumLiteral"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EEnumLiteral" reference="http://www.eclipse.org/emf/2002/Ecore/EEnumLiteral"/>
+        <parameters _imageResource="/icons/ecore/EParameter.gif" _imageFileName="ecore/EParameter.gif" name="name" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+          <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EEnum/getEEnumLiteral/name"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+        </parameters>
+      </operations>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="getEEnumLiteral" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EEnum/getEEnumLiteral"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EEnumLiteral" reference="http://www.eclipse.org/emf/2002/Ecore/EEnumLiteral"/>
+        <parameters _imageResource="/icons/ecore/EParameter.gif" _imageFileName="ecore/EParameter.gif" name="value" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+          <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EEnum/getEEnumLiteral/value"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EInt" reference="http://www.eclipse.org/emf/2002/Ecore/EInt"/>
+        </parameters>
+      </operations>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="getEEnumLiteralByLiteral" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EEnum/getEEnumLiteralByLiteral"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EEnumLiteral" reference="http://www.eclipse.org/emf/2002/Ecore/EEnumLiteral"/>
+        <parameters _imageResource="/icons/ecore/EParameter.gif" _imageFileName="ecore/EParameter.gif" name="literal" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+          <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EEnum/getEEnumLiteralByLiteral/literal"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+        </parameters>
+      </operations>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eLiterals" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" containment="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EEnum/eLiterals" referencedBy="//@rootPackages.2/@classes.6/@references.0/@opposite"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EEnumLiteral" reference="http://www.eclipse.org/emf/2002/Ecore/EEnumLiteral"/>
+        <opposite refIdString="http://www.eclipse.org/emf/2002/Ecore/EEnumLiteral/eEnum" reference="http://www.eclipse.org/emf/2002/Ecore/EEnumLiteral/eEnum"/>
+      </references>
+      <superTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/EDataType" reference="http://www.eclipse.org/emf/2002/Ecore/EDataType"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="EEnumLiteral" instanceClassName="org.eclipse.emf.ecore.EEnumLiteral" instanceTypeName="org.eclipse.emf.ecore.EEnumLiteral">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EEnumLiteral" referencedBy="//@rootPackages.2/@classes.5/@operations.1/@type //@rootPackages.2/@classes.5/@operations.2/@type //@rootPackages.2/@classes.5/@operations.0/@type //@rootPackages.2/@classes.5/@references.0/@type //@rootPackages.2/@classes.10/@subTypes.1"/>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eEnum" _cardinality="0..1" ordered="true" unique="true" upperBound="1" transient="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EEnumLiteral/eEnum" referencedBy="//@rootPackages.2/@classes.5/@references.0/@opposite"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EEnum" reference="http://www.eclipse.org/emf/2002/Ecore/EEnum"/>
+        <opposite refIdString="http://www.eclipse.org/emf/2002/Ecore/EEnum/eLiterals" reference="http://www.eclipse.org/emf/2002/Ecore/EEnum/eLiterals"/>
+      </references>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="instance" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true" transient="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EEnumLiteral/instance"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EEnumerator" reference="http://www.eclipse.org/emf/2002/Ecore/EEnumerator"/>
+      </attributes>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="literal" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EEnumLiteral/literal"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+      </attributes>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="value" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EEnumLiteral/value"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EInt" reference="http://www.eclipse.org/emf/2002/Ecore/EInt"/>
+      </attributes>
+      <superTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/ENamedElement" reference="http://www.eclipse.org/emf/2002/Ecore/ENamedElement"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="EFactory" instanceClassName="org.eclipse.emf.ecore.EFactory" instanceTypeName="org.eclipse.emf.ecore.EFactory">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EFactory" referencedBy="//@rootPackages.2/@classes.13/@references.1/@type //@rootPackages.2/@classes.9/@subTypes.1"/>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="convertToString" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EFactory/convertToString"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+        <parameters _imageResource="/icons/ecore/EParameter.gif" _imageFileName="ecore/EParameter.gif" name="eDataType" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+          <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EFactory/convertToString/eDataType"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EDataType" reference="http://www.eclipse.org/emf/2002/Ecore/EDataType"/>
+        </parameters>
+        <parameters _imageResource="/icons/ecore/EParameter.gif" _imageFileName="ecore/EParameter.gif" name="instanceValue" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+          <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EFactory/convertToString/instanceValue"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EJavaObject" reference="http://www.eclipse.org/emf/2002/Ecore/EJavaObject"/>
+        </parameters>
+      </operations>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="create" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EFactory/create"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EObject" reference="http://www.eclipse.org/emf/2002/Ecore/EObject"/>
+        <parameters _imageResource="/icons/ecore/EParameter.gif" _imageFileName="ecore/EParameter.gif" name="eClass" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+          <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EFactory/create/eClass"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass" reference="http://www.eclipse.org/emf/2002/Ecore/EClass"/>
+        </parameters>
+      </operations>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="createFromString" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EFactory/createFromString"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EJavaObject" reference="http://www.eclipse.org/emf/2002/Ecore/EJavaObject"/>
+        <parameters _imageResource="/icons/ecore/EParameter.gif" _imageFileName="ecore/EParameter.gif" name="eDataType" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+          <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EFactory/createFromString/eDataType"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EDataType" reference="http://www.eclipse.org/emf/2002/Ecore/EDataType"/>
+        </parameters>
+        <parameters _imageResource="/icons/ecore/EParameter.gif" _imageFileName="ecore/EParameter.gif" name="literalValue" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+          <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EFactory/createFromString/literalValue"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+        </parameters>
+      </operations>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="ePackage" _cardinality="1" ordered="true" unique="true" lowerBound="1" upperBound="1" changeable="true" transient="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EFactory/ePackage" referencedBy="//@rootPackages.2/@classes.13/@references.1/@opposite"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EPackage" reference="http://www.eclipse.org/emf/2002/Ecore/EPackage"/>
+        <opposite refIdString="http://www.eclipse.org/emf/2002/Ecore/EPackage/eFactoryInstance" reference="http://www.eclipse.org/emf/2002/Ecore/EPackage/eFactoryInstance"/>
+      </references>
+      <superTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/EModelElement" reference="http://www.eclipse.org/emf/2002/Ecore/EModelElement"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="EGenericType" instanceClassName="org.eclipse.emf.ecore.EGenericType" instanceTypeName="org.eclipse.emf.ecore.EGenericType">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EGenericType" referencedBy="//@rootPackages.2/@classes.19/@references.0/@type //@rootPackages.2/@classes.8/@references.3/@type //@rootPackages.2/@classes.2/@references.2/@type //@rootPackages.2/@classes.8/@references.5/@type //@rootPackages.2/@classes.18/@references.0/@type //@rootPackages.2/@classes.2/@references.8/@type //@rootPackages.2/@classes.12/@references.2/@type //@rootPackages.2/@classes.8/@references.1/@type //@rootPackages.2/@classes.11/@subTypes.0"/>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eClassifier" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true" resolveProxies="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EGenericType/eClassifier"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EClassifier" reference="http://www.eclipse.org/emf/2002/Ecore/EClassifier"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eLowerBound" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true" containment="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EGenericType/eLowerBound"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EGenericType" reference="http://www.eclipse.org/emf/2002/Ecore/EGenericType"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eRawType" _cardinality="1" ordered="true" unique="true" lowerBound="1" upperBound="1" transient="true" derived="true" resolveProxies="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EGenericType/eRawType"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EClassifier" reference="http://www.eclipse.org/emf/2002/Ecore/EClassifier"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eTypeArguments" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" containment="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EGenericType/eTypeArguments"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EGenericType" reference="http://www.eclipse.org/emf/2002/Ecore/EGenericType"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eTypeParameter" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EGenericType/eTypeParameter"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/ETypeParameter" reference="http://www.eclipse.org/emf/2002/Ecore/ETypeParameter"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eUpperBound" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true" containment="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EGenericType/eUpperBound"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EGenericType" reference="http://www.eclipse.org/emf/2002/Ecore/EGenericType"/>
+      </references>
+      <superTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/EObject" reference="http://www.eclipse.org/emf/2002/Ecore/EObject"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/DAbstractClass.gif" _imageFileName="ecore/DAbstractClass.gif" name="EModelElement" instanceClassName="org.eclipse.emf.ecore.EModelElement" instanceTypeName="org.eclipse.emf.ecore.EModelElement" abstract="true">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EModelElement" referencedBy="//@rootPackages.2/@classes.7/@superTypes.0 //@rootPackages.2/@classes.0/@superTypes.0 //@rootPackages.2/@classes.0/@references.2/@type //@rootPackages.2/@classes.10/@superTypes.0 //@rootPackages.2/@classes.11/@subTypes.1"/>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="getEAnnotation" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EModelElement/getEAnnotation"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EAnnotation" reference="http://www.eclipse.org/emf/2002/Ecore/EAnnotation"/>
+        <parameters _imageResource="/icons/ecore/EParameter.gif" _imageFileName="ecore/EParameter.gif" name="source" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+          <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EModelElement/getEAnnotation/source"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+        </parameters>
+      </operations>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eAnnotations" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" containment="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EModelElement/eAnnotations" referencedBy="//@rootPackages.2/@classes.0/@references.2/@opposite"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EAnnotation" reference="http://www.eclipse.org/emf/2002/Ecore/EAnnotation"/>
+        <opposite refIdString="http://www.eclipse.org/emf/2002/Ecore/EAnnotation/eModelElement" reference="http://www.eclipse.org/emf/2002/Ecore/EAnnotation/eModelElement"/>
+      </references>
+      <superTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/EObject" reference="http://www.eclipse.org/emf/2002/Ecore/EObject"/>
+      <subTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/EAnnotation" reference="http://www.eclipse.org/emf/2002/Ecore/EAnnotation"/>
+      <subTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/EFactory" reference="http://www.eclipse.org/emf/2002/Ecore/EFactory"/>
+      <subTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/ENamedElement" reference="http://www.eclipse.org/emf/2002/Ecore/ENamedElement"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/DAbstractClass.gif" _imageFileName="ecore/DAbstractClass.gif" name="ENamedElement" instanceClassName="org.eclipse.emf.ecore.ENamedElement" instanceTypeName="org.eclipse.emf.ecore.ENamedElement" abstract="true">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/ENamedElement" referencedBy="//@rootPackages.2/@classes.3/@superTypes.0 //@rootPackages.2/@classes.13/@superTypes.0 //@rootPackages.2/@classes.18/@superTypes.0 //@rootPackages.2/@classes.19/@superTypes.0 //@rootPackages.2/@classes.6/@superTypes.0 //@rootPackages.2/@classes.9/@subTypes.2"/>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="name" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/ENamedElement/name"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+      </attributes>
+      <superTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/EModelElement" reference="http://www.eclipse.org/emf/2002/Ecore/EModelElement"/>
+      <subTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/EClassifier" reference="http://www.eclipse.org/emf/2002/Ecore/EClassifier"/>
+      <subTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/EEnumLiteral" reference="http://www.eclipse.org/emf/2002/Ecore/EEnumLiteral"/>
+      <subTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/EPackage" reference="http://www.eclipse.org/emf/2002/Ecore/EPackage"/>
+      <subTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/ETypeParameter" reference="http://www.eclipse.org/emf/2002/Ecore/ETypeParameter"/>
+      <subTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/ETypedElement" reference="http://www.eclipse.org/emf/2002/Ecore/ETypedElement"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="EObject" instanceClassName="org.eclipse.emf.ecore.EObject" instanceTypeName="org.eclipse.emf.ecore.EObject">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EObject" referencedBy="//@rootPackages.2/@classes.7/@operations.1/@type //@rootPackages.2/@classes.8/@superTypes.0 //@rootPackages.2/@classes.11/@operations.2/@type //@rootPackages.2/@classes.0/@references.0/@type //@rootPackages.2/@classes.9/@superTypes.0 //@rootPackages.2/@classes.0/@references.3/@type"/>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="eAllContents" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EObject/eAllContents"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/ETreeIterator" reference="http://www.eclipse.org/emf/2002/Ecore/ETreeIterator"/>
+      </operations>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="eClass" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EObject/eClass"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass" reference="http://www.eclipse.org/emf/2002/Ecore/EClass"/>
+      </operations>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="eContainer" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EObject/eContainer"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EObject" reference="http://www.eclipse.org/emf/2002/Ecore/EObject"/>
+      </operations>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="eContainingFeature" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EObject/eContainingFeature"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature" reference="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature"/>
+      </operations>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="eContainmentFeature" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EObject/eContainmentFeature"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EReference" reference="http://www.eclipse.org/emf/2002/Ecore/EReference"/>
+      </operations>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="eContents" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EObject/eContents"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EEList" reference="http://www.eclipse.org/emf/2002/Ecore/EEList"/>
+      </operations>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="eCrossReferences" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EObject/eCrossReferences"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EEList" reference="http://www.eclipse.org/emf/2002/Ecore/EEList"/>
+      </operations>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="eGet" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EObject/eGet"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EJavaObject" reference="http://www.eclipse.org/emf/2002/Ecore/EJavaObject"/>
+        <parameters _imageResource="/icons/ecore/EParameter.gif" _imageFileName="ecore/EParameter.gif" name="feature" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+          <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EObject/eGet/feature"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature" reference="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature"/>
+        </parameters>
+      </operations>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="eGet" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EObject/eGet"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EJavaObject" reference="http://www.eclipse.org/emf/2002/Ecore/EJavaObject"/>
+        <parameters _imageResource="/icons/ecore/EParameter.gif" _imageFileName="ecore/EParameter.gif" name="feature" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+          <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EObject/eGet/feature"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature" reference="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature"/>
+        </parameters>
+        <parameters _imageResource="/icons/ecore/EParameter.gif" _imageFileName="ecore/EParameter.gif" name="resolve" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+          <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EObject/eGet/resolve"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EBoolean" reference="http://www.eclipse.org/emf/2002/Ecore/EBoolean"/>
+        </parameters>
+      </operations>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="eIsProxy" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EObject/eIsProxy"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EBoolean" reference="http://www.eclipse.org/emf/2002/Ecore/EBoolean"/>
+      </operations>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="eIsSet" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EObject/eIsSet"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EBoolean" reference="http://www.eclipse.org/emf/2002/Ecore/EBoolean"/>
+        <parameters _imageResource="/icons/ecore/EParameter.gif" _imageFileName="ecore/EParameter.gif" name="feature" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+          <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EObject/eIsSet/feature"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature" reference="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature"/>
+        </parameters>
+      </operations>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="eResource" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EObject/eResource"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EResource" reference="http://www.eclipse.org/emf/2002/Ecore/EResource"/>
+      </operations>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="eSet" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EObject/eSet"/>
+        <parameters _imageResource="/icons/ecore/EParameter.gif" _imageFileName="ecore/EParameter.gif" name="feature" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+          <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EObject/eSet/feature"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature" reference="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature"/>
+        </parameters>
+        <parameters _imageResource="/icons/ecore/EParameter.gif" _imageFileName="ecore/EParameter.gif" name="newValue" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+          <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EObject/eSet/newValue"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EJavaObject" reference="http://www.eclipse.org/emf/2002/Ecore/EJavaObject"/>
+        </parameters>
+      </operations>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="eUnset" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EObject/eUnset"/>
+        <parameters _imageResource="/icons/ecore/EParameter.gif" _imageFileName="ecore/EParameter.gif" name="feature" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+          <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EObject/eUnset/feature"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature" reference="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature"/>
+        </parameters>
+      </operations>
+      <subTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/EGenericType" reference="http://www.eclipse.org/emf/2002/Ecore/EGenericType"/>
+      <subTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/EModelElement" reference="http://www.eclipse.org/emf/2002/Ecore/EModelElement"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="EOperation" instanceClassName="org.eclipse.emf.ecore.EOperation" instanceTypeName="org.eclipse.emf.ecore.EOperation">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EOperation" referencedBy="//@rootPackages.2/@classes.2/@references.10/@type //@rootPackages.2/@classes.2/@references.3/@type //@rootPackages.2/@classes.14/@references.0/@type //@rootPackages.2/@classes.19/@subTypes.0"/>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eContainingClass" _cardinality="0..1" ordered="true" unique="true" upperBound="1" transient="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EOperation/eContainingClass" referencedBy="//@rootPackages.2/@classes.2/@references.10/@opposite"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass" reference="http://www.eclipse.org/emf/2002/Ecore/EClass"/>
+        <opposite refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass/eOperations" reference="http://www.eclipse.org/emf/2002/Ecore/EClass/eOperations"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eExceptions" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" unsettable="true" resolveProxies="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EOperation/eExceptions"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EClassifier" reference="http://www.eclipse.org/emf/2002/Ecore/EClassifier"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eGenericExceptions" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" unsettable="true" containment="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EOperation/eGenericExceptions"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EGenericType" reference="http://www.eclipse.org/emf/2002/Ecore/EGenericType"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eParameters" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" containment="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EOperation/eParameters" referencedBy="//@rootPackages.2/@classes.14/@references.0/@opposite"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EParameter" reference="http://www.eclipse.org/emf/2002/Ecore/EParameter"/>
+        <opposite refIdString="http://www.eclipse.org/emf/2002/Ecore/EParameter/eOperation" reference="http://www.eclipse.org/emf/2002/Ecore/EParameter/eOperation"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eTypeParameters" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" containment="true" resolveProxies="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EOperation/eTypeParameters"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/ETypeParameter" reference="http://www.eclipse.org/emf/2002/Ecore/ETypeParameter"/>
+      </references>
+      <superTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/ETypedElement" reference="http://www.eclipse.org/emf/2002/Ecore/ETypedElement"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="EPackage" instanceClassName="org.eclipse.emf.ecore.EPackage" instanceTypeName="org.eclipse.emf.ecore.EPackage">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EPackage" referencedBy="//@rootPackages.2/@classes.13/@references.2/@type //@rootPackages.2/@classes.13/@references.3/@type //@rootPackages.2/@classes.7/@references.0/@type //@rootPackages.2/@classes.3/@references.0/@type //@rootPackages.2/@classes.10/@subTypes.2"/>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="getEClassifier" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EPackage/getEClassifier"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EClassifier" reference="http://www.eclipse.org/emf/2002/Ecore/EClassifier"/>
+        <parameters _imageResource="/icons/ecore/EParameter.gif" _imageFileName="ecore/EParameter.gif" name="name" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+          <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EPackage/getEClassifier/name"/>
+          <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+        </parameters>
+      </operations>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eClassifiers" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" containment="true" resolveProxies="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EPackage/eClassifiers" referencedBy="//@rootPackages.2/@classes.3/@references.0/@opposite"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EClassifier" reference="http://www.eclipse.org/emf/2002/Ecore/EClassifier"/>
+        <opposite refIdString="http://www.eclipse.org/emf/2002/Ecore/EClassifier/ePackage" reference="http://www.eclipse.org/emf/2002/Ecore/EClassifier/ePackage"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eFactoryInstance" _cardinality="1" ordered="true" unique="true" lowerBound="1" upperBound="1" changeable="true" transient="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EPackage/eFactoryInstance" referencedBy="//@rootPackages.2/@classes.7/@references.0/@opposite"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EFactory" reference="http://www.eclipse.org/emf/2002/Ecore/EFactory"/>
+        <opposite refIdString="http://www.eclipse.org/emf/2002/Ecore/EFactory/ePackage" reference="http://www.eclipse.org/emf/2002/Ecore/EFactory/ePackage"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eSubpackages" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" containment="true" resolveProxies="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EPackage/eSubpackages" referencedBy="//@rootPackages.2/@classes.13/@references.3/@opposite"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EPackage" reference="http://www.eclipse.org/emf/2002/Ecore/EPackage"/>
+        <opposite refIdString="http://www.eclipse.org/emf/2002/Ecore/EPackage/eSuperPackage" reference="http://www.eclipse.org/emf/2002/Ecore/EPackage/eSuperPackage"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eSuperPackage" _cardinality="0..1" ordered="true" unique="true" upperBound="1" transient="true" resolveProxies="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EPackage/eSuperPackage" referencedBy="//@rootPackages.2/@classes.13/@references.2/@opposite"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EPackage" reference="http://www.eclipse.org/emf/2002/Ecore/EPackage"/>
+        <opposite refIdString="http://www.eclipse.org/emf/2002/Ecore/EPackage/eSubpackages" reference="http://www.eclipse.org/emf/2002/Ecore/EPackage/eSubpackages"/>
+      </references>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="nsPrefix" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EPackage/nsPrefix"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+      </attributes>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="nsURI" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EPackage/nsURI"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+      </attributes>
+      <superTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/ENamedElement" reference="http://www.eclipse.org/emf/2002/Ecore/ENamedElement"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="EParameter" instanceClassName="org.eclipse.emf.ecore.EParameter" instanceTypeName="org.eclipse.emf.ecore.EParameter">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EParameter" referencedBy="//@rootPackages.2/@classes.12/@references.3/@type //@rootPackages.2/@classes.19/@subTypes.1"/>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eOperation" _cardinality="0..1" ordered="true" unique="true" upperBound="1" transient="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EParameter/eOperation" referencedBy="//@rootPackages.2/@classes.12/@references.3/@opposite"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EOperation" reference="http://www.eclipse.org/emf/2002/Ecore/EOperation"/>
+        <opposite refIdString="http://www.eclipse.org/emf/2002/Ecore/EOperation/eParameters" reference="http://www.eclipse.org/emf/2002/Ecore/EOperation/eParameters"/>
+      </references>
+      <superTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/ETypedElement" reference="http://www.eclipse.org/emf/2002/Ecore/ETypedElement"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="EReference" instanceClassName="org.eclipse.emf.ecore.EReference" instanceTypeName="org.eclipse.emf.ecore.EReference">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EReference" referencedBy="//@rootPackages.2/@classes.2/@references.4/@type //@rootPackages.2/@classes.15/@references.1/@type //@rootPackages.2/@classes.2/@references.11/@type //@rootPackages.2/@classes.2/@references.1/@type //@rootPackages.2/@classes.11/@operations.4/@type //@rootPackages.2/@classes.17/@subTypes.1"/>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eKeys" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" resolveProxies="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EReference/eKeys"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EAttribute" reference="http://www.eclipse.org/emf/2002/Ecore/EAttribute"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eOpposite" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true" resolveProxies="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EReference/eOpposite"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EReference" reference="http://www.eclipse.org/emf/2002/Ecore/EReference"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eReferenceType" _cardinality="1" ordered="true" unique="true" lowerBound="1" upperBound="1" volatile="true" transient="true" derived="true" resolveProxies="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EReference/eReferenceType"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass" reference="http://www.eclipse.org/emf/2002/Ecore/EClass"/>
+      </references>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="container" _cardinality="0..1" ordered="true" unique="true" upperBound="1" volatile="true" transient="true" derived="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EReference/container"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EBoolean" reference="http://www.eclipse.org/emf/2002/Ecore/EBoolean"/>
+      </attributes>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="containment" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EReference/containment"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EBoolean" reference="http://www.eclipse.org/emf/2002/Ecore/EBoolean"/>
+      </attributes>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="resolveProxies" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true" defaultValueLiteral="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EReference/resolveProxies"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EBoolean" reference="http://www.eclipse.org/emf/2002/Ecore/EBoolean"/>
+      </attributes>
+      <superTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature" reference="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="EStringToStringMapEntry" instanceClassName="java.util.Map$Entry" instanceTypeName="java.util.Map$Entry">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EStringToStringMapEntry" referencedBy="//@rootPackages.2/@classes.0/@references.1/@type"/>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="key" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EStringToStringMapEntry/key"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+      </attributes>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="value" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EStringToStringMapEntry/value"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+      </attributes>
+    </classes>
+    <classes _imageResource="/icons/ecore/DAbstractClass.gif" _imageFileName="ecore/DAbstractClass.gif" name="EStructuralFeature" instanceClassName="org.eclipse.emf.ecore.EStructuralFeature" instanceTypeName="org.eclipse.emf.ecore.EStructuralFeature" abstract="true">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature" referencedBy="//@rootPackages.2/@classes.2/@operations.0/@type //@rootPackages.2/@classes.11/@operations.8/@parameters.0/@type //@rootPackages.2/@classes.11/@operations.7/@parameters.0/@type //@rootPackages.2/@classes.2/@operations.3/@parameters.0/@type //@rootPackages.2/@classes.1/@superTypes.0 //@rootPackages.2/@classes.11/@operations.13/@parameters.0/@type //@rootPackages.2/@classes.11/@operations.10/@parameters.0/@type //@rootPackages.2/@classes.2/@operations.1/@type //@rootPackages.2/@classes.11/@operations.3/@type //@rootPackages.2/@classes.15/@superTypes.0 //@rootPackages.2/@classes.11/@operations.12/@parameters.0/@type //@rootPackages.2/@classes.2/@references.5/@type //@rootPackages.2/@classes.2/@references.12/@type //@rootPackages.2/@classes.19/@subTypes.2"/>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="getContainerClass" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature/getContainerClass"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EJavaClass" reference="http://www.eclipse.org/emf/2002/Ecore/EJavaClass"/>
+      </operations>
+      <operations _imageResource="/icons/ecore/EOperation.gif" _imageFileName="ecore/EOperation.gif" name="getFeatureID" _cardinality="0..1" ordered="true" unique="true" upperBound="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature/getFeatureID"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EInt" reference="http://www.eclipse.org/emf/2002/Ecore/EInt"/>
+      </operations>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eContainingClass" _cardinality="0..1" ordered="true" unique="true" upperBound="1" transient="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature/eContainingClass" referencedBy="//@rootPackages.2/@classes.2/@references.12/@opposite"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass" reference="http://www.eclipse.org/emf/2002/Ecore/EClass"/>
+        <opposite refIdString="http://www.eclipse.org/emf/2002/Ecore/EClass/eStructuralFeatures" reference="http://www.eclipse.org/emf/2002/Ecore/EClass/eStructuralFeatures"/>
+      </references>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="changeable" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true" defaultValueLiteral="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature/changeable"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EBoolean" reference="http://www.eclipse.org/emf/2002/Ecore/EBoolean"/>
+      </attributes>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="defaultValue" _cardinality="0..1" ordered="true" unique="true" upperBound="1" volatile="true" transient="true" derived="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature/defaultValue"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EJavaObject" reference="http://www.eclipse.org/emf/2002/Ecore/EJavaObject"/>
+      </attributes>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="defaultValueLiteral" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature/defaultValueLiteral"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" reference="http://www.eclipse.org/emf/2002/Ecore/EString"/>
+      </attributes>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="derived" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature/derived"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EBoolean" reference="http://www.eclipse.org/emf/2002/Ecore/EBoolean"/>
+      </attributes>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="transient" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature/transient"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EBoolean" reference="http://www.eclipse.org/emf/2002/Ecore/EBoolean"/>
+      </attributes>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="unsettable" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature/unsettable"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EBoolean" reference="http://www.eclipse.org/emf/2002/Ecore/EBoolean"/>
+      </attributes>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="volatile" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature/volatile"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EBoolean" reference="http://www.eclipse.org/emf/2002/Ecore/EBoolean"/>
+      </attributes>
+      <superTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/ETypedElement" reference="http://www.eclipse.org/emf/2002/Ecore/ETypedElement"/>
+      <subTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/EAttribute" reference="http://www.eclipse.org/emf/2002/Ecore/EAttribute"/>
+      <subTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/EReference" reference="http://www.eclipse.org/emf/2002/Ecore/EReference"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/EClass.gif" _imageFileName="ecore/EClass.gif" name="ETypeParameter" instanceClassName="org.eclipse.emf.ecore.ETypeParameter" instanceTypeName="org.eclipse.emf.ecore.ETypeParameter">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/ETypeParameter" referencedBy="//@rootPackages.2/@classes.12/@references.4/@type //@rootPackages.2/@classes.8/@references.4/@type //@rootPackages.2/@classes.3/@references.1/@type //@rootPackages.2/@classes.10/@subTypes.3"/>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eBounds" _cardinality="0..*" ordered="true" unique="true" upperBound="-1" changeable="true" containment="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/ETypeParameter/eBounds"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EGenericType" reference="http://www.eclipse.org/emf/2002/Ecore/EGenericType"/>
+      </references>
+      <superTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/ENamedElement" reference="http://www.eclipse.org/emf/2002/Ecore/ENamedElement"/>
+    </classes>
+    <classes _imageResource="/icons/ecore/DAbstractClass.gif" _imageFileName="ecore/DAbstractClass.gif" name="ETypedElement" instanceClassName="org.eclipse.emf.ecore.ETypedElement" instanceTypeName="org.eclipse.emf.ecore.ETypedElement" abstract="true">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/ETypedElement" referencedBy="//@rootPackages.2/@classes.14/@superTypes.0 //@rootPackages.2/@classes.12/@superTypes.0 //@rootPackages.2/@classes.17/@superTypes.0 //@rootPackages.2/@classes.10/@subTypes.4"/>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eGenericType" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true" volatile="true" unsettable="true" containment="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/ETypedElement/eGenericType"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EGenericType" reference="http://www.eclipse.org/emf/2002/Ecore/EGenericType"/>
+      </references>
+      <references _imageResource="/icons/ecore/EReference.gif" _imageFileName="ecore/EReference.gif" name="eType" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true" volatile="true" unsettable="true" resolveProxies="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/ETypedElement/eType"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EClassifier" reference="http://www.eclipse.org/emf/2002/Ecore/EClassifier"/>
+      </references>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="lowerBound" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/ETypedElement/lowerBound"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EInt" reference="http://www.eclipse.org/emf/2002/Ecore/EInt"/>
+      </attributes>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="many" _cardinality="0..1" ordered="true" unique="true" upperBound="1" volatile="true" transient="true" derived="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/ETypedElement/many"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EBoolean" reference="http://www.eclipse.org/emf/2002/Ecore/EBoolean"/>
+      </attributes>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="ordered" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true" defaultValueLiteral="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/ETypedElement/ordered"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EBoolean" reference="http://www.eclipse.org/emf/2002/Ecore/EBoolean"/>
+      </attributes>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="required" _cardinality="0..1" ordered="true" unique="true" upperBound="1" volatile="true" transient="true" derived="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/ETypedElement/required"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EBoolean" reference="http://www.eclipse.org/emf/2002/Ecore/EBoolean"/>
+      </attributes>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="unique" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true" defaultValueLiteral="true">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/ETypedElement/unique"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EBoolean" reference="http://www.eclipse.org/emf/2002/Ecore/EBoolean"/>
+      </attributes>
+      <attributes _imageResource="/icons/ecore/EAttribute.gif" _imageFileName="ecore/EAttribute.gif" name="upperBound" _cardinality="0..1" ordered="true" unique="true" upperBound="1" changeable="true" defaultValueLiteral="1">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/ETypedElement/upperBound"/>
+        <type refIdString="http://www.eclipse.org/emf/2002/Ecore/EInt" reference="http://www.eclipse.org/emf/2002/Ecore/EInt"/>
+      </attributes>
+      <superTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/ENamedElement" reference="http://www.eclipse.org/emf/2002/Ecore/ENamedElement"/>
+      <subTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/EOperation" reference="http://www.eclipse.org/emf/2002/Ecore/EOperation"/>
+      <subTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/EParameter" reference="http://www.eclipse.org/emf/2002/Ecore/EParameter"/>
+      <subTypes refIdString="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature" reference="http://www.eclipse.org/emf/2002/Ecore/EStructuralFeature"/>
+    </classes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="EBigDecimal" instanceClassName="java.math.BigDecimal" instanceTypeName="java.math.BigDecimal" serializable="true">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EBigDecimal"/>
+      <annotations _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EBigDecimal/http:///org/eclipse/emf/ecore/util/ExtendedMetaData"/>
+        <details key="baseType" value="http://www.w3.org/2001/XMLSchema#decimal"/>
+      </annotations>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="EBigInteger" instanceClassName="java.math.BigInteger" instanceTypeName="java.math.BigInteger" serializable="true">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EBigInteger"/>
+      <annotations _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EBigInteger/http:///org/eclipse/emf/ecore/util/ExtendedMetaData"/>
+        <details key="baseType" value="http://www.w3.org/2001/XMLSchema#integer"/>
+      </annotations>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="EBoolean" instanceClassName="boolean" instanceTypeName="boolean" serializable="true">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EBoolean" referencedBy="//@rootPackages.2/@classes.17/@attributes.4/@type //@rootPackages.2/@classes.17/@attributes.6/@type //@rootPackages.2/@classes.1/@attributes.0/@type //@rootPackages.2/@classes.17/@attributes.3/@type //@rootPackages.2/@classes.2/@attributes.1/@type //@rootPackages.2/@classes.11/@operations.10/@type //@rootPackages.2/@classes.19/@attributes.1/@type //@rootPackages.2/@classes.17/@attributes.5/@type //@rootPackages.2/@classes.2/@operations.4/@type //@rootPackages.2/@classes.11/@operations.9/@type //@rootPackages.2/@classes.17/@attributes.0/@type //@rootPackages.2/@classes.15/@attributes.0/@type //@rootPackages.2/@classes.15/@attributes.2/@type //@rootPackages.2/@classes.4/@attributes.0/@type //@rootPackages.1/@subPackages.0/@classes.5/@attributes.0/@type //@rootPackages.2/@classes.19/@attributes.2/@type //@rootPackages.2/@classes.19/@attributes.4/@type //@rootPackages.2/@classes.19/@attributes.3/@type //@rootPackages.1/@subPackages.1/@classes.0/@attributes.3/@type //@rootPackages.2/@classes.2/@attributes.0/@type //@rootPackages.2/@classes.15/@attributes.1/@type //@rootPackages.2/@classes.3/@operations.1/@type //@rootPackages.2/@classes.11/@operations.8/@parameters.1/@type"/>
+      <annotations _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EBoolean/http:///org/eclipse/emf/ecore/util/ExtendedMetaData"/>
+        <details key="baseType" value="http://www.w3.org/2001/XMLSchema#boolean"/>
+      </annotations>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="EBooleanObject" instanceClassName="java.lang.Boolean" instanceTypeName="java.lang.Boolean" serializable="true">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EBooleanObject" referencedBy="//@rootPackages.1/@classes.8/@attributes.1/@type //@rootPackages.1/@classes.8/@attributes.0/@type"/>
+      <annotations _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EBooleanObject/http:///org/eclipse/emf/ecore/util/ExtendedMetaData"/>
+        <details key="baseType" value="EBoolean"/>
+        <details key="name" value="EBoolean:Object"/>
+      </annotations>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="EByte" instanceClassName="byte" instanceTypeName="byte" serializable="true">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EByte"/>
+      <annotations _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EByte/http:///org/eclipse/emf/ecore/util/ExtendedMetaData"/>
+        <details key="baseType" value="http://www.w3.org/2001/XMLSchema#byte"/>
+      </annotations>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="EByteArray" instanceClassName="byte[]" instanceTypeName="byte[]" serializable="true">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EByteArray"/>
+      <annotations _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EByteArray/http:///org/eclipse/emf/ecore/util/ExtendedMetaData"/>
+        <details key="baseType" value="http://www.w3.org/2001/XMLSchema#hexBinary"/>
+      </annotations>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="EByteObject" instanceClassName="java.lang.Byte" instanceTypeName="java.lang.Byte" serializable="true">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EByteObject"/>
+      <annotations _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EByteObject/http:///org/eclipse/emf/ecore/util/ExtendedMetaData"/>
+        <details key="baseType" value="EByte"/>
+        <details key="name" value="EByte:Object"/>
+      </annotations>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="EChar" instanceClassName="char" instanceTypeName="char" serializable="true">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EChar"/>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="ECharacterObject" instanceClassName="java.lang.Character" instanceTypeName="java.lang.Character" serializable="true">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/ECharacterObject"/>
+      <annotations _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/ECharacterObject/http:///org/eclipse/emf/ecore/util/ExtendedMetaData"/>
+        <details key="baseType" value="EChar"/>
+        <details key="name" value="EChar:Object"/>
+      </annotations>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="EDate" instanceClassName="java.util.Date" instanceTypeName="java.util.Date" serializable="true">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EDate"/>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="EDiagnosticChain" instanceClassName="org.eclipse.emf.common.util.DiagnosticChain" instanceTypeName="org.eclipse.emf.common.util.DiagnosticChain">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EDiagnosticChain"/>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="EDouble" instanceClassName="double" instanceTypeName="double" serializable="true">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EDouble"/>
+      <annotations _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EDouble/http:///org/eclipse/emf/ecore/util/ExtendedMetaData"/>
+        <details key="baseType" value="http://www.w3.org/2001/XMLSchema#double"/>
+      </annotations>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="EDoubleObject" instanceClassName="java.lang.Double" instanceTypeName="java.lang.Double" serializable="true">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EDoubleObject"/>
+      <annotations _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EDoubleObject/http:///org/eclipse/emf/ecore/util/ExtendedMetaData"/>
+        <details key="baseType" value="EDouble"/>
+        <details key="name" value="EDouble:Object"/>
+      </annotations>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="EEList" instanceClassName="org.eclipse.emf.common.util.EList" instanceTypeName="org.eclipse.emf.common.util.EList">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EEList" referencedBy="//@rootPackages.2/@classes.11/@operations.5/@type //@rootPackages.2/@classes.11/@operations.6/@type"/>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="EEnumerator" instanceClassName="org.eclipse.emf.common.util.Enumerator" instanceTypeName="org.eclipse.emf.common.util.Enumerator">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EEnumerator" referencedBy="//@rootPackages.2/@classes.6/@attributes.0/@type"/>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="EFeatureMap" instanceClassName="org.eclipse.emf.ecore.util.FeatureMap" instanceTypeName="org.eclipse.emf.ecore.util.FeatureMap">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EFeatureMap"/>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="EFeatureMapEntry" instanceClassName="org.eclipse.emf.ecore.util.FeatureMap$Entry" instanceTypeName="org.eclipse.emf.ecore.util.FeatureMap$Entry">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EFeatureMapEntry"/>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="EFloat" instanceClassName="float" instanceTypeName="float" serializable="true">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EFloat"/>
+      <annotations _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EFloat/http:///org/eclipse/emf/ecore/util/ExtendedMetaData"/>
+        <details key="baseType" value="http://www.w3.org/2001/XMLSchema#float"/>
+      </annotations>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="EFloatObject" instanceClassName="java.lang.Float" instanceTypeName="java.lang.Float" serializable="true">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EFloatObject"/>
+      <annotations _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EFloatObject/http:///org/eclipse/emf/ecore/util/ExtendedMetaData"/>
+        <details key="baseType" value="EFloat"/>
+        <details key="name" value="EFloat:Object"/>
+      </annotations>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="EInt" instanceClassName="int" instanceTypeName="int" serializable="true">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EInt" referencedBy="//@rootPackages.2/@classes.17/@operations.1/@type //@rootPackages.1/@subPackages.1/@classes.0/@attributes.4/@type //@rootPackages.2/@classes.2/@operations.3/@type //@rootPackages.2/@classes.6/@attributes.2/@type //@rootPackages.2/@classes.19/@attributes.5/@type //@rootPackages.1/@subPackages.1/@classes.0/@attributes.1/@type //@rootPackages.2/@classes.3/@operations.0/@type //@rootPackages.2/@classes.2/@operations.2/@type //@rootPackages.2/@classes.2/@operations.0/@parameters.0/@type //@rootPackages.2/@classes.19/@attributes.0/@type //@rootPackages.2/@classes.5/@operations.1/@parameters.0/@type"/>
+      <annotations _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EInt/http:///org/eclipse/emf/ecore/util/ExtendedMetaData"/>
+        <details key="baseType" value="http://www.w3.org/2001/XMLSchema#int"/>
+      </annotations>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="EIntegerObject" instanceClassName="java.lang.Integer" instanceTypeName="java.lang.Integer" serializable="true">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EIntegerObject"/>
+      <annotations _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EIntegerObject/http:///org/eclipse/emf/ecore/util/ExtendedMetaData"/>
+        <details key="baseType" value="EInt"/>
+        <details key="name" value="EInt:Object"/>
+      </annotations>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="EJavaClass" instanceClassName="java.lang.Class" instanceTypeName="java.lang.Class" serializable="true">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EJavaClass" referencedBy="//@rootPackages.2/@classes.17/@operations.0/@type //@rootPackages.2/@classes.3/@attributes.1/@type"/>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="EJavaObject" instanceClassName="java.lang.Object" instanceTypeName="java.lang.Object" serializable="true">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EJavaObject" referencedBy="//@rootPackages.2/@classes.3/@operations.1/@parameters.0/@type //@rootPackages.2/@classes.11/@operations.12/@parameters.1/@type //@rootPackages.2/@classes.17/@attributes.1/@type //@rootPackages.2/@classes.11/@operations.7/@type //@rootPackages.2/@classes.3/@attributes.0/@type //@rootPackages.2/@classes.7/@operations.0/@parameters.1/@type //@rootPackages.2/@classes.7/@operations.2/@type //@rootPackages.2/@classes.11/@operations.8/@type"/>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="ELong" instanceClassName="long" instanceTypeName="long" serializable="true">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/ELong"/>
+      <annotations _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/ELong/http:///org/eclipse/emf/ecore/util/ExtendedMetaData"/>
+        <details key="baseType" value="http://www.w3.org/2001/XMLSchema#long"/>
+      </annotations>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="ELongObject" instanceClassName="java.lang.Long" instanceTypeName="java.lang.Long" serializable="true">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/ELongObject"/>
+      <annotations _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/ELongObject/http:///org/eclipse/emf/ecore/util/ExtendedMetaData"/>
+        <details key="baseType" value="ELong"/>
+        <details key="name" value="ELong:Object"/>
+      </annotations>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="EMap" instanceClassName="java.util.Map" instanceTypeName="java.util.Map">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EMap"/>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="EResource" instanceClassName="org.eclipse.emf.ecore.resource.Resource" instanceTypeName="org.eclipse.emf.ecore.resource.Resource">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EResource" referencedBy="//@rootPackages.2/@classes.11/@operations.11/@type"/>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="EResourceSet" instanceClassName="org.eclipse.emf.ecore.resource.ResourceSet" instanceTypeName="org.eclipse.emf.ecore.resource.ResourceSet">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EResourceSet"/>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="EShort" instanceClassName="short" instanceTypeName="short" serializable="true">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EShort"/>
+      <annotations _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EShort/http:///org/eclipse/emf/ecore/util/ExtendedMetaData"/>
+        <details key="baseType" value="http://www.w3.org/2001/XMLSchema#short"/>
+      </annotations>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="EShortObject" instanceClassName="java.lang.Short" instanceTypeName="java.lang.Short" serializable="true">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EShortObject"/>
+      <annotations _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EShortObject/http:///org/eclipse/emf/ecore/util/ExtendedMetaData"/>
+        <details key="baseType" value="EShort"/>
+        <details key="name" value="EShort:Object"/>
+      </annotations>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="EString" instanceClassName="java.lang.String" instanceTypeName="java.lang.String" serializable="true">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EString" referencedBy="//@rootPackages.0/@classes.2/@attributes.1/@type //@rootPackages.1/@subPackages.1/@classes.0/@attributes.2/@type //@rootPackages.1/@classes.4/@attributes.1/@type //@rootPackages.1/@subPackages.1/@classes.0/@attributes.5/@type //@rootPackages.1/@classes.6/@attributes.0/@type //@rootPackages.1/@subPackages.0/@classes.0/@attributes.0/@type //@rootPackages.2/@classes.3/@attributes.3/@type //@rootPackages.2/@classes.10/@attributes.0/@type //@rootPackages.2/@classes.0/@attributes.0/@type //@rootPackages.0/@classes.1/@attributes.0/@type //@rootPackages.2/@classes.2/@operations.1/@parameters.0/@type //@rootPackages.0/@classes.2/@attributes.0/@type //@rootPackages.2/@classes.13/@attributes.0/@type //@rootPackages.0/@classes.5/@attributes.0/@type //@rootPackages.0/@classes.6/@attributes.0/@type //@rootPackages.0/@classes.3/@attributes.1/@type //@rootPackages.2/@classes.13/@attributes.1/@type //@rootPackages.1/@subPackages.2/@classes.4/@attributes.0/@type //@rootPackages.2/@classes.3/@attributes.2/@type //@rootPackages.1/@subPackages.2/@classes.1/@attributes.0/@type //@rootPackages.2/@classes.16/@attributes.0/@type //@rootPackages.2/@classes.7/@operations.2/@parameters.1/@type //@rootPackages.2/@classes.7/@operations.0/@type //@rootPackages.1/@subPackages.1/@classes.0/@attributes.0/@type //@rootPackages.2/@classes.6/@attributes.1/@type //@rootPackages.2/@classes.13/@operations.0/@parameters.0/@type //@rootPackages.2/@classes.5/@operations.2/@parameters.0/@type //@rootPackages.2/@classes.5/@operations.0/@parameters.0/@type //@rootPackages.0/@classes.0/@attributes.0/@type //@rootPackages.0/@classes.17/@attributes.0/@type //@rootPackages.2/@classes.9/@operations.0/@parameters.0/@type //@rootPackages.0/@classes.4/@attributes.0/@type //@rootPackages.1/@classes.4/@attributes.0/@type //@rootPackages.2/@classes.16/@attributes.1/@type //@rootPackages.0/@classes.3/@attributes.0/@type //@rootPackages.2/@classes.17/@attributes.2/@type //@rootPackages.1/@classes.2/@attributes.0/@type"/>
+      <annotations _imageResource="/icons/ecore/EAnnotation.gif" _imageFileName="ecore/EAnnotation.gif" source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/EString/http:///org/eclipse/emf/ecore/util/ExtendedMetaData"/>
+        <details key="baseType" value="http://www.w3.org/2001/XMLSchema#string"/>
+      </annotations>
+    </dataTypes>
+    <dataTypes _imageResource="/icons/ecore/EDataType.gif" _imageFileName="ecore/EDataType.gif" name="ETreeIterator" instanceClassName="org.eclipse.emf.common.util.TreeIterator" instanceTypeName="org.eclipse.emf.common.util.TreeIterator">
+      <refId refIdString="http://www.eclipse.org/emf/2002/Ecore/ETreeIterator" referencedBy="//@rootPackages.2/@classes.11/@operations.0/@type"/>
+    </dataTypes>
+  </rootPackages>
+</net.randomice.metamodeldoc:DMetamodelDocumentation>

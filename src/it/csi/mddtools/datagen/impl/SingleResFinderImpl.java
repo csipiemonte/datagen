@@ -7,26 +7,26 @@
 package it.csi.mddtools.datagen.impl;
 
 import it.csi.mddtools.datagen.DatagenPackage;
-import it.csi.mddtools.datagen.FindAll;
+import it.csi.mddtools.datagen.SingleResFinder;
 
 import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Find All</b></em>'.
+ * An implementation of the model object '<em><b>Single Res Finder</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class FindAllImpl extends MultiResFinderImpl implements FindAll {
+public abstract class SingleResFinderImpl extends FinderImpl implements SingleResFinder {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected FindAllImpl() {
+	protected SingleResFinderImpl() {
 		super();
 	}
 
@@ -37,7 +37,7 @@ public class FindAllImpl extends MultiResFinderImpl implements FindAll {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return DatagenPackage.Literals.FIND_ALL;
+		return DatagenPackage.Literals.SINGLE_RES_FINDER;
 	}
 
-} //FindAllImpl
+} //SingleResFinderImpl

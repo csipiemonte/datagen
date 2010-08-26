@@ -29,7 +29,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
  * @generated
  */
 public class QBEFinderItemProvider
-	extends FinderItemProvider
+	extends MultiResFinderItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,

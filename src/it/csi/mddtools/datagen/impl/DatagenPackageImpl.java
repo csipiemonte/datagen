@@ -24,9 +24,13 @@ import it.csi.mddtools.datagen.FindByPK;
 import it.csi.mddtools.datagen.Finder;
 import it.csi.mddtools.datagen.Finders;
 import it.csi.mddtools.datagen.Inserter;
+import it.csi.mddtools.datagen.MultiResFinder;
+import it.csi.mddtools.datagen.OrderSpec;
+import it.csi.mddtools.datagen.OrderSpecs;
 import it.csi.mddtools.datagen.PKGenerator;
 import it.csi.mddtools.datagen.QBEFinder;
 import it.csi.mddtools.datagen.SequencePKGenerator;
+import it.csi.mddtools.datagen.SingleResFinder;
 import it.csi.mddtools.datagen.UpdateColumns;
 import it.csi.mddtools.datagen.UpdateRow;
 import it.csi.mddtools.datagen.Updater;
@@ -102,6 +106,34 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 	 * @generated
 	 */
 	private EClass finderEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass singleResFinderEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass multiResFinderEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass orderSpecEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass orderSpecsEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -477,6 +509,87 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getSingleResFinder() {
+		return singleResFinderEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getMultiResFinder() {
+		return multiResFinderEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMultiResFinder_Distinct() {
+		return (EReference)multiResFinderEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMultiResFinder_OrderSpecs() {
+		return (EReference)multiResFinderEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getOrderSpec() {
+		return orderSpecEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getOrderSpec_Column() {
+		return (EReference)orderSpecEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOrderSpec_Ascending() {
+		return (EAttribute)orderSpecEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getOrderSpecs() {
+		return orderSpecsEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getOrderSpecs_Specs() {
+		return (EReference)orderSpecsEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getFindByPK() {
 		return findByPKEClass;
 	}
@@ -732,6 +845,19 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 
 		finderEClass = createEClass(FINDER);
 
+		singleResFinderEClass = createEClass(SINGLE_RES_FINDER);
+
+		multiResFinderEClass = createEClass(MULTI_RES_FINDER);
+		createEReference(multiResFinderEClass, MULTI_RES_FINDER__DISTINCT);
+		createEReference(multiResFinderEClass, MULTI_RES_FINDER__ORDER_SPECS);
+
+		orderSpecEClass = createEClass(ORDER_SPEC);
+		createEReference(orderSpecEClass, ORDER_SPEC__COLUMN);
+		createEAttribute(orderSpecEClass, ORDER_SPEC__ASCENDING);
+
+		orderSpecsEClass = createEClass(ORDER_SPECS);
+		createEReference(orderSpecsEClass, ORDER_SPECS__SPECS);
+
 		findByPKEClass = createEClass(FIND_BY_PK);
 
 		findAllEClass = createEClass(FIND_ALL);
@@ -800,10 +926,12 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		sequencePKGeneratorEClass.getESuperTypes().add(this.getPKGenerator());
 		inserterEClass.getESuperTypes().add(this.getDBCommand());
 		finderEClass.getESuperTypes().add(this.getDBCommand());
-		findByPKEClass.getESuperTypes().add(this.getFinder());
-		findAllEClass.getESuperTypes().add(this.getFinder());
-		qbeFinderEClass.getESuperTypes().add(this.getFinder());
-		customFinderEClass.getESuperTypes().add(this.getFinder());
+		singleResFinderEClass.getESuperTypes().add(this.getFinder());
+		multiResFinderEClass.getESuperTypes().add(this.getFinder());
+		findByPKEClass.getESuperTypes().add(this.getSingleResFinder());
+		findAllEClass.getESuperTypes().add(this.getMultiResFinder());
+		qbeFinderEClass.getESuperTypes().add(this.getMultiResFinder());
+		customFinderEClass.getESuperTypes().add(this.getMultiResFinder());
 		updaterEClass.getESuperTypes().add(this.getDBCommand());
 		updateRowEClass.getESuperTypes().add(this.getUpdater());
 		updateColumnsEClass.getESuperTypes().add(this.getUpdater());
@@ -846,6 +974,19 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		initEReference(getFinders_Finders(), this.getFinder(), null, "finders", null, 0, -1, Finders.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(finderEClass, Finder.class, "Finder", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(singleResFinderEClass, SingleResFinder.class, "SingleResFinder", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(multiResFinderEClass, MultiResFinder.class, "MultiResFinder", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMultiResFinder_Distinct(), theRdbmdlPackage.getColumn(), null, "distinct", null, 0, -1, MultiResFinder.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMultiResFinder_OrderSpecs(), this.getOrderSpecs(), null, "orderSpecs", null, 0, 1, MultiResFinder.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(orderSpecEClass, OrderSpec.class, "OrderSpec", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getOrderSpec_Column(), theRdbmdlPackage.getColumn(), null, "column", null, 0, 1, OrderSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOrderSpec_Ascending(), ecorePackage.getEBoolean(), "ascending", "true", 0, 1, OrderSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(orderSpecsEClass, OrderSpecs.class, "OrderSpecs", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getOrderSpecs_Specs(), this.getOrderSpec(), null, "specs", null, 0, -1, OrderSpecs.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(findByPKEClass, FindByPK.class, "FindByPK", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -108,6 +108,22 @@ public class DatagenAdapterFactory extends AdapterFactoryImpl {
 				return createFinderAdapter();
 			}
 			@Override
+			public Adapter caseSingleResFinder(SingleResFinder object) {
+				return createSingleResFinderAdapter();
+			}
+			@Override
+			public Adapter caseMultiResFinder(MultiResFinder object) {
+				return createMultiResFinderAdapter();
+			}
+			@Override
+			public Adapter caseOrderSpec(OrderSpec object) {
+				return createOrderSpecAdapter();
+			}
+			@Override
+			public Adapter caseOrderSpecs(OrderSpecs object) {
+				return createOrderSpecsAdapter();
+			}
+			@Override
 			public Adapter caseFindByPK(FindByPK object) {
 				return createFindByPKAdapter();
 			}
@@ -288,6 +304,62 @@ public class DatagenAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createFinderAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.SingleResFinder <em>Single Res Finder</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.SingleResFinder
+	 * @generated
+	 */
+	public Adapter createSingleResFinderAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.MultiResFinder <em>Multi Res Finder</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.MultiResFinder
+	 * @generated
+	 */
+	public Adapter createMultiResFinderAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.OrderSpec <em>Order Spec</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.OrderSpec
+	 * @generated
+	 */
+	public Adapter createOrderSpecAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.OrderSpecs <em>Order Specs</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.OrderSpecs
+	 * @generated
+	 */
+	public Adapter createOrderSpecsAdapter() {
 		return null;
 	}
 

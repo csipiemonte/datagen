@@ -144,9 +144,38 @@ public class DatagenSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case DatagenPackage.SINGLE_RES_FINDER: {
+				SingleResFinder singleResFinder = (SingleResFinder)theEObject;
+				T result = caseSingleResFinder(singleResFinder);
+				if (result == null) result = caseFinder(singleResFinder);
+				if (result == null) result = caseDBCommand(singleResFinder);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DatagenPackage.MULTI_RES_FINDER: {
+				MultiResFinder multiResFinder = (MultiResFinder)theEObject;
+				T result = caseMultiResFinder(multiResFinder);
+				if (result == null) result = caseFinder(multiResFinder);
+				if (result == null) result = caseDBCommand(multiResFinder);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DatagenPackage.ORDER_SPEC: {
+				OrderSpec orderSpec = (OrderSpec)theEObject;
+				T result = caseOrderSpec(orderSpec);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DatagenPackage.ORDER_SPECS: {
+				OrderSpecs orderSpecs = (OrderSpecs)theEObject;
+				T result = caseOrderSpecs(orderSpecs);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case DatagenPackage.FIND_BY_PK: {
 				FindByPK findByPK = (FindByPK)theEObject;
 				T result = caseFindByPK(findByPK);
+				if (result == null) result = caseSingleResFinder(findByPK);
 				if (result == null) result = caseFinder(findByPK);
 				if (result == null) result = caseDBCommand(findByPK);
 				if (result == null) result = defaultCase(theEObject);
@@ -155,6 +184,7 @@ public class DatagenSwitch<T> {
 			case DatagenPackage.FIND_ALL: {
 				FindAll findAll = (FindAll)theEObject;
 				T result = caseFindAll(findAll);
+				if (result == null) result = caseMultiResFinder(findAll);
 				if (result == null) result = caseFinder(findAll);
 				if (result == null) result = caseDBCommand(findAll);
 				if (result == null) result = defaultCase(theEObject);
@@ -163,6 +193,7 @@ public class DatagenSwitch<T> {
 			case DatagenPackage.QBE_FINDER: {
 				QBEFinder qbeFinder = (QBEFinder)theEObject;
 				T result = caseQBEFinder(qbeFinder);
+				if (result == null) result = caseMultiResFinder(qbeFinder);
 				if (result == null) result = caseFinder(qbeFinder);
 				if (result == null) result = caseDBCommand(qbeFinder);
 				if (result == null) result = defaultCase(theEObject);
@@ -171,6 +202,7 @@ public class DatagenSwitch<T> {
 			case DatagenPackage.CUSTOM_FINDER: {
 				CustomFinder customFinder = (CustomFinder)theEObject;
 				T result = caseCustomFinder(customFinder);
+				if (result == null) result = caseMultiResFinder(customFinder);
 				if (result == null) result = caseFinder(customFinder);
 				if (result == null) result = caseDBCommand(customFinder);
 				if (result == null) result = defaultCase(theEObject);
@@ -363,6 +395,66 @@ public class DatagenSwitch<T> {
 	 * @generated
 	 */
 	public T caseFinder(Finder object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Single Res Finder</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Single Res Finder</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSingleResFinder(SingleResFinder object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Multi Res Finder</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Multi Res Finder</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMultiResFinder(MultiResFinder object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Order Spec</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Order Spec</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOrderSpec(OrderSpec object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Order Specs</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Order Specs</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOrderSpecs(OrderSpecs object) {
 		return null;
 	}
 

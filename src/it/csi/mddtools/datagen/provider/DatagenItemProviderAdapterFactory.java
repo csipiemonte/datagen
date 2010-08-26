@@ -467,6 +467,52 @@ public class DatagenItemProviderAdapterFactory extends DatagenAdapterFactory imp
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link it.csi.mddtools.datagen.OrderSpec} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected OrderSpecItemProvider orderSpecItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.csi.mddtools.datagen.OrderSpec}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createOrderSpecAdapter() {
+		if (orderSpecItemProvider == null) {
+			orderSpecItemProvider = new OrderSpecItemProvider(this);
+		}
+
+		return orderSpecItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link it.csi.mddtools.datagen.OrderSpecs} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected OrderSpecsItemProvider orderSpecsItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.csi.mddtools.datagen.OrderSpecs}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createOrderSpecsAdapter() {
+		if (orderSpecsItemProvider == null) {
+			orderSpecsItemProvider = new OrderSpecsItemProvider(this);
+		}
+
+		return orderSpecsItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -571,6 +617,8 @@ public class DatagenItemProviderAdapterFactory extends DatagenAdapterFactory imp
 		if (sequencePKGeneratorItemProvider != null) sequencePKGeneratorItemProvider.dispose();
 		if (inserterItemProvider != null) inserterItemProvider.dispose();
 		if (findersItemProvider != null) findersItemProvider.dispose();
+		if (orderSpecItemProvider != null) orderSpecItemProvider.dispose();
+		if (orderSpecsItemProvider != null) orderSpecsItemProvider.dispose();
 		if (findByPKItemProvider != null) findByPKItemProvider.dispose();
 		if (findAllItemProvider != null) findAllItemProvider.dispose();
 		if (qbeFinderItemProvider != null) qbeFinderItemProvider.dispose();

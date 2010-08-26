@@ -21,5 +21,5 @@ package it.csi.mddtools.datagen;
  * @model
  * @generated
  */
-public interface FindByPK extends Finder {
+public interface FindByPK extends SingleResFinder {
 } // FindByPK

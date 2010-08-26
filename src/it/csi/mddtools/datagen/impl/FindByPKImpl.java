@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class FindByPKImpl extends FinderImpl implements FindByPK {
+public class FindByPKImpl extends SingleResFinderImpl implements FindByPK {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

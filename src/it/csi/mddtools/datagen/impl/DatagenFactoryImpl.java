@@ -66,6 +66,8 @@ public class DatagenFactoryImpl extends EFactoryImpl implements DatagenFactory {
 			case DatagenPackage.SEQUENCE_PK_GENERATOR: return (EObject)createSequencePKGenerator();
 			case DatagenPackage.INSERTER: return (EObject)createInserter();
 			case DatagenPackage.FINDERS: return (EObject)createFinders();
+			case DatagenPackage.ORDER_SPEC: return (EObject)createOrderSpec();
+			case DatagenPackage.ORDER_SPECS: return (EObject)createOrderSpecs();
 			case DatagenPackage.FIND_BY_PK: return (EObject)createFindByPK();
 			case DatagenPackage.FIND_ALL: return (EObject)createFindAll();
 			case DatagenPackage.QBE_FINDER: return (EObject)createQBEFinder();
@@ -250,6 +252,26 @@ public class DatagenFactoryImpl extends EFactoryImpl implements DatagenFactory {
 	public Finders createFinders() {
 		FindersImpl finders = new FindersImpl();
 		return finders;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OrderSpec createOrderSpec() {
+		OrderSpecImpl orderSpec = new OrderSpecImpl();
+		return orderSpec;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OrderSpecs createOrderSpecs() {
+		OrderSpecsImpl orderSpecs = new OrderSpecsImpl();
+		return orderSpecs;
 	}
 
 	/**

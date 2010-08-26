@@ -360,7 +360,7 @@ public interface DatagenPackage extends EPackage {
 	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getFindByPK()
 	 * @generated
 	 */
-	int FIND_BY_PK = 9;
+	int FIND_BY_PK = 13;
 
 	/**
 	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.FindAllImpl <em>Find All</em>}' class.
@@ -370,7 +370,7 @@ public interface DatagenPackage extends EPackage {
 	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getFindAll()
 	 * @generated
 	 */
-	int FIND_ALL = 10;
+	int FIND_ALL = 14;
 
 	/**
 	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.QBEFinderImpl <em>QBE Finder</em>}' class.
@@ -380,7 +380,7 @@ public interface DatagenPackage extends EPackage {
 	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getQBEFinder()
 	 * @generated
 	 */
-	int QBE_FINDER = 11;
+	int QBE_FINDER = 15;
 
 	/**
 	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.CustomFinderImpl <em>Custom Finder</em>}' class.
@@ -390,7 +390,7 @@ public interface DatagenPackage extends EPackage {
 	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getCustomFinder()
 	 * @generated
 	 */
-	int CUSTOM_FINDER = 12;
+	int CUSTOM_FINDER = 16;
 
 	/**
 	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.UpdatersImpl <em>Updaters</em>}' class.
@@ -400,7 +400,7 @@ public interface DatagenPackage extends EPackage {
 	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getUpdaters()
 	 * @generated
 	 */
-	int UPDATERS = 13;
+	int UPDATERS = 17;
 
 	/**
 	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.UpdaterImpl <em>Updater</em>}' class.
@@ -410,7 +410,7 @@ public interface DatagenPackage extends EPackage {
 	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getUpdater()
 	 * @generated
 	 */
-	int UPDATER = 14;
+	int UPDATER = 18;
 
 	/**
 	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.UpdateRowImpl <em>Update Row</em>}' class.
@@ -420,7 +420,7 @@ public interface DatagenPackage extends EPackage {
 	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getUpdateRow()
 	 * @generated
 	 */
-	int UPDATE_ROW = 15;
+	int UPDATE_ROW = 19;
 
 	/**
 	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.DeletersImpl <em>Deleters</em>}' class.
@@ -430,7 +430,7 @@ public interface DatagenPackage extends EPackage {
 	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getDeleters()
 	 * @generated
 	 */
-	int DELETERS = 17;
+	int DELETERS = 21;
 
 	/**
 	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.DeleterImpl <em>Deleter</em>}' class.
@@ -440,7 +440,7 @@ public interface DatagenPackage extends EPackage {
 	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getDeleter()
 	 * @generated
 	 */
-	int DELETER = 18;
+	int DELETER = 22;
 
 	/**
 	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.DeleteByPKImpl <em>Delete By PK</em>}' class.
@@ -450,7 +450,7 @@ public interface DatagenPackage extends EPackage {
 	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getDeleteByPK()
 	 * @generated
 	 */
-	int DELETE_BY_PK = 19;
+	int DELETE_BY_PK = 23;
 
 	/**
 	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.FindersImpl <em>Finders</em>}' class.
@@ -499,13 +499,152 @@ public interface DatagenPackage extends EPackage {
 	int FINDER_FEATURE_COUNT = DB_COMMAND_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.SingleResFinderImpl <em>Single Res Finder</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see it.csi.mddtools.datagen.impl.SingleResFinderImpl
+	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getSingleResFinder()
+	 * @generated
+	 */
+	int SINGLE_RES_FINDER = 9;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FIND_BY_PK__NAME = FINDER__NAME;
+	int SINGLE_RES_FINDER__NAME = FINDER__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Single Res Finder</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SINGLE_RES_FINDER_FEATURE_COUNT = FINDER_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.MultiResFinderImpl <em>Multi Res Finder</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see it.csi.mddtools.datagen.impl.MultiResFinderImpl
+	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getMultiResFinder()
+	 * @generated
+	 */
+	int MULTI_RES_FINDER = 10;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MULTI_RES_FINDER__NAME = FINDER__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Distinct</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MULTI_RES_FINDER__DISTINCT = FINDER_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Order Specs</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MULTI_RES_FINDER__ORDER_SPECS = FINDER_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Multi Res Finder</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MULTI_RES_FINDER_FEATURE_COUNT = FINDER_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.OrderSpecImpl <em>Order Spec</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see it.csi.mddtools.datagen.impl.OrderSpecImpl
+	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getOrderSpec()
+	 * @generated
+	 */
+	int ORDER_SPEC = 11;
+
+	/**
+	 * The feature id for the '<em><b>Column</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDER_SPEC__COLUMN = 0;
+
+	/**
+	 * The feature id for the '<em><b>Ascending</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDER_SPEC__ASCENDING = 1;
+
+	/**
+	 * The number of structural features of the '<em>Order Spec</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDER_SPEC_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.OrderSpecsImpl <em>Order Specs</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see it.csi.mddtools.datagen.impl.OrderSpecsImpl
+	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getOrderSpecs()
+	 * @generated
+	 */
+	int ORDER_SPECS = 12;
+
+	/**
+	 * The feature id for the '<em><b>Specs</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDER_SPECS__SPECS = 0;
+
+	/**
+	 * The number of structural features of the '<em>Order Specs</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDER_SPECS_FEATURE_COUNT = 1;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIND_BY_PK__NAME = SINGLE_RES_FINDER__NAME;
 
 	/**
 	 * The number of structural features of the '<em>Find By PK</em>' class.
@@ -514,7 +653,7 @@ public interface DatagenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIND_BY_PK_FEATURE_COUNT = FINDER_FEATURE_COUNT + 0;
+	int FIND_BY_PK_FEATURE_COUNT = SINGLE_RES_FINDER_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -523,7 +662,25 @@ public interface DatagenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIND_ALL__NAME = FINDER__NAME;
+	int FIND_ALL__NAME = MULTI_RES_FINDER__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Distinct</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIND_ALL__DISTINCT = MULTI_RES_FINDER__DISTINCT;
+
+	/**
+	 * The feature id for the '<em><b>Order Specs</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIND_ALL__ORDER_SPECS = MULTI_RES_FINDER__ORDER_SPECS;
 
 	/**
 	 * The number of structural features of the '<em>Find All</em>' class.
@@ -532,7 +689,7 @@ public interface DatagenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIND_ALL_FEATURE_COUNT = FINDER_FEATURE_COUNT + 0;
+	int FIND_ALL_FEATURE_COUNT = MULTI_RES_FINDER_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -541,7 +698,25 @@ public interface DatagenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int QBE_FINDER__NAME = FINDER__NAME;
+	int QBE_FINDER__NAME = MULTI_RES_FINDER__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Distinct</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QBE_FINDER__DISTINCT = MULTI_RES_FINDER__DISTINCT;
+
+	/**
+	 * The feature id for the '<em><b>Order Specs</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QBE_FINDER__ORDER_SPECS = MULTI_RES_FINDER__ORDER_SPECS;
 
 	/**
 	 * The number of structural features of the '<em>QBE Finder</em>' class.
@@ -550,7 +725,7 @@ public interface DatagenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int QBE_FINDER_FEATURE_COUNT = FINDER_FEATURE_COUNT + 0;
+	int QBE_FINDER_FEATURE_COUNT = MULTI_RES_FINDER_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -559,7 +734,25 @@ public interface DatagenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CUSTOM_FINDER__NAME = FINDER__NAME;
+	int CUSTOM_FINDER__NAME = MULTI_RES_FINDER__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Distinct</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOM_FINDER__DISTINCT = MULTI_RES_FINDER__DISTINCT;
+
+	/**
+	 * The feature id for the '<em><b>Order Specs</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOM_FINDER__ORDER_SPECS = MULTI_RES_FINDER__ORDER_SPECS;
 
 	/**
 	 * The feature id for the '<em><b>Filter Class FQN</b></em>' attribute.
@@ -568,7 +761,7 @@ public interface DatagenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CUSTOM_FINDER__FILTER_CLASS_FQN = FINDER_FEATURE_COUNT + 0;
+	int CUSTOM_FINDER__FILTER_CLASS_FQN = MULTI_RES_FINDER_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Custom Finder</em>' class.
@@ -577,7 +770,7 @@ public interface DatagenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CUSTOM_FINDER_FEATURE_COUNT = FINDER_FEATURE_COUNT + 1;
+	int CUSTOM_FINDER_FEATURE_COUNT = MULTI_RES_FINDER_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Updaters</b></em>' containment reference list.
@@ -641,7 +834,7 @@ public interface DatagenPackage extends EPackage {
 	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getUpdateColumns()
 	 * @generated
 	 */
-	int UPDATE_COLUMNS = 16;
+	int UPDATE_COLUMNS = 20;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -733,7 +926,7 @@ public interface DatagenPackage extends EPackage {
 	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getCustomUpdater()
 	 * @generated
 	 */
-	int CUSTOM_UPDATER = 20;
+	int CUSTOM_UPDATER = 24;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -780,7 +973,7 @@ public interface DatagenPackage extends EPackage {
 	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getCustomDeleter()
 	 * @generated
 	 */
-	int CUSTOM_DELETER = 21;
+	int CUSTOM_DELETER = 25;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1054,6 +1247,101 @@ public interface DatagenPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getFinder();
+
+	/**
+	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.SingleResFinder <em>Single Res Finder</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Single Res Finder</em>'.
+	 * @see it.csi.mddtools.datagen.SingleResFinder
+	 * @generated
+	 */
+	EClass getSingleResFinder();
+
+	/**
+	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.MultiResFinder <em>Multi Res Finder</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Multi Res Finder</em>'.
+	 * @see it.csi.mddtools.datagen.MultiResFinder
+	 * @generated
+	 */
+	EClass getMultiResFinder();
+
+	/**
+	 * Returns the meta object for the reference list '{@link it.csi.mddtools.datagen.MultiResFinder#getDistinct <em>Distinct</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Distinct</em>'.
+	 * @see it.csi.mddtools.datagen.MultiResFinder#getDistinct()
+	 * @see #getMultiResFinder()
+	 * @generated
+	 */
+	EReference getMultiResFinder_Distinct();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link it.csi.mddtools.datagen.MultiResFinder#getOrderSpecs <em>Order Specs</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Order Specs</em>'.
+	 * @see it.csi.mddtools.datagen.MultiResFinder#getOrderSpecs()
+	 * @see #getMultiResFinder()
+	 * @generated
+	 */
+	EReference getMultiResFinder_OrderSpecs();
+
+	/**
+	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.OrderSpec <em>Order Spec</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Order Spec</em>'.
+	 * @see it.csi.mddtools.datagen.OrderSpec
+	 * @generated
+	 */
+	EClass getOrderSpec();
+
+	/**
+	 * Returns the meta object for the reference '{@link it.csi.mddtools.datagen.OrderSpec#getColumn <em>Column</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Column</em>'.
+	 * @see it.csi.mddtools.datagen.OrderSpec#getColumn()
+	 * @see #getOrderSpec()
+	 * @generated
+	 */
+	EReference getOrderSpec_Column();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.csi.mddtools.datagen.OrderSpec#isAscending <em>Ascending</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Ascending</em>'.
+	 * @see it.csi.mddtools.datagen.OrderSpec#isAscending()
+	 * @see #getOrderSpec()
+	 * @generated
+	 */
+	EAttribute getOrderSpec_Ascending();
+
+	/**
+	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.OrderSpecs <em>Order Specs</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Order Specs</em>'.
+	 * @see it.csi.mddtools.datagen.OrderSpecs
+	 * @generated
+	 */
+	EClass getOrderSpecs();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link it.csi.mddtools.datagen.OrderSpecs#getSpecs <em>Specs</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Specs</em>'.
+	 * @see it.csi.mddtools.datagen.OrderSpecs#getSpecs()
+	 * @see #getOrderSpecs()
+	 * @generated
+	 */
+	EReference getOrderSpecs_Specs();
 
 	/**
 	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.FindByPK <em>Find By PK</em>}'.
@@ -1504,6 +1792,86 @@ public interface DatagenPackage extends EPackage {
 		 * @generated
 		 */
 		EClass FINDER = eINSTANCE.getFinder();
+
+		/**
+		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.SingleResFinderImpl <em>Single Res Finder</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see it.csi.mddtools.datagen.impl.SingleResFinderImpl
+		 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getSingleResFinder()
+		 * @generated
+		 */
+		EClass SINGLE_RES_FINDER = eINSTANCE.getSingleResFinder();
+
+		/**
+		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.MultiResFinderImpl <em>Multi Res Finder</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see it.csi.mddtools.datagen.impl.MultiResFinderImpl
+		 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getMultiResFinder()
+		 * @generated
+		 */
+		EClass MULTI_RES_FINDER = eINSTANCE.getMultiResFinder();
+
+		/**
+		 * The meta object literal for the '<em><b>Distinct</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MULTI_RES_FINDER__DISTINCT = eINSTANCE.getMultiResFinder_Distinct();
+
+		/**
+		 * The meta object literal for the '<em><b>Order Specs</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MULTI_RES_FINDER__ORDER_SPECS = eINSTANCE.getMultiResFinder_OrderSpecs();
+
+		/**
+		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.OrderSpecImpl <em>Order Spec</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see it.csi.mddtools.datagen.impl.OrderSpecImpl
+		 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getOrderSpec()
+		 * @generated
+		 */
+		EClass ORDER_SPEC = eINSTANCE.getOrderSpec();
+
+		/**
+		 * The meta object literal for the '<em><b>Column</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ORDER_SPEC__COLUMN = eINSTANCE.getOrderSpec_Column();
+
+		/**
+		 * The meta object literal for the '<em><b>Ascending</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ORDER_SPEC__ASCENDING = eINSTANCE.getOrderSpec_Ascending();
+
+		/**
+		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.OrderSpecsImpl <em>Order Specs</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see it.csi.mddtools.datagen.impl.OrderSpecsImpl
+		 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getOrderSpecs()
+		 * @generated
+		 */
+		EClass ORDER_SPECS = eINSTANCE.getOrderSpecs();
+
+		/**
+		 * The meta object literal for the '<em><b>Specs</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ORDER_SPECS__SPECS = eINSTANCE.getOrderSpecs_Specs();
 
 		/**
 		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.FindByPKImpl <em>Find By PK</em>}' class.

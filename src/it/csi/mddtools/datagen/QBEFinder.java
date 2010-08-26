@@ -21,5 +21,5 @@ package it.csi.mddtools.datagen;
  * @model
  * @generated
  */
-public interface QBEFinder extends Finder {
+public interface QBEFinder extends MultiResFinder {
 } // QBEFinder

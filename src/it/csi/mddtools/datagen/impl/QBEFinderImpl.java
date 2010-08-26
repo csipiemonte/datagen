@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class QBEFinderImpl extends FinderImpl implements QBEFinder {
+public class QBEFinderImpl extends MultiResFinderImpl implements QBEFinder {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

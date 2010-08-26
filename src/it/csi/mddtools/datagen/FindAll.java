@@ -22,5 +22,5 @@ package it.csi.mddtools.datagen;
  * @model
  * @generated
  */
-public interface FindAll extends Finder {
+public interface FindAll extends MultiResFinder {
 } // FindAll

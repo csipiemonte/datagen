@@ -141,22 +141,71 @@
       <details key="documentation" value="Superclasse astratta di tutte le operazioni di ricerca"/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FindByPK" eSuperTypes="#//Finder">
+  <eClassifiers xsi:type="ecore:EClass" name="SingleResFinder" abstract="true" eSuperTypes="#//Finder">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Classe astratta da cui discendono tutti i &lt;b>Finder&lt;/b> a risultato&#xD;&#xA;singolo."/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MultiResFinder" abstract="true" eSuperTypes="#//Finder">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Classe astratta da cui discendono tutti i &lt;b>Finder&lt;/b> a risultato&#xD;&#xA;potenzialmente multiplo."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="distinct" upperBound="-1"
+        eType="ecore:EClass rdbmdl.ecore#//Column">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Eventuale direttiva di _DISTINCT_. Se si specifica una o pi&amp;ugrave; colonne viene applicata la clausola _DISTINCT_.&#xD;&#xA;In questo caso il risultato conterr&amp;agrave; la valorizzazione delle sole colonne&#xD;&#xA;indicate nell'elenco."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="orderSpecs" eType="#//OrderSpecs"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Eventuali specifiche di ordinamento dei risultati della query."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OrderSpec">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Specifica di ordinamento relativa ad una singola colonna"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="column" eType="ecore:EClass rdbmdl.ecore#//Column">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="La colonna oggetto dell'ordinamento"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ascending" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Specifica la direzione di ordinamento: se il valore &amp;egrave; _true_&#xD;&#xA;l'ordinamento &amp;egrave; ascendente, altrimenti discendente"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OrderSpecs">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Specifiche di ordinamento da applicare ai risultati di una query"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="specs" upperBound="-1"
+        eType="#//OrderSpec" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Contiene l'elenco delle specifiche di ordinamento. L'ordinamento dei&#xD;&#xA;risultati &amp;egrave; ottenuto applicando le specifiche relative alle singole&#xD;&#xA;colonne nell'ordine in cui sono inserite in questo elenco."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FindByPK" eSuperTypes="#//SingleResFinder">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Operazione che permette la ricerca di un singolo record tramite primary key"/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FindAll" eSuperTypes="#//Finder">
+  <eClassifiers xsi:type="ecore:EClass" name="FindAll" eSuperTypes="#//MultiResFinder">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Operazione che permette l'estrazione dell'insieme completo dei dati dalla tabella&#xD;&#xA;associata al &lt;b>DataAccessObject&lt;/b>, senza filtri"/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="QBEFinder" eSuperTypes="#//Finder">
+  <eClassifiers xsi:type="ecore:EClass" name="QBEFinder" eSuperTypes="#//MultiResFinder">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Operazione di ricerca by example"/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CustomFinder" eSuperTypes="#//Finder">
+  <eClassifiers xsi:type="ecore:EClass" name="CustomFinder" eSuperTypes="#//MultiResFinder">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Operazione di ricerca con logica custom"/>
     </eAnnotations>

@@ -6,31 +6,36 @@
  */
 package it.csi.mddtools.datagen.impl;
 
-import it.csi.mddtools.datagen.CustomFinder;
 import it.csi.mddtools.datagen.DatagenPackage;
+import it.csi.mddtools.datagen.OrderSpec;
+import it.csi.mddtools.datagen.OrderSpecs;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.internal.cdo.CDOObjectImpl;
+
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Custom Finder</b></em>'.
+ * An implementation of the model object '<em><b>Order Specs</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link it.csi.mddtools.datagen.impl.CustomFinderImpl#getFilterClassFQN <em>Filter Class FQN</em>}</li>
+ *   <li>{@link it.csi.mddtools.datagen.impl.OrderSpecsImpl#getSpecs <em>Specs</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class CustomFinderImpl extends MultiResFinderImpl implements CustomFinder {
+public class OrderSpecsImpl extends CDOObjectImpl implements OrderSpecs {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected CustomFinderImpl() {
+	protected OrderSpecsImpl() {
 		super();
 	}
 
@@ -41,7 +46,7 @@ public class CustomFinderImpl extends MultiResFinderImpl implements CustomFinder
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return DatagenPackage.Literals.CUSTOM_FINDER;
+		return DatagenPackage.Literals.ORDER_SPECS;
 	}
 
 	/**
@@ -49,8 +54,9 @@ public class CustomFinderImpl extends MultiResFinderImpl implements CustomFinder
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getFilterClassFQN() {
-		return (String)eGet(DatagenPackage.Literals.CUSTOM_FINDER__FILTER_CLASS_FQN, true);
+	@Override
+	protected int eStaticFeatureCount() {
+		return 0;
 	}
 
 	/**
@@ -58,8 +64,9 @@ public class CustomFinderImpl extends MultiResFinderImpl implements CustomFinder
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFilterClassFQN(String newFilterClassFQN) {
-		eSet(DatagenPackage.Literals.CUSTOM_FINDER__FILTER_CLASS_FQN, newFilterClassFQN);
+	@SuppressWarnings("unchecked")
+	public EList<OrderSpec> getSpecs() {
+		return (EList<OrderSpec>)eGet(DatagenPackage.Literals.ORDER_SPECS__SPECS, true);
 	}
 
-} //CustomFinderImpl
+} //OrderSpecsImpl

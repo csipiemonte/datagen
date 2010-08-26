@@ -27,7 +27,7 @@ package it.csi.mddtools.datagen;
  * @model
  * @generated
  */
-public interface CustomFinder extends Finder {
+public interface CustomFinder extends MultiResFinder {
 
 	/**
 	 * Returns the value of the '<em><b>Filter Class FQN</b></em>' attribute.
