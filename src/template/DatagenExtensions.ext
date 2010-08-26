@@ -242,6 +242,69 @@ String getValueFromRS(TableColumn col, int i) :
 	
 		default :"???"
 	};
+	
+String getValueFromRSByColName(TableColumn col) :
+	let code = col.type.type :
+	switch(code){
+		case PrimitiveTypeCodes::BIT :
+			"rs.getInt(\""+col.name+"\") == 0 ? false : true"
+		case PrimitiveTypeCodes::TINYINT :
+			"rs.getInteger(\""+col.name+"\")"
+		case PrimitiveTypeCodes::SMALLINT :
+			"rs.getInteger(\""+col.name+"\")"
+		case PrimitiveTypeCodes::INTEGER :
+			"rs.getInteger(\""+col.name+"\")"		
+		case PrimitiveTypeCodes::BIGINT :
+			"rs.getLong(\""+col.name+"\")"
+		case PrimitiveTypeCodes::FLOAT :
+			"rs.getDouble(\""+col.name+"\")" 
+		case PrimitiveTypeCodes::REAL :
+			"rs.getFloat(\""+col.name+"\")"	
+		case PrimitiveTypeCodes::DOUBLE :
+			"rs.getDouble(\""+col.name+"\")" 
+		case PrimitiveTypeCodes::NUMERIC :
+			"rs.getBigDecimal(\""+col.name+"\")" 
+		case PrimitiveTypeCodes::DECIMAL :
+			"rs.getBigDecimal(\""+col.name+"\")" 
+		case PrimitiveTypeCodes::CHAR :
+			"rs.getString(\""+col.name+"\")" 
+		case PrimitiveTypeCodes::VARCHAR :
+			"rs.getString(\""+col.name+"\")" 
+		case PrimitiveTypeCodes::LONGVARCHAR :
+			"rs.getString(\""+col.name+"\")" 
+		case PrimitiveTypeCodes::DATE :
+			"rs.getDate(\""+col.name+"\")" 
+		case PrimitiveTypeCodes::TIME :
+			"rs.getTime(\""+col.name+"\")" 
+		case PrimitiveTypeCodes::TIMESTAMP :
+			"rs.getTimestamp(\""+col.name+"\")" 
+		case PrimitiveTypeCodes::BINARY :
+			"rs.getBytes(\""+col.name+"\")" 
+		case PrimitiveTypeCodes::VARBINARY :
+			"rs.getBytes(\""+col.name+"\")" 
+		case PrimitiveTypeCodes::LONGVARBINARY :
+			"rs.getBytes(\""+col.name+"\")" 
+		case PrimitiveTypeCodes::OTHER :
+			"getClobColumn(rs, \""+col.name+"\")"  
+		case PrimitiveTypeCodes::JAVA_OBJECT :
+			"rs.getObject(\""+col.name+"\")" 
+		case PrimitiveTypeCodes::DISTINCT :
+			"rs.getObject(\""+col.name+"\")" 
+		case PrimitiveTypeCodes::STRUCT :
+			"rs.getObject(\""+col.name+"\")" 
+		case PrimitiveTypeCodes::ARRAY :
+			"rs.getArray(\""+col.name+"\")" 
+		case PrimitiveTypeCodes::BLOB :
+			"getBlobColumn(rs, \""+col.name+"\")" 
+		case PrimitiveTypeCodes::CLOB :
+			"getClobColumn(rs, \""+col.name+"\")" 
+		case PrimitiveTypeCodes::REF :
+			"rs.getRef(\""+col.name+"\")" 
+		case PrimitiveTypeCodes::BOOLEAN :
+			"rs.getBoolean(\""+col.name+"\")" 
+	
+		default :"???"
+	};	
 
 String getSQLType(TableColumn col) :
 	let code = col.type.type :
