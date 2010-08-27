@@ -202,6 +202,10 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c)
 «ENDLET-»
 «ENDDEFINE»
 
+«DEFINE orderByClause FOR OrderSpecs»	
+  «IF this!=null-»+ " ORDER BY «FOREACH this.specs AS currSpec SEPARATOR ','-»«currSpec.column.name-»«IF currSpec.ascending-» ASC«ELSE-» DESC«ENDIF-»«ENDFOREACH-»"«ENDIF-»		
+«ENDDEFINE»
+
 
 «DEFINE incrementerUse FOR TableColumn-»
 «IF type.type == PrimitiveTypeCodes::VARCHAR-»

@@ -65,7 +65,7 @@
 	public List<«getDtoClassName(dao)»> findAll() throws «getDaoExcClassName(dao)»
 	«IF body-»
 	{
-		final String sql = "SELECT «EXPAND template::datagen::dao::daoFiles::columnNameList FOR dao.mainTable.columns» FROM " + getTableName();
+		final String sql = "SELECT «EXPAND template::datagen::dao::daoFiles::columnNameList FOR dao.mainTable.columns» FROM " + getTableName()«EXPAND template::datagen::dao::daoFiles::orderByClause FOR this.orderSpecs-»;
 		
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		
@@ -111,7 +111,7 @@
 		
 		// personalizzare l'elenco dei parametri da passare al jdbctemplate (devono corrispondere in tipo e
 		// numero ai parametri definiti nella queryString)
-		sql +="nome = :nome";
+		sql +="nome = :nome"«EXPAND template::datagen::dao::daoFiles::orderByClause FOR this.orderSpecs-»;
 		//***aggiungere tutte le condizioni
 		Map<String, Object> paramMap = new TreeMap<String, Object>();
 		paramMap.put("nome", input);
@@ -151,7 +151,7 @@
 		
 		// personalizzare la query SQL relativa al finder
 		QBEQueryBuilder<«getQbeExClassName(dao)»> builder = new QBEQueryBuilder<«getQbeExClassName(dao)»>(new «getMetadataClassName(dao)»());
-		String sql = builder.createFromExamples(positive, negative);
+		String sql = builder.createFromExamples(positive, negative)«EXPAND template::datagen::dao::daoFiles::orderByClause FOR this.orderSpecs-»;
 		
 		List<«getDtoClassName(dao)»> list = null;
 					StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
