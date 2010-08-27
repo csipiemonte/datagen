@@ -203,7 +203,7 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c)
 «ENDDEFINE»
 
 «DEFINE orderByClause FOR OrderSpecs»	
-  «IF this!=null-»+ " ORDER BY «FOREACH this.specs AS currSpec SEPARATOR ','-»«currSpec.column.name-»«IF currSpec.ascending-» ASC«ELSE-» DESC«ENDIF-»«ENDFOREACH-»"«ENDIF-»		
+  «IF this!=null-»sql.append(" ORDER BY «FOREACH this.specs AS currSpec SEPARATOR ','-»«currSpec.column.name-»«IF currSpec.ascending-» ASC«ELSE-» DESC«ENDIF-»«ENDFOREACH-»");«ENDIF-»		
 «ENDDEFINE»
 
 

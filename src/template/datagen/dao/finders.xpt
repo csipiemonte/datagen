@@ -28,7 +28,7 @@
 	«IF body-»
 	{
 		
-		final String sql = "SELECT «EXPAND template::datagen::dao::daoFiles::columnNameList FOR dao.mainTable.columns» FROM " + getTableName() + " WHERE «EXPAND template::datagen::dao::daoFiles::setColumnEqPlaceholderList(" AND ") FOR dao.mainTable.primaryKey.includedColumns»";
+		final StringBuilder sql = new StringBuilder("SELECT «EXPAND template::datagen::dao::daoFiles::columnNameList FOR dao.mainTable.columns» FROM " + getTableName() + " WHERE «EXPAND template::datagen::dao::daoFiles::setColumnEqPlaceholderList(" AND ") FOR dao.mainTable.primaryKey.includedColumns»");
 		
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		«EXPAND template::datagen::dao::daoFiles::paramValorizationList("pk") FOR dao.mainTable.primaryKey.includedColumns»
@@ -37,13 +37,13 @@
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
 			stopWatch.start();
-			list = jdbcTemplate.query(sql, params, this);
+			list = jdbcTemplate.query(sql.toString(), params, this);
 			
 		} catch (RuntimeException ex) {
 			log.error("[«getDaoImplClassName(dao)»::findByPrimaryKey] esecuzione query",ex);
 			throw new «getDaoExcClassName(dao)»("Query failed", ex);
 		} finally {
-			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "findByPrimaryKey","esecuzione query", sql);
+			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "findByPrimaryKey","esecuzione query", sql.toString());
 			log.debug("[«getDaoImplClassName(dao)»::findByPrimaryKey] END");
 		}
 
@@ -65,7 +65,8 @@
 	public List<«getDtoClassName(dao)»> findAll() throws «getDaoExcClassName(dao)»
 	«IF body-»
 	{
-		final String sql = "SELECT «EXPAND template::datagen::dao::daoFiles::columnNameList FOR dao.mainTable.columns» FROM " + getTableName()«EXPAND template::datagen::dao::daoFiles::orderByClause FOR this.orderSpecs-»;
+		final StringBuilder sql = new StringBuilder("SELECT «EXPAND template::datagen::dao::daoFiles::columnNameList FOR dao.mainTable.columns» FROM " + getTableName());
+		«EXPAND template::datagen::dao::daoFiles::orderByClause FOR this.orderSpecs-»
 		
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		
@@ -74,13 +75,13 @@
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
 			stopWatch.start();
-			list = jdbcTemplate.query(sql, params, this);
+			list = jdbcTemplate.query(sql.toString(), params, this);
 			
 		} catch (RuntimeException ex) {
 			log.error("[«getDaoImplClassName(dao)»::findAll] esecuzione query",ex);
 			throw new «getDaoExcClassName(dao)»("Query failed", ex);
 		} finally {
-			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "findAll","esecuzione query", sql);
+			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "findAll","esecuzione query", sql.toString());
 			log.debug("[«getDaoImplClassName(dao)»::findAll] END");
 		}
 
@@ -104,14 +105,17 @@
 	public List<«getDtoClassName(dao)»> find«name.toFirstUpper()»(«filterJavaType» input) throws «getDaoExcClassName(dao)»
 	«IF body-»
 	{
-		
-		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"queryandvalues")»
+		StringBuilder sql = new StringBuilder();
+		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"query")»
 		// personalizzare la query SQL relativa al finder
-		String sql = "SELECT * from «dao.mainTable.name» WHERE ";
+		sql.append("SELECT * from «dao.mainTable.name» WHERE ");
 		
 		// personalizzare l'elenco dei parametri da passare al jdbctemplate (devono corrispondere in tipo e
 		// numero ai parametri definiti nella queryString)
-		sql +="nome = :nome"«EXPAND template::datagen::dao::daoFiles::orderByClause FOR this.orderSpecs-»;
+		sql.append("nome = :nome");	
+		«ENDPROTECT»
+			«EXPAND template::datagen::dao::daoFiles::orderByClause FOR this.orderSpecs-»
+		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"values")»			
 		//***aggiungere tutte le condizioni
 		Map<String, Object> paramMap = new TreeMap<String, Object>();
 		paramMap.put("nome", input);
@@ -121,13 +125,13 @@
 					StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
 			stopWatch.start();
-			list = jdbcTemplate.query(sql, paramMap, this);
+			list = jdbcTemplate.query(sql.toString(), paramMap, this);
 			
 		} catch (RuntimeException ex) {
 			log.error("[«getDaoImplClassName(dao)»::find«name.toFirstUpper()»] esecuzione query",ex);
 			throw new «getDaoExcClassName(dao)»("Query failed", ex);
 		} finally {
-			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "find«name.toFirstUpper()»","esecuzione query", sql);
+			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "find«name.toFirstUpper()»","esecuzione query", sql.toString());
 			log.debug("[«getDaoImplClassName(dao)»::find«name.toFirstUpper()»] END");
 		}
 		return list;	
@@ -151,19 +155,20 @@
 		
 		// personalizzare la query SQL relativa al finder
 		QBEQueryBuilder<«getQbeExClassName(dao)»> builder = new QBEQueryBuilder<«getQbeExClassName(dao)»>(new «getMetadataClassName(dao)»());
-		String sql = builder.createFromExamples(positive, negative)«EXPAND template::datagen::dao::daoFiles::orderByClause FOR this.orderSpecs-»;
+		StringBuilder sql = new StringBuilder(builder.createFromExamples(positive, negative));
+		«EXPAND template::datagen::dao::daoFiles::orderByClause FOR this.orderSpecs-»
 		
 		List<«getDtoClassName(dao)»> list = null;
 					StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
 			stopWatch.start();
-			list = jdbcTemplate.query(sql, new HashMap(), this);
+			list = jdbcTemplate.query(sql.toString(), new HashMap(), this);
 			
 		} catch (RuntimeException ex) {
 			log.error("[«getDaoImplClassName(dao)»::findByExamples] esecuzione query",ex);
 			throw new «getDaoExcClassName(dao)»("Query failed", ex);
 		} finally {
-			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "findByExamples","esecuzione query", sql);
+			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "findByExamples","esecuzione query", sql.toString());
 			log.debug("[«getDaoImplClassName(dao)»::findByExamples] END");
 		}
 		return list;	
