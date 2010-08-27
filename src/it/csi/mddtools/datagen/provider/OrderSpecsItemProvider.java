@@ -9,6 +9,7 @@ package it.csi.mddtools.datagen.provider;
 
 import it.csi.mddtools.datagen.DatagenFactory;
 import it.csi.mddtools.datagen.DatagenPackage;
+import it.csi.mddtools.datagen.OrderSpec;
 import it.csi.mddtools.datagen.OrderSpecs;
 
 import java.util.Collection;
@@ -114,11 +115,28 @@ public class OrderSpecsItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_OrderSpecs_type");
+		OrderSpecs orderSpecs = (OrderSpecs)object;
+		StringBuilder sb = new StringBuilder();
+		sb.append(getString("_UI_OrderSpecs_type"));
+		if (orderSpecs.getSpecs()!=null && !orderSpecs.getSpecs().isEmpty()){
+			sb.append("--> ORDER BY ");
+			for(OrderSpec s : orderSpecs.getSpecs()){
+				if (s.getColumn()!=null){
+					sb.append(s.getColumn().getName());
+					sb.append(" ");
+					sb.append(s.isAscending() ? "ASC" : "DESC");
+					sb.append(",");
+				}
+			}
+			if (sb.length()>0 && sb.lastIndexOf(",")!=-1){
+				sb.deleteCharAt(sb.lastIndexOf(","));
+			}
+		}
+		return sb.toString();
 	}
 
 	/**
