@@ -7,18 +7,20 @@
 package it.csi.mddtools.datagen.provider;
 
 
+import it.csi.mddtools.datagen.DataAccessObject;
 import it.csi.mddtools.datagen.DatagenFactory;
 import it.csi.mddtools.datagen.DatagenPackage;
 import it.csi.mddtools.datagen.MultiResFinder;
+import it.csi.mddtools.rdbmdl.Column;
+import it.csi.mddtools.rdbmdl.Table;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -26,6 +28,7 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
@@ -72,22 +75,33 @@ public class MultiResFinderItemProvider
 	 * This adds a property descriptor for the Distinct feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	protected void addDistinctPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_MultiResFinder_distinct_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_MultiResFinder_distinct_feature", "_UI_MultiResFinder_type"),
-				 DatagenPackage.Literals.MULTI_RES_FINDER__DISTINCT,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
+		itemPropertyDescriptors.add(new ItemPropertyDescriptor(
+				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getString("_UI_MultiResFinder_distinct_feature"), 
+				getString("_UI_PropertyDescriptor_description",
+						  "_UI_MultiResFinder_distinct_feature",
+						  "_UI_MultiResFinder_type"),
+				DatagenPackage.eINSTANCE.getMultiResFinder_Distinct(),
+				true) {
+					@SuppressWarnings("unchecked")
+					protected Collection getComboBoxObjects(Object object) {
+						ArrayList<Column> result = new ArrayList<Column>();
+						MultiResFinder multiResFinder =  (MultiResFinder)object;											
+//						Salgo l'albero fino a Data Access Object						
+						DataAccessObject dao = (DataAccessObject)multiResFinder.eContainer().eContainer();
+						Table table = dao.getMainTable();
+						if (table!=null && table.getColumns()!=null && !table.getColumns().isEmpty()){
+							for(Column c : table.getColumns()){
+								result.add(c);
+							}
+						}
+						return result;						
+					}
+				}
+			);
 	}
 
 	/**
