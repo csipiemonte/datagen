@@ -24,10 +24,11 @@ public class DeleteByPKImpl extends DeleterImpl implements DeleteByPK {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	protected DeleteByPKImpl() {
 		super();
+		setName("delete");
 	}
 
 	/**

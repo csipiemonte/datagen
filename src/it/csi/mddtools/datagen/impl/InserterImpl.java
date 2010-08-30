@@ -24,10 +24,11 @@ public class InserterImpl extends DBCommandImpl implements Inserter {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	protected InserterImpl() {
 		super();
+		setName("insert");
 	}
 
 	/**

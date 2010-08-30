@@ -24,10 +24,11 @@ public class UpdateRowImpl extends UpdaterImpl implements UpdateRow {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	protected UpdateRowImpl() {
 		super();
+		setName("update");
 	}
 
 	/**

@@ -24,10 +24,11 @@ public class FindAllImpl extends MultiResFinderImpl implements FindAll {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	protected FindAllImpl() {
 		super();
+		setName("findAll");
 	}
 
 	/**

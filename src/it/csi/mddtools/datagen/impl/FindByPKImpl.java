@@ -24,10 +24,11 @@ public class FindByPKImpl extends SingleResFinderImpl implements FindByPK {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	protected FindByPKImpl() {
 		super();
+		setName("findByPrimaryKey");
 	}
 
 	/**
