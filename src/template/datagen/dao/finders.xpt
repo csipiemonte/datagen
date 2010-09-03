@@ -106,6 +106,7 @@
 	«IF body-»
 	{
 		StringBuilder sql = new StringBuilder();
+		Map<String, Object> paramMap = new TreeMap<String, Object>();
 		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"query")»
 		// personalizzare la query SQL relativa al finder
 		sql.append("SELECT «IF this.distinct==null || this.distinct.isEmpty-»«EXPAND template::datagen::dao::daoFiles::columnNameList(false) FOR dao.mainTable.columns-»«ELSE-»«EXPAND template::datagen::dao::daoFiles::columnNameList(true) FOR this.distinct-»«ENDIF-» from «dao.mainTable.name» WHERE ");
@@ -117,7 +118,7 @@
 			«EXPAND template::datagen::dao::daoFiles::orderByClause FOR this.orderSpecs-»
 		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"values")»			
 		//***aggiungere tutte le condizioni
-		Map<String, Object> paramMap = new TreeMap<String, Object>();
+		
 		paramMap.put("nome", input);
 		
 		«ENDPROTECT»
