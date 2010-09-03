@@ -34,6 +34,15 @@ import java.util.List;
  */
 public class «getMetadataClassName()» implements DAOMetadata{
 	
+	private String[] columnNames;	
+	
+	public «getMetadataClassName()»(){
+		columnNames = new String[]{«FOREACH mainTable.columns AS currCol SEPARATOR ','-»"«currCol.name»"«ENDFOREACH-»};		
+	}
+	
+	public «getMetadataClassName()»(String[] columnNames){
+		this.columnNames = columnNames;		
+	}
 	
 	/**
 	 * Method 'getTableName'
@@ -46,7 +55,19 @@ public class «getMetadataClassName()» implements DAOMetadata{
 		return "«mainTable.name»";
 	}
 
-	«EXPAND getColumnNameMethod(this) FOR this.mainTable»	
+	«EXPAND getColumnNameMethod(this) FOR this.mainTable»
+	
+	/**
+	 * Method 'getColumnNames'
+	 * 
+	 * @return String[]
+	 * @generated
+	 */
+	public String[] getColumnNames()
+	{
+		return this.columnNames;
+	}
+		
 }
 «ENDFILE-»
 «ENDLET-»
@@ -71,8 +92,6 @@ public class «getMetadataClassName()» implements DAOMetadata{
 		throw new IllegalArgumentException("proprieta' "+propName+" non trovata per il DTO «getDtoClassName(dao)»");
 	}
 «ENDDEFINE»
-
-
 
 «DEFINE commonMetadataFiles(DBAccessModel model) FOR DaoPackage»
 «FILE getDALayerBaseDir(model)+"/metadata/DAOMetadata.java"»package «getDALayerBasePkg(model)».metadata;
@@ -108,8 +127,14 @@ public interface DAOMetadata
 	 */
 	public abstract String getColumnName(String propName);
 	
-	
-	
+	/**
+	 * Method 'getColumnNames'
+	 * 
+	 * @return String[]
+	 * @generated
+	 */
+	public abstract String[] getColumnNames();
+		
 	
 	
 }

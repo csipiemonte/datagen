@@ -374,6 +374,9 @@ String getColumnModifier(TableColumn col) :
 
 boolean isNullOrEmpty(String s) :
 	s==null || s.length==0;
+	
+boolean isNullOrEmpty(List l) :
+	l==null || l.size==0;	
 
 String getPluginVersion() : JAVA
 	it.csi.mddtools.datagen.genutils.MiscUtils.getPluginVersion();
@@ -403,3 +406,12 @@ Void restoreProperties() : JAVA
 
 Void setProperty(String name, String val) : JAVA
   it.csi.mddtools.datagen.genutils.GenUtils.setProperty(java.lang.String, java.lang.String);
+  
+boolean areDistinctAndOrderByClauseConsistent(List distinctCols, List orderSpecs) : JAVA
+	it.csi.mddtools.datagen.genutils.GenUtils.areDistinctAndOrderByClauseConsistent(java.util.List, java.util.List);
+	
+boolean areAllDaoMethodsNamesUnivocal(Inserter inserter,Finders finders,Updaters updaters,Deleters deleters) : JAVA	
+	it.csi.mddtools.datagen.genutils.GenUtils.areAllDaoMethodsNamesUnivocal(it.csi.mddtools.datagen.Inserter,
+																	   it.csi.mddtools.datagen.Finders,
+																	   it.csi.mddtools.datagen.Updaters,
+																	   it.csi.mddtools.datagen.Deleters);

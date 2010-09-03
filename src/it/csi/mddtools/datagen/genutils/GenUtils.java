@@ -1,5 +1,14 @@
 package it.csi.mddtools.datagen.genutils;
 
+import it.csi.mddtools.datagen.Deleter;
+import it.csi.mddtools.datagen.Finder;
+import it.csi.mddtools.datagen.OrderSpec;
+import it.csi.mddtools.datagen.Updater;
+import it.csi.mddtools.rdbmdl.Column;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Properties;
 import java.util.StringTokenizer;
 
@@ -76,6 +85,64 @@ public class GenUtils {
 			i++;
 		}
 		return formattedSource;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static boolean areDistinctAndOrderByClauseConsistent(List distinctCols, List orderSpecs){
+		HashMap<String, Column> hmDistinct = new HashMap<String, Column>();
+		Iterator<Column> iterDistinct = distinctCols.iterator();
+		while (iterDistinct.hasNext()) {
+			Column column = (Column) iterDistinct.next();
+			hmDistinct.put(column.getName(), column);			
+		}
+		Iterator<OrderSpec> iterOrderBy = orderSpecs.iterator();
+		while (iterOrderBy.hasNext()) {
+			OrderSpec spec = (OrderSpec) iterOrderBy.next();
+			if (!hmDistinct.containsKey(spec.getColumn().getName())){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public static boolean areAllDaoMethodsNamesUnivocal(it.csi.mddtools.datagen.Inserter ins,
+																   it.csi.mddtools.datagen.Finders find,
+																   it.csi.mddtools.datagen.Updaters upd,
+																   it.csi.mddtools.datagen.Deleters del)
+	{
+		HashMap<String, String> hmNames = new HashMap<String, String>();
+		hmNames.put(ins.getName(),ins.getName());
+		Iterator<Finder> iterFind = find.getFinders().iterator();
+		while (iterFind.hasNext()) {
+			Finder finder = (Finder) iterFind.next();
+			if (!hmNames.containsKey(finder.getName())){
+				hmNames.put(finder.getName(), finder.getName());
+			}
+			else{
+				return false;
+			}
+		}
+		Iterator<Updater> iterUpd = upd.getUpdaters().iterator();
+		while (iterUpd.hasNext()) {
+			Updater updater = (Updater) iterUpd.next();
+			if (!hmNames.containsKey(updater.getName())){
+				hmNames.put(updater.getName(), updater.getName());
+			}
+			else{
+				return false;
+			}
+		}
+		Iterator<Deleter> iterDel = del.getDeleters().iterator();
+		while (iterDel.hasNext()) {
+			Deleter deleter = (Deleter) iterDel.next();
+			if (!hmNames.containsKey(deleter.getName())){
+				hmNames.put(deleter.getName(), deleter.getName());
+			}
+			else{
+				return false;
+			}
+		}
+		return true;
 	}
 	
 }

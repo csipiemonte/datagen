@@ -28,7 +28,7 @@
 	«IF body-»
 	{
 		
-		final StringBuilder sql = new StringBuilder("SELECT «EXPAND template::datagen::dao::daoFiles::columnNameList FOR dao.mainTable.columns» FROM " + getTableName() + " WHERE «EXPAND template::datagen::dao::daoFiles::setColumnEqPlaceholderList(" AND ") FOR dao.mainTable.primaryKey.includedColumns»");
+		final StringBuilder sql = new StringBuilder("SELECT «EXPAND template::datagen::dao::daoFiles::columnNameList(false) FOR dao.mainTable.columns» FROM " + getTableName() + " WHERE «EXPAND template::datagen::dao::daoFiles::setColumnEqPlaceholderList(" AND ") FOR dao.mainTable.primaryKey.includedColumns»");
 		
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		«EXPAND template::datagen::dao::daoFiles::paramValorizationList("pk") FOR dao.mainTable.primaryKey.includedColumns»
@@ -64,8 +64,8 @@
 	 @SuppressWarnings("unchecked")
 	public List<«getDtoClassName(dao)»> findAll() throws «getDaoExcClassName(dao)»
 	«IF body-»
-	{
-		final StringBuilder sql = new StringBuilder("SELECT «EXPAND template::datagen::dao::daoFiles::columnNameList FOR dao.mainTable.columns» FROM " + getTableName());
+	{		
+		final StringBuilder sql = new StringBuilder("SELECT «IF this.distinct==null || this.distinct.isEmpty-»«EXPAND template::datagen::dao::daoFiles::columnNameList(false) FOR dao.mainTable.columns-»«ELSE-»«EXPAND template::datagen::dao::daoFiles::columnNameList(true) FOR this.distinct-»«ENDIF-» FROM " + getTableName());
 		«EXPAND template::datagen::dao::daoFiles::orderByClause FOR this.orderSpecs-»
 		
 		MapSqlParameterSource params = new MapSqlParameterSource();
@@ -108,7 +108,7 @@
 		StringBuilder sql = new StringBuilder();
 		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"query")»
 		// personalizzare la query SQL relativa al finder
-		sql.append("SELECT * from «dao.mainTable.name» WHERE ");
+		sql.append("SELECT «IF this.distinct==null || this.distinct.isEmpty-»«EXPAND template::datagen::dao::daoFiles::columnNameList(false) FOR dao.mainTable.columns-»«ELSE-»«EXPAND template::datagen::dao::daoFiles::columnNameList(true) FOR this.distinct-»«ENDIF-» from «dao.mainTable.name» WHERE ");
 		
 		// personalizzare l'elenco dei parametri da passare al jdbctemplate (devono corrispondere in tipo e
 		// numero ai parametri definiti nella queryString)
@@ -154,8 +154,8 @@
 	{
 		
 		// personalizzare la query SQL relativa al finder
-		QBEQueryBuilder<«getQbeExClassName(dao)»> builder = new QBEQueryBuilder<«getQbeExClassName(dao)»>(new «getMetadataClassName(dao)»());
-		StringBuilder sql = new StringBuilder(builder.createFromExamples(positive, negative));
+		QBEQueryBuilder<«getQbeExClassName(dao)»> builder = new QBEQueryBuilder<«getQbeExClassName(dao)»>(new «getMetadataClassName(dao)»(«EXPAND template::datagen::dao::daoFiles::distinctColumnsIfNecessary FOR this.distinct-»));
+		StringBuilder sql = new StringBuilder(builder.createFromExamples(positive, negative,«IF this.distinct!=null && !this.distinct.isEmpty-»true«ELSE-»false«ENDIF-»));
 		«EXPAND template::datagen::dao::daoFiles::orderByClause FOR this.orderSpecs-»
 		
 		List<«getDtoClassName(dao)»> list = null;

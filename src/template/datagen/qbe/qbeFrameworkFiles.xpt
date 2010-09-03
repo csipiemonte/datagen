@@ -346,8 +346,8 @@ public class QBEQueryBuilder<TEX extends AbstractExample> {
 	 * @param negEx
 	 * @return
 	 */
-	public String createFromExamples(List<TEX> posEx, List<TEX> negEx){
-		String sql = "SELECT * FROM "+_metadata.getTableName()+" WHERE ";
+	public String createFromExamples(List<TEX> posEx, List<TEX> negEx,boolean usesDistinct){
+		String sql = "SELECT "+(usesDistinct?"DISTINCT ":"")+_metadata.getColumnNames()+" FROM "+_metadata.getTableName()+" WHERE ";
 		String where = "";
 		String posExClause = "";
 		String negExClause = "";

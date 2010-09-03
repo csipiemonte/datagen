@@ -26,7 +26,9 @@ context DataAccessObject WARNING "il dao: "+this.name+" non definisce nessun ins
 context DataAccessObject WARNING "il dao: "+this.name+" non definisce nessun updater di base (UpdateRow)" :
 	updaters != null && updaters.updaters.select(f| (f.metaType==UpdateRow)).size==1;
 
-
+context DataAccessObject ERROR "I nomi dei metodi contenuti nel dao : "+this.name+" devono essere univoci" :
+	areAllDaoMethodsNamesUnivocal(inserter,finders,updaters,deleters);
+	
 context Finder if (metaType != FindByPK && metaType != FindAll && metaType != QBEFinder) ERROR "E' necessario specificare il nome dei finder (esclusi il findByPK, findAll, QBEFinder)"+((DataAccessObject)(this.eContainer.eContainer)).name:
 	!isNullOrEmpty(name);
 	
@@ -35,3 +37,6 @@ context Updater if (metaType != UpdateRow) ERROR "E' necessario specificare il n
 
 context Deleter if (metaType != DeleteByPK) ERROR "E' necessario specificare il nome dei deleter (escluso il DeleteByPK)"+((DataAccessObject)(this.eContainer.eContainer)).name:
 	!isNullOrEmpty(name);
+	
+context MultiResFinder if (!isNullOrEmpty(distinct) && orderSpecs!=null && !isNullOrEmpty(orderSpecs.specs)) ERROR "Se la ricerca per distinct è abilitata, tutte le eventuali colonne presenti nella OrderSpecs devono essere presenti anche in distinct. "+((DataAccessObject)(this.eContainer.eContainer)).name:
+	areDistinctAndOrderByClauseConsistent(distinct,orderSpecs.specs);

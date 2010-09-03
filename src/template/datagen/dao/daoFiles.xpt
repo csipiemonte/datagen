@@ -166,8 +166,17 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameterize
 «ENDLET-»
 «ENDDEFINE»
 
+«DEFINE columnNameList(boolean useDistinct) FOR List[TableColumn]-»
+«IF useDistinct-»DISTINCT «ENDIF-»«FOREACH this AS currCol SEPARATOR ","-»«((TableColumn)currCol).name-»«ENDFOREACH-»
+«ENDDEFINE»
+
+«DEFINE distinctColumnsIfNecessary FOR List[TableColumn]-»
+«IF this!=null && !this.isEmpty-»new String[]{«FOREACH this AS currCol SEPARATOR ","-»"«((TableColumn)currCol).name-»"«ENDFOREACH-»}«ENDIF-»
+«ENDDEFINE»
+
+
 «DEFINE columnNameList FOR List[TableColumn]-»
-«FOREACH this AS currCol SEPARATOR ","-»«((TableColumn)currCol).name»«ENDFOREACH-»
+	«EXPAND columnNameList(false) FOR this-»
 «ENDDEFINE»
 
 «DEFINE setColumnSetValuePlaceholderList(DataAccessObject dao) FOR List[TableColumn]-»
