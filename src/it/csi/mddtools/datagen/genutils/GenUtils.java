@@ -105,43 +105,73 @@ public class GenUtils {
 		return true;
 	}
 	
-	public static boolean areAllDaoMethodsNamesUnivocal(it.csi.mddtools.datagen.Inserter ins,
-																   it.csi.mddtools.datagen.Finders find,
-																   it.csi.mddtools.datagen.Updaters upd,
-																   it.csi.mddtools.datagen.Deleters del)
-	{
+	/**
+	 * Verifica se vi sono duplicazioni di nome tra i metodi di un DAO 
+	 * @param ins
+	 * @param find
+	 * @param upd
+	 * @param del
+	 * @return true se non ci sono duplicazioni, false altrimenti
+	 */
+	public static boolean areAllDaoMethodsNamesUnivocal(
+			it.csi.mddtools.datagen.Inserter ins,
+			it.csi.mddtools.datagen.Finders find,
+			it.csi.mddtools.datagen.Updaters upd,
+			it.csi.mddtools.datagen.Deleters del) {
 		HashMap<String, String> hmNames = new HashMap<String, String>();
-		hmNames.put(ins.getName(),ins.getName());
-		Iterator<Finder> iterFind = find.getFinders().iterator();
-		while (iterFind.hasNext()) {
-			Finder finder = (Finder) iterFind.next();
-			if (!hmNames.containsKey(finder.getName())){
-				hmNames.put(finder.getName(), finder.getName());
-			}
-			else{
-				return false;
+		// inserter
+		if (ins != null) {
+			String opName = ins.getName();
+			if (opName != null) {
+				hmNames.put(opName, opName);
 			}
 		}
-		Iterator<Updater> iterUpd = upd.getUpdaters().iterator();
-		while (iterUpd.hasNext()) {
-			Updater updater = (Updater) iterUpd.next();
-			if (!hmNames.containsKey(updater.getName())){
-				hmNames.put(updater.getName(), updater.getName());
-			}
-			else{
-				return false;
-			}
-		}
-		Iterator<Deleter> iterDel = del.getDeleters().iterator();
-		while (iterDel.hasNext()) {
-			Deleter deleter = (Deleter) iterDel.next();
-			if (!hmNames.containsKey(deleter.getName())){
-				hmNames.put(deleter.getName(), deleter.getName());
-			}
-			else{
-				return false;
+		// finders
+		if (find != null && find.getFinders() != null) {
+			Iterator<Finder> iterFind = find.getFinders().iterator();
+			while (iterFind.hasNext()) {
+				Finder finder = (Finder) iterFind.next();
+				String opName = finder.getName();
+				if (opName != null) {
+					if (!hmNames.containsKey(opName)) {
+						hmNames.put(opName, opName);
+					} else {
+						return false;
+					}
+				}
 			}
 		}
+		// updaters
+		if (upd != null && upd.getUpdaters() != null) {
+			Iterator<Updater> iterUpd = upd.getUpdaters().iterator();
+			while (iterUpd.hasNext()) {
+				Updater updater = (Updater) iterUpd.next();
+				String opName = updater.getName();
+				if (opName != null) {
+					if (!hmNames.containsKey(opName)) {
+						hmNames.put(opName, opName);
+					} else {
+						return false;
+					}
+				}
+			}
+		}
+		// deleters
+		if (del != null && del.getDeleters() != null) {
+			Iterator<Deleter> iterDel = del.getDeleters().iterator();
+			while (iterDel.hasNext()) {
+				Deleter deleter = (Deleter) iterDel.next();
+				String opName = deleter.getName();
+				if (opName != null) {
+					if (!hmNames.containsKey(opName)) {
+						hmNames.put(opName, opName);
+					} else {
+						return false;
+					}
+				}
+			}
+		}
+
 		return true;
 	}
 	
