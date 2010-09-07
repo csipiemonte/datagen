@@ -1,6 +1,7 @@
 import datagen;
 import rdbmdl;
 
+extension org::openarchitectureware::util::stdlib::naming;
 extension template::DatagenExtensions; 
 
 context DBAccessModel ERROR "codice prodotto mancante" :
@@ -34,6 +35,11 @@ context Finder if (metaType != FindByPK && metaType != FindAll && metaType != QB
 	
 context Updater if (metaType != UpdateRow) ERROR "E' necessario specificare il nome degli updater (escluso l'UpdateRow)"+((DataAccessObject)(this.eContainer.eContainer)).name:
 	!isNullOrEmpty(name);
+
+context CustomFinder ERROR "E' necessario specificare la classe del parametro di filtro (full qualified name, oppure "+
+" '$dto' per utilizzare la classe del DTO associata al DAO, o '$dto[]' per utilizzare una"+
+"lista di oggetti DTO):"+loc() :
+	this.filterClassFQN!=null && this.filterClassFQN != "";
 
 context Deleter if (metaType != DeleteByPK) ERROR "E' necessario specificare il nome dei deleter (escluso il DeleteByPK)"+((DataAccessObject)(this.eContainer.eContainer)).name:
 	!isNullOrEmpty(name);
