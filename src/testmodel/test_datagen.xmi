@@ -26,7 +26,7 @@
       <finders>
         <finders xsi:type="datagen:FindByPK"/>
         <finders xsi:type="datagen:FindAll"/>
-        <finders xsi:type="datagen:CustomFinder" name="byMuzz"/>
+        <finders xsi:type="datagen:CustomFinder" name="byMuzz" filterClassFQN="$dto"/>
       </finders>
       <updaters>
         <updaters xsi:type="datagen:UpdateRow"/>
