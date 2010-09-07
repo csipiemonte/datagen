@@ -119,7 +119,7 @@
 		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"values")»			
 		//***aggiungere tutte le condizioni
 		
-		paramMap.put("nome", input);
+		paramMap.addValue("nome", input);
 		
 		«ENDPROTECT»
 		List<«getDtoClassName(dao)»> list = null;
