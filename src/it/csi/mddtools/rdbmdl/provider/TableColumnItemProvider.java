@@ -183,14 +183,17 @@ public class TableColumnItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((TableColumn)object).getName();
-		return label == null || label.length() == 0 ?
+		TableColumn tc = ((TableColumn)object);
+		String label = tc.getName() == null || tc.getName().length() == 0 ?
 			getString("_UI_TableColumn_type") :
-			getString("_UI_TableColumn_type") + " " + label;
+			getString("_UI_TableColumn_type") + " " + tc.getName();
+		String precision = tc.getType().getDecimalDigits()==0?"":","+tc.getType().getDecimalDigits();	
+			
+		return label + " ["+tc.getType().getName()+"("+tc.getType().getSize()+precision+")]";	
 	}
 
 	/**
