@@ -10,6 +10,9 @@
     <columns name="cognome" isPrimaryKey="false" isForeignKey="false">
       <type size="50" nullable="true" type="VARCHAR"/>
     </columns>
+    <columns name="fintoBlob" isPrimaryKey="false" isForeignKey="false">
+      <type name="BLOB" type="BLOB"/>
+    </columns>
     <primaryKey name="pk_dipendente" includedColumns="//@elements.0/@columns.0"/>
   </elements>
   <elements xsi:type="rdbmdl:Table" name="Progetto">
