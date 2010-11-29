@@ -368,7 +368,15 @@ String getSQLType(TableColumn col) :
 			
 		default :"???"
 	};
+
+boolean isBlobOrClob(TableColumn col) :
+	if (col.type !=null) then
+		getSQLType(col) == "CLOB" || getSQLType(col) == "BLOB"
+	else
+		false;
 	
+
+
 String getColumnModifier(TableColumn col) :
 	col.type.nullable ? "NULL" : "NOT NULL";
 

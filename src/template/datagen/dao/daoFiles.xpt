@@ -293,8 +293,11 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c)
 		«getDtoClassName()» dto = new «getDtoClassName()»();
 		«FOREACH mainTable.columns AS currCol ITERATOR i»
 		dto.set«javaPropertyNameFromColumn(currCol).toFirstUpper()»(
+		«IF !isBlobOrClob(currCol)-»
 			«getValueFromRSByColName(currCol)»
-			«REM»«getValueFromRS(currCol, i.counter1)»«ENDREM»			
+		«ELSE-»
+			«getValueFromRS(currCol, i.counter1)»
+		«ENDIF-»			
 		);
 		«ENDFOREACH»
 		return dto;
