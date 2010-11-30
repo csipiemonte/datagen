@@ -107,7 +107,23 @@
 	{
 		StringBuilder sql = new StringBuilder();
 		MapSqlParameterSource paramMap = new MapSqlParameterSource();
-		sql.append("SELECT «IF this.distinct==null || this.distinct.isEmpty-»«EXPAND template::datagen::dao::daoFiles::columnNameList(false) FOR dao.mainTable.columns-»«ELSE-»«EXPAND template::datagen::dao::daoFiles::columnNameList(true) FOR this.distinct-»«ENDIF-» from «dao.mainTable.name» WHERE ");
+		«IF customSelect-»
+		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"select")»
+		// la clausola select e'customizzabile poiche' il finder ha l'attributo customSelect == true
+		sql.append("SELECT «IF this.distinct==null || this.distinct.isEmpty-»«EXPAND template::datagen::dao::daoFiles::columnNameList(false) FOR dao.mainTable.columns-»«ELSE-»«EXPAND template::datagen::dao::daoFiles::columnNameList(true) FOR this.distinct-»«ENDIF-» ");
+		«ENDPROTECT»
+		«ELSE»
+		sql.append("SELECT «IF this.distinct==null || this.distinct.isEmpty-»«EXPAND template::datagen::dao::daoFiles::columnNameList(false) FOR dao.mainTable.columns-»«ELSE-»«EXPAND template::datagen::dao::daoFiles::columnNameList(true) FOR this.distinct-»«ENDIF-» ");
+		«ENDIF-»
+		«IF customFrom-»
+		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"from")»
+		// la clausola from e'customizzabile poiche' il finder ha l'attributo customFrom==true
+		sql.append(" FROM «dao.mainTable.name»");
+		«ENDPROTECT»
+		«ELSE-»
+		sql.append(" FROM «dao.mainTable.name»");
+		«ENDIF-»
+		sql.append(" WHERE ");
 		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"query")»
 		// personalizzare la query SQL relativa al finder
 		

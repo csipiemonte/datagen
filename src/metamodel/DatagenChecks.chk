@@ -41,6 +41,9 @@ context CustomFinder ERROR "E' necessario specificare la classe del parametro di
 "lista di oggetti DTO):"+loc() :
 	this.filterClassFQN!=null && this.filterClassFQN != "";
 
+context CustomFinder if (customSelect) ERROR "La clausola distinct è incompatibile con l'attributo 'customSelect'"+loc() :
+	this.distinct.size==0;
+
 context Deleter if (metaType != DeleteByPK) ERROR "E' necessario specificare il nome dei deleter (escluso il DeleteByPK)"+((DataAccessObject)(this.eContainer.eContainer)).name:
 	!isNullOrEmpty(name);
 	

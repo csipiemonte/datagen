@@ -20,6 +20,8 @@ package it.csi.mddtools.datagen;
  * The following features are supported:
  * <ul>
  *   <li>{@link it.csi.mddtools.datagen.CustomFinder#getFilterClassFQN <em>Filter Class FQN</em>}</li>
+ *   <li>{@link it.csi.mddtools.datagen.CustomFinder#isCustomSelect <em>Custom Select</em>}</li>
+ *   <li>{@link it.csi.mddtools.datagen.CustomFinder#isCustomFrom <em>Custom From</em>}</li>
  * </ul>
  * </p>
  *
@@ -60,4 +62,64 @@ public interface CustomFinder extends MultiResFinder {
 	 * @generated
 	 */
 	void setFilterClassFQN(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Custom Select</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Se impostata a true permette la customizzazione della clausola select, 
+	 * altrimenti viene generata una clausola di default che tiene conto di:
+	 * <ul>
+	 * <li>nomi di colonne</li>
+	 * <li>posizione delle colonne</li>
+	 * <li>eventuali clausole DISTINCT</li>
+	 * </ul>
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Custom Select</em>' attribute.
+	 * @see #setCustomSelect(boolean)
+	 * @see it.csi.mddtools.datagen.DatagenPackage#getCustomFinder_CustomSelect()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isCustomSelect();
+
+	/**
+	 * Sets the value of the '{@link it.csi.mddtools.datagen.CustomFinder#isCustomSelect <em>Custom Select</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Custom Select</em>' attribute.
+	 * @see #isCustomSelect()
+	 * @generated
+	 */
+	void setCustomSelect(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Custom From</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Se impostata a true permette la customizzazione della clausola FROM, 
+	 * tipicamente necessaria quando si debba introdurre una tabella aggiuntiva
+	 * per fare ad esempio una join.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Custom From</em>' attribute.
+	 * @see #setCustomFrom(boolean)
+	 * @see it.csi.mddtools.datagen.DatagenPackage#getCustomFinder_CustomFrom()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isCustomFrom();
+
+	/**
+	 * Sets the value of the '{@link it.csi.mddtools.datagen.CustomFinder#isCustomFrom <em>Custom From</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Custom From</em>' attribute.
+	 * @see #isCustomFrom()
+	 * @generated
+	 */
+	void setCustomFrom(boolean value);
 } // CustomFinder

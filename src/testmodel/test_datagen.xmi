@@ -11,6 +11,9 @@
         <finders xsi:type="datagen:FindAll"/>
         <finders xsi:type="datagen:FindByPK"/>
         <finders xsi:type="datagen:QBEFinder"/>
+        <finders xsi:type="datagen:CustomFinder" name="findWithCustomSelect" filterClassFQN="$dto" customSelect="true"/>
+        <finders xsi:type="datagen:CustomFinder" name="findWithCustomFrom" filterClassFQN="$dto" customFrom="true"/>
+        <finders xsi:type="datagen:CustomFinder" name="findWithAllCustom" filterClassFQN="$dto" customSelect="true" customFrom="true"/>
       </finders>
       <updaters>
         <updaters xsi:type="datagen:UpdateRow"/>

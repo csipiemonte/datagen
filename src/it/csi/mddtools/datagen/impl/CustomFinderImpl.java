@@ -19,6 +19,8 @@ import org.eclipse.emf.ecore.EClass;
  * The following features are implemented:
  * <ul>
  *   <li>{@link it.csi.mddtools.datagen.impl.CustomFinderImpl#getFilterClassFQN <em>Filter Class FQN</em>}</li>
+ *   <li>{@link it.csi.mddtools.datagen.impl.CustomFinderImpl#isCustomSelect <em>Custom Select</em>}</li>
+ *   <li>{@link it.csi.mddtools.datagen.impl.CustomFinderImpl#isCustomFrom <em>Custom From</em>}</li>
  * </ul>
  * </p>
  *
@@ -60,6 +62,42 @@ public class CustomFinderImpl extends MultiResFinderImpl implements CustomFinder
 	 */
 	public void setFilterClassFQN(String newFilterClassFQN) {
 		eSet(DatagenPackage.Literals.CUSTOM_FINDER__FILTER_CLASS_FQN, newFilterClassFQN);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isCustomSelect() {
+		return (Boolean)eGet(DatagenPackage.Literals.CUSTOM_FINDER__CUSTOM_SELECT, true);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCustomSelect(boolean newCustomSelect) {
+		eSet(DatagenPackage.Literals.CUSTOM_FINDER__CUSTOM_SELECT, newCustomSelect);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isCustomFrom() {
+		return (Boolean)eGet(DatagenPackage.Literals.CUSTOM_FINDER__CUSTOM_FROM, true);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCustomFrom(boolean newCustomFrom) {
+		eSet(DatagenPackage.Literals.CUSTOM_FINDER__CUSTOM_FROM, newCustomFrom);
 	}
 
 } //CustomFinderImpl

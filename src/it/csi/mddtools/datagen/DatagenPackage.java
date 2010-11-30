@@ -764,13 +764,31 @@ public interface DatagenPackage extends EPackage {
 	int CUSTOM_FINDER__FILTER_CLASS_FQN = MULTI_RES_FINDER_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Custom Select</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOM_FINDER__CUSTOM_SELECT = MULTI_RES_FINDER_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Custom From</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOM_FINDER__CUSTOM_FROM = MULTI_RES_FINDER_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Custom Finder</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CUSTOM_FINDER_FEATURE_COUNT = MULTI_RES_FINDER_FEATURE_COUNT + 1;
+	int CUSTOM_FINDER_FEATURE_COUNT = MULTI_RES_FINDER_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Updaters</b></em>' containment reference list.
@@ -1395,6 +1413,28 @@ public interface DatagenPackage extends EPackage {
 	EAttribute getCustomFinder_FilterClassFQN();
 
 	/**
+	 * Returns the meta object for the attribute '{@link it.csi.mddtools.datagen.CustomFinder#isCustomSelect <em>Custom Select</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Custom Select</em>'.
+	 * @see it.csi.mddtools.datagen.CustomFinder#isCustomSelect()
+	 * @see #getCustomFinder()
+	 * @generated
+	 */
+	EAttribute getCustomFinder_CustomSelect();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.csi.mddtools.datagen.CustomFinder#isCustomFrom <em>Custom From</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Custom From</em>'.
+	 * @see it.csi.mddtools.datagen.CustomFinder#isCustomFrom()
+	 * @see #getCustomFinder()
+	 * @generated
+	 */
+	EAttribute getCustomFinder_CustomFrom();
+
+	/**
 	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.Updaters <em>Updaters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1920,6 +1960,22 @@ public interface DatagenPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CUSTOM_FINDER__FILTER_CLASS_FQN = eINSTANCE.getCustomFinder_FilterClassFQN();
+
+		/**
+		 * The meta object literal for the '<em><b>Custom Select</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CUSTOM_FINDER__CUSTOM_SELECT = eINSTANCE.getCustomFinder_CustomSelect();
+
+		/**
+		 * The meta object literal for the '<em><b>Custom From</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CUSTOM_FINDER__CUSTOM_FROM = eINSTANCE.getCustomFinder_CustomFrom();
 
 		/**
 		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.UpdatersImpl <em>Updaters</em>}' class.

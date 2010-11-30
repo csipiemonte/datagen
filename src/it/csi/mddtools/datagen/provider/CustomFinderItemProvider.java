@@ -62,6 +62,8 @@ public class CustomFinderItemProvider
 			super.getPropertyDescriptors(object);
 
 			addFilterClassFQNPropertyDescriptor(object);
+			addCustomSelectPropertyDescriptor(object);
+			addCustomFromPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -84,6 +86,50 @@ public class CustomFinderItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Custom Select feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addCustomSelectPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_CustomFinder_customSelect_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_CustomFinder_customSelect_feature", "_UI_CustomFinder_type"),
+				 DatagenPackage.Literals.CUSTOM_FINDER__CUSTOM_SELECT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Custom From feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addCustomFromPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_CustomFinder_customFrom_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_CustomFinder_customFrom_feature", "_UI_CustomFinder_type"),
+				 DatagenPackage.Literals.CUSTOM_FINDER__CUSTOM_FROM,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -126,6 +172,8 @@ public class CustomFinderItemProvider
 
 		switch (notification.getFeatureID(CustomFinder.class)) {
 			case DatagenPackage.CUSTOM_FINDER__FILTER_CLASS_FQN:
+			case DatagenPackage.CUSTOM_FINDER__CUSTOM_SELECT:
+			case DatagenPackage.CUSTOM_FINDER__CUSTOM_FROM:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

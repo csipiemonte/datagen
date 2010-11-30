@@ -214,6 +214,18 @@
         <details key="documentation" value="Full qualified name della classe che deve essere utilizzata come parametro di input per il finder.&#xD;&#xA;Possibili valori:&#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>Se non si specifica la proipriet&amp;agrave; la classe utilizzata sar&amp;agrave; &lt;i>java.lang.Object&lt;/i>.&lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto, sar&amp;agrave; utilizzata la classe del dto associato. &lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto[], sar&amp;agrave; utilizzata una ArrayList costituita da oggetti del tipo del dto associato. &lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="customSelect" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Se impostata a true permette la customizzazione della clausola select, &#xD;&#xA;altrimenti viene generata una clausola di default che tiene conto di:&#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>nomi di colonne&lt;/li>&#xD;&#xA;&lt;li>posizione delle colonne&lt;/li>&#xD;&#xA;&lt;li>eventuali clausole DISTINCT&lt;/li>&#xD;&#xA;&lt;/ul>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="customFrom" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Se impostata a true permette la customizzazione della clausola FROM, &#xD;&#xA;tipicamente necessaria quando si debba introdurre una tabella aggiuntiva&#xD;&#xA;per fare ad esempio una join."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Updaters">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
