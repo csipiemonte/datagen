@@ -550,7 +550,7 @@ public final class Constants {
 	/**
 	 * identificativo dell'applicativo.
 	 */
-	public static final String APPLICATION_CODE = "«this.codComponente.toUpperCase()»";
+	public static final String APPLICATION_CODE = "«this.codComponente»";
 	
 	«PROTECT CSTART '/*' CEND '*/' ID getRegionUID("DaoConstants")»
 	
