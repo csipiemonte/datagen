@@ -266,6 +266,10 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c)
 		}
 		
 		«IF this.mainTable.primaryKey != null»
+		«IF pkGenerator!=null-»
+		«REM»se chiave multipla non funziona!!«ENDREM»
+		«EXPAND fillPKFields("dto", "newKey") FOREACH this.mainTable.primaryKey.includedColumns-»
+		«ENDIF-»
 		return dto.createPk();
 		«ENDIF»	
 		
@@ -276,6 +280,9 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c)
 	
 «ENDDEFINE»
 
+«DEFINE fillPKFields(String dtoVarName, String keyValVarName) FOR Column»
+		«dtoVarName».set«javaPropertyNameFromColumn((TableColumn)this).toFirstUpper()»(«keyValVarName»);
+«ENDDEFINE»
 
 «DEFINE mapRowMethod(DBAccessModel model, boolean body) FOR DataAccessObject»
 	/**
