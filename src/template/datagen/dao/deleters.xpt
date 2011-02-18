@@ -59,7 +59,7 @@
 	public void delete(«getPkClassName(dao)» pk) throws «getDaoExcClassName(dao)»
 	«IF body-»
 	{
-		final String sql = "DELETE FROM " + getTableName() + " WHERE «EXPAND template::datagen::dao::daoFiles::setColumnEqPlaceholderList(",") FOR dao.mainTable.primaryKey.includedColumns»";
+		final String sql = "DELETE FROM " + getTableName() + " WHERE «EXPAND template::datagen::dao::daoFiles::setColumnEqPlaceholderList(" AND ") FOR dao.mainTable.primaryKey.includedColumns»";
 		
 		if(pk == null){
 			log.error("[«getDaoImplClassName(dao)»::delete] chiave primaria non impostata");

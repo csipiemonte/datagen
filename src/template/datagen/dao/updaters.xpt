@@ -60,7 +60,7 @@
 	public void updateColumns«name.toFirstUpper()»(«getDtoClassName(dao)» dto) throws «getDaoExcClassName(dao)»
 	«IF body-»
 	{
-		final String sql = "UPDATE " + getTableName() + " «EXPAND template::datagen::dao::daoFiles::setColumnSetValuePlaceholderList(dao) FOR this.columns-» WHERE «EXPAND template::datagen::dao::daoFiles::setColumnEqPlaceholderList(",") FOR dao.mainTable.primaryKey.includedColumns»";
+		final String sql = "UPDATE " + getTableName() + " «EXPAND template::datagen::dao::daoFiles::setColumnSetValuePlaceholderList(dao) FOR this.columns-» WHERE «EXPAND template::datagen::dao::daoFiles::setColumnEqPlaceholderList(" AND ") FOR dao.mainTable.primaryKey.includedColumns»";
 		
 		if(«FOREACH dao.mainTable.primaryKey.includedColumns AS currCol SEPARATOR "||"-»dto.get«javaPropertyNameFromColumn(currCol).toFirstUpper()»() == null «ENDFOREACH-»){
 			log.error("[«getDaoImplClassName(dao)»::update] chiave primaria non impostata");
@@ -95,7 +95,7 @@
 	public void update(«getDtoClassName(dao)» dto) throws «getDaoExcClassName(dao)»
 	«IF body-»
 	{
-		final String sql = "UPDATE " + getTableName() + " «EXPAND template::datagen::dao::daoFiles::setColumnSetValuePlaceholderList(dao) FOR dao.mainTable.columns-» WHERE «EXPAND template::datagen::dao::daoFiles::setColumnEqPlaceholderList(",") FOR dao.mainTable.primaryKey.includedColumns»";
+		final String sql = "UPDATE " + getTableName() + " «EXPAND template::datagen::dao::daoFiles::setColumnSetValuePlaceholderList(dao) FOR dao.mainTable.columns-» WHERE «EXPAND template::datagen::dao::daoFiles::setColumnEqPlaceholderList(" AND ") FOR dao.mainTable.primaryKey.includedColumns»";
 		
 		if(«FOREACH dao.mainTable.primaryKey.includedColumns AS currCol SEPARATOR "||"-»dto.get«javaPropertyNameFromColumn(currCol).toFirstUpper()»() == null «ENDFOREACH-»){
 			log.error("[«getDaoImplClassName(dao)»::update] chiave primaria non impostata");
