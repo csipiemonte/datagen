@@ -84,7 +84,7 @@ public interface «getDaoClassName()» {
 	
 	«EXPAND template::datagen::dao::deleters::deleters(model, false) FOR this-»
 	
-	«EXPAND mapRowMethod(model, false) FOR this-»
+	«EXPAND mapRowMethods(model, false) FOR this-»
 	
 	«EXPAND template::datagen::dao::finders::finders(model, false) FOR this-»
 }
@@ -145,7 +145,7 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameterize
 	
 	«EXPAND template::datagen::dao::deleters::deleters(model, true) FOR this»
 	
-	«EXPAND mapRowMethod(model, true) FOR this»
+	«EXPAND mapRowMethods(model, true) FOR this»
 
 
 	/**
@@ -284,7 +284,7 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c)
 		«dtoVarName».set«javaPropertyNameFromColumn((TableColumn)this).toFirstUpper()»(«keyValVarName»);
 «ENDDEFINE»
 
-«DEFINE mapRowMethod(DBAccessModel model, boolean body) FOR DataAccessObject»
+«DEFINE mapRowMethods(DBAccessModel model, boolean body) FOR DataAccessObject»
 	/**
 	 * Method 'mapRow'
 	 * 
@@ -298,6 +298,26 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c)
 	«IF body-»
 	{
 		«getDtoClassName()» dto = new «getDtoClassName()»();
+		dto = mapRow_internal(dto, rs, row);
+		return dto;
+	}
+	«ELSE-»
+	;
+	«ENDIF-»
+	
+	/**
+	 * Method 'mapRow_internal'
+	 * 
+	 * @param rs
+	 * @param row
+	 * @throws SQLException
+	 * @return «getDtoClassName()»
+	 * @generated
+	 */
+	public «getDtoClassName()» mapRow_internal(«getDtoClassName()» objectToFill, ResultSet rs, int row) throws SQLException
+	«IF body-»
+	{
+		«getDtoClassName()» dto = objectToFill;
 		«FOREACH mainTable.columns AS currCol ITERATOR i»
 		dto.set«javaPropertyNameFromColumn(currCol).toFirstUpper()»(
 		«IF !isBlobOrClob(currCol)-»
@@ -312,6 +332,7 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c)
 	«ELSE-»
 	;
 	«ENDIF-»
+	
 	
 «ENDDEFINE»
 
