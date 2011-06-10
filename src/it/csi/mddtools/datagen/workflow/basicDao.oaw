@@ -64,10 +64,12 @@ Parametri:
 	</component>
 	
 	<!--  generate code -->
-	<component class="org.openarchitectureware.xpand2.Generator" id="mygenerator">
+	<component class="org.openarchitectureware.xpand2.Generator" id="daogenerator">
 		<metaModel idRef="mm"/>
 		<expand
 			value="template::datagen::Main::main('${daoBeansFileName}', '${basePackage}') FOR model" />
+		<!-- AOP definition for extensions -->
+		<extensionAdvice value="template::datagen::${targetDbms}::aopExtensions"/>
 		<!--  protected regions configurator --> 
 	    <prSrcPaths value="${src-gen-dao}" /> 
 	    <prDefaultExcludes value="true" /> 
@@ -77,4 +79,8 @@ Parametri:
 		</outlet>
 	</component>
 	
+	<!-- AOP definition for expand templates -->
+	<component adviceTarget="daogenerator" class="oaw.xpand2.GeneratorAdvice" id="daoxptaop">
+		<advices value="template::datagen::${targetDbms}::aop"/>
+	</component>
 </workflow>

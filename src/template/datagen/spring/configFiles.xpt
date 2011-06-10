@@ -25,13 +25,7 @@
 	<!-- 
 		Esempio di configurazione di datasource, transaction manager, incrementer e dao 
 	-->
-  <!--<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-    <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-      <property name="url" value="jdbc:oracle:thin:@TST-DB-01.CSI.IT:1522:TEST10B" /> 
-    <property name="url" value="jdbc:oracle:thin:@SVIL10A.CSI.IT:1555:SVIL10A" />  
-    <property name="username" value="sicee" />
-    <property name="password" value="mypass" />
-  </bean>-->
+	«EXPAND localDatasourceSample FOR this»
   
   <bean id="myDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName" value="siceeweb/jdbc/SiceeDS" />
@@ -76,6 +70,10 @@
 </beans>
 
 «ENDFILE»
+«ENDDEFINE»
+
+«DEFINE localDatasourceSample FOR DBAccessModel-»
+«ERROR "localDatasourceSample: aop non risolta"»
 «ENDDEFINE»
 
 «DEFINE pkGeneratorBeanDef(DataAccessObject dao) FOR PKGenerator»

@@ -37,7 +37,7 @@
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
 			stopWatch.start();
-			list = jdbcTemplate.query(sql.toString(), params, this);
+			list = jdbcTemplate.query(sql.toString(), params, «name»RowMapper);
 			
 		} catch (RuntimeException ex) {
 			log.error("[«getDaoImplClassName(dao)»::findByPrimaryKey] esecuzione query",ex);
@@ -75,7 +75,7 @@
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
 			stopWatch.start();
-			list = jdbcTemplate.query(sql.toString(), params, this);
+			list = jdbcTemplate.query(sql.toString(), params, «name»RowMapper);
 			
 		} catch (RuntimeException ex) {
 			log.error("[«getDaoImplClassName(dao)»::findAll] esecuzione query",ex);
@@ -143,7 +143,7 @@
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
 			stopWatch.start();
-			list = jdbcTemplate.query(sql.toString(), paramMap, this);
+			list = jdbcTemplate.query(sql.toString(), paramMap, «name»RowMapper);
 			
 		} catch (RuntimeException ex) {
 			log.error("[«getDaoImplClassName(dao)»::find«name.toFirstUpper()»] esecuzione query",ex);
@@ -180,7 +180,7 @@
 					StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
 			stopWatch.start();
-			list = jdbcTemplate.query(sql.toString(), new HashMap(), this);
+			list = jdbcTemplate.query(sql.toString(), new HashMap(), «name»RowMapper);
 			
 		} catch (RuntimeException ex) {
 			log.error("[«getDaoImplClassName(dao)»::findByExamples] esecuzione query",ex);

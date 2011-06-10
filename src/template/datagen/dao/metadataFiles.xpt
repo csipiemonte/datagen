@@ -99,8 +99,6 @@ public class «getMetadataClassName()» implements DAOMetadata{
 import java.io.*;
 import java.sql.*;
 
-import oracle.sql.BLOB;
-import oracle.sql.CLOB;
 
 /**
  * Interface for DAO Metadata.

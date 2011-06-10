@@ -147,6 +147,9 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameterize
 	
 	«EXPAND mapRowMethods(model, true) FOR this»
 
+	«IF finders!=null-»
+    	«EXPAND rowMapperObject(this) FOREACH this.finders.finders»
+    «ENDIF-»
 
 	/**
 	 * Method 'getTableName'
@@ -160,10 +163,108 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameterize
 	}
 
 	«EXPAND template::datagen::dao::finders::finders(model, true) FOR this»
+	
+	«EXPAND rowMapperInnerClass FOR this»
 }
 
 «ENDFILE-»
 «ENDLET-»
+«ENDDEFINE»
+
+«DEFINE rowMapperObject(DataAccessObject dao) FOR Finder-»
+«ERROR "rowMapperObject: tipo di finder non gestito:"+this»
+«ENDDEFINE»
+
+«DEFINE rowMapperObject(DataAccessObject dao) FOR FindAll-»
+	«EXPAND rowMapperObject_internal(dao, this.distinct) FOR this-»
+«ENDDEFINE»
+
+«DEFINE rowMapperObject(DataAccessObject dao) FOR FindByPK-»
+	«EXPAND rowMapperObject_internal(dao, null) FOR this-»
+«ENDDEFINE»
+
+«DEFINE rowMapperObject(DataAccessObject dao) FOR CustomFinder-»
+	«EXPAND rowMapperObject_internal(dao, this.distinct) FOR this-»
+«ENDDEFINE»
+
+«DEFINE rowMapperObject(DataAccessObject dao) FOR QBEFinder-»
+	«EXPAND rowMapperObject_internal(dao, this.distinct) FOR this-»
+«ENDDEFINE»
+
+«DEFINE rowMapperObject_internal(DataAccessObject dao, List[Column] distinctColumns) FOR Finder-»
+	protected «getDaoClassName(dao)»RowMapper «name»RowMapper = new «getDaoClassName(dao)»RowMapper(
+	«IF distinctColumns == null || distinctColumns.size==0-»null
+	«ELSE-»new String[]{«FOREACH distinctColumns AS currCol SEPARATOR ","»"«currCol.name»"«ENDFOREACH»}
+	«ENDIF-»
+	);
+«ENDDEFINE»
+
+
+«DEFINE rowMapperInnerClass FOR DataAccessObject»
+	/// flexible row mapper. 
+	public class «getDaoClassName()»RowMapper implements org.springframework.jdbc.core.RowMapper {
+		
+		private java.util.HashMap<String,String> columnsToReadMap = new java.util.HashMap<String, String>();
+		private boolean mapAllColumns = true;
+		
+		/**
+		 * @param columnsToRead elenco delle colonne da includere nel mapping (per query
+		 *        incomplete, esempio distinct, custom select...)
+		 */
+		public «getDaoClassName()»RowMapper(String[] columnsToRead) {
+			if (columnsToRead != null) {
+				mapAllColumns = false;
+				for (int i=0; i<columnsToRead.length; i++)
+					columnsToReadMap.put(columnsToRead[i], columnsToRead[i]);
+			}
+		}
+		
+		/**
+		 * Method 'mapRow'
+		 * 
+		 * @param rs
+		 * @param row
+		 * @throws SQLException
+		 * @return «getDtoClassName()»
+		 * @generated
+		 */
+		public «getDtoClassName()» mapRow(ResultSet rs, int row) throws SQLException
+		{
+			«getDtoClassName()» dto = new «getDtoClassName()»();
+			dto = mapRow_internal(dto, rs, row);
+			return dto;
+		}
+			
+		/**
+		 * Method 'mapRow_internal'
+		 * 
+		 * @param rs
+		 * @param row
+		 * @throws SQLException
+		 * @return «getDtoClassName()»
+		 * @generated
+		 */
+		public «getDtoClassName()» mapRow_internal(
+			«getDtoClassName()» objectToFill, 
+			ResultSet rs, 
+			int row) throws SQLException
+		
+		{	
+			«getDtoClassName()» dto = objectToFill;
+			«FOREACH mainTable.columns AS currCol ITERATOR i»
+			if (mapAllColumns || columnsToReadMap.get("«currCol.name»") != null)
+				dto.set«javaPropertyNameFromColumn(currCol).toFirstUpper()»(
+			«IF !isBlobOrClob(currCol)-»
+				«getValueFromRSByColName(currCol)»
+			«ELSE-»
+				«getValueFromRS(currCol, i.counter1)»
+			«ENDIF-»			
+				);
+			«ENDFOREACH»
+			return dto;
+		}
+		
+	}
 «ENDDEFINE»
 
 «DEFINE columnNameList(boolean useDistinct) FOR List[TableColumn]-»
@@ -305,6 +406,7 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c)
 	;
 	«ENDIF-»
 	
+	
 	/**
 	 * Method 'mapRow_internal'
 	 * 
@@ -314,18 +416,22 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c)
 	 * @return «getDtoClassName()»
 	 * @generated
 	 */
-	public «getDtoClassName()» mapRow_internal(«getDtoClassName()» objectToFill, ResultSet rs, int row) throws SQLException
+	public «getDtoClassName()» mapRow_internal(
+		«getDtoClassName()» objectToFill, 
+		ResultSet rs, 
+		int row) throws SQLException
 	«IF body-»
-	{
+	{	
 		«getDtoClassName()» dto = objectToFill;
 		«FOREACH mainTable.columns AS currCol ITERATOR i»
+		
 		dto.set«javaPropertyNameFromColumn(currCol).toFirstUpper()»(
 		«IF !isBlobOrClob(currCol)-»
 			«getValueFromRSByColName(currCol)»
 		«ELSE-»
 			«getValueFromRS(currCol, i.counter1)»
 		«ENDIF-»			
-		);
+			);
 		«ENDFOREACH»
 		return dto;
 	}
@@ -345,8 +451,6 @@ import java.sql.*;
 
 import org.springframework.jdbc.support.incrementer.DataFieldMaxValueIncrementer;
 
-import oracle.sql.BLOB;
-import oracle.sql.CLOB;
 
 /**
  * Base class for Oracle DAO classes.
@@ -375,144 +479,9 @@ public abstract class AbstractDAO
 	 */
 	public abstract String getTableName();
 	
-	/**
-	 * @generated
-	 */
-    public void updateClob(Clob clob, String data) throws IOException, SQLException 
-    {
-        if (clob == null || data == null) {
-            return;
-        }
-
-        Reader reader = new StringReader( data );
-         Writer clobWriter = ((oracle.sql.CLOB)clob).setCharacterStream(0L);
-        char[] cbuffer = new char[10* 1024];
-        int nread = 0;
-        while( (nread= reader.read(cbuffer)) != -1 )
-          clobWriter.write( cbuffer, 0, nread);
-        reader.close();
-        clobWriter.close();
-    }
-
-	/**
-	 * @generated
-	 */
-    public void updateBlob(Blob blob, byte[] data) throws IOException, SQLException
-    {
-        if (blob == null || data == null) {
-            return;
-        }
-
-        OutputStream os = ((oracle.sql.BLOB)blob).setBinaryStream(0L);
-        InputStream is = new ByteArrayInputStream(data);
-        byte[] buffer = new byte[10* 1024];
-        int nread = 0;
-        while( (nread= is.read(buffer)) != -1 ) {
-          os.write(buffer, 0, nread);
-      }
-        is.close();
-        os.close();
-    }
-
-	/**
-	 * @generated
-	 */
-    public byte[] getBlobColumn(ResultSet rs, int columnIndex)
-            throws SQLException
-    {
-        try {
-
-            int type = rs.getMetaData().getColumnType( columnIndex );
-            if (type == Types.LONGVARBINARY) {
-                return rs.getBytes( columnIndex );
-            }
-
-            Blob blob = rs.getBlob( columnIndex );
-            if (blob == null) {
-                return null;
-            }
-
-            InputStream is = blob.getBinaryStream();
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-
-            if (is == null) {
-                return null;
-            }
-            else {
-                byte buffer[] = new byte[ 64 ];
-                int c = is.read( buffer );
-                while (c>0) {
-                    bos.write( buffer, 0, c );
-                    c = is.read( buffer );
-                }
-                return bos.toByteArray();
-            }
-        }
-        catch (IOException e) {
-            throw new SQLException( "Failed to read BLOB column due to IOException: " + e.getMessage() );
-        }
-    }
-
-	/**
-	 * @generated
-	 */
-    public void setBlobColumn(PreparedStatement stmt, int parameterIndex, byte[] value)
-            throws SQLException
-    {
-        if (value == null) {
-            stmt.setNull( parameterIndex, Types.BLOB );
-        }
-        else {
-            stmt.setBinaryStream( parameterIndex, new ByteArrayInputStream(value), value.length );
-        }
-    }
-
-	/**
-	 * @generated
-	 */
-    public String getClobColumn(ResultSet rs, int columnIndex)
-        throws SQLException
-    {
-        try {
-            Clob clob = rs.getClob( columnIndex );
-            if (clob == null) {
-                return null;
-            }
-
-            StringBuffer ret = new StringBuffer();
-            InputStream is = clob.getAsciiStream();
-
-            if (is == null) {
-                return null;
-            }
-            else {
-                byte buffer[] = new byte[ 64 ];
-                int c = is.read( buffer );
-                while (c>0) {
-                    ret.append( new String(buffer, 0, c) );
-                    c = is.read( buffer );
-                }
-                return ret.toString();
-            }
-        }
-        catch (IOException e) {
-            throw new SQLException( "Failed to read CLOB column due to IOException: " + e.getMessage() );
-        }
-    }
-
-	/**
-	 * @generated
-	 */
-    public void setClobColumn(PreparedStatement stmt, int parameterIndex, String value)
-        throws SQLException
-    {
-        if (value == null) {
-            stmt.setNull( parameterIndex, Types.CLOB );
-        }
-        else {
-            stmt.setAsciiStream( parameterIndex, new ByteArrayInputStream(value.getBytes()), value.length() );
-        }
-    }
+	
+	«EXPAND abstractDAODBMSSpecificCode FOR this»
+	
 }
 «ENDFILE»
 
@@ -567,6 +536,9 @@ public class DaoException extends RuntimeException
 «ENDFILE»
 «ENDDEFINE»
 
+«DEFINE abstractDAODBMSSpecificCode FOR DaoPackage»
+«ERROR "abstractDAODBMSSpecificCode: aop non risolta"»
+«ENDDEFINE»
 
 «REM»gestire l'univocità della regione protetta per la compatibilità con servicegen«ENDREM»
 «DEFINE utilFiles FOR DBAccessModel»
