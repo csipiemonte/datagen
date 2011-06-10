@@ -1,0 +1,16 @@
+«IMPORT datagen»
+«IMPORT rdbmdl»
+
+«AROUND template::datagen::spring::configFiles::localDatasourceSample FOR DBAccessModel»
+  <!-- definizione locale di datasource per POSTGRESQL (non usare in un application server!) -->
+  <!--<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <property name="driverClassName" value="org.postgresql.Driver" />
+      <property name="url" value="jdbc:postgresql://localhost:5432/postgres" />   
+    <property name="username" value="myuser" />
+    <property name="password" value="mypass" />
+  </bean>-->
+«ENDAROUND»
+
+«AROUND template::datagen::dao::daoFiles::abstractDAODBMSSpecificCode FOR DaoPackage»
+	// there is no specific code for POSGRESQL
+«ENDAROUND»
