@@ -1,5 +1,6 @@
 «IMPORT datagen»
 «IMPORT rdbmdl»
+«EXTENSION template::DatagenExtensions»
 
 «AROUND template::datagen::spring::configFiles::localDatasourceSample FOR DBAccessModel»
   <!-- definizione locale di datasource per ORACLE (non usare in un application server!) -->
@@ -154,3 +155,22 @@
         }
     }
 «ENDAROUND»
+
+«AROUND template::datagen::spring::configFiles::pkGeneratorBeanDef(DataAccessObject dao) FOR SequencePKGenerator»
+«IF dao.mainTable.primaryKey.includedColumns.size==1-»
+	<bean id="«getDaoIdName(dao)»Incrementer"
+		class="org.springframework.jdbc.support.incrementer.OracleSequenceMaxValueIncrementer">
+		<constructor-arg>
+			<ref bean="myDataSource" />
+		</constructor-arg>
+		<constructor-arg>
+			<value>«this.sequenceName»</value>
+		</constructor-arg>
+	</bean>
+
+«ELSE-»
+	«ERROR "impossibile definire un incrementer per la PK di "+dao.name+" perchè non ha una sola colonna"-»
+«ENDIF-»
+
+«ENDAROUND»
+
