@@ -1,199 +1,216 @@
-«IMPORT ecore»
-«IMPORT datagen»
-«IMPORT rdbmdl»
-«IMPORT rdbmdl::constraints»
-«IMPORT rdbmdl::datatypes»
-«IMPORT rdbmdl::view»
+Â«REMÂ»
+C) Copyright 2011 CSI-PIEMONTE;                                             
+                                                                            
+Concesso in licenza a norma dell'EUPL, esclusivamente versione 1.1;         
+Non e' possibile utilizzare l'opera salvo nel rispetto della Licenza.       
+E' possibile ottenere una copia della Licenza al seguente indirizzo:        
+                                                                            
+http://www.eupl.it/opensource/eupl-1-1                                      
+                                                                            
+Salvo diversamente indicato dalla legge applicabile o concordato per        
+iscritto, il software distribuito secondo i termini della Licenza e'        
+distribuito "TAL QUALE", SENZA GARANZIE O CONDIZIONI DI ALCUN TIPO,         
+esplicite o implicite.                                                      
+Si veda la Licenza per la lingua specifica che disciplina le autorizzazioni 
+e le limitazioni secondo i termini della Licenza.                           
+Â«ENDREMÂ»
 
-«EXTENSION template::DatagenExtensions»
+Â«IMPORT ecoreÂ»
+Â«IMPORT datagenÂ»
+Â«IMPORT rdbmdlÂ»
+Â«IMPORT rdbmdl::constraintsÂ»
+Â«IMPORT rdbmdl::datatypesÂ»
+Â«IMPORT rdbmdl::viewÂ»
 
-«DEFINE finders(DBAccessModel model, boolean body) FOR DataAccessObject-»
-«IF finders!=null-»
-«EXPAND finder(model, this, body) FOREACH this.finders.finders-»
-«ENDIF-»
-«ENDDEFINE»
+Â«EXTENSION template::DatagenExtensionsÂ»
 
-«DEFINE finder(DBAccessModel model, DataAccessObject dao, boolean body) FOR Finder»
-«ERROR "finder "+this.metaType+" non gestito"»
-«ENDDEFINE»
+Â«DEFINE finders(DBAccessModel model, boolean body) FOR DataAccessObject-Â»
+Â«IF finders!=null-Â»
+Â«EXPAND finder(model, this, body) FOREACH this.finders.finders-Â»
+Â«ENDIF-Â»
+Â«ENDDEFINEÂ»
+
+Â«DEFINE finder(DBAccessModel model, DataAccessObject dao, boolean body) FOR FinderÂ»
+Â«ERROR "finder "+this.metaType+" non gestito"Â»
+Â«ENDDEFINEÂ»
 
 
-«DEFINE finder(DBAccessModel model, DataAccessObject dao, boolean body) FOR FindByPK»
+Â«DEFINE finder(DBAccessModel model, DataAccessObject dao, boolean body) FOR FindByPKÂ»
 	/** 
-	 * Returns all rows from the «dao.mainTable.name» table that match the primary key criteria
+	 * Returns all rows from the Â«dao.mainTable.nameÂ» table that match the primary key criteria
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
-	public «getDtoClassName(dao)» findByPrimaryKey(«getPkClassName(dao)» pk) throws «getDaoExcClassName(dao)»
-	«IF body-»
+	public Â«getDtoClassName(dao)Â» findByPrimaryKey(Â«getPkClassName(dao)Â» pk) throws Â«getDaoExcClassName(dao)Â»
+	Â«IF body-Â»
 	{
 		
-		final StringBuilder sql = new StringBuilder("SELECT «EXPAND template::datagen::dao::daoFiles::columnNameList(false) FOR dao.mainTable.columns» FROM " + getTableName() + " WHERE «EXPAND template::datagen::dao::daoFiles::setColumnEqPlaceholderList(" AND ") FOR dao.mainTable.primaryKey.includedColumns»");
+		final StringBuilder sql = new StringBuilder("SELECT Â«EXPAND template::datagen::dao::daoFiles::columnNameList(false) FOR dao.mainTable.columnsÂ» FROM " + getTableName() + " WHERE Â«EXPAND template::datagen::dao::daoFiles::setColumnEqPlaceholderList(" AND ") FOR dao.mainTable.primaryKey.includedColumnsÂ»");
 		
 		MapSqlParameterSource params = new MapSqlParameterSource();
-		«EXPAND template::datagen::dao::daoFiles::paramValorizationList("pk") FOR dao.mainTable.primaryKey.includedColumns»
-		List<«getDtoClassName(dao)»> list = null;
+		Â«EXPAND template::datagen::dao::daoFiles::paramValorizationList("pk") FOR dao.mainTable.primaryKey.includedColumnsÂ»
+		List<Â«getDtoClassName(dao)Â»> list = null;
 		
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
 			stopWatch.start();
-			list = jdbcTemplate.query(sql.toString(), params, «name»RowMapper);
+			list = jdbcTemplate.query(sql.toString(), params, Â«nameÂ»RowMapper);
 			
 		} catch (RuntimeException ex) {
-			log.error("[«getDaoImplClassName(dao)»::findByPrimaryKey] esecuzione query",ex);
-			throw new «getDaoExcClassName(dao)»("Query failed", ex);
+			log.error("[Â«getDaoImplClassName(dao)Â»::findByPrimaryKey] esecuzione query",ex);
+			throw new Â«getDaoExcClassName(dao)Â»("Query failed", ex);
 		} finally {
-			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "findByPrimaryKey","esecuzione query", sql.toString());
-			log.debug("[«getDaoImplClassName(dao)»::findByPrimaryKey] END");
+			stopWatch.dumpElapsed("Â«getDaoImplClassName(dao)Â»", "findByPrimaryKey","esecuzione query", sql.toString());
+			log.debug("[Â«getDaoImplClassName(dao)Â»::findByPrimaryKey] END");
 		}
 
 		return list.size() == 0 ? null : list.get(0);
 		
 	}
-	«ELSE-»
+	Â«ELSE-Â»
 	;
-	«ENDIF-»
+	Â«ENDIF-Â»
 	
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE finder(DBAccessModel model, DataAccessObject dao, boolean body) FOR FindAll»
+Â«DEFINE finder(DBAccessModel model, DataAccessObject dao, boolean body) FOR FindAllÂ»
 	/** 
-	 * Returns all rows from the «dao.mainTable.name» table that match the criteria ''.
+	 * Returns all rows from the Â«dao.mainTable.nameÂ» table that match the criteria ''.
 	 * @generated
 	 */
 	 @SuppressWarnings("unchecked")
-	public List<«getDtoClassName(dao)»> findAll() throws «getDaoExcClassName(dao)»
-	«IF body-»
+	public List<Â«getDtoClassName(dao)Â»> findAll() throws Â«getDaoExcClassName(dao)Â»
+	Â«IF body-Â»
 	{		
-		final StringBuilder sql = new StringBuilder("SELECT «IF this.distinct==null || this.distinct.isEmpty-»«EXPAND template::datagen::dao::daoFiles::columnNameList(false) FOR dao.mainTable.columns-»«ELSE-»«EXPAND template::datagen::dao::daoFiles::columnNameList(true) FOR this.distinct-»«ENDIF-» FROM " + getTableName());
-		«EXPAND template::datagen::dao::daoFiles::orderByClause FOR this.orderSpecs-»
+		final StringBuilder sql = new StringBuilder("SELECT Â«IF this.distinct==null || this.distinct.isEmpty-Â»Â«EXPAND template::datagen::dao::daoFiles::columnNameList(false) FOR dao.mainTable.columns-Â»Â«ELSE-Â»Â«EXPAND template::datagen::dao::daoFiles::columnNameList(true) FOR this.distinct-Â»Â«ENDIF-Â» FROM " + getTableName());
+		Â«EXPAND template::datagen::dao::daoFiles::orderByClause FOR this.orderSpecs-Â»
 		
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		
-		List<«getDtoClassName(dao)»> list = null;
+		List<Â«getDtoClassName(dao)Â»> list = null;
 		
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
 			stopWatch.start();
-			list = jdbcTemplate.query(sql.toString(), params, «name»RowMapper);
+			list = jdbcTemplate.query(sql.toString(), params, Â«nameÂ»RowMapper);
 			
 		} catch (RuntimeException ex) {
-			log.error("[«getDaoImplClassName(dao)»::findAll] esecuzione query",ex);
-			throw new «getDaoExcClassName(dao)»("Query failed", ex);
+			log.error("[Â«getDaoImplClassName(dao)Â»::findAll] esecuzione query",ex);
+			throw new Â«getDaoExcClassName(dao)Â»("Query failed", ex);
 		} finally {
-			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "findAll","esecuzione query", sql.toString());
-			log.debug("[«getDaoImplClassName(dao)»::findAll] END");
+			stopWatch.dumpElapsed("Â«getDaoImplClassName(dao)Â»", "findAll","esecuzione query", sql.toString());
+			log.debug("[Â«getDaoImplClassName(dao)Â»::findAll] END");
 		}
 
 		return list;
 		
 	}
-	«ELSE-»
+	Â«ELSE-Â»
 	;
-	«ENDIF-»
+	Â«ENDIF-Â»
 	
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
 
-«DEFINE finder(DBAccessModel model, DataAccessObject dao, boolean body) FOR CustomFinder»
+Â«DEFINE finder(DBAccessModel model, DataAccessObject dao, boolean body) FOR CustomFinderÂ»
 	/** 
-	 * Implementazione del finder «name»
+	 * Implementazione del finder Â«nameÂ»
 	 * @generated
 	 */
 	 @SuppressWarnings("unchecked")
-«LET isNullOrEmpty(filterClassFQN) ? "java.lang.Object" : (filterClassFQN=="$dto" ? getDtoFQN(dao, model) : (filterClassFQN=="$dto[]"? "java.util.ArrayList<"+getDtoFQN(dao, model)+">" : filterClassFQN) ) AS filterJavaType-»
-	public List<«getDtoClassName(dao)»> find«name.toFirstUpper()»(«filterJavaType» input) throws «getDaoExcClassName(dao)»
-	«IF body-»
+Â«LET isNullOrEmpty(filterClassFQN) ? "java.lang.Object" : (filterClassFQN=="$dto" ? getDtoFQN(dao, model) : (filterClassFQN=="$dto[]"? "java.util.ArrayList<"+getDtoFQN(dao, model)+">" : filterClassFQN) ) AS filterJavaType-Â»
+	public List<Â«getDtoClassName(dao)Â»> findÂ«name.toFirstUpper()Â»(Â«filterJavaTypeÂ» input) throws Â«getDaoExcClassName(dao)Â»
+	Â«IF body-Â»
 	{
 		StringBuilder sql = new StringBuilder();
 		MapSqlParameterSource paramMap = new MapSqlParameterSource();
-		«IF customSelect-»
-		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"select")»
+		Â«IF customSelect-Â»
+		Â«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"select")Â»
 		// la clausola select e'customizzabile poiche' il finder ha l'attributo customSelect == true
-		sql.append("SELECT «IF this.distinct==null || this.distinct.isEmpty-»«EXPAND template::datagen::dao::daoFiles::columnNameList(false) FOR dao.mainTable.columns-»«ELSE-»«EXPAND template::datagen::dao::daoFiles::columnNameList(true) FOR this.distinct-»«ENDIF-» ");
-		«ENDPROTECT»
-		«ELSE»
-		sql.append("SELECT «IF this.distinct==null || this.distinct.isEmpty-»«EXPAND template::datagen::dao::daoFiles::columnNameList(false) FOR dao.mainTable.columns-»«ELSE-»«EXPAND template::datagen::dao::daoFiles::columnNameList(true) FOR this.distinct-»«ENDIF-» ");
-		«ENDIF-»
-		«IF customFrom-»
-		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"from")»
+		sql.append("SELECT Â«IF this.distinct==null || this.distinct.isEmpty-Â»Â«EXPAND template::datagen::dao::daoFiles::columnNameList(false) FOR dao.mainTable.columns-Â»Â«ELSE-Â»Â«EXPAND template::datagen::dao::daoFiles::columnNameList(true) FOR this.distinct-Â»Â«ENDIF-Â» ");
+		Â«ENDPROTECTÂ»
+		Â«ELSEÂ»
+		sql.append("SELECT Â«IF this.distinct==null || this.distinct.isEmpty-Â»Â«EXPAND template::datagen::dao::daoFiles::columnNameList(false) FOR dao.mainTable.columns-Â»Â«ELSE-Â»Â«EXPAND template::datagen::dao::daoFiles::columnNameList(true) FOR this.distinct-Â»Â«ENDIF-Â» ");
+		Â«ENDIF-Â»
+		Â«IF customFrom-Â»
+		Â«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"from")Â»
 		// la clausola from e'customizzabile poiche' il finder ha l'attributo customFrom==true
-		sql.append(" FROM «dao.mainTable.name»");
-		«ENDPROTECT»
-		«ELSE-»
-		sql.append(" FROM «dao.mainTable.name»");
-		«ENDIF-»
+		sql.append(" FROM Â«dao.mainTable.nameÂ»");
+		Â«ENDPROTECTÂ»
+		Â«ELSE-Â»
+		sql.append(" FROM Â«dao.mainTable.nameÂ»");
+		Â«ENDIF-Â»
 		sql.append(" WHERE ");
-		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"query")»
+		Â«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"query")Â»
 		// personalizzare la query SQL relativa al finder
 		
 		
 		// personalizzare l'elenco dei parametri da passare al jdbctemplate (devono corrispondere in tipo e
 		// numero ai parametri definiti nella queryString)
 		sql.append("nome = :nome");	
-		«ENDPROTECT»
-			«EXPAND template::datagen::dao::daoFiles::orderByClause FOR this.orderSpecs-»
-		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"values")»			
+		Â«ENDPROTECTÂ»
+			Â«EXPAND template::datagen::dao::daoFiles::orderByClause FOR this.orderSpecs-Â»
+		Â«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"values")Â»			
 		//***aggiungere tutte le condizioni
 		
 		paramMap.addValue("nome", input);
 		
-		«ENDPROTECT»
-		List<«getDtoClassName(dao)»> list = null;
+		Â«ENDPROTECTÂ»
+		List<Â«getDtoClassName(dao)Â»> list = null;
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
 			stopWatch.start();
-			list = jdbcTemplate.query(sql.toString(), paramMap, «name»RowMapper);
+			list = jdbcTemplate.query(sql.toString(), paramMap, Â«nameÂ»RowMapper);
 			
 		} catch (RuntimeException ex) {
-			log.error("[«getDaoImplClassName(dao)»::find«name.toFirstUpper()»] esecuzione query",ex);
-			throw new «getDaoExcClassName(dao)»("Query failed", ex);
+			log.error("[Â«getDaoImplClassName(dao)Â»::findÂ«name.toFirstUpper()Â»] esecuzione query",ex);
+			throw new Â«getDaoExcClassName(dao)Â»("Query failed", ex);
 		} finally {
-			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "find«name.toFirstUpper()»","esecuzione query", sql.toString());
-			log.debug("[«getDaoImplClassName(dao)»::find«name.toFirstUpper()»] END");
+			stopWatch.dumpElapsed("Â«getDaoImplClassName(dao)Â»", "findÂ«name.toFirstUpper()Â»","esecuzione query", sql.toString());
+			log.debug("[Â«getDaoImplClassName(dao)Â»::findÂ«name.toFirstUpper()Â»] END");
 		}
 		return list;	
 	}
-	«ELSE-»
+	Â«ELSE-Â»
 	;
-	«ENDIF-»
-«ENDLET-»	
-«ENDDEFINE»
+	Â«ENDIF-Â»
+Â«ENDLET-Â»	
+Â«ENDDEFINEÂ»
 
 
-«DEFINE finder(DBAccessModel model, DataAccessObject dao, boolean body) FOR QBEFinder»
+Â«DEFINE finder(DBAccessModel model, DataAccessObject dao, boolean body) FOR QBEFinderÂ»
 	/** 
-	 * Implementazione del finder «name» query-by-example
+	 * Implementazione del finder Â«nameÂ» query-by-example
 	 * @generated
 	 */
-«LET (DaoPackage)(dao.eContainer) AS pkg-»
-	public List<«getDtoClassName(dao)»> findByExamples(ArrayList<«getQbeExFQN(dao,model)»> positive, ArrayList<«getQbeExFQN(dao,model)»> negative) throws «getDaoExcClassName(dao)»
-	«IF body-»
+Â«LET (DaoPackage)(dao.eContainer) AS pkg-Â»
+	public List<Â«getDtoClassName(dao)Â»> findByExamples(ArrayList<Â«getQbeExFQN(dao,model)Â»> positive, ArrayList<Â«getQbeExFQN(dao,model)Â»> negative) throws Â«getDaoExcClassName(dao)Â»
+	Â«IF body-Â»
 	{
 		
 		// personalizzare la query SQL relativa al finder
-		QBEQueryBuilder<«getQbeExClassName(dao)»> builder = new QBEQueryBuilder<«getQbeExClassName(dao)»>(new «getMetadataClassName(dao)»(«EXPAND template::datagen::dao::daoFiles::distinctColumnsIfNecessary FOR this.distinct-»));
-		StringBuilder sql = new StringBuilder(builder.createFromExamples(positive, negative,«IF this.distinct!=null && !this.distinct.isEmpty-»true«ELSE-»false«ENDIF-»));
-		«EXPAND template::datagen::dao::daoFiles::orderByClause FOR this.orderSpecs-»
+		QBEQueryBuilder<Â«getQbeExClassName(dao)Â»> builder = new QBEQueryBuilder<Â«getQbeExClassName(dao)Â»>(new Â«getMetadataClassName(dao)Â»(Â«EXPAND template::datagen::dao::daoFiles::distinctColumnsIfNecessary FOR this.distinct-Â»));
+		StringBuilder sql = new StringBuilder(builder.createFromExamples(positive, negative,Â«IF this.distinct!=null && !this.distinct.isEmpty-Â»trueÂ«ELSE-Â»falseÂ«ENDIF-Â»));
+		Â«EXPAND template::datagen::dao::daoFiles::orderByClause FOR this.orderSpecs-Â»
 		
-		List<«getDtoClassName(dao)»> list = null;
+		List<Â«getDtoClassName(dao)Â»> list = null;
 					StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
 			stopWatch.start();
-			list = jdbcTemplate.query(sql.toString(), new HashMap(), «name»RowMapper);
+			list = jdbcTemplate.query(sql.toString(), new HashMap(), Â«nameÂ»RowMapper);
 			
 		} catch (RuntimeException ex) {
-			log.error("[«getDaoImplClassName(dao)»::findByExamples] esecuzione query",ex);
-			throw new «getDaoExcClassName(dao)»("Query failed", ex);
+			log.error("[Â«getDaoImplClassName(dao)Â»::findByExamples] esecuzione query",ex);
+			throw new Â«getDaoExcClassName(dao)Â»("Query failed", ex);
 		} finally {
-			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "findByExamples","esecuzione query", sql.toString());
-			log.debug("[«getDaoImplClassName(dao)»::findByExamples] END");
+			stopWatch.dumpElapsed("Â«getDaoImplClassName(dao)Â»", "findByExamples","esecuzione query", sql.toString());
+			log.debug("[Â«getDaoImplClassName(dao)Â»::findByExamples] END");
 		}
 		return list;	
 	}
-	«ELSE-»
+	Â«ELSE-Â»
 	;
-	«ENDIF-»	
-«ENDLET-»
-«ENDDEFINE»
+	Â«ENDIF-Â»	
+Â«ENDLET-Â»
+Â«ENDDEFINEÂ»
 

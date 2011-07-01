@@ -1,147 +1,164 @@
-«IMPORT ecore»
-«IMPORT datagen»
-«IMPORT rdbmdl»
-«IMPORT rdbmdl::constraints»
-«IMPORT rdbmdl::datatypes»
-«IMPORT rdbmdl::view»
+Â«REMÂ»
+C) Copyright 2011 CSI-PIEMONTE;                                             
+                                                                            
+Concesso in licenza a norma dell'EUPL, esclusivamente versione 1.1;         
+Non e' possibile utilizzare l'opera salvo nel rispetto della Licenza.       
+E' possibile ottenere una copia della Licenza al seguente indirizzo:        
+                                                                            
+http://www.eupl.it/opensource/eupl-1-1                                      
+                                                                            
+Salvo diversamente indicato dalla legge applicabile o concordato per        
+iscritto, il software distribuito secondo i termini della Licenza e'        
+distribuito "TAL QUALE", SENZA GARANZIE O CONDIZIONI DI ALCUN TIPO,         
+esplicite o implicite.                                                      
+Si veda la Licenza per la lingua specifica che disciplina le autorizzazioni 
+e le limitazioni secondo i termini della Licenza.                           
+Â«ENDREMÂ»
 
-«EXTENSION template::DatagenExtensions»
+Â«IMPORT ecoreÂ»
+Â«IMPORT datagenÂ»
+Â«IMPORT rdbmdlÂ»
+Â«IMPORT rdbmdl::constraintsÂ»
+Â«IMPORT rdbmdl::datatypesÂ»
+Â«IMPORT rdbmdl::viewÂ»
 
-«DEFINE deleters(DBAccessModel model, boolean body) FOR DataAccessObject-»
-«IF deleters!=null-»
-«EXPAND deleter(model, this, body) FOREACH this.deleters.deleters-»
-«ENDIF-»
-«ENDDEFINE»
+Â«EXTENSION template::DatagenExtensionsÂ»
 
-«DEFINE deleter(DBAccessModel model, DataAccessObject dao, boolean body) FOR Deleter»
-«ERROR "deleter non gestito:"+metaType»
-«ENDDEFINE»
+Â«DEFINE deleters(DBAccessModel model, boolean body) FOR DataAccessObject-Â»
+Â«IF deleters!=null-Â»
+Â«EXPAND deleter(model, this, body) FOREACH this.deleters.deleters-Â»
+Â«ENDIF-Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE deleter(DBAccessModel model, DataAccessObject dao, boolean body) FOR CustomDeleter»
-«LET isNullOrEmpty(filterClassFQN) ? "java.lang.Object" : (filterClassFQN=="$dto" ? getDtoFQN(dao, model) : (filterClassFQN=="$dto[]"? "java.util.ArrayList<"+getDtoFQN(dao, model)+">" : filterClassFQN) ) AS filterJavaType-»
+Â«DEFINE deleter(DBAccessModel model, DataAccessObject dao, boolean body) FOR DeleterÂ»
+Â«ERROR "deleter non gestito:"+metaTypeÂ»
+Â«ENDDEFINEÂ»
+
+Â«DEFINE deleter(DBAccessModel model, DataAccessObject dao, boolean body) FOR CustomDeleterÂ»
+Â«LET isNullOrEmpty(filterClassFQN) ? "java.lang.Object" : (filterClassFQN=="$dto" ? getDtoFQN(dao, model) : (filterClassFQN=="$dto[]"? "java.util.ArrayList<"+getDtoFQN(dao, model)+">" : filterClassFQN) ) AS filterJavaType-Â»
 	/** 
-	 * Custom deleter in the «dao.mainTable.name» table.
+	 * Custom deleter in the Â«dao.mainTable.nameÂ» table.
 	 * @generated
 	 */	
-	public void customDeleter«name.toFirstUpper()»(«filterJavaType» filter) throws «getDaoExcClassName(dao)»
-	«IF body-»
+	public void customDeleterÂ«name.toFirstUpper()Â»(Â«filterJavaTypeÂ» filter) throws Â«getDaoExcClassName(dao)Â»
+	Â«IF body-Â»
 	{
-		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(getDaoImplFQN(dao, model)+"customDeleter"+name.toFirstUpper())»
+		Â«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(getDaoImplFQN(dao, model)+"customDeleter"+name.toFirstUpper())Â»
 		//***scrivere la custom query
 		final String sql = "DELETE FROM " + getTableName() + " WHERE ";
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("parametro", filter);
-		«ENDPROTECT»
+		Â«ENDPROTECTÂ»
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
 			stopWatch.start();
 			jdbcTemplate.update(sql.toString(), params);
 		} catch (RuntimeException ex) {
-			log.error("[«getDaoImplClassName(dao)»::delete] esecuzione query",ex);
-			throw new «getDaoExcClassName(dao)»("Query failed", ex);
+			log.error("[Â«getDaoImplClassName(dao)Â»::delete] esecuzione query",ex);
+			throw new Â«getDaoExcClassName(dao)Â»("Query failed", ex);
 		} finally {
-			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "delete","esecuzione query", sql);
-			log.debug("[«getDaoImplClassName(dao)»::delete] END");
+			stopWatch.dumpElapsed("Â«getDaoImplClassName(dao)Â»", "delete","esecuzione query", sql);
+			log.debug("[Â«getDaoImplClassName(dao)Â»::delete] END");
 		}
 	}
-	«ELSE-»
+	Â«ELSE-Â»
 	;
-	«ENDIF-»
-«ENDLET»
-«ENDDEFINE»
+	Â«ENDIF-Â»
+Â«ENDLETÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE deleter(DBAccessModel model, DataAccessObject dao, boolean body) FOR DeleteByPK»
+Â«DEFINE deleter(DBAccessModel model, DataAccessObject dao, boolean body) FOR DeleteByPKÂ»
 	/** 
-	 * Deletes a single row in the «dao.mainTable.name» table.
+	 * Deletes a single row in the Â«dao.mainTable.nameÂ» table.
 	 * @generated
 	 */
 	
-	public void delete(«getPkClassName(dao)» pk) throws «getDaoExcClassName(dao)»
-	«IF body-»
+	public void delete(Â«getPkClassName(dao)Â» pk) throws Â«getDaoExcClassName(dao)Â»
+	Â«IF body-Â»
 	{
-		final String sql = "DELETE FROM " + getTableName() + " WHERE «EXPAND template::datagen::dao::daoFiles::setColumnEqPlaceholderList(" AND ") FOR dao.mainTable.primaryKey.includedColumns»";
+		final String sql = "DELETE FROM " + getTableName() + " WHERE Â«EXPAND template::datagen::dao::daoFiles::setColumnEqPlaceholderList(" AND ") FOR dao.mainTable.primaryKey.includedColumnsÂ»";
 		
 		if(pk == null){
-			log.error("[«getDaoImplClassName(dao)»::delete] chiave primaria non impostata");
-			throw new «getDaoExcClassName(dao)»("Chiave primaria non impostata");
+			log.error("[Â«getDaoImplClassName(dao)Â»::delete] chiave primaria non impostata");
+			throw new Â«getDaoExcClassName(dao)Â»("Chiave primaria non impostata");
 		}
 		
 		MapSqlParameterSource params = new MapSqlParameterSource();
-		«EXPAND template::datagen::dao::daoFiles::paramValorizationList("pk") FOR dao.mainTable.primaryKey.includedColumns»
+		Â«EXPAND template::datagen::dao::daoFiles::paramValorizationList("pk") FOR dao.mainTable.primaryKey.includedColumnsÂ»
 		
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
 			stopWatch.start();
 			jdbcTemplate.update(sql.toString(), params);
 		} catch (RuntimeException ex) {
-			log.error("[«getDaoImplClassName(dao)»::delete] esecuzione query",ex);
-			throw new «getDaoExcClassName(dao)»("Query failed", ex);
+			log.error("[Â«getDaoImplClassName(dao)Â»::delete] esecuzione query",ex);
+			throw new Â«getDaoExcClassName(dao)Â»("Query failed", ex);
 		} finally {
-			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "delete","esecuzione query", sql);
-			log.debug("[«getDaoImplClassName(dao)»::delete] END");
+			stopWatch.dumpElapsed("Â«getDaoImplClassName(dao)Â»", "delete","esecuzione query", sql);
+			log.debug("[Â«getDaoImplClassName(dao)Â»::delete] END");
 		}
 	}
-	«ELSE-»
+	Â«ELSE-Â»
 	;
-	«ENDIF-»
+	Â«ENDIF-Â»
 	
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE finder(DBAccessModel model, DataAccessObject dao, boolean body) FOR FindAll»
+Â«DEFINE finder(DBAccessModel model, DataAccessObject dao, boolean body) FOR FindAllÂ»
 	/** 
-	 * Returns all rows from the «dao.mainTable.name» table that match the criteria ''.
+	 * Returns all rows from the Â«dao.mainTable.nameÂ» table that match the criteria ''.
 	 * @generated
 	 */
-	public List<«getDtoClassName(dao)»> findAll() throws «getDaoExcClassName(dao)»
-	«IF body-»
+	public List<Â«getDtoClassName(dao)Â»> findAll() throws Â«getDaoExcClassName(dao)Â»
+	Â«IF body-Â»
 	{
 		try {
-			return jdbcTemplate.query("SELECT «EXPAND template::datagen::dao::daoFiles::columnNameList FOR dao.mainTable.columns» FROM " + getTableName() , this);
+			return jdbcTemplate.query("SELECT Â«EXPAND template::datagen::dao::daoFiles::columnNameList FOR dao.mainTable.columnsÂ» FROM " + getTableName() , this);
 		}
 		catch (Exception e) {
-			throw new «getDaoExcClassName(dao)»("Query failed", e);
+			throw new Â«getDaoExcClassName(dao)Â»("Query failed", e);
 		}
 	}
-	«ELSE-»
+	Â«ELSE-Â»
 	;
-	«ENDIF-»
+	Â«ENDIF-Â»
 	
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
 
 
-«DEFINE finder(DBAccessModel model, DataAccessObject dao, boolean body) FOR Finder»
-«ERROR "finder "+this.metaType+" non gestito"»
-«ENDDEFINE»
+Â«DEFINE finder(DBAccessModel model, DataAccessObject dao, boolean body) FOR FinderÂ»
+Â«ERROR "finder "+this.metaType+" non gestito"Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE finder(DBAccessModel model, DataAccessObject dao, boolean body) FOR CustomFinder»
+Â«DEFINE finder(DBAccessModel model, DataAccessObject dao, boolean body) FOR CustomFinderÂ»
 	/** 
-	 * Implementazione del finder «name»
+	 * Implementazione del finder Â«nameÂ»
 	 * @generated
 	 */
-	public List<«getDtoClassName(dao)»> find«name.toFirstUpper()»(Object input) throws «getDaoExcClassName(dao)»
-	«IF body-»
+	public List<Â«getDtoClassName(dao)Â»> findÂ«name.toFirstUpper()Â»(Object input) throws Â«getDaoExcClassName(dao)Â»
+	Â«IF body-Â»
 	{
 		try {
-			«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"queryandvalues")»
+			Â«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"queryandvalues")Â»
 			// personalizzare la query SQL relativa al finder
-			String queryString = "SELECT * from «dao.mainTable.name»";
+			String queryString = "SELECT * from Â«dao.mainTable.nameÂ»";
 			
 			// personalizzare l'elenco dei parametri da passare al jdbctemplate (devono corrispondere in tipo e
 			// numero ai parametri definiti nella queryString - tramite "?")
 			Object [] params = new Object[]{};
-			«ENDPROTECT»
-			List<«getDtoClassName(dao)»> list = 
+			Â«ENDPROTECTÂ»
+			List<Â«getDtoClassName(dao)Â»> list = 
 				jdbcTemplate.query(queryString, this, params);
 			return list;
 		}
 		catch (Exception e) {
-			throw new «getDaoExcClassName(dao)»("Query failed", e);
+			throw new Â«getDaoExcClassName(dao)Â»("Query failed", e);
 		}		
 	}
-	«ELSE-»
+	Â«ELSE-Â»
 	;
-	«ENDIF-»
+	Â«ENDIF-Â»
 	
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 

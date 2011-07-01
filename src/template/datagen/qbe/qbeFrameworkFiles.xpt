@@ -1,25 +1,42 @@
-«IMPORT ecore»
-«IMPORT datagen»
-«IMPORT rdbmdl»
-«IMPORT rdbmdl::constraints»
-«IMPORT rdbmdl::datatypes»
-«IMPORT rdbmdl::view»
+Â«REMÂ»
+C) Copyright 2011 CSI-PIEMONTE;                                             
+                                                                            
+Concesso in licenza a norma dell'EUPL, esclusivamente versione 1.1;         
+Non e' possibile utilizzare l'opera salvo nel rispetto della Licenza.       
+E' possibile ottenere una copia della Licenza al seguente indirizzo:        
+                                                                            
+http://www.eupl.it/opensource/eupl-1-1                                      
+                                                                            
+Salvo diversamente indicato dalla legge applicabile o concordato per        
+iscritto, il software distribuito secondo i termini della Licenza e'        
+distribuito "TAL QUALE", SENZA GARANZIE O CONDIZIONI DI ALCUN TIPO,         
+esplicite o implicite.                                                      
+Si veda la Licenza per la lingua specifica che disciplina le autorizzazioni 
+e le limitazioni secondo i termini della Licenza.                           
+Â«ENDREMÂ»
 
-«EXTENSION template::DatagenExtensions»
+Â«IMPORT ecoreÂ»
+Â«IMPORT datagenÂ»
+Â«IMPORT rdbmdlÂ»
+Â«IMPORT rdbmdl::constraintsÂ»
+Â«IMPORT rdbmdl::datatypesÂ»
+Â«IMPORT rdbmdl::viewÂ»
 
-«DEFINE frameworkFiles FOR DBAccessModel»
-«EXPAND abstractExampleFile FOR this»
-«EXPAND eqChkFile FOR this»
-«EXPAND fieldChkFile FOR this»
-«EXPAND inSetChkFile FOR this»
-«EXPAND nullChkFile FOR this»
-«EXPAND rangeChkFile FOR this»
-«EXPAND regexpChkFile FOR this»
-«EXPAND qbeQueryBuilderFile FOR this»
-«ENDDEFINE»
+Â«EXTENSION template::DatagenExtensionsÂ»
 
-«DEFINE abstractExampleFile FOR DBAccessModel»
-«FILE getDALayerBaseDir()+"/qbe/AbstractExample.java"»package «getDALayerBasePkg()».qbe;
+Â«DEFINE frameworkFiles FOR DBAccessModelÂ»
+Â«EXPAND abstractExampleFile FOR thisÂ»
+Â«EXPAND eqChkFile FOR thisÂ»
+Â«EXPAND fieldChkFile FOR thisÂ»
+Â«EXPAND inSetChkFile FOR thisÂ»
+Â«EXPAND nullChkFile FOR thisÂ»
+Â«EXPAND rangeChkFile FOR thisÂ»
+Â«EXPAND regexpChkFile FOR thisÂ»
+Â«EXPAND qbeQueryBuilderFile FOR thisÂ»
+Â«ENDDEFINEÂ»
+
+Â«DEFINE abstractExampleFile FOR DBAccessModelÂ»
+Â«FILE getDALayerBaseDir()+"/qbe/AbstractExample.java"Â»package Â«getDALayerBasePkg()Â».qbe;
 
 /**
  * 
@@ -30,11 +47,11 @@ public class AbstractExample {
 
 }
 
-«ENDFILE»
-«ENDDEFINE»
+Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE fieldChkFile FOR DBAccessModel»
-«FILE getDALayerBaseDir()+"/qbe/FieldChk.java"»package «getDALayerBasePkg()».qbe;
+Â«DEFINE fieldChkFile FOR DBAccessModelÂ»
+Â«FILE getDALayerBaseDir()+"/qbe/FieldChk.java"Â»package Â«getDALayerBasePkg()Â».qbe;
 
 /**
  * 
@@ -78,11 +95,11 @@ public abstract class FieldChk {
 		return _negate;
 	}
 }
-«ENDFILE»
-«ENDDEFINE»
+Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE eqChkFile FOR DBAccessModel»
-«FILE getDALayerBaseDir()+"/qbe/EqChk.java"»package «getDALayerBasePkg()».qbe;
+Â«DEFINE eqChkFile FOR DBAccessModelÂ»
+Â«FILE getDALayerBaseDir()+"/qbe/EqChk.java"Â»package Â«getDALayerBasePkg()Â».qbe;
 
 /**
  * 
@@ -139,11 +156,11 @@ public class EqChk extends FieldChk{
 	 	return _ignoreCase;
 	 }
 }
-«ENDFILE»
-«ENDDEFINE»
+Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE inSetChkFile FOR DBAccessModel»
-«FILE getDALayerBaseDir()+"/qbe/InSetChk.java"»package «getDALayerBasePkg()».qbe;
+Â«DEFINE inSetChkFile FOR DBAccessModelÂ»
+Â«FILE getDALayerBaseDir()+"/qbe/InSetChk.java"Â»package Â«getDALayerBasePkg()Â».qbe;
 
 /**
  * 
@@ -173,11 +190,11 @@ public class InSetChk extends FieldChk{
 		return _items;
 	}
 }
-«ENDFILE»
-«ENDDEFINE»
+Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE rangeChkFile FOR DBAccessModel»
-«FILE getDALayerBaseDir()+"/qbe/RangeChk.java"»package «getDALayerBasePkg()».qbe;
+Â«DEFINE rangeChkFile FOR DBAccessModelÂ»
+Â«FILE getDALayerBaseDir()+"/qbe/RangeChk.java"Â»package Â«getDALayerBasePkg()Â».qbe;
 
 /**
  * 
@@ -208,8 +225,8 @@ public class RangeChk extends FieldChk{
 	
 	
 	/**
-	 * @param lowerBound l'estremo inferiore del range (se non specificato il check è a -infinito)
-	 * @param upperBound l'estremo superiore del range (se non specificato il check è a +infinito)
+	 * @param lowerBound l'estremo inferiore del range (se non specificato il check Ã¨ a -infinito)
+	 * @param upperBound l'estremo superiore del range (se non specificato il check Ã¨ a +infinito)
 	 * @param includeLB include o meno il lowerbound tra i valori ammessi
 	 * @param includeUB include o meno l'upperbound tra i valori ammessi 
 	 * @generated
@@ -251,11 +268,11 @@ public class RangeChk extends FieldChk{
 	}
 }
 
-«ENDFILE»
-«ENDDEFINE»
+Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE regexpChkFile FOR DBAccessModel»
-«FILE getDALayerBaseDir()+"/qbe/RegexpChk.java"»package «getDALayerBasePkg()».qbe;
+Â«DEFINE regexpChkFile FOR DBAccessModelÂ»
+Â«FILE getDALayerBaseDir()+"/qbe/RegexpChk.java"Â»package Â«getDALayerBasePkg()Â».qbe;
 
 /**
  * 
@@ -286,11 +303,11 @@ public class RegexpChk extends FieldChk{
 	}
 }
 
-«ENDFILE»
-«ENDDEFINE»
+Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE nullChkFile FOR DBAccessModel»
-«FILE getDALayerBaseDir()+"/qbe/NullChk.java"»package «getDALayerBasePkg()».qbe;
+Â«DEFINE nullChkFile FOR DBAccessModelÂ»
+Â«FILE getDALayerBaseDir()+"/qbe/NullChk.java"Â»package Â«getDALayerBasePkg()Â».qbe;
 
 /**
  * 
@@ -306,13 +323,13 @@ public class NullChk extends FieldChk{
 	}	
 }
 
-«ENDFILE»
-«ENDDEFINE»
+Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE qbeQueryBuilderFile FOR DBAccessModel»
-«FILE getDALayerBaseDir()+"/qbe/QBEQueryBuilder.java"»package «getDALayerBasePkg()».qbe;
+Â«DEFINE qbeQueryBuilderFile FOR DBAccessModelÂ»
+Â«FILE getDALayerBaseDir()+"/qbe/QBEQueryBuilder.java"Â»package Â«getDALayerBasePkg()Â».qbe;
 
-import «getDALayerBasePkg()».metadata.DAOMetadata;
+import Â«getDALayerBasePkg()Â».metadata.DAOMetadata;
 
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
@@ -374,7 +391,7 @@ public class QBEQueryBuilder<TEX extends AbstractExample> {
 	 * se false da OR.
 	 * @return la clausola derivante dalla concatenazione delle singole espressioni
 	 * relative agli esempi, concatenate con AND o OR a seconda del valore del parametro
-	 * conjunctive. Tutta la clausola è racchiusa da "(" e "(".
+	 * conjunctive. Tutta la clausola Ã¨ racchiusa da "(" e "(".
 	 * (<expr_ex_1> AND|OR <expr_ex2> AND|OR ... <expr_ex_n>)
 	 */
 	public String createFromExamples(List<TEX> examples, boolean conjunctive){
@@ -510,5 +527,5 @@ public class QBEQueryBuilder<TEX extends AbstractExample> {
 		return term;
 	}
 }
-«ENDFILE»
-«ENDDEFINE»
+Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»

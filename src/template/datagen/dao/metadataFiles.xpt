@@ -1,46 +1,63 @@
-«IMPORT ecore»
-«IMPORT datagen»
-«IMPORT rdbmdl»
-«IMPORT rdbmdl::constraints»
-«IMPORT rdbmdl::datatypes»
-«IMPORT rdbmdl::view»
+Â«REMÂ»
+C) Copyright 2011 CSI-PIEMONTE;                                             
+                                                                            
+Concesso in licenza a norma dell'EUPL, esclusivamente versione 1.1;         
+Non e' possibile utilizzare l'opera salvo nel rispetto della Licenza.       
+E' possibile ottenere una copia della Licenza al seguente indirizzo:        
+                                                                            
+http://www.eupl.it/opensource/eupl-1-1                                      
+                                                                            
+Salvo diversamente indicato dalla legge applicabile o concordato per        
+iscritto, il software distribuito secondo i termini della Licenza e'        
+distribuito "TAL QUALE", SENZA GARANZIE O CONDIZIONI DI ALCUN TIPO,         
+esplicite o implicite.                                                      
+Si veda la Licenza per la lingua specifica che disciplina le autorizzazioni 
+e le limitazioni secondo i termini della Licenza.                           
+Â«ENDREMÂ»
 
-«EXTENSION template::DatagenExtensions»
+Â«IMPORT ecoreÂ»
+Â«IMPORT datagenÂ»
+Â«IMPORT rdbmdlÂ»
+Â«IMPORT rdbmdl::constraintsÂ»
+Â«IMPORT rdbmdl::datatypesÂ»
+Â«IMPORT rdbmdl::viewÂ»
 
-«DEFINE metadataFiles FOR DBAccessModel»
-«EXPAND metadataFiles(this) FOREACH daopkgs»
-«ENDDEFINE»
+Â«EXTENSION template::DatagenExtensionsÂ»
 
-«DEFINE metadataFiles (DBAccessModel model) FOR DaoPackage»
-«EXPAND commonMetadataFiles(model) FOR this»
-«EXPAND metadataFiles(model) FOREACH dao»
-«ENDDEFINE»
+Â«DEFINE metadataFiles FOR DBAccessModelÂ»
+Â«EXPAND metadataFiles(this) FOREACH daopkgsÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE metadataFiles(DBAccessModel model) FOR DataAccessObject»
-«EXPAND metadataFile(model) FOR this»
-«ENDDEFINE»
+Â«DEFINE metadataFiles (DBAccessModel model) FOR DaoPackageÂ»
+Â«EXPAND commonMetadataFiles(model) FOR thisÂ»
+Â«EXPAND metadataFiles(model) FOREACH daoÂ»
+Â«ENDDEFINEÂ»
+
+Â«DEFINE metadataFiles(DBAccessModel model) FOR DataAccessObjectÂ»
+Â«EXPAND metadataFile(model) FOR thisÂ»
+Â«ENDDEFINEÂ»
 
 
-«DEFINE metadataFile(DBAccessModel model) FOR DataAccessObject»
-«LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-»
-«FILE getMetadataFullPath(this, model)»package «pkgPackage».metadata;
+Â«DEFINE metadataFile(DBAccessModel model) FOR DataAccessObjectÂ»
+Â«LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-Â»
+Â«FILE getMetadataFullPath(this, model)Â»package Â«pkgPackageÂ».metadata;
 
-import «pkgPackage».dto.*;
-import «getDALayerBasePkg(model)».metadata.*;
+import Â«pkgPackageÂ».dto.*;
+import Â«getDALayerBasePkg(model)Â».metadata.*;
 import java.util.List;
 
 /**
  * @generated
  */
-public class «getMetadataClassName()» implements DAOMetadata{
+public class Â«getMetadataClassName()Â» implements DAOMetadata{
 	
 	private String[] columnNames;	
 	
-	public «getMetadataClassName()»(){
-		columnNames = new String[]{«FOREACH mainTable.columns AS currCol SEPARATOR ','-»"«currCol.name»"«ENDFOREACH-»};		
+	public Â«getMetadataClassName()Â»(){
+		columnNames = new String[]{Â«FOREACH mainTable.columns AS currCol SEPARATOR ','-Â»"Â«currCol.nameÂ»"Â«ENDFOREACH-Â»};		
 	}
 	
-	public «getMetadataClassName()»(String[] columnNames){
+	public Â«getMetadataClassName()Â»(String[] columnNames){
 		this.columnNames = columnNames;		
 	}
 	
@@ -52,10 +69,10 @@ public class «getMetadataClassName()» implements DAOMetadata{
 	 */
 	public String getTableName()
 	{
-		return "«mainTable.name»";
+		return "Â«mainTable.nameÂ»";
 	}
 
-	«EXPAND getColumnNameMethod(this) FOR this.mainTable»
+	Â«EXPAND getColumnNameMethod(this) FOR this.mainTableÂ»
 	
 	/**
 	 * Method 'getColumnNames'
@@ -69,12 +86,12 @@ public class «getMetadataClassName()» implements DAOMetadata{
 	}
 		
 }
-«ENDFILE-»
-«ENDLET-»
-«ENDDEFINE»
+Â«ENDFILE-Â»
+Â«ENDLET-Â»
+Â«ENDDEFINEÂ»
 
 
-«DEFINE getColumnNameMethod(DataAccessObject dao) FOR Table»
+Â«DEFINE getColumnNameMethod(DataAccessObject dao) FOR TableÂ»
 	/**
 	 * Method 'getColumnName'
 	 * 
@@ -83,18 +100,18 @@ public class «getMetadataClassName()» implements DAOMetadata{
 	 * @generated
 	 */
 	public String getColumnName(String propName){
-		«FOREACH columns AS currCol-»
-		if ("«javaPropertyNameFromColumn(currCol)»".equals(propName)){
-			return "«currCol.name»";
+		Â«FOREACH columns AS currCol-Â»
+		if ("Â«javaPropertyNameFromColumn(currCol)Â»".equals(propName)){
+			return "Â«currCol.nameÂ»";
 		}
-		«ENDFOREACH-»
+		Â«ENDFOREACH-Â»
 		/// se non trovato
-		throw new IllegalArgumentException("proprieta' "+propName+" non trovata per il DTO «getDtoClassName(dao)»");
+		throw new IllegalArgumentException("proprieta' "+propName+" non trovata per il DTO Â«getDtoClassName(dao)Â»");
 	}
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE commonMetadataFiles(DBAccessModel model) FOR DaoPackage»
-«FILE getDALayerBaseDir(model)+"/metadata/DAOMetadata.java"»package «getDALayerBasePkg(model)».metadata;
+Â«DEFINE commonMetadataFiles(DBAccessModel model) FOR DaoPackageÂ»
+Â«FILE getDALayerBaseDir(model)+"/metadata/DAOMetadata.java"Â»package Â«getDALayerBasePkg(model)Â».metadata;
 
 import java.io.*;
 import java.sql.*;
@@ -136,9 +153,9 @@ public interface DAOMetadata
 	
 	
 }
-«ENDFILE»
+Â«ENDFILEÂ»
 
-«FILE getPkgDir(this, model)+"/exceptions/DaoException.java"»package «getPkgPackage(this, model)».exceptions;
+Â«FILE getPkgDir(this, model)+"/exceptions/DaoException.java"Â»package Â«getPkgPackage(this, model)Â».exceptions;
 
 /**
  * @generated
@@ -186,13 +203,13 @@ public class DaoException extends Exception
 	}
 
 }
-«ENDFILE»
-«ENDDEFINE»
+Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
 
-«REM»gestire l'univocità della regione protetta per la compatibilità con servicegen«ENDREM»
-«DEFINE utilFiles FOR DBAccessModel»
-«FILE getDALayerBaseDir(this)+"/util/Constants.java"»package «getDALayerBasePkg(this)».util;
+Â«REMÂ»gestire l'univocitÃ  della regione protetta per la compatibilitÃ  con servicegenÂ«ENDREMÂ»
+Â«DEFINE utilFiles FOR DBAccessModelÂ»
+Â«FILE getDALayerBaseDir(this)+"/util/Constants.java"Â»package Â«getDALayerBasePkg(this)Â».util;
 /**
 * @generated
 */
@@ -200,12 +217,12 @@ public final class Constants {
 	/**
 	 * identificativo dell'applicativo.
 	 */
-	public static final String APPLICATION_CODE = "«this.codComponente.toUpperCase()»";
+	public static final String APPLICATION_CODE = "Â«this.codComponente.toUpperCase()Â»";
 	
-	«PROTECT CSTART '/*' CEND '*/' ID getRegionUID("DaoConstants")»
+	Â«PROTECT CSTART '/*' CEND '*/' ID getRegionUID("DaoConstants")Â»
 	
-	«ENDPROTECT»
+	Â«ENDPROTECTÂ»
 }
-«ENDFILE»
-«ENDDEFINE»
+Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 

@@ -1,66 +1,83 @@
-«IMPORT ecore»
-«IMPORT datagen»
-«IMPORT rdbmdl»
-«IMPORT rdbmdl::constraints»
-«IMPORT rdbmdl::datatypes»
-«IMPORT rdbmdl::view»
+Â«REMÂ»
+C) Copyright 2011 CSI-PIEMONTE;                                             
+                                                                            
+Concesso in licenza a norma dell'EUPL, esclusivamente versione 1.1;         
+Non e' possibile utilizzare l'opera salvo nel rispetto della Licenza.       
+E' possibile ottenere una copia della Licenza al seguente indirizzo:        
+                                                                            
+http://www.eupl.it/opensource/eupl-1-1                                      
+                                                                            
+Salvo diversamente indicato dalla legge applicabile o concordato per        
+iscritto, il software distribuito secondo i termini della Licenza e'        
+distribuito "TAL QUALE", SENZA GARANZIE O CONDIZIONI DI ALCUN TIPO,         
+esplicite o implicite.                                                      
+Si veda la Licenza per la lingua specifica che disciplina le autorizzazioni 
+e le limitazioni secondo i termini della Licenza.                           
+Â«ENDREMÂ»
 
-«EXTENSION template::DatagenExtensions»
+Â«IMPORT ecoreÂ»
+Â«IMPORT datagenÂ»
+Â«IMPORT rdbmdlÂ»
+Â«IMPORT rdbmdl::constraintsÂ»
+Â«IMPORT rdbmdl::datatypesÂ»
+Â«IMPORT rdbmdl::viewÂ»
 
-«DEFINE qbeExamplesFiles FOR DBAccessModel»
-«EXPAND qbeExamplesFiles(this) FOREACH daopkgs»
-«ENDDEFINE»
+Â«EXTENSION template::DatagenExtensionsÂ»
 
-«DEFINE qbeExamplesFiles (DBAccessModel model) FOR DaoPackage»
-«EXPAND qbeExampleFile(model) FOREACH dao»
-«ENDDEFINE»
+Â«DEFINE qbeExamplesFiles FOR DBAccessModelÂ»
+Â«EXPAND qbeExamplesFiles(this) FOREACH daopkgsÂ»
+Â«ENDDEFINEÂ»
+
+Â«DEFINE qbeExamplesFiles (DBAccessModel model) FOR DaoPackageÂ»
+Â«EXPAND qbeExampleFile(model) FOREACH daoÂ»
+Â«ENDDEFINEÂ»
 
 
-«DEFINE qbeExampleFile(DBAccessModel model) FOR DataAccessObject»
-«LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-»
-«FILE getQbeExFullPath(this, model)»package «pkgPackage».qbe;
+Â«DEFINE qbeExampleFile(DBAccessModel model) FOR DataAccessObjectÂ»
+Â«LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-Â»
+Â«FILE getQbeExFullPath(this, model)Â»package Â«pkgPackageÂ».qbe;
 
-import «pkgPackage».dao.*;
-import «pkgPackage».dto.*;
-import «getDALayerBasePkg(model)».qbe.*;
-import «pkgPackage».exceptions.*;
+import Â«pkgPackageÂ».dao.*;
+import Â«pkgPackageÂ».dto.*;
+import Â«getDALayerBasePkg(model)Â».qbe.*;
+import Â«pkgPackageÂ».exceptions.*;
 import java.io.Serializable;
 import java.util.*;
 
 /**
  * @generated
  */
-public class «getQbeExClassName()» extends AbstractExample
+public class Â«getQbeExClassName()Â» extends AbstractExample
 {
 
-	«EXPAND columnChkFieldProperty(model) FOREACH this.mainTable.columns»
+	Â«EXPAND columnChkFieldProperty(model) FOREACH this.mainTable.columnsÂ»
 
 	
 }
 
 
-«ENDFILE»
-«ENDLET-»
-«ENDDEFINE»
+Â«ENDFILEÂ»
+Â«ENDLET-Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE columnChkFieldProperty(DBAccessModel model) FOR TableColumn-»
+Â«DEFINE columnChkFieldProperty(DBAccessModel model) FOR TableColumn-Â»
 	/**
 	 * @generated
 	 */
-	private «getDALayerBasePkg(model)».qbe.FieldChk _«javaPropertyNameFromColumn()»;
+	private Â«getDALayerBasePkg(model)Â».qbe.FieldChk _Â«javaPropertyNameFromColumn()Â»;
 	
 	/**
 	 * @generated
 	 */
-	public void set«javaPropertyNameFromColumn().toFirstUpper()» («getDALayerBasePkg(model)».qbe.FieldChk chk){
-		_«javaPropertyNameFromColumn()» = chk;
+	public void setÂ«javaPropertyNameFromColumn().toFirstUpper()Â» (Â«getDALayerBasePkg(model)Â».qbe.FieldChk chk){
+		_Â«javaPropertyNameFromColumn()Â» = chk;
 	}
 	
 	/**
 	 * @generated
 	 */
-	public «getDALayerBasePkg(model)».qbe.FieldChk get«javaPropertyNameFromColumn().toFirstUpper()»(){
-		return _«javaPropertyNameFromColumn()»;
+	public Â«getDALayerBasePkg(model)Â».qbe.FieldChk getÂ«javaPropertyNameFromColumn().toFirstUpper()Â»(){
+		return _Â«javaPropertyNameFromColumn()Â»;
 	}
 	
-«ENDDEFINE»
+Â«ENDDEFINEÂ»

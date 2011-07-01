@@ -1,8 +1,25 @@
-«IMPORT datagen»
-«IMPORT rdbmdl»
-«EXTENSION template::DatagenExtensions»
+Â«REMÂ»
+C) Copyright 2011 CSI-PIEMONTE;                                             
+                                                                            
+Concesso in licenza a norma dell'EUPL, esclusivamente versione 1.1;         
+Non e' possibile utilizzare l'opera salvo nel rispetto della Licenza.       
+E' possibile ottenere una copia della Licenza al seguente indirizzo:        
+                                                                            
+http://www.eupl.it/opensource/eupl-1-1                                      
+                                                                            
+Salvo diversamente indicato dalla legge applicabile o concordato per        
+iscritto, il software distribuito secondo i termini della Licenza e'        
+distribuito "TAL QUALE", SENZA GARANZIE O CONDIZIONI DI ALCUN TIPO,         
+esplicite o implicite.                                                      
+Si veda la Licenza per la lingua specifica che disciplina le autorizzazioni 
+e le limitazioni secondo i termini della Licenza.                           
+Â«ENDREMÂ»
 
-«AROUND template::datagen::spring::configFiles::localDatasourceSample FOR DBAccessModel»
+Â«IMPORT datagenÂ»
+Â«IMPORT rdbmdlÂ»
+Â«EXTENSION template::DatagenExtensionsÂ»
+
+Â«AROUND template::datagen::spring::configFiles::localDatasourceSample FOR DBAccessModelÂ»
   <!-- definizione locale di datasource per POSTGRESQL (non usare in un application server!) -->
   <!--<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
     <property name="driverClassName" value="org.postgresql.Driver" />
@@ -10,26 +27,26 @@
     <property name="username" value="myuser" />
     <property name="password" value="mypass" />
   </bean>-->
-«ENDAROUND»
+Â«ENDAROUNDÂ»
 
-«AROUND template::datagen::dao::daoFiles::abstractDAODBMSSpecificCode FOR DaoPackage»
+Â«AROUND template::datagen::dao::daoFiles::abstractDAODBMSSpecificCode FOR DaoPackageÂ»
 	// there is no specific code for POSGRESQL
-«ENDAROUND»
+Â«ENDAROUNDÂ»
 
-«AROUND template::datagen::spring::configFiles::pkGeneratorBeanDef(DataAccessObject dao) FOR SequencePKGenerator»
-«IF dao.mainTable.primaryKey.includedColumns.size==1-»
-	<bean id="«getDaoIdName(dao)»Incrementer"
+Â«AROUND template::datagen::spring::configFiles::pkGeneratorBeanDef(DataAccessObject dao) FOR SequencePKGeneratorÂ»
+Â«IF dao.mainTable.primaryKey.includedColumns.size==1-Â»
+	<bean id="Â«getDaoIdName(dao)Â»Incrementer"
 		class="org.springframework.jdbc.support.incrementer.PostgreSQLSequenceMaxValueIncrementer">
 		<constructor-arg>
 			<ref bean="myDataSource" />
 		</constructor-arg>
 		<constructor-arg>
-			<value>«this.sequenceName»</value>
+			<value>Â«this.sequenceNameÂ»</value>
 		</constructor-arg>
 	</bean>
 
-«ELSE-»
-	«ERROR "impossibile definire un incrementer per la PK di "+dao.name+" perchè non ha una sola colonna"-»
-«ENDIF-»
+Â«ELSE-Â»
+	Â«ERROR "impossibile definire un incrementer per la PK di "+dao.name+" perchÃ¨ non ha una sola colonna"-Â»
+Â«ENDIF-Â»
 
-«ENDAROUND»
+Â«ENDAROUNDÂ»

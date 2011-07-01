@@ -1,56 +1,73 @@
-«IMPORT ecore»
-«IMPORT datagen»
-«IMPORT rdbmdl»
-«IMPORT rdbmdl::constraints»
-«IMPORT rdbmdl::datatypes»
-«IMPORT rdbmdl::view»
+Â«REMÂ»
+C) Copyright 2011 CSI-PIEMONTE;                                             
+                                                                            
+Concesso in licenza a norma dell'EUPL, esclusivamente versione 1.1;         
+Non e' possibile utilizzare l'opera salvo nel rispetto della Licenza.       
+E' possibile ottenere una copia della Licenza al seguente indirizzo:        
+                                                                            
+http://www.eupl.it/opensource/eupl-1-1                                      
+                                                                            
+Salvo diversamente indicato dalla legge applicabile o concordato per        
+iscritto, il software distribuito secondo i termini della Licenza e'        
+distribuito "TAL QUALE", SENZA GARANZIE O CONDIZIONI DI ALCUN TIPO,         
+esplicite o implicite.                                                      
+Si veda la Licenza per la lingua specifica che disciplina le autorizzazioni 
+e le limitazioni secondo i termini della Licenza.                           
+Â«ENDREMÂ»
 
-«EXTENSION template::DatagenExtensions»
+Â«IMPORT ecoreÂ»
+Â«IMPORT datagenÂ»
+Â«IMPORT rdbmdlÂ»
+Â«IMPORT rdbmdl::constraintsÂ»
+Â«IMPORT rdbmdl::datatypesÂ»
+Â«IMPORT rdbmdl::viewÂ»
 
-«DEFINE dtoFiles FOR DBAccessModel»
-«EXPAND dtoFiles(this) FOREACH daopkgs»
-«ENDDEFINE»
+Â«EXTENSION template::DatagenExtensionsÂ»
 
-«DEFINE dtoFiles (DBAccessModel model) FOR DaoPackage»
-«EXPAND dtoFile(model) FOREACH dao»
-«EXPAND dtoPkFile(model) FOREACH dao.select(d|d.mainTable.primaryKey != null)»
-«ENDDEFINE»
+Â«DEFINE dtoFiles FOR DBAccessModelÂ»
+Â«EXPAND dtoFiles(this) FOREACH daopkgsÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE dtoPkFile(DBAccessModel model) FOR DataAccessObject»
-«LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-»
-«FILE getPkFullPath(this, model)»package «pkgPackage».dto;
+Â«DEFINE dtoFiles (DBAccessModel model) FOR DaoPackageÂ»
+Â«EXPAND dtoFile(model) FOREACH daoÂ»
+Â«EXPAND dtoPkFile(model) FOREACH dao.select(d|d.mainTable.primaryKey != null)Â»
+Â«ENDDEFINEÂ»
 
-import «pkgPackage».dao.*;
-import «pkgPackage».exceptions.*;
+Â«DEFINE dtoPkFile(DBAccessModel model) FOR DataAccessObjectÂ»
+Â«LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-Â»
+Â«FILE getPkFullPath(this, model)Â»package Â«pkgPackageÂ».dto;
+
+import Â«pkgPackageÂ».dao.*;
+import Â«pkgPackageÂ».exceptions.*;
 import java.io.Serializable;
 import java.util.*;
 
 /**
  * @generated
  */
-public class «getPkClassName()» implements Serializable {
+public class Â«getPkClassName()Â» implements Serializable {
 
-	«EXPAND columnJavaProperty FOREACH this.mainTable.primaryKey.includedColumns»
+	Â«EXPAND columnJavaProperty FOREACH this.mainTable.primaryKey.includedColumnsÂ»
 	
 	/**
 	 * @generated
 	 */
-	public «getPkClassName()»()
+	public Â«getPkClassName()Â»()
 	{
 	}
 
 	/**
 	 * @generated
 	 */
-	public «getPkClassName()»(
-		«FOREACH mainTable.primaryKey.includedColumns AS currPKCol SEPARATOR ","»
-		final «javaPropertyTypeFromColumn(currPKCol)» «javaPropertyNameFromColumn(currPKCol)»
-		«ENDFOREACH»
+	public Â«getPkClassName()Â»(
+		Â«FOREACH mainTable.primaryKey.includedColumns AS currPKCol SEPARATOR ","Â»
+		final Â«javaPropertyTypeFromColumn(currPKCol)Â» Â«javaPropertyNameFromColumn(currPKCol)Â»
+		Â«ENDFOREACHÂ»
 	)
 	{
-		«FOREACH mainTable.primaryKey.includedColumns AS currPKCol»
-		this._«javaPropertyNameFromColumn(currPKCol)» = «javaPropertyNameFromColumn(currPKCol)»;
-		«ENDFOREACH»
+		Â«FOREACH mainTable.primaryKey.includedColumns AS currPKColÂ»
+		this._Â«javaPropertyNameFromColumn(currPKCol)Â» = Â«javaPropertyNameFromColumn(currPKCol)Â»;
+		Â«ENDFOREACHÂ»
 	}
 
 	/**
@@ -69,17 +86,17 @@ public class «getPkClassName()» implements Serializable {
 			return true;
 		}
 		
-		if (!(_other instanceof «getPkClassName()»)) {
+		if (!(_other instanceof Â«getPkClassName()Â»)) {
 			return false;
 		}
 		
-		final «getPkClassName()» _cast = («getPkClassName()») _other;
+		final Â«getPkClassName()Â» _cast = (Â«getPkClassName()Â») _other;
 		
-		«FOREACH mainTable.primaryKey.includedColumns AS currPKCol»
-		if (_«javaPropertyNameFromColumn(currPKCol)» == null ? _cast.get«javaPropertyNameFromColumn(currPKCol).toFirstUpper()»() != _«javaPropertyNameFromColumn(currPKCol)» : !_«javaPropertyNameFromColumn(currPKCol)».equals( _cast.get«javaPropertyNameFromColumn(currPKCol).toFirstUpper()»() )) {
+		Â«FOREACH mainTable.primaryKey.includedColumns AS currPKColÂ»
+		if (_Â«javaPropertyNameFromColumn(currPKCol)Â» == null ? _cast.getÂ«javaPropertyNameFromColumn(currPKCol).toFirstUpper()Â»() != _Â«javaPropertyNameFromColumn(currPKCol)Â» : !_Â«javaPropertyNameFromColumn(currPKCol)Â».equals( _cast.getÂ«javaPropertyNameFromColumn(currPKCol).toFirstUpper()Â»() )) {
 			return false;
 		}
-		«ENDFOREACH»
+		Â«ENDFOREACHÂ»
 		
 		return true;
 	}
@@ -93,11 +110,11 @@ public class «getPkClassName()» implements Serializable {
 	{
 		int _hashCode = 0;
 		
-		«FOREACH mainTable.primaryKey.includedColumns AS currPKCol»
-		if (_«javaPropertyNameFromColumn(currPKCol)» != null) {
-			_hashCode = 29 * _hashCode + _«javaPropertyNameFromColumn(currPKCol)».hashCode();
+		Â«FOREACH mainTable.primaryKey.includedColumns AS currPKColÂ»
+		if (_Â«javaPropertyNameFromColumn(currPKCol)Â» != null) {
+			_hashCode = 29 * _hashCode + _Â«javaPropertyNameFromColumn(currPKCol)Â».hashCode();
 		}
-		«ENDFOREACH»
+		Â«ENDFOREACHÂ»
 		
 		return _hashCode;
 	}
@@ -110,34 +127,34 @@ public class «getPkClassName()» implements Serializable {
 	public String toString()
 	{
 		StringBuffer ret = new StringBuffer();
-		«FOREACH mainTable.primaryKey.includedColumns AS currPKCol»
-		ret.append( "«pkgPackage».dto.«getPkClassName()»: " );
-		ret.append( "_«javaPropertyNameFromColumn(currPKCol)»=" + _«javaPropertyNameFromColumn(currPKCol)» );
-		«ENDFOREACH»
+		Â«FOREACH mainTable.primaryKey.includedColumns AS currPKColÂ»
+		ret.append( "Â«pkgPackageÂ».dto.Â«getPkClassName()Â»: " );
+		ret.append( "_Â«javaPropertyNameFromColumn(currPKCol)Â»=" + _Â«javaPropertyNameFromColumn(currPKCol)Â» );
+		Â«ENDFOREACHÂ»
 		return ret.toString();
 	}
 }
 
-«ENDFILE»
-«ENDLET»
-«ENDDEFINE»
+Â«ENDFILEÂ»
+Â«ENDLETÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE dtoFile(DBAccessModel model) FOR DataAccessObject»
-«LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-»
-«FILE getDtoFullPath(this, model)»package «pkgPackage».dto;
+Â«DEFINE dtoFile(DBAccessModel model) FOR DataAccessObjectÂ»
+Â«LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-Â»
+Â«FILE getDtoFullPath(this, model)Â»package Â«pkgPackageÂ».dto;
 
-import «pkgPackage».dao.*;
-import «pkgPackage».exceptions.*;
+import Â«pkgPackageÂ».dao.*;
+import Â«pkgPackageÂ».exceptions.*;
 import java.io.Serializable;
 import java.util.*;
 
 /**
  * @generated
  */
-public class «getDtoClassName()» implements Serializable
+public class Â«getDtoClassName()Â» implements Serializable
 {
 
-	«EXPAND columnJavaProperty FOREACH this.mainTable.columns»
+	Â«EXPAND columnJavaProperty FOREACH this.mainTable.columnsÂ»
 
 	/**
 	 * Method 'equals'
@@ -164,22 +181,22 @@ public class «getDtoClassName()» implements Serializable
 		return super.hashCode();
 	}
 
-	«IF this.mainTable.primaryKey != null»
+	Â«IF this.mainTable.primaryKey != nullÂ»
 		/**
 	 * Method 'createPk'
 	 * 
-	 * @return «getPkClassName()»
+	 * @return Â«getPkClassName()Â»
 	 * @generated
 	 */
-	public «getPkClassName()» createPk()
+	public Â«getPkClassName()Â» createPk()
 	{
-		return new «getPkClassName()»(
-		«FOREACH this.mainTable.primaryKey.includedColumns AS pkColumn SEPARATOR ","-»
-			_«javaPropertyNameFromColumn(pkColumn)»
-		«ENDFOREACH-»
+		return new Â«getPkClassName()Â»(
+		Â«FOREACH this.mainTable.primaryKey.includedColumns AS pkColumn SEPARATOR ","-Â»
+			_Â«javaPropertyNameFromColumn(pkColumn)Â»
+		Â«ENDFOREACH-Â»
 		);
 	}
-	«ENDIF»
+	Â«ENDIFÂ»
 
 	/**
 	 * Method 'toString'
@@ -196,28 +213,28 @@ public class «getDtoClassName()» implements Serializable
 }
 
 
-«ENDFILE»
-«ENDLET-»
-«ENDDEFINE»
+Â«ENDFILEÂ»
+Â«ENDLET-Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE columnJavaProperty FOR TableColumn-»
+Â«DEFINE columnJavaProperty FOR TableColumn-Â»
 	/**
 	 * @generated
 	 */
-	private «javaPropertyTypeFromColumn()» _«javaPropertyNameFromColumn()»;
+	private Â«javaPropertyTypeFromColumn()Â» _Â«javaPropertyNameFromColumn()Â»;
 	
 	/**
 	 * @generated
 	 */
-	public void set«javaPropertyNameFromColumn().toFirstUpper()» («javaPropertyTypeFromColumn()» val){
-		_«javaPropertyNameFromColumn()» = val;
+	public void setÂ«javaPropertyNameFromColumn().toFirstUpper()Â» (Â«javaPropertyTypeFromColumn()Â» val){
+		_Â«javaPropertyNameFromColumn()Â» = val;
 	}
 	
 	/**
 	 * @generated
 	 */
-	public «javaPropertyTypeFromColumn()» get«javaPropertyNameFromColumn().toFirstUpper()»(){
-		return _«javaPropertyNameFromColumn()»;
+	public Â«javaPropertyTypeFromColumn()Â» getÂ«javaPropertyNameFromColumn().toFirstUpper()Â»(){
+		return _Â«javaPropertyNameFromColumn()Â»;
 	}
 	
-«ENDDEFINE»
+Â«ENDDEFINEÂ»

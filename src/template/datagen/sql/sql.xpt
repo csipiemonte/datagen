@@ -1,83 +1,100 @@
-«IMPORT ecore»
-«IMPORT datagen»
-«IMPORT rdbmdl»
-«IMPORT rdbmdl::constraints»
-«IMPORT rdbmdl::datatypes»
-«IMPORT rdbmdl::view»
+Â«REMÂ»
+C) Copyright 2011 CSI-PIEMONTE;                                             
+                                                                            
+Concesso in licenza a norma dell'EUPL, esclusivamente versione 1.1;         
+Non e' possibile utilizzare l'opera salvo nel rispetto della Licenza.       
+E' possibile ottenere una copia della Licenza al seguente indirizzo:        
+                                                                            
+http://www.eupl.it/opensource/eupl-1-1                                      
+                                                                            
+Salvo diversamente indicato dalla legge applicabile o concordato per        
+iscritto, il software distribuito secondo i termini della Licenza e'        
+distribuito "TAL QUALE", SENZA GARANZIE O CONDIZIONI DI ALCUN TIPO,         
+esplicite o implicite.                                                      
+Si veda la Licenza per la lingua specifica che disciplina le autorizzazioni 
+e le limitazioni secondo i termini della Licenza.                           
+Â«ENDREMÂ»
 
-«EXTENSION template::DatagenExtensions»
+Â«IMPORT ecoreÂ»
+Â«IMPORT datagenÂ»
+Â«IMPORT rdbmdlÂ»
+Â«IMPORT rdbmdl::constraintsÂ»
+Â«IMPORT rdbmdl::datatypesÂ»
+Â«IMPORT rdbmdl::viewÂ»
 
-«DEFINE main FOR DBAccessModel»
-«EXPAND dropSchemaSQL FOR this.schema»
-«EXPAND createSchemaSQL FOR this.schema»
-«ENDDEFINE»
+Â«EXTENSION template::DatagenExtensionsÂ»
 
-«DEFINE dropSchemaSQL FOR Schema»
-«FILE getSchemaDropSQLPath()»
+Â«DEFINE main FOR DBAccessModelÂ»
+Â«EXPAND dropSchemaSQL FOR this.schemaÂ»
+Â«EXPAND createSchemaSQL FOR this.schemaÂ»
+Â«ENDDEFINEÂ»
+
+Â«DEFINE dropSchemaSQL FOR SchemaÂ»
+Â«FILE getSchemaDropSQLPath()Â»
 /**
  * Drop dello schema (per pulizia totale del DB)
  */
 
-«EXPAND elementDrop FOREACH this.elements»
+Â«EXPAND elementDrop FOREACH this.elementsÂ»
 
 
-«ENDFILE»
-«ENDDEFINE»
+Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE elementDrop FOR SchemaElement»
-«ENDDEFINE»
+Â«DEFINE elementDrop FOR SchemaElementÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE elementDrop FOR Table»
-DROP TABLE «name»;
-
-
-«ENDDEFINE»
+Â«DEFINE elementDrop FOR TableÂ»
+DROP TABLE Â«nameÂ»;
 
 
-«DEFINE createSchemaSQL FOR Schema»
-«FILE getSchemaCreationSQLPath()»
+Â«ENDDEFINEÂ»
+
+
+Â«DEFINE createSchemaSQL FOR SchemaÂ»
+Â«FILE getSchemaCreationSQLPath()Â»
 
 /**
- * Creazione dello schema «name»
+ * Creazione dello schema Â«nameÂ»
  */
 
-«EXPAND elementCreate(this) FOREACH this.elements»
+Â«EXPAND elementCreate(this) FOREACH this.elementsÂ»
 
 
 
-«ENDFILE»
-«ENDDEFINE»
+Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE  elementCreate(Schema schema) FOR SchemaElement»
-«ENDDEFINE»
+Â«DEFINE  elementCreate(Schema schema) FOR SchemaElementÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE  elementCreate(Schema schema) FOR Table»
+Â«DEFINE  elementCreate(Schema schema) FOR TableÂ»
 
-CREATE TABLE «name» (
-«EXPAND columnDef(schema) FOREACH this.columns SEPARATOR ","»
+CREATE TABLE Â«nameÂ» (
+Â«EXPAND columnDef(schema) FOREACH this.columns SEPARATOR ","Â»
 );
 
-«IF this.primaryKey!=null»
-«EXPAND createPKIndex(schema) FOR this»
+Â«IF this.primaryKey!=nullÂ»
+Â«EXPAND createPKIndex(schema) FOR thisÂ»
 
-«EXPAND addPKConstraint(schema) FOR this»
-«ENDIF»
+Â«EXPAND addPKConstraint(schema) FOR thisÂ»
+Â«ENDIFÂ»
 
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE columnDef(Schema schema) FOR TableColumn-»
-	«name» «getSQLType()» «getColumnModifier()-»
-«ENDDEFINE»
+Â«DEFINE columnDef(Schema schema) FOR TableColumn-Â»
+	Â«nameÂ» Â«getSQLType()Â» Â«getColumnModifier()-Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE createPKIndex(Schema schema) FOR Table»
-CREATE UNIQUE INDEX PK_«name»_IDX ON «name» (
-       «FOREACH primaryKey.includedColumns AS currPKCol SEPARATOR ","-»
-«currPKCol.name» ASC 
-       «ENDFOREACH-»
+Â«DEFINE createPKIndex(Schema schema) FOR TableÂ»
+CREATE UNIQUE INDEX PK_Â«nameÂ»_IDX ON Â«nameÂ» (
+       Â«FOREACH primaryKey.includedColumns AS currPKCol SEPARATOR ","-Â»
+Â«currPKCol.nameÂ» ASC 
+       Â«ENDFOREACH-Â»
  );
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE addPKConstraint(Schema schema) FOR Table»
-ALTER TABLE «name»
-add CONSTRAINT PK_«name»_Constraint PRIMARY KEY («FOREACH primaryKey.includedColumns AS currPKCol SEPARATOR ","»«currPKCol.name»«ENDFOREACH»);
-«ENDDEFINE»
+Â«DEFINE addPKConstraint(Schema schema) FOR TableÂ»
+ALTER TABLE Â«nameÂ»
+add CONSTRAINT PK_Â«nameÂ»_Constraint PRIMARY KEY (Â«FOREACH primaryKey.includedColumns AS currPKCol SEPARATOR ","Â»Â«currPKCol.nameÂ»Â«ENDFOREACHÂ»);
+Â«ENDDEFINEÂ»
