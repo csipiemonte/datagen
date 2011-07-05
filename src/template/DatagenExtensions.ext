@@ -390,6 +390,13 @@ String getSQLType(TableColumn col) :
 		default :"???"
 	};
 
+
+boolean isNonDecimalNumber (PrimitiveDataType t) :
+	(t.type == PrimitiveTypeCodes::NUMERIC || 
+	 t.type == PrimitiveTypeCodes::DECIMAL ||
+	 t.type == PrimitiveTypeCodes::SMALLINT ||
+	 t.type == PrimitiveTypeCodes::INTEGER) && t.decimalDigits==0;
+	
 boolean isBlobOrClob(TableColumn col) :
 	if (col.type !=null) then
 		getSQLType(col) == "CLOB" || getSQLType(col) == "BLOB"
