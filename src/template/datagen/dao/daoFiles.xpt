@@ -338,7 +338,7 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c
 «IF type.type == PrimitiveTypeCodes::VARCHAR-»
 	«javaPropertyTypeFromColumn()» newKey = incrementer.nextStringValue();
 «ELSEIF (isNonDecimalNumber(this.type))-»
-	«javaPropertyTypeFromColumn()» newKey = new «javaPropertyTypeFromColumn()»(incrementer.nextLongValue());
+	«javaPropertyTypeFromColumn()» newKey = new «javaPropertyTypeFromColumn()»(incrementer.«getIncrementerNextValMethod()»);
 «ELSE»
 	«ERROR "impossibile usare incrementer per il tipo di colonna "+type.type+","+type.size+","+type.decimalDigits»
 «ENDIF-»

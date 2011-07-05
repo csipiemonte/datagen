@@ -207,11 +207,11 @@ String getValueFromRS(TableColumn col, int i) :
 		case PrimitiveTypeCodes::BIT :
 			"rs.getInt("+i+") == 0 ? false : true"
 		case PrimitiveTypeCodes::TINYINT :
-			"rs.getInteger("+i+")"
+			"rs.getInt("+i+")"
 		case PrimitiveTypeCodes::SMALLINT :
-			"rs.getInteger("+i+")"
+			"rs.getInt("+i+")"
 		case PrimitiveTypeCodes::INTEGER :
-			"rs.getInteger("+i+")"		
+			"rs.getInt("+i+")"		
 		case PrimitiveTypeCodes::BIGINT :
 			"rs.getLong("+i+")"
 		case PrimitiveTypeCodes::FLOAT :
@@ -263,6 +263,69 @@ String getValueFromRS(TableColumn col, int i) :
 	
 		default :"???"
 	};
+
+String getIncrementerNextValMethod(TableColumn col) :
+	let code = col.type.type :
+	switch(code){
+		case PrimitiveTypeCodes::BIT :
+			"nextIntValue()"
+		case PrimitiveTypeCodes::TINYINT :
+			"nextIntValue()"
+		case PrimitiveTypeCodes::SMALLINT :
+			"nextIntValue()"
+		case PrimitiveTypeCodes::INTEGER :
+			"nextIntValue()"		
+		case PrimitiveTypeCodes::BIGINT :
+			"nextLongValue()"
+		case PrimitiveTypeCodes::FLOAT :
+			"??" 
+		case PrimitiveTypeCodes::REAL :
+			"??"	
+		case PrimitiveTypeCodes::DOUBLE :
+			"??" 
+		case PrimitiveTypeCodes::NUMERIC :
+			"nextLongValue()"
+		case PrimitiveTypeCodes::DECIMAL :
+			"nextLongValue()" 
+		case PrimitiveTypeCodes::CHAR :
+			"nextStringValue()" 
+		case PrimitiveTypeCodes::VARCHAR :
+			"nextStringValue()" 
+		case PrimitiveTypeCodes::LONGVARCHAR :
+			"???" 
+		case PrimitiveTypeCodes::DATE :
+			"???" 
+		case PrimitiveTypeCodes::TIME :
+			"???" 
+		case PrimitiveTypeCodes::TIMESTAMP :
+			"???" 
+		case PrimitiveTypeCodes::BINARY :
+			"???" 
+		case PrimitiveTypeCodes::VARBINARY :
+			"???" 
+		case PrimitiveTypeCodes::LONGVARBINARY :
+			"???" 
+		case PrimitiveTypeCodes::OTHER :
+			"???"  
+		case PrimitiveTypeCodes::JAVA_OBJECT :
+			"???" 
+		case PrimitiveTypeCodes::DISTINCT :
+			"???" 
+		case PrimitiveTypeCodes::STRUCT :
+			"???" 
+		case PrimitiveTypeCodes::ARRAY :
+			"???" 
+		case PrimitiveTypeCodes::BLOB :
+			"???" 
+		case PrimitiveTypeCodes::CLOB :
+			"???" 
+		case PrimitiveTypeCodes::REF :
+			"???" 
+		case PrimitiveTypeCodes::BOOLEAN :
+			"???" 
+	
+		default :"???"
+	};	
 	
 String getValueFromRSByColName(TableColumn col) :
 	let code = col.type.type :
@@ -270,11 +333,11 @@ String getValueFromRSByColName(TableColumn col) :
 		case PrimitiveTypeCodes::BIT :
 			"rs.getInt(\""+col.name+"\") == 0 ? false : true"
 		case PrimitiveTypeCodes::TINYINT :
-			"rs.getInteger(\""+col.name+"\")"
+			"rs.getInt(\""+col.name+"\")"
 		case PrimitiveTypeCodes::SMALLINT :
-			"rs.getInteger(\""+col.name+"\")"
+			"rs.getInt(\""+col.name+"\")"
 		case PrimitiveTypeCodes::INTEGER :
-			"rs.getInteger(\""+col.name+"\")"		
+			"rs.getInt(\""+col.name+"\")"		
 		case PrimitiveTypeCodes::BIGINT :
 			"rs.getLong(\""+col.name+"\")"
 		case PrimitiveTypeCodes::FLOAT :
@@ -395,6 +458,8 @@ boolean isNonDecimalNumber (PrimitiveDataType t) :
 	(t.type == PrimitiveTypeCodes::NUMERIC || 
 	 t.type == PrimitiveTypeCodes::DECIMAL ||
 	 t.type == PrimitiveTypeCodes::SMALLINT ||
+	 t.type == PrimitiveTypeCodes::TINYINT ||
+	 t.type == PrimitiveTypeCodes::BIGINT ||
 	 t.type == PrimitiveTypeCodes::INTEGER) && t.decimalDigits==0;
 	
 boolean isBlobOrClob(TableColumn col) :
