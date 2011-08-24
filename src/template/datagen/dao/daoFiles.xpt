@@ -311,7 +311,7 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c
 
 «DEFINE paramValorizationList(String dtoVarName) FOR List[TableColumn]-»
 «FOREACH this AS currCol-»
-	params.addValue("«((TableColumn)currCol).name»", «dtoVarName».get«javaPropertyNameFromColumn(currCol).toFirstUpper()»() );	
+	params.addValue("«((TableColumn)currCol).name»", «dtoVarName».get«javaPropertyNameFromColumn(currCol).toFirstUpper()»(), java.sql.Types.«currCol.type.type» );	
 «ENDFOREACH-»
 «ENDDEFINE»
 
@@ -323,7 +323,7 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c
 «LET (DataAccessObject)(pkgen.eContainer) AS dao-»
 «LET dao.mainTable.primaryKey.includedColumns.first() AS pkCol-»
 «FOREACH this AS currCol-»
-	params.addValue("«((TableColumn)currCol).name»", «currCol==pkCol?" newKey ":dtoVarName+".get"+javaPropertyNameFromColumn(currCol).toFirstUpper()+"()"» );
+	params.addValue("«((TableColumn)currCol).name»", «currCol==pkCol?" newKey ":dtoVarName+".get"+javaPropertyNameFromColumn(currCol).toFirstUpper()+"()"» , java.sql.Types.«currCol.type.type» );
 «ENDFOREACH-»
 «ENDLET-»
 «ENDLET-»
