@@ -357,6 +357,27 @@ public class QBEQueryBuilder<TEX extends AbstractExample> {
 		this._metadata=metadata;
 	}
 	
+	private String formatColumnNames(DAOMetadata md) {
+		if (md != null) {
+			String [] names = md.getColumnNames();
+			if (names != null){
+				StringBuffer ris = new StringBuffer("");
+				String currName = null;
+				for (int i = 0; i < names.length; i++) {
+					currName = names[i];
+					ris.append(currName);
+					if (i<names.length-1)
+						ris.append(",");
+				}
+				return ris.toString();
+			}
+			else
+				return "????";
+		}
+		else
+			return "????";
+	}
+	
 	/**
 	 * @generated
 	 * @param posEx
@@ -364,7 +385,7 @@ public class QBEQueryBuilder<TEX extends AbstractExample> {
 	 * @return
 	 */
 	public String createFromExamples(List<TEX> posEx, List<TEX> negEx,boolean usesDistinct){
-		String sql = "SELECT "+(usesDistinct?"DISTINCT ":"")+_metadata.getColumnNames()+" FROM "+_metadata.getTableName()+" WHERE ";
+		String sql = "SELECT "+(usesDistinct?"DISTINCT ":"")+formatColumnNames(_metadata)+" FROM "+_metadata.getTableName()+" WHERE ";
 		String where = "";
 		String posExClause = "";
 		String negExClause = "";

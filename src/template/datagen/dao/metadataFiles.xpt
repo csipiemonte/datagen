@@ -101,7 +101,7 @@ public class «getMetadataClassName()» implements DAOMetadata{
 	 */
 	public String getColumnName(String propName){
 		«FOREACH columns AS currCol-»
-		if ("«javaPropertyNameFromColumn(currCol)»".equals(propName)){
+		if ("«javaPropertyNameFromColumn(currCol)»".equalsIgnoreCase(propName)){
 			return "«currCol.name»";
 		}
 		«ENDFOREACH-»
