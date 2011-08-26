@@ -474,16 +474,50 @@ public class QBEQueryBuilder<TEX extends AbstractExample> {
 	 * @return
 	 */
 	public String formatValue(Object val) {
-		if (val == null)
-			return "null";
-		else {
-			if (val instanceof String) {
-				return "'" + val + "'";
-			} 
-			else
-				return val.toString(); // TODO
-		}
 
+		String resultValue = "null";
+
+		if (val != null) {
+			if (val instanceof String) {
+				return "'" + ((String) val).replaceAll("'", "''") + "'";
+			}
+
+			else if (val instanceof Number) {
+				resultValue = val.toString();
+			}
+
+			else if (val instanceof java.util.Date) {
+				resultValue = makeToDateTerm((java.util.Date) val);
+			}
+
+		}
+		return resultValue;
+	}
+	
+	/**
+	 * crea l'espressione "to_date" da inserire nella query SQL
+	 * @param date la data da utilizzare
+	 * @return toDate('<data>','DD/MM/YYYY HH24:MI:SS')
+	 */
+	private static String makeToDateTerm(java.util.Date date) {
+		String retvalue = "";
+		java.util.Calendar cal = java.util.Calendar.getInstance();
+		cal.setTime(date);
+		retvalue = Integer.toString(cal.get(java.util.Calendar.DAY_OF_MONTH))
+				+ "/";
+		retvalue = retvalue
+				+ Integer.toString(cal.get(java.util.Calendar.MONTH) + 1) + "/";
+		retvalue = retvalue
+				+ Integer.toString(cal.get(java.util.Calendar.YEAR)) + "-";
+		retvalue = retvalue
+				+ Integer.toString(cal.get(java.util.Calendar.HOUR_OF_DAY))
+				+ ":";
+		retvalue = retvalue
+				+ Integer.toString(cal.get(java.util.Calendar.MINUTE)) + ":";
+		retvalue = retvalue
+				+ Integer.toString(cal.get(java.util.Calendar.SECOND));
+		retvalue = "to_date('" + retvalue + "','DD/MM/YYYY HH24:MI:SS')";
+		return retvalue;
 	}
 	
 	/**
