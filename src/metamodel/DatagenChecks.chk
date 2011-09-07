@@ -54,5 +54,5 @@ context MultiResFinder if (!isNullOrEmpty(distinct) && orderSpecs!=null && !isNu
 context QBEFinder ERROR "Il QBEFinder non può funzionare in modalità DISTINCT" :
 this.distinct.size==0;
 
-context QBEFinder ERROR "Il QBEFinder non supporta la clausola ORDER BY" :
-this.orderSpecs==null;
+//context QBEFinder ERROR "Il QBEFinder non supporta la clausola ORDER BY" :
+//this.orderSpecs==null;
