@@ -593,6 +593,7 @@ public class NamedParameterJdbcTemplateWithQueryDebug extends NamedParameterJdbc
 	protected static Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
 	
 	private static String PLACEHOLDER = ":";
+	private static String SPACE = " ";
 	
 	public NamedParameterJdbcTemplateWithQueryDebug(DataSource dataSource) {
 		super(dataSource);
@@ -631,30 +632,36 @@ public class NamedParameterJdbcTemplateWithQueryDebug extends NamedParameterJdbc
 	 * @param paramSource  mappa contenente i parametri e loro valori
 	 */
 	private void logSql(String sql, SqlParameterSource paramSource) {
-		sql = buildSqlWithParameters(sql, paramSource);
-		log.debug(sql);
+		if(log.isDebugEnabled()){
+			sql = buildSqlWithParameters(sql, paramSource);
+			log.debug(sql);
+		}
 	}
 
 	
 	/**
-	 * 
-	 * Restituisce una query con i valori impostati al posto dei placeholder (:nomeparametro)
-	 * 
-	 * @param sql query con i placeholder 
-	 * @param paramSource  mappa contenente i parametri e loro valori
-	 * @return
-	 */
+	*
+	* Restituisce una query con i valori impostati al posto dei placeholder (:nomeparametro)
+	*
+	* @param sql query con i placeholder
+	* @param paramSource  mappa contenente i parametri e loro valori
+	* @return
+	*/
 	private String buildSqlWithParameters(String sql, SqlParameterSource paramSource) {
-		String[] parametriQuery = sql.split(PLACEHOLDER);
-		for (String parametro : parametriQuery) 
+	String[] parametriQuery = sql.split(PLACEHOLDER);
+	for (String parametro : parametriQuery){
+		int primoSpazioNelNomeParametro = parametro.indexOf(SPACE);
+		if(primoSpazioNelNomeParametro>0)
 		{
-			String trimmedParam = parametro.trim();
-			if(paramSource.hasValue(trimmedParam))
-			{
-				sql = sql.replaceAll(PLACEHOLDER+trimmedParam, getValue(paramSource,trimmedParam));
-			}
+		parametro = parametro.substring(0,primoSpazioNelNomeParametro);
 		}
-		return sql;
+		if(paramSource.hasValue(parametro))
+		{
+		sql = sql.replaceAll(PLACEHOLDER+parametro, getValue(paramSource,parametro));
+		}
+	}
+		
+	return sql;
 	}
 
 	/**
