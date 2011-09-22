@@ -22,6 +22,7 @@ package it.csi.mddtools.datagen;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -205,13 +206,31 @@ public interface DatagenPackage extends EPackage {
 	int DATA_ACCESS_OBJECT__DELETERS = 6;
 
 	/**
+	 * The feature id for the '<em><b>Cacheability</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_ACCESS_OBJECT__CACHEABILITY = 7;
+
+	/**
+	 * The feature id for the '<em><b>Cache TT Lminutes</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_ACCESS_OBJECT__CACHE_TT_LMINUTES = 8;
+
+	/**
 	 * The number of structural features of the '<em>Data Access Object</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_ACCESS_OBJECT_FEATURE_COUNT = 7;
+	int DATA_ACCESS_OBJECT_FEATURE_COUNT = 9;
 
 
 	/**
@@ -1036,6 +1055,17 @@ public interface DatagenPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link it.csi.mddtools.datagen.CacheabilityTypes <em>Cacheability Types</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see it.csi.mddtools.datagen.CacheabilityTypes
+	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getCacheabilityTypes()
+	 * @generated
+	 */
+	int CACHEABILITY_TYPES = 26;
+
+
+	/**
 	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.DBAccessModel <em>DB Access Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1175,6 +1205,28 @@ public interface DatagenPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDataAccessObject_Deleters();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.csi.mddtools.datagen.DataAccessObject#getCacheability <em>Cacheability</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Cacheability</em>'.
+	 * @see it.csi.mddtools.datagen.DataAccessObject#getCacheability()
+	 * @see #getDataAccessObject()
+	 * @generated
+	 */
+	EAttribute getDataAccessObject_Cacheability();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.csi.mddtools.datagen.DataAccessObject#getCacheTTLminutes <em>Cache TT Lminutes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Cache TT Lminutes</em>'.
+	 * @see it.csi.mddtools.datagen.DataAccessObject#getCacheTTLminutes()
+	 * @see #getDataAccessObject()
+	 * @generated
+	 */
+	EAttribute getDataAccessObject_CacheTTLminutes();
 
 	/**
 	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.DaoPackage <em>Dao Package</em>}'.
@@ -1605,6 +1657,16 @@ public interface DatagenPackage extends EPackage {
 	EAttribute getCustomDeleter_FilterClassFQN();
 
 	/**
+	 * Returns the meta object for enum '{@link it.csi.mddtools.datagen.CacheabilityTypes <em>Cacheability Types</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Cacheability Types</em>'.
+	 * @see it.csi.mddtools.datagen.CacheabilityTypes
+	 * @generated
+	 */
+	EEnum getCacheabilityTypes();
+
+	/**
 	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.Finders <em>Finders</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1754,6 +1816,22 @@ public interface DatagenPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DATA_ACCESS_OBJECT__DELETERS = eINSTANCE.getDataAccessObject_Deleters();
+
+		/**
+		 * The meta object literal for the '<em><b>Cacheability</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DATA_ACCESS_OBJECT__CACHEABILITY = eINSTANCE.getDataAccessObject_Cacheability();
+
+		/**
+		 * The meta object literal for the '<em><b>Cache TT Lminutes</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DATA_ACCESS_OBJECT__CACHE_TT_LMINUTES = eINSTANCE.getDataAccessObject_CacheTTLminutes();
 
 		/**
 		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.DaoPackageImpl <em>Dao Package</em>}' class.
@@ -2128,6 +2206,16 @@ public interface DatagenPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CUSTOM_DELETER__FILTER_CLASS_FQN = eINSTANCE.getCustomDeleter_FilterClassFQN();
+
+		/**
+		 * The meta object literal for the '{@link it.csi.mddtools.datagen.CacheabilityTypes <em>Cacheability Types</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see it.csi.mddtools.datagen.CacheabilityTypes
+		 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getCacheabilityTypes()
+		 * @generated
+		 */
+		EEnum CACHEABILITY_TYPES = eINSTANCE.getCacheabilityTypes();
 
 		/**
 		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.FindersImpl <em>Finders</em>}' class.

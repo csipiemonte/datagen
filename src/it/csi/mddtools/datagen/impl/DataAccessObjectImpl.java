@@ -20,6 +20,7 @@
  */
 package it.csi.mddtools.datagen.impl;
 
+import it.csi.mddtools.datagen.CacheabilityTypes;
 import it.csi.mddtools.datagen.DataAccessObject;
 import it.csi.mddtools.datagen.DatagenPackage;
 
@@ -48,6 +49,8 @@ import org.eclipse.emf.internal.cdo.CDOObjectImpl;
  *   <li>{@link it.csi.mddtools.datagen.impl.DataAccessObjectImpl#getFinders <em>Finders</em>}</li>
  *   <li>{@link it.csi.mddtools.datagen.impl.DataAccessObjectImpl#getUpdaters <em>Updaters</em>}</li>
  *   <li>{@link it.csi.mddtools.datagen.impl.DataAccessObjectImpl#getDeleters <em>Deleters</em>}</li>
+ *   <li>{@link it.csi.mddtools.datagen.impl.DataAccessObjectImpl#getCacheability <em>Cacheability</em>}</li>
+ *   <li>{@link it.csi.mddtools.datagen.impl.DataAccessObjectImpl#getCacheTTLminutes <em>Cache TT Lminutes</em>}</li>
  * </ul>
  * </p>
  *
@@ -207,6 +210,42 @@ public class DataAccessObjectImpl extends CDOObjectImpl implements DataAccessObj
 	 */
 	public void setDeleters(Deleters newDeleters) {
 		eSet(DatagenPackage.Literals.DATA_ACCESS_OBJECT__DELETERS, newDeleters);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CacheabilityTypes getCacheability() {
+		return (CacheabilityTypes)eGet(DatagenPackage.Literals.DATA_ACCESS_OBJECT__CACHEABILITY, true);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCacheability(CacheabilityTypes newCacheability) {
+		eSet(DatagenPackage.Literals.DATA_ACCESS_OBJECT__CACHEABILITY, newCacheability);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getCacheTTLminutes() {
+		return (Integer)eGet(DatagenPackage.Literals.DATA_ACCESS_OBJECT__CACHE_TT_LMINUTES, true);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCacheTTLminutes(int newCacheTTLminutes) {
+		eSet(DatagenPackage.Literals.DATA_ACCESS_OBJECT__CACHE_TT_LMINUTES, newCacheTTLminutes);
 	}
 
 } //DataAccessObjectImpl

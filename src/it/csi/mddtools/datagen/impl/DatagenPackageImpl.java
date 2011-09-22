@@ -20,6 +20,7 @@
  */
 package it.csi.mddtools.datagen.impl;
 
+import it.csi.mddtools.datagen.CacheabilityTypes;
 import it.csi.mddtools.datagen.CustomDeleter;
 import it.csi.mddtools.datagen.CustomFinder;
 import it.csi.mddtools.datagen.CustomUpdater;
@@ -53,6 +54,7 @@ import it.csi.mddtools.rdbmdl.RdbmdlPackage;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -245,6 +247,13 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EEnum cacheabilityTypesEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass findersEClass = null;
 
 	/**
@@ -426,6 +435,24 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 	 */
 	public EReference getDataAccessObject_Deleters() {
 		return (EReference)dataAccessObjectEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDataAccessObject_Cacheability() {
+		return (EAttribute)dataAccessObjectEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDataAccessObject_CacheTTLminutes() {
+		return (EAttribute)dataAccessObjectEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -802,6 +829,15 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getCacheabilityTypes() {
+		return cacheabilityTypesEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getFinders() {
 		return findersEClass;
 	}
@@ -857,6 +893,8 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		createEReference(dataAccessObjectEClass, DATA_ACCESS_OBJECT__FINDERS);
 		createEReference(dataAccessObjectEClass, DATA_ACCESS_OBJECT__UPDATERS);
 		createEReference(dataAccessObjectEClass, DATA_ACCESS_OBJECT__DELETERS);
+		createEAttribute(dataAccessObjectEClass, DATA_ACCESS_OBJECT__CACHEABILITY);
+		createEAttribute(dataAccessObjectEClass, DATA_ACCESS_OBJECT__CACHE_TT_LMINUTES);
 
 		daoPackageEClass = createEClass(DAO_PACKAGE);
 		createEAttribute(daoPackageEClass, DAO_PACKAGE__NAME);
@@ -924,6 +962,9 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 
 		customDeleterEClass = createEClass(CUSTOM_DELETER);
 		createEAttribute(customDeleterEClass, CUSTOM_DELETER__FILTER_CLASS_FQN);
+
+		// Create enums
+		cacheabilityTypesEEnum = createEEnum(CACHEABILITY_TYPES);
 	}
 
 	/**
@@ -989,6 +1030,8 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		initEReference(getDataAccessObject_Finders(), this.getFinders(), null, "finders", null, 0, 1, DataAccessObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDataAccessObject_Updaters(), this.getUpdaters(), null, "updaters", null, 0, 1, DataAccessObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDataAccessObject_Deleters(), this.getDeleters(), null, "deleters", null, 0, 1, DataAccessObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDataAccessObject_Cacheability(), this.getCacheabilityTypes(), "cacheability", "HIGHLY_VARIABLE_DATA", 0, 1, DataAccessObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDataAccessObject_CacheTTLminutes(), ecorePackage.getEInt(), "cacheTTLminutes", null, 0, 1, DataAccessObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(daoPackageEClass, DaoPackage.class, "DaoPackage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDaoPackage_Name(), ecorePackage.getEString(), "name", null, 0, 1, DaoPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1056,6 +1099,11 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 
 		initEClass(customDeleterEClass, CustomDeleter.class, "CustomDeleter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCustomDeleter_FilterClassFQN(), ecorePackage.getEString(), "filterClassFQN", null, 0, 1, CustomDeleter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		// Initialize enums and add enum literals
+		initEEnum(cacheabilityTypesEEnum, CacheabilityTypes.class, "CacheabilityTypes");
+		addEEnumLiteral(cacheabilityTypesEEnum, CacheabilityTypes.HIGHLY_VARIABLE_DATA);
+		addEEnumLiteral(cacheabilityTypesEEnum, CacheabilityTypes.ALMOST_STABLE_DATA);
 
 		// Create resource
 		createResource(eNS_URI);

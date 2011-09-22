@@ -43,6 +43,8 @@ import org.eclipse.emf.cdo.CDOObject;
  *   <li>{@link it.csi.mddtools.datagen.DataAccessObject#getFinders <em>Finders</em>}</li>
  *   <li>{@link it.csi.mddtools.datagen.DataAccessObject#getUpdaters <em>Updaters</em>}</li>
  *   <li>{@link it.csi.mddtools.datagen.DataAccessObject#getDeleters <em>Deleters</em>}</li>
+ *   <li>{@link it.csi.mddtools.datagen.DataAccessObject#getCacheability <em>Cacheability</em>}</li>
+ *   <li>{@link it.csi.mddtools.datagen.DataAccessObject#getCacheTTLminutes <em>Cache TT Lminutes</em>}</li>
  * </ul>
  * </p>
  *
@@ -254,5 +256,59 @@ public interface DataAccessObject extends CDOObject {
 	 * @generated
 	 */
 	void setDeleters(Deleters value);
+
+	/**
+	 * Returns the value of the '<em><b>Cacheability</b></em>' attribute.
+	 * The default value is <code>"HIGHLY_VARIABLE_DATA"</code>.
+	 * The literals are from the enumeration {@link it.csi.mddtools.datagen.CacheabilityTypes}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Indica il tipo di variabilit&agrave; dei dati, utile per implementare eventuali meccanismi di caching
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Cacheability</em>' attribute.
+	 * @see it.csi.mddtools.datagen.CacheabilityTypes
+	 * @see #setCacheability(CacheabilityTypes)
+	 * @see it.csi.mddtools.datagen.DatagenPackage#getDataAccessObject_Cacheability()
+	 * @model default="HIGHLY_VARIABLE_DATA"
+	 * @generated
+	 */
+	CacheabilityTypes getCacheability();
+
+	/**
+	 * Sets the value of the '{@link it.csi.mddtools.datagen.DataAccessObject#getCacheability <em>Cacheability</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Cacheability</em>' attribute.
+	 * @see it.csi.mddtools.datagen.CacheabilityTypes
+	 * @see #getCacheability()
+	 * @generated
+	 */
+	void setCacheability(CacheabilityTypes value);
+
+	/**
+	 * Returns the value of the '<em><b>Cache TT Lminutes</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Indica il Time To Live dell'eventuale cache
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Cache TT Lminutes</em>' attribute.
+	 * @see #setCacheTTLminutes(int)
+	 * @see it.csi.mddtools.datagen.DatagenPackage#getDataAccessObject_CacheTTLminutes()
+	 * @model
+	 * @generated
+	 */
+	int getCacheTTLminutes();
+
+	/**
+	 * Sets the value of the '{@link it.csi.mddtools.datagen.DataAccessObject#getCacheTTLminutes <em>Cache TT Lminutes</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Cache TT Lminutes</em>' attribute.
+	 * @see #getCacheTTLminutes()
+	 * @generated
+	 */
+	void setCacheTTLminutes(int value);
 
 } // DataAccessObject

@@ -82,6 +82,8 @@ public class DataAccessObjectItemProvider
 
 			addNamePropertyDescriptor(object);
 			addMainTablePropertyDescriptor(object);
+			addCacheabilityPropertyDescriptor(object);
+			addCacheTTLminutesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -126,6 +128,50 @@ public class DataAccessObjectItemProvider
 				 false,
 				 true,
 				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Cacheability feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addCacheabilityPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_DataAccessObject_cacheability_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_DataAccessObject_cacheability_feature", "_UI_DataAccessObject_type"),
+				 DatagenPackage.Literals.DATA_ACCESS_OBJECT__CACHEABILITY,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Cache TT Lminutes feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addCacheTTLminutesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_DataAccessObject_cacheTTLminutes_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_DataAccessObject_cacheTTLminutes_feature", "_UI_DataAccessObject_type"),
+				 DatagenPackage.Literals.DATA_ACCESS_OBJECT__CACHE_TT_LMINUTES,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -202,6 +248,8 @@ public class DataAccessObjectItemProvider
 
 		switch (notification.getFeatureID(DataAccessObject.class)) {
 			case DatagenPackage.DATA_ACCESS_OBJECT__NAME:
+			case DatagenPackage.DATA_ACCESS_OBJECT__CACHEABILITY:
+			case DatagenPackage.DATA_ACCESS_OBJECT__CACHE_TT_LMINUTES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case DatagenPackage.DATA_ACCESS_OBJECT__PK_GENERATOR:
