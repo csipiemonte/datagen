@@ -184,6 +184,24 @@ public interface DatagenFactory extends EFactory {
 	CustomDeleter createCustomDeleter();
 
 	/**
+	 * Returns a new object of class '<em>Lookup Resolvers</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Lookup Resolvers</em>'.
+	 * @generated
+	 */
+	LookupResolvers createLookupResolvers();
+
+	/**
+	 * Returns a new object of class '<em>Lookup Resolver</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Lookup Resolver</em>'.
+	 * @generated
+	 */
+	LookupResolver createLookupResolver();
+
+	/**
 	 * Returns a new object of class '<em>Finders</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

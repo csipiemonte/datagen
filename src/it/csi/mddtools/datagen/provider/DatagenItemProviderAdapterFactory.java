@@ -458,6 +458,52 @@ public class DatagenItemProviderAdapterFactory extends DatagenAdapterFactory imp
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link it.csi.mddtools.datagen.LookupResolvers} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected LookupResolversItemProvider lookupResolversItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.csi.mddtools.datagen.LookupResolvers}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createLookupResolversAdapter() {
+		if (lookupResolversItemProvider == null) {
+			lookupResolversItemProvider = new LookupResolversItemProvider(this);
+		}
+
+		return lookupResolversItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link it.csi.mddtools.datagen.LookupResolver} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected LookupResolverItemProvider lookupResolverItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.csi.mddtools.datagen.LookupResolver}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createLookupResolverAdapter() {
+		if (lookupResolverItemProvider == null) {
+			lookupResolverItemProvider = new LookupResolverItemProvider(this);
+		}
+
+		return lookupResolverItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link it.csi.mddtools.datagen.Finders} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -644,6 +690,8 @@ public class DatagenItemProviderAdapterFactory extends DatagenAdapterFactory imp
 		if (deleteByPKItemProvider != null) deleteByPKItemProvider.dispose();
 		if (customUpdaterItemProvider != null) customUpdaterItemProvider.dispose();
 		if (customDeleterItemProvider != null) customDeleterItemProvider.dispose();
+		if (lookupResolversItemProvider != null) lookupResolversItemProvider.dispose();
+		if (lookupResolverItemProvider != null) lookupResolverItemProvider.dispose();
 	}
 
 }

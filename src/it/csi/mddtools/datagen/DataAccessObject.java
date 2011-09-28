@@ -45,6 +45,7 @@ import org.eclipse.emf.cdo.CDOObject;
  *   <li>{@link it.csi.mddtools.datagen.DataAccessObject#getDeleters <em>Deleters</em>}</li>
  *   <li>{@link it.csi.mddtools.datagen.DataAccessObject#getCacheability <em>Cacheability</em>}</li>
  *   <li>{@link it.csi.mddtools.datagen.DataAccessObject#getCacheTTLminutes <em>Cache TT Lminutes</em>}</li>
+ *   <li>{@link it.csi.mddtools.datagen.DataAccessObject#getLookupResolvers <em>Lookup Resolvers</em>}</li>
  * </ul>
  * </p>
  *
@@ -310,5 +311,31 @@ public interface DataAccessObject extends CDOObject {
 	 * @generated
 	 */
 	void setCacheTTLminutes(int value);
+
+	/**
+	 * Returns the value of the '<em><b>Lookup Resolvers</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Lookup Resolvers</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Lookup Resolvers</em>' containment reference.
+	 * @see #setLookupResolvers(LookupResolvers)
+	 * @see it.csi.mddtools.datagen.DatagenPackage#getDataAccessObject_LookupResolvers()
+	 * @model containment="true"
+	 * @generated
+	 */
+	LookupResolvers getLookupResolvers();
+
+	/**
+	 * Sets the value of the '{@link it.csi.mddtools.datagen.DataAccessObject#getLookupResolvers <em>Lookup Resolvers</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Lookup Resolvers</em>' containment reference.
+	 * @see #getLookupResolvers()
+	 * @generated
+	 */
+	void setLookupResolvers(LookupResolvers value);
 
 } // DataAccessObject

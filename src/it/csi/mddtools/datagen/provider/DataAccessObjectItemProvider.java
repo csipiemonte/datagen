@@ -193,6 +193,7 @@ public class DataAccessObjectItemProvider
 			childrenFeatures.add(DatagenPackage.Literals.DATA_ACCESS_OBJECT__FINDERS);
 			childrenFeatures.add(DatagenPackage.Literals.DATA_ACCESS_OBJECT__UPDATERS);
 			childrenFeatures.add(DatagenPackage.Literals.DATA_ACCESS_OBJECT__DELETERS);
+			childrenFeatures.add(DatagenPackage.Literals.DATA_ACCESS_OBJECT__LOOKUP_RESOLVERS);
 		}
 		return childrenFeatures;
 	}
@@ -257,6 +258,7 @@ public class DataAccessObjectItemProvider
 			case DatagenPackage.DATA_ACCESS_OBJECT__FINDERS:
 			case DatagenPackage.DATA_ACCESS_OBJECT__UPDATERS:
 			case DatagenPackage.DATA_ACCESS_OBJECT__DELETERS:
+			case DatagenPackage.DATA_ACCESS_OBJECT__LOOKUP_RESOLVERS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -298,6 +300,11 @@ public class DataAccessObjectItemProvider
 			(createChildParameter
 				(DatagenPackage.Literals.DATA_ACCESS_OBJECT__DELETERS,
 				 DatagenFactory.eINSTANCE.createDeleters()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(DatagenPackage.Literals.DATA_ACCESS_OBJECT__LOOKUP_RESOLVERS,
+				 DatagenFactory.eINSTANCE.createLookupResolvers()));
 	}
 
 	/**

@@ -224,13 +224,22 @@ public interface DatagenPackage extends EPackage {
 	int DATA_ACCESS_OBJECT__CACHE_TT_LMINUTES = 8;
 
 	/**
+	 * The feature id for the '<em><b>Lookup Resolvers</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_ACCESS_OBJECT__LOOKUP_RESOLVERS = 9;
+
+	/**
 	 * The number of structural features of the '<em>Data Access Object</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_ACCESS_OBJECT_FEATURE_COUNT = 9;
+	int DATA_ACCESS_OBJECT_FEATURE_COUNT = 10;
 
 
 	/**
@@ -1055,6 +1064,71 @@ public interface DatagenPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.LookupResolversImpl <em>Lookup Resolvers</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see it.csi.mddtools.datagen.impl.LookupResolversImpl
+	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getLookupResolvers()
+	 * @generated
+	 */
+	int LOOKUP_RESOLVERS = 26;
+
+	/**
+	 * The feature id for the '<em><b>Resolvers</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOOKUP_RESOLVERS__RESOLVERS = 0;
+
+	/**
+	 * The number of structural features of the '<em>Lookup Resolvers</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOOKUP_RESOLVERS_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.LookupResolverImpl <em>Lookup Resolver</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see it.csi.mddtools.datagen.impl.LookupResolverImpl
+	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getLookupResolver()
+	 * @generated
+	 */
+	int LOOKUP_RESOLVER = 27;
+
+	/**
+	 * The feature id for the '<em><b>Foreign Key</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOOKUP_RESOLVER__FOREIGN_KEY = 0;
+
+	/**
+	 * The feature id for the '<em><b>Supplier DAO</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOOKUP_RESOLVER__SUPPLIER_DAO = 1;
+
+	/**
+	 * The number of structural features of the '<em>Lookup Resolver</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOOKUP_RESOLVER_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link it.csi.mddtools.datagen.CacheabilityTypes <em>Cacheability Types</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1062,7 +1136,7 @@ public interface DatagenPackage extends EPackage {
 	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getCacheabilityTypes()
 	 * @generated
 	 */
-	int CACHEABILITY_TYPES = 26;
+	int CACHEABILITY_TYPES = 28;
 
 
 	/**
@@ -1227,6 +1301,17 @@ public interface DatagenPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getDataAccessObject_CacheTTLminutes();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link it.csi.mddtools.datagen.DataAccessObject#getLookupResolvers <em>Lookup Resolvers</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Lookup Resolvers</em>'.
+	 * @see it.csi.mddtools.datagen.DataAccessObject#getLookupResolvers()
+	 * @see #getDataAccessObject()
+	 * @generated
+	 */
+	EReference getDataAccessObject_LookupResolvers();
 
 	/**
 	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.DaoPackage <em>Dao Package</em>}'.
@@ -1657,6 +1742,59 @@ public interface DatagenPackage extends EPackage {
 	EAttribute getCustomDeleter_FilterClassFQN();
 
 	/**
+	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.LookupResolvers <em>Lookup Resolvers</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Lookup Resolvers</em>'.
+	 * @see it.csi.mddtools.datagen.LookupResolvers
+	 * @generated
+	 */
+	EClass getLookupResolvers();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link it.csi.mddtools.datagen.LookupResolvers#getResolvers <em>Resolvers</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Resolvers</em>'.
+	 * @see it.csi.mddtools.datagen.LookupResolvers#getResolvers()
+	 * @see #getLookupResolvers()
+	 * @generated
+	 */
+	EReference getLookupResolvers_Resolvers();
+
+	/**
+	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.LookupResolver <em>Lookup Resolver</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Lookup Resolver</em>'.
+	 * @see it.csi.mddtools.datagen.LookupResolver
+	 * @generated
+	 */
+	EClass getLookupResolver();
+
+	/**
+	 * Returns the meta object for the reference '{@link it.csi.mddtools.datagen.LookupResolver#getForeignKey <em>Foreign Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Foreign Key</em>'.
+	 * @see it.csi.mddtools.datagen.LookupResolver#getForeignKey()
+	 * @see #getLookupResolver()
+	 * @generated
+	 */
+	EReference getLookupResolver_ForeignKey();
+
+	/**
+	 * Returns the meta object for the reference '{@link it.csi.mddtools.datagen.LookupResolver#getSupplierDAO <em>Supplier DAO</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Supplier DAO</em>'.
+	 * @see it.csi.mddtools.datagen.LookupResolver#getSupplierDAO()
+	 * @see #getLookupResolver()
+	 * @generated
+	 */
+	EReference getLookupResolver_SupplierDAO();
+
+	/**
 	 * Returns the meta object for enum '{@link it.csi.mddtools.datagen.CacheabilityTypes <em>Cacheability Types</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1832,6 +1970,14 @@ public interface DatagenPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DATA_ACCESS_OBJECT__CACHE_TT_LMINUTES = eINSTANCE.getDataAccessObject_CacheTTLminutes();
+
+		/**
+		 * The meta object literal for the '<em><b>Lookup Resolvers</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DATA_ACCESS_OBJECT__LOOKUP_RESOLVERS = eINSTANCE.getDataAccessObject_LookupResolvers();
 
 		/**
 		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.DaoPackageImpl <em>Dao Package</em>}' class.
@@ -2206,6 +2352,50 @@ public interface DatagenPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CUSTOM_DELETER__FILTER_CLASS_FQN = eINSTANCE.getCustomDeleter_FilterClassFQN();
+
+		/**
+		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.LookupResolversImpl <em>Lookup Resolvers</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see it.csi.mddtools.datagen.impl.LookupResolversImpl
+		 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getLookupResolvers()
+		 * @generated
+		 */
+		EClass LOOKUP_RESOLVERS = eINSTANCE.getLookupResolvers();
+
+		/**
+		 * The meta object literal for the '<em><b>Resolvers</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LOOKUP_RESOLVERS__RESOLVERS = eINSTANCE.getLookupResolvers_Resolvers();
+
+		/**
+		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.LookupResolverImpl <em>Lookup Resolver</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see it.csi.mddtools.datagen.impl.LookupResolverImpl
+		 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getLookupResolver()
+		 * @generated
+		 */
+		EClass LOOKUP_RESOLVER = eINSTANCE.getLookupResolver();
+
+		/**
+		 * The meta object literal for the '<em><b>Foreign Key</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LOOKUP_RESOLVER__FOREIGN_KEY = eINSTANCE.getLookupResolver_ForeignKey();
+
+		/**
+		 * The meta object literal for the '<em><b>Supplier DAO</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LOOKUP_RESOLVER__SUPPLIER_DAO = eINSTANCE.getLookupResolver_SupplierDAO();
 
 		/**
 		 * The meta object literal for the '{@link it.csi.mddtools.datagen.CacheabilityTypes <em>Cacheability Types</em>}' enum.

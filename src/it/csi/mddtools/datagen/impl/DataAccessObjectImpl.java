@@ -27,6 +27,7 @@ import it.csi.mddtools.datagen.DatagenPackage;
 import it.csi.mddtools.datagen.Deleters;
 import it.csi.mddtools.datagen.Finders;
 import it.csi.mddtools.datagen.Inserter;
+import it.csi.mddtools.datagen.LookupResolvers;
 import it.csi.mddtools.datagen.PKGenerator;
 import it.csi.mddtools.datagen.Updaters;
 import it.csi.mddtools.rdbmdl.Table;
@@ -51,6 +52,7 @@ import org.eclipse.emf.internal.cdo.CDOObjectImpl;
  *   <li>{@link it.csi.mddtools.datagen.impl.DataAccessObjectImpl#getDeleters <em>Deleters</em>}</li>
  *   <li>{@link it.csi.mddtools.datagen.impl.DataAccessObjectImpl#getCacheability <em>Cacheability</em>}</li>
  *   <li>{@link it.csi.mddtools.datagen.impl.DataAccessObjectImpl#getCacheTTLminutes <em>Cache TT Lminutes</em>}</li>
+ *   <li>{@link it.csi.mddtools.datagen.impl.DataAccessObjectImpl#getLookupResolvers <em>Lookup Resolvers</em>}</li>
  * </ul>
  * </p>
  *
@@ -246,6 +248,24 @@ public class DataAccessObjectImpl extends CDOObjectImpl implements DataAccessObj
 	 */
 	public void setCacheTTLminutes(int newCacheTTLminutes) {
 		eSet(DatagenPackage.Literals.DATA_ACCESS_OBJECT__CACHE_TT_LMINUTES, newCacheTTLminutes);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LookupResolvers getLookupResolvers() {
+		return (LookupResolvers)eGet(DatagenPackage.Literals.DATA_ACCESS_OBJECT__LOOKUP_RESOLVERS, true);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLookupResolvers(LookupResolvers newLookupResolvers) {
+		eSet(DatagenPackage.Literals.DATA_ACCESS_OBJECT__LOOKUP_RESOLVERS, newLookupResolvers);
 	}
 
 } //DataAccessObjectImpl

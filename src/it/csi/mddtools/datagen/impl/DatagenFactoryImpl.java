@@ -94,6 +94,8 @@ public class DatagenFactoryImpl extends EFactoryImpl implements DatagenFactory {
 			case DatagenPackage.DELETE_BY_PK: return (EObject)createDeleteByPK();
 			case DatagenPackage.CUSTOM_UPDATER: return (EObject)createCustomUpdater();
 			case DatagenPackage.CUSTOM_DELETER: return (EObject)createCustomDeleter();
+			case DatagenPackage.LOOKUP_RESOLVERS: return (EObject)createLookupResolvers();
+			case DatagenPackage.LOOKUP_RESOLVER: return (EObject)createLookupResolver();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -287,6 +289,26 @@ public class DatagenFactoryImpl extends EFactoryImpl implements DatagenFactory {
 	public CustomDeleter createCustomDeleter() {
 		CustomDeleterImpl customDeleter = new CustomDeleterImpl();
 		return customDeleter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LookupResolvers createLookupResolvers() {
+		LookupResolversImpl lookupResolvers = new LookupResolversImpl();
+		return lookupResolvers;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LookupResolver createLookupResolver() {
+		LookupResolverImpl lookupResolver = new LookupResolverImpl();
+		return lookupResolver;
 	}
 
 	/**

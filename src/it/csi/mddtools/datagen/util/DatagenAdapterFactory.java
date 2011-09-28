@@ -190,6 +190,14 @@ public class DatagenAdapterFactory extends AdapterFactoryImpl {
 				return createCustomDeleterAdapter();
 			}
 			@Override
+			public Adapter caseLookupResolvers(LookupResolvers object) {
+				return createLookupResolversAdapter();
+			}
+			@Override
+			public Adapter caseLookupResolver(LookupResolver object) {
+				return createLookupResolverAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -556,6 +564,34 @@ public class DatagenAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCustomDeleterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.LookupResolvers <em>Lookup Resolvers</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.LookupResolvers
+	 * @generated
+	 */
+	public Adapter createLookupResolversAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.LookupResolver <em>Lookup Resolver</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.LookupResolver
+	 * @generated
+	 */
+	public Adapter createLookupResolverAdapter() {
 		return null;
 	}
 

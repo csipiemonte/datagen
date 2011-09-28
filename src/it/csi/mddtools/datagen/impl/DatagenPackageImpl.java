@@ -39,6 +39,8 @@ import it.csi.mddtools.datagen.FindByPK;
 import it.csi.mddtools.datagen.Finder;
 import it.csi.mddtools.datagen.Finders;
 import it.csi.mddtools.datagen.Inserter;
+import it.csi.mddtools.datagen.LookupResolver;
+import it.csi.mddtools.datagen.LookupResolvers;
 import it.csi.mddtools.datagen.MultiResFinder;
 import it.csi.mddtools.datagen.OrderSpec;
 import it.csi.mddtools.datagen.OrderSpecs;
@@ -52,6 +54,7 @@ import it.csi.mddtools.datagen.Updater;
 import it.csi.mddtools.datagen.Updaters;
 import it.csi.mddtools.rdbmdl.RdbmdlPackage;
 
+import it.csi.mddtools.rdbmdl.constraints.ConstraintsPackage;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
@@ -241,6 +244,20 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 	 * @generated
 	 */
 	private EClass customDeleterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass lookupResolversEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass lookupResolverEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -453,6 +470,15 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 	 */
 	public EAttribute getDataAccessObject_CacheTTLminutes() {
 		return (EAttribute)dataAccessObjectEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDataAccessObject_LookupResolvers() {
+		return (EReference)dataAccessObjectEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -829,6 +855,51 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getLookupResolvers() {
+		return lookupResolversEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getLookupResolvers_Resolvers() {
+		return (EReference)lookupResolversEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getLookupResolver() {
+		return lookupResolverEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getLookupResolver_ForeignKey() {
+		return (EReference)lookupResolverEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getLookupResolver_SupplierDAO() {
+		return (EReference)lookupResolverEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getCacheabilityTypes() {
 		return cacheabilityTypesEEnum;
 	}
@@ -895,6 +966,7 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		createEReference(dataAccessObjectEClass, DATA_ACCESS_OBJECT__DELETERS);
 		createEAttribute(dataAccessObjectEClass, DATA_ACCESS_OBJECT__CACHEABILITY);
 		createEAttribute(dataAccessObjectEClass, DATA_ACCESS_OBJECT__CACHE_TT_LMINUTES);
+		createEReference(dataAccessObjectEClass, DATA_ACCESS_OBJECT__LOOKUP_RESOLVERS);
 
 		daoPackageEClass = createEClass(DAO_PACKAGE);
 		createEAttribute(daoPackageEClass, DAO_PACKAGE__NAME);
@@ -963,6 +1035,13 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		customDeleterEClass = createEClass(CUSTOM_DELETER);
 		createEAttribute(customDeleterEClass, CUSTOM_DELETER__FILTER_CLASS_FQN);
 
+		lookupResolversEClass = createEClass(LOOKUP_RESOLVERS);
+		createEReference(lookupResolversEClass, LOOKUP_RESOLVERS__RESOLVERS);
+
+		lookupResolverEClass = createEClass(LOOKUP_RESOLVER);
+		createEReference(lookupResolverEClass, LOOKUP_RESOLVER__FOREIGN_KEY);
+		createEReference(lookupResolverEClass, LOOKUP_RESOLVER__SUPPLIER_DAO);
+
 		// Create enums
 		cacheabilityTypesEEnum = createEEnum(CACHEABILITY_TYPES);
 	}
@@ -992,6 +1071,7 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 
 		// Obtain other dependent packages
 		RdbmdlPackage theRdbmdlPackage = (RdbmdlPackage)EPackage.Registry.INSTANCE.getEPackage(RdbmdlPackage.eNS_URI);
+		ConstraintsPackage theConstraintsPackage = (ConstraintsPackage)EPackage.Registry.INSTANCE.getEPackage(ConstraintsPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -1032,6 +1112,7 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		initEReference(getDataAccessObject_Deleters(), this.getDeleters(), null, "deleters", null, 0, 1, DataAccessObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDataAccessObject_Cacheability(), this.getCacheabilityTypes(), "cacheability", "HIGHLY_VARIABLE_DATA", 0, 1, DataAccessObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDataAccessObject_CacheTTLminutes(), ecorePackage.getEInt(), "cacheTTLminutes", null, 0, 1, DataAccessObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDataAccessObject_LookupResolvers(), this.getLookupResolvers(), null, "lookupResolvers", null, 0, 1, DataAccessObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(daoPackageEClass, DaoPackage.class, "DaoPackage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDaoPackage_Name(), ecorePackage.getEString(), "name", null, 0, 1, DaoPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1099,6 +1180,13 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 
 		initEClass(customDeleterEClass, CustomDeleter.class, "CustomDeleter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCustomDeleter_FilterClassFQN(), ecorePackage.getEString(), "filterClassFQN", null, 0, 1, CustomDeleter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(lookupResolversEClass, LookupResolvers.class, "LookupResolvers", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getLookupResolvers_Resolvers(), this.getLookupResolver(), null, "resolvers", null, 0, -1, LookupResolvers.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(lookupResolverEClass, LookupResolver.class, "LookupResolver", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getLookupResolver_ForeignKey(), theConstraintsPackage.getForeignKey(), null, "foreignKey", null, 0, 1, LookupResolver.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLookupResolver_SupplierDAO(), this.getDataAccessObject(), null, "supplierDAO", null, 0, 1, LookupResolver.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(cacheabilityTypesEEnum, CacheabilityTypes.class, "CacheabilityTypes");
