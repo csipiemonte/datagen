@@ -70,15 +70,15 @@ this.distinct.size==0;
 //context QBEFinder ERROR "Il QBEFinder non supporta la clausola ORDER BY" :
 //this.orderSpecs==null;
 
-// check sulla richiesta di cache: cache impostata (ALMOST_STABLE_DATA) ma TTL minore zero
+// check sulla cache: cache impostata (ALMOST_STABLE_DATA) ma TTL minore zero
 context DataAccessObject if(this.cacheability==CacheabilityTypes::ALMOST_STABLE_DATA && this.cacheTTLminutes<0) ERROR "E' stato impostato un TTL minore di zero per il dao: "+loc()+ " , dato non consistente":
 false;
 
-// check sulla richiesta di cache: cache non impostata (HIGHLY_VARIABLE_DATA) ma TTL diverso da zero
+// check sulla cache: cache non impostata (HIGHLY_VARIABLE_DATA) ma TTL diverso da zero
 context DataAccessObject if(this.cacheability==CacheabilityTypes::HIGHLY_VARIABLE_DATA) WARNING "E' stato impostato un TTL diverso da zero per il dao: "+loc()+ " , ma la cache non e' abilitata (HIGHLY_VARIABLE_DATA)":
 !(this.cacheTTLminutes != 0);
 
-// check sulla richiesta di cache: cache impostata ma TTL zero: usare il default di 24 ore!!!
+// check sulla cache: cache impostata ma TTL zero: usare il default di 24 ore!!!
 context DataAccessObject if(this.cacheability==CacheabilityTypes::ALMOST_STABLE_DATA)  WARNING "E' stato impostata la cache per il dao " +loc()+" , con TTL pari zero, pertanto si utilizza il default di 24hr":
 !(this.cacheTTLminutes == 0);
 
