@@ -67,6 +67,23 @@ e le limitazioni secondo i termini della Licenza.
 			<constructor-arg ref="myDataSource" />
 		</bean>
 	
+	«REM»STDMDD-898:aggiunta dichiarazione dei bean di cache se richiesto da modello e referenza del daoImpl alla cache dichiarata«ENDREM»
+	«FOREACH daopkgs AS currPkg-»
+	«FOREACH currPkg.dao AS currDao-»
+	«IF currDao.cacheability==CacheabilityTypes::ALMOST_STABLE_DATA-»
+  		<bean id="simpleCache_«currDao.getDaoClassName()»" class="«getDALayerBasePkg(this)».util.SimpleCache">
+  			«IF currDao.cacheTTLminutes == 0-»
+  			<constructor-arg value="1440"></constructor-arg>
+  			«ELSE-»
+			<constructor-arg value="«currDao.cacheTTLminutes»"></constructor-arg>
+			«ENDIF-»
+			<constructor-arg value="false"></constructor-arg>
+		</bean>
+  	«ENDIF-»
+  	
+«ENDFOREACH-»
+«ENDFOREACH-»  
+
 		
 	
 «FOREACH daopkgs AS currPkg-»
@@ -77,6 +94,9 @@ e le limitazioni secondo i termini della Licenza.
   	
 	<bean id="«getDaoIdName(currDao)»" class="«getDaoImplFQN(currDao, this)»">
     	<property name="jdbcTemplate" ref="namedJdbcTemplate" />
+    	«IF currDao.cacheability==CacheabilityTypes::ALMOST_STABLE_DATA-»
+    	<property name="cache" ref="simpleCache_«currDao.getDaoClassName()»" />
+    	«ENDIF»
     	«IF currDao.pkGenerator!=null-»
     	<property name="incrementer" ref="«getDaoIdName(currDao)»Incrementer" />
     	«ENDIF-»

@@ -132,6 +132,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 
+
 «PROTECT CSTART '/*' CEND '*/' ID getRegionUID(getDaoImplFQN(this,model)+"extraimport")»
 // aggiungere qui eventuali import custom. 
 «ENDPROTECT»
@@ -153,6 +154,24 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameteri
 	public void setJdbcTemplate(NamedParameterJdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
+	
+	«IF this.cacheability==CacheabilityTypes::ALMOST_STABLE_DATA»
+	/**
+	 * @generated
+	 */
+	 protected SimpleCache cache;
+	
+	
+	public SimpleCache getCache() {
+		return cache;
+	}
+
+	public void setCache(SimpleCache cache) {
+		this.cache = cache;
+	}
+	«ENDIF»
+	
+	
 
 	«IF inserter != null-»
 		«EXPAND insertMethod(model, true) FOR this»
@@ -729,6 +748,99 @@ public class NamedParameterJdbcTemplateWithQueryDebug
 		retvalue = "to_date('" + retvalue + "','DD/MM/YYYY HH24:MI:SS')";
 		return retvalue;
 	}
+
+}
+
+«ENDFILE»
+
+«FILE getDALayerBaseDir(this)+"/util/SimpleCache.java"»package «getDALayerBasePkg(this)».util; 
+
+import java.util.HashMap;
+import java.util.Iterator;
+
+import org.apache.log4j.Logger;
+
+public class SimpleCache {
+	
+	protected static Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
+	
+	HashMap<Object, CacheElement> map = new HashMap<Object, CacheElement>();
+	int ttl_minutes = 0;
+	boolean updateAccessTime = false;
+	
+	public SimpleCache(int ttl, boolean updateAccessTime){
+		this.ttl_minutes=ttl;
+		this.updateAccessTime=updateAccessTime;
+	}
+	
+	//store del dato
+	public void put(Object key, Object value){
+		CacheElement el = new CacheElement();
+		el.setLastAccess(System.currentTimeMillis());
+		el.setValue(value);
+		map.put(key, el);
+	}
+	
+	//accesso al dato
+	public Object get(Object key){
+		CacheElement el = map.get(key);
+		if (el != null){
+			if ((System.currentTimeMillis() - el.getLastAccess())>(ttl_minutes*60000)){
+				log.debug("elemento trovato ma scaduto... (impostato TTL pari a "+ttl_minutes+" minuti");
+				map.remove(key);
+				return null;
+			}
+		
+		else{
+				log.debug("elemento trovato");
+				if(updateAccessTime){
+					el.setLastAccess(System.currentTimeMillis());
+				}
+				map.put(key, el); // non servirebbe nemmeno, reference...
+				Object val = el.getValue();
+				return val;
+			}
+		}
+		else {
+			log.debug("elemento non trovato");
+			return null;
+		}
+			
+	}
+	
+	
+	//per debug
+	public void dumpCache(){
+		Iterator<Object> it = map.keySet().iterator();
+		while(it.hasNext()){
+			Object currK = it.next();
+			CacheElement el = map.get(currK);
+			log.debug("key:"+currK+", val:"+el.getValue()+", lastAccess:"+el.getLastAccess());
+		}
+	}
+}
+
+«ENDFILE»
+
+«FILE getDALayerBaseDir(this)+"/util/CacheElement.java"»package «getDALayerBasePkg(this)».util;
+
+public class CacheElement {
+	
+		long lastAccess = 0;
+		Object value = null;
+		
+		public long getLastAccess() {
+			return lastAccess;
+		}
+		public void setLastAccess(long lastAccess) {
+			this.lastAccess = lastAccess;
+		}
+		public Object getValue() {
+			return value;
+		}
+		public void setValue(Object value) {
+			this.value = value;
+		}
 
 }
 

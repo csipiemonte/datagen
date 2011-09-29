@@ -53,9 +53,22 @@ e le limitazioni secondo i termini della Licenza.
 		
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
-			stopWatch.start();
-			list = jdbcTemplate.query(sql.toString(), params, «name»RowMapper);
-			
+			«IF dao.cacheability == CacheabilityTypes::ALMOST_STABLE_DATA-»
+			«getDtoClassName(dao)» res = («getDtoClassName(dao)»)cache.get(pk);
+			if(res!=null){
+				log.debug("Dato trovato in cache");
+				return res;
+			}			
+			else{
+			«ENDIF-»
+				stopWatch.start();
+				list = jdbcTemplate.query(sql.toString(), params, «name»RowMapper);
+			«IF dao.cacheability == CacheabilityTypes::ALMOST_STABLE_DATA-»
+			if(list!=null && !list.isEmpty()){
+					cache.put(pk , list.get(0));	
+				}
+			}
+			«ENDIF-»	
 		} catch (RuntimeException ex) {
 			log.error("[«getDaoImplClassName(dao)»::findByPrimaryKey] esecuzione query",ex);
 			throw new «getDaoExcClassName(dao)»("Query failed", ex);
