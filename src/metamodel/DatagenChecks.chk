@@ -50,6 +50,19 @@ context Deleter if (metaType != DeleteByPK) ERROR "E' necessario specificare il 
 context MultiResFinder if (!isNullOrEmpty(distinct) && orderSpecs!=null && !isNullOrEmpty(orderSpecs.specs)) ERROR "Se la ricerca per distinct è abilitata, tutte le eventuali colonne presenti nella OrderSpecs devono essere presenti anche in distinct. "+((DataAccessObject)(this.eContainer.eContainer)).name:
 	areDistinctAndOrderByClauseConsistent(distinct,orderSpecs.specs);
 
+context LookupResolver ERROR "I lookup-resolver devono specificare la FK risolta:"+loc() :
+	this.foreignKey != null;
+	
+context LookupResolver ERROR "I lookup-resolver devono specificare il DAO supplier:"+loc() :
+	this.supplierDAO != null;
+
+context LookupResolver if supplierDAO!=null && foreignKey != null 
+	ERROR "Il DAO "+supplierDAO.name+", specificato come supplier, è relativo a una "+
+		  "tabella differente da quella specificata nella FK da risolvere ("+foreignKey.name+")" :
+		supplierDAO.mainTable!=null && foreignKey.includedColumns.size>0 
+		&& supplierDAO.mainTable == ((Table)(foreignKey.includedColumns.first().eContainer));
+		
+		
 //// limitazioni temporanee
 context QBEFinder ERROR "Il QBEFinder non può funzionare in modalità DISTINCT" :
 this.distinct.size==0;

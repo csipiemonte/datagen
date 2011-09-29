@@ -22,6 +22,7 @@ package it.csi.mddtools.rdbmdl.provider;
 
 
 import it.csi.mddtools.rdbmdl.RdbmdlPackage;
+import it.csi.mddtools.rdbmdl.Table;
 import it.csi.mddtools.rdbmdl.TableColumn;
 
 import it.csi.mddtools.rdbmdl.datatypes.DatatypesFactory;
@@ -204,7 +205,7 @@ public class TableColumnItemProvider
 		TableColumn tc = ((TableColumn)object);
 		String label = tc.getName() == null || tc.getName().length() == 0 ?
 			getString("_UI_TableColumn_type") :
-			getString("_UI_TableColumn_type") + " " + tc.getName();
+			getString("_UI_TableColumn_type") + " " +((Table)tc.eContainer()).getName()+"."+ tc.getName();
 		String precision = tc.getType().getDecimalDigits()==0?"":","+tc.getType().getDecimalDigits();	
 			
 		return label + " ["+tc.getType().getName()+"("+tc.getType().getSize()+precision+")]";	
