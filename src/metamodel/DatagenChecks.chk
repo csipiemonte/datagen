@@ -56,11 +56,10 @@ context LookupResolver ERROR "I lookup-resolver devono specificare la FK risolta
 context LookupResolver ERROR "I lookup-resolver devono specificare il DAO supplier:"+loc() :
 	this.supplierDAO != null;
 
-context LookupResolver if supplierDAO!=null && foreignKey != null 
+context LookupResolver if supplierDAO!=null && foreignKey != null && supplierDAO.mainTable!=null
 	ERROR "Il DAO "+supplierDAO.name+", specificato come supplier, è relativo a una "+
 		  "tabella differente da quella specificata nella FK da risolvere ("+foreignKey.name+")" :
-		supplierDAO.mainTable!=null && foreignKey.includedColumns.size>0 
-		&& supplierDAO.mainTable == ((Table)(foreignKey.includedColumns.first().eContainer));
+		 supplierDAO.mainTable == ((Table)(foreignKey.referredUC.eContainer));
 		
 		
 //// limitazioni temporanee
