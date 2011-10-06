@@ -60,6 +60,12 @@ context LookupResolver if supplierDAO!=null && foreignKey != null && supplierDAO
 	ERROR "Il DAO "+supplierDAO.name+", specificato come supplier, è relativo a una "+
 		  "tabella differente da quella specificata nella FK da risolvere ("+foreignKey.name+")" :
 		 supplierDAO.mainTable == ((Table)(foreignKey.referredUC.eContainer));
+		 
+//check: se ho un lookup resolver devono esistere tutte le findByPk associate alle tabelle referenziate.
+context LookupResolver if supplierDAO!=null ERROR "E' stato definito un lookup resolver, ma non e' stata definita il finder PK per il dao supplier: "+this.supplierDAO.name:
+			this.supplierDAO.finders.finders.typeSelect(FindByPK).size > 0;
+ 
+		 
 		
 		
 //// limitazioni temporanee
