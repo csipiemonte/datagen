@@ -141,7 +141,7 @@ public class LookupResolverItemProvider
 						ArrayList<DataAccessObject> result = new ArrayList<DataAccessObject>();
 						if (lr.getForeignKey()!=null && lr.getForeignKey().getIncludedColumns()!=null && 
 								lr.getForeignKey().getIncludedColumns().size()>0){
-							Table referencedTable = (Table)lr.getForeignKey().getIncludedColumns().get(0).eContainer();	
+							Table referencedTable = (Table)lr.getForeignKey().getReferredUC().eContainer();	
 							Iterator<DataAccessObject> daos = daoPkg.getDao().iterator();
 							while(daos.hasNext()){
 								DataAccessObject currDAO = daos.next();
