@@ -201,6 +201,8 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameteri
 	«EXPAND template::datagen::dao::finders::finders(model, true) FOR this»
 	
 	«EXPAND rowMapperInnerClass FOR this»
+	
+	«EXPAND supplierDaoSpringProperties FOR this»
 }
 
 «ENDFILE-»
@@ -288,6 +290,11 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameteri
 		{	
 			«getDtoClassName()» dto = objectToFill;
 			«FOREACH mainTable.columns AS currCol ITERATOR i»
+			«REM»per ogni colonna della tabella verifico se e' una FK associata al resolver, «ENDREM»
+			«IF currCol.isForeignKey!=null && currCol.isForeignKey && this.lookupResolvers != null && this.lookupResolvers.resolvers.select(r|r.foreignKey.includedColumns.contains(currCol)).size >0-»
+			
+			«ELSE»
+			
 			if (mapAllColumns || columnsToReadMap.get("«currCol.name»") != null)
 				dto.set«javaPropertyNameFromColumn(currCol).toFirstUpper()»(
 			«IF !isBlobOrClob(currCol)-»
@@ -296,7 +303,14 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameteri
 				«getValueFromRS(currCol, i.counter1)»
 			«ENDIF-»			
 				);
+			«ENDIF»
 			«ENDFOREACH»
+			
+			
+			«REM»expand sui resolvers, se ci sono«ENDREM»
+			«IF this.lookupResolvers!=null && this.lookupResolvers.resolvers.size >0-»
+				«EXPAND lookupResolverRowMapping FOREACH this.lookupResolvers.resolvers-»
+			«ENDIF»
 			return dto;
 		}
 		
@@ -459,8 +473,13 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c
 	«IF body-»
 	{	
 		«getDtoClassName()» dto = objectToFill;
-		«FOREACH mainTable.columns AS currCol ITERATOR i»
 		
+		«getDaoClassName().toFirstUpper()»RowMapper «getDaoClassName().toFirstLower()»RowMapper = new «getDaoClassName().toFirstUpper()»RowMapper(null);
+		
+		«REM»«FOREACH mainTable.columns AS currCol ITERATOR i»
+			«IF currCol.isForeignKey!=null && currCol.isForeignKey && this.lookupResolvers != null && this.lookupResolvers.resolvers.select(r|r.foreignKey.includedColumns.contains(currCol)).size >0-»
+			
+			«ELSE»
 		dto.set«javaPropertyNameFromColumn(currCol).toFirstUpper()»(
 		«IF !isBlobOrClob(currCol)-»
 			«getValueFromRSByColName(currCol)»
@@ -468,8 +487,11 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c
 			«getValueFromRS(currCol, i.counter1)»
 		«ENDIF-»			
 			);
+			«ENDIF»
 		«ENDFOREACH»
-		return dto;
+		«ENDREM»
+		
+		return «getDaoClassName().toFirstLower()»RowMapper.mapRow_internal(objectToFill, rs, row);
 	}
 	«ELSE-»
 	;
@@ -849,8 +871,43 @@ public class CacheElement {
 «ENDDEFINE»
 
 
+«DEFINE lookupResolverRowMapping FOR LookupResolver»
+
+	
+	if (mapAllColumns ||«FOREACH this.foreignKey.includedColumns AS includedColumn SEPARATOR "&&"» columnsToReadMap.get(«getValueFromRSByColName(includedColumn)») != null «ENDFOREACH»){
+		«this.supplierDAO.getDtoClassName()» «this.supplierDAO.getDtoClassName().toFirstLower()» = null;
+				try {
+					«this.supplierDAO.getDtoClassName().toFirstLower()»   = «this.supplierDAO.getDaoClassName().toFirstLower()».findByPrimaryKey(new «this.supplierDAO.getPkClassName()»(«FOREACH this.foreignKey.includedColumns AS includedColumn SEPARATOR ","» «getValueFromRSByColName(includedColumn)»«ENDFOREACH»));
+				} catch («this.supplierDAO.getDaoExcClassName()» e) {
+					log.error("Si e' verificato un errore nella chiamata al dao supplier: " +  «this.supplierDAO.getDaoClassName().toFirstLower()» + " : "+e);
+					e.printStackTrace();
+				}
+		dto.set«getLookedUpPropertyName(this).toFirstUpper()»(«this.supplierDAO.getDtoClassName().toFirstLower()»);
+	}
 
 
+«ENDDEFINE»
+
+
+«DEFINE supplierDaoSpringProperties FOR DataAccessObject»
+	
+	«IF this.lookupResolvers!=null && this.lookupResolvers.resolvers.size > 0»
+		«FOREACH this.lookupResolvers.resolvers AS currResolver»
+			private «getDaoClassName(currResolver.supplierDAO)» «getDaoClassName(currResolver.supplierDAO).toFirstLower()»;
+			
+			public «getDaoClassName(currResolver.supplierDAO)» get«getDaoClassName(currResolver.supplierDAO)»(){
+				return «getDaoClassName(currResolver.supplierDAO).toFirstLower()»;
+			}
+			
+			public void set«getDaoClassName(currResolver.supplierDAO)»(«getDaoClassName(currResolver.supplierDAO)» val){
+				this.«getDaoClassName(currResolver.supplierDAO).toFirstLower()» = val;
+			}
+		«ENDFOREACH»
+	«ELSE»
+	«REM» do nothing«ENDREM»
+	«ENDIF»
+
+«ENDDEFINE»
 
 
 

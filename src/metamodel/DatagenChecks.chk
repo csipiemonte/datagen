@@ -55,6 +55,11 @@ context LookupResolver ERROR "I lookup-resolver devono specificare la FK risolta
 	
 context LookupResolver ERROR "I lookup-resolver devono specificare il DAO supplier:"+loc() :
 	this.supplierDAO != null;
+	
+//check: se ho un lookup resolver deve essere definito almeno un resolver
+context LookupResolvers ERROR "E' stato definito un Lookup resolver, ma non e' stato definito alcun resolver al suo interno!" + loc() :
+	this.resolvers.size >0;	
+	
 
 context LookupResolver if supplierDAO!=null && foreignKey != null && supplierDAO.mainTable!=null
 	ERROR "Il DAO "+supplierDAO.name+", specificato come supplier, è relativo a una "+
@@ -65,9 +70,14 @@ context LookupResolver if supplierDAO!=null && foreignKey != null && supplierDAO
 context LookupResolver if supplierDAO!=null ERROR "E' stato definito un lookup resolver, ma non e' stata definita il finder PK per il dao supplier: "+this.supplierDAO.name:
 			this.supplierDAO.finders.finders.typeSelect(FindByPK).size > 0;
  
-		 
-		
-		
+//limitazione temporanea: se viene dichiarato un resolver in cui la FK contiene almeno una includedColumn che e' PK e 
+//context DataAccessObject if(this.lookupResolvers!=null && this.lookupResolvers.resolvers.size>0) ERROR "Errore: " +loc():
+//	   this.lookupResolvers.resolvers.select(r|r.foreignKey.includedColumns.select(tc|tc.isPrimaryKey).size>0).size==0;
+
+//limitazione temporanea 
+context LookupResolver  ERROR "Non e' possibile definire un resolver in cui e' presente una foreign key (<" +this.foreignKey.name + ">) gia' inclusa come primary key in un altro resolver, verificare i resolver definiti nel dao:"+ ((DataAccessObject)(this.eContainer.eContainer)).name :
+	   this.foreignKey.includedColumns.select(tc|tc.isPrimaryKey).size == 0;
+		 	
 //// limitazioni temporanee
 context QBEFinder ERROR "Il QBEFinder non può funzionare in modalità DISTINCT" :
 this.distinct.size==0;

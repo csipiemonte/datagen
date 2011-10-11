@@ -47,8 +47,13 @@ import java.util.*;
  */
 public class «getPkClassName()» implements Serializable {
 
-	«EXPAND columnJavaProperty FOREACH this.mainTable.primaryKey.includedColumns»
-	
+	«EXPAND columnJavaProperty(this) FOREACH this.mainTable.primaryKey.includedColumns»
+	«REM» al momento non gestiamo il caso di FK che e' anche parte di PK nello stesso modo in cui
+	facciamo per il dto della tabella che presenta la foreign key 
+	«IF this.lookupResolvers!=null»
+		«EXPAND lookupResolverProperty FOREACH this.lookupResolvers.resolvers.select(r|r.foreignKey.includedColumns.select(c|c.isPrimaryKey!=null && c.isPrimaryKey).size > 0)»
+	«ENDIF»
+	«ENDREM»
 	/**
 	 * @generated
 	 */
@@ -154,8 +159,11 @@ import java.util.*;
 public class «getDtoClassName()» implements Serializable
 {
 
-	«EXPAND columnJavaProperty FOREACH this.mainTable.columns»
-
+	«EXPAND columnJavaProperty(this) FOREACH this.mainTable.columns»
+	«REM»verificare se non ci sono resolvers«ENDREM»
+	«IF this.lookupResolvers!=null && this.lookupResolvers.resolvers.size >0»
+		«EXPAND lookupResolverProperty FOREACH this.lookupResolvers.resolvers»
+	«ENDIF»
 	/**
 	 * Method 'equals'
 	 * 
@@ -217,7 +225,13 @@ public class «getDtoClassName()» implements Serializable
 «ENDLET-»
 «ENDDEFINE»
 
-«DEFINE columnJavaProperty FOR TableColumn-»
+«DEFINE columnJavaProperty(DataAccessObject dao) FOR TableColumn-»
+	
+	
+	
+	«IF this.isForeignKey!=null && this.isForeignKey && dao.lookupResolvers != null && dao.lookupResolvers.resolvers.select(r|r.foreignKey.includedColumns.contains(this)).size >0-»
+	
+	«ELSE-»
 	/**
 	 * @generated
 	 */
@@ -236,5 +250,30 @@ public class «getDtoClassName()» implements Serializable
 	public «javaPropertyTypeFromColumn()» get«javaPropertyNameFromColumn().toFirstUpper()»(){
 		return _«javaPropertyNameFromColumn()»;
 	}
+	«ENDIF-»
 	
+	
+«ENDDEFINE»
+
+
+«DEFINE lookupResolverProperty FOR LookupResolver»
+/**
+	 * @generated
+	 */
+	private «getDtoClassName(this.supplierDAO)» _«getLookedUpPropertyName()»;
+	
+	/**
+	 * @generated
+	 */
+	public void set«getLookedUpPropertyName().toFirstUpper()» («getDtoClassName(this.supplierDAO)» val){
+		_«getLookedUpPropertyName()» = val;
+	}
+	
+	/**
+	 * @generated
+	 */
+	public «getDtoClassName(this.supplierDAO)» get«getLookedUpPropertyName().toFirstUpper()»(){
+		return _«getLookedUpPropertyName()»;
+	}
+
 «ENDDEFINE»

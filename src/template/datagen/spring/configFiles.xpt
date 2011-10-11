@@ -68,6 +68,7 @@ e le limitazioni secondo i termini della Licenza.
 		</bean>
 	
 	«REM»STDMDD-898:aggiunta dichiarazione dei bean di cache se richiesto da modello e referenza del daoImpl alla cache dichiarata«ENDREM»
+	
 	«FOREACH daopkgs AS currPkg-»
 	«FOREACH currPkg.dao AS currDao-»
 	«IF currDao.cacheability==CacheabilityTypes::ALMOST_STABLE_DATA-»
@@ -100,6 +101,10 @@ e le limitazioni secondo i termini della Licenza.
     	«IF currDao.pkGenerator!=null-»
     	<property name="incrementer" ref="«getDaoIdName(currDao)»Incrementer" />
     	«ENDIF-»
+    	«REM»STDMDD-897:aggiunto ciclo sui resolvers in modo da iniettare via ref le property sui dao supplier«ENDREM»
+    	«IF currDao.lookupResolvers!=null && currDao.lookupResolvers.resolvers.size > 0 -»
+    		«EXPAND supplierDaoSpringProperties FOREACH currDao.lookupResolvers.resolvers-»
+    	«ENDIF-»
   	</bean>
   	
 «ENDFOREACH-»
@@ -125,3 +130,7 @@ e le limitazioni secondo i termini della Licenza.
 «ERROR "pkGeneratorBeanDef: aop non risolta"»
 «ENDDEFINE»
 
+«DEFINE supplierDaoSpringProperties FOR LookupResolver»
+		<!-- property del daoSupplier : «getDaoClassName(this.supplierDAO)» -->
+    	<property name="«getDaoClassName(this.supplierDAO).toFirstLower()»" ref="«getDaoClassName(this.supplierDAO).toFirstLower()»"></property>
+«ENDDEFINE»

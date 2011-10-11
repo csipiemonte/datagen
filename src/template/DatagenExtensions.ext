@@ -516,3 +516,10 @@ boolean areAllDaoMethodsNamesUnivocal(Inserter inserter,Finders finders,Updaters
 																	   it.csi.mddtools.datagen.Finders,
 																	   it.csi.mddtools.datagen.Updaters,
 																	   it.csi.mddtools.datagen.Deleters);
+																	   																	  								  
+String getLookedUpPropertyName(LookupResolver lookUpResolver): 
+	toJavaId(lookUpResolver.foreignKey.name);
+
+
+
+	
