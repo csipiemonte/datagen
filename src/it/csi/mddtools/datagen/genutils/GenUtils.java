@@ -20,12 +20,15 @@
  */
 package it.csi.mddtools.datagen.genutils;
 
+import it.csi.mddtools.datagen.DataAccessObject;
 import it.csi.mddtools.datagen.Deleter;
 import it.csi.mddtools.datagen.Finder;
+import it.csi.mddtools.datagen.LookupResolver;
 import it.csi.mddtools.datagen.OrderSpec;
 import it.csi.mddtools.datagen.Updater;
 import it.csi.mddtools.rdbmdl.Column;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -195,4 +198,40 @@ public class GenUtils {
 		return true;
 	}
 	
+	
+	
+	
+	public static boolean findLoop(it.csi.mddtools.datagen.DaoPackage daoPackage ){
+		
+		List<DataAccessObject> visited = new ArrayList<DataAccessObject>();
+		
+		for(DataAccessObject dao: daoPackage.getDao()){
+			if(findLoop(dao,visited))
+				return true;
+		}
+		return false;
+	
+}
+	
+	public static boolean findLoop(it.csi.mddtools.datagen.DataAccessObject dao, List<DataAccessObject> visited ){
+		
+		if(visited.contains(dao)){
+			return true;
+		}
+		else{
+			visited.add(dao);
+			if( dao.getLookupResolvers()!=null &&  dao.getLookupResolvers().getResolvers().size()>0){
+				List<LookupResolver> list = dao.getLookupResolvers().getResolvers();
+				for(LookupResolver resolver:list){
+					if(findLoop(resolver.getSupplierDAO(),visited)){
+						return true;
+					}
+				}
+				return false;
+			}
+			else
+				return false;
+			
+		}
+	}
 }

@@ -521,5 +521,7 @@ String getLookedUpPropertyName(LookupResolver lookUpResolver):
 	toJavaId(lookUpResolver.foreignKey.name);
 
 
+boolean areResolversInLoop(DaoPackage daoPackage): JAVA
+	it.csi.mddtools.datagen.genutils.GenUtils.findLoop(it.csi.mddtools.datagen.DaoPackage);
 
-	
+

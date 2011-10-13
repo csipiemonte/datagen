@@ -32,9 +32,21 @@ context DataAccessObject ERROR "I nomi dei metodi contenuti nel dao : "+this.nam
 	
 context Finder if (metaType != FindByPK && metaType != FindAll && metaType != QBEFinder) ERROR "E' necessario specificare il nome dei finder (esclusi il findByPK, findAll, QBEFinder)"+((DataAccessObject)(this.eContainer.eContainer)).name:
 	!isNullOrEmpty(name);
+
+//verifica sulla presenza di una PK in tabella se e' stato definito un finder di tipo findByPK	
+context DataAccessObject if(this.finders!= null && this.finders.finders.size>0 && this.finders.finders.select(f|f.metaType == FindByPK).size >0) ERROR "E' stato dichiarato un finder di tipo findByPK per il dao: "+this.loc()+" , ma la tabella di riferimento non possiede chiavi primarie."	:
+	this.mainTable.primaryKey != null;
+	
+//verifica sulla presenza di una PK in tabella se e' stato definito un u di tipo findByPK	
+context DataAccessObject if(this.deleters!= null && this.deleters.deleters.size>0 && this.deleters.deleters.select(d|d.metaType == DeleteByPK).size >0) ERROR "E' stato dichiarato un deleter di tipo deleteByPK per il dao: "+this.loc()+" , ma la tabella di riferimento non possiede chiavi primarie."	:
+	this.mainTable.primaryKey != null;	
 	
 context Updater if (metaType != UpdateRow) ERROR "E' necessario specificare il nome degli updater (escluso l'UpdateRow)"+((DataAccessObject)(this.eContainer.eContainer)).name:
 	!isNullOrEmpty(name);
+
+context DataAccessObject if(this.updaters!= null && this.updaters.updaters.size >0  && this.updaters.updaters.select(u|u.metaType == UpdateRow || u.metaType == UpdateColumns).size > 0 ) ERROR "E' stato definito almeno un updater di base (row/column), senza che sia stata definita una PK sulla tabella definita dal dao: " +this.loc():
+     this.mainTable.primaryKey!= null ;
+
 
 context CustomFinder ERROR "E' necessario specificare la classe del parametro di filtro (full qualified name, oppure "+
 " '$dto' per utilizzare la classe del DTO associata al DAO, o '$dto[]' per utilizzare una"+
@@ -69,7 +81,11 @@ context LookupResolver if supplierDAO!=null && foreignKey != null && supplierDAO
 //check: se ho un lookup resolver devono esistere tutte le findByPk associate alle tabelle referenziate.
 context LookupResolver if supplierDAO!=null ERROR "E' stato definito un lookup resolver, ma non e' stata definita il finder PK per il dao supplier: "+this.supplierDAO.name:
 			this.supplierDAO.finders.finders.typeSelect(FindByPK).size > 0;
- 
+			
+			
+context DaoPackage ERROR "Cycle loop in resolvers!!!":
+		areResolversInLoop(this);
+		
 //limitazione temporanea: se viene dichiarato un resolver in cui la FK contiene almeno una includedColumn che e' PK e 
 //context DataAccessObject if(this.lookupResolvers!=null && this.lookupResolvers.resolvers.size>0) ERROR "Errore: " +loc():
 //	   this.lookupResolvers.resolvers.select(r|r.foreignKey.includedColumns.select(tc|tc.isPrimaryKey).size>0).size==0;
@@ -77,7 +93,7 @@ context LookupResolver if supplierDAO!=null ERROR "E' stato definito un lookup r
 //limitazione temporanea 
 context LookupResolver  ERROR "Non e' possibile definire un resolver in cui e' presente una foreign key (<" +this.foreignKey.name + ">) gia' inclusa come primary key in un altro resolver, verificare i resolver definiti nel dao:"+ ((DataAccessObject)(this.eContainer.eContainer)).name :
 	   this.foreignKey.includedColumns.select(tc|tc.isPrimaryKey).size == 0;
-		 	
+	   		 	
 //// limitazioni temporanee
 context QBEFinder ERROR "Il QBEFinder non può funzionare in modalità DISTINCT" :
 this.distinct.size==0;
