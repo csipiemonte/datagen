@@ -84,7 +84,7 @@ e le limitazioni secondo i termini della Licenza.
 		}
 		
 		MapSqlParameterSource params = new MapSqlParameterSource();
-		«EXPAND template::datagen::dao::daoFiles::paramValorizationList("pk") FOR dao.mainTable.primaryKey.includedColumns»
+		«EXPAND template::datagen::dao::daoFiles::paramValorizationList("pk", dao) FOR dao.mainTable.primaryKey.includedColumns»
 		
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {

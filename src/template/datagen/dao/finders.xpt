@@ -48,7 +48,7 @@ e le limitazioni secondo i termini della Licenza.
 		final StringBuilder sql = new StringBuilder("SELECT «EXPAND template::datagen::dao::daoFiles::columnNameList(false) FOR dao.mainTable.columns» FROM " + getTableName() + " WHERE «EXPAND template::datagen::dao::daoFiles::setColumnEqPlaceholderList(" AND ") FOR dao.mainTable.primaryKey.includedColumns»");
 		
 		MapSqlParameterSource params = new MapSqlParameterSource();
-		«EXPAND template::datagen::dao::daoFiles::paramValorizationList("pk") FOR dao.mainTable.primaryKey.includedColumns»
+		«EXPAND template::datagen::dao::daoFiles::paramValorizationList("pk", dao) FOR dao.mainTable.primaryKey.includedColumns»
 		List<«getDtoClassName(dao)»> list = null;
 		
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);

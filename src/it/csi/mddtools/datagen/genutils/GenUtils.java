@@ -206,8 +206,11 @@ public class GenUtils {
 		List<DataAccessObject> visited = new ArrayList<DataAccessObject>();
 		
 		for(DataAccessObject dao: daoPackage.getDao()){
-			if(findLoop(dao,visited))
-				return true;
+			if(dao.getLookupResolvers()!= null && dao.getLookupResolvers().getResolvers().size() > 0){
+				if(findLoop(dao,visited)){
+					return true;
+				}
+			}
 		}
 		return false;
 	
@@ -220,18 +223,19 @@ public class GenUtils {
 		}
 		else{
 			visited.add(dao);
-			if( dao.getLookupResolvers()!=null &&  dao.getLookupResolvers().getResolvers().size()>0){
-				List<LookupResolver> list = dao.getLookupResolvers().getResolvers();
+			if(dao.getLookupResolvers()==null){
+				return false;
+			}
+			List<LookupResolver> list = dao.getLookupResolvers().getResolvers();
 				for(LookupResolver resolver:list){
 					if(findLoop(resolver.getSupplierDAO(),visited)){
 						return true;
+						}
 					}
+				return false;
 				}
-				return false;
 			}
-			else
-				return false;
-			
+					
 		}
-	}
-}
+
+

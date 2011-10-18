@@ -85,8 +85,14 @@ e le limitazioni secondo i termini della Licenza.
 		}
 		
 		MapSqlParameterSource params = new MapSqlParameterSource();
-		«EXPAND template::datagen::dao::daoFiles::paramValorizationList("dto") FOR this.columns»
-		«EXPAND template::datagen::dao::daoFiles::paramValorizationList("dto") FOR dao.mainTable.primaryKey.includedColumns»
+
+		«EXPAND template::datagen::dao::daoFiles::paramValorizationList("dto", dao) FOR this.columns»
+		«EXPAND template::datagen::dao::daoFiles::paramValorizationList("dto", dao) FOR dao.mainTable.primaryKey.includedColumns»
+		
+		«IF dao.lookupResolvers!=null && dao.lookupResolvers.resolvers.size>0 -»
+				«EXPAND template::datagen::dao::daoFiles::lookedUpParamValorizationList("dto", this.columns) FOR  dao»
+		«ENDIF»
+		
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
 			stopWatch.start();
@@ -120,7 +126,12 @@ e le limitazioni secondo i termini della Licenza.
 		}
 		
 		MapSqlParameterSource params = new MapSqlParameterSource();
-		«EXPAND template::datagen::dao::daoFiles::paramValorizationList("dto") FOR dao.mainTable.columns»
+		«EXPAND template::datagen::dao::daoFiles::paramValorizationList("dto", dao) FOR dao.mainTable.columns»
+		
+		«IF dao.lookupResolvers!=null && dao.lookupResolvers.resolvers.size>0-»
+				«EXPAND template::datagen::dao::daoFiles::lookedUpParamValorizationList("dto",dao.mainTable.columns) FOR  dao»
+		«ENDIF»
+		
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
 			stopWatch.start();

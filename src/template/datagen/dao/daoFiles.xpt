@@ -342,9 +342,14 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c
 «FOREACH this AS currCol SEPARATOR ","-» :«((TableColumn)currCol).name» «ENDFOREACH-»
 «ENDDEFINE»
 
-«DEFINE paramValorizationList(String dtoVarName) FOR List[TableColumn]-»
+«DEFINE paramValorizationList(String dtoVarName, DataAccessObject dao) FOR List[TableColumn]-»
 «FOREACH this AS currCol-»
+«REM»se abbiamo una FK definita sulla colonna i-esima e un resolver associato ad essa, dobbiamo recuperare la property dal corrispondente oggetto risolto e non come usuale!!!«ENDREM»
+	«IF currCol.isForeignKey!=null && currCol.isForeignKey && dao.lookupResolvers != null && dao.lookupResolvers.resolvers.select(r|r.foreignKey.includedColumns.contains(currCol)).size >0-»
+	«REM»do nothing...il dato viene trattato in seguito«ENDREM»
+	«ELSE»	
 	params.addValue("«((TableColumn)currCol).name»", «dtoVarName».get«javaPropertyNameFromColumn(currCol).toFirstUpper()»(), java.sql.Types.«currCol.type.type» );	
+	«ENDIF»
 «ENDFOREACH-»
 «ENDDEFINE»
 
@@ -400,9 +405,14 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c
 		
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		«IF pkGenerator!=null-»
-		«EXPAND paramValorizationList("dto",pkGenerator) FOR this.mainTable.columns-»
+			«EXPAND paramValorizationList("dto",pkGenerator) FOR this.mainTable.columns-»
 		«ELSE»
-		«EXPAND paramValorizationList("dto") FOR this.mainTable.columns-»
+			«REM»nel seguente template si salteranno le colonne con lookup«ENDREM»
+			«EXPAND paramValorizationList("dto",this) FOR this.mainTable.columns-»
+			«REM»comment«ENDREM»
+			«IF this.lookupResolvers!=null && this.lookupResolvers.resolvers.size>0-»
+				«EXPAND lookedUpParamValorizationList("dto", this.mainTable.columns) FOR  this»
+			«ENDIF»
 		«ENDIF-»
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
@@ -906,6 +916,23 @@ public class CacheElement {
 	«ELSE»
 	«REM» do nothing«ENDREM»
 	«ENDIF»
+
+«ENDDEFINE»
+
+
+
+
+«DEFINE lookedUpParamValorizationList(String dtoVarName, List[TableColumn] list) FOR DataAccessObject»
+
+«FOREACH this.lookupResolvers.resolvers AS currResolver»
+		«FOREACH currResolver.foreignKey.includedColumns AS cmpForeignKey ITERATOR i»
+			«IF list.contains(cmpForeignKey)»
+			«LET  (List[TableColumn])currResolver.foreignKey.referredUC.includedColumns AS pkCols» 
+				params.addValue("«((TableColumn)currResolver.foreignKey.includedColumns.get(i.counter0)).name»",«dtoVarName».get«getLookedUpPropertyName(currResolver).toFirstUpper()»().get«javaPropertyNameFromColumn(pkCols.get(i.counter0)).toFirstUpper()»(), java.sql.Types.«((TableColumn)currResolver.foreignKey.includedColumns.get(i.counter0)).type.type» ); 
+				«ENDLET»
+			«ENDIF»
+		«ENDFOREACH»		
+«ENDFOREACH»
 
 «ENDDEFINE»
 
