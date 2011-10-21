@@ -72,13 +72,21 @@ context LookupResolvers ERROR "E' stato definito un Lookup resolver, ma non e' s
 	this.resolvers.size >0;	
 	
 //limitazione temporanea
-context DataAccessObject if(this.finders!=null && this.finders.finders.select(fnd|fnd.metaType == QBEFinder).size >0)ERROR "Non e' possibile gestire al momento la presenza di resolvers insieme a finder di tipo findByQBE." +loc():
-	this.lookupResolvers == null;
+//context DataAccessObject if(this.finders!=null && this.finders.finders.select(fnd|fnd.metaType == QBEFinder).size >0)ERROR "Non e' possibile gestire al momento la presenza di resolvers insieme a finder di tipo findByQBE." +loc():
+//	this.lookupResolvers == null;
 
 context LookupResolver if supplierDAO!=null && foreignKey != null && supplierDAO.mainTable!=null
 	ERROR "Il DAO "+supplierDAO.name+", specificato come supplier, è relativo a una "+
 		  "tabella differente da quella specificata nella FK da risolvere ("+foreignKey.name+")" :
 		 supplierDAO.mainTable == ((Table)(foreignKey.referredUC.eContainer));
+		 
+// univocita delle FK di uno schema
+//context Schema ERROR "Lo schema almeno due foreign key con lo stesso nome":
+//		areAllFkNamesUnivocal((List[Table])this.elements.select(e|e.metaType==Table));
+
+// univocita delle PK di uno schema
+//context Schema ERROR "Lo schema presenta almeno due foreign key con lo stesso nome":
+//		areAllPkNamesUnivocal((List[Table])this.elements.select(e|e.metaType==Table));
 		 
 //check: se ho un lookup resolver devono esistere tutte le findByPk associate alle tabelle referenziate.
 context LookupResolver if supplierDAO!=null ERROR "E' stato definito un lookup resolver, ma non e' stata definita il finder PK per il dao supplier: "+this.supplierDAO.name:

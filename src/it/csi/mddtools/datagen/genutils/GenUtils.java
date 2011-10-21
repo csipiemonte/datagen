@@ -27,6 +27,8 @@ import it.csi.mddtools.datagen.LookupResolver;
 import it.csi.mddtools.datagen.OrderSpec;
 import it.csi.mddtools.datagen.Updater;
 import it.csi.mddtools.rdbmdl.Column;
+import it.csi.mddtools.rdbmdl.Table;
+import it.csi.mddtools.rdbmdl.constraints.ForeignKey;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -236,6 +238,101 @@ public class GenUtils {
 				}
 			}
 					
-		}
+	
+	
+//	public static boolean areAllFkNamesUnivocal(List<it.csi.mddtools.rdbmdl.Table> list){
+//		
+//		
+//		
+//		boolean isUnique = true;
+//		ArrayList<String> listFK = new ArrayList<String>();
+//		//riempio un array di FK
+//		for(int i=0;i<list.size();i++){
+//			if(list.get(i).getForeignKeys()!= null && list.get(i).getForeignKeys().size()>0 ){
+//				for(int j=0;j<list.get(i).getForeignKeys().size();j++){
+//					listFK.add(list.get(i).getForeignKeys().get(j).getName());
+//					if(isFkNameUnivocal(list, list.get(i).getForeignKeys().get(j).getName())){
+//						isUnique=false;
+//					}
+//				}
+//			}
+//			
+//		}
+//		
+//		return isUnique;
+//		
+//		
+//		
+//	}
+//	
+//	
+//public static boolean areAllPkNamesUnivocal(List<it.csi.mddtools.rdbmdl.Table> list){
+//		
+//		
+//		
+//		boolean isUnique = true;
+//		ArrayList<String> listFK = new ArrayList<String>();
+//		//riempio un array di FK
+//		for(int i=0;i<list.size();i++){
+//			if(list.get(i).getPrimaryKey()!= null && list.get(i).getPrimaryKey().getIncludedColumns().size()>0 ){
+//				for(int j=0;j<list.get(i).getPrimaryKey().getIncludedColumns().size();j++){
+//					listFK.add(list.get(i).getPrimaryKey().getIncludedColumns().get(j).getName());
+//					if(isPkNameUnivocal(list, list.get(i).getPrimaryKey().getIncludedColumns().get(j).getName())){
+//						isUnique=false;
+//					}
+//				}
+//			}
+//			
+//		}
+//		
+//		return isUnique;
+//		
+//		
+//		
+//	}
+//
+//	private static boolean isFkNameUnivocal(List<Table> list, String name) {
+//		
+//		int chk = 0;
+//		if(list!=null && list.size()>0){
+//			for(int i=0;i<list.size();i++){
+//				if(name.equals(list.get(i))){
+//					chk++;
+//				}
+//			}
+//			
+//		if(chk>1){
+//			return false;
+//		}else{
+//			return true;
+//		}
+//			
+//		}
+//		return false;
+//		
+//	}
+//	
+//private static boolean isPkNameUnivocal(List<Table> list, String name) {
+//		
+//		int chk = 0;
+//		if(list!=null && list.size()>0){
+//			for(int i=0;i<list.size();i++){
+//				if(name.equals(list.get(i))){
+//					chk++;
+//				}
+//			}
+//			
+//		if(chk>1){
+//			return false;
+//		}else{
+//			return true;
+//		}
+//			
+//		}
+//		return false;
+//		
+//	}
+	
+}//fine classe
 
 

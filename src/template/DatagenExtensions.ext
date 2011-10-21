@@ -524,4 +524,8 @@ String getLookedUpPropertyName(LookupResolver lookUpResolver):
 boolean areResolversInLoop(DaoPackage daoPackage): JAVA
 	it.csi.mddtools.datagen.genutils.GenUtils.findLoop(it.csi.mddtools.datagen.DaoPackage);
 
-
+//boolean areAllFkNamesUnivocal(List tables): JAVA
+//	it.csi.mddtools.datagen.genutils.GenUtils.areAllFkNamesUnivocal(java.util.List);
+	
+//boolean areAllPkNamesUnivocal(List tables): JAVA
+//	it.csi.mddtools.datagen.genutils.GenUtils.areAllPkNamesUnivocal(java.util.List);	

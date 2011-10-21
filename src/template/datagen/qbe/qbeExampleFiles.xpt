@@ -50,9 +50,11 @@ import java.util.*;
 public class «getQbeExClassName()» extends AbstractExample
 {
 
-	«EXPAND columnChkFieldProperty(model) FOREACH this.mainTable.columns»
-
+	«EXPAND columnChkFieldProperty(model,this) FOREACH this.mainTable.columns»
 	
+	«IF this.lookupResolvers!=null && this.lookupResolvers.resolvers.size >0»
+		«EXPAND lookedUpChkFieldProperty FOREACH this.lookupResolvers.resolvers»
+	«ENDIF»
 }
 
 
@@ -60,7 +62,11 @@ public class «getQbeExClassName()» extends AbstractExample
 «ENDLET-»
 «ENDDEFINE»
 
-«DEFINE columnChkFieldProperty(DBAccessModel model) FOR TableColumn-»
+«DEFINE columnChkFieldProperty(DBAccessModel model, DataAccessObject dao) FOR TableColumn-»
+
+«IF this.isForeignKey!=null && this.isForeignKey && dao.lookupResolvers != null && dao.lookupResolvers.resolvers.select(r|r.foreignKey.includedColumns.contains(this)).size >0-»
+
+«ELSE»
 	/**
 	 * @generated
 	 */
@@ -79,5 +85,28 @@ public class «getQbeExClassName()» extends AbstractExample
 	public «getDALayerBasePkg(model)».qbe.FieldChk get«javaPropertyNameFromColumn().toFirstUpper()»(){
 		return _«javaPropertyNameFromColumn()»;
 	}
+«ENDIF»
+«ENDDEFINE»
+
+
+
+«DEFINE lookedUpChkFieldProperty FOR LookupResolver»
+	/**
+	 * @generated
+	 */
+	private «getQbeExClassName(this.supplierDAO)»  _«getLookedUpPropertyName().toFirstLower()»;
 	
+	/**
+	 * @generated
+	 */
+	public void set«getLookedUpPropertyName().toFirstLower().toFirstUpper()» («getQbeExClassName(this.supplierDAO)» val){
+		_«getLookedUpPropertyName().toFirstLower()» = val;
+	}
+	
+	/**
+	 * @generated
+	 */
+	public «getQbeExClassName(this.supplierDAO)» get«getLookedUpPropertyName().toFirstLower().toFirstUpper()»(){
+		return _«getLookedUpPropertyName().toFirstLower()»;
+	}
 «ENDDEFINE»
