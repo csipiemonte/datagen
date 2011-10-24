@@ -348,63 +348,98 @@ public class QBEQueryBuilder<TEX extends AbstractExample> {
 	 * @generated
 	 */
 	private DAOMetadata _metadata;
-	
+
 	/**
 	 * @generated
 	 * @param metadata i metadati del DAO
 	 */
-	public QBEQueryBuilder(DAOMetadata metadata){
-		this._metadata=metadata;
+	public QBEQueryBuilder(DAOMetadata metadata) {
+		this._metadata = metadata;
 	}
-	
+
 	private String formatColumnNames(DAOMetadata md) {
 		if (md != null) {
-			String [] names = md.getColumnNames();
-			if (names != null){
+			String[] names = md.getColumnNames();
+			if (names != null) {
 				StringBuffer ris = new StringBuffer("");
 				String currName = null;
 				for (int i = 0; i < names.length; i++) {
 					currName = names[i];
 					ris.append(currName);
-					if (i<names.length-1)
+					if (i < names.length - 1)
 						ris.append(",");
 				}
 				return ris.toString();
-			}
-			else
+			} else
 				return "????";
-		}
-		else
+		} else
 			return "????";
 	}
-	
+
+	/**
+	 * 
+	 * @param propName
+	 * @param pkClass
+	 * @return true se la property <propName> e' una property di PK all'interno del DTO
+	 * corrispondente alla <pkClass>
+	 */
+		private boolean isInPK(String propName, Class exampleClass){
+//		try {
+//			String pkClassName = exampleClass.getCanonicalName().substring(0,exampleClass.getCanonicalName().length()-7)+"PK";
+//			Class pkClass = Class.forName(pkClassName);
+//			BeanInfo bi = Introspector.getBeanInfo(pkClass);
+//			PropertyDescriptor pd[] = bi.getPropertyDescriptors();
+//			for (int i = 0; i < pd.length; i++) {
+//				PropertyDescriptor currPD = pd[i];
+//				if (currPD.getName().equals(propName))
+//					return true;
+//			}
+//			return false;
+//		} catch (IntrospectionException e) {
+//			// TODO
+//			e.printStackTrace();
+//			return false;
+//		} catch (IllegalArgumentException e) {
+//			// TODO Auto-generated catch block
+//			return  false;
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			return false;
+//		}
+		// per il momento restituisce sempre true
+		return true;
+	}
+
 	/**
 	 * @generated
 	 * @param posEx
 	 * @param negEx
 	 * @return
 	 */
-	public String createFromExamples(List<TEX> posEx, List<TEX> negEx,boolean usesDistinct){
-		String sql = "SELECT "+(usesDistinct?"DISTINCT ":"")+formatColumnNames(_metadata)+" FROM "+_metadata.getTableName()+" WHERE ";
+	public String createFromExamples(List<TEX> posEx, List<TEX> negEx,
+			boolean usesDistinct) {
+		String sql = "SELECT " + (usesDistinct ? "DISTINCT " : "")
+				+ formatColumnNames(_metadata) + " FROM "
+				+ _metadata.getTableName() + " WHERE ";
 		String where = "";
 		String posExClause = "";
 		String negExClause = "";
-		if (posEx!=null && posEx.size()>0){
+		if (posEx != null && posEx.size() > 0) {
 			posExClause = createFromExamples(posEx, false);
 		}
-		if (negEx != null && negEx.size()>0){
+		if (negEx != null && negEx.size() > 0) {
 			negExClause = createFromExamples(negEx, false);
 		}
-		if (posExClause.length()>0 && negExClause.length()>0){
-			where+=posExClause+ " AND NOT "+negExClause;
-		}
-		else
-			where=posExClause+negExClause; // uno dei due e' ""
+		if (posExClause.length() > 0 && negExClause.length() > 0) {
+			where += posExClause + " AND NOT " + negExClause;
+		} else
+			where = posExClause + negExClause; // uno dei due e' ""
 		// rimuovo l'ultimo AND
-		sql+="("+where+")";
+		sql += "(" + where + ")";
 		return sql;
 	}
-	
+
 	/**
 	 * 
 	 * @param examples lista di esempi
@@ -415,18 +450,18 @@ public class QBEQueryBuilder<TEX extends AbstractExample> {
 	 * conjunctive. Tutta la clausola è racchiusa da "(" e "(".
 	 * (<expr_ex_1> AND|OR <expr_ex2> AND|OR ... <expr_ex_n>)
 	 */
-	public String createFromExamples(List<TEX> examples, boolean conjunctive){
+	public String createFromExamples(List<TEX> examples, boolean conjunctive) {
 		String clause = "";
-		String operator = conjunctive ? "AND ": " OR ";
+		String operator = conjunctive ? "AND " : " OR ";
 		for (TEX ex : examples) {
 			String currExClause = createWhereClauseForSingleExample(ex);
-			clause+= currExClause;
-			if (!(examples.get(examples.size()-1) == ex))
-				clause+= operator;
-		}	
-		return "("+clause+")"; 
+			clause += currExClause;
+			if (!(examples.get(examples.size() - 1) == ex))
+				clause += operator;
+		}
+		return "(" + clause + ")";
 	}
-	
+
 	/**
 	 * Crea una parte di clausola where a fronte di un singolo esempio.
 	 * Per ogni FieldChk valorizzato aggiunge un termine della clausola.
@@ -434,29 +469,57 @@ public class QBEQueryBuilder<TEX extends AbstractExample> {
 	 * @return l'espressione associata all'esempio.
 	 * (<term_chk_1> AND <term_chk_2> .... <term_chk_n>)
 	 */
-	public String createWhereClauseForSingleExample(TEX example){
+	public String createWhereClauseForSingleExample(TEX example) {
+		return createSubClause4Example(example, null, false);
+	}
+
+	/**
+	 * crea una sotto-clausola per l'esempio specificato
+	 * @param example
+	 * @param prefixPropName prefisso (opzionale) che permette di seguire la struttura annidata
+	 *                       degli examples in caso di LookupResolver. Se il metodo e' invocato
+	 *                       con questo parametro non nullo significa che si sta costruendo una 
+	 *                       sotto-clausola where relativa ad un example annidato.
+	 *                       Funziona solo per un livello di annidamento.
+	 * @param pkFieldsOnly se true => considera solo le property dell'example che sono in PK.
+	 * @return
+	 */
+	public String createSubClause4Example(AbstractExample example,
+			String prefixPropName, boolean pkFieldsOnly) {
 		String clause = "";
 		try {
 			BeanInfo bi = Introspector.getBeanInfo(example.getClass());
-			PropertyDescriptor pd [] = bi.getPropertyDescriptors();
+			PropertyDescriptor pd[] = bi.getPropertyDescriptors();
 			for (int i = 0; i < pd.length; i++) {
 				PropertyDescriptor currPD = pd[i];
-				if (FieldChk.class.isAssignableFrom(currPD.getPropertyType())){
-					FieldChk currChk = (FieldChk)(currPD.getReadMethod().invoke(example, new Object[]{}));
-					if (currChk==null)
+				if (FieldChk.class.isAssignableFrom(currPD.getPropertyType())&&
+						(!pkFieldsOnly || isInPK(currPD.getName(), example.getClass()))) {
+					FieldChk currChk = (FieldChk) (currPD.getReadMethod()
+							.invoke(example, new Object[]{}));
+					if (currChk == null)
 						continue;
-					String term = createTerm4FieldChk(currChk,currPD);
+					String term = createTerm4FieldChk(currChk, currPD,
+							prefixPropName);
+					clause += term + " AND ";
+				} else if (AbstractExample.class.isAssignableFrom(currPD
+						.getPropertyType())) {
+					AbstractExample subEx = (AbstractExample) (currPD
+							.getReadMethod().invoke(example, new Object[]{}));
+					if (subEx == null)
+						continue;
+					String term = createSubClause4Example(subEx,
+							currPD.getName(), true);
 					clause += term + " AND ";
 				}
 			}
 			// alla fine rimuove l'ultimo "AND"
-			clause = clause.substring(0, clause.length()-5);
+			clause = clause.substring(0, clause.length() - 5);
 		} catch (IntrospectionException e) {
 			// TODO
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
-			
+
 		} catch (IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -464,9 +527,10 @@ public class QBEQueryBuilder<TEX extends AbstractExample> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "("+clause+")";
+		return "(" + clause + ")";
 	}
-	
+
+
 	/**
 	 * Formatta l'oggetto in modo che sia utilizzabile nella query costruita a partire
 	 * dagli esempi.
@@ -493,7 +557,7 @@ public class QBEQueryBuilder<TEX extends AbstractExample> {
 		}
 		return resultValue;
 	}
-	
+
 	/**
 	 * crea l'espressione "to_date" da inserire nella query SQL
 	 * @param date la data da utilizzare
@@ -519,66 +583,75 @@ public class QBEQueryBuilder<TEX extends AbstractExample> {
 		retvalue = "to_date('" + retvalue + "','DD/MM/YYYY HH24:MI:SS')";
 		return retvalue;
 	}
-	
+
 	/**
 	 * 
 	 * @param chk
 	 * @return
 	 */
-	public String createTerm4FieldChk(FieldChk chk, PropertyDescriptor pd){
+	public String createTerm4FieldChk(FieldChk chk, PropertyDescriptor pd,
+			String prefixPropName) {
 		if (chk instanceof EqChk)
-			return createTerm4FieldChk((EqChk)chk, pd);
+			return createTerm4FieldChk((EqChk) chk, pd, prefixPropName);
 		else if (chk instanceof RangeChk)
-			return createTerm4FieldChk((RangeChk)chk, pd);
+			return createTerm4FieldChk((RangeChk) chk, pd, prefixPropName);
 		else if (chk instanceof RegexpChk)
-			return createTerm4FieldChk((RegexpChk)chk, pd);
+			return createTerm4FieldChk((RegexpChk) chk, pd, prefixPropName);
 		else if (chk instanceof NullChk)
-			return createTerm4FieldChk((NullChk)chk, pd);
+			return createTerm4FieldChk((NullChk) chk, pd, prefixPropName);
 		else if (chk instanceof InSetChk)
-			return createTerm4FieldChk((InSetChk)chk, pd);
+			return createTerm4FieldChk((InSetChk) chk, pd, prefixPropName);
 		else
-			throw new IllegalArgumentException("field check non gestito:"+chk.getClass());
+			throw new IllegalArgumentException("field check non gestito:"
+					+ chk.getClass());
 	}
-	
-	public String createTerm4FieldChk(EqChk chk, PropertyDescriptor pd){
-		String colName = _metadata.getColumnName(pd.getName());
+
+	public String createTerm4FieldChk(EqChk chk, PropertyDescriptor pd,
+			String prefixPropName) {
+		String colName = _metadata.getColumnName(prefixPropName, pd.getName());
 		String term = "(";
-		String lside = chk.isIgnoreCase() ? "UPPER("+colName+")" : colName;
-		String rside = chk.isIgnoreCase() ? "UPPER("+formatValue(chk.getExVal())+")" : formatValue(chk.getExVal());
-		if (!chk.valueHasWildcards()){
-			term += lside+(chk.isNegate()?" <> ":" = ")+rside;
+		String lside = chk.isIgnoreCase() ? "UPPER(" + colName + ")" : colName;
+		String rside = chk.isIgnoreCase() ? "UPPER("
+				+ formatValue(chk.getExVal()) + ")" : formatValue(chk
+				.getExVal());
+		if (!chk.valueHasWildcards()) {
+			term += lside + (chk.isNegate() ? " <> " : " = ") + rside;
+		} else {
+			term += lside + (chk.isNegate() ? " NOT LIKE( " : " LIKE( ")
+					+ rside + ")";
 		}
-		else{
-			term += lside+(chk.isNegate()?" NOT LIKE( ":" LIKE( ")+rside+")";
-		}
-		term+=")";
+		term += ")";
 		return term;
 	}
-	
-	public String createTerm4FieldChk(NullChk chk, PropertyDescriptor pd){
-		String colName = _metadata.getColumnName(pd.getName());
+
+	public String createTerm4FieldChk(NullChk chk, PropertyDescriptor pd,
+			String prefixPropName) {
+		String colName = _metadata.getColumnName(prefixPropName, pd.getName());
 		String term = "(";
-		term+=colName+" IS "+(chk.isNegate()?" NOT":"")+" NULL";
-		term+=")";
+		term += colName + " IS " + (chk.isNegate() ? " NOT" : "") + " NULL";
+		term += ")";
 		return term;
 	}
-	
-	public String createTerm4FieldChk(RangeChk chk, PropertyDescriptor pd){
-		String colName = _metadata.getColumnName(pd.getName());
+
+	public String createTerm4FieldChk(RangeChk chk, PropertyDescriptor pd,
+			String prefixPropName) {
+		String colName = _metadata.getColumnName(prefixPropName, pd.getName());
 		String term = "(";
 		if (chk.isNegate())
-			term+="NOT ";
-		if (chk.isLBIncluded()&&chk.isUBIncluded()){
-			term+=colName+" BETWEEN "+formatValue(chk.getLowerBound())+ " AND "+formatValue(chk.getUpperBound());
-		}
-		else{
-			term+=colName+(chk.isLBIncluded()?" >= ": " > ")+formatValue(chk.getLowerBound());
-			term+=" AND "+colName+(chk.isUBIncluded()?" <= ": " < ")+formatValue(chk.getUpperBound());
-			if (chk.isNegate()){
-				term = "(NOT "+term+")";
+			term += "NOT ";
+		if (chk.isLBIncluded() && chk.isUBIncluded()) {
+			term += colName + " BETWEEN " + formatValue(chk.getLowerBound())
+					+ " AND " + formatValue(chk.getUpperBound());
+		} else {
+			term += colName + (chk.isLBIncluded() ? " >= " : " > ")
+					+ formatValue(chk.getLowerBound());
+			term += " AND " + colName + (chk.isUBIncluded() ? " <= " : " < ")
+					+ formatValue(chk.getUpperBound());
+			if (chk.isNegate()) {
+				term = "(NOT " + term + ")";
 			}
 		}
-		term+=")";
+		term += ")";
 		return term;
 	}
 }

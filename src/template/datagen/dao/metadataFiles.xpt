@@ -90,8 +90,22 @@ public class «getMetadataClassName()» implements DAOMetadata{
 «ENDLET-»
 «ENDDEFINE»
 
+«DEFINE metadataCase4Resolver(DataAccessObject dao) FOR LookupResolver-»
+«FOREACH this.foreignKey.includedColumns AS currFKColumn ITERATOR i-»
+		if ("«javaPropertyPathForResolvedColumn(this, this.foreignKey,i.counter0)»".equalsIgnoreCase(propName)){
+			return "«currFKColumn.name»";
+		}
+«ENDFOREACH»
+«ENDDEFINE»
 
 «DEFINE getColumnNameMethod(DataAccessObject dao) FOR Table»
+	public String getColumnName(String prefixPropName, String propName){
+		if (prefixPropName!=null && prefixPropName.length()>0)
+			return getColumnName(prefixPropName+"."+propName);
+		else
+			return getColumnName(propName);
+	}
+
 	/**
 	 * Method 'getColumnName'
 	 * 
@@ -101,10 +115,16 @@ public class «getMetadataClassName()» implements DAOMetadata{
 	 */
 	public String getColumnName(String propName){
 		«FOREACH columns AS currCol-»
+		«IF currCol.isForeignKey!=null && currCol.isForeignKey && dao.lookupResolvers != null && dao.lookupResolvers.resolvers.select(r|r.foreignKey.includedColumns.contains(currCol)).size >0-»
+		«ELSE-»
 		if ("«javaPropertyNameFromColumn(currCol)»".equalsIgnoreCase(propName)){
 			return "«currCol.name»";
 		}
+		«ENDIF-»
 		«ENDFOREACH-»
+		«IF dao.lookupResolvers!=null && dao.lookupResolvers.resolvers.size >0-»
+		«EXPAND metadataCase4Resolver(dao) FOREACH dao.lookupResolvers.resolvers-»
+		«ENDIF-»
 		/// se non trovato
 		throw new IllegalArgumentException("proprieta' "+propName+" non trovata per il DTO «getDtoClassName(dao)»");
 	}
@@ -136,8 +156,21 @@ public interface DAOMetadata
 	/**
 	 * Method 'getColumnName'
 	 * 
-	 * @param propName
-	 * @return String
+	 * @param prefixPropName prefisso (opzionale) da apporre al nome della property
+	 *        nei casi in cui si debba scendere ricorsivamente in esempi annidati 
+	 * @param propName nome della property
+	 * @return String il nome di colonna associata alla property <prefixPropName>.<propName>
+	 *                o <propName> se <prefixPropName> e' nullo
+	 * @generated
+	 */
+	public abstract String getColumnName(String prefixPropName, String propName);
+	
+	/**
+	 * Method 'getColumnName'
+	 * 
+	 * @param propName nel formato <prefixPropName>.<propName> oppure <propName>
+	 * @return String il nome di colonna associata alla property <prefixPropName>.<propName>
+	 *                o <propName> se <prefixPropName> e' nullo
 	 * @generated
 	 */
 	public abstract String getColumnName(String propName);

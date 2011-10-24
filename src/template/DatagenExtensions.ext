@@ -23,6 +23,7 @@ import ecore;
 import datagen;
 import rdbmdl;
 import rdbmdl::datatypes;
+import rdbmdl::constraints;
 
 String javaSrcRoot() :
 	"src/java";
@@ -137,6 +138,9 @@ String getQbeExFullPath(DataAccessObject dao, DBAccessModel model) :
 
 String javaPropertyNameFromColumn(TableColumn col) :
 	toJavaId(col.name);
+
+String javaPropertyPathForResolvedColumn(LookupResolver resolver, ForeignKey fk, int i) :
+	getLookedUpPropertyName(resolver)+"."+javaPropertyNameFromColumn(fk.referredUC.includedColumns.get(i));
 
 // TODO!!!
 String javaPropertyTypeFromColumn(TableColumn col) :
