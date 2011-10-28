@@ -200,10 +200,28 @@ e le limitazioni secondo i termini della Licenza.
 	public List<«getDtoClassName(dao)»> findByExamples(ArrayList<«getQbeExFQN(dao,model)»> positive, ArrayList<«getQbeExFQN(dao,model)»> negative) throws «getDaoExcClassName(dao)»
 	«IF body-»
 	{
+		//verifiche consistenza esempi
+		if(positive == null ){
+			throw new «getDaoExcClassName(dao)»("Il set degli esempi positivi e' null. Impossibile costruire la query.");
+		}
+		if(negative == null){
+			throw new «getDaoExcClassName(dao)»("Il set degli esempi negativi e' null. Impossibile costruire la query.");
+		}
+		if(positive.size()==0){
+			throw new «getDaoExcClassName(dao)»("Il set degli esempi positivi e' vuoto. Impossibile costruire la query.");
+		}
+		if(negative.size()==0){
+			throw new «getDaoExcClassName(dao)»("Il set degli esempi positivi e' vuoto. Impossibile costruire la query.");
+		}
 		
 		// personalizzare la query SQL relativa al finder
 		QBEQueryBuilder<«getQbeExClassName(dao)»> builder = new QBEQueryBuilder<«getQbeExClassName(dao)»>(new «getMetadataClassName(dao)»(«EXPAND template::datagen::dao::daoFiles::distinctColumnsIfNecessary FOR this.distinct-»));
-		StringBuilder sql = new StringBuilder(builder.createFromExamples(positive, negative,«IF this.distinct!=null && !this.distinct.isEmpty-»true«ELSE-»false«ENDIF-»));
+		StringBuilder sql = null;
+		try{
+			sql = new StringBuilder(builder.createFromExamples(positive, negative,«IF this.distinct!=null && !this.distinct.isEmpty-»true«ELSE-»false«ENDIF-»));
+		}catch (StringIndexOutOfBoundsException e) {
+			throw new «getDaoExcClassName(dao)»("E' stato valorizzato almeno un esempio senza nessun FieldCheck associato.Impossibile creare la query.");
+		}
 		«EXPAND template::datagen::dao::daoFiles::orderByClause FOR this.orderSpecs-»
 		
 		List<«getDtoClassName(dao)»> list = null;
