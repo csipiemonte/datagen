@@ -517,9 +517,6 @@ public class QBEQueryBuilder<TEX extends AbstractExample> {
 		} catch (IntrospectionException e) {
 			// TODO
 			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-
 		} catch (IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

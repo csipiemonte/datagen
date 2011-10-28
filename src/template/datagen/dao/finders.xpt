@@ -222,6 +222,8 @@ e le limitazioni secondo i termini della Licenza.
 			sql = new StringBuilder(builder.createFromExamples(positive, negative,«IF this.distinct!=null && !this.distinct.isEmpty-»true«ELSE-»false«ENDIF-»));
 		}catch (StringIndexOutOfBoundsException e) {
 			throw new «getDaoExcClassName(dao)»("E' stato valorizzato almeno un esempio senza nessun FieldCheck associato.Impossibile creare la query.");
+		} catch (IllegalArgumentException e) {
+			throw new AnagraficaDaoException("E' stato valorizzato un campo di un esempio complesso non corrispondente alla PK della tabella di lookup.");
 		}
 		«EXPAND template::datagen::dao::daoFiles::orderByClause FOR this.orderSpecs-»
 		
