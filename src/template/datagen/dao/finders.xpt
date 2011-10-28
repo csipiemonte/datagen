@@ -201,17 +201,18 @@ e le limitazioni secondo i termini della Licenza.
 	«IF body-»
 	{
 		//verifiche consistenza esempi
-		if(positive == null ){
-			throw new «getDaoExcClassName(dao)»("Il set degli esempi positivi e' null. Impossibile costruire la query.");
+		if (positive == null) {
+			throw new AnagraficaDaoException(
+					"Il set degli esempi positivi e' null. Impossibile costruire la query.");
 		}
-		if(negative == null){
-			throw new «getDaoExcClassName(dao)»("Il set degli esempi negativi e' null. Impossibile costruire la query.");
+		if (negative == null) {
+			throw new AnagraficaDaoException(
+					"Il set degli esempi negativi e' null. Impossibile costruire la query.");
 		}
-		if(positive.size()==0){
-			throw new «getDaoExcClassName(dao)»("Il set degli esempi positivi e' vuoto. Impossibile costruire la query.");
-		}
-		if(negative.size()==0){
-			throw new «getDaoExcClassName(dao)»("Il set degli esempi positivi e' vuoto. Impossibile costruire la query.");
+		
+		if (positive.size() == 0 && negative.size() == 0) {
+			throw new AnagraficaDaoException(
+					"Il set degli esempi positivi e negativi e' vuoto. Impossibile costruire la query.");
 		}
 		
 		// personalizzare la query SQL relativa al finder
