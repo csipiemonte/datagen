@@ -36,6 +36,7 @@ package it.csi.mddtools.datagen;
  *   <li>{@link it.csi.mddtools.datagen.CustomFinder#getFilterClassFQN <em>Filter Class FQN</em>}</li>
  *   <li>{@link it.csi.mddtools.datagen.CustomFinder#isCustomSelect <em>Custom Select</em>}</li>
  *   <li>{@link it.csi.mddtools.datagen.CustomFinder#isCustomFrom <em>Custom From</em>}</li>
+ *   <li>{@link it.csi.mddtools.datagen.CustomFinder#getQueryDefinition <em>Query Definition</em>}</li>
  * </ul>
  * </p>
  *
@@ -136,4 +137,30 @@ public interface CustomFinder extends MultiResFinder {
 	 * @generated
 	 */
 	void setCustomFrom(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Query Definition</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Query Definition</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Query Definition</em>' containment reference.
+	 * @see #setQueryDefinition(QueryDef)
+	 * @see it.csi.mddtools.datagen.DatagenPackage#getCustomFinder_QueryDefinition()
+	 * @model containment="true"
+	 * @generated
+	 */
+	QueryDef getQueryDefinition();
+
+	/**
+	 * Sets the value of the '{@link it.csi.mddtools.datagen.CustomFinder#getQueryDefinition <em>Query Definition</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Query Definition</em>' containment reference.
+	 * @see #getQueryDefinition()
+	 * @generated
+	 */
+	void setQueryDefinition(QueryDef value);
 } // CustomFinder

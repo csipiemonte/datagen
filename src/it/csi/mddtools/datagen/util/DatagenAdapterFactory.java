@@ -198,6 +198,46 @@ public class DatagenAdapterFactory extends AdapterFactoryImpl {
 				return createLookupResolverAdapter();
 			}
 			@Override
+			public Adapter caseQueryDef(QueryDef object) {
+				return createQueryDefAdapter();
+			}
+			@Override
+			public Adapter caseSelectClause(SelectClause object) {
+				return createSelectClauseAdapter();
+			}
+			@Override
+			public Adapter caseQResultColumn(QResultColumn object) {
+				return createQResultColumnAdapter();
+			}
+			@Override
+			public Adapter caseQTableColumn(QTableColumn object) {
+				return createQTableColumnAdapter();
+			}
+			@Override
+			public Adapter caseQCalculatedColumn(QCalculatedColumn object) {
+				return createQCalculatedColumnAdapter();
+			}
+			@Override
+			public Adapter caseFromClause(FromClause object) {
+				return createFromClauseAdapter();
+			}
+			@Override
+			public Adapter caseQTable(QTable object) {
+				return createQTableAdapter();
+			}
+			@Override
+			public Adapter caseJoinClause(JoinClause object) {
+				return createJoinClauseAdapter();
+			}
+			@Override
+			public Adapter caseJoinCriterion(JoinCriterion object) {
+				return createJoinCriterionAdapter();
+			}
+			@Override
+			public Adapter caseWhereClause(WhereClause object) {
+				return createWhereClauseAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -592,6 +632,146 @@ public class DatagenAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createLookupResolverAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.QueryDef <em>Query Def</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.QueryDef
+	 * @generated
+	 */
+	public Adapter createQueryDefAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.SelectClause <em>Select Clause</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.SelectClause
+	 * @generated
+	 */
+	public Adapter createSelectClauseAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.QResultColumn <em>QResult Column</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.QResultColumn
+	 * @generated
+	 */
+	public Adapter createQResultColumnAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.QTableColumn <em>QTable Column</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.QTableColumn
+	 * @generated
+	 */
+	public Adapter createQTableColumnAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.QCalculatedColumn <em>QCalculated Column</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.QCalculatedColumn
+	 * @generated
+	 */
+	public Adapter createQCalculatedColumnAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.FromClause <em>From Clause</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.FromClause
+	 * @generated
+	 */
+	public Adapter createFromClauseAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.QTable <em>QTable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.QTable
+	 * @generated
+	 */
+	public Adapter createQTableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.JoinClause <em>Join Clause</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.JoinClause
+	 * @generated
+	 */
+	public Adapter createJoinClauseAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.JoinCriterion <em>Join Criterion</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.JoinCriterion
+	 * @generated
+	 */
+	public Adapter createJoinCriterionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.csi.mddtools.datagen.WhereClause <em>Where Clause</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.csi.mddtools.datagen.WhereClause
+	 * @generated
+	 */
+	public Adapter createWhereClauseAdapter() {
 		return null;
 	}
 

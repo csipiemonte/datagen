@@ -202,6 +202,87 @@ public interface DatagenFactory extends EFactory {
 	LookupResolver createLookupResolver();
 
 	/**
+	 * Returns a new object of class '<em>Query Def</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Query Def</em>'.
+	 * @generated
+	 */
+	QueryDef createQueryDef();
+
+	/**
+	 * Returns a new object of class '<em>Select Clause</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Select Clause</em>'.
+	 * @generated
+	 */
+	SelectClause createSelectClause();
+
+	/**
+	 * Returns a new object of class '<em>QTable Column</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>QTable Column</em>'.
+	 * @generated
+	 */
+	QTableColumn createQTableColumn();
+
+	/**
+	 * Returns a new object of class '<em>QCalculated Column</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>QCalculated Column</em>'.
+	 * @generated
+	 */
+	QCalculatedColumn createQCalculatedColumn();
+
+	/**
+	 * Returns a new object of class '<em>From Clause</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>From Clause</em>'.
+	 * @generated
+	 */
+	FromClause createFromClause();
+
+	/**
+	 * Returns a new object of class '<em>QTable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>QTable</em>'.
+	 * @generated
+	 */
+	QTable createQTable();
+
+	/**
+	 * Returns a new object of class '<em>Join Clause</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Join Clause</em>'.
+	 * @generated
+	 */
+	JoinClause createJoinClause();
+
+	/**
+	 * Returns a new object of class '<em>Join Criterion</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Join Criterion</em>'.
+	 * @generated
+	 */
+	JoinCriterion createJoinCriterion();
+
+	/**
+	 * Returns a new object of class '<em>Where Clause</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Where Clause</em>'.
+	 * @generated
+	 */
+	WhereClause createWhereClause();
+
+	/**
 	 * Returns a new object of class '<em>Finders</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

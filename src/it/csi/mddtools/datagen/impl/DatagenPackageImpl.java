@@ -38,7 +38,10 @@ import it.csi.mddtools.datagen.FindAll;
 import it.csi.mddtools.datagen.FindByPK;
 import it.csi.mddtools.datagen.Finder;
 import it.csi.mddtools.datagen.Finders;
+import it.csi.mddtools.datagen.FromClause;
 import it.csi.mddtools.datagen.Inserter;
+import it.csi.mddtools.datagen.JoinClause;
+import it.csi.mddtools.datagen.JoinCriterion;
 import it.csi.mddtools.datagen.LookupResolver;
 import it.csi.mddtools.datagen.LookupResolvers;
 import it.csi.mddtools.datagen.MultiResFinder;
@@ -46,12 +49,19 @@ import it.csi.mddtools.datagen.OrderSpec;
 import it.csi.mddtools.datagen.OrderSpecs;
 import it.csi.mddtools.datagen.PKGenerator;
 import it.csi.mddtools.datagen.QBEFinder;
+import it.csi.mddtools.datagen.QCalculatedColumn;
+import it.csi.mddtools.datagen.QResultColumn;
+import it.csi.mddtools.datagen.QTable;
+import it.csi.mddtools.datagen.QTableColumn;
+import it.csi.mddtools.datagen.QueryDef;
+import it.csi.mddtools.datagen.SelectClause;
 import it.csi.mddtools.datagen.SequencePKGenerator;
 import it.csi.mddtools.datagen.SingleResFinder;
 import it.csi.mddtools.datagen.UpdateColumns;
 import it.csi.mddtools.datagen.UpdateRow;
 import it.csi.mddtools.datagen.Updater;
 import it.csi.mddtools.datagen.Updaters;
+import it.csi.mddtools.datagen.WhereClause;
 import it.csi.mddtools.rdbmdl.RdbmdlPackage;
 
 import it.csi.mddtools.rdbmdl.constraints.ConstraintsPackage;
@@ -258,6 +268,76 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 	 * @generated
 	 */
 	private EClass lookupResolverEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass queryDefEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass selectClauseEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass qResultColumnEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass qTableColumnEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass qCalculatedColumnEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass fromClauseEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass qTableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass joinClauseEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass joinCriterionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass whereClauseEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -720,6 +800,15 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getCustomFinder_QueryDefinition() {
+		return (EReference)customFinderEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getUpdaters() {
 		return updatersEClass;
 	}
@@ -900,6 +989,240 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getQueryDef() {
+		return queryDefEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getQueryDef_SelectClause() {
+		return (EReference)queryDefEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getQueryDef_FromClause() {
+		return (EReference)queryDefEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getQueryDef_JoinClause() {
+		return (EReference)queryDefEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getQueryDef_WhereClause() {
+		return (EReference)queryDefEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getSelectClause() {
+		return selectClauseEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSelectClause_Columns() {
+		return (EReference)selectClauseEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getQResultColumn() {
+		return qResultColumnEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getQTableColumn() {
+		return qTableColumnEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getQTableColumn_Qtable() {
+		return (EReference)qTableColumnEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getQTableColumn_Column() {
+		return (EReference)qTableColumnEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getQCalculatedColumn() {
+		return qCalculatedColumnEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFromClause() {
+		return fromClauseEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getFromClause_Tables() {
+		return (EReference)fromClauseEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getQTable() {
+		return qTableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getQTable_Table() {
+		return (EReference)qTableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getQTable_AliasName() {
+		return (EAttribute)qTableEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getJoinClause() {
+		return joinClauseEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getJoinClause_Criteria() {
+		return (EReference)joinClauseEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getJoinCriterion() {
+		return joinCriterionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getJoinCriterion_LeftTable() {
+		return (EReference)joinCriterionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getJoinCriterion_LeftColumn() {
+		return (EReference)joinCriterionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getJoinCriterion_RightTable() {
+		return (EReference)joinCriterionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getJoinCriterion_RightColumn() {
+		return (EReference)joinCriterionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getWhereClause() {
+		return whereClauseEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getWhereClause_FreetextExpression() {
+		return (EAttribute)whereClauseEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getCacheabilityTypes() {
 		return cacheabilityTypesEEnum;
 	}
@@ -1010,6 +1333,7 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		createEAttribute(customFinderEClass, CUSTOM_FINDER__FILTER_CLASS_FQN);
 		createEAttribute(customFinderEClass, CUSTOM_FINDER__CUSTOM_SELECT);
 		createEAttribute(customFinderEClass, CUSTOM_FINDER__CUSTOM_FROM);
+		createEReference(customFinderEClass, CUSTOM_FINDER__QUERY_DEFINITION);
 
 		updatersEClass = createEClass(UPDATERS);
 		createEReference(updatersEClass, UPDATERS__UPDATERS);
@@ -1041,6 +1365,42 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		lookupResolverEClass = createEClass(LOOKUP_RESOLVER);
 		createEReference(lookupResolverEClass, LOOKUP_RESOLVER__FOREIGN_KEY);
 		createEReference(lookupResolverEClass, LOOKUP_RESOLVER__SUPPLIER_DAO);
+
+		queryDefEClass = createEClass(QUERY_DEF);
+		createEReference(queryDefEClass, QUERY_DEF__SELECT_CLAUSE);
+		createEReference(queryDefEClass, QUERY_DEF__FROM_CLAUSE);
+		createEReference(queryDefEClass, QUERY_DEF__JOIN_CLAUSE);
+		createEReference(queryDefEClass, QUERY_DEF__WHERE_CLAUSE);
+
+		selectClauseEClass = createEClass(SELECT_CLAUSE);
+		createEReference(selectClauseEClass, SELECT_CLAUSE__COLUMNS);
+
+		qResultColumnEClass = createEClass(QRESULT_COLUMN);
+
+		qTableColumnEClass = createEClass(QTABLE_COLUMN);
+		createEReference(qTableColumnEClass, QTABLE_COLUMN__QTABLE);
+		createEReference(qTableColumnEClass, QTABLE_COLUMN__COLUMN);
+
+		qCalculatedColumnEClass = createEClass(QCALCULATED_COLUMN);
+
+		fromClauseEClass = createEClass(FROM_CLAUSE);
+		createEReference(fromClauseEClass, FROM_CLAUSE__TABLES);
+
+		qTableEClass = createEClass(QTABLE);
+		createEReference(qTableEClass, QTABLE__TABLE);
+		createEAttribute(qTableEClass, QTABLE__ALIAS_NAME);
+
+		joinClauseEClass = createEClass(JOIN_CLAUSE);
+		createEReference(joinClauseEClass, JOIN_CLAUSE__CRITERIA);
+
+		joinCriterionEClass = createEClass(JOIN_CRITERION);
+		createEReference(joinCriterionEClass, JOIN_CRITERION__LEFT_TABLE);
+		createEReference(joinCriterionEClass, JOIN_CRITERION__LEFT_COLUMN);
+		createEReference(joinCriterionEClass, JOIN_CRITERION__RIGHT_TABLE);
+		createEReference(joinCriterionEClass, JOIN_CRITERION__RIGHT_COLUMN);
+
+		whereClauseEClass = createEClass(WHERE_CLAUSE);
+		createEAttribute(whereClauseEClass, WHERE_CLAUSE__FREETEXT_EXPRESSION);
 
 		// Create enums
 		cacheabilityTypesEEnum = createEEnum(CACHEABILITY_TYPES);
@@ -1094,6 +1454,8 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		deleteByPKEClass.getESuperTypes().add(this.getDeleter());
 		customUpdaterEClass.getESuperTypes().add(this.getUpdater());
 		customDeleterEClass.getESuperTypes().add(this.getDeleter());
+		qTableColumnEClass.getESuperTypes().add(this.getQResultColumn());
+		qCalculatedColumnEClass.getESuperTypes().add(this.getQResultColumn());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(dbAccessModelEClass, DBAccessModel.class, "DBAccessModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1156,6 +1518,7 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		initEAttribute(getCustomFinder_FilterClassFQN(), ecorePackage.getEString(), "filterClassFQN", null, 0, 1, CustomFinder.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCustomFinder_CustomSelect(), ecorePackage.getEBoolean(), "customSelect", "false", 0, 1, CustomFinder.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCustomFinder_CustomFrom(), ecorePackage.getEBoolean(), "customFrom", "false", 0, 1, CustomFinder.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCustomFinder_QueryDefinition(), this.getQueryDef(), null, "queryDefinition", null, 0, 1, CustomFinder.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(updatersEClass, Updaters.class, "Updaters", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getUpdaters_Updaters(), this.getUpdater(), null, "updaters", null, 0, -1, Updaters.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1187,6 +1550,42 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		initEClass(lookupResolverEClass, LookupResolver.class, "LookupResolver", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLookupResolver_ForeignKey(), theConstraintsPackage.getForeignKey(), null, "foreignKey", null, 0, 1, LookupResolver.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLookupResolver_SupplierDAO(), this.getDataAccessObject(), null, "supplierDAO", null, 0, 1, LookupResolver.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(queryDefEClass, QueryDef.class, "QueryDef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getQueryDef_SelectClause(), this.getSelectClause(), null, "selectClause", null, 0, 1, QueryDef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getQueryDef_FromClause(), this.getFromClause(), null, "fromClause", null, 0, 1, QueryDef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getQueryDef_JoinClause(), this.getJoinClause(), null, "joinClause", null, 0, 1, QueryDef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getQueryDef_WhereClause(), this.getWhereClause(), null, "whereClause", null, 0, 1, QueryDef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(selectClauseEClass, SelectClause.class, "SelectClause", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSelectClause_Columns(), this.getQResultColumn(), null, "columns", null, 0, -1, SelectClause.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(qResultColumnEClass, QResultColumn.class, "QResultColumn", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(qTableColumnEClass, QTableColumn.class, "QTableColumn", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getQTableColumn_Qtable(), this.getQTable(), null, "qtable", null, 0, 1, QTableColumn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getQTableColumn_Column(), theRdbmdlPackage.getTableColumn(), null, "column", null, 0, 1, QTableColumn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(qCalculatedColumnEClass, QCalculatedColumn.class, "QCalculatedColumn", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(fromClauseEClass, FromClause.class, "FromClause", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getFromClause_Tables(), this.getQTable(), null, "tables", null, 0, -1, FromClause.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(qTableEClass, QTable.class, "QTable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getQTable_Table(), theRdbmdlPackage.getTable(), null, "table", null, 0, 1, QTable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getQTable_AliasName(), ecorePackage.getEString(), "aliasName", null, 0, 1, QTable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(joinClauseEClass, JoinClause.class, "JoinClause", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getJoinClause_Criteria(), this.getJoinCriterion(), null, "criteria", null, 0, -1, JoinClause.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(joinCriterionEClass, JoinCriterion.class, "JoinCriterion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getJoinCriterion_LeftTable(), this.getQTable(), null, "leftTable", null, 0, 1, JoinCriterion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getJoinCriterion_LeftColumn(), theRdbmdlPackage.getTableColumn(), null, "leftColumn", null, 0, 1, JoinCriterion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getJoinCriterion_RightTable(), this.getQTable(), null, "rightTable", null, 0, 1, JoinCriterion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getJoinCriterion_RightColumn(), theRdbmdlPackage.getTableColumn(), null, "rightColumn", null, 0, 1, JoinCriterion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(whereClauseEClass, WhereClause.class, "WhereClause", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getWhereClause_FreetextExpression(), ecorePackage.getEString(), "freetextExpression", null, 0, 1, WhereClause.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(cacheabilityTypesEEnum, CacheabilityTypes.class, "CacheabilityTypes");

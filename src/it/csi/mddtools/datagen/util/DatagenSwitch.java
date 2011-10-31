@@ -300,6 +300,68 @@ public class DatagenSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case DatagenPackage.QUERY_DEF: {
+				QueryDef queryDef = (QueryDef)theEObject;
+				T result = caseQueryDef(queryDef);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DatagenPackage.SELECT_CLAUSE: {
+				SelectClause selectClause = (SelectClause)theEObject;
+				T result = caseSelectClause(selectClause);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DatagenPackage.QRESULT_COLUMN: {
+				QResultColumn qResultColumn = (QResultColumn)theEObject;
+				T result = caseQResultColumn(qResultColumn);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DatagenPackage.QTABLE_COLUMN: {
+				QTableColumn qTableColumn = (QTableColumn)theEObject;
+				T result = caseQTableColumn(qTableColumn);
+				if (result == null) result = caseQResultColumn(qTableColumn);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DatagenPackage.QCALCULATED_COLUMN: {
+				QCalculatedColumn qCalculatedColumn = (QCalculatedColumn)theEObject;
+				T result = caseQCalculatedColumn(qCalculatedColumn);
+				if (result == null) result = caseQResultColumn(qCalculatedColumn);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DatagenPackage.FROM_CLAUSE: {
+				FromClause fromClause = (FromClause)theEObject;
+				T result = caseFromClause(fromClause);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DatagenPackage.QTABLE: {
+				QTable qTable = (QTable)theEObject;
+				T result = caseQTable(qTable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DatagenPackage.JOIN_CLAUSE: {
+				JoinClause joinClause = (JoinClause)theEObject;
+				T result = caseJoinClause(joinClause);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DatagenPackage.JOIN_CRITERION: {
+				JoinCriterion joinCriterion = (JoinCriterion)theEObject;
+				T result = caseJoinCriterion(joinCriterion);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DatagenPackage.WHERE_CLAUSE: {
+				WhereClause whereClause = (WhereClause)theEObject;
+				T result = caseWhereClause(whereClause);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -706,6 +768,156 @@ public class DatagenSwitch<T> {
 	 * @generated
 	 */
 	public T caseLookupResolver(LookupResolver object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Query Def</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Query Def</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseQueryDef(QueryDef object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Select Clause</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Select Clause</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSelectClause(SelectClause object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>QResult Column</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>QResult Column</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseQResultColumn(QResultColumn object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>QTable Column</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>QTable Column</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseQTableColumn(QTableColumn object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>QCalculated Column</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>QCalculated Column</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseQCalculatedColumn(QCalculatedColumn object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>From Clause</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>From Clause</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFromClause(FromClause object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>QTable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>QTable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseQTable(QTable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Join Clause</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Join Clause</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseJoinClause(JoinClause object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Join Criterion</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Join Criterion</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseJoinCriterion(JoinCriterion object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Where Clause</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Where Clause</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseWhereClause(WhereClause object) {
 		return null;
 	}
 

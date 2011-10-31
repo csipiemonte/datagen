@@ -23,6 +23,7 @@ package it.csi.mddtools.datagen.impl;
 import it.csi.mddtools.datagen.CustomFinder;
 import it.csi.mddtools.datagen.DatagenPackage;
 
+import it.csi.mddtools.datagen.QueryDef;
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -35,6 +36,7 @@ import org.eclipse.emf.ecore.EClass;
  *   <li>{@link it.csi.mddtools.datagen.impl.CustomFinderImpl#getFilterClassFQN <em>Filter Class FQN</em>}</li>
  *   <li>{@link it.csi.mddtools.datagen.impl.CustomFinderImpl#isCustomSelect <em>Custom Select</em>}</li>
  *   <li>{@link it.csi.mddtools.datagen.impl.CustomFinderImpl#isCustomFrom <em>Custom From</em>}</li>
+ *   <li>{@link it.csi.mddtools.datagen.impl.CustomFinderImpl#getQueryDefinition <em>Query Definition</em>}</li>
  * </ul>
  * </p>
  *
@@ -112,6 +114,24 @@ public class CustomFinderImpl extends MultiResFinderImpl implements CustomFinder
 	 */
 	public void setCustomFrom(boolean newCustomFrom) {
 		eSet(DatagenPackage.Literals.CUSTOM_FINDER__CUSTOM_FROM, newCustomFrom);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public QueryDef getQueryDefinition() {
+		return (QueryDef)eGet(DatagenPackage.Literals.CUSTOM_FINDER__QUERY_DEFINITION, true);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setQueryDefinition(QueryDef newQueryDefinition) {
+		eSet(DatagenPackage.Literals.CUSTOM_FINDER__QUERY_DEFINITION, newQueryDefinition);
 	}
 
 } //CustomFinderImpl

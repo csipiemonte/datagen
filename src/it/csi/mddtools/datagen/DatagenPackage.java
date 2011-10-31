@@ -824,13 +824,22 @@ public interface DatagenPackage extends EPackage {
 	int CUSTOM_FINDER__CUSTOM_FROM = MULTI_RES_FINDER_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Query Definition</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOM_FINDER__QUERY_DEFINITION = MULTI_RES_FINDER_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Custom Finder</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CUSTOM_FINDER_FEATURE_COUNT = MULTI_RES_FINDER_FEATURE_COUNT + 3;
+	int CUSTOM_FINDER_FEATURE_COUNT = MULTI_RES_FINDER_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Updaters</b></em>' containment reference list.
@@ -1129,6 +1138,340 @@ public interface DatagenPackage extends EPackage {
 	int LOOKUP_RESOLVER_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.QueryDefImpl <em>Query Def</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see it.csi.mddtools.datagen.impl.QueryDefImpl
+	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getQueryDef()
+	 * @generated
+	 */
+	int QUERY_DEF = 28;
+
+	/**
+	 * The feature id for the '<em><b>Select Clause</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUERY_DEF__SELECT_CLAUSE = 0;
+
+	/**
+	 * The feature id for the '<em><b>From Clause</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUERY_DEF__FROM_CLAUSE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Join Clause</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUERY_DEF__JOIN_CLAUSE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Where Clause</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUERY_DEF__WHERE_CLAUSE = 3;
+
+	/**
+	 * The number of structural features of the '<em>Query Def</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUERY_DEF_FEATURE_COUNT = 4;
+
+	/**
+	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.SelectClauseImpl <em>Select Clause</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see it.csi.mddtools.datagen.impl.SelectClauseImpl
+	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getSelectClause()
+	 * @generated
+	 */
+	int SELECT_CLAUSE = 29;
+
+	/**
+	 * The feature id for the '<em><b>Columns</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SELECT_CLAUSE__COLUMNS = 0;
+
+	/**
+	 * The number of structural features of the '<em>Select Clause</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SELECT_CLAUSE_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.QResultColumnImpl <em>QResult Column</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see it.csi.mddtools.datagen.impl.QResultColumnImpl
+	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getQResultColumn()
+	 * @generated
+	 */
+	int QRESULT_COLUMN = 30;
+
+	/**
+	 * The number of structural features of the '<em>QResult Column</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QRESULT_COLUMN_FEATURE_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.QTableColumnImpl <em>QTable Column</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see it.csi.mddtools.datagen.impl.QTableColumnImpl
+	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getQTableColumn()
+	 * @generated
+	 */
+	int QTABLE_COLUMN = 31;
+
+	/**
+	 * The feature id for the '<em><b>Qtable</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QTABLE_COLUMN__QTABLE = QRESULT_COLUMN_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Column</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QTABLE_COLUMN__COLUMN = QRESULT_COLUMN_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>QTable Column</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QTABLE_COLUMN_FEATURE_COUNT = QRESULT_COLUMN_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.QCalculatedColumnImpl <em>QCalculated Column</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see it.csi.mddtools.datagen.impl.QCalculatedColumnImpl
+	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getQCalculatedColumn()
+	 * @generated
+	 */
+	int QCALCULATED_COLUMN = 32;
+
+	/**
+	 * The number of structural features of the '<em>QCalculated Column</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QCALCULATED_COLUMN_FEATURE_COUNT = QRESULT_COLUMN_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.FromClauseImpl <em>From Clause</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see it.csi.mddtools.datagen.impl.FromClauseImpl
+	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getFromClause()
+	 * @generated
+	 */
+	int FROM_CLAUSE = 33;
+
+	/**
+	 * The feature id for the '<em><b>Tables</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FROM_CLAUSE__TABLES = 0;
+
+	/**
+	 * The number of structural features of the '<em>From Clause</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FROM_CLAUSE_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.QTableImpl <em>QTable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see it.csi.mddtools.datagen.impl.QTableImpl
+	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getQTable()
+	 * @generated
+	 */
+	int QTABLE = 34;
+
+	/**
+	 * The feature id for the '<em><b>Table</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QTABLE__TABLE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Alias Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QTABLE__ALIAS_NAME = 1;
+
+	/**
+	 * The number of structural features of the '<em>QTable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QTABLE_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.JoinClauseImpl <em>Join Clause</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see it.csi.mddtools.datagen.impl.JoinClauseImpl
+	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getJoinClause()
+	 * @generated
+	 */
+	int JOIN_CLAUSE = 35;
+
+	/**
+	 * The feature id for the '<em><b>Criteria</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOIN_CLAUSE__CRITERIA = 0;
+
+	/**
+	 * The number of structural features of the '<em>Join Clause</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOIN_CLAUSE_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.JoinCriterionImpl <em>Join Criterion</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see it.csi.mddtools.datagen.impl.JoinCriterionImpl
+	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getJoinCriterion()
+	 * @generated
+	 */
+	int JOIN_CRITERION = 36;
+
+	/**
+	 * The feature id for the '<em><b>Left Table</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOIN_CRITERION__LEFT_TABLE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Left Column</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOIN_CRITERION__LEFT_COLUMN = 1;
+
+	/**
+	 * The feature id for the '<em><b>Right Table</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOIN_CRITERION__RIGHT_TABLE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Right Column</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOIN_CRITERION__RIGHT_COLUMN = 3;
+
+	/**
+	 * The number of structural features of the '<em>Join Criterion</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOIN_CRITERION_FEATURE_COUNT = 4;
+
+	/**
+	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.WhereClauseImpl <em>Where Clause</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see it.csi.mddtools.datagen.impl.WhereClauseImpl
+	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getWhereClause()
+	 * @generated
+	 */
+	int WHERE_CLAUSE = 37;
+
+	/**
+	 * The feature id for the '<em><b>Freetext Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WHERE_CLAUSE__FREETEXT_EXPRESSION = 0;
+
+	/**
+	 * The number of structural features of the '<em>Where Clause</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WHERE_CLAUSE_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link it.csi.mddtools.datagen.CacheabilityTypes <em>Cacheability Types</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1136,7 +1479,7 @@ public interface DatagenPackage extends EPackage {
 	 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getCacheabilityTypes()
 	 * @generated
 	 */
-	int CACHEABILITY_TYPES = 28;
+	int CACHEABILITY_TYPES = 38;
 
 
 	/**
@@ -1586,6 +1929,17 @@ public interface DatagenPackage extends EPackage {
 	EAttribute getCustomFinder_CustomFrom();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link it.csi.mddtools.datagen.CustomFinder#getQueryDefinition <em>Query Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Query Definition</em>'.
+	 * @see it.csi.mddtools.datagen.CustomFinder#getQueryDefinition()
+	 * @see #getCustomFinder()
+	 * @generated
+	 */
+	EReference getCustomFinder_QueryDefinition();
+
+	/**
 	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.Updaters <em>Updaters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1793,6 +2147,282 @@ public interface DatagenPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getLookupResolver_SupplierDAO();
+
+	/**
+	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.QueryDef <em>Query Def</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Query Def</em>'.
+	 * @see it.csi.mddtools.datagen.QueryDef
+	 * @generated
+	 */
+	EClass getQueryDef();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link it.csi.mddtools.datagen.QueryDef#getSelectClause <em>Select Clause</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Select Clause</em>'.
+	 * @see it.csi.mddtools.datagen.QueryDef#getSelectClause()
+	 * @see #getQueryDef()
+	 * @generated
+	 */
+	EReference getQueryDef_SelectClause();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link it.csi.mddtools.datagen.QueryDef#getFromClause <em>From Clause</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>From Clause</em>'.
+	 * @see it.csi.mddtools.datagen.QueryDef#getFromClause()
+	 * @see #getQueryDef()
+	 * @generated
+	 */
+	EReference getQueryDef_FromClause();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link it.csi.mddtools.datagen.QueryDef#getJoinClause <em>Join Clause</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Join Clause</em>'.
+	 * @see it.csi.mddtools.datagen.QueryDef#getJoinClause()
+	 * @see #getQueryDef()
+	 * @generated
+	 */
+	EReference getQueryDef_JoinClause();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link it.csi.mddtools.datagen.QueryDef#getWhereClause <em>Where Clause</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Where Clause</em>'.
+	 * @see it.csi.mddtools.datagen.QueryDef#getWhereClause()
+	 * @see #getQueryDef()
+	 * @generated
+	 */
+	EReference getQueryDef_WhereClause();
+
+	/**
+	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.SelectClause <em>Select Clause</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Select Clause</em>'.
+	 * @see it.csi.mddtools.datagen.SelectClause
+	 * @generated
+	 */
+	EClass getSelectClause();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link it.csi.mddtools.datagen.SelectClause#getColumns <em>Columns</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Columns</em>'.
+	 * @see it.csi.mddtools.datagen.SelectClause#getColumns()
+	 * @see #getSelectClause()
+	 * @generated
+	 */
+	EReference getSelectClause_Columns();
+
+	/**
+	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.QResultColumn <em>QResult Column</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>QResult Column</em>'.
+	 * @see it.csi.mddtools.datagen.QResultColumn
+	 * @generated
+	 */
+	EClass getQResultColumn();
+
+	/**
+	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.QTableColumn <em>QTable Column</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>QTable Column</em>'.
+	 * @see it.csi.mddtools.datagen.QTableColumn
+	 * @generated
+	 */
+	EClass getQTableColumn();
+
+	/**
+	 * Returns the meta object for the reference '{@link it.csi.mddtools.datagen.QTableColumn#getQtable <em>Qtable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Qtable</em>'.
+	 * @see it.csi.mddtools.datagen.QTableColumn#getQtable()
+	 * @see #getQTableColumn()
+	 * @generated
+	 */
+	EReference getQTableColumn_Qtable();
+
+	/**
+	 * Returns the meta object for the reference '{@link it.csi.mddtools.datagen.QTableColumn#getColumn <em>Column</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Column</em>'.
+	 * @see it.csi.mddtools.datagen.QTableColumn#getColumn()
+	 * @see #getQTableColumn()
+	 * @generated
+	 */
+	EReference getQTableColumn_Column();
+
+	/**
+	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.QCalculatedColumn <em>QCalculated Column</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>QCalculated Column</em>'.
+	 * @see it.csi.mddtools.datagen.QCalculatedColumn
+	 * @generated
+	 */
+	EClass getQCalculatedColumn();
+
+	/**
+	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.FromClause <em>From Clause</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>From Clause</em>'.
+	 * @see it.csi.mddtools.datagen.FromClause
+	 * @generated
+	 */
+	EClass getFromClause();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link it.csi.mddtools.datagen.FromClause#getTables <em>Tables</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Tables</em>'.
+	 * @see it.csi.mddtools.datagen.FromClause#getTables()
+	 * @see #getFromClause()
+	 * @generated
+	 */
+	EReference getFromClause_Tables();
+
+	/**
+	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.QTable <em>QTable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>QTable</em>'.
+	 * @see it.csi.mddtools.datagen.QTable
+	 * @generated
+	 */
+	EClass getQTable();
+
+	/**
+	 * Returns the meta object for the reference '{@link it.csi.mddtools.datagen.QTable#getTable <em>Table</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Table</em>'.
+	 * @see it.csi.mddtools.datagen.QTable#getTable()
+	 * @see #getQTable()
+	 * @generated
+	 */
+	EReference getQTable_Table();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.csi.mddtools.datagen.QTable#getAliasName <em>Alias Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Alias Name</em>'.
+	 * @see it.csi.mddtools.datagen.QTable#getAliasName()
+	 * @see #getQTable()
+	 * @generated
+	 */
+	EAttribute getQTable_AliasName();
+
+	/**
+	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.JoinClause <em>Join Clause</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Join Clause</em>'.
+	 * @see it.csi.mddtools.datagen.JoinClause
+	 * @generated
+	 */
+	EClass getJoinClause();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link it.csi.mddtools.datagen.JoinClause#getCriteria <em>Criteria</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Criteria</em>'.
+	 * @see it.csi.mddtools.datagen.JoinClause#getCriteria()
+	 * @see #getJoinClause()
+	 * @generated
+	 */
+	EReference getJoinClause_Criteria();
+
+	/**
+	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.JoinCriterion <em>Join Criterion</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Join Criterion</em>'.
+	 * @see it.csi.mddtools.datagen.JoinCriterion
+	 * @generated
+	 */
+	EClass getJoinCriterion();
+
+	/**
+	 * Returns the meta object for the reference '{@link it.csi.mddtools.datagen.JoinCriterion#getLeftTable <em>Left Table</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Left Table</em>'.
+	 * @see it.csi.mddtools.datagen.JoinCriterion#getLeftTable()
+	 * @see #getJoinCriterion()
+	 * @generated
+	 */
+	EReference getJoinCriterion_LeftTable();
+
+	/**
+	 * Returns the meta object for the reference '{@link it.csi.mddtools.datagen.JoinCriterion#getLeftColumn <em>Left Column</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Left Column</em>'.
+	 * @see it.csi.mddtools.datagen.JoinCriterion#getLeftColumn()
+	 * @see #getJoinCriterion()
+	 * @generated
+	 */
+	EReference getJoinCriterion_LeftColumn();
+
+	/**
+	 * Returns the meta object for the reference '{@link it.csi.mddtools.datagen.JoinCriterion#getRightTable <em>Right Table</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Right Table</em>'.
+	 * @see it.csi.mddtools.datagen.JoinCriterion#getRightTable()
+	 * @see #getJoinCriterion()
+	 * @generated
+	 */
+	EReference getJoinCriterion_RightTable();
+
+	/**
+	 * Returns the meta object for the reference '{@link it.csi.mddtools.datagen.JoinCriterion#getRightColumn <em>Right Column</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Right Column</em>'.
+	 * @see it.csi.mddtools.datagen.JoinCriterion#getRightColumn()
+	 * @see #getJoinCriterion()
+	 * @generated
+	 */
+	EReference getJoinCriterion_RightColumn();
+
+	/**
+	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.WhereClause <em>Where Clause</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Where Clause</em>'.
+	 * @see it.csi.mddtools.datagen.WhereClause
+	 * @generated
+	 */
+	EClass getWhereClause();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.csi.mddtools.datagen.WhereClause#getFreetextExpression <em>Freetext Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Freetext Expression</em>'.
+	 * @see it.csi.mddtools.datagen.WhereClause#getFreetextExpression()
+	 * @see #getWhereClause()
+	 * @generated
+	 */
+	EAttribute getWhereClause_FreetextExpression();
 
 	/**
 	 * Returns the meta object for enum '{@link it.csi.mddtools.datagen.CacheabilityTypes <em>Cacheability Types</em>}'.
@@ -2216,6 +2846,14 @@ public interface DatagenPackage extends EPackage {
 		EAttribute CUSTOM_FINDER__CUSTOM_FROM = eINSTANCE.getCustomFinder_CustomFrom();
 
 		/**
+		 * The meta object literal for the '<em><b>Query Definition</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CUSTOM_FINDER__QUERY_DEFINITION = eINSTANCE.getCustomFinder_QueryDefinition();
+
+		/**
 		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.UpdatersImpl <em>Updaters</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2396,6 +3034,234 @@ public interface DatagenPackage extends EPackage {
 		 * @generated
 		 */
 		EReference LOOKUP_RESOLVER__SUPPLIER_DAO = eINSTANCE.getLookupResolver_SupplierDAO();
+
+		/**
+		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.QueryDefImpl <em>Query Def</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see it.csi.mddtools.datagen.impl.QueryDefImpl
+		 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getQueryDef()
+		 * @generated
+		 */
+		EClass QUERY_DEF = eINSTANCE.getQueryDef();
+
+		/**
+		 * The meta object literal for the '<em><b>Select Clause</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference QUERY_DEF__SELECT_CLAUSE = eINSTANCE.getQueryDef_SelectClause();
+
+		/**
+		 * The meta object literal for the '<em><b>From Clause</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference QUERY_DEF__FROM_CLAUSE = eINSTANCE.getQueryDef_FromClause();
+
+		/**
+		 * The meta object literal for the '<em><b>Join Clause</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference QUERY_DEF__JOIN_CLAUSE = eINSTANCE.getQueryDef_JoinClause();
+
+		/**
+		 * The meta object literal for the '<em><b>Where Clause</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference QUERY_DEF__WHERE_CLAUSE = eINSTANCE.getQueryDef_WhereClause();
+
+		/**
+		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.SelectClauseImpl <em>Select Clause</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see it.csi.mddtools.datagen.impl.SelectClauseImpl
+		 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getSelectClause()
+		 * @generated
+		 */
+		EClass SELECT_CLAUSE = eINSTANCE.getSelectClause();
+
+		/**
+		 * The meta object literal for the '<em><b>Columns</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SELECT_CLAUSE__COLUMNS = eINSTANCE.getSelectClause_Columns();
+
+		/**
+		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.QResultColumnImpl <em>QResult Column</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see it.csi.mddtools.datagen.impl.QResultColumnImpl
+		 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getQResultColumn()
+		 * @generated
+		 */
+		EClass QRESULT_COLUMN = eINSTANCE.getQResultColumn();
+
+		/**
+		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.QTableColumnImpl <em>QTable Column</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see it.csi.mddtools.datagen.impl.QTableColumnImpl
+		 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getQTableColumn()
+		 * @generated
+		 */
+		EClass QTABLE_COLUMN = eINSTANCE.getQTableColumn();
+
+		/**
+		 * The meta object literal for the '<em><b>Qtable</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference QTABLE_COLUMN__QTABLE = eINSTANCE.getQTableColumn_Qtable();
+
+		/**
+		 * The meta object literal for the '<em><b>Column</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference QTABLE_COLUMN__COLUMN = eINSTANCE.getQTableColumn_Column();
+
+		/**
+		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.QCalculatedColumnImpl <em>QCalculated Column</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see it.csi.mddtools.datagen.impl.QCalculatedColumnImpl
+		 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getQCalculatedColumn()
+		 * @generated
+		 */
+		EClass QCALCULATED_COLUMN = eINSTANCE.getQCalculatedColumn();
+
+		/**
+		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.FromClauseImpl <em>From Clause</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see it.csi.mddtools.datagen.impl.FromClauseImpl
+		 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getFromClause()
+		 * @generated
+		 */
+		EClass FROM_CLAUSE = eINSTANCE.getFromClause();
+
+		/**
+		 * The meta object literal for the '<em><b>Tables</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FROM_CLAUSE__TABLES = eINSTANCE.getFromClause_Tables();
+
+		/**
+		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.QTableImpl <em>QTable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see it.csi.mddtools.datagen.impl.QTableImpl
+		 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getQTable()
+		 * @generated
+		 */
+		EClass QTABLE = eINSTANCE.getQTable();
+
+		/**
+		 * The meta object literal for the '<em><b>Table</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference QTABLE__TABLE = eINSTANCE.getQTable_Table();
+
+		/**
+		 * The meta object literal for the '<em><b>Alias Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute QTABLE__ALIAS_NAME = eINSTANCE.getQTable_AliasName();
+
+		/**
+		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.JoinClauseImpl <em>Join Clause</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see it.csi.mddtools.datagen.impl.JoinClauseImpl
+		 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getJoinClause()
+		 * @generated
+		 */
+		EClass JOIN_CLAUSE = eINSTANCE.getJoinClause();
+
+		/**
+		 * The meta object literal for the '<em><b>Criteria</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JOIN_CLAUSE__CRITERIA = eINSTANCE.getJoinClause_Criteria();
+
+		/**
+		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.JoinCriterionImpl <em>Join Criterion</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see it.csi.mddtools.datagen.impl.JoinCriterionImpl
+		 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getJoinCriterion()
+		 * @generated
+		 */
+		EClass JOIN_CRITERION = eINSTANCE.getJoinCriterion();
+
+		/**
+		 * The meta object literal for the '<em><b>Left Table</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JOIN_CRITERION__LEFT_TABLE = eINSTANCE.getJoinCriterion_LeftTable();
+
+		/**
+		 * The meta object literal for the '<em><b>Left Column</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JOIN_CRITERION__LEFT_COLUMN = eINSTANCE.getJoinCriterion_LeftColumn();
+
+		/**
+		 * The meta object literal for the '<em><b>Right Table</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JOIN_CRITERION__RIGHT_TABLE = eINSTANCE.getJoinCriterion_RightTable();
+
+		/**
+		 * The meta object literal for the '<em><b>Right Column</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JOIN_CRITERION__RIGHT_COLUMN = eINSTANCE.getJoinCriterion_RightColumn();
+
+		/**
+		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.WhereClauseImpl <em>Where Clause</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see it.csi.mddtools.datagen.impl.WhereClauseImpl
+		 * @see it.csi.mddtools.datagen.impl.DatagenPackageImpl#getWhereClause()
+		 * @generated
+		 */
+		EClass WHERE_CLAUSE = eINSTANCE.getWhereClause();
+
+		/**
+		 * The meta object literal for the '<em><b>Freetext Expression</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute WHERE_CLAUSE__FREETEXT_EXPRESSION = eINSTANCE.getWhereClause_FreetextExpression();
 
 		/**
 		 * The meta object literal for the '{@link it.csi.mddtools.datagen.CacheabilityTypes <em>Cacheability Types</em>}' enum.

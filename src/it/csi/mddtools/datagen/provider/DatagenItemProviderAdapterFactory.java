@@ -504,6 +504,213 @@ public class DatagenItemProviderAdapterFactory extends DatagenAdapterFactory imp
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link it.csi.mddtools.datagen.QueryDef} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected QueryDefItemProvider queryDefItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.csi.mddtools.datagen.QueryDef}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createQueryDefAdapter() {
+		if (queryDefItemProvider == null) {
+			queryDefItemProvider = new QueryDefItemProvider(this);
+		}
+
+		return queryDefItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link it.csi.mddtools.datagen.SelectClause} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SelectClauseItemProvider selectClauseItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.csi.mddtools.datagen.SelectClause}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createSelectClauseAdapter() {
+		if (selectClauseItemProvider == null) {
+			selectClauseItemProvider = new SelectClauseItemProvider(this);
+		}
+
+		return selectClauseItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link it.csi.mddtools.datagen.QTableColumn} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected QTableColumnItemProvider qTableColumnItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.csi.mddtools.datagen.QTableColumn}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createQTableColumnAdapter() {
+		if (qTableColumnItemProvider == null) {
+			qTableColumnItemProvider = new QTableColumnItemProvider(this);
+		}
+
+		return qTableColumnItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link it.csi.mddtools.datagen.QCalculatedColumn} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected QCalculatedColumnItemProvider qCalculatedColumnItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.csi.mddtools.datagen.QCalculatedColumn}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createQCalculatedColumnAdapter() {
+		if (qCalculatedColumnItemProvider == null) {
+			qCalculatedColumnItemProvider = new QCalculatedColumnItemProvider(this);
+		}
+
+		return qCalculatedColumnItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link it.csi.mddtools.datagen.FromClause} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected FromClauseItemProvider fromClauseItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.csi.mddtools.datagen.FromClause}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createFromClauseAdapter() {
+		if (fromClauseItemProvider == null) {
+			fromClauseItemProvider = new FromClauseItemProvider(this);
+		}
+
+		return fromClauseItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link it.csi.mddtools.datagen.QTable} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected QTableItemProvider qTableItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.csi.mddtools.datagen.QTable}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createQTableAdapter() {
+		if (qTableItemProvider == null) {
+			qTableItemProvider = new QTableItemProvider(this);
+		}
+
+		return qTableItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link it.csi.mddtools.datagen.JoinClause} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected JoinClauseItemProvider joinClauseItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.csi.mddtools.datagen.JoinClause}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createJoinClauseAdapter() {
+		if (joinClauseItemProvider == null) {
+			joinClauseItemProvider = new JoinClauseItemProvider(this);
+		}
+
+		return joinClauseItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link it.csi.mddtools.datagen.JoinCriterion} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected JoinCriterionItemProvider joinCriterionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.csi.mddtools.datagen.JoinCriterion}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createJoinCriterionAdapter() {
+		if (joinCriterionItemProvider == null) {
+			joinCriterionItemProvider = new JoinCriterionItemProvider(this);
+		}
+
+		return joinCriterionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link it.csi.mddtools.datagen.WhereClause} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected WhereClauseItemProvider whereClauseItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.csi.mddtools.datagen.WhereClause}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createWhereClauseAdapter() {
+		if (whereClauseItemProvider == null) {
+			whereClauseItemProvider = new WhereClauseItemProvider(this);
+		}
+
+		return whereClauseItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link it.csi.mddtools.datagen.Finders} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -692,6 +899,15 @@ public class DatagenItemProviderAdapterFactory extends DatagenAdapterFactory imp
 		if (customDeleterItemProvider != null) customDeleterItemProvider.dispose();
 		if (lookupResolversItemProvider != null) lookupResolversItemProvider.dispose();
 		if (lookupResolverItemProvider != null) lookupResolverItemProvider.dispose();
+		if (queryDefItemProvider != null) queryDefItemProvider.dispose();
+		if (selectClauseItemProvider != null) selectClauseItemProvider.dispose();
+		if (qTableColumnItemProvider != null) qTableColumnItemProvider.dispose();
+		if (qCalculatedColumnItemProvider != null) qCalculatedColumnItemProvider.dispose();
+		if (fromClauseItemProvider != null) fromClauseItemProvider.dispose();
+		if (qTableItemProvider != null) qTableItemProvider.dispose();
+		if (joinClauseItemProvider != null) joinClauseItemProvider.dispose();
+		if (joinCriterionItemProvider != null) joinCriterionItemProvider.dispose();
+		if (whereClauseItemProvider != null) whereClauseItemProvider.dispose();
 	}
 
 }

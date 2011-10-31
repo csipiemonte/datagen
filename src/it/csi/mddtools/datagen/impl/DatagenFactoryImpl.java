@@ -96,6 +96,15 @@ public class DatagenFactoryImpl extends EFactoryImpl implements DatagenFactory {
 			case DatagenPackage.CUSTOM_DELETER: return (EObject)createCustomDeleter();
 			case DatagenPackage.LOOKUP_RESOLVERS: return (EObject)createLookupResolvers();
 			case DatagenPackage.LOOKUP_RESOLVER: return (EObject)createLookupResolver();
+			case DatagenPackage.QUERY_DEF: return (EObject)createQueryDef();
+			case DatagenPackage.SELECT_CLAUSE: return (EObject)createSelectClause();
+			case DatagenPackage.QTABLE_COLUMN: return (EObject)createQTableColumn();
+			case DatagenPackage.QCALCULATED_COLUMN: return (EObject)createQCalculatedColumn();
+			case DatagenPackage.FROM_CLAUSE: return (EObject)createFromClause();
+			case DatagenPackage.QTABLE: return (EObject)createQTable();
+			case DatagenPackage.JOIN_CLAUSE: return (EObject)createJoinClause();
+			case DatagenPackage.JOIN_CRITERION: return (EObject)createJoinCriterion();
+			case DatagenPackage.WHERE_CLAUSE: return (EObject)createWhereClause();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -309,6 +318,96 @@ public class DatagenFactoryImpl extends EFactoryImpl implements DatagenFactory {
 	public LookupResolver createLookupResolver() {
 		LookupResolverImpl lookupResolver = new LookupResolverImpl();
 		return lookupResolver;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public QueryDef createQueryDef() {
+		QueryDefImpl queryDef = new QueryDefImpl();
+		return queryDef;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SelectClause createSelectClause() {
+		SelectClauseImpl selectClause = new SelectClauseImpl();
+		return selectClause;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public QTableColumn createQTableColumn() {
+		QTableColumnImpl qTableColumn = new QTableColumnImpl();
+		return qTableColumn;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public QCalculatedColumn createQCalculatedColumn() {
+		QCalculatedColumnImpl qCalculatedColumn = new QCalculatedColumnImpl();
+		return qCalculatedColumn;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FromClause createFromClause() {
+		FromClauseImpl fromClause = new FromClauseImpl();
+		return fromClause;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public QTable createQTable() {
+		QTableImpl qTable = new QTableImpl();
+		return qTable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JoinClause createJoinClause() {
+		JoinClauseImpl joinClause = new JoinClauseImpl();
+		return joinClause;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JoinCriterion createJoinCriterion() {
+		JoinCriterionImpl joinCriterion = new JoinCriterionImpl();
+		return joinCriterion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public WhereClause createWhereClause() {
+		WhereClauseImpl whereClause = new WhereClauseImpl();
+		return whereClause;
 	}
 
 	/**
