@@ -13,6 +13,10 @@ context DBAccessModel ERROR "codice componente mancante" :
 context DataAccessObject ERROR "Occorre specificare il nome del DAO:" :
 	!isNullOrEmpty(name);
 
+//check sulla presenza del nome del Dao Package nel modello
+context DaoPackage ERROR "Occorre specificare il nome del Dao Package:":
+	!isNullOrEmpty(name);
+
 context DataAccessObject if (pkGenerator != null && pkGenerator.metaType == SequencePKGenerator) 
 ERROR "Il SequencePKGenerator è utilizzabile solo con PK di 1 sola colonna":
 	mainTable.primaryKey.includedColumns.size == 1;
@@ -59,7 +63,7 @@ context CustomFinder if (customSelect) ERROR "La clausola distinct è incompatibi
 context Deleter if (metaType != DeleteByPK) ERROR "E' necessario specificare il nome dei deleter (escluso il DeleteByPK)"+((DataAccessObject)(this.eContainer.eContainer)).name:
 	!isNullOrEmpty(name);
 	
-context MultiResFinder if (!isNullOrEmpty(distinct) && orderSpecs!=null && !isNullOrEmpty(orderSpecs.specs)) ERROR "Se la ricerca per distinct è abilitata, tutte le eventuali colonne presenti nella OrderSpecs devono essere presenti anche in distinct. "+((DataAccessObject)(this.eContainer.eContainer)).name:
+context MultiResFinder if (!isListNullOrEmpty(distinct) && orderSpecs!=null && !isListNullOrEmpty(orderSpecs.specs)) ERROR "Se la ricerca per distinct è abilitata, tutte le eventuali colonne presenti nella OrderSpecs devono essere presenti anche in distinct. "+((DataAccessObject)(this.eContainer.eContainer)).name:
 	areDistinctAndOrderByClauseConsistent(distinct,orderSpecs.specs);
 
 context LookupResolver ERROR "I lookup-resolver devono specificare la FK risolta:"+loc() :

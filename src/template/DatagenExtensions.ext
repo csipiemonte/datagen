@@ -480,7 +480,7 @@ String getColumnModifier(TableColumn col) :
 boolean isNullOrEmpty(String s) :
 	s==null || s.length==0;
 	
-boolean isNullOrEmpty(List l) :
+boolean isListNullOrEmpty(List l) :
 	l==null || l.size==0;	
 
 String getPluginVersion() : JAVA
