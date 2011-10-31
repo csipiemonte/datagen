@@ -30,6 +30,7 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 
 /**
@@ -179,6 +180,13 @@ public class QTableColumnItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(QTableColumn.class)) {
+			case DatagenPackage.QTABLE_COLUMN__QTABLE:
+			case DatagenPackage.QTABLE_COLUMN__COLUMN:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 

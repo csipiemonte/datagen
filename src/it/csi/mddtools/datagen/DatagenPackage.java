@@ -643,13 +643,22 @@ public interface DatagenPackage extends EPackage {
 	int ORDER_SPEC__ASCENDING = 1;
 
 	/**
+	 * The feature id for the '<em><b>Qcolumn</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDER_SPEC__QCOLUMN = 2;
+
+	/**
 	 * The number of structural features of the '<em>Order Spec</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORDER_SPEC_FEATURE_COUNT = 2;
+	int ORDER_SPEC_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.OrderSpecsImpl <em>Order Specs</em>}' class.
@@ -1835,6 +1844,17 @@ public interface DatagenPackage extends EPackage {
 	EAttribute getOrderSpec_Ascending();
 
 	/**
+	 * Returns the meta object for the reference '{@link it.csi.mddtools.datagen.OrderSpec#getQcolumn <em>Qcolumn</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Qcolumn</em>'.
+	 * @see it.csi.mddtools.datagen.OrderSpec#getQcolumn()
+	 * @see #getOrderSpec()
+	 * @generated
+	 */
+	EReference getOrderSpec_Qcolumn();
+
+	/**
 	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.OrderSpecs <em>Order Specs</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2762,6 +2782,14 @@ public interface DatagenPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ORDER_SPEC__ASCENDING = eINSTANCE.getOrderSpec_Ascending();
+
+		/**
+		 * The meta object literal for the '<em><b>Qcolumn</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ORDER_SPEC__QCOLUMN = eINSTANCE.getOrderSpec_Qcolumn();
 
 		/**
 		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.OrderSpecsImpl <em>Order Specs</em>}' class.

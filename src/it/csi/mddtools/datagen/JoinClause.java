@@ -11,6 +11,11 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Join Clause</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Elenco (opzionale) dei cirteri di <i>join</i> che devono essere applicati alle
+ * tabelle referenziate nella <b>FromClause</b>.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

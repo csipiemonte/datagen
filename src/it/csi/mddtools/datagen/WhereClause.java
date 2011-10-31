@@ -10,6 +10,12 @@ import org.eclipse.emf.cdo.CDOObject;
  * A representation of the model object '<em><b>Where Clause</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Determina la condizione di selezione della query, che va ad aggiungersi all'eventuale
+ * criterio di <i>join</i>.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -31,6 +37,12 @@ public interface WhereClause extends CDOObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Espressione SQL scritta a mano che determina la clausola where (in aggiunta alla
+	 * eventuale espressione derivante dai criteri di JOIN. Non si deve aggingere nessun
+	 * &quot;AND&quot; iniziale e non viene effettuato nessun controllo sulla correttezza 
+	 * della sintassi/semantica.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Freetext Expression</em>' attribute.
 	 * @see #setFreetextExpression(String)
 	 * @see it.csi.mddtools.datagen.DatagenPackage#getWhereClause_FreetextExpression()

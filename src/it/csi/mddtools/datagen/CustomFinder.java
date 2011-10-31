@@ -146,6 +146,13 @@ public interface CustomFinder extends MultiResFinder {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Definizione della query da eseguire. Utilizzando questo tipo di modellazione 
+	 * &egrave; possibile modellare interamente la query senza limitazioni sulla struttura
+	 * dei campi in output, delle tabelle coinvolte, dei criteri di join.
+	 * L'utilizzo di questa modalit&agrave; inibisce la possibilit&agrave;/necessit&agrave;
+	 * di scrivere codice java per implementare la query.  
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Query Definition</em>' containment reference.
 	 * @see #setQueryDefinition(QueryDef)
 	 * @see it.csi.mddtools.datagen.DatagenPackage#getCustomFinder_QueryDefinition()

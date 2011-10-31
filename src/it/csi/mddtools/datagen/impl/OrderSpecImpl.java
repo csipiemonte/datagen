@@ -23,6 +23,7 @@ package it.csi.mddtools.datagen.impl;
 import it.csi.mddtools.datagen.DatagenPackage;
 import it.csi.mddtools.datagen.OrderSpec;
 
+import it.csi.mddtools.datagen.QTableColumn;
 import it.csi.mddtools.rdbmdl.Column;
 
 import org.eclipse.emf.ecore.EClass;
@@ -38,6 +39,7 @@ import org.eclipse.emf.internal.cdo.CDOObjectImpl;
  * <ul>
  *   <li>{@link it.csi.mddtools.datagen.impl.OrderSpecImpl#getColumn <em>Column</em>}</li>
  *   <li>{@link it.csi.mddtools.datagen.impl.OrderSpecImpl#isAscending <em>Ascending</em>}</li>
+ *   <li>{@link it.csi.mddtools.datagen.impl.OrderSpecImpl#getQcolumn <em>Qcolumn</em>}</li>
  * </ul>
  * </p>
  *
@@ -107,6 +109,24 @@ public class OrderSpecImpl extends CDOObjectImpl implements OrderSpec {
 	 */
 	public void setAscending(boolean newAscending) {
 		eSet(DatagenPackage.Literals.ORDER_SPEC__ASCENDING, newAscending);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public QTableColumn getQcolumn() {
+		return (QTableColumn)eGet(DatagenPackage.Literals.ORDER_SPEC__QCOLUMN, true);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setQcolumn(QTableColumn newQcolumn) {
+		eSet(DatagenPackage.Literals.ORDER_SPEC__QCOLUMN, newQcolumn);
 	}
 
 } //OrderSpecImpl

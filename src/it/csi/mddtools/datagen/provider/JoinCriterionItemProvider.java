@@ -31,6 +31,7 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
  * This is the item provider adapter for a {@link it.csi.mddtools.datagen.JoinCriterion} object.
@@ -248,6 +249,15 @@ public class JoinCriterionItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(JoinCriterion.class)) {
+			case DatagenPackage.JOIN_CRITERION__LEFT_TABLE:
+			case DatagenPackage.JOIN_CRITERION__LEFT_COLUMN:
+			case DatagenPackage.JOIN_CRITERION__RIGHT_TABLE:
+			case DatagenPackage.JOIN_CRITERION__RIGHT_COLUMN:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 

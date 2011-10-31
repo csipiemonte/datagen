@@ -12,6 +12,21 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Select Clause</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Determina l'elenco delle colonne che costituiscono il risultato della query.
+ * Le colonne possono essere di due tipi: 
+ * <ul>
+ * <li>colonne appartenenti ad una qualsiasi delle tabelle coinvolte (ovvero quelle
+ * referenziate nella <b>FromClause</b></li>
+ * <li>colonne <i>calcolate</i>, ottenute ad esempio applicando funzioni di
+ * aggregazione a colonne effettive (es. somma), oppure applicando altri tipi di funzioni ad
+ * una o pi&ugrave; colonne effettive (es. concatenzaione)</li>
+ * </ul>
+ * Il DTO associato al <b>CustomFinder</b> che utlizza questo tipo di costrutto
+ * conterr&agrave; i campi necessari a contenenre adeguatamente i risultati della
+ * query e non sar&agrave; il DTO classico associato al DAO.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

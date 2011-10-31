@@ -719,6 +719,15 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getOrderSpec_Qcolumn() {
+		return (EReference)orderSpecEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getOrderSpecs() {
 		return orderSpecsEClass;
 	}
@@ -1319,6 +1328,7 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		orderSpecEClass = createEClass(ORDER_SPEC);
 		createEReference(orderSpecEClass, ORDER_SPEC__COLUMN);
 		createEAttribute(orderSpecEClass, ORDER_SPEC__ASCENDING);
+		createEReference(orderSpecEClass, ORDER_SPEC__QCOLUMN);
 
 		orderSpecsEClass = createEClass(ORDER_SPECS);
 		createEReference(orderSpecsEClass, ORDER_SPECS__SPECS);
@@ -1504,6 +1514,7 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		initEClass(orderSpecEClass, OrderSpec.class, "OrderSpec", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOrderSpec_Column(), theRdbmdlPackage.getColumn(), null, "column", null, 0, 1, OrderSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getOrderSpec_Ascending(), ecorePackage.getEBoolean(), "ascending", "true", 0, 1, OrderSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOrderSpec_Qcolumn(), this.getQTableColumn(), null, "qcolumn", null, 0, 1, OrderSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(orderSpecsEClass, OrderSpecs.class, "OrderSpecs", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOrderSpecs_Specs(), this.getOrderSpec(), null, "specs", null, 0, -1, OrderSpecs.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

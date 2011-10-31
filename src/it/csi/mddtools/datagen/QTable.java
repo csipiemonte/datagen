@@ -12,6 +12,10 @@ import org.eclipse.emf.cdo.CDOObject;
  * A representation of the model object '<em><b>QTable</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Rappresenta una <b>Table</b> utilizzata all'interno di una <i>query</i>.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -34,6 +38,9 @@ public interface QTable extends CDOObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * La tabella effettiva dello schema relazionale.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Table</em>' reference.
 	 * @see #setTable(Table)
 	 * @see it.csi.mddtools.datagen.DatagenPackage#getQTable_Table()
@@ -60,6 +67,11 @@ public interface QTable extends CDOObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Alias opzionale attribuibile alla tabella nella query. Serve essenzialmente in quei
+	 * casi in cui una stessa tabella è referenziata pi&ugrave; di una volta nella clausola
+	 * from.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Alias Name</em>' attribute.
 	 * @see #setAliasName(String)
 	 * @see it.csi.mddtools.datagen.DatagenPackage#getQTable_AliasName()

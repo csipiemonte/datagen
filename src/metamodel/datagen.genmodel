@@ -67,6 +67,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#_g44oy-T_EeCfL57xkAM0Kw"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#_g44oz-T_EeCfL57xkAM0Kw"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#_g44o0-T_EeCfL57xkAM0Kw"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//CustomFinder/queryDefinition"/>
     </genClasses>
     <genClasses ecoreClass="datagen.ecore#_g44o1-T_EeCfL57xkAM0Kw">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#_g44o2uT_EeCfL57xkAM0Kw"/>
@@ -94,6 +95,40 @@
     <genClasses ecoreClass="datagen.ecore#//LookupResolver">
       <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#//LookupResolver/foreignKey"/>
       <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#//LookupResolver/supplierDAO"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#//QueryDef">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//QueryDef/selectClause"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//QueryDef/fromClause"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//QueryDef/joinClause"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//QueryDef/whereClause"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#//SelectClause">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//SelectClause/columns"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="datagen.ecore#//QResultColumn"/>
+    <genClasses ecoreClass="datagen.ecore#//QTableColumn">
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#//QTableColumn/qtable"/>
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#//QTableColumn/column"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#//QCalculatedColumn"/>
+    <genClasses ecoreClass="datagen.ecore#//FromClause">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//FromClause/tables"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#//QTable">
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#//QTable/table"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#//QTable/aliasName"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#//JoinClause">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//JoinClause/criteria"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#//JoinCriterion">
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#//JoinCriterion/leftTable"/>
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#//JoinCriterion/leftColumn"/>
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#//JoinCriterion/rightTable"/>
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#//JoinCriterion/rightColumn"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#//WhereClause">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#//WhereClause/freetextExpression"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

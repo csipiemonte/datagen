@@ -38,6 +38,7 @@ import org.eclipse.emf.cdo.CDOObject;
  * <ul>
  *   <li>{@link it.csi.mddtools.datagen.OrderSpec#getColumn <em>Column</em>}</li>
  *   <li>{@link it.csi.mddtools.datagen.OrderSpec#isAscending <em>Ascending</em>}</li>
+ *   <li>{@link it.csi.mddtools.datagen.OrderSpec#getQcolumn <em>Qcolumn</em>}</li>
  * </ul>
  * </p>
  *
@@ -106,5 +107,32 @@ public interface OrderSpec extends CDOObject {
 	 * @generated
 	 */
 	void setAscending(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Qcolumn</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * La colonna calcolata oggetto dell'ordinamento (utilizzare questo campo in alternativa al
+	 * campo <i>column</i> e solo in un <b>CustomFinder</b> con 
+	 * <b>QueryDef<b>.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Qcolumn</em>' reference.
+	 * @see #setQcolumn(QTableColumn)
+	 * @see it.csi.mddtools.datagen.DatagenPackage#getOrderSpec_Qcolumn()
+	 * @model
+	 * @generated
+	 */
+	QTableColumn getQcolumn();
+
+	/**
+	 * Sets the value of the '{@link it.csi.mddtools.datagen.OrderSpec#getQcolumn <em>Qcolumn</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Qcolumn</em>' reference.
+	 * @see #getQcolumn()
+	 * @generated
+	 */
+	void setQcolumn(QTableColumn value);
 
 } // OrderSpec

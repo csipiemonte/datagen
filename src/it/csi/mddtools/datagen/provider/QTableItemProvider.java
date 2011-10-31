@@ -148,6 +148,7 @@ public class QTableItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(QTable.class)) {
+			case DatagenPackage.QTABLE__TABLE:
 			case DatagenPackage.QTABLE__ALIAS_NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

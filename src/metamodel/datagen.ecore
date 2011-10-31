@@ -207,6 +207,11 @@
         <details xmi:id="_g44os-T_EeCfL57xkAM0Kw" key="documentation" value="Specifica la direzione di ordinamento: se il valore &amp;egrave; _true_&#xD;&#xA;l'ordinamento &amp;egrave; ascendente, altrimenti discendente"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="qcolumn" eType="#//QTableColumn">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="La colonna calcolata oggetto dell'ordinamento (utilizzare questo campo in alternativa al&#xD;&#xA;campo &lt;i>column&lt;/i> e solo in un &lt;b>CustomFinder&lt;/b> con &#xD;&#xA;&lt;b>QueryDef&lt;b>."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="_g44otOT_EeCfL57xkAM0Kw" name="OrderSpecs">
     <eAnnotations xmi:id="_g44oteT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
@@ -263,7 +268,11 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="queryDefinition" eType="#//QueryDef"
-        containment="true"/>
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definizione della query da eseguire. Utilizzando questo tipo di modellazione &#xD;&#xA;&amp;egrave; possibile modellare interamente la query senza limitazioni sulla struttura&#xD;&#xA;dei campi in output, delle tabelle coinvolte, dei criteri di join.&#xD;&#xA;L'utilizzo di questa modalit&amp;agrave; inibisce la possibilit&amp;agrave;/necessit&amp;agrave;&#xD;&#xA;di scrivere codice java per implementare la query.  "/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="_g44o1-T_EeCfL57xkAM0Kw" name="Updaters">
     <eAnnotations xmi:id="_g44o2OT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
@@ -363,16 +372,34 @@
         literal="ALMOST_STABLE_DATA"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="QueryDef">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definizione della query da eseguire. Utilizzando questo tipo di modellazione &#xD;&#xA;&amp;egrave; possibile modellare interamente la query senza limitazioni sulla struttura&#xD;&#xA;dei campi in output, delle tabelle coinvolte, dei criteri di join.&#xD;&#xA;L'utilizzo di questa modalit&amp;agrave; inibisce la possibilit&amp;agrave;/necessit&amp;agrave;&#xD;&#xA;di scrivere codice java per implementare la query.  "/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="selectClause" eType="#//SelectClause"
-        containment="true"/>
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Determina l'elenco delle colonne che costituiscono il risultato della query.&#xD;&#xA;Le colonne possono essere di due tipi: &#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>colonne appartenenti ad una qualsiasi delle tabelle coinvolte (ovvero quelle&#xD;&#xA;referenziate nella &lt;b>FromClause&lt;/b>&lt;/li>&#xD;&#xA;&lt;li>colonne &lt;i>calcolate&lt;/i>, ottenute ad esempio applicando funzioni di&#xD;&#xA;aggregazione a colonne effettive (es. somma), oppure applicando altri tipi di funzioni ad&#xD;&#xA;una o pi&amp;ugrave; colonne effettive (es. concatenzaione)&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;Il DTO associato al &lt;b>CustomFinder&lt;/b> che utlizza questo tipo di costrutto&#xD;&#xA;conterr&amp;agrave; i campi necessari a contenenre adeguatamente i risultati della&#xD;&#xA;query e non sar&amp;agrave; il DTO classico associato al DAO."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="fromClause" eType="#//FromClause"
-        containment="true"/>
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Elenco delle tabelle incluse nella query. A ciascuna Tabella pu&amp;ograve; essere associato un &lt;i>alias&lt;/i>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="joinClause" eType="#//JoinClause"
-        containment="true"/>
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Elenco (opzionale) dei cirteri di &lt;i>join&lt;/i> che devono essere applicati alle&#xD;&#xA;tabelle referenziate nella &lt;b>FromClause&lt;/b>."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="whereClause" eType="#//WhereClause"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SelectClause">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Determina l'elenco delle colonne che costituiscono il risultato della query.&#xD;&#xA;Le colonne possono essere di due tipi: &#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>colonne appartenenti ad una qualsiasi delle tabelle coinvolte (ovvero quelle&#xD;&#xA;referenziate nella &lt;b>FromClause&lt;/b>&lt;/li>&#xD;&#xA;&lt;li>colonne &lt;i>calcolate&lt;/i>, ottenute ad esempio applicando funzioni di&#xD;&#xA;aggregazione a colonne effettive (es. somma), oppure applicando altri tipi di funzioni ad&#xD;&#xA;una o pi&amp;ugrave; colonne effettive (es. concatenzaione)&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;Il DTO associato al &lt;b>CustomFinder&lt;/b> che utlizza questo tipo di costrutto&#xD;&#xA;conterr&amp;agrave; i campi necessari a contenenre adeguatamente i risultati della&#xD;&#xA;query e non sar&amp;agrave; il DTO classico associato al DAO."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="columns" upperBound="-1"
         eType="#//QResultColumn" containment="true"/>
   </eClassifiers>
@@ -383,14 +410,31 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="QCalculatedColumn" eSuperTypes="#//QResultColumn"/>
   <eClassifiers xsi:type="ecore:EClass" name="FromClause">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Elenco delle tabelle incluse nella query. A ciascuna Tabella pu&amp;ograve; essere associato un &lt;i>alias&lt;/i>"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tables" upperBound="-1"
         eType="#//QTable" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="QTable">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="table" eType="ecore:EClass rdbmdl.ecore#//Table"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aliasName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Rappresenta una &lt;b>Table&lt;/b> utilizzata all'interno di una &lt;i>query&lt;/i>."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="table" eType="ecore:EClass rdbmdl.ecore#//Table">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="La tabella effettiva dello schema relazionale."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aliasName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Alias opzionale attribuibile alla tabella nella query. Serve essenzialmente in quei&#xD;&#xA;casi in cui una stessa tabella è referenziata pi&amp;ugrave; di una volta nella clausola&#xD;&#xA;from."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JoinClause">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Elenco (opzionale) dei cirteri di &lt;i>join&lt;/i> che devono essere applicati alle&#xD;&#xA;tabelle referenziate nella &lt;b>FromClause&lt;/b>."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="criteria" upperBound="-1"
         eType="#//JoinCriterion" containment="true"/>
   </eClassifiers>
@@ -401,6 +445,13 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="rightColumn" eType="ecore:EClass rdbmdl.ecore#//TableColumn"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="WhereClause">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="freetextExpression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Determina la condizione di selezione della query, che va ad aggiungersi all'eventuale&#xD;&#xA;criterio di &lt;i>join&lt;/i>.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="freetextExpression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Espressione SQL scritta a mano che determina la clausola where (in aggiunta alla&#xD;&#xA;eventuale espressione derivante dai criteri di JOIN. Non si deve aggingere nessun&#xD;&#xA;&amp;quot;AND&amp;quot; iniziale e non viene effettuato nessun controllo sulla correttezza &#xD;&#xA;della sintassi/semantica."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
 </ecore:EPackage>
