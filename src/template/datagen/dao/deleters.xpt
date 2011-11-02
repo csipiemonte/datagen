@@ -109,7 +109,7 @@ e le limitazioni secondo i termini della Licenza.
 	 * Returns all rows from the «dao.mainTable.name» table that match the criteria ''.
 	 * @generated
 	 */
-	public List<«getDtoClassName(dao)»> findAll() throws «getDaoExcClassName(dao)»
+	public List<«getDtoClassName(dao)»> findAll_«this.name»() throws «getDaoExcClassName(dao)»
 	«IF body-»
 	{
 		try {

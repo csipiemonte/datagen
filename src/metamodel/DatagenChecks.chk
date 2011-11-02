@@ -21,7 +21,7 @@ context DataAccessObject if (pkGenerator != null && pkGenerator.metaType == Sequ
 ERROR "Il SequencePKGenerator è utilizzabile solo con PK di 1 sola colonna":
 	mainTable.primaryKey.includedColumns.size == 1;
 	
-/// verifiche sui finder
+/// verifiche sui finder/updaters/inserters/deleters
 context DataAccessObject WARNING "il dao:"+this.name+" non definisce i finder base (findByPK e findAll)" :
 	finders != null && finders.finders.select(f| (f.metaType==FindAll || f.metaType==FindByPK)).size==2;
 
@@ -41,9 +41,33 @@ context Finder if (metaType != FindByPK && metaType != FindAll && metaType != QB
 context DataAccessObject if(this.finders!= null && this.finders.finders.size>0 && this.finders.finders.select(f|f.metaType == FindByPK).size >0) ERROR "E' stato dichiarato un finder di tipo findByPK per il dao: "+this.loc()+" , ma la tabella di riferimento non possiede chiavi primarie."	:
 	this.mainTable.primaryKey != null;
 	
-//verifica sulla presenza di una PK in tabella se e' stato definito un u di tipo findByPK	
+//verifica sulla presenza di una PK in tabella se e' stato definito un deleter di tipo deleteByPK	
 context DataAccessObject if(this.deleters!= null && this.deleters.deleters.size>0 && this.deleters.deleters.select(d|d.metaType == DeleteByPK).size >0) ERROR "E' stato dichiarato un deleter di tipo deleteByPK per il dao: "+this.loc()+" , ma la tabella di riferimento non possiede chiavi primarie."	:
 	this.mainTable.primaryKey != null;	
+	
+//verifica che non sia presente piu' di un metodo findByPK in un DAO
+context DataAccessObject if(this.finders!= null && this.finders.finders.size>0 && this.finders.finders.select(f|f.metaType == FindByPK).size >0) ERROR "E' stato dichiarato piu di un finder di tipo findByPK per il dao: "+this.loc()+" , ma non ha senso definirne piu' di uno"	:
+	!(this.finders.finders.select(f|f.metaType == FindByPK).size > 1);
+	
+//verifica che non sia presente piu' di un metodo updateRow in un DAO
+context DataAccessObject if(this.updaters!= null && this.updaters.updaters.size>0 && this.updaters.updaters.select(u|u.metaType == UpdateRow).size >0) ERROR "E' stato dichiarato piu di un updater di tipo updateRow per il dao: "+this.loc()+" , ma non ha senso definirne piu' di uno"	:
+	!(this.updaters.updaters.select(u|u.metaType == UpdateRow).size > 1);	
+	
+//warning: anche se l'utente modifica il nome di un updateRow, questo viene ignorato e rimane update
+context DataAccessObject if(this.updaters!= null && this.updaters.updaters.size>0 && this.updaters.updaters.select(u|u.metaType == UpdateRow).size >0) WARNING "E' stata modificata la property name per l'updater di tipo updateRow per il dao: "+this.loc()+" , ma verra' ignorata in quanto e' possibile definire solo un deleteByPK per ogni DAO"	:
+	this.updaters.updaters.select(u|u.metaType == UpdateRow).get(0).name == "update";	
+
+//verifica che non sia presente piu' di un metodo deleteByPK in un DAO
+context DataAccessObject if(this.deleters!= null && this.deleters.deleters.size>0 && this.deleters.deleters.select(d|d.metaType == DeleteByPK).size >0) ERROR "E' stato dichiarato piu di un deleter di tipo deleteByPK per il dao: "+this.loc()+" , ma non ha senso definirne piu' di uno"	:
+	!(this.deleters.deleters.select(d|d.metaType == DeleteByPK).size > 1);	
+
+//warning: anche se l'utente modifica il nome di un deleteByPK, questo viene ignorato e rimane delete
+context DataAccessObject if(this.deleters!= null && this.deleters.deleters.size>0 && this.deleters.deleters.select(d|d.metaType == DeleteByPK).size >0) WARNING "E' stata modificata la property name per il deleter di tipo deleteByPK per il dao: "+this.loc()+" , ma verra' ignorata in quanto e' possibile definire solo un deleteByPK per ogni DAO"	:
+	this.deleters.deleters.select(d|d.metaType == DeleteByPK).get(0).name == "delete";	
+
+//warning: anche se l'utente modifica il nome di un findByPK, questo viene ignorato e rimane findByPrimaryKey
+context DataAccessObject if(this.finders!= null && this.finders.finders.size>0 && this.finders.finders.select(f|f.metaType == FindByPK).size >0) WARNING "E' stata modificata la property name per il finder di tipo findByPK per il dao: "+this.loc()+" , ma verra' ignorata in quanto e' possibile definire solo un findByPK per ogni DAO"	:
+	this.finders.finders.select(f|f.metaType == FindByPK).get(0).name == "findByPrimaryKey";
 	
 context Updater if (metaType != UpdateRow) ERROR "E' necessario specificare il nome degli updater (escluso l'UpdateRow)"+((DataAccessObject)(this.eContainer.eContainer)).name:
 	!isNullOrEmpty(name);
