@@ -151,6 +151,25 @@ context DataAccessObject if(this.cacheability==CacheabilityTypes::ALMOST_STABLE_
 !(this.cacheTTLminutes == 0);
 
 
+//////////////////CUSTOM FINDER CON JOIN CLAUSE//////////////////////
+context CustomFinder if(this.queryDefinition!=null) WARNING "E' stato definito un custom finder <"+this.name+"> associato ad una QueryDefinition: i parametri CustomFrom e CustomSelect saranno ignorati " +loc():
+false;
+
+context CustomFinder if(this.queryDefinition!=null) ERROR "E' necessario definire il parametro Select Clause per il CustomFinder <"+this.name+"> e che esso contenga almeno una colonna"+loc():
+this.queryDefinition.selectClause != null && this.queryDefinition.selectClause.columns.size != 0;
+
+context CustomFinder if(this.queryDefinition!=null) ERROR "E' necessario definire il parametro From Clause per il CustomFinder <"+this.name+"> e che esso contenga almeno una tabella"+loc():
+this.queryDefinition.fromClause != null && this.queryDefinition.fromClause.tables.size != 0;
+
+context CustomFinder if(this.queryDefinition!=null && this.queryDefinition.joinClause!=null) ERROR "E' necessario specificare almeno un Join Criterion nella Join Clause per il CustomFinder <"+this.name+"> "+loc():
+this.queryDefinition.joinClause.criteria.size != 0;
+
+context CustomFinder if(this.queryDefinition!=null && this.queryDefinition.joinClause!=null) ERROR "E' stata definita un Join Criterion nella Join Clause per il CustomFinder <"+this.name+"> senza che siano stati specificati tutti e 4 i parametri necessari. "+loc():
+this.queryDefinition.joinClause.criteria.select(c|c.leftTable == null || c.leftColumn ==null || c.rightTable == null || c.rightColumn ==null).size == 0;
+
+context CustomFinder if(this.queryDefinition!=null && this.queryDefinition.whereClause != null) ERROR "E' stata definita una Where Clasue vuota per il CustomFinder <"+this.name+">. Se non e' necessario specificare la where condition, rimuoverla dal modello. "+loc():
+!isNullOrEmpty(this.queryDefinition.whereClause.freetextExpression);
+/////////////////////////////////////////////////////
 
 
 
