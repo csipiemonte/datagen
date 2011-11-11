@@ -384,29 +384,7 @@ public class QBEQueryBuilder<TEX extends AbstractExample> {
 	 * corrispondente alla <pkClass>
 	 */
 		private boolean isInPK(String propName, Class exampleClass){
-//		try {
-//			String pkClassName = exampleClass.getCanonicalName().substring(0,exampleClass.getCanonicalName().length()-7)+"PK";
-//			Class pkClass = Class.forName(pkClassName);
-//			BeanInfo bi = Introspector.getBeanInfo(pkClass);
-//			PropertyDescriptor pd[] = bi.getPropertyDescriptors();
-//			for (int i = 0; i < pd.length; i++) {
-//				PropertyDescriptor currPD = pd[i];
-//				if (currPD.getName().equals(propName))
-//					return true;
-//			}
-//			return false;
-//		} catch (IntrospectionException e) {
-//			// TODO
-//			e.printStackTrace();
-//			return false;
-//		} catch (IllegalArgumentException e) {
-//			// TODO Auto-generated catch block
-//			return  false;
-//		} catch (ClassNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			return false;
-//		}
+		// per future evoluzioni.
 		// per il momento restituisce sempre true
 		return true;
 	}
