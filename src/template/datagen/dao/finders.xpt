@@ -92,7 +92,7 @@ e le limitazioni secondo i termini della Licenza.
 	 * @generated
 	 */
 	 @SuppressWarnings("unchecked")
-	public List<«getDtoClassName(dao)»> findAll_«this.name»() throws «getDaoExcClassName(dao)»
+	public List<«getDtoClassName(dao)»> «this.name»() throws «getDaoExcClassName(dao)»
 	«IF body-»
 	{		
 		final StringBuilder sql = new StringBuilder("SELECT «IF this.distinct==null || this.distinct.isEmpty-»«EXPAND template::datagen::dao::daoFiles::columnNameList(false) FOR dao.mainTable.columns-»«ELSE-»«EXPAND template::datagen::dao::daoFiles::columnNameList(true) FOR this.distinct-»«ENDIF-» FROM " + getTableName());
