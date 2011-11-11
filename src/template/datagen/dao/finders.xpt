@@ -202,16 +202,16 @@ e le limitazioni secondo i termini della Licenza.
 	{
 		//verifiche consistenza esempi
 		if (positive == null) {
-			throw new AnagraficaDaoException(
+			throw new «getDaoExcClassName(dao)»(
 					"Il set degli esempi positivi e' null. Impossibile costruire la query.");
 		}
 		if (negative == null) {
-			throw new AnagraficaDaoException(
+			throw new «getDaoExcClassName(dao)»(
 					"Il set degli esempi negativi e' null. Impossibile costruire la query.");
 		}
 		
 		if (positive.size() == 0 && negative.size() == 0) {
-			throw new AnagraficaDaoException(
+			throw new «getDaoExcClassName(dao)»(
 					"Il set degli esempi positivi e negativi e' vuoto. Impossibile costruire la query.");
 		}
 		
@@ -223,7 +223,7 @@ e le limitazioni secondo i termini della Licenza.
 		}catch (StringIndexOutOfBoundsException e) {
 			throw new «getDaoExcClassName(dao)»("E' stato valorizzato almeno un esempio senza nessun FieldCheck associato.Impossibile creare la query.");
 		} catch (IllegalArgumentException e) {
-			throw new AnagraficaDaoException("E' stato valorizzato un campo di un esempio complesso non corrispondente alla PK della tabella di lookup.");
+			throw new «getDaoExcClassName(dao)»("E' stato valorizzato un campo di un esempio complesso non corrispondente alla PK della tabella di lookup.");
 		}
 		«EXPAND template::datagen::dao::daoFiles::orderByClause FOR this.orderSpecs-»
 		
