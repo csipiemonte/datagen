@@ -121,8 +121,8 @@ context LookupResolver if supplierDAO!=null ERROR "E' stato definito un lookup r
 		this.supplierDAO.finders.finders.typeSelect(FindByPK).size > 0;
 			
 //check per verificare se i resolver sono referenziati ciclicamente (se si fosse, il codice generato risulta compilante, ma inutilizzabile)			
-//context DaoPackage ERROR "Si e' verificato un cycle loop tra i resolver definiti nel modello":
-//		!areResolversInLoop(this);
+context DataAccessObject ERROR "Si e' verificato un cycle loop tra i resolver definiti nel modello " +loc():
+		!areResolversInLoop(this);
 		
 //limitazione temporanea: se viene dichiarato un resolver in cui la FK contiene almeno una includedColumn che e' PK e 
 context DataAccessObject if(this.lookupResolvers!=null && this.lookupResolvers.resolvers.size>0) ERROR "Errore: " +loc():

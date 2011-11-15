@@ -202,22 +202,9 @@ public class GenUtils {
 	}
 	
 	
-	
-	
-	public static boolean findLoop(it.csi.mddtools.datagen.DaoPackage daoPackage ){
-		
-		List<DataAccessObject> visited = new ArrayList<DataAccessObject>();
-		
-		for(DataAccessObject dao: daoPackage.getDao()){
-			if(dao.getLookupResolvers()!= null && dao.getLookupResolvers().getResolvers().size() > 0){
-				if(findLoop(dao,visited)){
-					return true;
-				}
-			}
-		}
-		return false;
-	
-}
+	public static boolean findLoop(it.csi.mddtools.datagen.DataAccessObject dao){
+		return findLoop(dao, new ArrayList<DataAccessObject>());
+	}
 	
 	public static boolean findLoop(it.csi.mddtools.datagen.DataAccessObject dao, List<DataAccessObject> visited ){
 		
@@ -225,13 +212,15 @@ public class GenUtils {
 			return true;
 		}
 		else{
-			visited.add(dao);
-			if(dao.getLookupResolvers()==null){
+			ArrayList<DataAccessObject> visited2 = new ArrayList<DataAccessObject>();
+			visited2.addAll(visited);
+			visited2.add(dao);
+			if(dao.getLookupResolvers()==null || dao.getLookupResolvers().getResolvers().size()== 0){
 				return false;
 			}
 			List<LookupResolver> list = dao.getLookupResolvers().getResolvers();
 				for(LookupResolver resolver:list){
-					if(findLoop(resolver.getSupplierDAO(),visited)){
+					if(findLoop(resolver.getSupplierDAO(),visited2)){
 						return true;
 						}
 					}
