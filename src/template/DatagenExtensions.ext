@@ -529,7 +529,7 @@ boolean areAllDaoMethodsNamesUnivocal(Inserter inserter,Finders finders,Updaters
 																	   it.csi.mddtools.datagen.Deleters);
 																	   																	  								  
 String getLookedUpPropertyName(LookupResolver lookUpResolver): 
-	toJavaId(lookUpResolver.foreignKey.name);
+	toJavaId(isNullOrEmpty(lookUpResolver.name)?lookUpResolver.foreignKey.name:lookUpResolver.name);
 
 
 boolean areResolversInLoop(DataAccessObject dao): JAVA
