@@ -544,9 +544,9 @@ String getSingleFromClause(QTable qTable):
 	
 String getSingleSelectClause(QTableColumn qTableColumn):
 	if(isNullOrEmpty(qTableColumn.qtable.aliasName)) then
-		qTableColumn.column.name 
+		qTableColumn.column.name + (isNullOrEmpty(qTableColumn.alias)?"": (" as " + qTableColumn.alias))
 	else	
-		qTableColumn.qtable.aliasName+"."+qTableColumn.column.name;
+		qTableColumn.qtable.aliasName+"."+qTableColumn.column.name + (isNullOrEmpty(qTableColumn.alias)?"": (" as " + qTableColumn.alias)) ;
 	
 String getSingleJoinClause(String alias, String column):
 	if(isNullOrEmpty(alias)) then
