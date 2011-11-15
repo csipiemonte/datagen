@@ -303,8 +303,8 @@ import java.util.*;
 public class «getDtoCustomQdefClassName((DataAccessObject)this.eContainer.eContainer,this)»  implements Serializable
 {
 
-	«EXPAND columnJavaPropertyQdef FOREACH this.queryDefinition.selectClause.columns»
-	
+	«EXPAND columnJavaPropertyQdef FOREACH this.queryDefinition.selectClause.columns.typeSelect(QTableColumn)»
+	«EXPAND QCalculatedColumnJavaPropertyQdef FOREACH this.queryDefinition.selectClause.columns.typeSelect(QCalculatedColumn)»
 	
 	/**
 	 * Method 'equals'
@@ -347,48 +347,91 @@ public class «getDtoCustomQdefClassName((DataAccessObject)this.eContainer.eCont
 «ENDDEFINE»
 
 «DEFINE columnJavaPropertyQdef FOR QTableColumn»
+	
+	«REM»la logica di creazione dei campi del DTO in output: se viene specificato un alias di colonna si provvede a utilizzare tale alias come nome del campo del DTO
+	altrimenti, se e' specificato l'alias di tabella si provvede a usarlo come prefisso per il campo del DTO (che avra' quindi il nome della colonna nella clausola 
+	di select specificata).Altrimenti si usa direttamente il nome della colonna«ENDREM»
+		«IF isNullOrEmpty(this.alias)-»
+			«IF isNullOrEmpty(this.qtable.aliasName)-»
+			/*	 
+			 * @generated
+			 */
+			private «javaPropertyTypeFromColumn(this.column)» «javaPropertyNameFromColumn(this.column)»;
+			
+			/**
+			 * @generated
+			 */
+			public void set«javaPropertyNameFromColumn(this.column).toFirstUpper()» («javaPropertyTypeFromColumn(this.column)» val){
+				«javaPropertyNameFromColumn(this.column)» = val;
+			}
+			
+			/**
+			 * @generated
+			 */
+			public «javaPropertyTypeFromColumn(this.column)» get«javaPropertyNameFromColumn(this.column).toFirstUpper()»(){
+				return «javaPropertyNameFromColumn(this.column)»;
+			}
+			
+			«ELSE»
+			/*	 
+			 * @generated
+			 */
+			private «javaPropertyTypeFromColumn(this.column)» «this.qtable.aliasName.toLowerCase()»«javaPropertyNameFromColumn(this.column).toFirstUpper()»;
+			
+			/**
+			 * @generated
+			 */
+			public void set«this.qtable.aliasName.toFirstUpper()»«javaPropertyNameFromColumn(this.column).toFirstUpper()» («javaPropertyTypeFromColumn(this.column)» val){
+				«this.qtable.aliasName.toFirstLower()»«javaPropertyNameFromColumn(this.column).toFirstUpper()» = val;
+			}
+			/**
+			 * @generated
+			 */
+			public «javaPropertyTypeFromColumn(this.column)» get«this.qtable.aliasName.toFirstUpper()»«javaPropertyNameFromColumn(this.column).toFirstUpper()»(){
+				return «this.qtable.aliasName.toLowerCase()»«javaPropertyNameFromColumn(this.column).toFirstUpper()»;
+			}
+			«ENDIF»
+		«ELSE»
+			/*	 
+			 * @generated
+			 */
+			private «javaPropertyTypeFromColumn(this.column)» «this.alias.toFirstLower()»;
+			
+			/**
+			 * @generated
+			 */
+			public void set«this.alias.toFirstUpper()» («javaPropertyTypeFromColumn(this.column)» val){
+				«this.alias» = val;
+			}
+			/**
+			 * @generated
+			 */
+			public «javaPropertyTypeFromColumn(this.column)» get«this.alias.toFirstUpper()»(){
+				return «this.alias»;
+			}
+		«ENDIF»
+«ENDDEFINE»
 
 
-	«IF isNullOrEmpty(this.qtable.aliasName)»
-	/*	 
-	 * @generated
-	 */
-	private «javaPropertyTypeFromColumn(this.column)» «javaPropertyNameFromColumn(this.column)»;
-	
-	/**
-	 * @generated
-	 */
-	public void set«javaPropertyNameFromColumn(this.column).toFirstUpper()» («javaPropertyTypeFromColumn(this.column)» val){
-		«javaPropertyNameFromColumn(this.column)» = val;
-	}
-	
-	/**
-	 * @generated
-	 */
-	public «javaPropertyTypeFromColumn(this.column)» get«javaPropertyNameFromColumn(this.column).toFirstUpper()»(){
-		return «javaPropertyNameFromColumn(this.column)»;
-	}
-	
-	«ELSE»
-	/*	 
-	 * @generated
-	 */
-	private «javaPropertyTypeFromColumn(this.column)» «this.qtable.aliasName.toLowerCase()»«javaPropertyNameFromColumn(this.column).toFirstUpper()»;
-	
-	/**
-	 * @generated
-	 */
-	public void set«this.qtable.aliasName.toFirstUpper()»«javaPropertyNameFromColumn(this.column).toFirstUpper()» («javaPropertyTypeFromColumn(this.column)» val){
-		«this.qtable.aliasName.toFirstLower()»«javaPropertyNameFromColumn(this.column).toFirstUpper()» = val;
-	}
-	
-	/**
-	 * @generated
-	 */
-	public «javaPropertyTypeFromColumn(this.column)» get«this.qtable.aliasName.toFirstUpper()»«javaPropertyNameFromColumn(this.column).toFirstUpper()»(){
-		return «this.qtable.aliasName.toLowerCase()»«javaPropertyNameFromColumn(this.column).toFirstUpper()»;
-	}
-	«ENDIF»
-
+«DEFINE QCalculatedColumnJavaPropertyQdef FOR QCalculatedColumn»
+		    
+		/**	 
+		* @generated
+		*/
+		private Object «this.alias.toFirstLower()»;
+			
+		/**
+		* @generated
+		*/
+		public void set«this.alias.toFirstUpper()» (Object val){
+		«this.alias» = val;
+		}
+		/**
+		* @generated
+		*/
+		public Object get«this.alias.toFirstUpper()»(){
+			return «this.alias»;
+		}
+			
 «ENDDEFINE»
 

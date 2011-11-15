@@ -378,23 +378,34 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameteri
 «ENDDEFINE»
 
 «DEFINE singleMapRowInternalQDef(Integer i) FOR QTableColumn»
-«IF isNullOrEmpty(this.qtable.aliasName)»
-	if (mapAllColumns || columnsToReadMap.get("«this.column.name»") != null)
-		dto.set«javaPropertyNameFromColumn(this.column).toFirstUpper()»(«IF !isBlobOrClob(this.column)-»
-			«getValueFromRSByColName(this.column)-»
+«REM»la logica di mapping deve seguire quella della creazione del DTO«ENDREM»
+«IF isNullOrEmpty(this.alias)-»
+	«IF isNullOrEmpty(this.qtable.aliasName)»
+		if (mapAllColumns || columnsToReadMap.get("«this.column.name»") != null)
+			dto.set«javaPropertyNameFromColumn(this.column).toFirstUpper()»(«IF !isBlobOrClob(this.column)-»
+				«getValueFromRSByColName(this.column)-»
 		«ELSE-»
 			«getValueFromRS(this.column,i)-»
 		«ENDIF-»			
 		);	
-«ELSE-»
-	if (mapAllColumns || columnsToReadMap.get("«this.column.name»") != null)
-		dto.set«this.qtable.aliasName.toFirstUpper()»«javaPropertyNameFromColumn(this.column).toFirstUpper()»(«IF !isBlobOrClob(this.column)-»
+	«ELSE-»
+		if (mapAllColumns || columnsToReadMap.get("«this.column.name»") != null)
+			dto.set«this.qtable.aliasName.toFirstUpper()»«javaPropertyNameFromColumn(this.column).toFirstUpper()»(«IF !isBlobOrClob(this.column)-»
 			«getValueFromRSByColName(this.column)»
 		«ELSE-»
 			«getValueFromRS(this.column,i)»
 		«ENDIF-»			
 		);	
-«ENDIF-»
+	«ENDIF-»
+«ELSE-»
+		if (mapAllColumns || columnsToReadMap.get("«this.alias.toFirstUpper()»") != null)
+			dto.set«this.alias.toFirstUpper()»(«IF !isBlobOrClob(this.column)-»
+				«getValueFromRSByColName(this.column)-»
+		«ELSE-»
+				«getValueFromRS(this.column,i)-»
+		«ENDIF-»			
+		);	
+«ENDIF»
 «ENDDEFINE»
 
 
