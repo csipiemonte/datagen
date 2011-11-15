@@ -401,20 +401,63 @@
       <details key="documentation" value="Determina l'elenco delle colonne che costituiscono il risultato della query.&#xD;&#xA;Le colonne possono essere di due tipi: &#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>colonne appartenenti ad una qualsiasi delle tabelle coinvolte (ovvero quelle&#xD;&#xA;referenziate nella &lt;b>FromClause&lt;/b>&lt;/li>&#xD;&#xA;&lt;li>colonne &lt;i>calcolate&lt;/i>, ottenute ad esempio applicando funzioni di&#xD;&#xA;aggregazione a colonne effettive (es. somma), oppure applicando altri tipi di funzioni ad&#xD;&#xA;una o pi&amp;ugrave; colonne effettive (es. concatenzaione)&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;Il DTO associato al &lt;b>CustomFinder&lt;/b> che utlizza questo tipo di costrutto&#xD;&#xA;conterr&amp;agrave; i campi necessari a contenenre adeguatamente i risultati della&#xD;&#xA;query e non sar&amp;agrave; il DTO classico associato al DAO."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="columns" upperBound="-1"
-        eType="#//QResultColumn" containment="true"/>
+        eType="#//QResultColumn" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="L'elenco delle colonne. Le colonne possono essere:&#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>&lt;b>QTableColumn&lt;/b>: colonne effettive appartenenti alle tabelle presenti nella clausola FROM&lt;/li>&#xD;&#xA;&lt;li>&lt;b>QCalculatedColumn&lt;/b>: colonne calcolate a partire dalle colonne&#xD;&#xA;presenti nelle tabelle referenziate nella clausola FROM&#xD;&#xA;&lt;/ul>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="QResultColumn" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="QResultColumn" abstract="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Superclasse (astratta) delle colonne che costituiscono l'output di una query."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="alias" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Se presente serve per disambiguare eventuali colonne con lo stesso nome ma&#xD;&#xA;provenienti da differenti tabelle. Nel caso delle colonne calcolate &amp;egrave; &#xD;&#xA;obbligatorio."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="QTableColumn" eSuperTypes="#//QResultColumn">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="qtable" eType="#//QTable"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="column" eType="ecore:EClass rdbmdl.ecore#//TableColumn"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="La singola colonna che fa parte del risultato della query. Inserendo questo tipo&#xD;&#xA;di elemento in una clausola SELECT viene inserita in output la colonna effettiva."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="qtable" eType="#//QTable">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Tabella a cui appartiene la colonna che si desidera inserire in output."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="column" eType="ecore:EClass rdbmdl.ecore#//TableColumn">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="La colonna effettiva. Deve essere una delle colonne della tabella referenziata&#xD;&#xA;in &lt;i>qtable&lt;/i>."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="QCalculatedColumn" eSuperTypes="#//QResultColumn"/>
+  <eClassifiers xsi:type="ecore:EClass" name="QCalculatedColumn" eSuperTypes="#//QResultColumn">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Inserendo questo tipo&#xD;&#xA;di elemento in una clausola SELECT viene inserita in output una colonna &#xD;&#xA;calcolata a seconda del contenuto delle varie propriet&amp;agrave;."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referencedColumns" upperBound="-1"
+        eType="#//QResultColumn" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Le colonne che sono referenziate nella espressione. L'ordine in cui sono definite&#xD;&#xA;&amp;egrave; rilevante."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="freeTextExpression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Espressione che coinvolge le colonne referenziate nella property&#xD;&#xA;&lt;i>referencedColumns&lt;/i>. L'espressione deve essere scritta nel dialetto SQL&#xD;&#xA;del DBMS target e pu&amp;ograve; contenere segnaposto nella forma &lt;i>$i&lt;/i> dove&#xD;&#xA;&lt;i>i&lt;/i> rappresenta la posizione a partire da 1 nell'elenco delle colonne referenziate.&#xD;&#xA;L'espressione non pu&amp;ograve; contenere una funzione di aggregazione."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FromClause">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Elenco delle tabelle incluse nella query. A ciascuna Tabella pu&amp;ograve; essere associato un &lt;i>alias&lt;/i>"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tables" upperBound="-1"
-        eType="#//QTable" containment="true"/>
+        eType="#//QTable" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="L'elenco delle tabelle"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="QTable">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -450,7 +493,7 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="freetextExpression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Espressione SQL scritta a mano che determina la clausola where (in aggiunta alla&#xD;&#xA;eventuale espressione derivante dai criteri di JOIN. Non si deve aggingere nessun&#xD;&#xA;&amp;quot;AND&amp;quot; iniziale e non viene effettuato nessun controllo sulla correttezza &#xD;&#xA;della sintassi/semantica."/>
+        <details key="documentation" value="Espressione SQL scritta a mano che determina la clausola where (in aggiunta alla&#xD;&#xA;eventuale espressione derivante dai criteri di JOIN). Non si deve aggingere nessun&#xD;&#xA;&amp;quot;AND&amp;quot; iniziale e non viene effettuato nessun controllo sulla correttezza &#xD;&#xA;della sintassi/semantica. Nella stringa &amp;egrave; possibile indicare dei segnaposto&#xD;&#xA;nella forma &amp;quot;&lt;i>:nome_parametro&lt;/i>&amp;quot;.&#xD;&#xA;La sostituzione dei valori va fatta nel codice relativo al &lt;b>Finder&lt;/i>."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>

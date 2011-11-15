@@ -1070,6 +1070,15 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getQResultColumn_Alias() {
+		return (EAttribute)qResultColumnEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getQTableColumn() {
 		return qTableColumnEClass;
 	}
@@ -1099,6 +1108,24 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 	 */
 	public EClass getQCalculatedColumn() {
 		return qCalculatedColumnEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getQCalculatedColumn_ReferencedColumns() {
+		return (EReference)qCalculatedColumnEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getQCalculatedColumn_FreeTextExpression() {
+		return (EAttribute)qCalculatedColumnEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1386,12 +1413,15 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		createEReference(selectClauseEClass, SELECT_CLAUSE__COLUMNS);
 
 		qResultColumnEClass = createEClass(QRESULT_COLUMN);
+		createEAttribute(qResultColumnEClass, QRESULT_COLUMN__ALIAS);
 
 		qTableColumnEClass = createEClass(QTABLE_COLUMN);
 		createEReference(qTableColumnEClass, QTABLE_COLUMN__QTABLE);
 		createEReference(qTableColumnEClass, QTABLE_COLUMN__COLUMN);
 
 		qCalculatedColumnEClass = createEClass(QCALCULATED_COLUMN);
+		createEReference(qCalculatedColumnEClass, QCALCULATED_COLUMN__REFERENCED_COLUMNS);
+		createEAttribute(qCalculatedColumnEClass, QCALCULATED_COLUMN__FREE_TEXT_EXPRESSION);
 
 		fromClauseEClass = createEClass(FROM_CLAUSE);
 		createEReference(fromClauseEClass, FROM_CLAUSE__TABLES);
@@ -1572,12 +1602,15 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		initEReference(getSelectClause_Columns(), this.getQResultColumn(), null, "columns", null, 0, -1, SelectClause.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(qResultColumnEClass, QResultColumn.class, "QResultColumn", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getQResultColumn_Alias(), ecorePackage.getEString(), "alias", null, 0, 1, QResultColumn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(qTableColumnEClass, QTableColumn.class, "QTableColumn", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getQTableColumn_Qtable(), this.getQTable(), null, "qtable", null, 0, 1, QTableColumn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getQTableColumn_Column(), theRdbmdlPackage.getTableColumn(), null, "column", null, 0, 1, QTableColumn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(qCalculatedColumnEClass, QCalculatedColumn.class, "QCalculatedColumn", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getQCalculatedColumn_ReferencedColumns(), this.getQResultColumn(), null, "referencedColumns", null, 0, -1, QCalculatedColumn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getQCalculatedColumn_FreeTextExpression(), ecorePackage.getEString(), "freeTextExpression", null, 0, 1, QCalculatedColumn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(fromClauseEClass, FromClause.class, "FromClause", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFromClause_Tables(), this.getQTable(), null, "tables", null, 0, -1, FromClause.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

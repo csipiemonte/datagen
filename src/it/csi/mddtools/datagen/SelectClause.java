@@ -49,6 +49,14 @@ public interface SelectClause extends CDOObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * L'elenco delle colonne. Le colonne possono essere:
+	 * <ul>
+	 * <li><b>QTableColumn</b>: colonne effettive appartenenti alle tabelle presenti nella clausola FROM</li>
+	 * <li><b>QCalculatedColumn</b>: colonne calcolate a partire dalle colonne
+	 * presenti nelle tabelle referenziate nella clausola FROM
+	 * </ul>
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Columns</em>' containment reference list.
 	 * @see it.csi.mddtools.datagen.DatagenPackage#getSelectClause_Columns()
 	 * @model containment="true"

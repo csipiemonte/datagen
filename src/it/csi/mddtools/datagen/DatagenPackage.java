@@ -1240,13 +1240,22 @@ public interface DatagenPackage extends EPackage {
 	int QRESULT_COLUMN = 30;
 
 	/**
+	 * The feature id for the '<em><b>Alias</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QRESULT_COLUMN__ALIAS = 0;
+
+	/**
 	 * The number of structural features of the '<em>QResult Column</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int QRESULT_COLUMN_FEATURE_COUNT = 0;
+	int QRESULT_COLUMN_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.QTableColumnImpl <em>QTable Column</em>}' class.
@@ -1257,6 +1266,15 @@ public interface DatagenPackage extends EPackage {
 	 * @generated
 	 */
 	int QTABLE_COLUMN = 31;
+
+	/**
+	 * The feature id for the '<em><b>Alias</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QTABLE_COLUMN__ALIAS = QRESULT_COLUMN__ALIAS;
 
 	/**
 	 * The feature id for the '<em><b>Qtable</b></em>' reference.
@@ -1296,13 +1314,40 @@ public interface DatagenPackage extends EPackage {
 	int QCALCULATED_COLUMN = 32;
 
 	/**
+	 * The feature id for the '<em><b>Alias</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QCALCULATED_COLUMN__ALIAS = QRESULT_COLUMN__ALIAS;
+
+	/**
+	 * The feature id for the '<em><b>Referenced Columns</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QCALCULATED_COLUMN__REFERENCED_COLUMNS = QRESULT_COLUMN_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Free Text Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QCALCULATED_COLUMN__FREE_TEXT_EXPRESSION = QRESULT_COLUMN_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>QCalculated Column</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int QCALCULATED_COLUMN_FEATURE_COUNT = QRESULT_COLUMN_FEATURE_COUNT + 0;
+	int QCALCULATED_COLUMN_FEATURE_COUNT = QRESULT_COLUMN_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.FromClauseImpl <em>From Clause</em>}' class.
@@ -2254,6 +2299,17 @@ public interface DatagenPackage extends EPackage {
 	EClass getQResultColumn();
 
 	/**
+	 * Returns the meta object for the attribute '{@link it.csi.mddtools.datagen.QResultColumn#getAlias <em>Alias</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Alias</em>'.
+	 * @see it.csi.mddtools.datagen.QResultColumn#getAlias()
+	 * @see #getQResultColumn()
+	 * @generated
+	 */
+	EAttribute getQResultColumn_Alias();
+
+	/**
 	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.QTableColumn <em>QTable Column</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2294,6 +2350,28 @@ public interface DatagenPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getQCalculatedColumn();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link it.csi.mddtools.datagen.QCalculatedColumn#getReferencedColumns <em>Referenced Columns</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Referenced Columns</em>'.
+	 * @see it.csi.mddtools.datagen.QCalculatedColumn#getReferencedColumns()
+	 * @see #getQCalculatedColumn()
+	 * @generated
+	 */
+	EReference getQCalculatedColumn_ReferencedColumns();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.csi.mddtools.datagen.QCalculatedColumn#getFreeTextExpression <em>Free Text Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Free Text Expression</em>'.
+	 * @see it.csi.mddtools.datagen.QCalculatedColumn#getFreeTextExpression()
+	 * @see #getQCalculatedColumn()
+	 * @generated
+	 */
+	EAttribute getQCalculatedColumn_FreeTextExpression();
 
 	/**
 	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.FromClause <em>From Clause</em>}'.
@@ -3134,6 +3212,14 @@ public interface DatagenPackage extends EPackage {
 		EClass QRESULT_COLUMN = eINSTANCE.getQResultColumn();
 
 		/**
+		 * The meta object literal for the '<em><b>Alias</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute QRESULT_COLUMN__ALIAS = eINSTANCE.getQResultColumn_Alias();
+
+		/**
 		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.QTableColumnImpl <em>QTable Column</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3168,6 +3254,22 @@ public interface DatagenPackage extends EPackage {
 		 * @generated
 		 */
 		EClass QCALCULATED_COLUMN = eINSTANCE.getQCalculatedColumn();
+
+		/**
+		 * The meta object literal for the '<em><b>Referenced Columns</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference QCALCULATED_COLUMN__REFERENCED_COLUMNS = eINSTANCE.getQCalculatedColumn_ReferencedColumns();
+
+		/**
+		 * The meta object literal for the '<em><b>Free Text Expression</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute QCALCULATED_COLUMN__FREE_TEXT_EXPRESSION = eINSTANCE.getQCalculatedColumn_FreeTextExpression();
 
 		/**
 		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.FromClauseImpl <em>From Clause</em>}' class.

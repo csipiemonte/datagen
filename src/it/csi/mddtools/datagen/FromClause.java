@@ -38,6 +38,9 @@ public interface FromClause extends CDOObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * L'elenco delle tabelle
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Tables</em>' containment reference list.
 	 * @see it.csi.mddtools.datagen.DatagenPackage#getFromClause_Tables()
 	 * @model containment="true"

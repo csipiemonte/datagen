@@ -10,6 +10,11 @@ import it.csi.mddtools.rdbmdl.TableColumn;
  * A representation of the model object '<em><b>QTable Column</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * La singola colonna che fa parte del risultato della query. Inserendo questo tipo
+ * di elemento in una clausola SELECT viene inserita in output la colonna effettiva.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -31,6 +36,9 @@ public interface QTableColumn extends QResultColumn {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Tabella a cui appartiene la colonna che si desidera inserire in output.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Qtable</em>' reference.
 	 * @see #setQtable(QTable)
 	 * @see it.csi.mddtools.datagen.DatagenPackage#getQTableColumn_Qtable()
@@ -57,6 +65,10 @@ public interface QTableColumn extends QResultColumn {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * La colonna effettiva. Deve essere una delle colonne della tabella referenziata
+	 * in <i>qtable</i>.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Column</em>' reference.
 	 * @see #setColumn(TableColumn)
 	 * @see it.csi.mddtools.datagen.DatagenPackage#getQTableColumn_Column()

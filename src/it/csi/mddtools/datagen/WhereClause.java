@@ -39,9 +39,11 @@ public interface WhereClause extends CDOObject {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Espressione SQL scritta a mano che determina la clausola where (in aggiunta alla
-	 * eventuale espressione derivante dai criteri di JOIN. Non si deve aggingere nessun
+	 * eventuale espressione derivante dai criteri di JOIN). Non si deve aggingere nessun
 	 * &quot;AND&quot; iniziale e non viene effettuato nessun controllo sulla correttezza 
-	 * della sintassi/semantica.
+	 * della sintassi/semantica. Nella stringa &egrave; possibile indicare dei segnaposto
+	 * nella forma &quot;<i>:nome_parametro</i>&quot;.
+	 * La sostituzione dei valori va fatta nel codice relativo al <b>Finder</i>.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Freetext Expression</em>' attribute.
 	 * @see #setFreetextExpression(String)

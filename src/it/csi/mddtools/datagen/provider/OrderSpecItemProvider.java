@@ -203,9 +203,18 @@ public class OrderSpecItemProvider
 	public String getText(Object object) {
 		
 		OrderSpec orderSpec = (OrderSpec)object;
-		return getString("_UI_OrderSpec_type") 
-				+ " " + (orderSpec.getColumn()!=null ? orderSpec.getColumn().getName() : "")
-				+ " " + (orderSpec.isAscending() ? "ASC" : "DESC");
+		String label = "";
+		if (orderSpec.getColumn()!=null && orderSpec.getQcolumn()!=null){
+			label += "<selezionare solo uno tra 'column' e 'qcolumn' >";
+		}
+		else{
+			label += " " + (orderSpec.getColumn()!=null ? orderSpec.getColumn().getName() : "");
+			label += (orderSpec.getQcolumn()!=null ? 
+					QTableColumnItemProvider.formatQTableColumn(orderSpec.getQcolumn())
+					 : "")
+			+ " " + (orderSpec.isAscending() ? "ASC" : "DESC");
+		}
+		return getString("_UI_OrderSpec_type") + label;
 	}
 
 	/**
@@ -220,7 +229,9 @@ public class OrderSpecItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(OrderSpec.class)) {
+			case DatagenPackage.ORDER_SPEC__COLUMN:
 			case DatagenPackage.ORDER_SPEC__ASCENDING:
+			case DatagenPackage.ORDER_SPEC__QCOLUMN:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

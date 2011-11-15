@@ -8,6 +8,8 @@ import it.csi.mddtools.datagen.DataAccessObject;
 import it.csi.mddtools.datagen.DatagenPackage;
 import it.csi.mddtools.datagen.LookupResolver;
 import it.csi.mddtools.datagen.LookupResolvers;
+import it.csi.mddtools.datagen.QCalculatedColumn;
+import it.csi.mddtools.datagen.QResultColumn;
 import it.csi.mddtools.datagen.QTable;
 import it.csi.mddtools.datagen.QTableColumn;
 import it.csi.mddtools.datagen.QueryDef;
@@ -94,8 +96,15 @@ public class QTableColumnItemProvider
 						// elenca solo le qtable presenti nella clausola from
 						ArrayList<QTable> result = new ArrayList<QTable>();
 						QTableColumn qtc = (QTableColumn)object;
-						SelectClause sel = (SelectClause)qtc.eContainer();
-						QueryDef qdef = (QueryDef)sel.eContainer();
+						QueryDef qdef = null;
+						SelectClause sel = null;
+						if (qtc.eContainer() instanceof SelectClause){
+							sel = (SelectClause)qtc.eContainer();
+						}
+						else {
+							sel = (SelectClause)((QCalculatedColumn)qtc.eContainer()).eContainer();
+						}
+						qdef = (QueryDef)sel.eContainer();
 						if (qdef.getFromClause() != null){
 							Iterator<QTable> it = qdef.getFromClause().getTables().iterator();
 							while(it.hasNext())
@@ -158,7 +167,19 @@ public class QTableColumnItemProvider
 	@Override
 	public String getText(Object object) {
 		QTableColumn qtc = (QTableColumn) object;
-		String label = ": ";
+		String label = formatQTableColumn(qtc);
+		return getString("_UI_QTableColumn_type") +": "+ label;
+	}
+
+	/**
+	 * se l'alias della tabella è specificato: <alias_tabella>.<nome_colonna> {AS <alias_colonna>}
+	 * se l'alias della tabella non è specificato: <nome_tabella>.<nome_colonna> {AS <alias_colonna>}
+	 * @param qtc
+	 * @return
+	 * @generated NOT
+	 */
+	public static String formatQTableColumn(QTableColumn qtc){
+		String label = "";
 		label += (qtc.getQtable() != null && qtc.getQtable().getTable() != null ? (qtc
 				.getQtable().getAliasName() != null
 				&& qtc.getQtable().getAliasName().length() > 0 ? qtc
@@ -167,9 +188,11 @@ public class QTableColumnItemProvider
 		label += "."
 				+ (qtc.getColumn() != null ? qtc.getColumn().getName()
 						: "<???>");
-		return getString("_UI_QTableColumn_type") + label;
+		if (qtc.getAlias()!=null && qtc.getAlias().length()>0){
+			label += " AS "+qtc.getAlias();
+		}
+		return label;
 	}
-
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
 	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
