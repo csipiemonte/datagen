@@ -17,6 +17,7 @@ import org.eclipse.emf.cdo.CDOObject;
  * <ul>
  *   <li>{@link it.csi.mddtools.datagen.LookupResolver#getForeignKey <em>Foreign Key</em>}</li>
  *   <li>{@link it.csi.mddtools.datagen.LookupResolver#getSupplierDAO <em>Supplier DAO</em>}</li>
+ *   <li>{@link it.csi.mddtools.datagen.LookupResolver#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -77,5 +78,31 @@ public interface LookupResolver extends CDOObject {
 	 * @generated
 	 */
 	void setSupplierDAO(DataAccessObject value);
+
+	/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see it.csi.mddtools.datagen.DatagenPackage#getLookupResolver_Name()
+	 * @model
+	 * @generated
+	 */
+	String getName();
+
+	/**
+	 * Sets the value of the '{@link it.csi.mddtools.datagen.LookupResolver#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
 
 } // LookupResolver

@@ -1138,13 +1138,22 @@ public interface DatagenPackage extends EPackage {
 	int LOOKUP_RESOLVER__SUPPLIER_DAO = 1;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOOKUP_RESOLVER__NAME = 2;
+
+	/**
 	 * The number of structural features of the '<em>Lookup Resolver</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOOKUP_RESOLVER_FEATURE_COUNT = 2;
+	int LOOKUP_RESOLVER_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.QueryDefImpl <em>Query Def</em>}' class.
@@ -2214,6 +2223,17 @@ public interface DatagenPackage extends EPackage {
 	EReference getLookupResolver_SupplierDAO();
 
 	/**
+	 * Returns the meta object for the attribute '{@link it.csi.mddtools.datagen.LookupResolver#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see it.csi.mddtools.datagen.LookupResolver#getName()
+	 * @see #getLookupResolver()
+	 * @generated
+	 */
+	EAttribute getLookupResolver_Name();
+
+	/**
 	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.QueryDef <em>Query Def</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3140,6 +3160,14 @@ public interface DatagenPackage extends EPackage {
 		 * @generated
 		 */
 		EReference LOOKUP_RESOLVER__SUPPLIER_DAO = eINSTANCE.getLookupResolver_SupplierDAO();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LOOKUP_RESOLVER__NAME = eINSTANCE.getLookupResolver_Name();
 
 		/**
 		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.QueryDefImpl <em>Query Def</em>}' class.

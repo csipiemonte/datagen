@@ -22,6 +22,7 @@ import org.eclipse.emf.internal.cdo.CDOObjectImpl;
  * <ul>
  *   <li>{@link it.csi.mddtools.datagen.impl.LookupResolverImpl#getForeignKey <em>Foreign Key</em>}</li>
  *   <li>{@link it.csi.mddtools.datagen.impl.LookupResolverImpl#getSupplierDAO <em>Supplier DAO</em>}</li>
+ *   <li>{@link it.csi.mddtools.datagen.impl.LookupResolverImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -91,6 +92,24 @@ public class LookupResolverImpl extends CDOObjectImpl implements LookupResolver 
 	 */
 	public void setSupplierDAO(DataAccessObject newSupplierDAO) {
 		eSet(DatagenPackage.Literals.LOOKUP_RESOLVER__SUPPLIER_DAO, newSupplierDAO);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return (String)eGet(DatagenPackage.Literals.LOOKUP_RESOLVER__NAME, true);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		eSet(DatagenPackage.Literals.LOOKUP_RESOLVER__NAME, newName);
 	}
 
 } //LookupResolverImpl

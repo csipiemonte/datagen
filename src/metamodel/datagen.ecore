@@ -365,6 +365,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="LookupResolver">
     <eStructuralFeatures xsi:type="ecore:EReference" name="foreignKey" eType="ecore:EClass rdbmdl.ecore#//constraints/ForeignKey"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="supplierDAO" eType="#_g44oVeT_EeCfL57xkAM0Kw"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" xmi:id="_jFUqoOT_EeCfL57xkAM0Kw" name="CacheabilityTypes">
     <eLiterals xmi:id="_x73oIOT_EeCfL57xkAM0Kw" name="HIGHLY_VARIABLE_DATA" literal="HIGHLY_VARIABLE_DATA"/>

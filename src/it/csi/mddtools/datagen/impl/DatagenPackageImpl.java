@@ -998,6 +998,15 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getLookupResolver_Name() {
+		return (EAttribute)lookupResolverEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getQueryDef() {
 		return queryDefEClass;
 	}
@@ -1402,6 +1411,7 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		lookupResolverEClass = createEClass(LOOKUP_RESOLVER);
 		createEReference(lookupResolverEClass, LOOKUP_RESOLVER__FOREIGN_KEY);
 		createEReference(lookupResolverEClass, LOOKUP_RESOLVER__SUPPLIER_DAO);
+		createEAttribute(lookupResolverEClass, LOOKUP_RESOLVER__NAME);
 
 		queryDefEClass = createEClass(QUERY_DEF);
 		createEReference(queryDefEClass, QUERY_DEF__SELECT_CLAUSE);
@@ -1591,6 +1601,7 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		initEClass(lookupResolverEClass, LookupResolver.class, "LookupResolver", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLookupResolver_ForeignKey(), theConstraintsPackage.getForeignKey(), null, "foreignKey", null, 0, 1, LookupResolver.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLookupResolver_SupplierDAO(), this.getDataAccessObject(), null, "supplierDAO", null, 0, 1, LookupResolver.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLookupResolver_Name(), ecorePackage.getEString(), "name", null, 0, 1, LookupResolver.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(queryDefEClass, QueryDef.class, "QueryDef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getQueryDef_SelectClause(), this.getSelectClause(), null, "selectClause", null, 0, 1, QueryDef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -75,6 +75,7 @@ public class LookupResolverItemProvider
 
 			addForeignKeyPropertyDescriptor(object);
 			addSupplierDAOPropertyDescriptor(object);
+			addNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -159,6 +160,28 @@ public class LookupResolverItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_LookupResolver_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_LookupResolver_name_feature", "_UI_LookupResolver_type"),
+				 DatagenPackage.Literals.LOOKUP_RESOLVER__NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns LookupResolver.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -198,6 +221,7 @@ public class LookupResolverItemProvider
 		switch (notification.getFeatureID(LookupResolver.class)) {
 			case DatagenPackage.LOOKUP_RESOLVER__FOREIGN_KEY:
 			case DatagenPackage.LOOKUP_RESOLVER__SUPPLIER_DAO:
+			case DatagenPackage.LOOKUP_RESOLVER__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
