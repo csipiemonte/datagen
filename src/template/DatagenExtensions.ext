@@ -560,4 +560,65 @@ boolean checkAliasUniqness(FromClause fc): JAVA
 boolean checkSelectClause(SelectClause sc): JAVA
 	it.csi.mddtools.datagen.genutils.GenUtils.checkSelectClause(it.csi.mddtools.datagen.SelectClause);
 	
+String getValueFromRSByAliasName(TableColumn col, String alias) :
+	let code = col.type.type :
+	switch(code){
+		case PrimitiveTypeCodes::BIT :
+			"rs.getInt(\""+alias.toUpperCase()+"\") == 0 ? false : true"
+		case PrimitiveTypeCodes::TINYINT :
+			"rs.getInt(\""+alias.toUpperCase()+"\")"
+		case PrimitiveTypeCodes::SMALLINT :
+			"rs.getInt(\""+alias.toUpperCase()+"\")"
+		case PrimitiveTypeCodes::INTEGER :
+			"rs.getInt(\""+alias.toUpperCase()+"\")"		
+		case PrimitiveTypeCodes::BIGINT :
+			"rs.getLong(\""+alias.toUpperCase()+"\")"
+		case PrimitiveTypeCodes::FLOAT :
+			"rs.getDouble(\""+alias.toUpperCase()+"\")" 
+		case PrimitiveTypeCodes::REAL :
+			"rs.getFloat(\""+alias.toUpperCase()+"\")"	
+		case PrimitiveTypeCodes::DOUBLE :
+			"rs.getDouble(\""+alias.toUpperCase()+"\")" 
+		case PrimitiveTypeCodes::NUMERIC :
+			"rs.getBigDecimal(\""+alias.toUpperCase()+"\")" 
+		case PrimitiveTypeCodes::DECIMAL :
+			"rs.getBigDecimal(\""+alias.toUpperCase()+"\")" 
+		case PrimitiveTypeCodes::CHAR :
+			"rs.getString(\""+alias.toUpperCase()+"\")" 
+		case PrimitiveTypeCodes::VARCHAR :
+			"rs.getString(\""+alias.toUpperCase()+"\")" 
+		case PrimitiveTypeCodes::LONGVARCHAR :
+			"rs.getString(\""+alias.toUpperCase()+"\")" 
+		case PrimitiveTypeCodes::DATE :
+			"rs.getDate(\""+alias.toUpperCase()+"\")" 
+		case PrimitiveTypeCodes::TIME :
+			"rs.getTime(\""+alias.toUpperCase()+"\")" 
+		case PrimitiveTypeCodes::TIMESTAMP :
+			"rs.getTimestamp(\""+alias.toUpperCase()+"\")" 
+		case PrimitiveTypeCodes::BINARY :
+			"rs.getBytes(\""+alias.toUpperCase()+"\")" 
+		case PrimitiveTypeCodes::VARBINARY :
+			"rs.getBytes(\""+alias.toUpperCase()+"\")" 
+		case PrimitiveTypeCodes::LONGVARBINARY :
+			"rs.getBytes(\""+alias.toUpperCase()+"\")" 
+		case PrimitiveTypeCodes::OTHER :
+			"getClobColumn(rs, \""+alias.toUpperCase()+"\")"  
+		case PrimitiveTypeCodes::JAVA_OBJECT :
+			"rs.getObject(\""+alias.toUpperCase()+"\")" 
+		case PrimitiveTypeCodes::DISTINCT :
+			"rs.getObject(\""+alias.toUpperCase()+"\")" 
+		case PrimitiveTypeCodes::STRUCT :
+			"rs.getObject(\""+alias.toUpperCase()+"\")" 
+		case PrimitiveTypeCodes::ARRAY :
+			"rs.getArray(\""+alias.toUpperCase()+"\")" 
+		case PrimitiveTypeCodes::BLOB :
+			"getBlobColumn(rs, \""+alias.toUpperCase()+"\")" 
+		case PrimitiveTypeCodes::CLOB :
+			"getClobColumn(rs, \""+alias.toUpperCase()+"\")" 
+		case PrimitiveTypeCodes::REF :
+			"rs.getRef(\""+alias.toUpperCase()+"\")" 
+		case PrimitiveTypeCodes::BOOLEAN :
+			"rs.getBoolean(\""+alias.toUpperCase()+"\")" 
 	
+		default :"???"
+	};		

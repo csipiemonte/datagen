@@ -378,7 +378,7 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameteri
 «ENDDEFINE»
 
 «DEFINE singleMapRowInternalQDef(Integer i) FOR QTableColumn»
-«REM»la logica di mapping deve seguire quella della creazione del DTO«ENDREM»
+
 «IF isNullOrEmpty(this.alias)-»
 	«IF isNullOrEmpty(this.qtable.aliasName)»
 		if (mapAllColumns || columnsToReadMap.get("«this.column.name»") != null)
@@ -398,9 +398,9 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameteri
 		);	
 	«ENDIF-»
 «ELSE-»
-		if (mapAllColumns || columnsToReadMap.get("«this.alias.toFirstUpper()»") != null)
+		if (mapAllColumns || columnsToReadMap.get("«this.alias.toUpperCase()»") != null)
 			dto.set«this.alias.toFirstUpper()»(«IF !isBlobOrClob(this.column)-»
-				«getValueFromRSByColName(this.column)-»
+				«getValueFromRSByAliasName(this.column, this.alias)-»
 		«ELSE-»
 				«getValueFromRS(this.column,i)-»
 		«ENDIF-»			
