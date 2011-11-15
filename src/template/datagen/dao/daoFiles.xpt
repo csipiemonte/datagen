@@ -436,9 +436,7 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c
 
 «DEFINE paramValorizationList(String dtoVarName, DataAccessObject dao) FOR List[TableColumn]-»
 «FOREACH this AS currCol-»
-«REM»se abbiamo una FK definita sulla colonna i-esima e un resolver associato ad essa, dobbiamo recuperare la property dal corrispondente oggetto risolto e non come usuale!!!«ENDREM»
 	«IF currCol.isForeignKey!=null && currCol.isForeignKey && dao.lookupResolvers != null && dao.lookupResolvers.resolvers.select(r|r.foreignKey.includedColumns.contains(currCol)).size >0-»
-	«REM»do nothing...il dato viene trattato in seguito«ENDREM»
 	«ELSE»	
 	params.addValue("«((TableColumn)currCol).name»", «dtoVarName».get«javaPropertyNameFromColumn(currCol).toFirstUpper()»(), java.sql.Types.«currCol.type.type» );	
 	«ENDIF»
@@ -453,7 +451,10 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c
 «LET (DataAccessObject)(pkgen.eContainer) AS dao-»
 «LET dao.mainTable.primaryKey.includedColumns.first() AS pkCol-»
 «FOREACH this AS currCol-»
+«IF currCol.isForeignKey!=null && currCol.isForeignKey && dao.lookupResolvers != null && dao.lookupResolvers.resolvers.select(r|r.foreignKey.includedColumns.contains(currCol)).size >0-»
+«ELSE»
 	params.addValue("«((TableColumn)currCol).name»", «currCol==pkCol?" newKey ":dtoVarName+".get"+javaPropertyNameFromColumn(currCol).toFirstUpper()+"()"» , java.sql.Types.«currCol.type.type» );
+«ENDIF»
 «ENDFOREACH-»
 «ENDLET-»
 «ENDLET-»
@@ -499,13 +500,12 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c
 		«IF pkGenerator!=null-»
 			«EXPAND paramValorizationList("dto",pkGenerator) FOR this.mainTable.columns-»
 		«ELSE»
-			«REM»nel seguente template si salteranno le colonne con lookup«ENDREM»
 			«EXPAND paramValorizationList("dto",this) FOR this.mainTable.columns-»
-			«REM»comment«ENDREM»
-			«IF this.lookupResolvers!=null && this.lookupResolvers.resolvers.size>0-»
-				«EXPAND lookedUpParamValorizationList("dto", this.mainTable.columns) FOR  this»
-			«ENDIF»
-		«ENDIF-»
+		«ENDIF-»	
+		«IF this.lookupResolvers!=null && this.lookupResolvers.resolvers.size>0-»
+			«EXPAND lookedUpParamValorizationList("dto", this.mainTable.columns) FOR  this»
+		«ENDIF»
+
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
 			stopWatch.start();
