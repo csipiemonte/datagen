@@ -169,7 +169,21 @@ this.queryDefinition.joinClause.criteria.select(c|c.leftTable == null || c.leftC
 
 context CustomFinder if(this.queryDefinition!=null && this.queryDefinition.whereClause != null) ERROR "E' stata definita una Where Clasue vuota per il CustomFinder <"+this.name+">. Se non e' necessario specificare la where condition, rimuoverla dal modello. "+loc():
 !isNullOrEmpty(this.queryDefinition.whereClause.freetextExpression);
-/////////////////////////////////////////////////////
+
+context CustomFinder if(this.queryDefinition!=null && this.queryDefinition.fromClause.tables.size>1) ERROR "Non e' possibile utilizzare lo stesso alias per due tabelle distinte. Verificare la clausola di FROM del customFinder "+loc():
+checkAliasUniqness(this.queryDefinition.fromClause);
+
+context CustomFinder if(this.queryDefinition!=null && this.queryDefinition.selectClause.columns.size>1) ERROR "E' stata inserita una clausola di SELECT con colonne duplicate : "+loc():
+checkSelectClause(this.queryDefinition.selectClause);
+
+//limitazione temporanee sui CustomFinder con query definition
+context CustomFinder if(this.queryDefinition!=null) ERROR "La clausola DISTINCT non e' al momento disponibile per il caso Custom Finder con query definition: " +loc():
+this.distinct.size == 0;
+
+//warning generici
+context CustomFinder if(this.queryDefinition.fromClause.tables.size > 1 && this.queryDefinition.joinClause!=null) WARNING "Si consiglia sempre di fornire un alias identificativo per tutte le tabelle nella clausola FROM in presenza di una condizione di join" +loc():
+this.queryDefinition.fromClause.tables.select(t|t.aliasName==null).size==0;
+ /////////////////////////////////////////////////////
 
 
 

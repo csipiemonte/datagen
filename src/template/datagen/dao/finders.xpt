@@ -126,6 +126,7 @@ e le limitazioni secondo i termini della Licenza.
 
 
 «DEFINE finder(DBAccessModel model, DataAccessObject dao, boolean body) FOR CustomFinder»
+«IF this.queryDefinition == null»
 	/** 
 	 * Implementazione del finder «name»
 	 * @generated
@@ -188,7 +189,63 @@ e le limitazioni secondo i termini della Licenza.
 	;
 	«ENDIF-»
 «ENDLET-»	
+
+«REM»caso del custom finder con Qdef«ENDREM»
+«ELSE»
+«LET isNullOrEmpty(filterClassFQN) ? "java.lang.Object" : (filterClassFQN=="$dto" ? getDtoFQN(dao, model) : (filterClassFQN=="$dto[]"? "java.util.ArrayList<"+getDtoFQN(dao, model)+">" : filterClassFQN) ) AS filterJavaType-»
+
+/** 
+	 * Implementazione del finder «name» con Qdef
+	 * @generated
+	 */
+
+public List<«getDtoCustomQdefClassName((DataAccessObject)this.eContainer.eContainer, this)»> find«name.toFirstUpper()»(«filterJavaType» input) throws «getDaoExcClassName(dao)»
+	«IF body-»
+	{
+	
+	StringBuilder sql = new StringBuilder();
+	MapSqlParameterSource paramMap = new MapSqlParameterSource();	
+	
+	«EXPAND selectClause(dao) FOR this»
+	«EXPAND fromClause(dao) FOR this»
+	«IF this.queryDefinition.joinClause!=null || this.queryDefinition.whereClause!=null-»
+	sql.append(" WHERE ");
+	«ENDIF»
+	«EXPAND joinClause(dao) FOR this»
+	«IF this.queryDefinition.joinClause.criteria!=null && this.queryDefinition.joinClause.criteria.size>0»
+	sql.append(" AND ");
+	«ENDIF»
+	«EXPAND whereClause(dao) FOR this»
+	«EXPAND customQDefRowMapper(dao) FOR this»
+	
+	List<«getDtoCustomQdefClassName((DataAccessObject)this.eContainer.eContainer, this)»> list = null;
+	StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
+	
+		try {
+			stopWatch.start();
+			list = jdbcTemplate.query(sql.toString(), paramMap, «name»RowMapper);	
+		} catch (RuntimeException ex) {
+			log.error("[«getDaoImplClassName(dao)»::find«name.toFirstUpper()»] esecuzione query",ex);
+			throw new «getDaoExcClassName(dao)»("Query failed", ex);
+		} finally {
+			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "find«name.toFirstUpper()»","esecuzione query", sql.toString());
+			log.debug("[«getDaoImplClassName(dao)»::find«name.toFirstUpper()»] END");
+		}
+		return list;	
+	}
+	
+	«ELSE-»
+	;
+	«ENDIF-»
+
+
+«ENDLET»
+	
+«ENDIF»
+
 «ENDDEFINE»
+
+
 
 
 «DEFINE finder(DBAccessModel model, DataAccessObject dao, boolean body) FOR QBEFinder»
@@ -246,5 +303,53 @@ e le limitazioni secondo i termini della Licenza.
 	;
 	«ENDIF-»	
 «ENDLET-»
+«ENDDEFINE»
+«DEFINE selectClause(DataAccessObject dao) FOR CustomFinder-»
+	sql.append("SELECT «EXPAND singleSelectClause FOREACH this.queryDefinition.selectClause.columns SEPARATOR ", " -»");
+
+«ENDDEFINE»
+
+«DEFINE fromClause(DataAccessObject dao) FOR CustomFinder-»
+	sql.append(" FROM «EXPAND singleFromClause FOREACH this.queryDefinition.fromClause.tables SEPARATOR ", " -»");
+«ENDDEFINE»
+
+«DEFINE joinClause(DataAccessObject dao) FOR CustomFinder»
+«IF this.queryDefinition.joinClause!=null && this.queryDefinition.joinClause.criteria.size > 0-»
+	sql.append("«EXPAND singleJoinClause FOREACH this.queryDefinition.joinClause.criteria SEPARATOR " AND " -»");
+«ENDIF»
+«ENDDEFINE»
+
+«DEFINE whereClause(DataAccessObject dao) FOR CustomFinder-»
+	«IF this.queryDefinition.whereClause!=null && this.queryDefinition.whereClause.freetextExpression!=null-»
+	sql.append("«this.queryDefinition.whereClause.freetextExpression-»");
+	«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"whereClause"+this.name+"query")-»
+	//inserire qui i parametri indicati nella espressione di where, ad esempio:
+	
+	//paramMap.addValue("param", input);
+	
+	«ENDPROTECT»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE customQDefRowMapper(DataAccessObject dao) FOR CustomFinder-»
+«ENDDEFINE»
+
+«DEFINE singleSelectClause FOR QResultColumn»
+«ERROR "QResultColumn non gestito"-»
+«ENDDEFINE»
+
+«REM»condizione di select per ogni colonna«ENDREM»
+«DEFINE singleSelectClause FOR QTableColumn-»
+«getSingleSelectClause(this)-»
+«ENDDEFINE»
+
+«REM»condizione di from per ogni tablla«ENDREM»
+«DEFINE singleFromClause FOR QTable-»
+«getSingleFromClause(this)-»
+«ENDDEFINE»
+
+«REM»condizione di join per ogni join criterion«ENDREM»
+«DEFINE singleJoinClause FOR JoinCriterion-»
+«getSingleJoinClause(this.leftTable.aliasName, this.leftColumn.name)-» = «getSingleJoinClause(this.rightTable.aliasName, this.rightColumn.name)-»
 «ENDDEFINE»
 

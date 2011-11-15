@@ -106,13 +106,19 @@ String getMetadataFullPath(DataAccessObject dao, DBAccessModel model) :
 
 String getDtoClassName(DataAccessObject dao) :
 	dao.name.toFirstUpper()+"Dto";
+	
+String getDtoCustomQdefClassName(DataAccessObject dao, CustomFinder cf) :
+	dao.name.toFirstUpper()+cf.name.toFirstUpper()+"Dto";	
 
 String getDtoFQN(DataAccessObject dao, DBAccessModel model) :
 	getPkgPackage((DaoPackage)(dao.eContainer), model)+".dto."+getDtoClassName(dao);
 
 String getDtoFullPath(DataAccessObject dao, DBAccessModel model) :
 	getPkgDir((DaoPackage)(dao.eContainer), model)+"/dto/"+getDtoClassName(dao)+".java";
-	
+
+String getDtoFullPathQdef(DataAccessObject dao, DBAccessModel model, CustomFinder cf) :
+	getPkgDir((DaoPackage)(dao.eContainer), model)+"/dto/"+ dao.name.toFirstUpper()+cf.name.toFirstUpper()+"Dto"+".java";
+		
 // DTO PK
 String getPkClassName(DataAccessObject dao) :
 	dao.name.toFirstUpper()+"Pk";
@@ -138,6 +144,7 @@ String getQbeExFullPath(DataAccessObject dao, DBAccessModel model) :
 
 String javaPropertyNameFromColumn(TableColumn col) :
 	toJavaId(col.name);
+		
 
 String javaPropertyPathForResolvedColumn(LookupResolver resolver, ForeignKey fk, int i) :
 	getLookedUpPropertyName(resolver)+"."+javaPropertyNameFromColumn(fk.referredUC.includedColumns.get(i));
@@ -528,8 +535,29 @@ String getLookedUpPropertyName(LookupResolver lookUpResolver):
 boolean areResolversInLoop(DaoPackage daoPackage): JAVA
 	it.csi.mddtools.datagen.genutils.GenUtils.findLoop(it.csi.mddtools.datagen.DaoPackage);
 
-//boolean areAllFkNamesUnivocal(List tables): JAVA
-//	it.csi.mddtools.datagen.genutils.GenUtils.areAllFkNamesUnivocal(java.util.List);
+
+String getSingleFromClause(QTable qTable):
+	if(isNullOrEmpty(qTable.aliasName)) then
+		qTable.table.name 
+	else
+		qTable.table.name+ " " + qTable.aliasName;
 	
-//boolean areAllPkNamesUnivocal(List tables): JAVA
-//	it.csi.mddtools.datagen.genutils.GenUtils.areAllPkNamesUnivocal(java.util.List);	
+String getSingleSelectClause(QTableColumn qTableColumn):
+	if(isNullOrEmpty(qTableColumn.qtable.aliasName)) then
+		qTableColumn.column.name 
+	else	
+		qTableColumn.qtable.aliasName+"."+qTableColumn.column.name;
+	
+String getSingleJoinClause(String alias, String column):
+	if(isNullOrEmpty(alias)) then
+		column
+	else 
+		alias+"."+column; 
+	
+boolean checkAliasUniqness(FromClause fc): JAVA
+	it.csi.mddtools.datagen.genutils.GenUtils.checkAliasUniqness(it.csi.mddtools.datagen.FromClause);
+
+boolean checkSelectClause(SelectClause sc): JAVA
+	it.csi.mddtools.datagen.genutils.GenUtils.checkSelectClause(it.csi.mddtools.datagen.SelectClause);
+	
+	

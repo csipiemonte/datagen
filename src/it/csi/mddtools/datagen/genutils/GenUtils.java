@@ -25,10 +25,11 @@ import it.csi.mddtools.datagen.Deleter;
 import it.csi.mddtools.datagen.Finder;
 import it.csi.mddtools.datagen.LookupResolver;
 import it.csi.mddtools.datagen.OrderSpec;
+import it.csi.mddtools.datagen.QTableColumn;
 import it.csi.mddtools.datagen.Updater;
 import it.csi.mddtools.rdbmdl.Column;
 import it.csi.mddtools.rdbmdl.Table;
-import it.csi.mddtools.rdbmdl.constraints.ForeignKey;
+import it.csi.mddtools.rdbmdl.TableColumn;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -238,6 +239,33 @@ public class GenUtils {
 				}
 			}
 					
+
+	public static boolean checkAliasUniqness(it.csi.mddtools.datagen.FromClause fc){
+		HashMap<String, String> aliasNames = new HashMap<String, String>();
+		aliasNames.put(fc.getTables().get(0).getAliasName(), fc.getTables().get(0).getAliasName());
+		for(int i=1; i<fc.getTables().size();i++){
+			if(aliasNames.containsKey(fc.getTables().get(i).getAliasName()))
+				return false;
+		}
+		return true;
+	}
+	
+	
+	public static boolean checkSelectClause(it.csi.mddtools.datagen.SelectClause sc){
+		HashMap<String, String> selectClauses = new HashMap<String, String>();
+		QTableColumn c = (QTableColumn)sc.getColumns().get(0);
+		String t = c.getQtable().getTable().getName();
+		selectClauses.put(t+c.getColumn().getName(),"");
+		for(int i=1;i<sc.getColumns().size();i++){
+			QTableColumn tci = (QTableColumn)sc.getColumns().get(i);
+			String ti = tci.getQtable().getTable().getName();
+			if(selectClauses.containsKey(ti+tci.getColumn().getName()))
+				return false;
+		}
+		return true;
+	}
+	
+	
 	
 	
 //	public static boolean areAllFkNamesUnivocal(List<it.csi.mddtools.rdbmdl.Table> list){

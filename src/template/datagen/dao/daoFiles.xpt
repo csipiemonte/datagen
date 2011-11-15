@@ -230,11 +230,17 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameteri
 «ENDDEFINE»
 
 «DEFINE rowMapperObject_internal(DataAccessObject dao, List[Column] distinctColumns) FOR Finder-»
-	protected «getDaoClassName(dao)»RowMapper «name»RowMapper = new «getDaoClassName(dao)»RowMapper(
+	«REM»se si tratta di un custom finder con qDef si deve istanziare la classe RowMapper passando come argomento il dto specificatamente creato«ENDREM»
+	«IF this.metaType==CustomFinder && ((CustomFinder)this).queryDefinition!=null»
+		protected «getDaoClassName(dao)»RowMapper «name»RowMapper = new «getDaoClassName(dao)»RowMapper(
+		null,«getDtoCustomQdefClassName(dao,(CustomFinder)this)».class);
+	«ELSE»
+		protected «getDaoClassName(dao)»RowMapper «name»RowMapper = new «getDaoClassName(dao)»RowMapper(
 	«IF distinctColumns == null || distinctColumns.size==0-»null
 	«ELSE-»new String[]{«FOREACH distinctColumns AS currCol SEPARATOR ","»"«currCol.name»"«ENDFOREACH»}
-	«ENDIF-»
+	«ENDIF-», «getDtoClassName(dao)».class
 	);
+	«ENDIF»
 «ENDDEFINE»
 
 
@@ -244,17 +250,19 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameteri
 		
 		private java.util.HashMap<String,String> columnsToReadMap = new java.util.HashMap<String, String>();
 		private boolean mapAllColumns = true;
+		private Class dtoClass;
 		
 		/**
 		 * @param columnsToRead elenco delle colonne da includere nel mapping (per query
 		 *        incomplete, esempio distinct, custom select...)
 		 */
-		public «getDaoClassName()»RowMapper(String[] columnsToRead) {
+		public «getDaoClassName()»RowMapper(String[] columnsToRead, Class dtoClass) {
 			if (columnsToRead != null) {
 				mapAllColumns = false;
 				for (int i=0; i<columnsToRead.length; i++)
 					columnsToReadMap.put(columnsToRead[i], columnsToRead[i]);
 			}
+			this.dtoClass=dtoClass;
 		}
 		
 		/**
@@ -266,22 +274,37 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameteri
 		 * @return «getDtoClassName()»
 		 * @generated
 		 */
-		public «getDtoClassName()» mapRow(ResultSet rs, int row) throws SQLException
+		public Object mapRow(ResultSet rs, int row) throws SQLException
 		{
-			«getDtoClassName()» dto = new «getDtoClassName()»();
+			«REM»comment«getDtoClassName()» dto = new «getDtoClassName()»();
 			dto = mapRow_internal(dto, rs, row);
+			return dto;«ENDREM»
+			Object dto = null;
+			try {
+				dto = dtoClass.newInstance();
+			} catch (InstantiationException e) {
+				e.printStackTrace();
+				throw new RuntimeException("Impossibile istanziare la classe " + dto.getClass().getCanonicalName()+" ,"+e.getCause());
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+				throw new RuntimeException("Impossibile accedere alla classe " + dto.getClass().getCanonicalName()+" ,"+e.getCause());
+			}
+			
+			if(dto instanceof «getDtoClassName()»){
+				return mapRow_internal((«getDtoClassName()»)dto, rs, row);
+			}
+			
+			«REM»espando il mapping per i custom finder per tutti i dto specifici definiti all'interno del dao con Qdef«ENDREM»
+			«LET this.finders.finders.typeSelect(CustomFinder).select(f|f.queryDefinition!=null) AS customJoinFinders»
+				«IF customJoinFinders!=null && customJoinFinders.size>0»
+					«EXPAND CustomFinderQdefMapping(this) FOREACH customJoinFinders »
+				«ENDIF»
+			«ENDLET»
+			
 			return dto;
 		}
 			
-		/**
-		 * Method 'mapRow_internal'
-		 * 
-		 * @param rs
-		 * @param row
-		 * @throws SQLException
-		 * @return «getDtoClassName()»
-		 * @generated
-		 */
+		 
 		public «getDtoClassName()» mapRow_internal(
 			«getDtoClassName()» objectToFill, 
 			ResultSet rs, 
@@ -296,15 +319,15 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameteri
 			«ELSE»
 			
 			if (mapAllColumns || columnsToReadMap.get("«currCol.name»") != null)
-				dto.set«javaPropertyNameFromColumn(currCol).toFirstUpper()»(
+				dto.set«javaPropertyNameFromColumn(currCol).toFirstUpper()-»(
 			«IF !isBlobOrClob(currCol)-»
-				«getValueFromRSByColName(currCol)»
+				«getValueFromRSByColName(currCol)-»
 			«ELSE-»
 				«getValueFromRS(currCol, i.counter1)»
 			«ENDIF-»			
 				);
-			«ENDIF»
-			«ENDFOREACH»
+			«ENDIF-»
+			«ENDFOREACH-»
 			
 			
 			«REM»expand sui resolvers, se ci sono«ENDREM»
@@ -314,8 +337,66 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameteri
 			return dto;
 		}
 		
+		
+		«LET this.finders.finders.typeSelect(CustomFinder).select(f|f.queryDefinition!=null) AS customJoinFinders»
+				«IF customJoinFinders!=null && customJoinFinders.size>0»
+					«EXPAND mapRowInternalQDef(this) FOREACH customJoinFinders »
+				«ENDIF»
+			«ENDLET»
+		
 	}
+	
 «ENDDEFINE»
+
+
+«DEFINE mapRowInternalQDef(DataAccessObject dao) FOR CustomFinder»
+	
+	/**
+	 * Method 'mapRow_internal'
+	 * 
+	 * @param rs
+	 * @param row
+	 * @throws SQLException
+	 * @return «getDtoCustomQdefClassName(dao,this)»
+	 * @generated
+	 */
+
+	public «getDtoCustomQdefClassName(dao,this)» mapRow_internal(
+			«getDtoCustomQdefClassName(dao,this)» objectToFill, ResultSet rs, int row) throws SQLException
+	{	
+			«getDtoCustomQdefClassName(dao,this)» dto = objectToFill;
+			«FOREACH this.queryDefinition.selectClause.columns AS currCol ITERATOR  i-»
+				«EXPAND singleMapRowInternalQDef(i.counter1) FOR currCol-»
+			«ENDFOREACH»
+			return dto;
+	}	 
+«ENDDEFINE»
+
+
+«DEFINE singleMapRowInternalQDef(Integer i) FOR QResultColumn»
+	«ERROR "Non implementato"»
+«ENDDEFINE»
+
+«DEFINE singleMapRowInternalQDef(Integer i) FOR QTableColumn»
+«IF isNullOrEmpty(this.qtable.aliasName)»
+	if (mapAllColumns || columnsToReadMap.get("«this.column.name»") != null)
+		dto.set«javaPropertyNameFromColumn(this.column).toFirstUpper()»(«IF !isBlobOrClob(this.column)-»
+			«getValueFromRSByColName(this.column)-»
+		«ELSE-»
+			«getValueFromRS(this.column,i)-»
+		«ENDIF-»			
+		);	
+«ELSE-»
+	if (mapAllColumns || columnsToReadMap.get("«this.column.name»") != null)
+		dto.set«this.qtable.aliasName.toFirstUpper()»«javaPropertyNameFromColumn(this.column).toFirstUpper()»(«IF !isBlobOrClob(this.column)-»
+			«getValueFromRSByColName(this.column)»
+		«ELSE-»
+			«getValueFromRS(this.column,i)»
+		«ENDIF-»			
+		);	
+«ENDIF-»
+«ENDDEFINE»
+
 
 «DEFINE columnNameList(boolean useDistinct) FOR List[TableColumn]-»
 «IF useDistinct-»DISTINCT «ENDIF-»«FOREACH this AS currCol SEPARATOR ","-»«((TableColumn)currCol).name-»«ENDFOREACH-»
@@ -484,7 +565,7 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c
 	{	
 		«getDtoClassName()» dto = objectToFill;
 		
-		«getDaoClassName().toFirstUpper()»RowMapper «getDaoClassName().toFirstLower()»RowMapper = new «getDaoClassName().toFirstUpper()»RowMapper(null);
+		«getDaoClassName().toFirstUpper()»RowMapper «getDaoClassName().toFirstLower()»RowMapper = new «getDaoClassName().toFirstUpper()»RowMapper(null,«getDtoClassName()».class);
 		
 		«REM»«FOREACH mainTable.columns AS currCol ITERATOR i»
 			«IF currCol.isForeignKey!=null && currCol.isForeignKey && this.lookupResolvers != null && this.lookupResolvers.resolvers.select(r|r.foreignKey.includedColumns.contains(currCol)).size >0-»
@@ -936,5 +1017,9 @@ public class CacheElement {
 
 «ENDDEFINE»
 
-
+«DEFINE CustomFinderQdefMapping(DataAccessObject dao) FOR CustomFinder-»
+	if(dto instanceof «getDtoCustomQdefClassName(dao,this)»){
+			return mapRow_internal((«getDtoCustomQdefClassName(dao,this)»)dto, rs, row);
+	}
+«ENDDEFINE»
 
