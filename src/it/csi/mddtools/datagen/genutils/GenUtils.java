@@ -25,6 +25,8 @@ import it.csi.mddtools.datagen.Deleter;
 import it.csi.mddtools.datagen.Finder;
 import it.csi.mddtools.datagen.LookupResolver;
 import it.csi.mddtools.datagen.OrderSpec;
+import it.csi.mddtools.datagen.QCalculatedColumn;
+import it.csi.mddtools.datagen.QResultColumn;
 import it.csi.mddtools.datagen.QTableColumn;
 import it.csi.mddtools.datagen.Updater;
 import it.csi.mddtools.rdbmdl.Column;
@@ -269,7 +271,50 @@ public class GenUtils {
 		} 
 		return ris;
 	}
-		
+	
+	public static String getSingleSelectClause(it.csi.mddtools.datagen.QCalculatedColumn qcc){
+		String ris = qcc.getFreeTextExpression();
+		for(int i=0; i<qcc.getReferencedColumns().size(); i++){
+			QResultColumn currQResCol = qcc.getReferencedColumns().get(i);
+			String subst = "";
+			if (currQResCol instanceof QCalculatedColumn){
+				subst = "???QCalculatedColumn non ancora supportata???";
+			}
+			else if (currQResCol instanceof QTableColumn){
+				QTableColumn qtc = (QTableColumn)currQResCol;
+				if (qtc.getQtable()!=null){
+					// aggiungo l'alias o il nome della tabella
+					if (qtc.getQtable().getAliasName()!=null && qtc.getQtable().getAliasName().length()>0){
+						subst += qtc.getQtable().getAliasName()+".";
+					}
+					else {
+						if (qtc.getQtable().getTable()!=null)
+							subst += qtc.getQtable().getTable().getName()+".";
+						else
+							subst+= "#ERRORE#";
+					}
+					// aggiungo il nome della colonna
+					if (qtc.getColumn()!=null)
+						subst+=qtc.getColumn().getName();
+					else
+						subst+= "#ERRORE#";
+				}
+				else
+					subst+= "#ERRORE#";
+			}
+			else{
+				subst = "???"+currQResCol.getClass()+" non ancora supportata???";
+			}
+			String pattern = "\\$"+(i+1);
+			System.out.println("pattern: "+pattern);
+			System.out.println("subst:"+subst);
+			ris = ris.replaceFirst(pattern, subst);
+			System.out.println("ris:"+ris);
+		}
+		// aggiungo l'alias
+		ris += " AS "+qcc.getAlias();
+		return ris;
+	}
 	
 	
 //	public static boolean areAllFkNamesUnivocal(List<it.csi.mddtools.rdbmdl.Table> list){

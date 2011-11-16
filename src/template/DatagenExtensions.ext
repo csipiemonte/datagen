@@ -552,6 +552,10 @@ String getSingleSelectClause(QTableColumn qTableColumn):
 		qTableColumn.column.name + (isNullOrEmpty(qTableColumn.alias)?"": (" as " + qTableColumn.alias))
 	else	
 		qTableColumn.qtable.aliasName+"."+qTableColumn.column.name + (isNullOrEmpty(qTableColumn.alias)?"": (" as " + qTableColumn.alias)) ;
+
+String getSingleSelectClause(QCalculatedColumn qCalcColumn) : JAVA 
+	it.csi.mddtools.datagen.genutils.GenUtils.getSingleSelectClause(it.csi.mddtools.datagen.QCalculatedColumn);
+
 	
 String getSingleJoinClause(String alias, String column):
 	if(isNullOrEmpty(alias)) then

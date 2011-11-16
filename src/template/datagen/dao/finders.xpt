@@ -344,6 +344,10 @@ public List<«getDtoCustomQdefClassName((DataAccessObject)this.eContainer.eConta
 «getSingleSelectClause(this)-»
 «ENDDEFINE»
 
+«DEFINE singleSelectClause FOR QCalculatedColumn-»
+«getSingleSelectClause(this)-»
+«ENDDEFINE»
+
 «REM»condizione di from per ogni tablla«ENDREM»
 «DEFINE singleFromClause FOR QTable-»
 «getSingleFromClause(this)-»
