@@ -212,7 +212,8 @@ public List<«getDtoCustomQdefClassName((DataAccessObject)this.eContainer.eConta
 	sql.append(" WHERE ");
 	«ENDIF»
 	«EXPAND joinClause(dao) FOR this»
-	«IF this.queryDefinition.joinClause.criteria!=null && this.queryDefinition.joinClause.criteria.size>0»
+	«IF this.queryDefinition.joinClause.criteria!=null && this.queryDefinition.joinClause.criteria.size>0 &&
+	this.queryDefinition.whereClause != null-»
 	sql.append(" AND ");
 	«ENDIF»
 	«EXPAND whereClause(dao) FOR this»
