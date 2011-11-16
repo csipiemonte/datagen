@@ -102,7 +102,9 @@ e le limitazioni secondo i termini della Licenza.
     	<property name="incrementer" ref="«getDaoIdName(currDao)»Incrementer" />
     	«ENDIF-»
     	«IF currDao.lookupResolvers!=null && currDao.lookupResolvers.resolvers.size > 0 -»
-    		«EXPAND supplierDaoSpringProperties FOREACH currDao.lookupResolvers.resolvers-»
+    	«LET getAllDistinctSuppliers(currDao) AS allDistinctSuppliers-»
+    		«EXPAND supplierDaoSpringProperty FOREACH allDistinctSuppliers-»
+    	«ENDLET-»
     	«ENDIF-»
   	</bean>
   	
@@ -129,7 +131,7 @@ e le limitazioni secondo i termini della Licenza.
 «ERROR "pkGeneratorBeanDef: aop non risolta"»
 «ENDDEFINE»
 
-«DEFINE supplierDaoSpringProperties FOR LookupResolver»
-		<!-- property del daoSupplier : «getDaoClassName(this.supplierDAO)» -->
-    	<property name="«getDaoClassName(this.supplierDAO).toFirstLower()»" ref="«getDaoClassName(this.supplierDAO).toFirstLower()»"></property>
+«DEFINE supplierDaoSpringProperty FOR DataAccessObject»
+		<!-- property del daoSupplier : «getDaoClassName(this)» -->
+    	<property name="«getDaoClassName(this).toFirstLower()»" ref="«getDaoClassName(this).toFirstLower()»"></property>
 «ENDDEFINE»

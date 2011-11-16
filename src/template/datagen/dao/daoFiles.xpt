@@ -994,24 +994,30 @@ public class CacheElement {
 «DEFINE supplierDaoSpringProperties FOR DataAccessObject»
 	
 	«IF this.lookupResolvers!=null && this.lookupResolvers.resolvers.size > 0»
-		«FOREACH this.lookupResolvers.resolvers AS currResolver»
-			private «getDaoClassName(currResolver.supplierDAO)» «getDaoClassName(currResolver.supplierDAO).toFirstLower()»;
-			
-			public «getDaoClassName(currResolver.supplierDAO)» get«getDaoClassName(currResolver.supplierDAO)»(){
-				return «getDaoClassName(currResolver.supplierDAO).toFirstLower()»;
-			}
-			
-			public void set«getDaoClassName(currResolver.supplierDAO)»(«getDaoClassName(currResolver.supplierDAO)» val){
-				this.«getDaoClassName(currResolver.supplierDAO).toFirstLower()» = val;
-			}
-		«ENDFOREACH»
-	«ELSE»
+		«LET this.lookupResolvers.resolvers.supplierDAO AS allSuppliers-»
+		«LET getAllDistinctSuppliers() AS allDistinctSuppliers-»
+		«FOREACH allDistinctSuppliers AS currSupplier»
+		«EXPAND supplierDaoSpringProperty FOR currSupplier-»
+		«ENDFOREACH-»
+		«ENDLET-»
+		«ENDLET-»
+	«ELSE-»
 	«REM» do nothing«ENDREM»
 	«ENDIF»
 
 «ENDDEFINE»
 
-
+«DEFINE supplierDaoSpringProperty FOR DataAccessObject-»
+			private «getDaoClassName(this)» «getDaoClassName(this).toFirstLower()»;
+			
+			public «getDaoClassName(this)» get«getDaoClassName(this)»(){
+				return «getDaoClassName(this).toFirstLower()»;
+			}
+			
+			public void set«getDaoClassName(this)»(«getDaoClassName(this)» val){
+				this.«getDaoClassName(this).toFirstLower()» = val;
+			}
+«ENDDEFINE»
 
 
 «DEFINE lookedUpParamValorizationList(String dtoVarName, List[TableColumn] list) FOR DataAccessObject»

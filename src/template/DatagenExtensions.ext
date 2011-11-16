@@ -535,6 +535,11 @@ String getLookedUpPropertyName(LookupResolver lookUpResolver):
 boolean areResolversInLoop(DataAccessObject dao): JAVA
 	it.csi.mddtools.datagen.genutils.GenUtils.findLoop(it.csi.mddtools.datagen.DataAccessObject);
 
+	
+List[DataAccessObject] getAllDistinctSuppliers(DataAccessObject dao) : JAVA
+	it.csi.mddtools.datagen.genutils.GenUtils.getAllDistinctSuppliers(it.csi.mddtools.datagen.DataAccessObject);
+
+
 
 String getSingleFromClause(QTable qTable):
 	if(isNullOrEmpty(qTable.aliasName)) then

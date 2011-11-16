@@ -38,6 +38,8 @@ import java.util.List;
 import java.util.Properties;
 import java.util.StringTokenizer;
 
+import org.eclipse.emf.common.util.EList;
+
 public class GenUtils {
 	
 	/**
@@ -254,7 +256,20 @@ public class GenUtils {
 		return true;
 	}
 	
-	
+	public static List<DataAccessObject> getAllDistinctSuppliers(DataAccessObject dao){
+		ArrayList<DataAccessObject> ris = new ArrayList<DataAccessObject>();
+		if (dao.getLookupResolvers()!=null){
+			Iterator<LookupResolver> it_lr = dao.getLookupResolvers().getResolvers().iterator();
+			while(it_lr.hasNext()){
+				LookupResolver currLR = it_lr.next();
+				DataAccessObject currSupp = currLR.getSupplierDAO();
+				if (currSupp != null && !ris.contains(currSupp))
+					ris.add(currSupp);
+			}
+		} 
+		return ris;
+	}
+		
 	
 	
 //	public static boolean areAllFkNamesUnivocal(List<it.csi.mddtools.rdbmdl.Table> list){
