@@ -151,43 +151,47 @@ context DataAccessObject if(this.cacheability==CacheabilityTypes::ALMOST_STABLE_
 !(this.cacheTTLminutes == 0);
 
 
-//////////////////CUSTOM FINDER CON JOIN CLAUSE//////////////////////
+//////////////////CUSTOM FINDER CON CON QUERY DEFINITION//////////////////////
 context CustomFinder if(this.queryDefinition!=null) WARNING "E' stato definito un custom finder <"+this.name+"> associato ad una QueryDefinition: i parametri CustomFrom e CustomSelect saranno ignorati " +loc():
 false;
 
+//Select Clause : deve sempre essere specificata
 context CustomFinder if(this.queryDefinition!=null) ERROR "E' necessario definire il parametro Select Clause per il CustomFinder <"+this.name+"> e che esso contenga almeno una colonna"+loc():
 this.queryDefinition.selectClause != null && this.queryDefinition.selectClause.columns.size != 0;
 
+//From Clause   : deve sempre essere specificata
 context CustomFinder if(this.queryDefinition!=null) ERROR "E' necessario definire il parametro From Clause per il CustomFinder <"+this.name+"> e che esso contenga almeno una tabella"+loc():
 this.queryDefinition.fromClause != null && this.queryDefinition.fromClause.tables.size != 0;
 
-context CustomFinder if(this.queryDefinition!=null && this.queryDefinition.joinClause!=null) ERROR "E' necessario specificare almeno un Join Criterion nella Join Clause per il CustomFinder <"+this.name+"> "+loc():
-this.queryDefinition.joinClause.criteria.size != 0;
+//Join Clause   : se presente, deve avere almeno un Join Criterion specificato
+context JoinClause ERROR "E' necessario specificare almeno un Join Criterion se e' stata definita una Join Clause in un CustomFinder "+loc():
+this.criteria.size != 0;
 
-context CustomFinder if(this.queryDefinition!=null && this.queryDefinition.joinClause!=null) ERROR "E' stata definita un Join Criterion nella Join Clause per il CustomFinder <"+this.name+"> senza che siano stati specificati tutti e 4 i parametri necessari. "+loc():
-this.queryDefinition.joinClause.criteria.select(c|c.leftTable == null || c.leftColumn ==null || c.rightTable == null || c.rightColumn ==null).size == 0;
+//Join Criterion : necessario specificare tutti e 4 i parametri (LT+LC:RT+RC)
+context JoinCriterion ERROR "E' stata definita un Join Criterion senza che siano stati specificati tutti e 4 i parametri necessari. "+loc():
+!isNullOrEmpty(this.leftColumn.name) && !isNullOrEmpty(this.rightColumn.name) && this.leftTable!=null && this.rightTable!=null;
 
-context CustomFinder if(this.queryDefinition!=null && this.queryDefinition.whereClause != null) ERROR "E' stata definita una Where Clasue vuota per il CustomFinder <"+this.name+">. Se non e' necessario specificare la where condition, rimuoverla dal modello. "+loc():
-!isNullOrEmpty(this.queryDefinition.whereClause.freetextExpression);
+//Where Clause : necessario specificare la free text expression (si ricorda che non e' invece obbligatorio fornire una where per i custom finder con qDef!!!)
+context WhereClause ERROR "E' stata definita una Where Clasue senza la relativa free text expression "+loc():
+!isNullOrEmpty(this.freetextExpression);
 
-//VERIFICARE se serve ancora!!!!
-//context CustomFinder if(this.queryDefinition!=null && this.queryDefinition.fromClause.tables.size>1) ERROR "Non e' possibile utilizzare lo stesso alias per due tabelle distinte. Verificare la clausola di FROM del customFinder "+loc():
-//checkAliasUniqness(this.queryDefinition.fromClause);
+//QCalculatedColumn : necessario fornire un alias e freeTextExpression
+context QCalculatedColumn ERROR "Non e' stato definito un alias per la QCalculatedColumn definita nella clausola di select di un custom finder: "+loc():
+!isNullOrEmpty(this.alias);
 
-//VERIFICARE se serve ancora!!!!
-//context CustomFinder if(this.queryDefinition!=null && this.queryDefinition.selectClause.columns.size>1) ERROR "E' stata inserita una clausola di SELECT con colonne duplicate : "+loc():
-//checkSelectClause(this.queryDefinition.selectClause);
+//QCalculatedColumn : necessario fornire una freeTextExpression
+context QCalculatedColumn ERROR "Non e' stata definita la free text expression per la QCalculatedColumn con alias <"+this.alias+">: " + loc():
+!isNullOrEmpty(this.freeTextExpression);
+
+context QTable if(this.eContainer.metaType == FromClause) ERROR "Un alias duplicato e' presente nella FROM clause del custom finder: "+loc():
+((FromClause)eContainer).tables.select(t|t.aliasName == this.aliasName).size==1;
 
 //limitazione temporanee sui CustomFinder con query definition
 context CustomFinder if(this.queryDefinition!=null) ERROR "La clausola DISTINCT non e' al momento disponibile per il caso Custom Finder con query definition: " +loc():
 this.distinct.size == 0;
 
-context CustomFinder if(this.queryDefinition!=null && this.queryDefinition.selectClause.columns.typeSelect(QCalculatedColumn).size>0) ERROR "Non e' al momento possibile definire una QCalculatedColumn che referenzia altre QCalculatedColumn." +loc():
-this.queryDefinition.selectClause.columns.typeSelect(QCalculatedColumn).referencedColumns.typeSelect(QCalculatedColumn).size==0;
-
-//warning generici
-context CustomFinder if(this.queryDefinition.fromClause.tables.size > 1 && this.queryDefinition.joinClause!=null) WARNING "Si consiglia sempre di fornire un alias identificativo per tutte le tabelle nella clausola FROM in presenza di una condizione di join" +loc():
-this.queryDefinition.fromClause.tables.select(t|t.aliasName==null).size==0;
+context QCalculatedColumn ERROR "Non e' al momento possibile definire una QCalculatedColumn che referenzia altre QCalculatedColumn." +loc():
+this.referencedColumns.typeSelect(QCalculatedColumn).size==0;
  /////////////////////////////////////////////////////
 
 
