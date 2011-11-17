@@ -182,6 +182,9 @@ context CustomFinder if(this.queryDefinition!=null && this.queryDefinition.where
 context CustomFinder if(this.queryDefinition!=null) ERROR "La clausola DISTINCT non e' al momento disponibile per il caso Custom Finder con query definition: " +loc():
 this.distinct.size == 0;
 
+context CustomFinder if(this.queryDefinition!=null && this.queryDefinition.selectClause.columns.typeSelect(QCalculatedColumn).size>0) ERROR "Non e' al momento possibile definire una QCalculatedColumn che referenzia altre QCalculatedColumn." +loc():
+this.queryDefinition.selectClause.columns.typeSelect(QCalculatedColumn).referencedColumns.typeSelect(QCalculatedColumn).size==0;
+
 //warning generici
 context CustomFinder if(this.queryDefinition.fromClause.tables.size > 1 && this.queryDefinition.joinClause!=null) WARNING "Si consiglia sempre di fornire un alias identificativo per tutte le tabelle nella clausola FROM in presenza di una condizione di join" +loc():
 this.queryDefinition.fromClause.tables.select(t|t.aliasName==null).size==0;

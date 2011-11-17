@@ -418,18 +418,18 @@ public class «getDtoCustomQdefClassName((DataAccessObject)this.eContainer.eCont
 		/**	 
 		* @generated
 		*/
-		private Object «this.alias.toFirstLower()»;
+		private «javaTypeFromSQLType(this.calculatedType)» «this.alias.toFirstLower()»;
 			
 		/**
 		* @generated
 		*/
-		public void set«this.alias.toFirstUpper()» (Object val){
+		public void set«this.alias.toFirstUpper()» («javaTypeFromSQLType(this.calculatedType)» val){
 		«this.alias» = val;
 		}
 		/**
 		* @generated
 		*/
-		public Object get«this.alias.toFirstUpper()»(){
+		public «javaTypeFromSQLType(this.calculatedType)» get«this.alias.toFirstUpper()»(){
 			return «this.alias»;
 		}
 			

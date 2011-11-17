@@ -365,9 +365,13 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameteri
 			«getDtoCustomQdefClassName(dao,this)» objectToFill, ResultSet rs, int row) throws SQLException
 	{	
 			«getDtoCustomQdefClassName(dao,this)» dto = objectToFill;
-			«FOREACH this.queryDefinition.selectClause.columns AS currCol ITERATOR  i-»
+			«FOREACH this.queryDefinition.selectClause.columns.select(c|c.metaType==QTableColumn) AS currCol ITERATOR  i-»
 				«EXPAND singleMapRowInternalQDef(i.counter1) FOR currCol-»
 			«ENDFOREACH»
+			«FOREACH this.queryDefinition.selectClause.columns.select(c|c.metaType==QCalculatedColumn) AS currCol ITERATOR  i-»
+				«EXPAND singleMapRowInternalQDef(i.counter1) FOR currCol-»
+			«ENDFOREACH»
+			
 			return dto;
 	}	 
 «ENDDEFINE»
@@ -376,6 +380,26 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameteri
 «DEFINE singleMapRowInternalQDef(Integer i) FOR QResultColumn»
 	«ERROR "Non implementato"»
 «ENDDEFINE»
+
+
+«DEFINE singleMapRowInternalQDef(Integer i) FOR QCalculatedColumn»
+ 		if (mapAllColumns || columnsToReadMap.get("«this.alias.toUpperCase()»") != null)
+			dto.set«this.alias.toFirstUpper()»(«IF !isBlobOrClob(this)-»
+				«getValueFromRSByColName(this.calculatedType, this.alias)-»
+		«ELSE-»
+				«IF this.calculatedType == "BLOB"»
+				getBlobColumn(rs, "+i+")
+				«ELSEIF this.calculatedType == "CLOB"»
+				getClobColumn(rs, "+i+")
+				«ENDIF»
+		«ENDIF-»			
+		);			
+«ENDDEFINE»
+
+
+
+
+
 
 «DEFINE singleMapRowInternalQDef(Integer i) FOR QTableColumn»
 
@@ -407,6 +431,9 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameteri
 		);	
 «ENDIF»
 «ENDDEFINE»
+
+
+
 
 
 «DEFINE columnNameList(boolean useDistinct) FOR List[TableColumn]-»
