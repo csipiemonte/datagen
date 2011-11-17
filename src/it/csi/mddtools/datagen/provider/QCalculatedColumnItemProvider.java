@@ -7,6 +7,7 @@ package it.csi.mddtools.datagen.provider;
 import it.csi.mddtools.datagen.DatagenFactory;
 import it.csi.mddtools.datagen.DatagenPackage;
 import it.csi.mddtools.datagen.QCalculatedColumn;
+import it.csi.mddtools.rdbmdl.datatypes.DatatypesFactory;
 import it.csi.mddtools.datagen.QResultColumn;
 import it.csi.mddtools.datagen.QTableColumn;
 
@@ -102,6 +103,7 @@ public class QCalculatedColumnItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(DatagenPackage.Literals.QCALCULATED_COLUMN__REFERENCED_COLUMNS);
+			childrenFeatures.add(DatagenPackage.Literals.QCALCULATED_COLUMN__CALCULATED_TYPE);
 		}
 		return childrenFeatures;
 	}
@@ -193,6 +195,7 @@ public class QCalculatedColumnItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case DatagenPackage.QCALCULATED_COLUMN__REFERENCED_COLUMNS:
+			case DatagenPackage.QCALCULATED_COLUMN__CALCULATED_TYPE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -219,6 +222,16 @@ public class QCalculatedColumnItemProvider
 			(createChildParameter
 				(DatagenPackage.Literals.QCALCULATED_COLUMN__REFERENCED_COLUMNS,
 				 DatagenFactory.eINSTANCE.createQCalculatedColumn()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(DatagenPackage.Literals.QCALCULATED_COLUMN__CALCULATED_TYPE,
+				 DatatypesFactory.eINSTANCE.createDomain()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(DatagenPackage.Literals.QCALCULATED_COLUMN__CALCULATED_TYPE,
+				 DatatypesFactory.eINSTANCE.createPrimitiveDataType()));
 	}
 
 }

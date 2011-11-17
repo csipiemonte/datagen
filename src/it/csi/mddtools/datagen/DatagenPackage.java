@@ -1350,13 +1350,22 @@ public interface DatagenPackage extends EPackage {
 	int QCALCULATED_COLUMN__FREE_TEXT_EXPRESSION = QRESULT_COLUMN_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Calculated Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QCALCULATED_COLUMN__CALCULATED_TYPE = QRESULT_COLUMN_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>QCalculated Column</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int QCALCULATED_COLUMN_FEATURE_COUNT = QRESULT_COLUMN_FEATURE_COUNT + 2;
+	int QCALCULATED_COLUMN_FEATURE_COUNT = QRESULT_COLUMN_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.FromClauseImpl <em>From Clause</em>}' class.
@@ -2394,6 +2403,17 @@ public interface DatagenPackage extends EPackage {
 	EAttribute getQCalculatedColumn_FreeTextExpression();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link it.csi.mddtools.datagen.QCalculatedColumn#getCalculatedType <em>Calculated Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Calculated Type</em>'.
+	 * @see it.csi.mddtools.datagen.QCalculatedColumn#getCalculatedType()
+	 * @see #getQCalculatedColumn()
+	 * @generated
+	 */
+	EReference getQCalculatedColumn_CalculatedType();
+
+	/**
 	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.FromClause <em>From Clause</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3298,6 +3318,14 @@ public interface DatagenPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute QCALCULATED_COLUMN__FREE_TEXT_EXPRESSION = eINSTANCE.getQCalculatedColumn_FreeTextExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Calculated Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference QCALCULATED_COLUMN__CALCULATED_TYPE = eINSTANCE.getQCalculatedColumn_CalculatedType();
 
 		/**
 		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.FromClauseImpl <em>From Clause</em>}' class.

@@ -65,6 +65,7 @@ import it.csi.mddtools.datagen.WhereClause;
 import it.csi.mddtools.rdbmdl.RdbmdlPackage;
 
 import it.csi.mddtools.rdbmdl.constraints.ConstraintsPackage;
+import it.csi.mddtools.rdbmdl.datatypes.DatatypesPackage;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
@@ -1142,6 +1143,15 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getQCalculatedColumn_CalculatedType() {
+		return (EReference)qCalculatedColumnEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getFromClause() {
 		return fromClauseEClass;
 	}
@@ -1432,6 +1442,7 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		qCalculatedColumnEClass = createEClass(QCALCULATED_COLUMN);
 		createEReference(qCalculatedColumnEClass, QCALCULATED_COLUMN__REFERENCED_COLUMNS);
 		createEAttribute(qCalculatedColumnEClass, QCALCULATED_COLUMN__FREE_TEXT_EXPRESSION);
+		createEReference(qCalculatedColumnEClass, QCALCULATED_COLUMN__CALCULATED_TYPE);
 
 		fromClauseEClass = createEClass(FROM_CLAUSE);
 		createEReference(fromClauseEClass, FROM_CLAUSE__TABLES);
@@ -1482,6 +1493,7 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		// Obtain other dependent packages
 		RdbmdlPackage theRdbmdlPackage = (RdbmdlPackage)EPackage.Registry.INSTANCE.getEPackage(RdbmdlPackage.eNS_URI);
 		ConstraintsPackage theConstraintsPackage = (ConstraintsPackage)EPackage.Registry.INSTANCE.getEPackage(ConstraintsPackage.eNS_URI);
+		DatatypesPackage theDatatypesPackage = (DatatypesPackage)EPackage.Registry.INSTANCE.getEPackage(DatatypesPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -1621,7 +1633,8 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 
 		initEClass(qCalculatedColumnEClass, QCalculatedColumn.class, "QCalculatedColumn", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getQCalculatedColumn_ReferencedColumns(), this.getQResultColumn(), null, "referencedColumns", null, 0, -1, QCalculatedColumn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getQCalculatedColumn_FreeTextExpression(), ecorePackage.getEString(), "freeTextExpression", null, 0, 1, QCalculatedColumn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getQCalculatedColumn_FreeTextExpression(), ecorePackage.getEString(), "freeTextExpression", null, 1, 1, QCalculatedColumn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getQCalculatedColumn_CalculatedType(), theDatatypesPackage.getPrimitiveDataType(), null, "calculatedType", null, 1, 1, QCalculatedColumn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(fromClauseEClass, FromClause.class, "FromClause", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFromClause_Tables(), this.getQTable(), null, "tables", null, 0, -1, FromClause.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

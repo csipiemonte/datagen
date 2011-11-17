@@ -7,6 +7,7 @@ import it.csi.mddtools.datagen.DatagenPackage;
 import it.csi.mddtools.datagen.QCalculatedColumn;
 
 import it.csi.mddtools.datagen.QResultColumn;
+import it.csi.mddtools.rdbmdl.datatypes.PrimitiveDataType;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
@@ -19,6 +20,7 @@ import org.eclipse.emf.ecore.EClass;
  * <ul>
  *   <li>{@link it.csi.mddtools.datagen.impl.QCalculatedColumnImpl#getReferencedColumns <em>Referenced Columns</em>}</li>
  *   <li>{@link it.csi.mddtools.datagen.impl.QCalculatedColumnImpl#getFreeTextExpression <em>Free Text Expression</em>}</li>
+ *   <li>{@link it.csi.mddtools.datagen.impl.QCalculatedColumnImpl#getCalculatedType <em>Calculated Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -70,6 +72,24 @@ public class QCalculatedColumnImpl extends QResultColumnImpl implements QCalcula
 	 */
 	public void setFreeTextExpression(String newFreeTextExpression) {
 		eSet(DatagenPackage.Literals.QCALCULATED_COLUMN__FREE_TEXT_EXPRESSION, newFreeTextExpression);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PrimitiveDataType getCalculatedType() {
+		return (PrimitiveDataType)eGet(DatagenPackage.Literals.QCALCULATED_COLUMN__CALCULATED_TYPE, true);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCalculatedType(PrimitiveDataType newCalculatedType) {
+		eSet(DatagenPackage.Literals.QCALCULATED_COLUMN__CALCULATED_TYPE, newCalculatedType);
 	}
 
 } //QCalculatedColumnImpl

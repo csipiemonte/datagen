@@ -3,6 +3,7 @@
  */
 package it.csi.mddtools.datagen;
 
+import it.csi.mddtools.rdbmdl.datatypes.PrimitiveDataType;
 import org.eclipse.emf.common.util.EList;
 
 
@@ -22,6 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link it.csi.mddtools.datagen.QCalculatedColumn#getReferencedColumns <em>Referenced Columns</em>}</li>
  *   <li>{@link it.csi.mddtools.datagen.QCalculatedColumn#getFreeTextExpression <em>Free Text Expression</em>}</li>
+ *   <li>{@link it.csi.mddtools.datagen.QCalculatedColumn#getCalculatedType <em>Calculated Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -61,7 +63,7 @@ public interface QCalculatedColumn extends QResultColumn {
 	 * @return the value of the '<em>Free Text Expression</em>' attribute.
 	 * @see #setFreeTextExpression(String)
 	 * @see it.csi.mddtools.datagen.DatagenPackage#getQCalculatedColumn_FreeTextExpression()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	String getFreeTextExpression();
@@ -75,4 +77,33 @@ public interface QCalculatedColumn extends QResultColumn {
 	 * @generated
 	 */
 	void setFreeTextExpression(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Calculated Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Il tipo della colonna calcolata. Dipende:
+	 * <ul>
+	 * <li>dal tipo delle colonne coinvolte nell'espressione</li>
+	 * <li>dall'espressione stessa</li>
+	 * </ul>
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Calculated Type</em>' containment reference.
+	 * @see #setCalculatedType(PrimitiveDataType)
+	 * @see it.csi.mddtools.datagen.DatagenPackage#getQCalculatedColumn_CalculatedType()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
+	PrimitiveDataType getCalculatedType();
+
+	/**
+	 * Sets the value of the '{@link it.csi.mddtools.datagen.QCalculatedColumn#getCalculatedType <em>Calculated Type</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Calculated Type</em>' containment reference.
+	 * @see #getCalculatedType()
+	 * @generated
+	 */
+	void setCalculatedType(PrimitiveDataType value);
 } // QCalculatedColumn

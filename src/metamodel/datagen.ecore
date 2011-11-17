@@ -443,9 +443,16 @@
         <details key="documentation" value="Le colonne che sono referenziate nella espressione. L'ordine in cui sono definite&#xD;&#xA;&amp;egrave; rilevante."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="freeTextExpression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="freeTextExpression" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Espressione che coinvolge le colonne referenziate nella property&#xD;&#xA;&lt;i>referencedColumns&lt;/i>. L'espressione deve essere scritta nel dialetto SQL&#xD;&#xA;del DBMS target e pu&amp;ograve; contenere segnaposto nella forma &lt;i>$i&lt;/i> dove&#xD;&#xA;&lt;i>i&lt;/i> rappresenta la posizione a partire da 1 nell'elenco delle colonne referenziate.&#xD;&#xA;L'espressione non pu&amp;ograve; contenere una funzione di aggregazione."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="calculatedType" lowerBound="1"
+        eType="ecore:EClass rdbmdl.ecore#//datatypes/PrimitiveDataType" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Il tipo della colonna calcolata. Dipende:&#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>dal tipo delle colonne coinvolte nell'espressione&lt;/li>&#xD;&#xA;&lt;li>dall'espressione stessa&lt;/li>&#xD;&#xA;&lt;/ul>"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
