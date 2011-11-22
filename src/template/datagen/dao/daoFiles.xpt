@@ -465,7 +465,7 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c
 «FOREACH this AS currCol-»
 	«IF currCol.isForeignKey!=null && currCol.isForeignKey && dao.lookupResolvers != null && dao.lookupResolvers.resolvers.select(r|r.foreignKey.includedColumns.contains(currCol)).size >0-»
 	«ELSE»	
-	params.addValue("«((TableColumn)currCol).name»", «dtoVarName».get«javaPropertyNameFromColumn(currCol).toFirstUpper()»(), java.sql.Types.«currCol.type.type» );	
+	params.addValue("«((TableColumn)currCol).name»", «dtoVarName».get«javaPropertyNameFromColumn(currCol).toFirstUpper()»(), «javaSqlTypeForJDBCBinding(currCol.type)-» );	
 	«ENDIF»
 «ENDFOREACH-»
 «ENDDEFINE»
@@ -480,7 +480,7 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c
 «FOREACH this AS currCol-»
 «IF currCol.isForeignKey!=null && currCol.isForeignKey && dao.lookupResolvers != null && dao.lookupResolvers.resolvers.select(r|r.foreignKey.includedColumns.contains(currCol)).size >0-»
 «ELSE»
-	params.addValue("«((TableColumn)currCol).name»", «currCol==pkCol?" newKey ":dtoVarName+".get"+javaPropertyNameFromColumn(currCol).toFirstUpper()+"()"» , java.sql.Types.«currCol.type.type» );
+	params.addValue("«((TableColumn)currCol).name»", «currCol==pkCol?" newKey ":dtoVarName+".get"+javaPropertyNameFromColumn(currCol).toFirstUpper()+"()"» , «javaSqlTypeForJDBCBinding(currCol.type)-» );
 «ENDIF»
 «ENDFOREACH-»
 «ENDLET-»
@@ -1053,7 +1053,9 @@ public class CacheElement {
 		«FOREACH currResolver.foreignKey.includedColumns AS cmpForeignKey ITERATOR i»
 			«IF list.contains(cmpForeignKey)»
 			«LET  (List[TableColumn])currResolver.foreignKey.referredUC.includedColumns AS pkCols» 
-				params.addValue("«((TableColumn)currResolver.foreignKey.includedColumns.get(i.counter0)).name»",«dtoVarName».get«getLookedUpPropertyName(currResolver).toFirstUpper()»().get«javaPropertyNameFromColumn(pkCols.get(i.counter0)).toFirstUpper()»(), java.sql.Types.«((TableColumn)currResolver.foreignKey.includedColumns.get(i.counter0)).type.type» ); 
+			«LET ((TableColumn)currResolver.foreignKey.includedColumns.get(i.counter0)).type AS colDataType»
+				params.addValue("«((TableColumn)currResolver.foreignKey.includedColumns.get(i.counter0)).name»",«dtoVarName».get«getLookedUpPropertyName(currResolver).toFirstUpper()»().get«javaPropertyNameFromColumn(pkCols.get(i.counter0)).toFirstUpper()»(),  «javaSqlTypeForJDBCBinding(colDataType)-» ); 
+				«ENDLET»
 				«ENDLET»
 			«ENDIF»
 		«ENDFOREACH»		

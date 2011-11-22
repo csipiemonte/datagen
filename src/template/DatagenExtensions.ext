@@ -591,5 +591,14 @@ boolean checkAliasUniqness(FromClause fc): JAVA
 boolean checkSelectClause(SelectClause sc): JAVA
 	it.csi.mddtools.datagen.genutils.GenUtils.checkSelectClause(it.csi.mddtools.datagen.SelectClause);
 	
-
+String javaSqlTypeForJDBCBinding(PrimitiveDataType pdt):
+	if(pdt.type == null) then
+	"java.sql.Types.????" 
+	else if(pdt.type == PrimitiveTypeCodes::BLOB) then
+	"java.sql.Types.LONGVARBINARY"
+	else if(pdt.type == PrimitiveTypeCodes::CLOB) then
+	"java.sql.Types.LONGVARCHAR"
+	else
+	"java.sql.Types."+pdt.type;
+	
 			
