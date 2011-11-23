@@ -103,10 +103,22 @@ e le limitazioni secondo i termini della Licenza.
 		List<«getDtoClassName(dao)»> list = null;
 		
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
-		try {
+		try {«IF dao.cacheability == CacheabilityTypes::ALMOST_STABLE_DATA-»
+			List<«getDtoClassName(dao)»> res = (List<«getDtoClassName(dao)»>)cache.get("findAll_«dao.name»_data");
+			if(res!=null){
+				log.debug("Dato trovato in cache");
+				return res;
+			}			
+			else{
+			«ENDIF-»
 			stopWatch.start();
 			list = jdbcTemplate.query(sql.toString(), params, «name»RowMapper);
-			
+			«IF dao.cacheability == CacheabilityTypes::ALMOST_STABLE_DATA-»
+			if(list!=null && !list.isEmpty()){
+					cache.put("findAll_«dao.name»_data" , list);	
+				}
+			}
+			«ENDIF-»	
 		} catch (RuntimeException ex) {
 			log.error("[«getDaoImplClassName(dao)»::findAll] esecuzione query",ex);
 			throw new «getDaoExcClassName(dao)»("Query failed", ex);
