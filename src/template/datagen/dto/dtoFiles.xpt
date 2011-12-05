@@ -31,9 +31,15 @@ e le limitazioni secondo i termini della Licenza.
 «DEFINE dtoFiles (DBAccessModel model) FOR DaoPackage»
 «EXPAND dtoFile(model) FOREACH dao»
 «REM»creazione del DTO per il custom finder con QDef«ENDREM»
-«LET dao.finders.finders.typeSelect(CustomFinder).select(f|f.queryDefinition!=null) AS customJoinFinders»
-«EXPAND dtoFileCustomFinderQDef(model) FOREACH customJoinFinders »
+«LET this.dao.select(d|d.finders!=null && d.finders.finders.size>0) AS daoWithFinders»
+«IF daoWithFinders!=null && daoWithFinders.size>0»
+	«LET daoWithFinders.finders.finders.typeSelect(CustomFinder).select(f|f.queryDefinition!=null) AS customJoinFinders»
+		«EXPAND dtoFileCustomFinderQDef(model) FOREACH customJoinFinders »
+	«ENDLET»
+«ENDIF»
 «ENDLET»
+
+
 
 
 

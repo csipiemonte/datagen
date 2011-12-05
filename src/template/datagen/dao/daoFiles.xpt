@@ -183,7 +183,7 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameteri
 	
 	«EXPAND mapRowMethods(model, true) FOR this»
 
-	«IF finders!=null-»
+	«IF finders!=null && finders.finders.size>0-»
     	«EXPAND rowMapperObject(this) FOREACH this.finders.finders»
     «ENDIF-»
 
@@ -198,11 +198,11 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameteri
 		return "«mainTable.name»";
 	}
 
-	«EXPAND template::datagen::dao::finders::finders(model, true) FOR this»
-	
-	«EXPAND rowMapperInnerClass FOR this»
-	
-	«EXPAND supplierDaoSpringProperties FOR this»
+	«IF finders!=null && finders.finders.size>0-»
+		«EXPAND template::datagen::dao::finders::finders(model, true) FOR this»
+		«EXPAND rowMapperInnerClass FOR this»
+		«EXPAND supplierDaoSpringProperties FOR this»
+	«ENDIF»
 }
 
 «ENDFILE-»
