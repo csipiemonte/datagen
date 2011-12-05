@@ -34,6 +34,13 @@ context DataAccessObject WARNING "il dao: "+this.name+" non definisce nessun upd
 context DataAccessObject ERROR "I nomi dei metodi contenuti nel dao : "+this.name+" devono essere univoci" :
 	areAllDaoMethodsNamesUnivocal(inserter,finders,updaters,deleters);
 	
+context DataAccessObject if(this.finders!=null && this.finders.finders.size>0 && this.finders.finders.typeSelect(QBEFinder).size>1)ERROR "Il nome di un finder QBE non e' obbligatorio, ma non vi possono essere piu' di due QBEFinder con lo stesso nome oppure piu' di due QBEFinder a cui non e' associato il nome" +loc():
+	!(this.finders.finders.typeSelect(QBEFinder).select(qbe|isNullOrEmpty(qbe.name)).size>1);
+
+
+context QBEFinder WARNING "Si consiglia sempre di fornire un nome del metodo per un QBEFinder"+loc():
+	!isNullOrEmpty(this.name);
+	
 context Finder if (metaType != FindByPK && metaType != FindAll && metaType != QBEFinder) ERROR "E' necessario specificare il nome dei finder (esclusi il findByPK, findAll, QBEFinder)"+((DataAccessObject)(this.eContainer.eContainer)).name:
 	!isNullOrEmpty(name);
 

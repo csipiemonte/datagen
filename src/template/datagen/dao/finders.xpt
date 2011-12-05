@@ -267,7 +267,7 @@ public List<«getDtoCustomQdefClassName((DataAccessObject)this.eContainer.eConta
 	 * @generated
 	 */
 «LET (DaoPackage)(dao.eContainer) AS pkg-»
-	public List<«getDtoClassName(dao)»> findByExamples_«this.name»(ArrayList<«getQbeExFQN(dao,model)»> positive, ArrayList<«getQbeExFQN(dao,model)»> negative) throws «getDaoExcClassName(dao)»
+	public List<«getDtoClassName(dao)»> «!isNullOrEmpty(this.name)?"findByExamples_"+this.name:"findByExamples"»(ArrayList<«getQbeExFQN(dao,model)»> positive, ArrayList<«getQbeExFQN(dao,model)»> negative) throws «getDaoExcClassName(dao)»
 	«IF body-»
 	{
 		//verifiche consistenza esempi
@@ -304,10 +304,10 @@ public List<«getDtoCustomQdefClassName((DataAccessObject)this.eContainer.eConta
 			list = jdbcTemplate.query(sql.toString(), new HashMap(), «name»RowMapper);
 			
 		} catch (RuntimeException ex) {
-			log.error("[«getDaoImplClassName(dao)»::findByExamples_«this.name»] esecuzione query",ex);
+			log.error("[«getDaoImplClassName(dao)»::«!isNullOrEmpty(this.name)?"findByExamples_"+this.name:"findByExamples"»]esecuzione query",ex);
 			throw new «getDaoExcClassName(dao)»("Query failed", ex);
 		} finally {
-			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "findByExamples_«this.name»","esecuzione query", sql.toString());
+			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "«!isNullOrEmpty(this.name)?"findByExamples_"+this.name:"findByExamples"»","esecuzione query", sql.toString());
 			log.debug("[«getDaoImplClassName(dao)»::findByExamples] END");
 		}
 		return list;	
