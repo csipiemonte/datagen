@@ -17,6 +17,10 @@ context DataAccessObject ERROR "Occorre specificare il nome del DAO:" :
 context DaoPackage ERROR "Occorre specificare il nome del Dao Package:":
 	!isNullOrEmpty(name);
 
+context DataAccessObject ERROR "Il dao "+loc()+" non definisce una main table":
+	!isNullOrEmpty(mainTable.name);	
+	
+
 context DataAccessObject if (pkGenerator != null && pkGenerator.metaType == SequencePKGenerator) 
 ERROR "Il SequencePKGenerator è utilizzabile solo con PK di 1 sola colonna":
 	mainTable.primaryKey.includedColumns.size == 1;
