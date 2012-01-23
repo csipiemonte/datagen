@@ -1,7 +1,7 @@
 import datagen;
 import rdbmdl;
 
-extension org::openarchitectureware::util::stdlib::naming;
+extension org::eclipse::xtend::util::stdlib::naming;
 extension template::DatagenExtensions; 
 
 context DBAccessModel ERROR "codice prodotto mancante" :

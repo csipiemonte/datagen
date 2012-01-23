@@ -527,7 +527,7 @@ String pkg2Path(String pkg) : JAVA
 	it.csi.mddtools.datagen.genutils.GenUtils.pkg2Path(java.lang.String);
 
 String getProperty(String name) : JAVA
-  org.openarchitectureware.util.stdlib.PropertiesExtension.getProperty(java.lang.String);
+  org.eclipse.xtend.util.stdlib.PropertiesExtension.getProperty(java.lang.String);
 
 Void dumpProperties() : JAVA
   it.csi.mddtools.datagen.genutils.GenUtils.dumpProperties();

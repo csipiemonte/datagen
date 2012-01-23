@@ -30,8 +30,6 @@ import it.csi.mddtools.datagen.QResultColumn;
 import it.csi.mddtools.datagen.QTableColumn;
 import it.csi.mddtools.datagen.Updater;
 import it.csi.mddtools.rdbmdl.Column;
-import it.csi.mddtools.rdbmdl.Table;
-import it.csi.mddtools.rdbmdl.TableColumn;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,7 +38,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.StringTokenizer;
 
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtend.util.stdlib.PropertiesExtension;
 
 public class GenUtils {
 	
@@ -66,12 +64,12 @@ public class GenUtils {
 	}
 	
 	public static void dumpProperties(){
-		org.openarchitectureware.util.stdlib.PropertiesExtension.getProperties().list(System.out);
+		PropertiesExtension.getProperties().list(System.out);
 	}
 	
 	public static void backupProperties(){
 		System.out.println("Backup properties originarie");
-		Properties orig = org.openarchitectureware.util.stdlib.PropertiesExtension.getProperties();
+		Properties orig = PropertiesExtension.getProperties();
 		Properties bkpProps = new Properties();
 		bkpProps.putAll(orig);
 		_origProps = bkpProps;
@@ -81,7 +79,7 @@ public class GenUtils {
 	public static void restoreProperties(){
 		System.out.println("Restore properties originarie");
 		if (_origProps!=null){
-			org.openarchitectureware.util.stdlib.PropertiesExtension.setProperties(_origProps);	
+			PropertiesExtension.setProperties(_origProps);	
 		}
 		_origProps = null;
 		
@@ -90,9 +88,9 @@ public class GenUtils {
 	static Properties _origProps=null;
 	
 	public static void setProperty(String name, String val){
-		java.util.Properties props = org.openarchitectureware.util.stdlib.PropertiesExtension.getProperties();
+		java.util.Properties props = PropertiesExtension.getProperties();
 		props.put(name, val);
-		org.openarchitectureware.util.stdlib.PropertiesExtension.setProperties(props);
+		PropertiesExtension.setProperties(props);
 	}
 	
 	public static String toJavaId(String sourceId){
