@@ -72,7 +72,7 @@ Parametri:
 		<!--  protected regions configurator -->
 	    <prSrcPaths value="${src-gen-dao}" />
 	    <prDefaultExcludes value="true" />
-	    <prExcludes value="*.jar, *.svn-base, .metadata" />
+	    <prExcludes value="*.ear, *.war, *.jar, *.class, *.svn-base, .metadata" />
 		<outlet path="${src-gen-dao}" >
 			<postprocessor class="org.eclipse.xpand2.output.JavaBeautifier" />
 		</outlet>
