@@ -23,8 +23,8 @@ Parametri:
 	     al componente SW -->
 	<property name="src-gen-dao" value="../${daoTargetProjectName}" />
 
-	<!-- override if needed! -->
-	<property name="daoBeansFileName" value="/conf/dao-beans.xml" />
+	<!-- [DM] Secondo la documentazione e' OBBLIGATORIA, quindi NO DEFAULT -->
+	<!-- <property name="daoBeansFileName" value="/conf/dao-beans.xml" /> -->
 
 	<!-- override if needed! -->
 	<property name="basePackage" value="" />
