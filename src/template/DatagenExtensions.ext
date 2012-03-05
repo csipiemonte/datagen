@@ -221,21 +221,21 @@ String getValueFromRS(TableColumn col, int i) :
 	let code = col.type.type :
 	switch(code){
 		case PrimitiveTypeCodes::BIT :
-			"rs.getInt("+i+") == 0 ? false : true"
+			"rs.getObject("+i+") == null ? null : (rs.getInt("+i+") == 0 ? false : true)" // [DM] STDMDD-1091: was "rs.getInt("+i+") == 0 ? false : true"
 		case PrimitiveTypeCodes::TINYINT :
-			"rs.getInt("+i+")"
+			"(Integer)rs.getObject("+i+")" // [DM] STDMDD-1091: was "rs.getInt("+i+")"
 		case PrimitiveTypeCodes::SMALLINT :
-			"rs.getInt("+i+")"
+			"(Integer)rs.getObject("+i+")" // [DM] STDMDD-1091: was "rs.getInt("+i+")"
 		case PrimitiveTypeCodes::INTEGER :
-			"rs.getInt("+i+")"		
+			"(Integer)rs.getObject("+i+")" // [DM] STDMDD-1091: was "rs.getInt("+i+")"		
 		case PrimitiveTypeCodes::BIGINT :
-			"rs.getLong("+i+")"
+			"(Long)rs.getObject("+i+")" // [DM] STDMDD-1091: was "rs.getLong("+i+")"
 		case PrimitiveTypeCodes::FLOAT :
-			"rs.getDouble("+i+")" 
+			"(Double)rs.getObject("+i+")" // [DM] STDMDD-1091: was "rs.getDouble("+i+")" 
 		case PrimitiveTypeCodes::REAL :
-			"rs.getFloat("+i+")"	
+			"(Float)rs.getObject("+i+")" // [DM] STDMDD-1091: was "rs.getFloat("+i+")"	
 		case PrimitiveTypeCodes::DOUBLE :
-			"rs.getDouble("+i+")" 
+			"(Double)rs.getObject("+i+")"// [DM] STDMDD-1091: was "rs.getDouble("+i+")" 
 		case PrimitiveTypeCodes::NUMERIC :
 			"rs.getBigDecimal("+i+")" 
 		case PrimitiveTypeCodes::DECIMAL :
@@ -355,21 +355,21 @@ String getValueFromRSByColName(QCalculatedColumn col) :
 String getValueFromRSByColName(PrimitiveDataType pt, String resultSetName) :
 	switch(pt.type){
 		case PrimitiveTypeCodes::BIT :
-			"rs.getInt(\""+resultSetName+"\") == 0 ? false : true"
+			"rs.getObject(\""+resultSetName+"\") == null ? null : (rs.getInt(\""+resultSetName+"\") == 0 ? false : true)" // [DM] STDMDD-1091: was "rs.getInt(\""+resultSetName+"\") == 0 ? false : true"
 		case PrimitiveTypeCodes::TINYINT :
-			"rs.getInt(\""+resultSetName+"\")"
+			"(Integer)rs.getObject(\""+resultSetName+"\")" // [DM] STDMDD-1091: was "rs.getInt(\""+resultSetName+"\")"
 		case PrimitiveTypeCodes::SMALLINT :
-			"rs.getInt(\""+resultSetName+"\")"
+			"(Integer)rs.getObject(\""+resultSetName+"\")" // [DM] STDMDD-1091: was "rs.getInt(\""+resultSetName+"\")"
 		case PrimitiveTypeCodes::INTEGER :
-			"rs.getInt(\""+resultSetName+"\")"		
+			"(Integer)rs.getObject(\""+resultSetName+"\")" // [DM] STDMDD-1091: was "rs.getInt(\""+resultSetName+"\")"		
 		case PrimitiveTypeCodes::BIGINT :
-			"rs.getLong(\""+resultSetName+"\")"
+			"(Long)rs.getObject(\""+resultSetName+"\")" // [DM] STDMDD-1091: was "rs.getLong(\""+resultSetName+"\")"
 		case PrimitiveTypeCodes::FLOAT :
-			"rs.getDouble(\""+resultSetName+"\")" 
+			"(Double)rs.getObject(\""+resultSetName+"\")" // [DM] STDMDD-1091: was "rs.getDouble(\""+resultSetName+"\")" 
 		case PrimitiveTypeCodes::REAL :
-			"rs.getFloat(\""+resultSetName+"\")"	
+			"(Float)rs.getObject(\""+resultSetName+"\")" // [DM] STDMDD-1091: was "rs.getFloat(\""+resultSetName+"\")"	
 		case PrimitiveTypeCodes::DOUBLE :
-			"rs.getDouble(\""+resultSetName+"\")" 
+			"(Double)rs.getObject(\""+resultSetName+"\")" // [DM] STDMDD-1091: was "rs.getDouble(\""+resultSetName+"\")" 
 		case PrimitiveTypeCodes::NUMERIC :
 			"rs.getBigDecimal(\""+resultSetName+"\")" 
 		case PrimitiveTypeCodes::DECIMAL :
