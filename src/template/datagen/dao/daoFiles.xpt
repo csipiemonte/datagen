@@ -182,6 +182,7 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameteri
 	«EXPAND template::datagen::dao::deleters::deleters(model, true) FOR this»
 	
 	«EXPAND mapRowMethods(model, true) FOR this»
+	«EXPAND rowMapperInnerClass FOR this»
 
 	«IF finders!=null && finders.finders.size>0-»
     	«EXPAND rowMapperObject(this) FOREACH this.finders.finders»
@@ -197,10 +198,9 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameteri
 	{
 		return "«mainTable.name»";
 	}
-
+	
 	«IF finders!=null && finders.finders.size>0-»
 		«EXPAND template::datagen::dao::finders::finders(model, true) FOR this»
-		«EXPAND rowMapperInnerClass FOR this»
 		«EXPAND supplierDaoSpringProperties FOR this»
 	«ENDIF»
 }
@@ -242,11 +242,17 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameteri
 	);
 	«ENDIF»
 «ENDDEFINE»
+«DEFINE rowMapperInnerClassEmpty FOR DataAccessObject»
+	/// flexible row mapper. 
+	public class «getDaoClassName()»RowMapper implements org.springframework.jdbc.core.RowMapper {
+	}
+	«ENDDEFINE»
 
 
 «DEFINE rowMapperInnerClass FOR DataAccessObject»
 	/// flexible row mapper. 
 	public class «getDaoClassName()»RowMapper implements org.springframework.jdbc.core.RowMapper {
+	
 		
 		private java.util.HashMap<String,String> columnsToReadMap = new java.util.HashMap<String, String>();
 		private boolean mapAllColumns = true;
