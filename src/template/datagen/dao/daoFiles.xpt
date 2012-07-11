@@ -607,8 +607,6 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c
 		int row) throws SQLException
 	«IF body-»
 	{	
-		«getDtoClassName()» dto = objectToFill;
-		
 		«getDaoClassName().toFirstUpper()»RowMapper «getDaoClassName().toFirstLower()»RowMapper = new «getDaoClassName().toFirstUpper()»RowMapper(null,«getDtoClassName()».class);
 		
 		«REM»«FOREACH mainTable.columns AS currCol ITERATOR i»
