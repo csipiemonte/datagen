@@ -142,7 +142,7 @@ import java.util.TreeMap;
  */
 public class «getDaoImplClassName()» extends AbstractDAO implements ParameterizedRowMapper<«getDtoClassName()»>, «getDaoClassName()»
 {
-	protected static Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
+	protected static final Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
 	/**
 	 * @generated
 	 */
