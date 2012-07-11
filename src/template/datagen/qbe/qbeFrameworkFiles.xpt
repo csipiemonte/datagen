@@ -125,7 +125,7 @@ public class EqChk extends FieldChk{
 	 * @generated
 	 */
 	public boolean valueHasWildcards(){
-		if (_exVal == null || !(_exVal instanceof String))
+		if (!(_exVal instanceof String))
 			return false;
 		else {
 			return (((String)_exVal).indexOf("%")>-1);
