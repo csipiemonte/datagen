@@ -111,7 +111,7 @@ public class «getPkClassName()» implements Serializable {
 		final «getPkClassName()» _cast = («getPkClassName()») _other;
 		
 		«FOREACH mainTable.primaryKey.includedColumns AS currPKCol»
-		if (_«javaPropertyNameFromColumn(currPKCol)» == null ? _cast.get«javaPropertyNameFromColumn(currPKCol).toFirstUpper()»() != _«javaPropertyNameFromColumn(currPKCol)» : !_«javaPropertyNameFromColumn(currPKCol)».equals( _cast.get«javaPropertyNameFromColumn(currPKCol).toFirstUpper()»() )) {
+		if (_«javaPropertyNameFromColumn(currPKCol)» == null ? _cast.get«javaPropertyNameFromColumn(currPKCol).toFirstUpper()»() != null : !_«javaPropertyNameFromColumn(currPKCol)».equals( _cast.get«javaPropertyNameFromColumn(currPKCol).toFirstUpper()»() )) {
 			return false;
 		}
 		«ENDFOREACH»
