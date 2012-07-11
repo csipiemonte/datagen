@@ -290,10 +290,10 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameteri
 				dto = dtoClass.newInstance();
 			} catch (InstantiationException e) {
 				e.printStackTrace();
-				throw new RuntimeException("Impossibile istanziare la classe " + dto.getClass().getCanonicalName()+" ,"+e.getCause());
+				throw new RuntimeException("Impossibile istanziare la classe " + dtoClass.getName()+" ,"+e.getCause());
 			} catch (IllegalAccessException e) {
 				e.printStackTrace();
-				throw new RuntimeException("Impossibile accedere alla classe " + dto.getClass().getCanonicalName()+" ,"+e.getCause());
+				throw new RuntimeException("Impossibile accedere alla classe " + dtoClass.getName()+" ,"+e.getCause());
 			}
 			
 			if(dto instanceof «getDtoClassName()»){
