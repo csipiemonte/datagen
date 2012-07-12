@@ -254,7 +254,7 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameteri
 	public class «getDaoClassName()»RowMapper implements org.springframework.jdbc.core.RowMapper {
 	
 		
-		private final java.util.HashMap<String,String> columnsToReadMap = new java.util.HashMap<String, String>();
+		private final java.util.Map<String,String> columnsToReadMap = new java.util.HashMap<String, String>();
 		private boolean mapAllColumns = true;
 		private Class dtoClass;
 		
