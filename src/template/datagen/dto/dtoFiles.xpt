@@ -60,6 +60,8 @@ import java.util.*;
  */
 public class «getPkClassName()» implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	«EXPAND columnJavaProperty(this) FOREACH this.mainTable.primaryKey.includedColumns»
 	«REM» al momento non gestiamo il caso di FK che e' anche parte di PK nello stesso modo in cui
 	facciamo per il dto della tabella che presenta la foreign key 
@@ -68,7 +70,7 @@ public class «getPkClassName()» implements Serializable {
 	«ENDIF»
 	«ENDREM»
 	/**
-	 * @generated
+	 * @generated 
 	 */
 	public «getPkClassName()»()
 	{
@@ -169,9 +171,10 @@ import java.util.*;
 /**
  * @generated
  */
-public class «getDtoClassName()» implements Serializable
-{
+public class «getDtoClassName()» implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	«EXPAND columnJavaProperty(this) FOREACH this.mainTable.columns»
 	«REM»verificare se non ci sono resolvers«ENDREM»
 	«IF this.lookupResolvers!=null && this.lookupResolvers.resolvers.size >0»
