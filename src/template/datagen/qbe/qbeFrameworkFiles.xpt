@@ -337,12 +337,16 @@ import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import org.apache.log4j.Logger;
+import «getDALayerBasePkg(this)».util.*;
 
 /**
  * @generated
  * @param <TEX> classe degli esempi
  */
 public class QBEQueryBuilder<TEX extends AbstractExample> {
+
+protected static Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
 
 	/**
 	 * @generated
@@ -494,13 +498,16 @@ public class QBEQueryBuilder<TEX extends AbstractExample> {
 			clause = clause.substring(0, clause.length() - 5);
 		} catch (IntrospectionException e) {
 			// TODO
-			e.printStackTrace();
+			log.error("[QBEQueryBuilder::createSubClause4Example] creazione sotto-clausola",e);
+			
 		} catch (IllegalAccessException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("[QBEQueryBuilder::createSubClause4Example] creazione sotto-clausola",e);
+			
 		} catch (InvocationTargetException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("[QBEQueryBuilder::createSubClause4Example] creazione sotto-clausola",e);
+			
 		}
 		return "(" + clause + ")";
 	}
