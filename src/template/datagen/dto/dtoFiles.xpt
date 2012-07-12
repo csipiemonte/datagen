@@ -180,31 +180,7 @@ public class «getDtoClassName()» implements Serializable {
 	«IF this.lookupResolvers!=null && this.lookupResolvers.resolvers.size >0»
 		«EXPAND lookupResolverProperty FOREACH this.lookupResolvers.resolvers»
 	«ENDIF»
-	/**
-	 * Method 'equals'
-	 * 
-	 * @param _other
-	 * @return boolean
-	 * @generated
-	 */
-	public boolean equals(Object _other)
-	{
-		// TODO
-		return super.equals(_other);
-	}
-
-	/**
-	 * Method 'hashCode'
-	 * 
-	 * @return int
-	 * @generated
-	 */
-	public int hashCode()
-	{
-		// TODO
-		return super.hashCode();
-	}
-
+	
 	«IF this.mainTable.primaryKey != null»
 		/**
 	 * Method 'createPk'
@@ -221,18 +197,6 @@ public class «getDtoClassName()» implements Serializable {
 		);
 	}
 	«ENDIF»
-
-	/**
-	 * Method 'toString'
-	 * 
-	 * @return String
-	 * @generated
-	 */
-	public String toString()
-	{
-		// TODO
-		return super.toString();
-	}
 
 }
 
