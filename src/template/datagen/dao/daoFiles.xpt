@@ -256,7 +256,7 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameteri
 		
 		private final java.util.Map<String,String> columnsToReadMap = new java.util.HashMap<String, String>();
 		private boolean mapAllColumns = true;
-		private Class dtoClass;
+		private final Class dtoClass;
 		
 		/**
 		 * @param columnsToRead elenco delle colonne da includere nel mapping (per query
