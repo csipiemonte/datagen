@@ -108,8 +108,8 @@ public abstract class FieldChk {
  */
 public class EqChk extends FieldChk{
 	
-	private Object _exVal;
-	private boolean _ignoreCase=false;
+	private final Object _exVal;
+	private final boolean _ignoreCase;
 	
 	/**
 	 * @param equalsTo valore di confronto 
@@ -172,7 +172,7 @@ public class InSetChk extends FieldChk{
 	/**
 	 * @generated
 	 */
-	private Object [] _items;
+	private final Object [] _items;
 	
 	/**
 	 * 
@@ -206,22 +206,22 @@ public class RangeChk extends FieldChk{
 	/**
 	 * @generated
 	 */
-	private Object _lowerBound;
+	private final Object _lowerBound;
 	
 	/**
 	 * @generated
 	 */
-	private Object _upperBound;
+	private final Object _upperBound;
 	
 	/**
 	 * @generated
 	 */
-	private boolean _includeLB;
+	private final boolean _includeLB;
 	
 	/**
 	 * @generated
 	 */
-	private boolean _includeUB;
+	private final boolean _includeUB;
 	
 	
 	/**
@@ -284,7 +284,7 @@ public class RegexpChk extends FieldChk{
 	/**
 	 * @generated
 	 */
-	private String _regexp;
+	private final String _regexp;
 	
 	/**
 	 * @param equalsTo valore di confronto 
