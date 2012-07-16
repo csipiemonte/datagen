@@ -401,10 +401,14 @@ protected static Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
 	 */
 	public String createFromExamples(List<TEX> posEx, List<TEX> negEx,
 			boolean usesDistinct) {
+		
 		String sql = "SELECT " + (usesDistinct ? "DISTINCT " : "")
 				+ formatColumnNames(_metadata) + " FROM "
 				+ _metadata.getTableName() + " WHERE ";
-		String where = "";
+		StringBuffer sqlSelect = new StringBuffer(sql);
+		
+		
+		StringBuffer where = new StringBuffer("");
 		String posExClause = "";
 		String negExClause = "";
 		if (posEx != null && posEx.size() > 0) {
@@ -414,12 +418,19 @@ protected static Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
 			negExClause = createFromExamples(negEx, false);
 		}
 		if (posExClause.length() > 0 && negExClause.length() > 0) {
-			where += posExClause + " AND NOT " + negExClause;
-		} else
-			where = posExClause + negExClause; // uno dei due e' ""
+			
+			where.append(posExClause + " AND NOT " + negExClause);
+		} else {
+			
+			where.append(posExClause + negExClause); // uno dei due e' ""
 		// rimuovo l'ultimo AND
-		sql += "(" + where + ")";
-		return sql;
+		}
+		
+		sqlSelect.append("(");
+		sqlSelect.append(where);
+		sqlSelect.append(")");
+		return sqlSelect.toString();
+		
 	}
 
 	/**
@@ -433,15 +444,15 @@ protected static Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
 	 * (<expr_ex_1> AND|OR <expr_ex2> AND|OR ... <expr_ex_n>)
 	 */
 	public String createFromExamples(List<TEX> examples, boolean conjunctive) {
-		String clause = "";
+		StringBuffer clause = new StringBuffer("");
 		String operator = conjunctive ? "AND " : " OR ";
 		for (TEX ex : examples) {
 			String currExClause = createWhereClauseForSingleExample(ex);
-			clause += currExClause;
+			clause.append(currExClause);
 			if (!(examples.get(examples.size() - 1) == ex))
-				clause += operator;
+				clause.append(operator);
 		}
-		return "(" + clause + ")";
+		return "(" + clause.toString() + ")";
 	}
 
 	/**
@@ -468,7 +479,8 @@ protected static Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
 	 */
 	public String createSubClause4Example(AbstractExample example,
 			String prefixPropName, boolean pkFieldsOnly) {
-		String clause = "";
+		StringBuffer clause = new StringBuffer("");
+		
 		try {
 			BeanInfo bi = Introspector.getBeanInfo(example.getClass());
 			PropertyDescriptor pd[] = bi.getPropertyDescriptors();
@@ -482,7 +494,7 @@ protected static Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
 						continue;
 					String term = createTerm4FieldChk(currChk, currPD,
 							prefixPropName);
-					clause += term + " AND ";
+					clause.append(term + " AND ");
 				} else if (AbstractExample.class.isAssignableFrom(currPD
 						.getPropertyType())) {
 					AbstractExample subEx = (AbstractExample) (currPD
@@ -491,11 +503,11 @@ protected static Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
 						continue;
 					String term = createSubClause4Example(subEx,
 							currPD.getName(), true);
-					clause += term + " AND ";
+					clause.append(term + " AND ");
 				}
 			}
 			// alla fine rimuove l'ultimo "AND"
-			clause = clause.substring(0, clause.length() - 5);
+			clause = new StringBuffer(clause.substring(0, clause.length() - 5));
 		} catch (IntrospectionException e) {
 			// TODO
 			log.error("[QBEQueryBuilder::createSubClause4Example] creazione sotto-clausola",e);
@@ -509,7 +521,7 @@ protected static Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
 			log.error("[QBEQueryBuilder::createSubClause4Example] creazione sotto-clausola",e);
 			
 		}
-		return "(" + clause + ")";
+		return "(" + clause.toString() + ")";
 	}
 
 
@@ -546,24 +558,17 @@ protected static Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
 	 * @return toDate('<data>','DD/MM/YYYY HH24:MI:SS')
 	 */
 	private static String makeToDateTerm(java.util.Date date) {
-		String retvalue = "";
+		StringBuffer retvalue = new StringBuffer("");
 		java.util.Calendar cal = java.util.Calendar.getInstance();
 		cal.setTime(date);
-		retvalue = Integer.toString(cal.get(java.util.Calendar.DAY_OF_MONTH))
-				+ "/";
-		retvalue = retvalue
-				+ Integer.toString(cal.get(java.util.Calendar.MONTH) + 1) + "/";
-		retvalue = retvalue
-				+ Integer.toString(cal.get(java.util.Calendar.YEAR)) + "-";
-		retvalue = retvalue
-				+ Integer.toString(cal.get(java.util.Calendar.HOUR_OF_DAY))
-				+ ":";
-		retvalue = retvalue
-				+ Integer.toString(cal.get(java.util.Calendar.MINUTE)) + ":";
-		retvalue = retvalue
-				+ Integer.toString(cal.get(java.util.Calendar.SECOND));
-		retvalue = "to_date('" + retvalue + "','DD/MM/YYYY HH24:MI:SS')";
-		return retvalue;
+		retvalue.append(Integer.toString(cal.get(java.util.Calendar.DAY_OF_MONTH)) + "/");
+		retvalue.append(Integer.toString(cal.get(java.util.Calendar.MONTH) + 1) + "/");
+		retvalue.append(Integer.toString(cal.get(java.util.Calendar.YEAR)) + "-");
+		retvalue.append(Integer.toString(cal.get(java.util.Calendar.HOUR_OF_DAY)) + ":");
+		retvalue.append(Integer.toString(cal.get(java.util.Calendar.MINUTE)) + ":");
+		retvalue.append(Integer.toString(cal.get(java.util.Calendar.SECOND)));
+		retvalue = new StringBuffer("to_date('" + retvalue + "','DD/MM/YYYY HH24:MI:SS')");
+		return retvalue.toString();
 	}
 
 	/**
@@ -591,50 +596,53 @@ protected static Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
 	public String createTerm4FieldChk(EqChk chk, PropertyDescriptor pd,
 			String prefixPropName) {
 		String colName = _metadata.getColumnName(prefixPropName, pd.getName());
-		String term = "(";
+		StringBuffer term = new StringBuffer("");
+		term.append("(");
 		String lside = chk.isIgnoreCase() ? "UPPER(" + colName + ")" : colName;
 		String rside = chk.isIgnoreCase() ? "UPPER("
 				+ formatValue(chk.getExVal()) + ")" : formatValue(chk
 				.getExVal());
 		if (!chk.valueHasWildcards()) {
-			term += lside + (chk.isNegate() ? " <> " : " = ") + rside;
+			term.append(lside + (chk.isNegate() ? " <> " : " = ") + rside);
 		} else {
-			term += lside + (chk.isNegate() ? " NOT LIKE( " : " LIKE( ")
-					+ rside + ")";
+			term.append(lside + (chk.isNegate() ? " NOT LIKE( " : " LIKE( ")
+					+ rside + ")");
 		}
-		term += ")";
-		return term;
+		term.append(")");
+		return term.toString();
 	}
 
 	public String createTerm4FieldChk(NullChk chk, PropertyDescriptor pd,
 			String prefixPropName) {
 		String colName = _metadata.getColumnName(prefixPropName, pd.getName());
-		String term = "(";
-		term += colName + " IS " + (chk.isNegate() ? " NOT" : "") + " NULL";
-		term += ")";
-		return term;
+		StringBuffer term = new StringBuffer("");
+		term.append("(");
+		term.append(colName + " IS " + (chk.isNegate() ? " NOT" : "") + " NULL");
+		term.append(")");
+		return term.toString();
 	}
 
 	public String createTerm4FieldChk(RangeChk chk, PropertyDescriptor pd,
 			String prefixPropName) {
 		String colName = _metadata.getColumnName(prefixPropName, pd.getName());
-		String term = "(";
+		StringBuffer term = new StringBuffer("");
+		term.append("(");
 		if (chk.isNegate())
-			term += "NOT ";
+			term.append("NOT ");
 		if (chk.isLBIncluded() && chk.isUBIncluded()) {
-			term += colName + " BETWEEN " + formatValue(chk.getLowerBound())
-					+ " AND " + formatValue(chk.getUpperBound());
+			term.append(colName + " BETWEEN " + formatValue(chk.getLowerBound())
+					+ " AND " + formatValue(chk.getUpperBound()));
 		} else {
-			term += colName + (chk.isLBIncluded() ? " >= " : " > ")
-					+ formatValue(chk.getLowerBound());
-			term += " AND " + colName + (chk.isUBIncluded() ? " <= " : " < ")
-					+ formatValue(chk.getUpperBound());
+			term.append(colName + (chk.isLBIncluded() ? " >= " : " > ")
+					+ formatValue(chk.getLowerBound()));
+			term.append(" AND " + colName + (chk.isUBIncluded() ? " <= " : " < ")
+					+ formatValue(chk.getUpperBound()));
 			if (chk.isNegate()) {
-				term = "(NOT " + term + ")";
+				term = new StringBuffer("(NOT " + term + ")");
 			}
 		}
-		term += ")";
-		return term;
+		term.append(")");
+		return term.toString();
 	}
 }
 «ENDFILE»
