@@ -70,10 +70,11 @@ public class «getPkClassName()» implements Serializable {
 	«ENDIF»
 	«ENDREM»
 	/**
-	 * @generated empty constructor
+	 * @generated 
 	 */
 	public «getPkClassName()»()
 	{
+		//empty constructor
 	}
 
 	/**
