@@ -251,7 +251,7 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameteri
 
 «DEFINE rowMapperInnerClass FOR DataAccessObject»
 	/// flexible row mapper. 
-	public class «getDaoClassName()»RowMapper implements org.springframework.jdbc.core.RowMapper {
+	public static class «getDaoClassName()»RowMapper implements org.springframework.jdbc.core.RowMapper {
 	
 		
 		private final java.util.Map<String,String> columnsToReadMap = new java.util.HashMap<String, String>();
