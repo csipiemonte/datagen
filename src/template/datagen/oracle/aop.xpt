@@ -1,4 +1,4 @@
-«REM»
+Â«REMÂ»
 C) Copyright 2011 CSI-PIEMONTE;                                             
                                                                             
 Concesso in licenza a norma dell'EUPL, esclusivamente versione 1.1;         
@@ -13,13 +13,13 @@ distribuito "TAL QUALE", SENZA GARANZIE O CONDIZIONI DI ALCUN TIPO,
 esplicite o implicite.                                                      
 Si veda la Licenza per la lingua specifica che disciplina le autorizzazioni 
 e le limitazioni secondo i termini della Licenza.                           
-«ENDREM»
+Â«ENDREMÂ»
 
-«IMPORT datagen»
-«IMPORT rdbmdl»
-«EXTENSION template::DatagenExtensions»
+Â«IMPORT datagenÂ»
+Â«IMPORT rdbmdlÂ»
+Â«EXTENSION template::DatagenExtensionsÂ»
 
-«AROUND template::datagen::spring::configFiles::localDatasourceSample FOR DBAccessModel»
+Â«AROUND template::datagen::spring::configFiles::localDatasourceSample FOR DBAccessModelÂ»
   <!-- definizione locale di datasource per ORACLE (non usare in un application server!) -->
   <!--<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
     <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
@@ -28,15 +28,15 @@ e le limitazioni secondo i termini della Licenza.
     <property name="username" value="sicee" />
     <property name="password" value="mypass" />
   </bean>-->
-«ENDAROUND»
+Â«ENDAROUNDÂ»
 
-«AROUND template::datagen::dao::daoFiles::abstractDAODBMSSpecificCode FOR DaoPackage»
+Â«AROUND template::datagen::dao::daoFiles::abstractDAODBMSSpecificCode FOR DaoPackageÂ»
 	// ORACLE specific code
 	
 	/**
 	 * @generated
 	 */
-    public void updateClob(Clob clob, String data) throws IOException, SQLException 
+    public static void updateClob(Clob clob, String data) throws IOException, SQLException 
     {
         if (clob == null || data == null) {
             return;
@@ -55,7 +55,7 @@ e le limitazioni secondo i termini della Licenza.
 	/**
 	 * @generated
 	 */
-    public void updateBlob(Blob blob, byte[] data) throws IOException, SQLException
+    public static void updateBlob(Blob blob, byte[] data) throws IOException, SQLException
     {
         if (blob == null || data == null) {
             return;
@@ -75,7 +75,7 @@ e le limitazioni secondo i termini della Licenza.
 	/**
 	 * @generated
 	 */
-    public byte[] getBlobColumn(ResultSet rs, int columnIndex)
+    public static byte[] getBlobColumn(ResultSet rs, int columnIndex)
             throws SQLException
     {
         try {
@@ -114,7 +114,7 @@ e le limitazioni secondo i termini della Licenza.
 	/**
 	 * @generated
 	 */
-    public void setBlobColumn(PreparedStatement stmt, int parameterIndex, byte[] value)
+    public static void setBlobColumn(PreparedStatement stmt, int parameterIndex, byte[] value)
             throws SQLException
     {
         if (value == null) {
@@ -128,7 +128,7 @@ e le limitazioni secondo i termini della Licenza.
 	/**
 	 * @generated
 	 */
-    public String getClobColumn(ResultSet rs, int columnIndex)
+    public static String getClobColumn(ResultSet rs, int columnIndex)
         throws SQLException
     {
         try {
@@ -161,7 +161,7 @@ e le limitazioni secondo i termini della Licenza.
 	/**
 	 * @generated
 	 */
-    public void setClobColumn(PreparedStatement stmt, int parameterIndex, String value)
+    public static void setClobColumn(PreparedStatement stmt, int parameterIndex, String value)
         throws SQLException
     {
         if (value == null) {
@@ -171,23 +171,23 @@ e le limitazioni secondo i termini della Licenza.
             stmt.setAsciiStream( parameterIndex, new ByteArrayInputStream(value.getBytes()), value.length() );
         }
     }
-«ENDAROUND»
+Â«ENDAROUNDÂ»
 
-«AROUND template::datagen::spring::configFiles::pkGeneratorBeanDef(DataAccessObject dao) FOR SequencePKGenerator»
-«IF dao.mainTable.primaryKey.includedColumns.size==1-»
-	<bean id="«getDaoIdName(dao)»Incrementer"
+Â«AROUND template::datagen::spring::configFiles::pkGeneratorBeanDef(DataAccessObject dao) FOR SequencePKGeneratorÂ»
+Â«IF dao.mainTable.primaryKey.includedColumns.size==1-Â»
+	<bean id="Â«getDaoIdName(dao)Â»Incrementer"
 		class="org.springframework.jdbc.support.incrementer.OracleSequenceMaxValueIncrementer">
 		<constructor-arg>
 			<ref bean="myDataSource" />
 		</constructor-arg>
 		<constructor-arg>
-			<value>«this.sequenceName»</value>
+			<value>Â«this.sequenceNameÂ»</value>
 		</constructor-arg>
 	</bean>
 
-«ELSE-»
-	«ERROR "impossibile definire un incrementer per la PK di "+dao.name+" perchè non ha una sola colonna"-»
-«ENDIF-»
+Â«ELSE-Â»
+	Â«ERROR "impossibile definire un incrementer per la PK di "+dao.name+" perchÃ¨ non ha una sola colonna"-Â»
+Â«ENDIF-Â»
 
-«ENDAROUND»
+Â«ENDAROUNDÂ»
 
