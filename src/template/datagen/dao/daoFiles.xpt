@@ -766,7 +766,7 @@ public class NamedParameterJdbcTemplateWithQueryDebug
 		extends
 			NamedParameterJdbcTemplate {
 
-	protected static Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
+	protected static final Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
 
 	private static String PLACEHOLDER = ":";
 
@@ -917,7 +917,7 @@ import org.apache.log4j.Logger;
 
 public class SimpleCache {
 	
-	protected static Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
+	protected static final Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
 	
 	HashMap<Object, CacheElement> map = new HashMap<Object, CacheElement>();
 	int ttl_minutes = 0;
