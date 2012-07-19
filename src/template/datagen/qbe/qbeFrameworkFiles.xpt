@@ -346,7 +346,7 @@ import «getDALayerBasePkg(this)».util.*;
  */
 public class QBEQueryBuilder<TEX extends AbstractExample> {
 
-protected static Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
+protected static final Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
 
 	/**
 	 * @generated
