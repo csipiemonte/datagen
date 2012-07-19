@@ -264,7 +264,7 @@ public class RangeChk extends FieldChk{
 	 * @generated
 	 */
 	public boolean isUBIncluded(){
-		return _includeLB;
+		return _includeUB;
 	}
 }
 
