@@ -320,6 +320,7 @@ public class NullChk extends FieldChk{
 	 * @generated
 	 */
 	public NullChk(){
+	// Empty Constructor
 	}	
 }
 
