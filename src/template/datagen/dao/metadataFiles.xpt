@@ -49,12 +49,16 @@ import java.util.List;
 /**
  * @generated
  */
-public class «getMetadataClassName()» implements DAOMetadata{
+public class «getMetadataClassName()» extends DAOMetadata{
 	
 	private final String[] columnNames;	
 	
 	public «getMetadataClassName()»(){
 		columnNames = new String[]{«FOREACH mainTable.columns AS currCol SEPARATOR ','-»"«currCol.name»"«ENDFOREACH-»};		
+		for (int i = 0; i < columnNames.length; i++) {
+			columnsNamesMap.put(columnNames[i], columnNames[i]);
+			
+		}
 	}
 	
 	public «getMetadataClassName()»(String[] columnNames){
@@ -71,8 +75,6 @@ public class «getMetadataClassName()» implements DAOMetadata{
 	{
 		return "«mainTable.name»";
 	}
-
-	«EXPAND getColumnNameMethod(this) FOR this.mainTable»
 	
 	/**
 	 * Method 'getColumnNames'
@@ -138,12 +140,17 @@ import java.sql.*;
 
 
 /**
- * Interface for DAO Metadata.
+ * abstract class for DAO Metadata.
  *
  * @generated
  */
-public interface DAOMetadata
+public abstract class DAOMetadata
 {
+	public java.util.Map<String, String> columnsNamesMap = new java.util.HashMap<String, String>();
+	
+	public DAOMetadata()
+	{
+	}
 	
 	/**
 	 * Method 'getTableName'
@@ -163,7 +170,13 @@ public interface DAOMetadata
 	 *                o <propName> se <prefixPropName> e' nullo
 	 * @generated
 	 */
-	public abstract String getColumnName(String prefixPropName, String propName);
+	
+	public String getColumnName(String prefixPropName, String propName) {
+		if (prefixPropName != null && prefixPropName.length() > 0)
+			return getColumnName(prefixPropName + "." + propName);
+		else
+			return getColumnName(propName);
+	}
 	
 	/**
 	 * Method 'getColumnName'
@@ -173,7 +186,16 @@ public interface DAOMetadata
 	 *                o <propName> se <prefixPropName> e' nullo
 	 * @generated
 	 */
-	public abstract String getColumnName(String propName);
+	public String getColumnName(String propName) {
+		if(columnsNamesMap .containsKey(propName))
+		{
+			return columnsNamesMap.get(propName);
+		}
+
+		/// se non trovato
+		throw new IllegalArgumentException("proprieta' " + propName
+				+ " non trovata per il DTO RuoloProfiloLowDto");
+	}
 	
 	/**
 	 * Method 'getColumnNames'
