@@ -32,13 +32,16 @@ e le limitazioni secondo i termini della Licenza.
 «DEFINE daoFiles (DBAccessModel model) FOR DaoPackage»
 «EXPAND commonDaoFiles(model) FOR this»
 «EXPAND daoFiles(model) FOREACH dao»
+«EXPAND baseDaoRowMapper(model) FOREACH dao»
 «ENDDEFINE»
 
 «DEFINE daoFiles(DBAccessModel model) FOR DataAccessObject»
 «EXPAND daoFile(model) FOR this»
 «EXPAND daoImplFile(model) FOR this»
+«EXPAND daoRowMapper(model) FOR this»
 «EXPAND daoExceptionFile(model) FOR this»
 «ENDDEFINE»
+
 
 «DEFINE daoExceptionFile(DBAccessModel model) FOR DataAccessObject»
 «LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-»
@@ -114,6 +117,7 @@ public interface «getDaoClassName()» {
 «FILE getDaoImplFullPath(this, model)»package «pkgPackage».dao.impl;
 
 import «pkgPackage».dao.*;
+import «pkgPackage».dao.mapper.*;
 import «pkgPackage».dto.*;
 import «pkgPackage».qbe.*;
 import «pkgPackage».metadata.*;
@@ -182,7 +186,10 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameteri
 	«EXPAND template::datagen::dao::deleters::deleters(model, true) FOR this»
 	
 	«EXPAND mapRowMethods(model, true) FOR this»
+	«REM»
+	 Le classi RowMapper sono state disaccopiate dalle DAOImpl
 	«EXPAND rowMapperInnerClass FOR this»
+	«ENDREM»
 
 	«IF finders!=null && finders.finders.size>0-»
     	«EXPAND rowMapperObject(this) FOREACH this.finders.finders»
@@ -538,8 +545,9 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c
 		«IF this.lookupResolvers!=null && this.lookupResolvers.resolvers.size>0-»
 			«EXPAND lookedUpParamValorizationList("dto", this.mainTable.columns) FOR  this»
 		«ENDIF»
+«REM»
 
-		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
+StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
 			stopWatch.start();
 			jdbcTemplate.update(sql.toString(), params);
@@ -550,6 +558,10 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c
 			stopWatch.dumpElapsed("«getDaoImplClassName()»", "insert","esecuzione query", sql);
 			log.debug("[«getDaoImplClassName()»::insert] END");
 		}
+
+«ENDREM»
+		
+		insert(jdbcTemplate, sql.toString(), params);
 		
 		«IF this.mainTable.primaryKey != null»
 		«IF pkGenerator!=null-»
@@ -642,6 +654,11 @@ import java.sql.*;
 
 import org.springframework.jdbc.support.incrementer.DataFieldMaxValueIncrementer;
 
+import it.csi.dma.dmaccbl.business.dao.util.Constants;
+import it.csi.util.performance.StopWatch;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+
 
 /**
  * Base class for Oracle DAO classes.
@@ -669,6 +686,54 @@ public abstract class AbstractDAO
 	 * @generated
 	 */
 	public abstract String getTableName();
+	
+	public void insert(NamedParameterJdbcTemplate jdbcTemplate,String sql,MapSqlParameterSource params)
+	{
+		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
+		try {
+			stopWatch.start();
+			jdbcTemplate.update(sql.toString(), params);
+		} catch (RuntimeException ex) {
+			//log.error("[PazienteLowDaoImpl::insert] esecuzione query", ex);
+			throw ex;
+		} finally {
+			stopWatch.dumpElapsed("PazienteLowDaoImpl", "insert",
+					"esecuzione query", sql);
+			//log.debug("[PazienteLowDaoImpl::insert] END");
+		}
+	}
+	
+	public void update(NamedParameterJdbcTemplate jdbcTemplate,String sql,MapSqlParameterSource params)
+	{
+		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
+		try {
+			stopWatch.start();
+			jdbcTemplate.update(sql.toString(), params);
+		} catch (RuntimeException ex) {
+			//log.error("[PazienteLowDaoImpl::insert] esecuzione query", ex);
+			throw ex;
+		} finally {
+			stopWatch.dumpElapsed("PazienteLowDaoImpl", "insert",
+					"esecuzione query", sql);
+			//log.debug("[PazienteLowDaoImpl::insert] END");
+		}
+	}
+	
+	public void delete(NamedParameterJdbcTemplate jdbcTemplate,String sql,MapSqlParameterSource params)
+	{
+		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
+		try {
+			stopWatch.start();
+			jdbcTemplate.update(sql.toString(), params);
+		} catch (RuntimeException ex) {
+			//log.error("[PazienteLowDaoImpl::insert] esecuzione query", ex);
+			throw ex;
+		} finally {
+			stopWatch.dumpElapsed("PazienteLowDaoImpl", "insert",
+					"esecuzione query", sql);
+			//log.debug("[PazienteLowDaoImpl::insert] END");
+		}
+	}
 	
 	
 	«EXPAND abstractDAODBMSSpecificCode FOR this»
@@ -884,24 +949,35 @@ public class NamedParameterJdbcTemplateWithQueryDebug
 	 * @return  stringa rappresentante la data nel formato to_date(,DD/MM/YYYY HH24:MI:SS')
 	 */
 	private static String parseDate(java.util.Date date) {
-		String retvalue = "";
+		StringBuffer retValue = new StringBuffer("");
+		StringBuffer retvalueBuff = new StringBuffer("");
 		java.util.Calendar cal = java.util.Calendar.getInstance();
 		cal.setTime(date);
-		retvalue = Integer.toString(cal.get(java.util.Calendar.DAY_OF_MONTH))
-				+ "/";
-		retvalue = retvalue
-				+ Integer.toString(cal.get(java.util.Calendar.MONTH) + 1) + "/";
-		retvalue = retvalue
-				+ Integer.toString(cal.get(java.util.Calendar.YEAR)) + "-";
-		retvalue = retvalue
-				+ Integer.toString(cal.get(java.util.Calendar.HOUR_OF_DAY))
-				+ ":";
-		retvalue = retvalue
-				+ Integer.toString(cal.get(java.util.Calendar.MINUTE)) + ":";
-		retvalue = retvalue
-				+ Integer.toString(cal.get(java.util.Calendar.SECOND));
-		retvalue = "to_date('" + retvalue + "','DD/MM/YYYY HH24:MI:SS')";
-		return retvalue;
+		
+		retvalueBuff.append(Integer.toString(cal.get(java.util.Calendar.DAY_OF_MONTH)));
+		retvalueBuff.append("/");
+		
+		retvalueBuff.append(Integer.toString(cal.get(java.util.Calendar.MONTH) + 1));
+		retvalueBuff.append("/");
+		
+		retvalueBuff.append(Integer.toString(cal.get(java.util.Calendar.YEAR)));
+		retvalueBuff.append("-");
+		
+		retvalueBuff.append(Integer.toString(cal.get(java.util.Calendar.HOUR_OF_DAY)));
+		retvalueBuff.append(":");
+		
+		retvalueBuff.append(Integer.toString(cal.get(java.util.Calendar.MINUTE)));
+		retvalueBuff.append(":");
+		
+		retvalueBuff.append(Integer.toString(cal.get(java.util.Calendar.SECOND)));
+		
+		retValue.append("to_date('");
+		retValue.append(retvalueBuff);
+		retValue.append("','DD/MM/YYYY HH24:MI:SS')");
+		
+		
+		
+		return retValue.toString();
 	}
 
 }
@@ -1071,5 +1147,173 @@ public class CacheElement {
 	if(dto instanceof «getDtoCustomQdefClassName(dao,this)»){
 			return mapRow_internal((«getDtoCustomQdefClassName(dao,this)»)dto, rs, row);
 	}
+«ENDDEFINE»
+
+
+«DEFINE baseDaoRowMapper(DBAccessModel model) FOR DataAccessObject»
+«LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-»
+«FILE getBaseDaoMapperFullPath(this, model)»package «pkgPackage».dao.mapper;
+
+
+import «getDALayerBasePkg(model)».util.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import org.apache.log4j.Logger;
+
+
+
+
+/**
+ * @generated
+ */
+public class BaseDaoRowMapper 
+{
+	protected static final Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
+	/**
+	 * @generated
+	 */
+	public final java.util.Map<String, String> columnsToReadMap = new java.util.HashMap<String, String>();
+	public boolean mapAllColumns = true;
+	public Class dtoClass;
+	public Object dtoInstance;
+	
+	/**
+	 * @generated
+	 */
+	/**
+	 * @param columnsToRead elenco delle colonne da includere nel mapping (per query
+	 *        incomplete, esempio distinct, custom select...)
+	 */
+	public BaseDaoRowMapper(String[] columnsToRead, Class dtoClass) {
+		if (columnsToRead != null) {
+			mapAllColumns = false;
+			for (int i = 0; i < columnsToRead.length; i++)
+				columnsToReadMap.put(columnsToRead[i], columnsToRead[i]);
+		}
+		this.dtoClass = dtoClass;
+		setDtoInstance();
+	}
+	
+	
+	/**
+	 * @generated
+	 */
+	public void setDtoInstance()
+	{
+		try {
+			dtoInstance = dtoClass.newInstance();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Impossibile istanziare la classe "
+					+ dtoClass.getName() + " ," + e.getCause());
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Impossibile accedere alla classe "
+					+ dtoClass.getName() + " ," + e.getCause());
+		}
+	}
+}
+
+«ENDFILE-»
+«ENDLET-»
+«ENDDEFINE»
+
+«DEFINE daoRowMapper(DBAccessModel model) FOR DataAccessObject»
+«LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-»
+«FILE getDaoMapperFullPath(this, model)»package «pkgPackage».dao.mapper;
+
+
+import «pkgPackage».dto.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+
+/**
+ * @generated
+ */
+public class «getDaoClassName().toFirstUpper()»RowMapper extends BaseDaoRowMapper implements org.springframework.jdbc.core.RowMapper {
+	
+		
+		
+		
+		/**
+		 * @param columnsToRead elenco delle colonne da includere nel mapping (per query
+		 *        incomplete, esempio distinct, custom select...) nella classe padre
+		 */
+		public «getDaoClassName().toFirstUpper()»RowMapper(String[] columnsToRead, Class dtoClass) {
+			super(columnsToRead, dtoClass);
+		}
+		
+		/**
+		 * Method 'mapRow'
+		 * 
+		 * @param rs
+		 * @param row
+		 * @throws SQLException
+		 * @return «getDtoClassName()»
+		 * @generated
+		 */
+		public Object mapRow(ResultSet rs, int row) throws SQLException
+		{
+			
+			
+			if(dtoInstance instanceof «getDtoClassName()»){
+				return mapRow_internal((«getDtoClassName()»)dtoInstance, rs, row);
+			}
+			
+			«REM»espando il mapping per i custom finder per tutti i dto specifici definiti all'interno del dao con Qdef«ENDREM»
+			«LET this.finders.finders.typeSelect(CustomFinder).select(f|f.queryDefinition!=null) AS customJoinFinders»
+				«IF customJoinFinders!=null && customJoinFinders.size>0»
+					«EXPAND CustomFinderQdefMapping(this) FOREACH customJoinFinders »
+				«ENDIF»
+			«ENDLET»
+			
+			return dtoInstance;
+		}
+			
+		 
+		public «getDtoClassName()» mapRow_internal(
+			«getDtoClassName()» objectToFill, 
+			ResultSet rs, 
+			int row) throws SQLException
+		
+		{	
+			«getDtoClassName()» dto = objectToFill;
+			«FOREACH mainTable.columns AS currCol ITERATOR i»
+			«REM»per ogni colonna della tabella verifico se e' una FK associata al resolver, «ENDREM»
+			«IF currCol.isForeignKey!=null && currCol.isForeignKey && this.lookupResolvers != null && this.lookupResolvers.resolvers.select(r|r.foreignKey.includedColumns.contains(currCol)).size >0-»
+			
+			«ELSE»
+			
+			if (mapAllColumns || columnsToReadMap.get("«currCol.name»") != null)
+				dto.set«javaPropertyNameFromColumn(currCol).toFirstUpper()-»(
+			«IF !isBlobOrClob(currCol)-»
+				«getValueFromRSByColName(currCol)-»
+			«ELSE-»
+				«getValueFromRS(currCol, i.counter1)»
+			«ENDIF-»			
+				);
+			«ENDIF-»
+			«ENDFOREACH-»
+			
+			
+			«REM»expand sui resolvers, se ci sono«ENDREM»
+			«IF this.lookupResolvers!=null && this.lookupResolvers.resolvers.size >0-»
+				«EXPAND lookupResolverRowMapping FOREACH this.lookupResolvers.resolvers-»
+			«ENDIF»
+			return dto;
+		}
+		
+		
+		«LET this.finders.finders.typeSelect(CustomFinder).select(f|f.queryDefinition!=null) AS customJoinFinders»
+				«IF customJoinFinders!=null && customJoinFinders.size>0»
+					«EXPAND mapRowInternalQDef(this) FOREACH customJoinFinders »
+				«ENDIF»
+			«ENDLET»
+		
+	}
+
+«ENDFILE-»
+«ENDLET-»
 «ENDDEFINE»
 
