@@ -64,6 +64,9 @@ String getPkgDir(DaoPackage pkg, DBAccessModel model) :
 String getDaoClassName(DataAccessObject dao) :
 	dao.name.toFirstUpper()+"Dao";
 	
+String getDaoMapperClassName(DataAccessObject dao) :
+	getDaoClassName(dao)+"RowMapper";	
+	
 String getDaoIdName(DataAccessObject dao) :
 	dao.name.toFirstLower()+"Dao";
 
@@ -90,6 +93,14 @@ String getDaoExcFQN(DataAccessObject dao, DBAccessModel model) :
 
 String getDaoExcFullPath(DataAccessObject dao, DBAccessModel model) :
 	getPkgDir((DaoPackage)(dao.eContainer), model)+"/exceptions/"+getDaoExcClassName(dao)+".java";
+
+String getDaoMapperFullPath(DataAccessObject dao, DBAccessModel model) :
+	getPkgDir((DaoPackage)(dao.eContainer), model)+"/dao/mapper/"+getDaoMapperClassName(dao)+".java";
+	
+String getBaseDaoMapperFullPath(DataAccessObject dao, DBAccessModel model) :
+	getPkgDir((DaoPackage)(dao.eContainer), model)+"/dao/mapper/BaseDaoRowMapper.java";
+	
+
 
 
 
