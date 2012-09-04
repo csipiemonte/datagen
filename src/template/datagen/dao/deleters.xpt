@@ -49,6 +49,7 @@ e le limitazioni secondo i termini della Licenza.
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("parametro", filter);
 		«ENDPROTECT»
+		«REM»
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
 			stopWatch.start();
@@ -60,6 +61,8 @@ e le limitazioni secondo i termini della Licenza.
 			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "delete","esecuzione query", sql);
 			log.debug("[«getDaoImplClassName(dao)»::delete] END");
 		}
+		«ENDREM»
+		delete(jdbcTemplate, sql.toString(), params);
 	}
 	«ELSE-»
 	;
@@ -85,7 +88,7 @@ e le limitazioni secondo i termini della Licenza.
 		
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		«EXPAND template::datagen::dao::daoFiles::paramValorizationList("pk", dao) FOR dao.mainTable.primaryKey.includedColumns»
-		
+		«REM»
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
 			stopWatch.start();
@@ -97,6 +100,8 @@ e le limitazioni secondo i termini della Licenza.
 			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "delete","esecuzione query", sql);
 			log.debug("[«getDaoImplClassName(dao)»::delete] END");
 		}
+		«ENDREM»
+		delete(jdbcTemplate, sql.toString(), params);
 	}
 	«ELSE-»
 	;

@@ -50,6 +50,8 @@ e le limitazioni secondo i termini della Licenza.
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("parametro", value);
 		«ENDPROTECT»
+		
+		«REM»
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
 			stopWatch.start();
@@ -61,6 +63,9 @@ e le limitazioni secondo i termini della Licenza.
 			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "updateColumns«name.toFirstUpper()»","esecuzione query", sql);
 			log.debug("[«getDaoImplClassName(dao)»::updateColumns«name.toFirstUpper()»] END");
 		}
+		«ENDREM»
+		
+		update(jdbcTemplate, sql.toString(), params);
 	}
 	«ELSE-»
 	;
@@ -93,6 +98,7 @@ e le limitazioni secondo i termini della Licenza.
 				«EXPAND template::datagen::dao::daoFiles::lookedUpParamValorizationList("dto", this.columns) FOR  dao»
 		«ENDIF»
 		
+		«REM»
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
 			stopWatch.start();
@@ -104,6 +110,8 @@ e le limitazioni secondo i termini della Licenza.
 			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "updateColumns«name.toFirstUpper()»","esecuzione query", sql);
 			log.debug("[«getDaoImplClassName(dao)»::updateColumns«name.toFirstUpper()»] END");
 		}
+		«ENDREM»
+		update(jdbcTemplate, sql.toString(), params);
 	}
 	«ELSE-»
 	;
@@ -131,7 +139,7 @@ e le limitazioni secondo i termini della Licenza.
 		«IF dao.lookupResolvers!=null && dao.lookupResolvers.resolvers.size>0-»
 				«EXPAND template::datagen::dao::daoFiles::lookedUpParamValorizationList("dto",dao.mainTable.columns) FOR  dao»
 		«ENDIF»
-		
+		«REM»
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
 			stopWatch.start();
@@ -143,6 +151,8 @@ e le limitazioni secondo i termini della Licenza.
 			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "update","esecuzione query", sql);
 			log.debug("[«getDaoImplClassName(dao)»::update] END");
 		}
+		«ENDREM»
+		update(jdbcTemplate, sql.toString(), params);
 	}
 	«ELSE-»
 	;
