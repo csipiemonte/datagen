@@ -56,6 +56,8 @@ import java.io.Serializable;
 import java.util.*;
 
 /**
+ * Primary Key del DTO «getDtoClassName()».
+ * E' utilizzato per tutte le operazioni di lettura dati per chiave primaria. 
  * @generated
  */
 public class «getPkClassName()» implements Serializable {
@@ -70,6 +72,7 @@ public class «getPkClassName()» implements Serializable {
 	«ENDIF»
 	«ENDREM»
 	/**
+	 * Costruttore di una chiave primaria vuota
 	 * @generated 
 	 */
 	public «getPkClassName()»()
@@ -78,6 +81,7 @@ public class «getPkClassName()» implements Serializable {
 	}
 
 	/**
+	 * Costruttore di una chiave primaria a partire dai valori delle varie colonne
 	 * @generated
 	 */
 	public «getPkClassName()»(
@@ -92,10 +96,11 @@ public class «getPkClassName()» implements Serializable {
 	}
 
 	/**
-	 * Method 'equals'
+	 * Method 'equals'. 
+	 * Due istanze di «getPkClassName()» sono equals se i valori di tutti i campi coincidono.
 	 * 
 	 * @param _other
-	 * @return boolean
+	 * @return boolean se i due oggetti sono uguali
 	 */
 	public boolean equals(Object _other)
 	{
@@ -170,6 +175,7 @@ import java.io.Serializable;
 import java.util.*;
 
 /**
+ * Data transfer object relativo al DAO «getDaoClassName()».
  * @generated
  */
 public class «getDtoClassName()» implements Serializable {
@@ -183,8 +189,8 @@ public class «getDtoClassName()» implements Serializable {
 	«ENDIF»
 	
 	«IF this.mainTable.primaryKey != null»
-		/**
-	 * Method 'createPk'
+	/**
+	 * Crea una istanza di «getPkClassName()» a partire dal valore dei campi chiave del DTO
 	 * 
 	 * @return «getPkClassName()»
 	 * @generated
@@ -214,11 +220,14 @@ public class «getDtoClassName()» implements Serializable {
 	
 	«ELSE-»
 	/**
+	 * store della proprieta' associata alla colonna «name»
 	 * @generated
 	 */
 	private «javaPropertyTypeFromColumn()» _«javaPropertyNameFromColumn()»;
 	
 	/**
+	 * Imposta il valore della proprieta' «javaPropertyNameFromColumn()» associata alla
+	 * colonna «name».
 	 * @generated
 	 */
 	public void set«javaPropertyNameFromColumn().toFirstUpper()» («javaPropertyTypeFromColumn()» val){
@@ -226,6 +235,7 @@ public class «getDtoClassName()» implements Serializable {
 	}
 	
 	/**
+	 * Legge il valore della proprieta' «javaPropertyNameFromColumn()» associata alla
 	 * @generated
 	 */
 	public «javaPropertyTypeFromColumn()» get«javaPropertyNameFromColumn().toFirstUpper()»(){
@@ -238,12 +248,13 @@ public class «getDtoClassName()» implements Serializable {
 
 
 «DEFINE lookupResolverProperty FOR LookupResolver»
-/**
+    /**
 	 * @generated
 	 */
 	private «getDtoClassName(this.supplierDAO)» _«getLookedUpPropertyName()»;
 	
 	/**
+	 * Imposta il valore della proprieta' di lookup «getLookedUpPropertyName()». 
 	 * @generated
 	 */
 	public void set«getLookedUpPropertyName().toFirstUpper()» («getDtoClassName(this.supplierDAO)» val){
@@ -251,6 +262,7 @@ public class «getDtoClassName()» implements Serializable {
 	}
 	
 	/**
+	 * Legge il valore della proprieta' di lookup «getLookedUpPropertyName()».
 	 * @generated
 	 */
 	public «getDtoClassName(this.supplierDAO)» get«getLookedUpPropertyName().toFirstUpper()»(){
@@ -272,6 +284,7 @@ import java.io.Serializable;
 import java.util.*;
 
 /**
+ * DTO specifico della query modellata nel finder «name».
  * @generated
  */
 public class «getDtoCustomQdefClassName((DataAccessObject)this.eContainer.eContainer,this)»  implements Serializable
@@ -288,8 +301,7 @@ public class «getDtoCustomQdefClassName((DataAccessObject)this.eContainer.eCont
 	 * @generated
 	 */
 	public boolean equals(Object _other)
-	{
-		// TODO
+	{ 
 		return super.equals(_other);
 	}
 
@@ -301,7 +313,6 @@ public class «getDtoCustomQdefClassName((DataAccessObject)this.eContainer.eCont
 	 */
 	public int hashCode()
 	{
-		// TODO
 		return super.hashCode();
 	}
 

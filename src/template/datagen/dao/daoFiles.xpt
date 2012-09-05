@@ -48,7 +48,7 @@ e le limitazioni secondo i termini della Licenza.
 «FILE getDaoExcFullPath(this, model)»package «pkgPackage».exceptions;
 
 /**
- *
+ * Le eccezioni rilanciate dai metodi del DAO «name» sono di questo tipo.
  * @generated
  */
 public class «getDaoExcClassName()» extends DaoException
@@ -93,6 +93,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
+ * Interfaccia pubblica del DAO «name».
  * @generated
  */
 public interface «getDaoClassName()» {
@@ -145,17 +146,20 @@ import java.util.TreeMap;
 «ENDPROTECT»
 
 /**
+ * Implemenrazione del DAO «name»
  * @generated
  */
 public class «getDaoImplClassName()» extends AbstractDAO implements «getDaoClassName()»
 {
 	protected static final Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
 	/**
+	 * Il DAO utilizza JDBC template per l'implementazione delle query.
 	 * @generated
 	 */
 	protected NamedParameterJdbcTemplate jdbcTemplate;
 	
 	/**
+	 * Imposta il JDBC template utilizato per l'implementazione delle query
 	 * @generated
 	 */
 	public void setJdbcTemplate(NamedParameterJdbcTemplate jdbcTemplate) {
@@ -164,15 +168,24 @@ public class «getDaoImplClassName()» extends AbstractDAO implements «getDaoCl
 	
 	«IF this.cacheability==CacheabilityTypes::ALMOST_STABLE_DATA»
 	/**
+	 * Cache del DAO.
 	 * @generated
 	 */
 	 protected SimpleCache cache;
 	
-	
+	/**
+	 * Restutuisce la cache del DAO
+	 * @generated
+	 */
 	public SimpleCache getCache() {
 		return cache;
 	}
 
+    /**
+	 * Imposta la cache del DAO
+	 * @param cache
+	 * @generated
+	 */
 	public void setCache(SimpleCache cache) {
 		this.cache = cache;
 	}
@@ -203,8 +216,8 @@ public class «getDaoImplClassName()» extends AbstractDAO implements «getDaoCl
     «ENDIF-»
 
 	/**
-	 * Method 'getTableName'
 	 * 
+	 * Restituisce il nome della tabella su cui opera il DAO
 	 * @return String
 	 * @generated
 	 */
@@ -264,17 +277,35 @@ public class «getDaoImplClassName()» extends AbstractDAO implements «getDaoCl
 
 
 «DEFINE rowMapperInnerClass FOR DataAccessObject»
-	/// flexible row mapper. 
+	/** 
+	 * RowMapper relativo al DAO «getDaoClassName()»
+	 */
 	public static class «getDaoClassName()»RowMapper implements org.springframework.jdbc.core.RowMapper {
 	
 		
+		/**
+		 * conterra' l'elenco delle colonne su cui il row mapper opera (sottoinsieme delle colonne totali)
+		 */
 		private final java.util.Map<String,String> columnsToReadMap = new java.util.HashMap<String, String>();
+		
+		/**
+		 * se vale true allor ail row mapper opera su tutte le colonne (in questo caso il contenuto della
+		 * mappa 'columnsToReadMap' e' ignorato). 
+		 */
 		private boolean mapAllColumns = true;
+		
+		/**
+		 * La classe del DTO su cui opera il row mapper
+		 */
 		private final Class dtoClass;
 		
 		/**
+		 * Costruttore di default: permette di inizalizzare l'elenco delle colonne che il 
+		 * row mapper dovra' gestire e l'informazione relativa alla classe su cui opera il row
+		 * mapper.
 		 * @param columnsToRead elenco delle colonne da includere nel mapping (per query
 		 *        incomplete, esempio distinct, custom select...)
+		 * @param dtoClass la classe su cui il row mapper opera
 		 */
 		public «getDaoClassName()»RowMapper(String[] columnsToRead, Class dtoClass) {
 			if (columnsToRead != null) {
@@ -286,12 +317,12 @@ public class «getDaoImplClassName()» extends AbstractDAO implements «getDaoCl
 		}
 		
 		/**
-		 * Method 'mapRow'
+		 * Effettua il mapping necessario per ricostruire l'oggetto risultato («getDtoClassName()»).
 		 * 
-		 * @param rs
-		 * @param row
-		 * @throws SQLException
+		 * @param rs il result set risultato della query
+		 * @param row l'indice della riga del result set da mappare
 		 * @return «getDtoClassName()»
+		 * @throws SQLException
 		 * @generated
 		 */
 		public Object mapRow(ResultSet rs, int row) throws SQLException
@@ -324,7 +355,12 @@ public class «getDaoImplClassName()» extends AbstractDAO implements «getDaoCl
 			return dto;
 		}
 			
-		 
+		/**
+		 * metodo di mapping specifico del DTO «getDtoClassName()»
+		 * @param objectToFill il DTO da popolare
+		 * @rs il resultset
+		 * @row l'indice della riga del result set da cui prendere i dati 
+		 */ 
 		public «getDtoClassName()» mapRow_internal(
 			«getDtoClassName()» objectToFill, 
 			ResultSet rs, 
@@ -372,7 +408,7 @@ public class «getDaoImplClassName()» extends AbstractDAO implements «getDaoCl
 «DEFINE mapRowInternalQDef(DataAccessObject dao) FOR CustomFinder»
 	
 	/**
-	 * Method 'mapRow_internal'
+	 * Metodo specifico di mapping relativo al DTO custom «getDtoCustomQdefClassName(dao, this)».
 	 * 
 	 * @param rs
 	 * @param row
@@ -525,7 +561,8 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c
 
 «DEFINE insertMethod(DBAccessModel model, boolean body) FOR DataAccessObject»
 	/**
-	 * Method 'insert'
+	 * Metodo di inserimento del DAO «name». Al termine dell'esecuzione il metodo
+	 * ritorna il valore della primary key.
 	 * 
 	 * @param dto
 	 * @return «getPkClassName()»
@@ -590,13 +627,14 @@ StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 «ENDDEFINE»
 
 «DEFINE mapRowMethods(DBAccessModel model, boolean body) FOR DataAccessObject»
+	
 	/**
-	 * Method 'mapRow'
+     * Effettua il mapping necessario per ricostruire l'oggetto risultato («getDtoClassName()»).
 	 * 
-	 * @param rs
-	 * @param row
-	 * @throws SQLException
+	 * @param rs il result set risultato della query
+	 * @param row l'indice della riga del result set da mappare
 	 * @return «getDtoClassName()»
+	 * @throws SQLException
 	 * @generated
 	 */
 	public «getDtoClassName()» mapRow(ResultSet rs, int row) throws SQLException
@@ -612,14 +650,11 @@ StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 	
 	
 	/**
-	 * Method 'mapRow_internal'
-	 * 
-	 * @param rs
-	 * @param row
-	 * @throws SQLException
-	 * @return «getDtoClassName()»
-	 * @generated
-	 */
+	 * metodo di mapping specifico del DTO «getDtoClassName()»
+	 * @param objectToFill il DTO da popolare
+	 * @rs il resultset
+	 * @row l'indice della riga del result set da cui prendere i dati 
+	 */ 
 	public «getDtoClassName()» mapRow_internal(
 		«getDtoClassName()» objectToFill, 
 		ResultSet rs, 
@@ -694,6 +729,12 @@ public abstract class AbstractDAO
 	 */
 	public abstract String getTableName();
 	
+	/**
+	 * Metodo di generico di inserimento (opera su qualsiasi specifico DAO).
+	 * @param jdbcTemplate
+	 * @param sql
+	 * @param params  
+	 */
 	public void insert(NamedParameterJdbcTemplate jdbcTemplate,String sql,MapSqlParameterSource params)
 	{
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
@@ -710,6 +751,12 @@ public abstract class AbstractDAO
 		}
 	}
 	
+	/**
+	 * Metodo di generico di aggiornamento dati (opera su qualsiasi specifico DAO).
+	 * @param jdbcTemplate
+	 * @param sql
+	 * @param params  
+	 */
 	public void update(NamedParameterJdbcTemplate jdbcTemplate,String sql,MapSqlParameterSource params)
 	{
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
@@ -726,6 +773,12 @@ public abstract class AbstractDAO
 		}
 	}
 	
+	/**
+	 * Metodo di generico di cancellazione (opera su qualsiasi specifico DAO).
+	 * @param jdbcTemplate
+	 * @param sql
+	 * @param params  
+	 */
 	public void delete(NamedParameterJdbcTemplate jdbcTemplate,String sql,MapSqlParameterSource params)
 	{
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
@@ -751,6 +804,7 @@ public abstract class AbstractDAO
 «FILE getPkgDir(this, model)+"/exceptions/DaoException.java"»package «getPkgPackage(this, model)».exceptions;
 
 /**
+ * Superclasse di tutte le classi di eccezione dei vari DAO.
  * @generated
  */
 public class DaoException extends RuntimeException
@@ -761,7 +815,7 @@ public class DaoException extends RuntimeException
 	protected Throwable throwable;
 
 	/**
-	 * Method 'DaoException'
+	 * Costruttore
 	 * 
 	 * @param message
 	 * @generated
@@ -772,7 +826,7 @@ public class DaoException extends RuntimeException
 	}
 
 	/**
-	 * Method 'DaoException'
+	 * Costruttore
 	 * 
 	 * @param message
 	 * @param throwable
@@ -807,8 +861,9 @@ public class DaoException extends RuntimeException
 «DEFINE utilFiles FOR DBAccessModel»
 «FILE getDALayerBaseDir(this)+"/util/Constants.java"»package «getDALayerBasePkg(this)».util;
 /**
-* @generated
-*/
+ * Costanti dell'applicativo
+ * @generated
+ */
 public final class Constants {
 	/**
 	 * identificativo dell'applicativo.
@@ -834,25 +889,49 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
+/**
+ * Implementazione di NamedParameterJdbcTemplate con l'aggiunta del log dell'SQL che viene eseguito.
+ * @generated
+ */
 public class NamedParameterJdbcTemplateWithQueryDebug
 		extends
 			NamedParameterJdbcTemplate {
 
+	/**
+	 * @generated
+	 */
 	protected static final Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
 
+	/**
+	 * @generated
+	 */
 	private static String PLACEHOLDER = ":";
 
+	/**
+	 * @generated
+	 */
 	private static String[] terminatoriParametro = new String[]{" ","=",")","|","(",">","<","+","-","*","/"}; 
 	
+	/**
+	 * costruttore
+	 * @generated
+	 */
 	public NamedParameterJdbcTemplateWithQueryDebug(DataSource dataSource) {
 		super(dataSource);
 	}
 
+    /** 
+     * costruttore
+     * @generated
+     */
 	public NamedParameterJdbcTemplateWithQueryDebug(
 			JdbcOperations classicJdbcTemplate) {
 		super(classicJdbcTemplate);
 	}
 
+	/**
+	 * @generated
+	 */
 	@Override
 	public int update(String sql, SqlParameterSource paramSource)
 			throws DataAccessException {
@@ -864,6 +943,9 @@ public class NamedParameterJdbcTemplateWithQueryDebug
 		return super.update(sql, paramSource);
 	}
 
+	/**
+	 * @generated
+	 */
 	@Override
 	public List query(String sql, SqlParameterSource paramSource,
 			RowMapper rowMapper) throws DataAccessException {
@@ -880,6 +962,7 @@ public class NamedParameterJdbcTemplateWithQueryDebug
 	 * 
 	 * @param sql query con i placeholder 
 	 * @param paramSource  mappa contenente i parametri e loro valori
+	 * @generated
 	 */
 	private void logSql(String sql, SqlParameterSource paramSource) {
 		if(log.isDebugEnabled()){
@@ -895,6 +978,7 @@ public class NamedParameterJdbcTemplateWithQueryDebug
 	 * @param sql query con i placeholder 
 	 * @param paramSource  mappa contenente i parametri e loro valori
 	 * @return
+	 * @generated
 	 */
 	private String buildSqlWithParameters(String sql,
 			SqlParameterSource paramSource) {
@@ -914,6 +998,7 @@ public class NamedParameterJdbcTemplateWithQueryDebug
 	 *  
 	 * @param parametro  pezzo di query ottenuta da una istruzione split con il carattere ':' come separatore 
 	 * @return la minore parola utile utilizzabile come parametro della query
+	 * @generated
 	 */
 	private String getParametroUtile(String parametro) {
 		int posizioneTerminatoreAttuale = 0;
@@ -933,6 +1018,7 @@ public class NamedParameterJdbcTemplateWithQueryDebug
 	 * @param paramSource mappa contenente i parametri e ralativi valori
 	 * @param parametro nome del parametro nella query
 	 * @return
+	 * @generated
 	 */
 	private String getValue(SqlParameterSource paramSource, String parametro) {
 		String resultValue = "null";
@@ -954,6 +1040,7 @@ public class NamedParameterJdbcTemplateWithQueryDebug
 	 * Converte una data in un formato stringa utilizzabile nelle query per Oracle 
 	 * @param date 
 	 * @return  stringa rappresentante la data nel formato to_date(,DD/MM/YYYY HH24:MI:SS')
+	 * @generated
 	 */
 	private static String parseDate(java.util.Date date) {
 		StringBuffer retValue = new StringBuffer("");
@@ -998,20 +1085,46 @@ import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 
+/**
+ * Implementazione di cache di DTO. Utilizzata dai DAO se specificato.
+ * @generated
+ */
 public class SimpleCache {
 	
+	/**
+	 * @generated
+	 */
 	protected static final Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
 	
+	/**
+	 * @generated
+	 */
 	HashMap<Object, CacheElement> map = new HashMap<Object, CacheElement>();
+	
+	/**
+	 * @generated
+	 */
 	int ttl_minutes = 0;
+	
+	/**
+	 * @generated
+	 */
 	boolean updateAccessTime = false;
 	
+	/**
+	 * costruttore
+	 * @generated
+	 */
 	public SimpleCache(int ttl, boolean updateAccessTime){
 		this.ttl_minutes=ttl;
 		this.updateAccessTime=updateAccessTime;
 	}
 	
-	//store del dato
+	/**
+	 * inserimento del dato nella cache (con valorizzazione dell'istante di inserimento
+	 * che serve per determinare lo svecchiamento).
+	 * @generated
+	 */
 	public void put(Object key, Object value){
 		CacheElement el = new CacheElement();
 		el.setLastAccess(System.currentTimeMillis());
@@ -1019,7 +1132,10 @@ public class SimpleCache {
 		map.put(key, el);
 	}
 	
-	//accesso al dato
+	/**
+	 * Restituisce l'elemento della cache identificato dalla chiave.
+	 * @generated
+	 */
 	public Object get(Object key){
 		CacheElement el = map.get(key);
 		if (el != null){
@@ -1047,7 +1163,9 @@ public class SimpleCache {
 	}
 	
 	
-	//per debug
+	/**
+	 * dump per debug
+	 */
 	public void dumpCache(){
 		Iterator<Object> it = map.keySet().iterator();
 		while(it.hasNext()){
@@ -1062,20 +1180,49 @@ public class SimpleCache {
 
 «FILE getDALayerBaseDir(this)+"/util/CacheElement.java"»package «getDALayerBasePkg(this)».util;
 
+/**
+ * elemento della cache con indicazione dell'istante di inserimento in cache (per TTL)
+ * @generated
+ */
 public class CacheElement {
-	
+	   /**
+	 	* @generated
+	 	*/
 		long lastAccess = 0;
+	
+	   /**
+	 	* @generated
+	 	*/
 		Object value = null;
 		
+	   /**
+	    * restituisce l'istante di ultimo accesso all'oggetto
+	 	* @generated
+	 	*/
 		public long getLastAccess() {
 			return lastAccess;
 		}
+		
+		/**
+		 * imposta l'istante di ultimo accesso all'oggetto
+		 * @generated
+		 */
 		public void setLastAccess(long lastAccess) {
 			this.lastAccess = lastAccess;
 		}
+		
+		/**
+		 * restituisce il valore dell'elemento di cache
+		 * @generated
+		 */
 		public Object getValue() {
 			return value;
 		}
+		
+		/**
+		 * imposta il valore dell'elemento di cache
+		 * @generated
+		 */
 		public void setValue(Object value) {
 			this.value = value;
 		}
@@ -1122,12 +1269,23 @@ public class CacheElement {
 «ENDDEFINE»
 
 «DEFINE supplierDaoSpringProperty FOR DataAccessObject-»
+			/**
+			 * @generated
+			 */
 			private «getDaoClassName(this)» «getDaoClassName(this).toFirstLower()»;
 			
+			/**
+			 * supplier DAO «getDaoClassName(this)»
+			 * @generated
+			 */
 			public «getDaoClassName(this)» get«getDaoClassName(this)»(){
 				return «getDaoClassName(this).toFirstLower()»;
 			}
 			
+			/**
+			 * supplier DAO «getDaoClassName(this)»
+			 * @generated
+			 */
 			public void set«getDaoClassName(this)»(«getDaoClassName(this)» val){
 				this.«getDaoClassName(this).toFirstLower()» = val;
 			}
@@ -1171,6 +1329,7 @@ import org.apache.log4j.Logger;
 
 
 /**
+ * Classe base di tutti i row mapper utilizzati nello strato DAO.
  * @generated
  */
 public class BaseDaoRowMapper 
@@ -1180,8 +1339,17 @@ public class BaseDaoRowMapper
 	 * @generated
 	 */
 	public final java.util.Map<String, String> columnsToReadMap = new java.util.HashMap<String, String>();
+	/**
+	 * @generated
+	 */
 	public boolean mapAllColumns = true;
+	/**
+	 * @generated
+	 */
 	public Class dtoClass;
+	/**
+	 * @generated
+	 */
 	public Object dtoInstance;
 	
 	/**
@@ -1236,6 +1404,7 @@ import java.sql.SQLException;
 
 
 /**
+ * RowMapper specifico del DAO «getDaoClassName()»
  * @generated
  */
 public class «getDaoClassName().toFirstUpper()»RowMapper extends BaseDaoRowMapper implements org.springframework.jdbc.core.RowMapper {
@@ -1244,6 +1413,7 @@ public class «getDaoClassName().toFirstUpper()»RowMapper extends BaseDaoRowMap
 		
 		
 		/**
+		 * costruttore
 		 * @param columnsToRead elenco delle colonne da includere nel mapping (per query
 		 *        incomplete, esempio distinct, custom select...) nella classe padre
 		 */
