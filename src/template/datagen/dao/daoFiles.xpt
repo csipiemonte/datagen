@@ -104,7 +104,10 @@ public interface «getDaoClassName()» {
 	
 	«EXPAND template::datagen::dao::deleters::deleters(model, false) FOR this-»
 	
+	«REM»
+	Spostata la logica di estrazione dati nella corrispondente classe dtoRowMapper
 	«EXPAND mapRowMethods(model, false) FOR this-»
+	«ENDREM»
 	
 	«EXPAND template::datagen::dao::finders::finders(model, false) FOR this-»
 }
@@ -144,7 +147,7 @@ import java.util.TreeMap;
 /**
  * @generated
  */
-public class «getDaoImplClassName()» extends AbstractDAO implements ParameterizedRowMapper<«getDtoClassName()»>, «getDaoClassName()»
+public class «getDaoImplClassName()» extends AbstractDAO implements «getDaoClassName()»
 {
 	protected static final Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
 	/**
@@ -185,7 +188,11 @@ public class «getDaoImplClassName()» extends AbstractDAO implements Parameteri
 	
 	«EXPAND template::datagen::dao::deleters::deleters(model, true) FOR this»
 	
+	«REM»
+	Spostata la logica di estrazione dati nella corrispondente classe dtoRowMapper
 	«EXPAND mapRowMethods(model, true) FOR this»
+	«ENDREM»
+	
 	«REM»
 	 Le classi RowMapper sono state disaccopiate dalle DAOImpl
 	«EXPAND rowMapperInnerClass FOR this»
