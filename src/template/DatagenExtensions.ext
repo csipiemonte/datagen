@@ -525,8 +525,14 @@ boolean isListNullOrEmpty(List l) :
 
 String getPluginVersion() : JAVA
 	it.csi.mddtools.datagen.genutils.MiscUtils.getPluginVersion();
+	
+String getRegionUID(String sourceId, String name) : 
+if name.isNullOrEmpty() then
+	getRegionUIDValue(sourceId)
+else
+	getRegionUIDValue(sourceId+name);
 
-String getRegionUID(String sourceId) : JAVA
+String getRegionUIDValue(String sourceId) : JAVA
 	it.csi.mddtools.datagen.genutils.GenUtils.getRegionUID(java.lang.String);
 
 // TODO da rivedere...
