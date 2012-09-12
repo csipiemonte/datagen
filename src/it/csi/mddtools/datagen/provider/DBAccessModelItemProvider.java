@@ -84,6 +84,7 @@ public class DBAccessModelItemProvider
 			addSchemaPropertyDescriptor(object);
 			addCodProdottoPropertyDescriptor(object);
 			addCodComponentePropertyDescriptor(object);
+			addNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -155,6 +156,28 @@ public class DBAccessModelItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_DBAccessModel_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_DBAccessModel_name_feature", "_UI_DBAccessModel_type"),
+				 DatagenPackage.Literals.DB_ACCESS_MODEL__NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -203,7 +226,7 @@ public class DBAccessModelItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((DBAccessModel)object).getCodProdotto();
+		String label = ((DBAccessModel)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_DBAccessModel_type") :
 			getString("_UI_DBAccessModel_type") + " " + label;
@@ -223,6 +246,7 @@ public class DBAccessModelItemProvider
 		switch (notification.getFeatureID(DBAccessModel.class)) {
 			case DatagenPackage.DB_ACCESS_MODEL__COD_PRODOTTO:
 			case DatagenPackage.DB_ACCESS_MODEL__COD_COMPONENTE:
+			case DatagenPackage.DB_ACCESS_MODEL__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case DatagenPackage.DB_ACCESS_MODEL__DAOPKGS:

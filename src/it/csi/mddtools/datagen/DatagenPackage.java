@@ -124,13 +124,22 @@ public interface DatagenPackage extends EPackage {
 	int DB_ACCESS_MODEL__COD_COMPONENTE = 3;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DB_ACCESS_MODEL__NAME = 4;
+
+	/**
 	 * The number of structural features of the '<em>DB Access Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DB_ACCESS_MODEL_FEATURE_COUNT = 4;
+	int DB_ACCESS_MODEL_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link it.csi.mddtools.datagen.impl.DataAccessObjectImpl <em>Data Access Object</em>}' class.
@@ -1609,6 +1618,17 @@ public interface DatagenPackage extends EPackage {
 	EAttribute getDBAccessModel_CodComponente();
 
 	/**
+	 * Returns the meta object for the attribute '{@link it.csi.mddtools.datagen.DBAccessModel#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see it.csi.mddtools.datagen.DBAccessModel#getName()
+	 * @see #getDBAccessModel()
+	 * @generated
+	 */
+	EAttribute getDBAccessModel_Name();
+
+	/**
 	 * Returns the meta object for class '{@link it.csi.mddtools.datagen.DataAccessObject <em>Data Access Object</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2656,6 +2676,14 @@ public interface DatagenPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DB_ACCESS_MODEL__COD_COMPONENTE = eINSTANCE.getDBAccessModel_CodComponente();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DB_ACCESS_MODEL__NAME = eINSTANCE.getDBAccessModel_Name();
 
 		/**
 		 * The meta object literal for the '{@link it.csi.mddtools.datagen.impl.DataAccessObjectImpl <em>Data Access Object</em>}' class.

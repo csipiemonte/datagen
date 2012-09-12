@@ -42,6 +42,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link it.csi.mddtools.datagen.DBAccessModel#getDaopkgs <em>Daopkgs</em>}</li>
  *   <li>{@link it.csi.mddtools.datagen.DBAccessModel#getCodProdotto <em>Cod Prodotto</em>}</li>
  *   <li>{@link it.csi.mddtools.datagen.DBAccessModel#getCodComponente <em>Cod Componente</em>}</li>
+ *   <li>{@link it.csi.mddtools.datagen.DBAccessModel#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -157,5 +158,30 @@ public interface DBAccessModel extends CDOObject {
 	 * @generated
 	 */
 	void setCodComponente(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Codice componente di appartenenza
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see it.csi.mddtools.datagen.DatagenPackage#getDBAccessModel_Name()
+	 * @model
+	 * @generated
+	 */
+	String getName();
+
+	/**
+	 * Sets the value of the '{@link it.csi.mddtools.datagen.DBAccessModel#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
 
 } // DBAccessModel

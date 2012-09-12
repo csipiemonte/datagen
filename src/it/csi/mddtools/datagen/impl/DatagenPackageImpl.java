@@ -468,6 +468,15 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getDBAccessModel_Name() {
+		return (EAttribute)dbAccessModelEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getDataAccessObject() {
 		return dataAccessObjectEClass;
 	}
@@ -1333,6 +1342,7 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		createEReference(dbAccessModelEClass, DB_ACCESS_MODEL__DAOPKGS);
 		createEAttribute(dbAccessModelEClass, DB_ACCESS_MODEL__COD_PRODOTTO);
 		createEAttribute(dbAccessModelEClass, DB_ACCESS_MODEL__COD_COMPONENTE);
+		createEAttribute(dbAccessModelEClass, DB_ACCESS_MODEL__NAME);
 
 		dataAccessObjectEClass = createEClass(DATA_ACCESS_OBJECT);
 		createEAttribute(dataAccessObjectEClass, DATA_ACCESS_OBJECT__NAME);
@@ -1525,6 +1535,7 @@ public class DatagenPackageImpl extends EPackageImpl implements DatagenPackage {
 		initEReference(getDBAccessModel_Daopkgs(), this.getDaoPackage(), null, "daopkgs", null, 0, -1, DBAccessModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDBAccessModel_CodProdotto(), ecorePackage.getEString(), "codProdotto", null, 0, 1, DBAccessModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDBAccessModel_CodComponente(), ecorePackage.getEString(), "codComponente", null, 0, 1, DBAccessModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDBAccessModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, DBAccessModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dataAccessObjectEClass, DataAccessObject.class, "DataAccessObject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDataAccessObject_Name(), ecorePackage.getEString(), "name", null, 0, 1, DataAccessObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

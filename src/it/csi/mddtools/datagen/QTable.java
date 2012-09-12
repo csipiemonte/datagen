@@ -69,7 +69,7 @@ public interface QTable extends CDOObject {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Alias opzionale attribuibile alla tabella nella query. Serve essenzialmente in quei
-	 * casi in cui una stessa tabella è referenziata pi&ugrave; di una volta nella clausola
+	 * casi in cui una stessa tabella Ã¨ referenziata pi&ugrave; di una volta nella clausola
 	 * from.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Alias Name</em>' attribute.

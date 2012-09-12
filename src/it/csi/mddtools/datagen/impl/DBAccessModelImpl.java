@@ -44,6 +44,7 @@ import org.eclipse.emf.internal.cdo.CDOObjectImpl;
  *   <li>{@link it.csi.mddtools.datagen.impl.DBAccessModelImpl#getDaopkgs <em>Daopkgs</em>}</li>
  *   <li>{@link it.csi.mddtools.datagen.impl.DBAccessModelImpl#getCodProdotto <em>Cod Prodotto</em>}</li>
  *   <li>{@link it.csi.mddtools.datagen.impl.DBAccessModelImpl#getCodComponente <em>Cod Componente</em>}</li>
+ *   <li>{@link it.csi.mddtools.datagen.impl.DBAccessModelImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -141,6 +142,24 @@ public class DBAccessModelImpl extends CDOObjectImpl implements DBAccessModel {
 	 */
 	public void setCodComponente(String newCodComponente) {
 		eSet(DatagenPackage.Literals.DB_ACCESS_MODEL__COD_COMPONENTE, newCodComponente);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return (String)eGet(DatagenPackage.Literals.DB_ACCESS_MODEL__NAME, true);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		eSet(DatagenPackage.Literals.DB_ACCESS_MODEL__NAME, newName);
 	}
 
 } //DBAccessModelImpl
