@@ -43,7 +43,7 @@ e le limitazioni secondo i termini della Licenza.
 	public void customDeleter«name.toFirstUpper()»(«filterJavaType» filter) throws «getDaoExcClassName(dao)»
 	«IF body-»
 	{
-		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(getDaoImplFQN(dao, model)+"customDeleter"+name.toFirstUpper())»
+		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(getDaoImplFQN(dao, model)+"customDeleter"+name.toFirstUpper(), this.name)»
 		//***scrivere la custom query
 		final String sql = "DELETE FROM " + getTableName() + " WHERE ";
 		MapSqlParameterSource params = new MapSqlParameterSource();
@@ -145,7 +145,7 @@ e le limitazioni secondo i termini della Licenza.
 	«IF body-»
 	{
 		try {
-			«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"queryandvalues")»
+			«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"queryandvalues", this.name)»
 			// personalizzare la query SQL relativa al finder
 			String queryString = "SELECT * from «dao.mainTable.name»";
 			

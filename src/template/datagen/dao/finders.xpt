@@ -151,7 +151,7 @@ e le limitazioni secondo i termini della Licenza.
 		StringBuilder sql = new StringBuilder();
 		MapSqlParameterSource paramMap = new MapSqlParameterSource();
 		«IF customSelect-»
-		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"select")»
+		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"select", this.name)»
 		// la clausola select e'customizzabile poiche' il finder ha l'attributo customSelect == true
 		sql.append("SELECT «IF this.distinct==null || this.distinct.isEmpty-»«EXPAND template::datagen::dao::daoFiles::columnNameList(false) FOR dao.mainTable.columns-»«ELSE-»«EXPAND template::datagen::dao::daoFiles::columnNameList(true) FOR this.distinct-»«ENDIF-» ");
 		«ENDPROTECT»
@@ -159,7 +159,7 @@ e le limitazioni secondo i termini della Licenza.
 		sql.append("SELECT «IF this.distinct==null || this.distinct.isEmpty-»«EXPAND template::datagen::dao::daoFiles::columnNameList(false) FOR dao.mainTable.columns-»«ELSE-»«EXPAND template::datagen::dao::daoFiles::columnNameList(true) FOR this.distinct-»«ENDIF-» ");
 		«ENDIF-»
 		«IF customFrom-»
-		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"from")»
+		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"from", this.name)»
 		// la clausola from e'customizzabile poiche' il finder ha l'attributo customFrom==true
 		sql.append(" FROM «dao.mainTable.name»");
 		«ENDPROTECT»
@@ -167,7 +167,7 @@ e le limitazioni secondo i termini della Licenza.
 		sql.append(" FROM «dao.mainTable.name»");
 		«ENDIF-»
 		sql.append(" WHERE ");
-		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"query")»
+		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"query", this.name)»
 		// personalizzare la query SQL relativa al finder
 		
 		
@@ -176,7 +176,7 @@ e le limitazioni secondo i termini della Licenza.
 		sql.append("nome = :nome");	
 		«ENDPROTECT»
 			«EXPAND template::datagen::dao::daoFiles::orderByClause FOR this.orderSpecs-»
-		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"values")»			
+		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"values", this.name)»			
 		//***aggiungere tutte le condizioni
 		
 		paramMap.addValue("nome", input);
@@ -335,7 +335,7 @@ public List<«getDtoCustomQdefClassName((DataAccessObject)this.eContainer.eConta
 «DEFINE whereClause(DataAccessObject dao) FOR CustomFinder-»
 	«IF this.queryDefinition.whereClause!=null && this.queryDefinition.whereClause.freetextExpression!=null-»
 	sql.append("«this.queryDefinition.whereClause.freetextExpression-»");
-	«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"whereClause"+this.name+"query")-»
+	«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"whereClause"+this.name+"query", this.name)-»
 	//inserire qui i parametri indicati nella espressione di where, ad esempio:
 	
 	//paramMap.addValue("param", input);

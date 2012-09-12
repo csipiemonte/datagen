@@ -141,7 +141,7 @@ import java.util.TreeMap;
 
 
 
-«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(getDaoImplFQN(this,model)+"extraimport")»
+«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(getDaoImplFQN(this,model)+"extraimport", this.name)»
 // aggiungere qui eventuali import custom. 
 «ENDPROTECT»
 
@@ -870,7 +870,7 @@ public final class Constants {
 	 */
 	public static final String APPLICATION_CODE = "«this.codComponente»";
 	
-	«PROTECT CSTART '/*' CEND '*/' ID getRegionUID("DaoConstants")»
+	«PROTECT CSTART '/*' CEND '*/' ID getRegionUID("DaoConstants", this.name)»
 	
 	«ENDPROTECT»
 }
