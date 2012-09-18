@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright 2011 CSI-PIEMONTE"
+    modelDirectory="/datagen/src" editDirectory="/datagen/src" modelPluginID="datagen"
+    modelName="Datagen" rootExtendsInterface="org.eclipse.emf.cdo.CDOObject" rootExtendsClass="org.eclipse.emf.internal.cdo.CDOObjectImpl"
+    reflectiveDelegation="true" importerID="org.eclipse.emf.importer.cdo" featureDelegation="Reflective"
+    complianceLevel="5.0" copyrightFields="false" usedGenPackages="rdbmdl.genmodel#//rdbmdl">
+  <foreignModel>datagen.ecore</foreignModel>
+  <modelPluginVariables>CDO=org.eclipse.emf.cdo</modelPluginVariables>
+  <genPackages prefix="Datagen" basePackage="it.csi.mddtools" disposableProviderFactory="true"
+      ecorePackage="datagen.ecore#_g44oQOT_EeCfL57xkAM0Kw">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="datagen.ecore#_jFUqoOT_EeCfL57xkAM0Kw">
+      <genEnumLiterals ecoreEnumLiteral="datagen.ecore#_x73oIOT_EeCfL57xkAM0Kw"/>
+      <genEnumLiterals ecoreEnumLiteral="datagen.ecore#_rURpEOT_EeCfL57xkAM0Kw"/>
+    </genEnums>
+    <genClasses ecoreClass="datagen.ecore#_g44oQ-T_EeCfL57xkAM0Kw">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#_g44oRuT_EeCfL57xkAM0Kw"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#_g44oSuT_EeCfL57xkAM0Kw"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#_g44oTeT_EeCfL57xkAM0Kw"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#_g44oUeT_EeCfL57xkAM0Kw"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#_g44oVeT_EeCfL57xkAM0Kw">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#_g44oWOT_EeCfL57xkAM0Kw"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#_g44oXOT_EeCfL57xkAM0Kw"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#_g44oYOT_EeCfL57xkAM0Kw"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#_g44oY-T_EeCfL57xkAM0Kw"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#_g44oZuT_EeCfL57xkAM0Kw"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#_g44oaeT_EeCfL57xkAM0Kw"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#_g44obOT_EeCfL57xkAM0Kw"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#_7UoHQOT_EeCfL57xkAM0Kw"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#_WJw9sOUAEeCfL57xkAM0Kw"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//DataAccessObject/lookupResolvers"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#_g44ob-T_EeCfL57xkAM0Kw">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#_g44ocuT_EeCfL57xkAM0Kw"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#_g44oduT_EeCfL57xkAM0Kw"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="datagen.ecore#_g44oeuT_EeCfL57xkAM0Kw"/>
+    <genClasses ecoreClass="datagen.ecore#_g44ofeT_EeCfL57xkAM0Kw">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#_g44ogeT_EeCfL57xkAM0Kw"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="datagen.ecore#_g44oheT_EeCfL57xkAM0Kw">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#_g44oiOT_EeCfL57xkAM0Kw"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#_g44ojOT_EeCfL57xkAM0Kw"/>
+    <genClasses ecoreClass="datagen.ecore#_g44okOT_EeCfL57xkAM0Kw">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#_g44ok-T_EeCfL57xkAM0Kw"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="datagen.ecore#_g44oluT_EeCfL57xkAM0Kw"/>
+    <genClasses image="false" ecoreClass="datagen.ecore#_g44omuT_EeCfL57xkAM0Kw"/>
+    <genClasses image="false" ecoreClass="datagen.ecore#_g44onuT_EeCfL57xkAM0Kw">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#_g44oouT_EeCfL57xkAM0Kw"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#_g44opuT_EeCfL57xkAM0Kw"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#_g44oqeT_EeCfL57xkAM0Kw">
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#_g44orOT_EeCfL57xkAM0Kw"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#_g44osOT_EeCfL57xkAM0Kw"/>
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#//OrderSpec/qcolumn"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#_g44otOT_EeCfL57xkAM0Kw">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#_g44ot-T_EeCfL57xkAM0Kw"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#_g44ou-T_EeCfL57xkAM0Kw"/>
+    <genClasses ecoreClass="datagen.ecore#_g44ov-T_EeCfL57xkAM0Kw"/>
+    <genClasses ecoreClass="datagen.ecore#_g44ow-T_EeCfL57xkAM0Kw"/>
+    <genClasses ecoreClass="datagen.ecore#_g44ox-T_EeCfL57xkAM0Kw">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#_g44oy-T_EeCfL57xkAM0Kw"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#_g44oz-T_EeCfL57xkAM0Kw"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#_g44o0-T_EeCfL57xkAM0Kw"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//CustomFinder/queryDefinition"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#_g44o1-T_EeCfL57xkAM0Kw">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#_g44o2uT_EeCfL57xkAM0Kw"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="datagen.ecore#_g44o3eT_EeCfL57xkAM0Kw"/>
+    <genClasses ecoreClass="datagen.ecore#_g44o4eT_EeCfL57xkAM0Kw"/>
+    <genClasses ecoreClass="datagen.ecore#_g44o5eT_EeCfL57xkAM0Kw">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#_g44o6eT_EeCfL57xkAM0Kw"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#_g44o6-T_EeCfL57xkAM0Kw">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#_g44o7uT_EeCfL57xkAM0Kw"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="datagen.ecore#_g44o8eT_EeCfL57xkAM0Kw"/>
+    <genClasses ecoreClass="datagen.ecore#_g44o9eT_EeCfL57xkAM0Kw"/>
+    <genClasses ecoreClass="datagen.ecore#_g44o-eT_EeCfL57xkAM0Kw">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#_g44o_eT_EeCfL57xkAM0Kw"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#_g44pAeT_EeCfL57xkAM0Kw"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#_g44pBeT_EeCfL57xkAM0Kw">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#_g44pCeT_EeCfL57xkAM0Kw"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#//LookupResolvers">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//LookupResolvers/resolvers"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#//LookupResolver">
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#//LookupResolver/foreignKey"/>
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#//LookupResolver/supplierDAO"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#//QueryDef">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//QueryDef/selectClause"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//QueryDef/fromClause"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//QueryDef/joinClause"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//QueryDef/whereClause"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#//SelectClause">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//SelectClause/columns"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="datagen.ecore#//QResultColumn">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#//QResultColumn/alias"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#//QTableColumn">
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#//QTableColumn/qtable"/>
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#//QTableColumn/column"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#//QCalculatedColumn">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//QCalculatedColumn/referencedColumns"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#//QCalculatedColumn/freeTextExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#//FromClause">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//FromClause/tables"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#//QTable">
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#//QTable/table"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#//QTable/aliasName"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#//JoinClause">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference datagen.ecore#//JoinClause/criteria"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#//JoinCriterion">
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#//JoinCriterion/leftTable"/>
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#//JoinCriterion/leftColumn"/>
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#//JoinCriterion/rightTable"/>
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference datagen.ecore#//JoinCriterion/rightColumn"/>
+    </genClasses>
+    <genClasses ecoreClass="datagen.ecore#//WhereClause">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datagen.ecore#//WhereClause/freetextExpression"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

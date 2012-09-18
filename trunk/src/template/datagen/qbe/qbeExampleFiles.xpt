@@ -1,0 +1,112 @@
+«REM»
+C) Copyright 2011 CSI-PIEMONTE;                                             
+                                                                            
+Concesso in licenza a norma dell'EUPL, esclusivamente versione 1.1;         
+Non e' possibile utilizzare l'opera salvo nel rispetto della Licenza.       
+E' possibile ottenere una copia della Licenza al seguente indirizzo:        
+                                                                            
+http://www.eupl.it/opensource/eupl-1-1                                      
+                                                                            
+Salvo diversamente indicato dalla legge applicabile o concordato per        
+iscritto, il software distribuito secondo i termini della Licenza e'        
+distribuito "TAL QUALE", SENZA GARANZIE O CONDIZIONI DI ALCUN TIPO,         
+esplicite o implicite.                                                      
+Si veda la Licenza per la lingua specifica che disciplina le autorizzazioni 
+e le limitazioni secondo i termini della Licenza.                           
+«ENDREM»
+
+«IMPORT ecore»
+«IMPORT datagen»
+«IMPORT rdbmdl»
+«IMPORT rdbmdl::constraints»
+«IMPORT rdbmdl::datatypes»
+«IMPORT rdbmdl::view»
+
+«EXTENSION template::DatagenExtensions»
+
+«DEFINE qbeExamplesFiles FOR DBAccessModel»
+«EXPAND qbeExamplesFiles(this) FOREACH daopkgs»
+«ENDDEFINE»
+
+«DEFINE qbeExamplesFiles (DBAccessModel model) FOR DaoPackage»
+«EXPAND qbeExampleFile(model) FOREACH dao»
+«ENDDEFINE»
+
+
+«DEFINE qbeExampleFile(DBAccessModel model) FOR DataAccessObject»
+«LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-»
+«FILE getQbeExFullPath(this, model)»package «pkgPackage».qbe;
+
+import «pkgPackage».dao.*;
+import «pkgPackage».dto.*;
+import «getDALayerBasePkg(model)».qbe.*;
+import «pkgPackage».exceptions.*;
+import java.io.Serializable;
+import java.util.*;
+
+/**
+ * @generated
+ */
+public class «getQbeExClassName()» extends AbstractExample
+{
+
+	«EXPAND columnChkFieldProperty(model,this) FOREACH this.mainTable.columns»
+	
+	«IF this.lookupResolvers!=null && this.lookupResolvers.resolvers.size >0»
+		«EXPAND lookedUpChkFieldProperty FOREACH this.lookupResolvers.resolvers»
+	«ENDIF»
+}
+
+
+«ENDFILE»
+«ENDLET-»
+«ENDDEFINE»
+
+«DEFINE columnChkFieldProperty(DBAccessModel model, DataAccessObject dao) FOR TableColumn-»
+
+«IF this.isForeignKey!=null && this.isForeignKey && dao.lookupResolvers != null && dao.lookupResolvers.resolvers.select(r|r.foreignKey.includedColumns.contains(this)).size >0-»
+
+«ELSE»
+	/**
+	 * @generated
+	 */
+	private «getDALayerBasePkg(model)».qbe.FieldChk _«javaPropertyNameFromColumn()»;
+	
+	/**
+	 * @generated
+	 */
+	public void set«javaPropertyNameFromColumn().toFirstUpper()» («getDALayerBasePkg(model)».qbe.FieldChk chk){
+		_«javaPropertyNameFromColumn()» = chk;
+	}
+	
+	/**
+	 * @generated
+	 */
+	public «getDALayerBasePkg(model)».qbe.FieldChk get«javaPropertyNameFromColumn().toFirstUpper()»(){
+		return _«javaPropertyNameFromColumn()»;
+	}
+«ENDIF»
+«ENDDEFINE»
+
+
+
+«DEFINE lookedUpChkFieldProperty FOR LookupResolver»
+	/**
+	 * @generated
+	 */
+	private «getQbeExClassName(this.supplierDAO)»  _«getLookedUpPropertyName().toFirstLower()»;
+	
+	/**
+	 * @generated
+	 */
+	public void set«getLookedUpPropertyName().toFirstLower().toFirstUpper()» («getQbeExClassName(this.supplierDAO)» val){
+		_«getLookedUpPropertyName().toFirstLower()» = val;
+	}
+	
+	/**
+	 * @generated
+	 */
+	public «getQbeExClassName(this.supplierDAO)» get«getLookedUpPropertyName().toFirstLower().toFirstUpper()»(){
+		return _«getLookedUpPropertyName().toFirstLower()»;
+	}
+«ENDDEFINE»

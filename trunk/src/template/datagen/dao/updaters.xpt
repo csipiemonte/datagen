@@ -1,0 +1,162 @@
+«REM»
+C) Copyright 2011 CSI-PIEMONTE;                                             
+                                                                            
+Concesso in licenza a norma dell'EUPL, esclusivamente versione 1.1;         
+Non e' possibile utilizzare l'opera salvo nel rispetto della Licenza.       
+E' possibile ottenere una copia della Licenza al seguente indirizzo:        
+                                                                            
+http://www.eupl.it/opensource/eupl-1-1                                      
+                                                                            
+Salvo diversamente indicato dalla legge applicabile o concordato per        
+iscritto, il software distribuito secondo i termini della Licenza e'        
+distribuito "TAL QUALE", SENZA GARANZIE O CONDIZIONI DI ALCUN TIPO,         
+esplicite o implicite.                                                      
+Si veda la Licenza per la lingua specifica che disciplina le autorizzazioni 
+e le limitazioni secondo i termini della Licenza.                           
+«ENDREM»
+
+«IMPORT ecore»
+«IMPORT datagen»
+«IMPORT rdbmdl»
+«IMPORT rdbmdl::constraints»
+«IMPORT rdbmdl::datatypes»
+«IMPORT rdbmdl::view»
+
+«EXTENSION template::DatagenExtensions»
+
+«DEFINE updaters(DBAccessModel model, boolean body) FOR DataAccessObject-»
+«IF updaters!=null-»
+«EXPAND updater(model, this, body) FOREACH this.updaters.updaters-»
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE updater(DBAccessModel model, DataAccessObject dao, boolean body) FOR Updater»
+«ERROR "updater non gestito:"+metaType»
+«ENDDEFINE»
+
+«DEFINE updater(DBAccessModel model, DataAccessObject dao, boolean body) FOR CustomUpdater»
+«LET isNullOrEmpty(filterClassFQN) ? "java.lang.Object" : (filterClassFQN=="$dto" ? getDtoFQN(dao, model) : (filterClassFQN=="$dto[]"? "java.util.ArrayList<"+getDtoFQN(dao, model)+">" : filterClassFQN) ) AS filterJavaType-»
+«LET isNullOrEmpty(valueClassFQN) ? "java.lang.Object" : (valueClassFQN=="$dto" ? getDtoFQN(dao, model) : (valueClassFQN=="$dto[]"? "java.util.ArrayList<"+getDtoFQN(dao, model)+">" : valueClassFQN) ) AS valueJavaType-»
+	/** 
+	 * Custom updater in the «dao.mainTable.name» table.
+	 * @generated
+	 */
+	public void customUpdater«name.toFirstUpper()»(«filterJavaType» filter, «valueJavaType» value) throws «getDaoExcClassName(dao)»
+	«IF body-»
+	{
+		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(getDaoImplFQN(dao, model)+"customUpdater"+name.toFirstUpper(), this.name)»
+		//***scrivere la custom query
+		final String sql = "UPDATE " + getTableName() + " SET ";
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("parametro", value);
+		«ENDPROTECT»
+		
+		«REM»
+		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
+		try {
+			stopWatch.start();
+			jdbcTemplate.update(sql.toString(), params);
+		} catch (RuntimeException ex) {
+			log.error("[«getDaoImplClassName(dao)»::updateColumns«name.toFirstUpper()»] esecuzione query",ex);
+			throw new «getDaoExcClassName(dao)»("Query failed", ex);
+		} finally {
+			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "updateColumns«name.toFirstUpper()»","esecuzione query", sql);
+			log.debug("[«getDaoImplClassName(dao)»::updateColumns«name.toFirstUpper()»] END");
+		}
+		«ENDREM»
+		
+		update(jdbcTemplate, sql.toString(), params);
+	}
+	«ELSE-»
+	;
+	«ENDIF-»
+«ENDLET-»
+«ENDLET-»
+«ENDDEFINE»
+
+«DEFINE updater(DBAccessModel model, DataAccessObject dao, boolean body) FOR UpdateColumns»
+	/** 
+	 * Updates selected columns in the «dao.mainTable.name» table.
+	 * @generated
+	 */
+	public void updateColumns«name.toFirstUpper()»(«getDtoClassName(dao)» dto) throws «getDaoExcClassName(dao)»
+	«IF body-»
+	{
+		final String sql = "UPDATE " + getTableName() + " «EXPAND template::datagen::dao::daoFiles::setColumnSetValuePlaceholderList(dao) FOR this.columns-» WHERE «EXPAND template::datagen::dao::daoFiles::setColumnEqPlaceholderList(" AND ") FOR dao.mainTable.primaryKey.includedColumns»";
+		
+		if(«FOREACH dao.mainTable.primaryKey.includedColumns AS currCol SEPARATOR "||"-»dto.get«javaPropertyNameFromColumn(currCol).toFirstUpper()»() == null «ENDFOREACH-»){
+			log.error("[«getDaoImplClassName(dao)»::update] chiave primaria non impostata");
+			throw new «getDaoExcClassName(dao)»("Chiave primaria non impostata");
+		}
+		
+		MapSqlParameterSource params = new MapSqlParameterSource();
+
+		«EXPAND template::datagen::dao::daoFiles::paramValorizationList("dto", dao) FOR this.columns»
+		«EXPAND template::datagen::dao::daoFiles::paramValorizationList("dto", dao) FOR dao.mainTable.primaryKey.includedColumns»
+		
+		«IF dao.lookupResolvers!=null && dao.lookupResolvers.resolvers.size>0 -»
+				«EXPAND template::datagen::dao::daoFiles::lookedUpParamValorizationList("dto", this.columns) FOR  dao»
+		«ENDIF»
+		
+		«REM»
+		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
+		try {
+			stopWatch.start();
+			jdbcTemplate.update(sql.toString(), params);
+		} catch (RuntimeException ex) {
+			log.error("[«getDaoImplClassName(dao)»::updateColumns«name.toFirstUpper()»] esecuzione query",ex);
+			throw new «getDaoExcClassName(dao)»("Query failed", ex);
+		} finally {
+			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "updateColumns«name.toFirstUpper()»","esecuzione query", sql);
+			log.debug("[«getDaoImplClassName(dao)»::updateColumns«name.toFirstUpper()»] END");
+		}
+		«ENDREM»
+		update(jdbcTemplate, sql.toString(), params);
+	}
+	«ELSE-»
+	;
+	«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE updater(DBAccessModel model, DataAccessObject dao, boolean body) FOR UpdateRow»
+	/** 
+	 * Updates a single row in the «dao.mainTable.name» table.
+	 * @generated
+	 */
+	public void update(«getDtoClassName(dao)» dto) throws «getDaoExcClassName(dao)»
+	«IF body-»
+	{
+		final String sql = "UPDATE " + getTableName() + " «EXPAND template::datagen::dao::daoFiles::setColumnSetValuePlaceholderList(dao) FOR dao.mainTable.columns-» WHERE «EXPAND template::datagen::dao::daoFiles::setColumnEqPlaceholderList(" AND ") FOR dao.mainTable.primaryKey.includedColumns»";
+		
+		if(«FOREACH dao.mainTable.primaryKey.includedColumns AS currCol SEPARATOR "||"-»dto.get«javaPropertyNameFromColumn(currCol).toFirstUpper()»() == null «ENDFOREACH-»){
+			log.error("[«getDaoImplClassName(dao)»::update] chiave primaria non impostata");
+			throw new «getDaoExcClassName(dao)»("Chiave primaria non impostata");
+		}
+		
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		«EXPAND template::datagen::dao::daoFiles::paramValorizationList("dto", dao) FOR dao.mainTable.columns»
+		
+		«IF dao.lookupResolvers!=null && dao.lookupResolvers.resolvers.size>0-»
+				«EXPAND template::datagen::dao::daoFiles::lookedUpParamValorizationList("dto",dao.mainTable.columns) FOR  dao»
+		«ENDIF»
+		«REM»
+		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
+		try {
+			stopWatch.start();
+			jdbcTemplate.update(sql.toString(), params);
+		} catch (RuntimeException ex) {
+			log.error("[«getDaoImplClassName(dao)»::update] esecuzione query",ex);
+			throw new «getDaoExcClassName(dao)»("Query failed", ex);
+		} finally {
+			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "update","esecuzione query", sql);
+			log.debug("[«getDaoImplClassName(dao)»::update] END");
+		}
+		«ENDREM»
+		update(jdbcTemplate, sql.toString(), params);
+	}
+	«ELSE-»
+	;
+	«ENDIF-»
+	
+
+«ENDDEFINE»

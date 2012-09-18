@@ -1,0 +1,621 @@
+/**
+ * <copyright>
+ * (C) Copyright 2011 CSI-PIEMONTE;
+
+ * Concesso in licenza a norma dell'EUPL, esclusivamente versione 1.1;
+ * Non e' possibile utilizzare l'opera salvo nel rispetto della Licenza.
+ * E' possibile ottenere una copia della Licenza al seguente indirizzo:
+ *
+ * http://www.eupl.it/opensource/eupl-1-1
+ *
+ * Salvo diversamente indicato dalla legge applicabile o concordato per 
+ * iscritto, il software distribuito secondo i termini della Licenza e' 
+ * distribuito "TAL QUALE", SENZA GARANZIE O CONDIZIONI DI ALCUN TIPO,
+ * esplicite o implicite.
+ * Si veda la Licenza per la lingua specifica che disciplina le autorizzazioni
+ * e le limitazioni secondo i termini della Licenza.
+ * </copyright>
+ *
+ * $Id$
+ */
+
+import ecore;
+import datagen;
+import rdbmdl;
+import rdbmdl::datatypes;
+import rdbmdl::constraints;
+
+String javaSrcRoot() :
+	"src/java";
+
+String sqlSrcRoot() :
+	"src/sql";
+
+/// SQL
+String getSchemaCreationSQLPath(Schema sch) :
+	"createSchema_"+sch.name+".sql";
+
+String getSchemaDropSQLPath(Schema sch) :
+	"dropSchema_"+sch.name+".sql";
+	
+String getDALayerBasePkg(DBAccessModel model) :
+	(!isNullOrEmpty(getProperty("basePackage"))?getProperty("basePackage"):
+	"it.csi."+model.codProdotto.toLowerCase()+"."+model.codComponente.toLowerCase())
+	+".business.dao";
+	
+
+String getDALayerBaseDir(DBAccessModel model) :
+javaSrcRoot()+"/"+
+   (!isNullOrEmpty(getProperty("basePackage")) ? 
+   pkg2Path(getProperty("basePackage"))
+   :
+   "it/csi/"+model.codProdotto.toLowerCase()+"/"+model.codComponente.toLowerCase()
+   )
+	+"/business/dao";
+
+String getPkgPackage(DaoPackage pkg, DBAccessModel model) :
+	getDALayerBasePkg(model)+"."+pkg.name;
+
+String getPkgDir(DaoPackage pkg, DBAccessModel model) :
+	getDALayerBaseDir(model)+"/"+pkg.name;
+		
+// DAO
+
+String getDaoClassName(DataAccessObject dao) :
+	dao.name.toFirstUpper()+"Dao";
+	
+String getDaoMapperClassName(DataAccessObject dao) :
+	getDaoClassName(dao)+"RowMapper";	
+	
+String getDaoIdName(DataAccessObject dao) :
+	dao.name.toFirstLower()+"Dao";
+
+String getDaoFQN(DataAccessObject dao, DBAccessModel model) :
+	getPkgPackage((DaoPackage)(dao.eContainer), model)+".dao."+getDaoClassName(dao);
+
+String getDaoFullPath(DataAccessObject dao, DBAccessModel model) :
+	getPkgDir((DaoPackage)(dao.eContainer), model)+"/dao/"+getDaoClassName(dao)+".java";
+
+String getDaoImplClassName(DataAccessObject dao) :
+	dao.name.toFirstUpper()+"DaoImpl";
+
+String getDaoImplFQN(DataAccessObject dao, DBAccessModel model) :
+	getPkgPackage((DaoPackage)(dao.eContainer), model)+".dao.impl."+getDaoImplClassName(dao);
+
+String getDaoImplFullPath(DataAccessObject dao, DBAccessModel model) :
+	getPkgDir((DaoPackage)(dao.eContainer), model)+"/dao/impl/"+getDaoImplClassName(dao)+".java";
+
+String getDaoExcClassName(DataAccessObject dao) :
+	dao.name.toFirstUpper()+"DaoException";
+
+String getDaoExcFQN(DataAccessObject dao, DBAccessModel model) :
+	getPkgPackage((DaoPackage)(dao.eContainer), model)+".exceptions."+getDaoExcClassName(dao);
+
+String getDaoExcFullPath(DataAccessObject dao, DBAccessModel model) :
+	getPkgDir((DaoPackage)(dao.eContainer), model)+"/exceptions/"+getDaoExcClassName(dao)+".java";
+
+String getDaoMapperFullPath(DataAccessObject dao, DBAccessModel model) :
+	getPkgDir((DaoPackage)(dao.eContainer), model)+"/dao/mapper/"+getDaoMapperClassName(dao)+".java";
+	
+String getBaseDaoMapperFullPath(DataAccessObject dao, DBAccessModel model) :
+	getPkgDir((DaoPackage)(dao.eContainer), model)+"/dao/mapper/BaseDaoRowMapper.java";
+	
+
+
+
+
+String getMetadataClassName(DataAccessObject dao) :
+	dao.name.toFirstUpper()+"Metadata";
+
+String getMetadataFQN(DataAccessObject dao, DBAccessModel model) :
+	getPkgPackage((DaoPackage)(dao.eContainer), model)+".metadata."+getMetadataClassName(dao);
+
+String getMetadataFullPath(DataAccessObject dao, DBAccessModel model) :
+	getPkgDir((DaoPackage)(dao.eContainer), model)+"/metadata/"+getMetadataClassName(dao)+".java";
+
+// DTO
+
+String getDtoClassName(DataAccessObject dao) :
+	dao.name.toFirstUpper()+"Dto";
+	
+String getDtoCustomQdefClassName(DataAccessObject dao, CustomFinder cf) :
+	dao.name.toFirstUpper()+cf.name.toFirstUpper()+"Dto";	
+
+String getDtoFQN(DataAccessObject dao, DBAccessModel model) :
+	getPkgPackage((DaoPackage)(dao.eContainer), model)+".dto."+getDtoClassName(dao);
+
+String getDtoFullPath(DataAccessObject dao, DBAccessModel model) :
+	getPkgDir((DaoPackage)(dao.eContainer), model)+"/dto/"+getDtoClassName(dao)+".java";
+
+String getDtoFullPathQdef(DataAccessObject dao, DBAccessModel model, CustomFinder cf) :
+	getPkgDir((DaoPackage)(dao.eContainer), model)+"/dto/"+ dao.name.toFirstUpper()+cf.name.toFirstUpper()+"Dto"+".java";
+		
+// DTO PK
+String getPkClassName(DataAccessObject dao) :
+	dao.name.toFirstUpper()+"Pk";
+
+String getPkFQN(DataAccessObject dao, DBAccessModel model) :
+	getPkgPackage((DaoPackage)(dao.eContainer), model)+".dto."+getPkClassName(dao);
+
+String getPkFullPath(DataAccessObject dao, DBAccessModel model) :
+	getPkgDir((DaoPackage)(dao.eContainer), model)+"/dto/"+getPkClassName(dao)+".java";
+	
+// QBE
+
+String getQbeExClassName(DataAccessObject dao) :
+	dao.name.toFirstUpper()+"Example";
+
+String getQbeExFQN(DataAccessObject dao, DBAccessModel model) :
+	getPkgPackage((DaoPackage)(dao.eContainer), model)+".qbe."+getQbeExClassName(dao);
+
+String getQbeExFullPath(DataAccessObject dao, DBAccessModel model) :
+	getPkgDir((DaoPackage)(dao.eContainer), model)+"/qbe/"+getQbeExClassName(dao)+".java";
+	
+//// 
+
+String javaPropertyNameFromColumn(TableColumn col) :
+	toJavaId(col.name);
+		
+
+String javaPropertyPathForResolvedColumn(LookupResolver resolver, ForeignKey fk, int i) :
+	getLookedUpPropertyName(resolver)+"."+javaPropertyNameFromColumn(fk.referredUC.includedColumns.get(i));
+
+
+String javaTypeFromSQLType(PrimitiveDataType pdt) :
+switch(pdt.type){
+		case PrimitiveTypeCodes::BIT :
+			"Boolean"
+		case PrimitiveTypeCodes::TINYINT :
+			"Integer"
+		case PrimitiveTypeCodes::SMALLINT :
+			"Integer"
+		case PrimitiveTypeCodes::INTEGER :
+			"Integer"		
+		case PrimitiveTypeCodes::BIGINT :
+			"Long"
+		case PrimitiveTypeCodes::FLOAT :
+			"Double" 
+		case PrimitiveTypeCodes::REAL :
+			"Float"	
+		case PrimitiveTypeCodes::DOUBLE :
+			"Double" 
+		case PrimitiveTypeCodes::NUMERIC :
+			"java.math.BigDecimal" 
+		case PrimitiveTypeCodes::DECIMAL :
+			"java.math.BigDecimal" 
+		case PrimitiveTypeCodes::CHAR :
+			"String" 
+		case PrimitiveTypeCodes::VARCHAR :
+			"String" 
+		case PrimitiveTypeCodes::LONGVARCHAR :
+			"String" 
+		case PrimitiveTypeCodes::DATE :
+			"java.sql.Date" 
+		case PrimitiveTypeCodes::TIME :
+			"java.sql.Time" 
+		case PrimitiveTypeCodes::TIMESTAMP :
+			"java.sql.Timestamp" 
+		case PrimitiveTypeCodes::BINARY :
+			"byte[]" 
+		case PrimitiveTypeCodes::VARBINARY :
+			"byte[]" 
+		case PrimitiveTypeCodes::LONGVARBINARY :
+			"byte[]" 
+		case PrimitiveTypeCodes::OTHER :
+			"String" 
+		case PrimitiveTypeCodes::JAVA_OBJECT :
+			"Class" 
+		case PrimitiveTypeCodes::DISTINCT :
+			"Object" 
+		case PrimitiveTypeCodes::STRUCT :
+			"java.sql.Struct" 
+		case PrimitiveTypeCodes::ARRAY :
+			"java.sql.Array" 
+		case PrimitiveTypeCodes::BLOB :
+			"byte[]" 
+		case PrimitiveTypeCodes::CLOB :
+			"String" 
+		case PrimitiveTypeCodes::REF :
+			"java.sql.Ref" 
+		case PrimitiveTypeCodes::BOOLEAN :
+			"Boolean" 
+		default :"???"
+	};
+
+
+String javaPropertyTypeFromColumn(TableColumn col) :
+	javaTypeFromSQLType(col.type);
+	
+	
+		
+String getValueFromRS(TableColumn col, int i) :
+	let code = col.type.type :
+	switch(code){
+		case PrimitiveTypeCodes::BIT :
+			"rs.getObject("+i+") == null ? null : (rs.getInt("+i+") == 0 ? false : true)" // [DM] STDMDD-1091: was "rs.getInt("+i+") == 0 ? false : true"
+		case PrimitiveTypeCodes::TINYINT :
+			"(Integer)rs.getObject("+i+")" // [DM] STDMDD-1091: was "rs.getInt("+i+")"
+		case PrimitiveTypeCodes::SMALLINT :
+			"(Integer)rs.getObject("+i+")" // [DM] STDMDD-1091: was "rs.getInt("+i+")"
+		case PrimitiveTypeCodes::INTEGER :
+			"(Integer)rs.getObject("+i+")" // [DM] STDMDD-1091: was "rs.getInt("+i+")"		
+		case PrimitiveTypeCodes::BIGINT :
+			"(Long)rs.getObject("+i+")" // [DM] STDMDD-1091: was "rs.getLong("+i+")"
+		case PrimitiveTypeCodes::FLOAT :
+			"(Double)rs.getObject("+i+")" // [DM] STDMDD-1091: was "rs.getDouble("+i+")" 
+		case PrimitiveTypeCodes::REAL :
+			"(Float)rs.getObject("+i+")" // [DM] STDMDD-1091: was "rs.getFloat("+i+")"	
+		case PrimitiveTypeCodes::DOUBLE :
+			"(Double)rs.getObject("+i+")"// [DM] STDMDD-1091: was "rs.getDouble("+i+")" 
+		case PrimitiveTypeCodes::NUMERIC :
+			"rs.getBigDecimal("+i+")" 
+		case PrimitiveTypeCodes::DECIMAL :
+			"rs.getBigDecimal("+i+")" 
+		case PrimitiveTypeCodes::CHAR :
+			"rs.getString("+i+")" 
+		case PrimitiveTypeCodes::VARCHAR :
+			"rs.getString("+i+")" 
+		case PrimitiveTypeCodes::LONGVARCHAR :
+			"rs.getString("+i+")" 
+		case PrimitiveTypeCodes::DATE :
+			"rs.getDate("+i+")" 
+		case PrimitiveTypeCodes::TIME :
+			"rs.getTime("+i+")" 
+		case PrimitiveTypeCodes::TIMESTAMP :
+			"rs.getTimestamp("+i+")" 
+		case PrimitiveTypeCodes::BINARY :
+			"rs.getBytes("+i+")" 
+		case PrimitiveTypeCodes::VARBINARY :
+			"rs.getBytes("+i+")" 
+		case PrimitiveTypeCodes::LONGVARBINARY :
+			"rs.getBytes("+i+")" 
+		case PrimitiveTypeCodes::OTHER :
+			"getClobColumn(rs, "+i+")"  
+		case PrimitiveTypeCodes::JAVA_OBJECT :
+			"rs.getObject("+i+")" 
+		case PrimitiveTypeCodes::DISTINCT :
+			"rs.getObject("+i+")" 
+		case PrimitiveTypeCodes::STRUCT :
+			"rs.getObject("+i+")" 
+		case PrimitiveTypeCodes::ARRAY :
+			"rs.getArray("+i+")" 
+		case PrimitiveTypeCodes::BLOB :
+			"getBlobColumn(rs, "+i+")" 
+		case PrimitiveTypeCodes::CLOB :
+			"getClobColumn(rs, "+i+")" 
+		case PrimitiveTypeCodes::REF :
+			"rs.getRef("+i+")" 
+		case PrimitiveTypeCodes::BOOLEAN :
+			"rs.getBoolean("+i+")" 
+	
+		default :"???"
+	};
+
+String getIncrementerNextValMethod(TableColumn col) :
+	let code = col.type.type :
+	switch(code){
+		case PrimitiveTypeCodes::BIT :
+			"nextIntValue()"
+		case PrimitiveTypeCodes::TINYINT :
+			"nextIntValue()"
+		case PrimitiveTypeCodes::SMALLINT :
+			"nextIntValue()"
+		case PrimitiveTypeCodes::INTEGER :
+			"nextIntValue()"		
+		case PrimitiveTypeCodes::BIGINT :
+			"nextLongValue()"
+		case PrimitiveTypeCodes::FLOAT :
+			"??" 
+		case PrimitiveTypeCodes::REAL :
+			"??"	
+		case PrimitiveTypeCodes::DOUBLE :
+			"??" 
+		case PrimitiveTypeCodes::NUMERIC :
+			"nextLongValue()"
+		case PrimitiveTypeCodes::DECIMAL :
+			"nextLongValue()" 
+		case PrimitiveTypeCodes::CHAR :
+			"nextStringValue()" 
+		case PrimitiveTypeCodes::VARCHAR :
+			"nextStringValue()" 
+		case PrimitiveTypeCodes::LONGVARCHAR :
+			"???" 
+		case PrimitiveTypeCodes::DATE :
+			"???" 
+		case PrimitiveTypeCodes::TIME :
+			"???" 
+		case PrimitiveTypeCodes::TIMESTAMP :
+			"???" 
+		case PrimitiveTypeCodes::BINARY :
+			"???" 
+		case PrimitiveTypeCodes::VARBINARY :
+			"???" 
+		case PrimitiveTypeCodes::LONGVARBINARY :
+			"???" 
+		case PrimitiveTypeCodes::OTHER :
+			"???"  
+		case PrimitiveTypeCodes::JAVA_OBJECT :
+			"???" 
+		case PrimitiveTypeCodes::DISTINCT :
+			"???" 
+		case PrimitiveTypeCodes::STRUCT :
+			"???" 
+		case PrimitiveTypeCodes::ARRAY :
+			"???" 
+		case PrimitiveTypeCodes::BLOB :
+			"???" 
+		case PrimitiveTypeCodes::CLOB :
+			"???" 
+		case PrimitiveTypeCodes::REF :
+			"???" 
+		case PrimitiveTypeCodes::BOOLEAN :
+			"???" 
+	
+		default :"???"
+	};	
+	
+String getValueFromRSByColName(TableColumn col) :
+	getValueFromRSByColName(col.type,col.name);
+	
+String getValueFromRSByAliasName(TableColumn col, String alias) :
+	getValueFromRSByColName(col.type,alias);
+
+String getValueFromRSByColName(QCalculatedColumn col) :
+	getValueFromRSByColName(col.calculatedType,col.alias);	
+	
+String getValueFromRSByColName(PrimitiveDataType pt, String resultSetName) :
+	switch(pt.type){
+		case PrimitiveTypeCodes::BIT :
+			"rs.getObject(\""+resultSetName+"\") == null ? null : (rs.getInt(\""+resultSetName+"\") == 0 ? false : true)" // [DM] STDMDD-1091: was "rs.getInt(\""+resultSetName+"\") == 0 ? false : true"
+		case PrimitiveTypeCodes::TINYINT :
+			"(Integer)rs.getObject(\""+resultSetName+"\")" // [DM] STDMDD-1091: was "rs.getInt(\""+resultSetName+"\")"
+		case PrimitiveTypeCodes::SMALLINT :
+			"(Integer)rs.getObject(\""+resultSetName+"\")" // [DM] STDMDD-1091: was "rs.getInt(\""+resultSetName+"\")"
+		case PrimitiveTypeCodes::INTEGER :
+			"(Integer)rs.getObject(\""+resultSetName+"\")" // [DM] STDMDD-1091: was "rs.getInt(\""+resultSetName+"\")"		
+		case PrimitiveTypeCodes::BIGINT :
+			"(Long)rs.getObject(\""+resultSetName+"\")" // [DM] STDMDD-1091: was "rs.getLong(\""+resultSetName+"\")"
+		case PrimitiveTypeCodes::FLOAT :
+			"(Double)rs.getObject(\""+resultSetName+"\")" // [DM] STDMDD-1091: was "rs.getDouble(\""+resultSetName+"\")" 
+		case PrimitiveTypeCodes::REAL :
+			"(Float)rs.getObject(\""+resultSetName+"\")" // [DM] STDMDD-1091: was "rs.getFloat(\""+resultSetName+"\")"	
+		case PrimitiveTypeCodes::DOUBLE :
+			"(Double)rs.getObject(\""+resultSetName+"\")" // [DM] STDMDD-1091: was "rs.getDouble(\""+resultSetName+"\")" 
+		case PrimitiveTypeCodes::NUMERIC :
+			"rs.getBigDecimal(\""+resultSetName+"\")" 
+		case PrimitiveTypeCodes::DECIMAL :
+			"rs.getBigDecimal(\""+resultSetName+"\")" 
+		case PrimitiveTypeCodes::CHAR :
+			"rs.getString(\""+resultSetName+"\")" 
+		case PrimitiveTypeCodes::VARCHAR :
+			"rs.getString(\""+resultSetName+"\")" 
+		case PrimitiveTypeCodes::LONGVARCHAR :
+			"rs.getString(\""+resultSetName+"\")" 
+		case PrimitiveTypeCodes::DATE :
+			"rs.getDate(\""+resultSetName+"\")" 
+		case PrimitiveTypeCodes::TIME :
+			"rs.getTime(\""+resultSetName+"\")" 
+		case PrimitiveTypeCodes::TIMESTAMP :
+			"rs.getTimestamp(\""+resultSetName+"\")" 
+		case PrimitiveTypeCodes::BINARY :
+			"rs.getBytes(\""+resultSetName+"\")" 
+		case PrimitiveTypeCodes::VARBINARY :
+			"rs.getBytes(\""+resultSetName+"\")" 
+		case PrimitiveTypeCodes::LONGVARBINARY :
+			"rs.getBytes(\""+resultSetName+"\")" 
+		case PrimitiveTypeCodes::OTHER :
+			"getClobColumn(rs, \""+resultSetName+"\")"  
+		case PrimitiveTypeCodes::JAVA_OBJECT :
+			"rs.getObject(\""+resultSetName+"\")" 
+		case PrimitiveTypeCodes::DISTINCT :
+			"rs.getObject(\""+resultSetName+"\")" 
+		case PrimitiveTypeCodes::STRUCT :
+			"rs.getObject(\""+resultSetName+"\")" 
+		case PrimitiveTypeCodes::ARRAY :
+			"rs.getArray(\""+resultSetName+"\")" 
+		case PrimitiveTypeCodes::BLOB :
+			"getBlobColumn(rs, \""+resultSetName+"\")" 
+		case PrimitiveTypeCodes::CLOB :
+			"getClobColumn(rs, \""+resultSetName+"\")" 
+		case PrimitiveTypeCodes::REF :
+			"rs.getRef(\""+resultSetName+"\")" 
+		case PrimitiveTypeCodes::BOOLEAN :
+			"rs.getBoolean(\""+resultSetName+"\")" 
+	
+		default :"???"
+	};	
+
+
+
+
+
+String getSQLType(TableColumn col) :
+	let code = col.type.type :
+	switch(code){
+		case PrimitiveTypeCodes::BIT :
+			"SMALLINT"
+		case PrimitiveTypeCodes::TINYINT :
+			"INT"
+		case PrimitiveTypeCodes::SMALLINT :
+			"SMALLINT"
+		case PrimitiveTypeCodes::INTEGER :
+			"INTEGER"		
+		case PrimitiveTypeCodes::BIGINT :
+			"NUMERIC("+col.type.size+")"
+		case PrimitiveTypeCodes::FLOAT :
+			"NUMERIC("+col.type.size+","+col.type.decimalDigits+")" 
+		case PrimitiveTypeCodes::REAL :
+			"NUMERIC("+col.type.size+","+col.type.decimalDigits+")"	
+		case PrimitiveTypeCodes::DOUBLE :
+			"NUMERIC("+col.type.size+","+col.type.decimalDigits+")" 
+		case PrimitiveTypeCodes::NUMERIC :
+			"NUMERIC("+col.type.size+","+col.type.decimalDigits+")" 
+		case PrimitiveTypeCodes::DECIMAL :
+			"NUMERIC("+col.type.size+","+col.type.decimalDigits+")" 
+		case PrimitiveTypeCodes::CHAR :
+			"CHAR("+col.type.size+")" 
+		case PrimitiveTypeCodes::VARCHAR :
+			"VARCHAR2("+col.type.size+")" 
+		case PrimitiveTypeCodes::LONGVARCHAR :
+			"VARCHAR2("+col.type.size+")" 
+		case PrimitiveTypeCodes::DATE :
+			"DATE" 
+		case PrimitiveTypeCodes::TIME :
+			"DATE" 
+		case PrimitiveTypeCodes::TIMESTAMP :
+			"DATE" 
+		case PrimitiveTypeCodes::BINARY :
+			"BINARY_DOUBLE" 
+		case PrimitiveTypeCodes::VARBINARY :
+			"BINARY_DOUBLE" 
+		case PrimitiveTypeCodes::LONGVARBINARY :
+			"BINARY_DOUBLE" 
+		case PrimitiveTypeCodes::OTHER :
+			"VARCHAR2("+col.type.size+")" 
+		case PrimitiveTypeCodes::JAVA_OBJECT :
+			"CLOB" 
+		case PrimitiveTypeCodes::DISTINCT :
+			"CLOB" 
+		case PrimitiveTypeCodes::STRUCT :
+			"CLOB" 
+		case PrimitiveTypeCodes::ARRAY :
+			"CLOB" 
+		case PrimitiveTypeCodes::BLOB :
+			"BLOB" 
+		case PrimitiveTypeCodes::CLOB :
+			"CLOB" 
+		case PrimitiveTypeCodes::REF :
+			"CLOB" 
+		case PrimitiveTypeCodes::BOOLEAN :
+			"SMALLINT" 
+			
+		default :"???"
+	};
+
+
+boolean isNonDecimalNumber (PrimitiveDataType t) :
+	(t.type == PrimitiveTypeCodes::NUMERIC || 
+	 t.type == PrimitiveTypeCodes::DECIMAL ||
+	 t.type == PrimitiveTypeCodes::SMALLINT ||
+	 t.type == PrimitiveTypeCodes::TINYINT ||
+	 t.type == PrimitiveTypeCodes::BIGINT ||
+	 t.type == PrimitiveTypeCodes::INTEGER) && t.decimalDigits==0;
+	
+boolean isBlobOrClob(TableColumn col) :
+	if (col.type !=null) then
+		getSQLType(col) == "CLOB" || getSQLType(col) == "BLOB"
+	else
+		false;
+	
+boolean isBlobOrClob(QCalculatedColumn col) :
+	if (col.calculatedType !=null) then
+		col.calculatedType == "CLOB" || col.calculatedType == "BLOB"
+	else
+		false;	
+
+
+String getColumnModifier(TableColumn col) :
+	col.type.nullable ? "NULL" : "NOT NULL";
+
+boolean isNullOrEmpty(String s) :
+	s==null || s.length==0;
+	
+boolean isListNullOrEmpty(List l) :
+	l==null || l.size==0;	
+
+String getPluginVersion() : JAVA
+	it.csi.mddtools.datagen.genutils.MiscUtils.getPluginVersion();
+	
+String getRegionUID(String sourceId, String name) : 
+if name.isNullOrEmpty() then
+	getRegionUIDValue(sourceId)
+else
+	getRegionUIDValue(sourceId+name);
+
+String getRegionUIDValue(String sourceId) : JAVA
+	it.csi.mddtools.datagen.genutils.GenUtils.getRegionUID(java.lang.String);
+
+// TODO da rivedere...
+String toJavaId(String original) : JAVA
+	it.csi.mddtools.datagen.genutils.GenUtils.toJavaId(java.lang.String);
+	
+// JAVA 
+String pkg2Path(String pkg) : JAVA
+	it.csi.mddtools.datagen.genutils.GenUtils.pkg2Path(java.lang.String);
+
+String getProperty(String name) : JAVA
+  org.eclipse.xtend.util.stdlib.PropertiesExtension.getProperty(java.lang.String);
+
+Void dumpProperties() : JAVA
+  it.csi.mddtools.datagen.genutils.GenUtils.dumpProperties();
+
+Void backupProperties() : JAVA
+  it.csi.mddtools.datagen.genutils.GenUtils.backupProperties();
+
+Void restoreProperties() : JAVA
+  it.csi.mddtools.datagen.genutils.GenUtils.restoreProperties();
+
+Void setProperty(String name, String val) : JAVA
+  it.csi.mddtools.datagen.genutils.GenUtils.setProperty(java.lang.String, java.lang.String);
+  
+boolean areDistinctAndOrderByClauseConsistent(List distinctCols, List orderSpecs) : JAVA
+	it.csi.mddtools.datagen.genutils.GenUtils.areDistinctAndOrderByClauseConsistent(java.util.List, java.util.List);
+	
+boolean areAllDaoMethodsNamesUnivocal(Inserter inserter,Finders finders,Updaters updaters,Deleters deleters) : JAVA	
+	it.csi.mddtools.datagen.genutils.GenUtils.areAllDaoMethodsNamesUnivocal(it.csi.mddtools.datagen.Inserter,
+																	   it.csi.mddtools.datagen.Finders,
+																	   it.csi.mddtools.datagen.Updaters,
+																	   it.csi.mddtools.datagen.Deleters);
+																	   																	  								  
+String getLookedUpPropertyName(LookupResolver lookUpResolver): 
+	toJavaId(isNullOrEmpty(lookUpResolver.name)?lookUpResolver.foreignKey.name:lookUpResolver.name);
+
+
+boolean areResolversInLoop(DataAccessObject dao): JAVA
+	it.csi.mddtools.datagen.genutils.GenUtils.findLoop(it.csi.mddtools.datagen.DataAccessObject);
+
+	
+List[DataAccessObject] getAllDistinctSuppliers(DataAccessObject dao) : JAVA
+	it.csi.mddtools.datagen.genutils.GenUtils.getAllDistinctSuppliers(it.csi.mddtools.datagen.DataAccessObject);
+
+
+
+String getSingleFromClause(QTable qTable):
+	if(isNullOrEmpty(qTable.aliasName)) then
+		qTable.table.name 
+	else
+		qTable.table.name+ " " + qTable.aliasName;
+	
+String getSingleSelectClause(QTableColumn qTableColumn):
+	if(isNullOrEmpty(qTableColumn.qtable.aliasName)) then
+		qTableColumn.column.name + (isNullOrEmpty(qTableColumn.alias)?"": (" as " + qTableColumn.alias))
+	else	
+		qTableColumn.qtable.aliasName+"."+qTableColumn.column.name + (isNullOrEmpty(qTableColumn.alias)?"": (" as " + qTableColumn.alias)) ;
+
+String getSingleSelectClause(QCalculatedColumn qCalcColumn) : JAVA 
+	it.csi.mddtools.datagen.genutils.GenUtils.getSingleSelectClause(it.csi.mddtools.datagen.QCalculatedColumn);
+
+	
+String getSingleJoinClause(String alias, String column):
+	if(isNullOrEmpty(alias)) then
+		column
+	else 
+		alias+"."+column; 
+	
+boolean checkAliasUniqness(FromClause fc): JAVA
+	it.csi.mddtools.datagen.genutils.GenUtils.checkAliasUniqness(it.csi.mddtools.datagen.FromClause);
+
+boolean checkSelectClause(SelectClause sc): JAVA
+	it.csi.mddtools.datagen.genutils.GenUtils.checkSelectClause(it.csi.mddtools.datagen.SelectClause);
+	
+String javaSqlTypeForJDBCBinding(PrimitiveDataType pdt):
+	if(pdt.type == null) then
+	"java.sql.Types.????" 
+	else if(pdt.type == PrimitiveTypeCodes::BLOB) then
+	"java.sql.Types.LONGVARBINARY"
+	else if(pdt.type == PrimitiveTypeCodes::CLOB) then
+	"java.sql.Types.LONGVARCHAR"
+	else
+	"java.sql.Types."+pdt.type;
+	
+			

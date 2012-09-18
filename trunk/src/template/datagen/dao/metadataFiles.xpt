@@ -1,0 +1,283 @@
+«REM»
+C) Copyright 2011 CSI-PIEMONTE;                                             
+                                                                            
+Concesso in licenza a norma dell'EUPL, esclusivamente versione 1.1;         
+Non e' possibile utilizzare l'opera salvo nel rispetto della Licenza.       
+E' possibile ottenere una copia della Licenza al seguente indirizzo:        
+                                                                            
+http://www.eupl.it/opensource/eupl-1-1                                      
+                                                                            
+Salvo diversamente indicato dalla legge applicabile o concordato per        
+iscritto, il software distribuito secondo i termini della Licenza e'        
+distribuito "TAL QUALE", SENZA GARANZIE O CONDIZIONI DI ALCUN TIPO,         
+esplicite o implicite.                                                      
+Si veda la Licenza per la lingua specifica che disciplina le autorizzazioni 
+e le limitazioni secondo i termini della Licenza.                           
+«ENDREM»
+
+«IMPORT ecore»
+«IMPORT datagen»
+«IMPORT rdbmdl»
+«IMPORT rdbmdl::constraints»
+«IMPORT rdbmdl::datatypes»
+«IMPORT rdbmdl::view»
+
+«EXTENSION template::DatagenExtensions»
+
+«DEFINE metadataFiles FOR DBAccessModel»
+«EXPAND metadataFiles(this) FOREACH daopkgs»
+«ENDDEFINE»
+
+«DEFINE metadataFiles (DBAccessModel model) FOR DaoPackage»
+«EXPAND commonMetadataFiles(model) FOR this»
+«EXPAND metadataFiles(model) FOREACH dao»
+«ENDDEFINE»
+
+«DEFINE metadataFiles(DBAccessModel model) FOR DataAccessObject»
+«EXPAND metadataFile(model) FOR this»
+«ENDDEFINE»
+
+
+«DEFINE metadataFile(DBAccessModel model) FOR DataAccessObject»
+«LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-»
+«FILE getMetadataFullPath(this, model)»package «pkgPackage».metadata;
+
+import «pkgPackage».dto.*;
+import «getDALayerBasePkg(model)».metadata.*;
+import java.util.List;
+
+/**
+ * @generated
+ */
+public class «getMetadataClassName()» extends DAOMetadata{
+	
+	private final String[] columnNames;	
+	
+	public «getMetadataClassName()»(){
+		columnNames = new String[]{«FOREACH mainTable.columns AS currCol SEPARATOR ','-»"«currCol.name»"«ENDFOREACH-»};		
+		for (int i = 0; i < columnNames.length; i++) {
+			columnsNamesMap.put(columnNames[i], columnNames[i]);
+			
+		}
+	}
+	
+	public «getMetadataClassName()»(String[] columnNames){
+		this.columnNames = columnNames;		
+	}
+	
+	/**
+	 * Method 'getTableName'
+	 * 
+	 * @return String
+	 * @generated
+	 */
+	public String getTableName()
+	{
+		return "«mainTable.name»";
+	}
+	
+	/**
+	 * Method 'getColumnNames'
+	 * 
+	 * @return String[]
+	 * @generated
+	 */
+	public String[] getColumnNames()
+	{
+		return this.columnNames;
+	}
+		
+}
+«ENDFILE-»
+«ENDLET-»
+«ENDDEFINE»
+
+«DEFINE metadataCase4Resolver(DataAccessObject dao) FOR LookupResolver-»
+«FOREACH this.foreignKey.includedColumns AS currFKColumn ITERATOR i-»
+		if ("«javaPropertyPathForResolvedColumn(this, this.foreignKey,i.counter0)»".equalsIgnoreCase(propName)){
+			return "«currFKColumn.name»";
+		}
+«ENDFOREACH»
+«ENDDEFINE»
+
+«DEFINE getColumnNameMethod(DataAccessObject dao) FOR Table»
+	public String getColumnName(String prefixPropName, String propName){
+		if (prefixPropName!=null && prefixPropName.length()>0)
+			return getColumnName(prefixPropName+"."+propName);
+		else
+			return getColumnName(propName);
+	}
+
+	/**
+	 * Method 'getColumnName'
+	 * 
+	 * @param propName
+	 * @return String
+	 * @generated
+	 */
+	public String getColumnName(String propName){
+		«FOREACH columns AS currCol-»
+		«IF currCol.isForeignKey!=null && currCol.isForeignKey && dao.lookupResolvers != null && dao.lookupResolvers.resolvers.select(r|r.foreignKey.includedColumns.contains(currCol)).size >0-»
+		«ELSE-»
+		if ("«javaPropertyNameFromColumn(currCol)»".equalsIgnoreCase(propName)){
+			return "«currCol.name»";
+		}
+		«ENDIF-»
+		«ENDFOREACH-»
+		«IF dao.lookupResolvers!=null && dao.lookupResolvers.resolvers.size >0-»
+		«EXPAND metadataCase4Resolver(dao) FOREACH dao.lookupResolvers.resolvers-»
+		«ENDIF-»
+		/// se non trovato
+		throw new IllegalArgumentException("proprieta' "+propName+" non trovata per il DTO «getDtoClassName(dao)»");
+	}
+«ENDDEFINE»
+
+«DEFINE commonMetadataFiles(DBAccessModel model) FOR DaoPackage»
+«FILE getDALayerBaseDir(model)+"/metadata/DAOMetadata.java"»package «getDALayerBasePkg(model)».metadata;
+
+import java.io.*;
+import java.sql.*;
+
+
+/**
+ * abstract class for DAO Metadata.
+ *
+ * @generated
+ */
+public abstract class DAOMetadata
+{
+	public java.util.Map<String, String> columnsNamesMap = new java.util.HashMap<String, String>();
+	
+	public DAOMetadata()
+	{
+	}
+	
+	/**
+	 * Method 'getTableName'
+	 * 
+	 * @return String
+	 * @generated
+	 */
+	public abstract String getTableName();
+	
+	/**
+	 * Method 'getColumnName'
+	 * 
+	 * @param prefixPropName prefisso (opzionale) da apporre al nome della property
+	 *        nei casi in cui si debba scendere ricorsivamente in esempi annidati 
+	 * @param propName nome della property
+	 * @return String il nome di colonna associata alla property <prefixPropName>.<propName>
+	 *                o <propName> se <prefixPropName> e' nullo
+	 * @generated
+	 */
+	
+	public String getColumnName(String prefixPropName, String propName) {
+		if (prefixPropName != null && prefixPropName.length() > 0)
+			return getColumnName(prefixPropName + "." + propName);
+		else
+			return getColumnName(propName);
+	}
+	
+	/**
+	 * Method 'getColumnName'
+	 * 
+	 * @param propName nel formato <prefixPropName>.<propName> oppure <propName>
+	 * @return String il nome di colonna associata alla property <prefixPropName>.<propName>
+	 *                o <propName> se <prefixPropName> e' nullo
+	 * @generated
+	 */
+	public String getColumnName(String propName) {
+		if(columnsNamesMap .containsKey(propName))
+		{
+			return columnsNamesMap.get(propName);
+		}
+
+		/// se non trovato
+		throw new IllegalArgumentException("proprieta' " + propName
+				+ " non trovata per il DTO RuoloProfiloLowDto");
+	}
+	
+	/**
+	 * Method 'getColumnNames'
+	 * 
+	 * @return String[]
+	 * @generated
+	 */
+	public abstract String[] getColumnNames();
+		
+	
+	
+}
+«ENDFILE»
+
+«FILE getPkgDir(this, model)+"/exceptions/DaoException.java"»package «getPkgPackage(this, model)».exceptions;
+
+/**
+ * @generated
+ */
+public class DaoException extends Exception
+{
+	/**
+	 * @generated
+	 */
+	protected Throwable throwable;
+
+	/**
+	 * Method 'DaoException'
+	 * 
+	 * @param message
+	 * @generated
+	 */
+	public DaoException(String message)
+	{
+		super(message);
+	}
+
+	/**
+	 * Method 'DaoException'
+	 * 
+	 * @param message
+	 * @param throwable
+	 * @generated
+	 */
+	public DaoException(String message, Throwable throwable)
+	{
+		super(message);
+		this.throwable = throwable;
+	}
+
+	/**
+	 * Method 'getCause'
+	 * 
+	 * @return Throwable
+	 * @generated
+	 */
+	public Throwable getCause()
+	{
+		return throwable;
+	}
+
+}
+«ENDFILE»
+«ENDDEFINE»
+
+
+«REM»gestire l'univocità della regione protetta per la compatibilità con servicegen«ENDREM»
+«DEFINE utilFiles FOR DBAccessModel»
+«FILE getDALayerBaseDir(this)+"/util/Constants.java"»package «getDALayerBasePkg(this)».util;
+/**
+* @generated
+*/
+public final class Constants {
+	/**
+	 * identificativo dell'applicativo.
+	 */
+	public static final String APPLICATION_CODE = "«this.codComponente.toUpperCase()»";
+	
+	«PROTECT CSTART '/*' CEND '*/' ID getRegionUID("DaoConstants", this.name)»
+	
+	«ENDPROTECT»
+}
+«ENDFILE»
+«ENDDEFINE»
+

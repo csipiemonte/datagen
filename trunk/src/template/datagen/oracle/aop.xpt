@@ -1,0 +1,193 @@
+«REM»
+C) Copyright 2011 CSI-PIEMONTE;                                             
+                                                                            
+Concesso in licenza a norma dell'EUPL, esclusivamente versione 1.1;         
+Non e' possibile utilizzare l'opera salvo nel rispetto della Licenza.       
+E' possibile ottenere una copia della Licenza al seguente indirizzo:        
+                                                                            
+http://www.eupl.it/opensource/eupl-1-1                                      
+                                                                            
+Salvo diversamente indicato dalla legge applicabile o concordato per        
+iscritto, il software distribuito secondo i termini della Licenza e'        
+distribuito "TAL QUALE", SENZA GARANZIE O CONDIZIONI DI ALCUN TIPO,         
+esplicite o implicite.                                                      
+Si veda la Licenza per la lingua specifica che disciplina le autorizzazioni 
+e le limitazioni secondo i termini della Licenza.                           
+«ENDREM»
+
+«IMPORT datagen»
+«IMPORT rdbmdl»
+«EXTENSION template::DatagenExtensions»
+
+«AROUND template::datagen::spring::configFiles::localDatasourceSample FOR DBAccessModel»
+  <!-- definizione locale di datasource per ORACLE (non usare in un application server!) -->
+  <!--<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+      <property name="url" value="jdbc:oracle:thin:@TST-DB-01.CSI.IT:1522:TEST10B" /> 
+    <property name="url" value="jdbc:oracle:thin:@SVIL10A.CSI.IT:1555:SVIL10A" />  
+    <property name="username" value="sicee" />
+    <property name="password" value="mypass" />
+  </bean>-->
+«ENDAROUND»
+
+«AROUND template::datagen::dao::daoFiles::abstractDAODBMSSpecificCode FOR DaoPackage»
+	// ORACLE specific code
+	
+	/**
+	 * @generated
+	 */
+    public static void updateClob(Clob clob, String data) throws IOException, SQLException 
+    {
+        if (clob == null || data == null) {
+            return;
+        }
+
+        Reader reader = new StringReader( data );
+         Writer clobWriter = ((oracle.sql.CLOB)clob).setCharacterStream(0L);
+        char[] cbuffer = new char[10* 1024];
+        int nread = 0;
+        while( (nread= reader.read(cbuffer)) != -1 )
+          clobWriter.write( cbuffer, 0, nread);
+        reader.close();
+        clobWriter.close();
+    }
+
+	/**
+	 * @generated
+	 */
+    public static void updateBlob(Blob blob, byte[] data) throws IOException, SQLException
+    {
+        if (blob == null || data == null) {
+            return;
+        }
+
+        OutputStream os = ((oracle.sql.BLOB)blob).setBinaryStream(0L);
+        InputStream is = new ByteArrayInputStream(data);
+        byte[] buffer = new byte[10* 1024];
+        int nread = 0;
+        while( (nread= is.read(buffer)) != -1 ) {
+          os.write(buffer, 0, nread);
+      }
+        is.close();
+        os.close();
+    }
+
+	/**
+	 * @generated
+	 */
+    public static byte[] getBlobColumn(ResultSet rs, int columnIndex)
+            throws SQLException
+    {
+        try {
+
+            int type = rs.getMetaData().getColumnType( columnIndex );
+            if (type == Types.LONGVARBINARY) {
+                return rs.getBytes( columnIndex );
+            }
+
+            Blob blob = rs.getBlob( columnIndex );
+            if (blob == null) {
+                return null;
+            }
+
+            InputStream is = blob.getBinaryStream();
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+            if (is == null) {
+                return null;
+            }
+            else {
+                byte buffer[] = new byte[ 64 ];
+                int c = is.read( buffer );
+                while (c>0) {
+                    bos.write( buffer, 0, c );
+                    c = is.read( buffer );
+                }
+                return bos.toByteArray();
+            }
+        }
+        catch (IOException e) {
+            throw new SQLException( "Failed to read BLOB column due to IOException: " + e.getMessage() );
+        }
+    }
+
+	/**
+	 * @generated
+	 */
+    public static void setBlobColumn(PreparedStatement stmt, int parameterIndex, byte[] value)
+            throws SQLException
+    {
+        if (value == null) {
+            stmt.setNull( parameterIndex, Types.BLOB );
+        }
+        else {
+            stmt.setBinaryStream( parameterIndex, new ByteArrayInputStream(value), value.length );
+        }
+    }
+
+	/**
+	 * @generated
+	 */
+    public static String getClobColumn(ResultSet rs, int columnIndex)
+        throws SQLException
+    {
+        try {
+            Clob clob = rs.getClob( columnIndex );
+            if (clob == null) {
+                return null;
+            }
+
+            StringBuffer ret = new StringBuffer();
+            InputStream is = clob.getAsciiStream();
+
+            if (is == null) {
+                return null;
+            }
+            else {
+                byte buffer[] = new byte[ 64 ];
+                int c = is.read( buffer );
+                while (c>0) {
+                    ret.append( new String(buffer, 0, c) );
+                    c = is.read( buffer );
+                }
+                return ret.toString();
+            }
+        }
+        catch (IOException e) {
+            throw new SQLException( "Failed to read CLOB column due to IOException: " + e.getMessage() );
+        }
+    }
+
+	/**
+	 * @generated
+	 */
+    public static void setClobColumn(PreparedStatement stmt, int parameterIndex, String value)
+        throws SQLException
+    {
+        if (value == null) {
+            stmt.setNull( parameterIndex, Types.CLOB );
+        }
+        else {
+            stmt.setAsciiStream( parameterIndex, new ByteArrayInputStream(value.getBytes()), value.length() );
+        }
+    }
+«ENDAROUND»
+
+«AROUND template::datagen::spring::configFiles::pkGeneratorBeanDef(DataAccessObject dao) FOR SequencePKGenerator»
+«IF dao.mainTable.primaryKey.includedColumns.size==1-»
+	<bean id="«getDaoIdName(dao)»Incrementer"
+		class="org.springframework.jdbc.support.incrementer.OracleSequenceMaxValueIncrementer">
+		<constructor-arg>
+			<ref bean="myDataSource" />
+		</constructor-arg>
+		<constructor-arg>
+			<value>«this.sequenceName»</value>
+		</constructor-arg>
+	</bean>
+
+«ELSE-»
+	«ERROR "impossibile definire un incrementer per la PK di "+dao.name+" perchè non ha una sola colonna"-»
+«ENDIF-»
+
+«ENDAROUND»
+

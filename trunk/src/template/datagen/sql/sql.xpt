@@ -1,0 +1,100 @@
+«REM»
+C) Copyright 2011 CSI-PIEMONTE;                                             
+                                                                            
+Concesso in licenza a norma dell'EUPL, esclusivamente versione 1.1;         
+Non e' possibile utilizzare l'opera salvo nel rispetto della Licenza.       
+E' possibile ottenere una copia della Licenza al seguente indirizzo:        
+                                                                            
+http://www.eupl.it/opensource/eupl-1-1                                      
+                                                                            
+Salvo diversamente indicato dalla legge applicabile o concordato per        
+iscritto, il software distribuito secondo i termini della Licenza e'        
+distribuito "TAL QUALE", SENZA GARANZIE O CONDIZIONI DI ALCUN TIPO,         
+esplicite o implicite.                                                      
+Si veda la Licenza per la lingua specifica che disciplina le autorizzazioni 
+e le limitazioni secondo i termini della Licenza.                           
+«ENDREM»
+
+«IMPORT ecore»
+«IMPORT datagen»
+«IMPORT rdbmdl»
+«IMPORT rdbmdl::constraints»
+«IMPORT rdbmdl::datatypes»
+«IMPORT rdbmdl::view»
+
+«EXTENSION template::DatagenExtensions»
+
+«DEFINE main FOR DBAccessModel»
+«EXPAND dropSchemaSQL FOR this.schema»
+«EXPAND createSchemaSQL FOR this.schema»
+«ENDDEFINE»
+
+«DEFINE dropSchemaSQL FOR Schema»
+«FILE getSchemaDropSQLPath()»
+/**
+ * Drop dello schema (per pulizia totale del DB)
+ */
+
+«EXPAND elementDrop FOREACH this.elements»
+
+
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE elementDrop FOR SchemaElement»
+«ENDDEFINE»
+
+«DEFINE elementDrop FOR Table»
+DROP TABLE «name»;
+
+
+«ENDDEFINE»
+
+
+«DEFINE createSchemaSQL FOR Schema»
+«FILE getSchemaCreationSQLPath()»
+
+/**
+ * Creazione dello schema «name»
+ */
+
+«EXPAND elementCreate(this) FOREACH this.elements»
+
+
+
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE  elementCreate(Schema schema) FOR SchemaElement»
+«ENDDEFINE»
+
+«DEFINE  elementCreate(Schema schema) FOR Table»
+
+CREATE TABLE «name» (
+«EXPAND columnDef(schema) FOREACH this.columns SEPARATOR ","»
+);
+
+«IF this.primaryKey!=null»
+«EXPAND createPKIndex(schema) FOR this»
+
+«EXPAND addPKConstraint(schema) FOR this»
+«ENDIF»
+
+«ENDDEFINE»
+
+«DEFINE columnDef(Schema schema) FOR TableColumn-»
+	«name» «getSQLType()» «getColumnModifier()-»
+«ENDDEFINE»
+
+«DEFINE createPKIndex(Schema schema) FOR Table»
+CREATE UNIQUE INDEX PK_«name»_IDX ON «name» (
+       «FOREACH primaryKey.includedColumns AS currPKCol SEPARATOR ","-»
+«currPKCol.name» ASC 
+       «ENDFOREACH-»
+ );
+«ENDDEFINE»
+
+«DEFINE addPKConstraint(Schema schema) FOR Table»
+ALTER TABLE «name»
+add CONSTRAINT PK_«name»_Constraint PRIMARY KEY («FOREACH primaryKey.includedColumns AS currPKCol SEPARATOR ","»«currPKCol.name»«ENDFOREACH»);
+«ENDDEFINE»

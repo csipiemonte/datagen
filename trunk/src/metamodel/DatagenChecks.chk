@@ -1,0 +1,206 @@
+import datagen;
+import rdbmdl;
+
+extension org::eclipse::xtend::util::stdlib::naming;
+extension template::DatagenExtensions; 
+
+context DBAccessModel ERROR "codice prodotto mancante" :
+	!isNullOrEmpty(codProdotto);
+	
+context DBAccessModel ERROR "codice componente mancante" :
+	!isNullOrEmpty(codComponente);
+
+context DataAccessObject ERROR "Occorre specificare il nome del DAO:" :
+	!isNullOrEmpty(name);
+
+//check sulla presenza del nome del Dao Package nel modello
+context DaoPackage ERROR "Occorre specificare il nome del Dao Package:":
+	!isNullOrEmpty(name);
+
+context DataAccessObject ERROR "Il dao "+loc()+" non definisce una main table":
+	!isNullOrEmpty(mainTable.name);	
+	
+
+context DataAccessObject if (pkGenerator != null && pkGenerator.metaType == SequencePKGenerator) 
+ERROR "Il SequencePKGenerator è utilizzabile solo con PK di 1 sola colonna":
+	mainTable.primaryKey.includedColumns.size == 1;
+	
+/// verifiche sui finder/updaters/inserters/deleters
+context DataAccessObject WARNING "il dao:"+this.name+" non definisce i finder base (findByPK e findAll)" :
+	finders != null && finders.finders.select(f| (f.metaType==FindAll || f.metaType==FindByPK)).size==2;
+
+context DataAccessObject WARNING "il dao: "+this.name+" non definisce nessun inserter" :
+	inserter != null;
+
+context DataAccessObject WARNING "il dao: "+this.name+" non definisce nessun updater di base (UpdateRow)" :
+	updaters != null && updaters.updaters.select(f| (f.metaType==UpdateRow)).size==1;
+
+context DataAccessObject ERROR "I nomi dei metodi contenuti nel dao : "+this.name+" devono essere univoci" :
+	areAllDaoMethodsNamesUnivocal(inserter,finders,updaters,deleters);
+	
+context DataAccessObject if(this.finders!=null && this.finders.finders.size>0 && this.finders.finders.typeSelect(QBEFinder).size>1)ERROR "Il nome di un finder QBE non e' obbligatorio, ma non vi possono essere piu' QBEFinder con nome nullo" +loc():
+	!(this.finders.finders.typeSelect(QBEFinder).select(qbe|isNullOrEmpty(qbe.name)).size>1);
+
+	
+context Finder if (metaType != FindByPK && metaType != FindAll && metaType != QBEFinder) ERROR "E' necessario specificare il nome dei finder (esclusi il findByPK, findAll, QBEFinder)"+((DataAccessObject)(this.eContainer.eContainer)).name:
+	!isNullOrEmpty(name);
+
+//verifica sulla presenza di una PK in tabella se e' stato definito un finder di tipo findByPK	
+context DataAccessObject if(this.finders!= null && this.finders.finders.size>0 && this.finders.finders.select(f|f.metaType == FindByPK).size >0) ERROR "E' stato dichiarato un finder di tipo findByPK per il dao: "+this.loc()+" , ma la tabella di riferimento non possiede chiavi primarie."	:
+	this.mainTable.primaryKey != null;
+	
+//verifica sulla presenza di una PK in tabella se e' stato definito un deleter di tipo deleteByPK	
+context DataAccessObject if(this.deleters!= null && this.deleters.deleters.size>0 && this.deleters.deleters.select(d|d.metaType == DeleteByPK).size >0) ERROR "E' stato dichiarato un deleter di tipo deleteByPK per il dao: "+this.loc()+" , ma la tabella di riferimento non possiede chiavi primarie."	:
+	this.mainTable.primaryKey != null;	
+	
+//verifica che non sia presente piu' di un metodo findByPK in un DAO
+context DataAccessObject if(this.finders!= null && this.finders.finders.size>0 && this.finders.finders.select(f|f.metaType == FindByPK).size >0) ERROR "E' stato dichiarato piu di un finder di tipo findByPK per il dao: "+this.loc()+" , ma non ha senso definirne piu' di uno"	:
+	!(this.finders.finders.select(f|f.metaType == FindByPK).size > 1);
+	
+//verifica che non sia presente piu' di un metodo updateRow in un DAO
+context DataAccessObject if(this.updaters!= null && this.updaters.updaters.size>0 && this.updaters.updaters.select(u|u.metaType == UpdateRow).size >0) ERROR "E' stato dichiarato piu di un updater di tipo updateRow per il dao: "+this.loc()+" , ma non ha senso definirne piu' di uno"	:
+	!(this.updaters.updaters.select(u|u.metaType == UpdateRow).size > 1);	
+	
+//warning: anche se l'utente modifica il nome di un updateRow, questo viene ignorato e rimane update
+context DataAccessObject if(this.updaters!= null && this.updaters.updaters.size>0 && this.updaters.updaters.select(u|u.metaType == UpdateRow).size >0) WARNING "E' stata modificata la property name per l'updater di tipo updateRow per il dao: "+this.loc()+" , ma verra' ignorata in quanto e' possibile definire solo un deleteByPK per ogni DAO"	:
+	this.updaters.updaters.select(u|u.metaType == UpdateRow).get(0).name == "update";	
+
+//verifica che non sia presente piu' di un metodo deleteByPK in un DAO
+context DataAccessObject if(this.deleters!= null && this.deleters.deleters.size>0 && this.deleters.deleters.select(d|d.metaType == DeleteByPK).size >0) ERROR "E' stato dichiarato piu di un deleter di tipo deleteByPK per il dao: "+this.loc()+" , ma non ha senso definirne piu' di uno"	:
+	!(this.deleters.deleters.select(d|d.metaType == DeleteByPK).size > 1);	
+
+//warning: anche se l'utente modifica il nome di un deleteByPK, questo viene ignorato e rimane delete
+context DataAccessObject if(this.deleters!= null && this.deleters.deleters.size>0 && this.deleters.deleters.select(d|d.metaType == DeleteByPK).size >0) WARNING "E' stata modificata la property name per il deleter di tipo deleteByPK per il dao: "+this.loc()+" , ma verra' ignorata in quanto e' possibile definire solo un deleteByPK per ogni DAO"	:
+	this.deleters.deleters.select(d|d.metaType == DeleteByPK).get(0).name == "delete";	
+
+//warning: anche se l'utente modifica il nome di un findByPK, questo viene ignorato e rimane findByPrimaryKey
+context DataAccessObject if(this.finders!= null && this.finders.finders.size>0 && this.finders.finders.select(f|f.metaType == FindByPK).size >0) WARNING "E' stata modificata la property name per il finder di tipo findByPK per il dao: "+this.loc()+" , ma verra' ignorata in quanto e' possibile definire solo un findByPK per ogni DAO"	:
+	this.finders.finders.select(f|f.metaType == FindByPK).get(0).name == "findByPrimaryKey";
+	
+context Updater if (metaType != UpdateRow) ERROR "E' necessario specificare il nome degli updater (escluso l'UpdateRow)"+((DataAccessObject)(this.eContainer.eContainer)).name:
+	!isNullOrEmpty(name);
+
+context DataAccessObject if(this.updaters!= null && this.updaters.updaters.size >0  && this.updaters.updaters.select(u|u.metaType == UpdateRow || u.metaType == UpdateColumns).size > 0 ) ERROR "E' stato definito almeno un updater di base (row/column), senza che sia stata definita una PK sulla tabella definita dal dao: " +this.loc():
+     this.mainTable.primaryKey!= null ;
+
+
+context CustomFinder ERROR "E' necessario specificare la classe del parametro di filtro (full qualified name, oppure "+
+" '$dto' per utilizzare la classe del DTO associata al DAO, o '$dto[]' per utilizzare una"+
+"lista di oggetti DTO):"+loc() :
+	this.filterClassFQN!=null && this.filterClassFQN != "";
+
+context CustomFinder if (customSelect) ERROR "La clausola distinct è incompatibile con l'attributo 'customSelect'"+loc() :
+	this.distinct.size==0;
+
+context Deleter if (metaType != DeleteByPK) ERROR "E' necessario specificare il nome dei deleter (escluso il DeleteByPK)"+((DataAccessObject)(this.eContainer.eContainer)).name:
+	!isNullOrEmpty(name);
+	
+context MultiResFinder if (!isListNullOrEmpty(distinct) && orderSpecs!=null && !isListNullOrEmpty(orderSpecs.specs)) ERROR "Se la ricerca per distinct è abilitata, tutte le eventuali colonne presenti nella OrderSpecs devono essere presenti anche in distinct. "+((DataAccessObject)(this.eContainer.eContainer)).name:
+	areDistinctAndOrderByClauseConsistent(distinct,orderSpecs.specs);
+
+context LookupResolver ERROR "I lookup-resolver devono specificare la FK risolta:"+loc() :
+	this.foreignKey != null;
+	
+context LookupResolver ERROR "I lookup-resolver devono specificare il DAO supplier:"+loc() :
+	this.supplierDAO != null;
+	
+context LookupResolvers ERROR "E' stato definito un Lookup resolver, ma non e' stato definito alcun resolver al suo interno!" + loc() :
+	this.resolvers.size >0;	
+	
+//limitazione temporanea
+//context DataAccessObject if(this.finders!=null && this.finders.finders.select(fnd|fnd.metaType == QBEFinder).size >0)ERROR "Non e' possibile gestire al momento la presenza di resolvers insieme a finder di tipo findByQBE." +loc():
+//	this.lookupResolvers == null;
+
+context LookupResolver if supplierDAO!=null && foreignKey != null && supplierDAO.mainTable!=null
+	ERROR "Il DAO "+supplierDAO.name+", specificato come supplier, è relativo a una "+
+		  "tabella differente da quella specificata nella FK da risolvere ("+foreignKey.name+")" :
+		 supplierDAO.mainTable == ((Table)(foreignKey.referredUC.eContainer));
+		 
+// univocita delle FK di uno schema
+//context Schema ERROR "Lo schema almeno due foreign key con lo stesso nome":
+//		areAllFkNamesUnivocal((List[Table])this.elements.select(e|e.metaType==Table));
+
+// univocita delle PK di uno schema
+//context Schema ERROR "Lo schema presenta almeno due foreign key con lo stesso nome":
+//		areAllPkNamesUnivocal((List[Table])this.elements.select(e|e.metaType==Table));
+		 
+//check: se ho un lookup resolver devono esistere tutte le findByPk associate alle tabelle referenziate.
+context LookupResolver if supplierDAO!=null ERROR "E' stato definito un lookup resolver, ma non e' stata definita il finder PK per il dao supplier: "+this.supplierDAO.name:
+		this.supplierDAO.finders.finders.typeSelect(FindByPK).size > 0;
+			
+//check per verificare se i resolver sono referenziati ciclicamente (se si fosse, il codice generato risulta compilante, ma inutilizzabile)			
+context DataAccessObject ERROR "Si e' verificato un cycle loop tra i resolver definiti nel modello " +loc():
+		!areResolversInLoop(this);
+		
+//limitazione temporanea: se viene dichiarato un resolver in cui la FK contiene almeno una includedColumn che e' PK e 
+context DataAccessObject if(this.lookupResolvers!=null && this.lookupResolvers.resolvers.size>0) ERROR "Errore: " +loc():
+	   this.lookupResolvers.resolvers.select(r|r.foreignKey.includedColumns.select(tc|tc.isPrimaryKey).size>0).size==0;
+ 
+//context LookupResolver  ERROR "Non e' possibile definire un resolver in cui e' presente una foreign key (<" +this.foreignKey.name + ">) gia' inclusa come primary key in un altro resolver, verificare i resolver definiti nel dao:"+ ((DataAccessObject)(this.eContainer.eContainer)).name :
+//	   this.foreignKey.includedColumns.select(tc|tc.isPrimaryKey).size == 0;
+	   		 	
+//// limitazioni temporanee
+context QBEFinder ERROR "Il QBEFinder non può funzionare in modalità DISTINCT" :
+this.distinct.size==0;
+
+//context QBEFinder ERROR "Il QBEFinder non supporta la clausola ORDER BY" :
+//this.orderSpecs==null;
+
+// check sulla cache: cache impostata (ALMOST_STABLE_DATA) ma TTL minore zero
+context DataAccessObject if(this.cacheability==CacheabilityTypes::ALMOST_STABLE_DATA && this.cacheTTLminutes<0) ERROR "E' stato impostato un TTL minore di zero per il dao: "+loc()+ " , dato non consistente":
+false;
+
+// check sulla cache: cache non impostata (HIGHLY_VARIABLE_DATA) ma TTL diverso da zero
+context DataAccessObject if(this.cacheability==CacheabilityTypes::HIGHLY_VARIABLE_DATA) WARNING "E' stato impostato un TTL diverso da zero per il dao: "+loc()+ " , ma la cache non e' abilitata (HIGHLY_VARIABLE_DATA)":
+!(this.cacheTTLminutes != 0);
+
+// check sulla cache: cache impostata ma TTL zero: usare il default di 24 ore!!!
+context DataAccessObject if(this.cacheability==CacheabilityTypes::ALMOST_STABLE_DATA)  WARNING "E' stato impostata la cache per il dao " +loc()+" , con TTL pari zero, pertanto si utilizza il default di 24hr":
+!(this.cacheTTLminutes == 0);
+
+
+//////////////////CUSTOM FINDER CON CON QUERY DEFINITION//////////////////////
+context CustomFinder if(this.queryDefinition!=null) WARNING "E' stato definito un custom finder <"+this.name+"> associato ad una QueryDefinition: i parametri CustomFrom e CustomSelect saranno ignorati " +loc():
+false;
+
+//Select Clause : deve sempre essere specificata
+context CustomFinder if(this.queryDefinition!=null) ERROR "E' necessario definire il parametro Select Clause per il CustomFinder <"+this.name+"> e che esso contenga almeno una colonna"+loc():
+this.queryDefinition.selectClause != null && this.queryDefinition.selectClause.columns.size != 0;
+
+//From Clause   : deve sempre essere specificata
+context CustomFinder if(this.queryDefinition!=null) ERROR "E' necessario definire il parametro From Clause per il CustomFinder <"+this.name+"> e che esso contenga almeno una tabella"+loc():
+this.queryDefinition.fromClause != null && this.queryDefinition.fromClause.tables.size != 0;
+
+//Join Clause   : se presente, deve avere almeno un Join Criterion specificato
+context JoinClause ERROR "E' necessario specificare almeno un Join Criterion se e' stata definita una Join Clause in un CustomFinder "+loc():
+this.criteria.size != 0;
+
+//Join Criterion : necessario specificare tutti e 4 i parametri (LT+LC:RT+RC)
+context JoinCriterion ERROR "E' stata definita un Join Criterion senza che siano stati specificati tutti e 4 i parametri necessari. "+loc():
+!isNullOrEmpty(this.leftColumn.name) && !isNullOrEmpty(this.rightColumn.name) && this.leftTable!=null && this.rightTable!=null;
+
+//Where Clause : necessario specificare la free text expression (si ricorda che non e' invece obbligatorio fornire una where per i custom finder con qDef!!!)
+context WhereClause ERROR "E' stata definita una Where Clasue senza la relativa free text expression "+loc():
+!isNullOrEmpty(this.freetextExpression);
+
+//QCalculatedColumn : necessario fornire un alias e freeTextExpression
+context QCalculatedColumn ERROR "Non e' stato definito un alias per la QCalculatedColumn definita nella clausola di select di un custom finder: "+loc():
+!isNullOrEmpty(this.alias);
+
+//QCalculatedColumn : necessario fornire una freeTextExpression
+context QCalculatedColumn ERROR "Non e' stata definita la free text expression per la QCalculatedColumn con alias <"+this.alias+">: " + loc():
+!isNullOrEmpty(this.freeTextExpression);
+
+context QTable if(this.eContainer.metaType == FromClause) ERROR "Un alias duplicato e' presente nella FROM clause del custom finder: "+loc():
+((FromClause)eContainer).tables.select(t|t.aliasName == this.aliasName).size==1;
+
+//limitazione temporanee sui CustomFinder con query definition
+context CustomFinder if(this.queryDefinition!=null) ERROR "La clausola DISTINCT non e' al momento disponibile per il caso Custom Finder con query definition: " +loc():
+this.distinct.size == 0;
+
+context QCalculatedColumn ERROR "Non e' al momento possibile definire una QCalculatedColumn che referenzia altre QCalculatedColumn." +loc():
+this.referencedColumns.typeSelect(QCalculatedColumn).size==0;
+ /////////////////////////////////////////////////////
+
+
+

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+Parametri:
+ - dbTargetProjectName:
+   - nome del progetto dove generare il componente DB
+   - default: no
+
+-->
+<workflow>
+
+	<!-- ***************************************************
+         ALIAS per basicSql.mwe
+         Lasciata per retrocompatibilita', si limita a invocare la nuova cartuccia MWE
+         passando i parametri ricevuti
+	-->
+
+	<cartridge file="it/csi/mddtools/datagen/workflow/basicSql.mwe"
+		model="${model}"
+		dbTargetProjectName="${dbTargetProjectName}"
+	/>
+
+</workflow>

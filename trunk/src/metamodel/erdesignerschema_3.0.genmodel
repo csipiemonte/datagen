@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/datagen/src"
+    editDirectory="/datagen/src" editorDirectory="/datagen.editor/src" modelPluginID="datagen.erdesigner"
+    modelName="Erdesignerschema_3" importerID="org.eclipse.xsd.ecore.importer" complianceLevel="5.0"
+    copyrightFields="false" editPluginID="datagen.erdesigner" editorPluginID="datagen.erdesigner.editor">
+  <foreignModel>../../datagen/src/metamodel/erdesignerschema_3.0.xsd</foreignModel>
+  <genPackages prefix="erdesignerschema30" basePackage="it.csi.mddtools.datagen" resource="XML"
+      disposableProviderFactory="true" ecorePackage="Erdesignerschema30.ecore#/">
+    <genDataTypes ecoreDataType="Erdesignerschema30.ecore#//CommentType"/>
+    <genDataTypes ecoreDataType="Erdesignerschema30.ecore#//CommentType1"/>
+    <genClasses ecoreClass="Erdesignerschema30.ecore#//AttributeType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//AttributeType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//AttributeType/datatype"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//AttributeType/defaultvalue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//AttributeType/extra"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//AttributeType/fraction"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//AttributeType/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//AttributeType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//AttributeType/nullable"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//AttributeType/scale"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//AttributeType/size"/>
+    </genClasses>
+    <genClasses ecoreClass="Erdesignerschema30.ecore#//CommentsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//CommentsType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Erdesignerschema30.ecore#//CommentsType/modelComment"/>
+    </genClasses>
+    <genClasses ecoreClass="Erdesignerschema30.ecore#//ConfigurationType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//ConfigurationType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Erdesignerschema30.ecore#//ConfigurationType/property"/>
+    </genClasses>
+    <genClasses ecoreClass="Erdesignerschema30.ecore#//DocumentRoot">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//DocumentRoot/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Erdesignerschema30.ecore#//DocumentRoot/xMLNSPrefixMap"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Erdesignerschema30.ecore#//DocumentRoot/xSISchemaLocation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Erdesignerschema30.ecore#//DocumentRoot/model"/>
+    </genClasses>
+    <genClasses ecoreClass="Erdesignerschema30.ecore#//DomainsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//DomainsType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Erdesignerschema30.ecore#//DomainsType/domain"/>
+    </genClasses>
+    <genClasses ecoreClass="Erdesignerschema30.ecore#//DomainType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//DomainType/datatype"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//DomainType/fraction"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//DomainType/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//DomainType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//DomainType/nullable"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//DomainType/scale"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//DomainType/size"/>
+    </genClasses>
+    <genClasses ecoreClass="Erdesignerschema30.ecore#//IndexattributeType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//IndexattributeType/attributerefid"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//IndexattributeType/expression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//IndexattributeType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="Erdesignerschema30.ecore#//IndexType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//IndexType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Erdesignerschema30.ecore#//IndexType/indexattribute"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//IndexType/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//IndexType/indextype"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//IndexType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Erdesignerschema30.ecore#//ItemType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//ItemType/commentrefid"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//ItemType/tablerefid"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//ItemType/viewrefid"/>
+    </genClasses>
+    <genClasses ecoreClass="Erdesignerschema30.ecore#//MappingType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//MappingType/exportingexpressionrefid"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//MappingType/importingattributerefid"/>
+    </genClasses>
+    <genClasses ecoreClass="Erdesignerschema30.ecore#//ModelCommentType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//ModelCommentType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Erdesignerschema30.ecore#//ModelCommentType/property"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//ModelCommentType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//ModelCommentType/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//ModelCommentType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Erdesignerschema30.ecore#//ModelType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Erdesignerschema30.ecore#//ModelType/configuration"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Erdesignerschema30.ecore#//ModelType/domains"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Erdesignerschema30.ecore#//ModelType/tables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Erdesignerschema30.ecore#//ModelType/relations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Erdesignerschema30.ecore#//ModelType/views"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Erdesignerschema30.ecore#//ModelType/subjectareas"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Erdesignerschema30.ecore#//ModelType/comments"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//ModelType/version"/>
+    </genClasses>
+    <genClasses ecoreClass="Erdesignerschema30.ecore#//PropertyType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//PropertyType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//PropertyType/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Erdesignerschema30.ecore#//RelationsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//RelationsType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Erdesignerschema30.ecore#//RelationsType/relation"/>
+    </genClasses>
+    <genClasses ecoreClass="Erdesignerschema30.ecore#//RelationType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//RelationType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Erdesignerschema30.ecore#//RelationType/property"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//RelationType/comment"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Erdesignerschema30.ecore#//RelationType/mapping"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//RelationType/exportingtablerefid"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//RelationType/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//RelationType/importingtablerefid"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//RelationType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//RelationType/ondelete"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//RelationType/onupdate"/>
+    </genClasses>
+    <genClasses ecoreClass="Erdesignerschema30.ecore#//SubjectareasType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//SubjectareasType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Erdesignerschema30.ecore#//SubjectareasType/subjectarea"/>
+    </genClasses>
+    <genClasses ecoreClass="Erdesignerschema30.ecore#//SubjectareaType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//SubjectareaType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Erdesignerschema30.ecore#//SubjectareaType/item"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//SubjectareaType/color"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//SubjectareaType/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//SubjectareaType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//SubjectareaType/visible"/>
+    </genClasses>
+    <genClasses ecoreClass="Erdesignerschema30.ecore#//TablesType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//TablesType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Erdesignerschema30.ecore#//TablesType/table"/>
+    </genClasses>
+    <genClasses ecoreClass="Erdesignerschema30.ecore#//TableType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Erdesignerschema30.ecore#//TableType/property"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//TableType/comment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Erdesignerschema30.ecore#//TableType/attribute"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Erdesignerschema30.ecore#//TableType/index"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//TableType/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//TableType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//TableType/schema"/>
+    </genClasses>
+    <genClasses ecoreClass="Erdesignerschema30.ecore#//ViewsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//ViewsType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Erdesignerschema30.ecore#//ViewsType/view"/>
+    </genClasses>
+    <genClasses ecoreClass="Erdesignerschema30.ecore#//ViewType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//ViewType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Erdesignerschema30.ecore#//ViewType/property"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//ViewType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//ViewType/sql"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//ViewType/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//ViewType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Erdesignerschema30.ecore#//ViewType/schema"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

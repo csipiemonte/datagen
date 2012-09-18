@@ -1,0 +1,1496 @@
+«REM»
+C) Copyright 2011 CSI-PIEMONTE;                                             
+                                                                            
+Concesso in licenza a norma dell'EUPL, esclusivamente versione 1.1;         
+Non e' possibile utilizzare l'opera salvo nel rispetto della Licenza.       
+E' possibile ottenere una copia della Licenza al seguente indirizzo:        
+                                                                            
+http://www.eupl.it/opensource/eupl-1-1                                      
+                                                                            
+Salvo diversamente indicato dalla legge applicabile o concordato per        
+iscritto, il software distribuito secondo i termini della Licenza e'        
+distribuito "TAL QUALE", SENZA GARANZIE O CONDIZIONI DI ALCUN TIPO,         
+esplicite o implicite.                                                      
+Si veda la Licenza per la lingua specifica che disciplina le autorizzazioni 
+e le limitazioni secondo i termini della Licenza.                           
+«ENDREM»
+
+«IMPORT ecore»
+«IMPORT datagen»
+«IMPORT rdbmdl»
+«IMPORT rdbmdl::constraints»
+«IMPORT rdbmdl::datatypes»
+«IMPORT rdbmdl::view»
+
+«EXTENSION template::DatagenExtensions»
+
+«DEFINE daoFiles FOR DBAccessModel»
+«EXPAND daoFiles(this) FOREACH daopkgs»
+«EXPAND utilFiles FOR this»
+«ENDDEFINE»
+
+«DEFINE daoFiles (DBAccessModel model) FOR DaoPackage»
+«EXPAND commonDaoFiles(model) FOR this»
+«EXPAND daoFiles(model) FOREACH dao»
+«EXPAND baseDaoRowMapper(model) FOREACH dao»
+«ENDDEFINE»
+
+«DEFINE daoFiles(DBAccessModel model) FOR DataAccessObject»
+«EXPAND daoFile(model) FOR this»
+«EXPAND daoImplFile(model) FOR this»
+«EXPAND daoRowMapper(model) FOR this»
+«EXPAND daoExceptionFile(model) FOR this»
+«ENDDEFINE»
+
+
+«DEFINE daoExceptionFile(DBAccessModel model) FOR DataAccessObject»
+«LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-»
+«FILE getDaoExcFullPath(this, model)»package «pkgPackage».exceptions;
+
+/**
+ * Le eccezioni rilanciate dai metodi del DAO «name» sono di questo tipo.
+ * @generated
+ */
+public class «getDaoExcClassName()» extends DaoException
+{
+	/** 
+	 * @param message
+	 * @generated
+	 */
+	public «getDaoExcClassName()»(String message)
+	{
+		super(message);
+	}
+
+	/**
+	 * @param message
+	 * @param cause
+	 * @generated
+	 */
+	public «getDaoExcClassName()»(String message, Throwable cause)
+	{
+		super(message, cause);
+	}
+
+}
+«ENDFILE»
+«ENDLET»
+«ENDDEFINE»
+
+«DEFINE daoFile(DBAccessModel model) FOR DataAccessObject»
+«LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-»
+«FILE getDaoFullPath(this, model)»package «pkgPackage».dao;
+
+import «pkgPackage».dao.*;
+import «pkgPackage».dto.*;
+import «pkgPackage».qbe.*;
+import «pkgPackage».metadata.*;
+import «pkgPackage».exceptions.*;
+import «getDALayerBasePkg(model)».util.*;
+import «getDALayerBasePkg(model)».qbe.*;
+import java.util.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+/**
+ * Interfaccia pubblica del DAO «name».
+ * @generated
+ */
+public interface «getDaoClassName()» {
+	«IF inserter != null-»
+		«EXPAND insertMethod(model, false) FOR this-»
+	«ENDIF-»	
+	
+	«EXPAND template::datagen::dao::updaters::updaters(model, false) FOR this-»
+	
+	«EXPAND template::datagen::dao::deleters::deleters(model, false) FOR this-»
+	
+	«REM»
+	Spostata la logica di estrazione dati nella corrispondente classe dtoRowMapper
+	«EXPAND mapRowMethods(model, false) FOR this-»
+	«ENDREM»
+	
+	«EXPAND template::datagen::dao::finders::finders(model, false) FOR this-»
+}
+«ENDFILE-»
+«ENDLET-»
+«ENDDEFINE»
+
+«DEFINE daoImplFile(DBAccessModel model) FOR DataAccessObject»
+«LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-»
+«FILE getDaoImplFullPath(this, model)»package «pkgPackage».dao.impl;
+
+import «pkgPackage».dao.*;
+import «pkgPackage».dao.mapper.*;
+import «pkgPackage».dto.*;
+import «pkgPackage».qbe.*;
+import «pkgPackage».metadata.*;
+import «pkgPackage».exceptions.*;
+import «getDALayerBasePkg(model)».util.*;
+import «getDALayerBasePkg(model)».qbe.*;
+import java.util.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
+import it.csi.util.performance.StopWatch;
+import org.apache.log4j.Logger;
+import java.util.Map;
+import java.util.TreeMap;
+
+
+
+«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(getDaoImplFQN(this,model)+"extraimport", this.name)»
+// aggiungere qui eventuali import custom. 
+«ENDPROTECT»
+
+/**
+ * Implemenrazione del DAO «name»
+ * @generated
+ */
+public class «getDaoImplClassName()» extends AbstractDAO implements «getDaoClassName()»
+{
+	protected static final Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
+	/**
+	 * Il DAO utilizza JDBC template per l'implementazione delle query.
+	 * @generated
+	 */
+	protected NamedParameterJdbcTemplate jdbcTemplate;
+	
+	/**
+	 * Imposta il JDBC template utilizato per l'implementazione delle query
+	 * @generated
+	 */
+	public void setJdbcTemplate(NamedParameterJdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
+	
+	«IF this.cacheability==CacheabilityTypes::ALMOST_STABLE_DATA»
+	/**
+	 * Cache del DAO.
+	 * @generated
+	 */
+	 protected SimpleCache cache;
+	
+	/**
+	 * Restutuisce la cache del DAO
+	 * @generated
+	 */
+	public SimpleCache getCache() {
+		return cache;
+	}
+
+    /**
+	 * Imposta la cache del DAO
+	 * @param cache
+	 * @generated
+	 */
+	public void setCache(SimpleCache cache) {
+		this.cache = cache;
+	}
+	«ENDIF»
+	
+	
+
+	«IF inserter != null-»
+		«EXPAND insertMethod(model, true) FOR this»
+	«ENDIF»
+	
+	«EXPAND template::datagen::dao::updaters::updaters(model, true) FOR this»
+	
+	«EXPAND template::datagen::dao::deleters::deleters(model, true) FOR this»
+	
+	«REM»
+	Spostata la logica di estrazione dati nella corrispondente classe dtoRowMapper
+	«EXPAND mapRowMethods(model, true) FOR this»
+	«ENDREM»
+	
+	«REM»
+	 Le classi RowMapper sono state disaccopiate dalle DAOImpl
+	«EXPAND rowMapperInnerClass FOR this»
+	«ENDREM»
+
+	«IF finders!=null && finders.finders.size>0-»
+    	«EXPAND rowMapperObject(this) FOREACH this.finders.finders»
+    «ENDIF-»
+
+	/**
+	 * 
+	 * Restituisce il nome della tabella su cui opera il DAO
+	 * @return String
+	 * @generated
+	 */
+	public String getTableName()
+	{
+		return "«mainTable.name»";
+	}
+	
+	«IF finders!=null && finders.finders.size>0-»
+		«EXPAND template::datagen::dao::finders::finders(model, true) FOR this»
+		«EXPAND supplierDaoSpringProperties FOR this»
+	«ENDIF»
+}
+
+«ENDFILE-»
+«ENDLET-»
+«ENDDEFINE»
+
+«DEFINE rowMapperObject(DataAccessObject dao) FOR Finder-»
+«ERROR "rowMapperObject: tipo di finder non gestito:"+this»
+«ENDDEFINE»
+
+«DEFINE rowMapperObject(DataAccessObject dao) FOR FindAll-»
+	«EXPAND rowMapperObject_internal(dao, this.distinct) FOR this-»
+«ENDDEFINE»
+
+«DEFINE rowMapperObject(DataAccessObject dao) FOR FindByPK-»
+	«EXPAND rowMapperObject_internal(dao, null) FOR this-»
+«ENDDEFINE»
+
+«DEFINE rowMapperObject(DataAccessObject dao) FOR CustomFinder-»
+	«EXPAND rowMapperObject_internal(dao, this.distinct) FOR this-»
+«ENDDEFINE»
+
+«DEFINE rowMapperObject(DataAccessObject dao) FOR QBEFinder-»
+	«EXPAND rowMapperObject_internal(dao, this.distinct) FOR this-»
+«ENDDEFINE»
+
+«DEFINE rowMapperObject_internal(DataAccessObject dao, List[Column] distinctColumns) FOR Finder-»
+	«REM»se si tratta di un custom finder con qDef si deve istanziare la classe RowMapper passando come argomento il dto specificatamente creato«ENDREM»
+	«IF this.metaType==CustomFinder && ((CustomFinder)this).queryDefinition!=null»
+		protected «getDaoClassName(dao)»RowMapper «name»RowMapper = new «getDaoClassName(dao)»RowMapper(
+		null,«getDtoCustomQdefClassName(dao,(CustomFinder)this)».class);
+	«ELSE»
+		protected «getDaoClassName(dao)»RowMapper «name»RowMapper = new «getDaoClassName(dao)»RowMapper(
+	«IF distinctColumns == null || distinctColumns.size==0-»null
+	«ELSE-»new String[]{«FOREACH distinctColumns AS currCol SEPARATOR ","»"«currCol.name»"«ENDFOREACH»}
+	«ENDIF-», «getDtoClassName(dao)».class
+	);
+	«ENDIF»
+«ENDDEFINE»
+«DEFINE rowMapperInnerClassEmpty FOR DataAccessObject»
+	/// flexible row mapper. 
+	public class «getDaoClassName()»RowMapper implements org.springframework.jdbc.core.RowMapper {
+	}
+	«ENDDEFINE»
+
+
+«DEFINE rowMapperInnerClass FOR DataAccessObject»
+	/** 
+	 * RowMapper relativo al DAO «getDaoClassName()»
+	 */
+	public static class «getDaoClassName()»RowMapper implements org.springframework.jdbc.core.RowMapper {
+	
+		
+		/**
+		 * conterra' l'elenco delle colonne su cui il row mapper opera (sottoinsieme delle colonne totali)
+		 */
+		private final java.util.Map<String,String> columnsToReadMap = new java.util.HashMap<String, String>();
+		
+		/**
+		 * se vale true allor ail row mapper opera su tutte le colonne (in questo caso il contenuto della
+		 * mappa 'columnsToReadMap' e' ignorato). 
+		 */
+		private boolean mapAllColumns = true;
+		
+		/**
+		 * La classe del DTO su cui opera il row mapper
+		 */
+		private final Class dtoClass;
+		
+		/**
+		 * Costruttore di default: permette di inizalizzare l'elenco delle colonne che il 
+		 * row mapper dovra' gestire e l'informazione relativa alla classe su cui opera il row
+		 * mapper.
+		 * @param columnsToRead elenco delle colonne da includere nel mapping (per query
+		 *        incomplete, esempio distinct, custom select...)
+		 * @param dtoClass la classe su cui il row mapper opera
+		 */
+		public «getDaoClassName()»RowMapper(String[] columnsToRead, Class dtoClass) {
+			if (columnsToRead != null) {
+				mapAllColumns = false;
+				for (int i=0; i<columnsToRead.length; i++)
+					columnsToReadMap.put(columnsToRead[i], columnsToRead[i]);
+			}
+			this.dtoClass=dtoClass;
+		}
+		
+		/**
+		 * Effettua il mapping necessario per ricostruire l'oggetto risultato («getDtoClassName()»).
+		 * 
+		 * @param rs il result set risultato della query
+		 * @param row l'indice della riga del result set da mappare
+		 * @return «getDtoClassName()»
+		 * @throws SQLException
+		 * @generated
+		 */
+		public Object mapRow(ResultSet rs, int row) throws SQLException
+		{
+			«REM»comment«getDtoClassName()» dto = new «getDtoClassName()»();
+			dto = mapRow_internal(dto, rs, row);
+			return dto;«ENDREM»
+			Object dto = null;
+			try {
+				dto = dtoClass.newInstance();
+			} catch (InstantiationException e) {
+				e.printStackTrace();
+				throw new RuntimeException("Impossibile istanziare la classe " + dtoClass.getName()+" ,"+e.getCause());
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+				throw new RuntimeException("Impossibile accedere alla classe " + dtoClass.getName()+" ,"+e.getCause());
+			}
+			
+			if(dto instanceof «getDtoClassName()»){
+				return mapRow_internal((«getDtoClassName()»)dto, rs, row);
+			}
+			
+			«REM»espando il mapping per i custom finder per tutti i dto specifici definiti all'interno del dao con Qdef«ENDREM»
+			«LET this.finders.finders.typeSelect(CustomFinder).select(f|f.queryDefinition!=null) AS customJoinFinders»
+				«IF customJoinFinders!=null && customJoinFinders.size>0»
+					«EXPAND CustomFinderQdefMapping(this) FOREACH customJoinFinders »
+				«ENDIF»
+			«ENDLET»
+			
+			return dto;
+		}
+			
+		/**
+		 * metodo di mapping specifico del DTO «getDtoClassName()»
+		 * @param objectToFill il DTO da popolare
+		 * @rs il resultset
+		 * @row l'indice della riga del result set da cui prendere i dati 
+		 */ 
+		public «getDtoClassName()» mapRow_internal(
+			«getDtoClassName()» objectToFill, 
+			ResultSet rs, 
+			int row) throws SQLException
+		
+		{	
+			«getDtoClassName()» dto = objectToFill;
+			«FOREACH mainTable.columns AS currCol ITERATOR i»
+			«REM»per ogni colonna della tabella verifico se e' una FK associata al resolver, «ENDREM»
+			«IF currCol.isForeignKey!=null && currCol.isForeignKey && this.lookupResolvers != null && this.lookupResolvers.resolvers.select(r|r.foreignKey.includedColumns.contains(currCol)).size >0-»
+			
+			«ELSE»
+			
+			if (mapAllColumns || columnsToReadMap.get("«currCol.name»") != null)
+				dto.set«javaPropertyNameFromColumn(currCol).toFirstUpper()-»(
+			«IF !isBlobOrClob(currCol)-»
+				«getValueFromRSByColName(currCol)-»
+			«ELSE-»
+				«getValueFromRS(currCol, i.counter1)»
+			«ENDIF-»			
+				);
+			«ENDIF-»
+			«ENDFOREACH-»
+			
+			
+			«REM»expand sui resolvers, se ci sono«ENDREM»
+			«IF this.lookupResolvers!=null && this.lookupResolvers.resolvers.size >0-»
+				«EXPAND lookupResolverRowMapping FOREACH this.lookupResolvers.resolvers-»
+			«ENDIF»
+			return dto;
+		}
+		
+		
+		«LET this.finders.finders.typeSelect(CustomFinder).select(f|f.queryDefinition!=null) AS customJoinFinders»
+				«IF customJoinFinders!=null && customJoinFinders.size>0»
+					«EXPAND mapRowInternalQDef(this) FOREACH customJoinFinders »
+				«ENDIF»
+			«ENDLET»
+		
+	}
+	
+«ENDDEFINE»
+
+
+«DEFINE mapRowInternalQDef(DataAccessObject dao) FOR CustomFinder»
+	
+	/**
+	 * Metodo specifico di mapping relativo al DTO custom «getDtoCustomQdefClassName(dao, this)».
+	 * 
+	 * @param rs
+	 * @param row
+	 * @throws SQLException
+	 * @return «getDtoCustomQdefClassName(dao,this)»
+	 * @generated
+	 */
+
+	public «getDtoCustomQdefClassName(dao,this)» mapRow_internal(
+			«getDtoCustomQdefClassName(dao,this)» objectToFill, ResultSet rs, int row) throws SQLException
+	{	
+			«getDtoCustomQdefClassName(dao,this)» dto = objectToFill;
+			«FOREACH this.queryDefinition.selectClause.columns.select(c|c.metaType==QTableColumn) AS currCol ITERATOR  i-»
+				«EXPAND singleMapRowInternalQDef(i.counter1) FOR currCol-»
+			«ENDFOREACH»
+			«FOREACH this.queryDefinition.selectClause.columns.select(c|c.metaType==QCalculatedColumn) AS currCol ITERATOR  i-»
+				«EXPAND singleMapRowInternalQDef(i.counter1) FOR currCol-»
+			«ENDFOREACH»
+			
+			return dto;
+	}	 
+«ENDDEFINE»
+
+
+«DEFINE singleMapRowInternalQDef(Integer i) FOR QResultColumn»
+	«ERROR "Non implementato"»
+«ENDDEFINE»
+
+
+«DEFINE singleMapRowInternalQDef(Integer i) FOR QCalculatedColumn»
+ 		if (mapAllColumns || columnsToReadMap.get("«this.alias.toUpperCase()»") != null)
+			dto.set«this.alias.toFirstUpper()»(«IF !isBlobOrClob(this)-»
+				«getValueFromRSByColName(this.calculatedType, this.alias)-»
+		«ELSE-»
+				«IF this.calculatedType == "BLOB"»
+				getBlobColumn(rs, "+i+")
+				«ELSEIF this.calculatedType == "CLOB"»
+				getClobColumn(rs, "+i+")
+				«ENDIF»
+		«ENDIF-»			
+		);			
+«ENDDEFINE»
+
+
+
+
+
+
+«DEFINE singleMapRowInternalQDef(Integer i) FOR QTableColumn»
+
+«IF isNullOrEmpty(this.alias)-»
+	«IF isNullOrEmpty(this.qtable.aliasName)»
+		if (mapAllColumns || columnsToReadMap.get("«this.column.name»") != null)
+			dto.set«javaPropertyNameFromColumn(this.column).toFirstUpper()»(«IF !isBlobOrClob(this.column)-»
+				«getValueFromRSByColName(this.column)-»
+		«ELSE-»
+			«getValueFromRS(this.column,i)-»
+		«ENDIF-»			
+		);	
+	«ELSE-»
+		if (mapAllColumns || columnsToReadMap.get("«this.column.name»") != null)
+			dto.set«this.qtable.aliasName.toFirstUpper()»«javaPropertyNameFromColumn(this.column).toFirstUpper()»(«IF !isBlobOrClob(this.column)-»
+			«getValueFromRSByColName(this.column)»
+		«ELSE-»
+			«getValueFromRS(this.column,i)»
+		«ENDIF-»			
+		);	
+	«ENDIF-»
+«ELSE-»
+		if (mapAllColumns || columnsToReadMap.get("«this.alias.toUpperCase()»") != null)
+			dto.set«this.alias.toFirstUpper()»(«IF !isBlobOrClob(this.column)-»
+				«getValueFromRSByAliasName(this.column, this.alias)-»
+		«ELSE-»
+				«getValueFromRS(this.column,i)-»
+		«ENDIF-»			
+		);	
+«ENDIF»
+«ENDDEFINE»
+
+
+
+
+
+«DEFINE columnNameList(boolean useDistinct) FOR List[TableColumn]-»
+«IF useDistinct-»DISTINCT «ENDIF-»«FOREACH this AS currCol SEPARATOR ","-»«((TableColumn)currCol).name-»«ENDFOREACH-»
+«ENDDEFINE»
+
+«DEFINE distinctColumnsIfNecessary FOR List[TableColumn]-»
+«IF this!=null && !this.isEmpty-»new String[]{«FOREACH this AS currCol SEPARATOR ","-»"«((TableColumn)currCol).name-»"«ENDFOREACH-»}«ENDIF-»
+«ENDDEFINE»
+
+
+«DEFINE columnNameList FOR List[TableColumn]-»
+	«EXPAND columnNameList(false) FOR this-»
+«ENDDEFINE»
+
+«DEFINE setColumnSetValuePlaceholderList(DataAccessObject dao) FOR List[TableColumn]-»
+SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c)) AS currCol SEPARATOR ","-»«((TableColumn)currCol).name» = :«((TableColumn)currCol).name-» «ENDFOREACH-»
+«ENDDEFINE»
+
+«DEFINE setColumnEqPlaceholderList(String separator) FOR List[TableColumn]-»
+«FOREACH this AS currCol SEPARATOR separator-»«((TableColumn)currCol).name» = :«((TableColumn)currCol).name» «ENDFOREACH-»
+«ENDDEFINE»
+
+«DEFINE paramPlaceholderList FOR List[TableColumn]-»
+«FOREACH this AS currCol SEPARATOR ","-» :«((TableColumn)currCol).name» «ENDFOREACH-»
+«ENDDEFINE»
+
+«DEFINE paramValorizationList(String dtoVarName, DataAccessObject dao) FOR List[TableColumn]-»
+«FOREACH this AS currCol-»
+	«IF currCol.isForeignKey!=null && currCol.isForeignKey && dao.lookupResolvers != null && dao.lookupResolvers.resolvers.select(r|r.foreignKey.includedColumns.contains(currCol)).size >0-»
+	«ELSE»	
+	params.addValue("«((TableColumn)currCol).name»", «dtoVarName».get«javaPropertyNameFromColumn(currCol).toFirstUpper()»(), «javaSqlTypeForJDBCBinding(currCol.type)-» );	
+	«ENDIF»
+«ENDFOREACH-»
+«ENDDEFINE»
+
+«DEFINE paramValorizationList(String dtoVarName, PKGenerator pkgen) FOR List[TableColumn]-»
+«ERROR "valorizzazione parametri non gestita per DAO con PKGenerator di tipo "+pkgen.metaType»
+«ENDDEFINE»
+
+«DEFINE paramValorizationList(String dtoVarName, SequencePKGenerator pkgen) FOR List[TableColumn]-»
+«LET (DataAccessObject)(pkgen.eContainer) AS dao-»
+«LET dao.mainTable.primaryKey.includedColumns.first() AS pkCol-»
+«FOREACH this AS currCol-»
+«IF currCol.isForeignKey!=null && currCol.isForeignKey && dao.lookupResolvers != null && dao.lookupResolvers.resolvers.select(r|r.foreignKey.includedColumns.contains(currCol)).size >0-»
+«ELSE»
+	params.addValue("«((TableColumn)currCol).name»", «currCol==pkCol?" newKey ":dtoVarName+".get"+javaPropertyNameFromColumn(currCol).toFirstUpper()+"()"» , «javaSqlTypeForJDBCBinding(currCol.type)-» );
+«ENDIF»
+«ENDFOREACH-»
+«ENDLET-»
+«ENDLET-»
+«ENDDEFINE»
+
+«DEFINE orderByClause FOR OrderSpecs»	
+  «IF this!=null-»sql.append(" ORDER BY «FOREACH this.specs AS currSpec SEPARATOR ','-»«currSpec.column.name-»«IF currSpec.ascending-» ASC«ELSE-» DESC«ENDIF-»«ENDFOREACH-»");«ENDIF-»		
+«ENDDEFINE»
+
+
+«DEFINE incrementerUse FOR TableColumn-»
+«IF type.type == PrimitiveTypeCodes::VARCHAR-»
+	«javaPropertyTypeFromColumn()» newKey = incrementer.nextStringValue();
+«ELSEIF (isNonDecimalNumber(this.type))-»
+	«javaPropertyTypeFromColumn()» newKey = «javaPropertyTypeFromColumn()».valueOf(incrementer.«getIncrementerNextValMethod()»);
+«ELSE»
+	«ERROR "impossibile usare incrementer per il tipo di colonna "+type.type+","+type.size+","+type.decimalDigits»
+«ENDIF-»
+		
+«ENDDEFINE»
+
+«DEFINE insertMethod(DBAccessModel model, boolean body) FOR DataAccessObject»
+	/**
+	 * Metodo di inserimento del DAO «name». Al termine dell'esecuzione il metodo
+	 * ritorna il valore della primary key.
+	 * 
+	 * @param dto
+	 * @return «getPkClassName()»
+	 * @generated
+	 */
+	«IF this.mainTable.primaryKey != null»
+	public «getPkClassName()» insert(«getDtoClassName()» dto)
+	«ELSE»
+	public void insert(«getDtoClassName()» dto)
+	«ENDIF»	
+	«IF body-»
+	{
+		«IF mainTable.primaryKey!=null && pkGenerator!=null-»
+		«EXPAND incrementerUse FOR this.mainTable.primaryKey.includedColumns.first()»
+		«ENDIF-»
+		final String sql = "INSERT INTO " + getTableName() + " ( «EXPAND columnNameList FOR this.mainTable.columns-» ) VALUES ( «EXPAND paramPlaceholderList FOR this.mainTable.columns-» )";
+		
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		«IF pkGenerator!=null-»
+			«EXPAND paramValorizationList("dto",pkGenerator) FOR this.mainTable.columns-»
+		«ELSE»
+			«EXPAND paramValorizationList("dto",this) FOR this.mainTable.columns-»
+		«ENDIF-»	
+		«IF this.lookupResolvers!=null && this.lookupResolvers.resolvers.size>0-»
+			«EXPAND lookedUpParamValorizationList("dto", this.mainTable.columns) FOR  this»
+		«ENDIF»
+«REM»
+
+StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
+		try {
+			stopWatch.start();
+			jdbcTemplate.update(sql.toString(), params);
+		} catch (RuntimeException ex) {
+			log.error("[«getDaoImplClassName()»::insert] esecuzione query",ex);
+			throw ex;
+		} finally {
+			stopWatch.dumpElapsed("«getDaoImplClassName()»", "insert","esecuzione query", sql);
+			log.debug("[«getDaoImplClassName()»::insert] END");
+		}
+
+«ENDREM»
+		
+		insert(jdbcTemplate, sql.toString(), params);
+		
+		«IF this.mainTable.primaryKey != null»
+		«IF pkGenerator!=null-»
+		«REM»se chiave multipla non funziona!!«ENDREM»
+		«EXPAND fillPKFields("dto", "newKey") FOREACH this.mainTable.primaryKey.includedColumns-»
+		«ENDIF-»
+		return dto.createPk();
+		«ENDIF»	
+		
+	}
+	«ELSE-»
+	;
+	«ENDIF-»
+	
+«ENDDEFINE»
+
+«DEFINE fillPKFields(String dtoVarName, String keyValVarName) FOR Column»
+		«dtoVarName».set«javaPropertyNameFromColumn((TableColumn)this).toFirstUpper()»(«keyValVarName»);
+«ENDDEFINE»
+
+«DEFINE mapRowMethods(DBAccessModel model, boolean body) FOR DataAccessObject»
+	
+	/**
+     * Effettua il mapping necessario per ricostruire l'oggetto risultato («getDtoClassName()»).
+	 * 
+	 * @param rs il result set risultato della query
+	 * @param row l'indice della riga del result set da mappare
+	 * @return «getDtoClassName()»
+	 * @throws SQLException
+	 * @generated
+	 */
+	public «getDtoClassName()» mapRow(ResultSet rs, int row) throws SQLException
+	«IF body-»
+	{
+		«getDtoClassName()» dto = new «getDtoClassName()»();
+		dto = mapRow_internal(dto, rs, row);
+		return dto;
+	}
+	«ELSE-»
+	;
+	«ENDIF-»
+	
+	
+	/**
+	 * metodo di mapping specifico del DTO «getDtoClassName()»
+	 * @param objectToFill il DTO da popolare
+	 * @rs il resultset
+	 * @row l'indice della riga del result set da cui prendere i dati 
+	 */ 
+	public «getDtoClassName()» mapRow_internal(
+		«getDtoClassName()» objectToFill, 
+		ResultSet rs, 
+		int row) throws SQLException
+	«IF body-»
+	{	
+		«getDaoClassName().toFirstUpper()»RowMapper «getDaoClassName().toFirstLower()»RowMapper = new «getDaoClassName().toFirstUpper()»RowMapper(null,«getDtoClassName()».class);
+		
+		«REM»«FOREACH mainTable.columns AS currCol ITERATOR i»
+			«IF currCol.isForeignKey!=null && currCol.isForeignKey && this.lookupResolvers != null && this.lookupResolvers.resolvers.select(r|r.foreignKey.includedColumns.contains(currCol)).size >0-»
+			
+			«ELSE»
+		dto.set«javaPropertyNameFromColumn(currCol).toFirstUpper()»(
+		«IF !isBlobOrClob(currCol)-»
+			«getValueFromRSByColName(currCol)»
+		«ELSE-»
+			«getValueFromRS(currCol, i.counter1)»
+		«ENDIF-»			
+			);
+			«ENDIF»
+		«ENDFOREACH»
+		«ENDREM»
+		
+		return «getDaoClassName().toFirstLower()»RowMapper.mapRow_internal(objectToFill, rs, row);
+	}
+	«ELSE-»
+	;
+	«ENDIF-»
+	
+	
+«ENDDEFINE»
+
+
+«DEFINE commonDaoFiles(DBAccessModel model) FOR DaoPackage»
+«FILE getPkgDir(this, model)+"/dao/impl/AbstractDAO.java"»package «getPkgPackage(this, model)».dao.impl;
+
+import java.io.*;
+import java.sql.*;
+
+import org.springframework.jdbc.support.incrementer.DataFieldMaxValueIncrementer;
+
+import «getDALayerBasePkg(model)».util.*;
+import it.csi.util.performance.StopWatch;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+
+
+/**
+ * Base class for Oracle DAO classes.
+ *
+ * @generated
+ */
+public abstract class AbstractDAO
+{
+	/**
+	 * @generated
+	 */
+	protected DataFieldMaxValueIncrementer incrementer;
+	
+	/**
+	 * @generated
+	 */   
+	public void setIncrementer(DataFieldMaxValueIncrementer incrementer) {
+		this.incrementer = incrementer;
+	}
+
+	/**
+	 * Method 'getTableName'
+	 * 
+	 * @return String
+	 * @generated
+	 */
+	public abstract String getTableName();
+	
+	/**
+	 * Metodo di generico di inserimento (opera su qualsiasi specifico DAO).
+	 * @param jdbcTemplate
+	 * @param sql
+	 * @param params  
+	 */
+	public void insert(NamedParameterJdbcTemplate jdbcTemplate,String sql,MapSqlParameterSource params)
+	{
+		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
+		try {
+			stopWatch.start();
+			jdbcTemplate.update(sql.toString(), params);
+		} catch (RuntimeException ex) {
+			//log.error("[PazienteLowDaoImpl::insert] esecuzione query", ex);
+			throw ex;
+		} finally {
+			stopWatch.dumpElapsed("PazienteLowDaoImpl", "insert",
+					"esecuzione query", sql);
+			//log.debug("[PazienteLowDaoImpl::insert] END");
+		}
+	}
+	
+	/**
+	 * Metodo di generico di aggiornamento dati (opera su qualsiasi specifico DAO).
+	 * @param jdbcTemplate
+	 * @param sql
+	 * @param params  
+	 */
+	public void update(NamedParameterJdbcTemplate jdbcTemplate,String sql,MapSqlParameterSource params)
+	{
+		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
+		try {
+			stopWatch.start();
+			jdbcTemplate.update(sql.toString(), params);
+		} catch (RuntimeException ex) {
+			//log.error("[PazienteLowDaoImpl::insert] esecuzione query", ex);
+			throw ex;
+		} finally {
+			stopWatch.dumpElapsed("PazienteLowDaoImpl", "insert",
+					"esecuzione query", sql);
+			//log.debug("[PazienteLowDaoImpl::insert] END");
+		}
+	}
+	
+	/**
+	 * Metodo di generico di cancellazione (opera su qualsiasi specifico DAO).
+	 * @param jdbcTemplate
+	 * @param sql
+	 * @param params  
+	 */
+	public void delete(NamedParameterJdbcTemplate jdbcTemplate,String sql,MapSqlParameterSource params)
+	{
+		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
+		try {
+			stopWatch.start();
+			jdbcTemplate.update(sql.toString(), params);
+		} catch (RuntimeException ex) {
+			//log.error("[PazienteLowDaoImpl::insert] esecuzione query", ex);
+			throw ex;
+		} finally {
+			stopWatch.dumpElapsed("PazienteLowDaoImpl", "insert",
+					"esecuzione query", sql);
+			//log.debug("[PazienteLowDaoImpl::insert] END");
+		}
+	}
+	
+	
+	«EXPAND abstractDAODBMSSpecificCode FOR this»
+	
+}
+«ENDFILE»
+
+«FILE getPkgDir(this, model)+"/exceptions/DaoException.java"»package «getPkgPackage(this, model)».exceptions;
+
+/**
+ * Superclasse di tutte le classi di eccezione dei vari DAO.
+ * @generated
+ */
+public class DaoException extends RuntimeException
+{
+	/**
+	 * @generated
+	 */
+	protected Throwable throwable;
+
+	/**
+	 * Costruttore
+	 * 
+	 * @param message
+	 * @generated
+	 */
+	public DaoException(String message)
+	{
+		super(message);
+	}
+
+	/**
+	 * Costruttore
+	 * 
+	 * @param message
+	 * @param throwable
+	 * @generated
+	 */
+	public DaoException(String message, Throwable throwable)
+	{
+		super(message);
+		this.throwable = throwable;
+	}
+
+	/**
+	 * Method 'getCause'
+	 * 
+	 * @return Throwable
+	 * @generated
+	 */
+	public Throwable getCause()
+	{
+		return throwable;
+	}
+
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE abstractDAODBMSSpecificCode FOR DaoPackage»
+«ERROR "abstractDAODBMSSpecificCode: aop non risolta"»
+«ENDDEFINE»
+
+«REM»gestire l'univocità della regione protetta per la compatibilità con servicegen«ENDREM»
+«DEFINE utilFiles FOR DBAccessModel»
+«FILE getDALayerBaseDir(this)+"/util/Constants.java"»package «getDALayerBasePkg(this)».util;
+/**
+ * Costanti dell'applicativo
+ * @generated
+ */
+public final class Constants {
+	/**
+	 * identificativo dell'applicativo.
+	 */
+	public static final String APPLICATION_CODE = "«this.codComponente»";
+	
+	«PROTECT CSTART '/*' CEND '*/' ID getRegionUID("DaoConstants", this.name)»
+	
+	«ENDPROTECT»
+}
+«ENDFILE»
+
+«FILE getDALayerBaseDir(this)+"/util/NamedParameterJdbcTemplateWithQueryDebug.java"»package «getDALayerBasePkg(this)».util; 
+import java.util.Date;
+import java.util.List;
+
+import javax.sql.DataSource;
+
+import org.apache.log4j.Logger;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcOperations;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+
+/**
+ * Implementazione di NamedParameterJdbcTemplate con l'aggiunta del log dell'SQL che viene eseguito.
+ * @generated
+ */
+public class NamedParameterJdbcTemplateWithQueryDebug
+		extends
+			NamedParameterJdbcTemplate {
+
+	/**
+	 * @generated
+	 */
+	protected static final Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
+
+	/**
+	 * @generated
+	 */
+	private static String PLACEHOLDER = ":";
+
+	/**
+	 * @generated
+	 */
+	private static String[] terminatoriParametro = new String[]{" ","=",")","|","(",">","<","+","-","*","/"}; 
+	
+	/**
+	 * costruttore
+	 * @generated
+	 */
+	public NamedParameterJdbcTemplateWithQueryDebug(DataSource dataSource) {
+		super(dataSource);
+	}
+
+    /** 
+     * costruttore
+     * @generated
+     */
+	public NamedParameterJdbcTemplateWithQueryDebug(
+			JdbcOperations classicJdbcTemplate) {
+		super(classicJdbcTemplate);
+	}
+
+	/**
+	 * @generated
+	 */
+	@Override
+	public int update(String sql, SqlParameterSource paramSource)
+			throws DataAccessException {
+		try {
+			logSql(sql, paramSource);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return super.update(sql, paramSource);
+	}
+
+	/**
+	 * @generated
+	 */
+	@Override
+	public List query(String sql, SqlParameterSource paramSource,
+			RowMapper rowMapper) throws DataAccessException {
+		try {
+			logSql(sql, paramSource);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return super.query(sql, paramSource, rowMapper);
+	}
+
+	/**
+	 * stampa su log la query con i valori dei parametri impostati al posto dei placeholder
+	 * 
+	 * @param sql query con i placeholder 
+	 * @param paramSource  mappa contenente i parametri e loro valori
+	 * @generated
+	 */
+	private void logSql(String sql, SqlParameterSource paramSource) {
+		if(log.isDebugEnabled()){
+			sql = buildSqlWithParameters(sql, paramSource);
+		}
+		log.debug(sql);
+	}
+
+	/**
+	 * 
+	 * Restituisce una query con i valori impostati al posto dei placeholder (:nomeparametro)
+	 * 
+	 * @param sql query con i placeholder 
+	 * @param paramSource  mappa contenente i parametri e loro valori
+	 * @return
+	 * @generated
+	 */
+	private String buildSqlWithParameters(String sql,
+			SqlParameterSource paramSource) {
+		String[] parametriQuery = sql.split(PLACEHOLDER);
+		for (String parametro : parametriQuery) {
+			parametro = getParametroUtile(parametro);
+			if (paramSource.hasValue(parametro)) {
+				sql = sql.replaceAll(PLACEHOLDER + parametro, getValue(paramSource, parametro));
+			}
+		}
+		return sql;
+	}
+
+	/**
+	 * Cerca all'interno di una parte di query la minore porzione di stringa utile per essere considerata
+	 * come parametro
+	 *  
+	 * @param parametro  pezzo di query ottenuta da una istruzione split con il carattere ':' come separatore 
+	 * @return la minore parola utile utilizzabile come parametro della query
+	 * @generated
+	 */
+	private String getParametroUtile(String parametro) {
+		int posizioneTerminatoreAttuale = 0;
+		for (int i = 0; i < terminatoriParametro.length; i++) {
+			posizioneTerminatoreAttuale = parametro.indexOf(terminatoriParametro[i]); 
+			if(posizioneTerminatoreAttuale > 0)
+			{
+				parametro = parametro.substring(0,posizioneTerminatoreAttuale);
+			}
+		}
+		return parametro;
+	}
+
+	/**
+	 * restituisce una rappresentazione in formato stringa di un parametro con placeholder
+	 * nella query prelevando il valore dalla Map
+	 * @param paramSource mappa contenente i parametri e ralativi valori
+	 * @param parametro nome del parametro nella query
+	 * @return
+	 * @generated
+	 */
+	private String getValue(SqlParameterSource paramSource, String parametro) {
+		String resultValue = "null";
+		Object paramValue = paramSource.getValue(parametro);
+
+		if (paramValue != null) {
+			if (paramValue instanceof String) {
+				return "'" + ((String) paramValue).replaceAll("'", "''") + "'";
+			} else if (paramValue instanceof Number) {
+				resultValue = paramValue.toString();
+			} else if (paramValue instanceof Date) {
+				resultValue = parseDate((Date) paramValue);
+			}
+		}
+		return resultValue;
+	}
+
+	/**
+	 * Converte una data in un formato stringa utilizzabile nelle query per Oracle 
+	 * @param date 
+	 * @return  stringa rappresentante la data nel formato to_date(,DD/MM/YYYY HH24:MI:SS')
+	 * @generated
+	 */
+	private static String parseDate(java.util.Date date) {
+		StringBuffer retValue = new StringBuffer("");
+		StringBuffer retvalueBuff = new StringBuffer("");
+		java.util.Calendar cal = java.util.Calendar.getInstance();
+		cal.setTime(date);
+		
+		retvalueBuff.append(Integer.toString(cal.get(java.util.Calendar.DAY_OF_MONTH)));
+		retvalueBuff.append("/");
+		
+		retvalueBuff.append(Integer.toString(cal.get(java.util.Calendar.MONTH) + 1));
+		retvalueBuff.append("/");
+		
+		retvalueBuff.append(Integer.toString(cal.get(java.util.Calendar.YEAR)));
+		retvalueBuff.append("-");
+		
+		retvalueBuff.append(Integer.toString(cal.get(java.util.Calendar.HOUR_OF_DAY)));
+		retvalueBuff.append(":");
+		
+		retvalueBuff.append(Integer.toString(cal.get(java.util.Calendar.MINUTE)));
+		retvalueBuff.append(":");
+		
+		retvalueBuff.append(Integer.toString(cal.get(java.util.Calendar.SECOND)));
+		
+		retValue.append("to_date('");
+		retValue.append(retvalueBuff);
+		retValue.append("','DD/MM/YYYY HH24:MI:SS')");
+		
+		
+		
+		return retValue.toString();
+	}
+
+}
+
+«ENDFILE»
+
+«FILE getDALayerBaseDir(this)+"/util/SimpleCache.java"»package «getDALayerBasePkg(this)».util; 
+
+import java.util.HashMap;
+import java.util.Iterator;
+
+import org.apache.log4j.Logger;
+
+/**
+ * Implementazione di cache di DTO. Utilizzata dai DAO se specificato.
+ * @generated
+ */
+public class SimpleCache {
+	
+	/**
+	 * @generated
+	 */
+	protected static final Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
+	
+	/**
+	 * @generated
+	 */
+	HashMap<Object, CacheElement> map = new HashMap<Object, CacheElement>();
+	
+	/**
+	 * @generated
+	 */
+	int ttl_minutes = 0;
+	
+	/**
+	 * @generated
+	 */
+	boolean updateAccessTime = false;
+	
+	/**
+	 * costruttore
+	 * @generated
+	 */
+	public SimpleCache(int ttl, boolean updateAccessTime){
+		this.ttl_minutes=ttl;
+		this.updateAccessTime=updateAccessTime;
+	}
+	
+	/**
+	 * inserimento del dato nella cache (con valorizzazione dell'istante di inserimento
+	 * che serve per determinare lo svecchiamento).
+	 * @generated
+	 */
+	public void put(Object key, Object value){
+		CacheElement el = new CacheElement();
+		el.setLastAccess(System.currentTimeMillis());
+		el.setValue(value);
+		map.put(key, el);
+	}
+	
+	/**
+	 * Restituisce l'elemento della cache identificato dalla chiave.
+	 * @generated
+	 */
+	public Object get(Object key){
+		CacheElement el = map.get(key);
+		if (el != null){
+			if ((System.currentTimeMillis() - el.getLastAccess())>(ttl_minutes*60000)){
+				log.debug("elemento trovato ma scaduto... (impostato TTL pari a "+ttl_minutes+" minuti");
+				map.remove(key);
+				return null;
+			}
+		
+		else{
+				log.debug("elemento trovato");
+				if(updateAccessTime){
+					el.setLastAccess(System.currentTimeMillis());
+				}
+				map.put(key, el); // non servirebbe nemmeno, reference...
+				Object val = el.getValue();
+				return val;
+			}
+		}
+		else {
+			log.debug("elemento non trovato");
+			return null;
+		}
+			
+	}
+	
+	
+	/**
+	 * dump per debug
+	 */
+	public void dumpCache(){
+		Iterator<Object> it = map.keySet().iterator();
+		while(it.hasNext()){
+			Object currK = it.next();
+			CacheElement el = map.get(currK);
+			log.debug("key:"+currK+", val:"+el.getValue()+", lastAccess:"+el.getLastAccess());
+		}
+	}
+}
+
+«ENDFILE»
+
+«FILE getDALayerBaseDir(this)+"/util/CacheElement.java"»package «getDALayerBasePkg(this)».util;
+
+/**
+ * elemento della cache con indicazione dell'istante di inserimento in cache (per TTL)
+ * @generated
+ */
+public class CacheElement {
+	   /**
+	 	* @generated
+	 	*/
+		long lastAccess = 0;
+	
+	   /**
+	 	* @generated
+	 	*/
+		Object value = null;
+		
+	   /**
+	    * restituisce l'istante di ultimo accesso all'oggetto
+	 	* @generated
+	 	*/
+		public long getLastAccess() {
+			return lastAccess;
+		}
+		
+		/**
+		 * imposta l'istante di ultimo accesso all'oggetto
+		 * @generated
+		 */
+		public void setLastAccess(long lastAccess) {
+			this.lastAccess = lastAccess;
+		}
+		
+		/**
+		 * restituisce il valore dell'elemento di cache
+		 * @generated
+		 */
+		public Object getValue() {
+			return value;
+		}
+		
+		/**
+		 * imposta il valore dell'elemento di cache
+		 * @generated
+		 */
+		public void setValue(Object value) {
+			this.value = value;
+		}
+
+}
+
+«ENDFILE»
+
+«ENDDEFINE»
+
+
+«DEFINE lookupResolverRowMapping FOR LookupResolver»
+
+	
+	if (mapAllColumns ||«FOREACH this.foreignKey.includedColumns AS includedColumn SEPARATOR "&&"» columnsToReadMap.get(«getValueFromRSByColName(includedColumn)») != null «ENDFOREACH»){
+		«this.supplierDAO.getDtoClassName()» «this.supplierDAO.getDtoClassName().toFirstLower()» = null;
+				try {
+					«this.supplierDAO.getDtoClassName().toFirstLower()»   = «this.supplierDAO.getDaoClassName().toFirstLower()».findByPrimaryKey(new «this.supplierDAO.getPkClassName()»(«FOREACH this.foreignKey.includedColumns AS includedColumn SEPARATOR ","» «getValueFromRSByColName(includedColumn)»«ENDFOREACH»));
+				} catch («this.supplierDAO.getDaoExcClassName()» e) {
+					log.error("Si e' verificato un errore nella chiamata al dao supplier: " +  «this.supplierDAO.getDaoClassName().toFirstLower()» + " : "+e);
+					e.printStackTrace();
+				}
+		dto.set«getLookedUpPropertyName(this).toFirstUpper()»(«this.supplierDAO.getDtoClassName().toFirstLower()»);
+	}
+
+
+«ENDDEFINE»
+
+
+«DEFINE supplierDaoSpringProperties FOR DataAccessObject»
+	
+	«IF this.lookupResolvers!=null && this.lookupResolvers.resolvers.size > 0»
+		«LET this.lookupResolvers.resolvers.supplierDAO AS allSuppliers-»
+		«LET getAllDistinctSuppliers() AS allDistinctSuppliers-»
+		«FOREACH allDistinctSuppliers AS currSupplier»
+		«EXPAND supplierDaoSpringProperty FOR currSupplier-»
+		«ENDFOREACH-»
+		«ENDLET-»
+		«ENDLET-»
+	«ELSE-»
+	«REM» do nothing«ENDREM»
+	«ENDIF»
+
+«ENDDEFINE»
+
+«DEFINE supplierDaoSpringProperty FOR DataAccessObject-»
+			/**
+			 * @generated
+			 */
+			private «getDaoClassName(this)» «getDaoClassName(this).toFirstLower()»;
+			
+			/**
+			 * supplier DAO «getDaoClassName(this)»
+			 * @generated
+			 */
+			public «getDaoClassName(this)» get«getDaoClassName(this)»(){
+				return «getDaoClassName(this).toFirstLower()»;
+			}
+			
+			/**
+			 * supplier DAO «getDaoClassName(this)»
+			 * @generated
+			 */
+			public void set«getDaoClassName(this)»(«getDaoClassName(this)» val){
+				this.«getDaoClassName(this).toFirstLower()» = val;
+			}
+«ENDDEFINE»
+
+
+«DEFINE lookedUpParamValorizationList(String dtoVarName, List[TableColumn] list) FOR DataAccessObject»
+
+«FOREACH this.lookupResolvers.resolvers AS currResolver»
+		«FOREACH currResolver.foreignKey.includedColumns AS cmpForeignKey ITERATOR i»
+			«IF list.contains(cmpForeignKey)»
+			«LET  (List[TableColumn])currResolver.foreignKey.referredUC.includedColumns AS pkCols» 
+			«LET ((TableColumn)currResolver.foreignKey.includedColumns.get(i.counter0)).type AS colDataType»
+				params.addValue("«((TableColumn)currResolver.foreignKey.includedColumns.get(i.counter0)).name»",«dtoVarName».get«getLookedUpPropertyName(currResolver).toFirstUpper()»().get«javaPropertyNameFromColumn(pkCols.get(i.counter0)).toFirstUpper()»(),  «javaSqlTypeForJDBCBinding(colDataType)-» ); 
+				«ENDLET»
+				«ENDLET»
+			«ENDIF»
+		«ENDFOREACH»		
+«ENDFOREACH»
+
+«ENDDEFINE»
+
+«DEFINE CustomFinderQdefMapping(DataAccessObject dao) FOR CustomFinder-»
+	if(dto instanceof «getDtoCustomQdefClassName(dao,this)»){
+			return mapRow_internal((«getDtoCustomQdefClassName(dao,this)»)dto, rs, row);
+	}
+«ENDDEFINE»
+
+
+«DEFINE baseDaoRowMapper(DBAccessModel model) FOR DataAccessObject»
+«LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-»
+«FILE getBaseDaoMapperFullPath(this, model)»package «pkgPackage».dao.mapper;
+
+
+import «getDALayerBasePkg(model)».util.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import org.apache.log4j.Logger;
+
+
+
+
+/**
+ * Classe base di tutti i row mapper utilizzati nello strato DAO.
+ * @generated
+ */
+public class BaseDaoRowMapper 
+{
+	protected static final Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
+	/**
+	 * @generated
+	 */
+	public final java.util.Map<String, String> columnsToReadMap = new java.util.HashMap<String, String>();
+	/**
+	 * @generated
+	 */
+	public boolean mapAllColumns = true;
+	/**
+	 * @generated
+	 */
+	public Class dtoClass;
+	/**
+	 * @generated
+	 */
+	public Object dtoInstance;
+	
+	/**
+	 * @generated
+	 */
+	/**
+	 * @param columnsToRead elenco delle colonne da includere nel mapping (per query
+	 *        incomplete, esempio distinct, custom select...)
+	 */
+	public BaseDaoRowMapper(String[] columnsToRead, Class dtoClass) {
+		if (columnsToRead != null) {
+			mapAllColumns = false;
+			for (int i = 0; i < columnsToRead.length; i++)
+				columnsToReadMap.put(columnsToRead[i], columnsToRead[i]);
+		}
+		this.dtoClass = dtoClass;
+		setDtoInstance();
+	}
+	
+	
+	/**
+	 * @generated
+	 */
+	public void setDtoInstance()
+	{
+		try {
+			dtoInstance = dtoClass.newInstance();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Impossibile istanziare la classe "
+					+ dtoClass.getName() + " ," + e.getCause());
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Impossibile accedere alla classe "
+					+ dtoClass.getName() + " ," + e.getCause());
+		}
+	}
+}
+
+«ENDFILE-»
+«ENDLET-»
+«ENDDEFINE»
+
+«DEFINE daoRowMapper(DBAccessModel model) FOR DataAccessObject»
+«LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-»
+«FILE getDaoMapperFullPath(this, model)»package «pkgPackage».dao.mapper;
+
+
+import «pkgPackage».dto.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+
+/**
+ * RowMapper specifico del DAO «getDaoClassName()»
+ * @generated
+ */
+public class «getDaoClassName().toFirstUpper()»RowMapper extends BaseDaoRowMapper implements org.springframework.jdbc.core.RowMapper {
+	
+		
+		
+		
+		/**
+		 * costruttore
+		 * @param columnsToRead elenco delle colonne da includere nel mapping (per query
+		 *        incomplete, esempio distinct, custom select...) nella classe padre
+		 */
+		public «getDaoClassName().toFirstUpper()»RowMapper(String[] columnsToRead, Class dtoClass) {
+			super(columnsToRead, dtoClass);
+		}
+		
+		/**
+		 * Method 'mapRow'
+		 * 
+		 * @param rs
+		 * @param row
+		 * @throws SQLException
+		 * @return «getDtoClassName()»
+		 * @generated
+		 */
+		public Object mapRow(ResultSet rs, int row) throws SQLException
+		{
+			
+			
+			if(dtoInstance instanceof «getDtoClassName()»){
+				return mapRow_internal((«getDtoClassName()»)dtoInstance, rs, row);
+			}
+			
+			«REM»espando il mapping per i custom finder per tutti i dto specifici definiti all'interno del dao con Qdef«ENDREM»
+			«LET this.finders.finders.typeSelect(CustomFinder).select(f|f.queryDefinition!=null) AS customJoinFinders»
+				«IF customJoinFinders!=null && customJoinFinders.size>0»
+					«EXPAND CustomFinderQdefMapping(this) FOREACH customJoinFinders »
+				«ENDIF»
+			«ENDLET»
+			
+			return dtoInstance;
+		}
+			
+		 
+		public «getDtoClassName()» mapRow_internal(
+			«getDtoClassName()» objectToFill, 
+			ResultSet rs, 
+			int row) throws SQLException
+		
+		{	
+			«getDtoClassName()» dto = objectToFill;
+			«FOREACH mainTable.columns AS currCol ITERATOR i»
+			«REM»per ogni colonna della tabella verifico se e' una FK associata al resolver, «ENDREM»
+			«IF currCol.isForeignKey!=null && currCol.isForeignKey && this.lookupResolvers != null && this.lookupResolvers.resolvers.select(r|r.foreignKey.includedColumns.contains(currCol)).size >0-»
+			
+			«ELSE»
+			
+			if (mapAllColumns || columnsToReadMap.get("«currCol.name»") != null)
+				dto.set«javaPropertyNameFromColumn(currCol).toFirstUpper()-»(
+			«IF !isBlobOrClob(currCol)-»
+				«getValueFromRSByColName(currCol)-»
+			«ELSE-»
+				«getValueFromRS(currCol, i.counter1)»
+			«ENDIF-»			
+				);
+			«ENDIF-»
+			«ENDFOREACH-»
+			
+			
+			«REM»expand sui resolvers, se ci sono«ENDREM»
+			«IF this.lookupResolvers!=null && this.lookupResolvers.resolvers.size >0-»
+				«EXPAND lookupResolverRowMapping FOREACH this.lookupResolvers.resolvers-»
+			«ENDIF»
+			return dto;
+		}
+		
+		
+		«LET this.finders.finders.typeSelect(CustomFinder).select(f|f.queryDefinition!=null) AS customJoinFinders»
+				«IF customJoinFinders!=null && customJoinFinders.size>0»
+					«EXPAND mapRowInternalQDef(this) FOREACH customJoinFinders »
+				«ENDIF»
+			«ENDLET»
+		
+	}
+
+«ENDFILE-»
+«ENDLET-»
+«ENDDEFINE»
+

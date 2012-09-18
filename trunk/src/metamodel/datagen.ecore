@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:id="_g44oQOT_EeCfL57xkAM0Kw"
+    name="datagen" nsURI="http://www.csi.it/mddtools/datagen" nsPrefix="datagen">
+  <eAnnotations xmi:id="_g44oQeT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+    <details xmi:id="_g44oQuT_EeCfL57xkAM0Kw" key="documentation" value="Modellazione dello strato di accesso ai dati"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="_g44oQ-T_EeCfL57xkAM0Kw" name="DBAccessModel">
+    <eAnnotations xmi:id="_g44oROT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+      <details xmi:id="_g44oReT_EeCfL57xkAM0Kw" key="documentation" value="Modellazione dello strato di accesso ai dati"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_g44oRuT_EeCfL57xkAM0Kw"
+        name="schema" lowerBound="1" eType="ecore:EClass rdbmdl.ecore#//Schema">
+      <eAnnotations xmi:id="_g44oSOT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_g44oSeT_EeCfL57xkAM0Kw" key="documentation" value="Schema DB di cui viene modellato l'accesso&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_g44oSuT_EeCfL57xkAM0Kw"
+        name="daopkgs" upperBound="-1" eType="#_g44ob-T_EeCfL57xkAM0Kw" containment="true">
+      <eAnnotations xmi:id="_g44oS-T_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_g44oTOT_EeCfL57xkAM0Kw" key="documentation" value="I &lt;b>DataAccessObject&lt;/b> sono suddivisi in gruppi logici"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="_g44oTeT_EeCfL57xkAM0Kw"
+        name="codProdotto" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations xmi:id="_g44oT-T_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_g44oUOT_EeCfL57xkAM0Kw" key="documentation" value="Codice prodotto di appartenenza"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="_g44oUeT_EeCfL57xkAM0Kw"
+        name="codComponente" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations xmi:id="_g44oU-T_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_g44oVOT_EeCfL57xkAM0Kw" key="documentation" value="Codice componente di appartenenza"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Codice componente di appartenenza"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="_g44oVeT_EeCfL57xkAM0Kw" name="DataAccessObject">
+    <eAnnotations xmi:id="_g44oVuT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+      <details xmi:id="_g44oV-T_EeCfL57xkAM0Kw" key="documentation" value="Agente deputato alla manipolazione dei dati di una singola tabella"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="_g44oWOT_EeCfL57xkAM0Kw"
+        name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations xmi:id="_g44oWuT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_g44oW-T_EeCfL57xkAM0Kw" key="documentation" value="Nome logico del &lt;b>DAO&lt;/b>. Deve essere un identificativo vlaido di classe java."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_g44oXOT_EeCfL57xkAM0Kw"
+        name="mainTable" eType="ecore:EClass rdbmdl.ecore#//Table">
+      <eAnnotations xmi:id="_g44oXuT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_g44oX-T_EeCfL57xkAM0Kw" key="documentation" value="Tabella su cui opera il &lt;b>DAO&lt;/b>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_g44oYOT_EeCfL57xkAM0Kw"
+        name="pkGenerator" eType="#_g44oeuT_EeCfL57xkAM0Kw" containment="true">
+      <eAnnotations xmi:id="_g44oYeT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_g44oYuT_EeCfL57xkAM0Kw" key="documentation" value="Generatore di primary key (opzionale). Se definito e' utilizzato nelle operazioni di inserimento"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_g44oY-T_EeCfL57xkAM0Kw"
+        name="inserter" eType="#_g44ojOT_EeCfL57xkAM0Kw" containment="true">
+      <eAnnotations xmi:id="_g44oZOT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_g44oZeT_EeCfL57xkAM0Kw" key="documentation" value="Operazione di inserimento di un record"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_g44oZuT_EeCfL57xkAM0Kw"
+        name="finders" eType="#_g44okOT_EeCfL57xkAM0Kw" containment="true">
+      <eAnnotations xmi:id="_g44oZ-T_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_g44oaOT_EeCfL57xkAM0Kw" key="documentation" value="Insieme dei possibili finder definiti per questo &lt;b>DAO&lt;/b>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_g44oaeT_EeCfL57xkAM0Kw"
+        name="updaters" eType="#_g44o1-T_EeCfL57xkAM0Kw" containment="true">
+      <eAnnotations xmi:id="_g44oauT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_g44oa-T_EeCfL57xkAM0Kw" key="documentation" value="Insieme dei possibili updater definiti per questo &lt;b>DAO&lt;/b>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_g44obOT_EeCfL57xkAM0Kw"
+        name="deleters" eType="#_g44o6-T_EeCfL57xkAM0Kw" containment="true">
+      <eAnnotations xmi:id="_g44obeT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_g44obuT_EeCfL57xkAM0Kw" key="documentation" value="Insieme dei possibili deleter definiti per questo &lt;b>DAO&lt;/b>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="_7UoHQOT_EeCfL57xkAM0Kw"
+        name="cacheability" eType="#_jFUqoOT_EeCfL57xkAM0Kw" defaultValueLiteral="HIGHLY_VARIABLE_DATA">
+      <eAnnotations xmi:id="_KW5MkOUAEeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_KW5MkeUAEeCfL57xkAM0Kw" key="documentation" value="Indica il tipo di variabilit&amp;agrave; dei dati, utile per implementare eventuali meccanismi di caching"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="_WJw9sOUAEeCfL57xkAM0Kw"
+        name="cacheTTLminutes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eAnnotations xmi:id="_nfUUQOUAEeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_nfUUQeUAEeCfL57xkAM0Kw" key="documentation" value="Indica il Time To Live dell'eventuale cache"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lookupResolvers" eType="#//LookupResolvers"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="_g44ob-T_EeCfL57xkAM0Kw" name="DaoPackage">
+    <eAnnotations xmi:id="_g44ocOT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+      <details xmi:id="_g44oceT_EeCfL57xkAM0Kw" key="documentation" value="Raggruppamento logico di &lt;b>DataAccessObject&lt;/b>"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="_g44ocuT_EeCfL57xkAM0Kw"
+        name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations xmi:id="_g44odOT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_g44odeT_EeCfL57xkAM0Kw" key="documentation" value="nome logico del package. deve essere un identificativo valido per un package java"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_g44oduT_EeCfL57xkAM0Kw"
+        name="dao" upperBound="-1" eType="#_g44oVeT_EeCfL57xkAM0Kw" containment="true">
+      <eAnnotations xmi:id="_g44oeOT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_g44oeeT_EeCfL57xkAM0Kw" key="documentation" value="Elenco dei &lt;b>DataAccessObject&lt;/b> contenuti nel package."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="_g44oeuT_EeCfL57xkAM0Kw" name="PKGenerator"
+      abstract="true">
+    <eAnnotations xmi:id="_g44oe-T_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+      <details xmi:id="_g44ofOT_EeCfL57xkAM0Kw" key="documentation" value="Superclasse astratta dei generatori di primary key"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="_g44ofeT_EeCfL57xkAM0Kw" name="SequencePKGenerator"
+      eSuperTypes="#_g44oeuT_EeCfL57xkAM0Kw">
+    <eAnnotations xmi:id="_g44of-T_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+      <details xmi:id="_g44ogOT_EeCfL57xkAM0Kw" key="documentation" value="Generatorew di primary key basato su SEQUENCE"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="_g44ogeT_EeCfL57xkAM0Kw"
+        name="sequenceName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations xmi:id="_g44og-T_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_g44ohOT_EeCfL57xkAM0Kw" key="documentation" value="Nome della SEQUENCE utilizzata dal generatore di primary key"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="_g44oheT_EeCfL57xkAM0Kw" name="DBCommand"
+      abstract="true">
+    <eAnnotations xmi:id="_g44ohuT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+      <details xmi:id="_g44oh-T_EeCfL57xkAM0Kw" key="documentation" value="Superclasse astratta di tutte le classi che rappresentano le operazioni che il&#xD;&#xA;&lt;b>DataAccessObject&lt;/b> pu&amp;ograve; esporre"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="_g44oiOT_EeCfL57xkAM0Kw"
+        name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations xmi:id="_g44oiuT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_g44oi-T_EeCfL57xkAM0Kw" key="documentation" value="nome logico dell'operazione. Obbligatorio per alcune tipologie di operazioni.&#xD;&#xA;Deve essere un identificativo valido di metodo java"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="_g44ojOT_EeCfL57xkAM0Kw" name="Inserter"
+      eSuperTypes="#_g44oheT_EeCfL57xkAM0Kw">
+    <eAnnotations xmi:id="_g44ojuT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+      <details xmi:id="_g44oj-T_EeCfL57xkAM0Kw" key="documentation" value="Superclasse astratta di tutte le operazioni di inserimento dati"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="_g44okOT_EeCfL57xkAM0Kw" name="Finders">
+    <eAnnotations xmi:id="_g44okeT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+      <details xmi:id="_g44okuT_EeCfL57xkAM0Kw" key="documentation" value="Insieme dei &lt;b>Finder&lt;/b> messi a disposizione dal &lt;b>DataAccessObject&lt;/b>"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_g44ok-T_EeCfL57xkAM0Kw"
+        name="finders" upperBound="-1" eType="#_g44oluT_EeCfL57xkAM0Kw" containment="true">
+      <eAnnotations xmi:id="_g44olOT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_g44oleT_EeCfL57xkAM0Kw" key="documentation" value="Elenco dei &lt;b>Finder&lt;/b>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="_g44oluT_EeCfL57xkAM0Kw" name="Finder"
+      abstract="true" eSuperTypes="#_g44oheT_EeCfL57xkAM0Kw">
+    <eAnnotations xmi:id="_g44omOT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+      <details xmi:id="_g44omeT_EeCfL57xkAM0Kw" key="documentation" value="Superclasse astratta di tutte le operazioni di ricerca"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="_g44omuT_EeCfL57xkAM0Kw" name="SingleResFinder"
+      abstract="true" eSuperTypes="#_g44oluT_EeCfL57xkAM0Kw">
+    <eAnnotations xmi:id="_g44onOT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+      <details xmi:id="_g44oneT_EeCfL57xkAM0Kw" key="documentation" value="Classe astratta da cui discendono tutti i &lt;b>Finder&lt;/b> a risultato&#xD;&#xA;singolo."/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="_g44onuT_EeCfL57xkAM0Kw" name="MultiResFinder"
+      abstract="true" eSuperTypes="#_g44oluT_EeCfL57xkAM0Kw">
+    <eAnnotations xmi:id="_g44ooOT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+      <details xmi:id="_g44ooeT_EeCfL57xkAM0Kw" key="documentation" value="Classe astratta da cui discendono tutti i &lt;b>Finder&lt;/b> a risultato&#xD;&#xA;potenzialmente multiplo."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_g44oouT_EeCfL57xkAM0Kw"
+        name="distinct" upperBound="-1" eType="ecore:EClass rdbmdl.ecore#//Column">
+      <eAnnotations xmi:id="_g44opOT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_g44opeT_EeCfL57xkAM0Kw" key="documentation" value="Eventuale direttiva di _DISTINCT_. Se si specifica una o pi&amp;ugrave; colonne viene applicata la clausola _DISTINCT_.&#xD;&#xA;In questo caso il risultato conterr&amp;agrave; la valorizzazione delle sole colonne&#xD;&#xA;indicate nell'elenco."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_g44opuT_EeCfL57xkAM0Kw"
+        name="orderSpecs" eType="#_g44otOT_EeCfL57xkAM0Kw" containment="true">
+      <eAnnotations xmi:id="_g44op-T_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_g44oqOT_EeCfL57xkAM0Kw" key="documentation" value="Eventuali specifiche di ordinamento dei risultati della query."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="_g44oqeT_EeCfL57xkAM0Kw" name="OrderSpec">
+    <eAnnotations xmi:id="_g44oquT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+      <details xmi:id="_g44oq-T_EeCfL57xkAM0Kw" key="documentation" value="Specifica di ordinamento relativa ad una singola colonna"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_g44orOT_EeCfL57xkAM0Kw"
+        name="column" eType="ecore:EClass rdbmdl.ecore#//Column">
+      <eAnnotations xmi:id="_g44oruT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_g44or-T_EeCfL57xkAM0Kw" key="documentation" value="La colonna oggetto dell'ordinamento"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="_g44osOT_EeCfL57xkAM0Kw"
+        name="ascending" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true">
+      <eAnnotations xmi:id="_g44osuT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_g44os-T_EeCfL57xkAM0Kw" key="documentation" value="Specifica la direzione di ordinamento: se il valore &amp;egrave; _true_&#xD;&#xA;l'ordinamento &amp;egrave; ascendente, altrimenti discendente"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="qcolumn" eType="#//QTableColumn">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="La colonna calcolata oggetto dell'ordinamento (utilizzare questo campo in alternativa al&#xD;&#xA;campo &lt;i>column&lt;/i> e solo in un &lt;b>CustomFinder&lt;/b> con &#xD;&#xA;&lt;b>QueryDef&lt;b>."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="_g44otOT_EeCfL57xkAM0Kw" name="OrderSpecs">
+    <eAnnotations xmi:id="_g44oteT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+      <details xmi:id="_g44otuT_EeCfL57xkAM0Kw" key="documentation" value="Specifiche di ordinamento da applicare ai risultati di una query"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_g44ot-T_EeCfL57xkAM0Kw"
+        name="specs" upperBound="-1" eType="#_g44oqeT_EeCfL57xkAM0Kw" containment="true">
+      <eAnnotations xmi:id="_g44oueT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_g44ouuT_EeCfL57xkAM0Kw" key="documentation" value="Contiene l'elenco delle specifiche di ordinamento. L'ordinamento dei&#xD;&#xA;risultati &amp;egrave; ottenuto applicando le specifiche relative alle singole&#xD;&#xA;colonne nell'ordine in cui sono inserite in questo elenco."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="_g44ou-T_EeCfL57xkAM0Kw" name="FindByPK"
+      eSuperTypes="#_g44omuT_EeCfL57xkAM0Kw">
+    <eAnnotations xmi:id="_g44oveT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+      <details xmi:id="_g44ovuT_EeCfL57xkAM0Kw" key="documentation" value="Operazione che permette la ricerca di un singolo record tramite primary key"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="_g44ov-T_EeCfL57xkAM0Kw" name="FindAll"
+      eSuperTypes="#_g44onuT_EeCfL57xkAM0Kw">
+    <eAnnotations xmi:id="_g44oweT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+      <details xmi:id="_g44owuT_EeCfL57xkAM0Kw" key="documentation" value="Operazione che permette l'estrazione dell'insieme completo dei dati dalla tabella&#xD;&#xA;associata al &lt;b>DataAccessObject&lt;/b>, senza filtri"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="_g44ow-T_EeCfL57xkAM0Kw" name="QBEFinder"
+      eSuperTypes="#_g44onuT_EeCfL57xkAM0Kw">
+    <eAnnotations xmi:id="_g44oxeT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+      <details xmi:id="_g44oxuT_EeCfL57xkAM0Kw" key="documentation" value="Operazione di ricerca by example"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="_g44ox-T_EeCfL57xkAM0Kw" name="CustomFinder"
+      eSuperTypes="#_g44onuT_EeCfL57xkAM0Kw">
+    <eAnnotations xmi:id="_g44oyeT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+      <details xmi:id="_g44oyuT_EeCfL57xkAM0Kw" key="documentation" value="Operazione di ricerca con logica custom"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="_g44oy-T_EeCfL57xkAM0Kw"
+        name="filterClassFQN" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations xmi:id="_g44ozeT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_g44ozuT_EeCfL57xkAM0Kw" key="documentation" value="Full qualified name della classe che deve essere utilizzata come parametro di input per il finder.&#xD;&#xA;Possibili valori:&#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>Se non si specifica la proipriet&amp;agrave; la classe utilizzata sar&amp;agrave; &lt;i>java.lang.Object&lt;/i>.&lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto, sar&amp;agrave; utilizzata la classe del dto associato. &lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto[], sar&amp;agrave; utilizzata una ArrayList costituita da oggetti del tipo del dto associato. &lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="_g44oz-T_EeCfL57xkAM0Kw"
+        name="customSelect" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false">
+      <eAnnotations xmi:id="_g44o0eT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_g44o0uT_EeCfL57xkAM0Kw" key="documentation" value="Se impostata a true permette la customizzazione della clausola select, &#xD;&#xA;altrimenti viene generata una clausola di default che tiene conto di:&#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>nomi di colonne&lt;/li>&#xD;&#xA;&lt;li>posizione delle colonne&lt;/li>&#xD;&#xA;&lt;li>eventuali clausole DISTINCT&lt;/li>&#xD;&#xA;&lt;/ul>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="_g44o0-T_EeCfL57xkAM0Kw"
+        name="customFrom" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false">
+      <eAnnotations xmi:id="_g44o1eT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_g44o1uT_EeCfL57xkAM0Kw" key="documentation" value="Se impostata a true permette la customizzazione della clausola FROM, &#xD;&#xA;tipicamente necessaria quando si debba introdurre una tabella aggiuntiva&#xD;&#xA;per fare ad esempio una join."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="queryDefinition" eType="#//QueryDef"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definizione della query da eseguire. Utilizzando questo tipo di modellazione &#xD;&#xA;&amp;egrave; possibile modellare interamente la query senza limitazioni sulla struttura&#xD;&#xA;dei campi in output, delle tabelle coinvolte, dei criteri di join.&#xD;&#xA;L'utilizzo di questa modalit&amp;agrave; inibisce la possibilit&amp;agrave;/necessit&amp;agrave;&#xD;&#xA;di scrivere codice java per implementare la query.  "/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="_g44o1-T_EeCfL57xkAM0Kw" name="Updaters">
+    <eAnnotations xmi:id="_g44o2OT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+      <details xmi:id="_g44o2eT_EeCfL57xkAM0Kw" key="documentation" value="Insieme degli &lt;b>Updater&lt;/b> messia a disposizione dal &lt;b>DataAccessObject&lt;/b>"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_g44o2uT_EeCfL57xkAM0Kw"
+        name="updaters" upperBound="-1" eType="#_g44o3eT_EeCfL57xkAM0Kw" containment="true">
+      <eAnnotations xmi:id="_g44o2-T_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_g44o3OT_EeCfL57xkAM0Kw" key="documentation" value="Elenco degli &lt;b>Updater&lt;/b>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="_g44o3eT_EeCfL57xkAM0Kw" name="Updater"
+      abstract="true" eSuperTypes="#_g44oheT_EeCfL57xkAM0Kw">
+    <eAnnotations xmi:id="_g44o3-T_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+      <details xmi:id="_g44o4OT_EeCfL57xkAM0Kw" key="documentation" value="Superclasse astratta di tutte le operazioni di aggiornamento dati"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="_g44o4eT_EeCfL57xkAM0Kw" name="UpdateRow"
+      eSuperTypes="#_g44o3eT_EeCfL57xkAM0Kw">
+    <eAnnotations xmi:id="_g44o4-T_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+      <details xmi:id="_g44o5OT_EeCfL57xkAM0Kw" key="documentation" value="Operazione di aggiornamento dati che permette di aggiornate tutte le&#xD;&#xA;colonne della tabella relativamente ad un singolo record identitficato tramite &#xD;&#xA;primary key"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="_g44o5eT_EeCfL57xkAM0Kw" name="UpdateColumns"
+      eSuperTypes="#_g44o3eT_EeCfL57xkAM0Kw">
+    <eAnnotations xmi:id="_g44o5-T_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+      <details xmi:id="_g44o6OT_EeCfL57xkAM0Kw" key="documentation" value="Operazione di aggiornamento dati che permette di aggiornate selettivamente un sottoinsieme&#xD;&#xA;colonne della tabella relativamente ad un singolo record identitficato tramite &#xD;&#xA;primary key"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_g44o6eT_EeCfL57xkAM0Kw"
+        name="columns" upperBound="-1" eType="ecore:EClass rdbmdl.ecore#//TableColumn"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="_g44o6-T_EeCfL57xkAM0Kw" name="Deleters">
+    <eAnnotations xmi:id="_g44o7OT_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+      <details xmi:id="_g44o7eT_EeCfL57xkAM0Kw" key="documentation" value="Insieme dei &lt;b>Deleter&lt;/b> messi a disposizione dal &lt;b>DataAccessObject&lt;/b>"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_g44o7uT_EeCfL57xkAM0Kw"
+        name="deleters" upperBound="-1" eType="#_g44o8eT_EeCfL57xkAM0Kw" containment="true">
+      <eAnnotations xmi:id="_g44o7-T_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_g44o8OT_EeCfL57xkAM0Kw" key="documentation" value="Elenco dei &lt;b>Deleter&lt;/b>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="_g44o8eT_EeCfL57xkAM0Kw" name="Deleter"
+      abstract="true" eSuperTypes="#_g44oheT_EeCfL57xkAM0Kw">
+    <eAnnotations xmi:id="_g44o8-T_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+      <details xmi:id="_g44o9OT_EeCfL57xkAM0Kw" key="documentation" value="Superclasse astratta di tutte le operazioni dicancellazione di record dati"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="_g44o9eT_EeCfL57xkAM0Kw" name="DeleteByPK"
+      eSuperTypes="#_g44o8eT_EeCfL57xkAM0Kw">
+    <eAnnotations xmi:id="_g44o9-T_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+      <details xmi:id="_g44o-OT_EeCfL57xkAM0Kw" key="documentation" value="Operazione di cancellazione che permette di cancellare una singola riga identificata &#xD;&#xA;tramite primary key"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="_g44o-eT_EeCfL57xkAM0Kw" name="CustomUpdater"
+      eSuperTypes="#_g44o3eT_EeCfL57xkAM0Kw">
+    <eAnnotations xmi:id="_g44o--T_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+      <details xmi:id="_g44o_OT_EeCfL57xkAM0Kw" key="documentation" value="Operazione di aggiornamento dati altamente personalizzabile, tramite scrittura di codice custom.&#xD;&#xA;E' utile, ad esempio, nel caso si debbano realizzare delle operazioni di aggiornamento di un insieme di righe e non&#xD;&#xA;di una singola riga identificata da PK."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="_g44o_eT_EeCfL57xkAM0Kw"
+        name="filterClassFQN" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations xmi:id="_g44o_-T_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_g44pAOT_EeCfL57xkAM0Kw" key="documentation" value="Full qualified name della classe che deve essere utilizzata come primo parametro di input per il finder.&#xD;&#xA;Serve per determinare l'inisieme di righe su cui operare la modifica&#xD;&#xA;Possibili valori:&#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>Se non si specifica la proipriet&amp;agrave; la classe utilizzata sar&amp;agrave; &lt;i>java.lang.Object&lt;/i>.&lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto, sar&amp;agrave; utilizzata la classe del dto associato. &lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto[], sar&amp;agrave; utilizzata una ArrayList costituita da oggetti del tipo del dto associato. &lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="_g44pAeT_EeCfL57xkAM0Kw"
+        name="valueClassFQN" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations xmi:id="_g44pA-T_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_g44pBOT_EeCfL57xkAM0Kw" key="documentation" value="Full qualified name della classe che deve essere utilizzata come secondo parametro parametro di input per l'updater.&#xD;&#xA;Serve per specificare i valori da impostare&#xD;&#xA;&#xD;&#xA;Possibili valori:&#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>Se non si specifica la proipriet&amp;agrave; la classe utilizzata sar&amp;agrave; &lt;i>java.lang.Object&lt;/i>.&lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto, sar&amp;agrave; utilizzata la classe del dto associato. &lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto[], sar&amp;agrave; utilizzata una ArrayList costituita da oggetti del tipo del dto associato. &lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="_g44pBeT_EeCfL57xkAM0Kw" name="CustomDeleter"
+      eSuperTypes="#_g44o8eT_EeCfL57xkAM0Kw">
+    <eAnnotations xmi:id="_g44pB-T_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+      <details xmi:id="_g44pCOT_EeCfL57xkAM0Kw" key="documentation" value="Operazione di cancellazioen righe altamente personalizzabile, tramite scrittura di codice custom.&#xD;&#xA;E' utile nel caso si debbano realizzare delle operazioni di cancellazione di un insieme di righe e non&#xD;&#xA;di una singola riga identificata da PK."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="_g44pCeT_EeCfL57xkAM0Kw"
+        name="filterClassFQN" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations xmi:id="_g44pC-T_EeCfL57xkAM0Kw" source="http://www.eclipse.org/emf/2002/GenModel">
+        <details xmi:id="_g44pDOT_EeCfL57xkAM0Kw" key="documentation" value="Full qualified name della classe che deve essere utilizzata come parametro di input per il deleter.&#xD;&#xA;Possibili valori:&#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>Se non si specifica la proipriet&amp;agrave; la classe utilizzata sar&amp;agrave; &lt;i>java.lang.Object&lt;/i>.&lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto, sar&amp;agrave; utilizzata la classe del dto associato. &lt;/li>&#xD;&#xA;&lt;li>Se il valore specificato &amp;egrave; $dto[], sar&amp;agrave; utilizzata una ArrayList costituita da oggetti del tipo del dto associato. &lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LookupResolvers">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resolvers" upperBound="-1"
+        eType="#//LookupResolver" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LookupResolver">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="foreignKey" eType="ecore:EClass rdbmdl.ecore#//constraints/ForeignKey"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="supplierDAO" eType="#_g44oVeT_EeCfL57xkAM0Kw"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" xmi:id="_jFUqoOT_EeCfL57xkAM0Kw" name="CacheabilityTypes">
+    <eLiterals xmi:id="_x73oIOT_EeCfL57xkAM0Kw" name="HIGHLY_VARIABLE_DATA" literal="HIGHLY_VARIABLE_DATA"/>
+    <eLiterals xmi:id="_rURpEOT_EeCfL57xkAM0Kw" name="ALMOST_STABLE_DATA" value="1"
+        literal="ALMOST_STABLE_DATA"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QueryDef">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Definizione della query da eseguire. Utilizzando questo tipo di modellazione &#xD;&#xA;&amp;egrave; possibile modellare interamente la query senza limitazioni sulla struttura&#xD;&#xA;dei campi in output, delle tabelle coinvolte, dei criteri di join.&#xD;&#xA;L'utilizzo di questa modalit&amp;agrave; inibisce la possibilit&amp;agrave;/necessit&amp;agrave;&#xD;&#xA;di scrivere codice java per implementare la query.  "/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="selectClause" eType="#//SelectClause"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Determina l'elenco delle colonne che costituiscono il risultato della query.&#xD;&#xA;Le colonne possono essere di due tipi: &#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>colonne appartenenti ad una qualsiasi delle tabelle coinvolte (ovvero quelle&#xD;&#xA;referenziate nella &lt;b>FromClause&lt;/b>&lt;/li>&#xD;&#xA;&lt;li>colonne &lt;i>calcolate&lt;/i>, ottenute ad esempio applicando funzioni di&#xD;&#xA;aggregazione a colonne effettive (es. somma), oppure applicando altri tipi di funzioni ad&#xD;&#xA;una o pi&amp;ugrave; colonne effettive (es. concatenzaione)&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;Il DTO associato al &lt;b>CustomFinder&lt;/b> che utlizza questo tipo di costrutto&#xD;&#xA;conterr&amp;agrave; i campi necessari a contenenre adeguatamente i risultati della&#xD;&#xA;query e non sar&amp;agrave; il DTO classico associato al DAO."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fromClause" eType="#//FromClause"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Elenco delle tabelle incluse nella query. A ciascuna Tabella pu&amp;ograve; essere associato un &lt;i>alias&lt;/i>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="joinClause" eType="#//JoinClause"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Elenco (opzionale) dei cirteri di &lt;i>join&lt;/i> che devono essere applicati alle&#xD;&#xA;tabelle referenziate nella &lt;b>FromClause&lt;/b>."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="whereClause" eType="#//WhereClause"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SelectClause">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Determina l'elenco delle colonne che costituiscono il risultato della query.&#xD;&#xA;Le colonne possono essere di due tipi: &#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>colonne appartenenti ad una qualsiasi delle tabelle coinvolte (ovvero quelle&#xD;&#xA;referenziate nella &lt;b>FromClause&lt;/b>&lt;/li>&#xD;&#xA;&lt;li>colonne &lt;i>calcolate&lt;/i>, ottenute ad esempio applicando funzioni di&#xD;&#xA;aggregazione a colonne effettive (es. somma), oppure applicando altri tipi di funzioni ad&#xD;&#xA;una o pi&amp;ugrave; colonne effettive (es. concatenzaione)&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;Il DTO associato al &lt;b>CustomFinder&lt;/b> che utlizza questo tipo di costrutto&#xD;&#xA;conterr&amp;agrave; i campi necessari a contenenre adeguatamente i risultati della&#xD;&#xA;query e non sar&amp;agrave; il DTO classico associato al DAO."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="columns" upperBound="-1"
+        eType="#//QResultColumn" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="L'elenco delle colonne. Le colonne possono essere:&#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>&lt;b>QTableColumn&lt;/b>: colonne effettive appartenenti alle tabelle presenti nella clausola FROM&lt;/li>&#xD;&#xA;&lt;li>&lt;b>QCalculatedColumn&lt;/b>: colonne calcolate a partire dalle colonne&#xD;&#xA;presenti nelle tabelle referenziate nella clausola FROM&#xD;&#xA;&lt;/ul>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QResultColumn" abstract="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Superclasse (astratta) delle colonne che costituiscono l'output di una query."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="alias" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Se presente serve per disambiguare eventuali colonne con lo stesso nome ma&#xD;&#xA;provenienti da differenti tabelle. Nel caso delle colonne calcolate &amp;egrave; &#xD;&#xA;obbligatorio."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QTableColumn" eSuperTypes="#//QResultColumn">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="La singola colonna che fa parte del risultato della query. Inserendo questo tipo&#xD;&#xA;di elemento in una clausola SELECT viene inserita in output la colonna effettiva."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="qtable" eType="#//QTable">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Tabella a cui appartiene la colonna che si desidera inserire in output."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="column" eType="ecore:EClass rdbmdl.ecore#//TableColumn">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="La colonna effettiva. Deve essere una delle colonne della tabella referenziata&#xD;&#xA;in &lt;i>qtable&lt;/i>."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QCalculatedColumn" eSuperTypes="#//QResultColumn">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Inserendo questo tipo&#xD;&#xA;di elemento in una clausola SELECT viene inserita in output una colonna &#xD;&#xA;calcolata a seconda del contenuto delle varie propriet&amp;agrave;."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referencedColumns" upperBound="-1"
+        eType="#//QResultColumn" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Le colonne che sono referenziate nella espressione. L'ordine in cui sono definite&#xD;&#xA;&amp;egrave; rilevante."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="freeTextExpression" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Espressione che coinvolge le colonne referenziate nella property&#xD;&#xA;&lt;i>referencedColumns&lt;/i>. L'espressione deve essere scritta nel dialetto SQL&#xD;&#xA;del DBMS target e pu&amp;ograve; contenere segnaposto nella forma &lt;i>$i&lt;/i> dove&#xD;&#xA;&lt;i>i&lt;/i> rappresenta la posizione a partire da 1 nell'elenco delle colonne referenziate.&#xD;&#xA;L'espressione non pu&amp;ograve; contenere una funzione di aggregazione."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="calculatedType" lowerBound="1"
+        eType="ecore:EClass rdbmdl.ecore#//datatypes/PrimitiveDataType" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Il tipo della colonna calcolata. Dipende:&#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>dal tipo delle colonne coinvolte nell'espressione&lt;/li>&#xD;&#xA;&lt;li>dall'espressione stessa&lt;/li>&#xD;&#xA;&lt;/ul>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FromClause">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Elenco delle tabelle incluse nella query. A ciascuna Tabella pu&amp;ograve; essere associato un &lt;i>alias&lt;/i>"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tables" upperBound="-1"
+        eType="#//QTable" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="L'elenco delle tabelle"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QTable">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Rappresenta una &lt;b>Table&lt;/b> utilizzata all'interno di una &lt;i>query&lt;/i>."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="table" eType="ecore:EClass rdbmdl.ecore#//Table">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="La tabella effettiva dello schema relazionale."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aliasName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Alias opzionale attribuibile alla tabella nella query. Serve essenzialmente in quei&#xD;&#xA;casi in cui una stessa tabella è referenziata pi&amp;ugrave; di una volta nella clausola&#xD;&#xA;from."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JoinClause">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Elenco (opzionale) dei cirteri di &lt;i>join&lt;/i> che devono essere applicati alle&#xD;&#xA;tabelle referenziate nella &lt;b>FromClause&lt;/b>."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="criteria" upperBound="-1"
+        eType="#//JoinCriterion" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JoinCriterion">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftTable" eType="#//QTable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftColumn" eType="ecore:EClass rdbmdl.ecore#//TableColumn"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightTable" eType="#//QTable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightColumn" eType="ecore:EClass rdbmdl.ecore#//TableColumn"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WhereClause">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Determina la condizione di selezione della query, che va ad aggiungersi all'eventuale&#xD;&#xA;criterio di &lt;i>join&lt;/i>.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="freetextExpression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Espressione SQL scritta a mano che determina la clausola where (in aggiunta alla&#xD;&#xA;eventuale espressione derivante dai criteri di JOIN). Non si deve aggingere nessun&#xD;&#xA;&amp;quot;AND&amp;quot; iniziale e non viene effettuato nessun controllo sulla correttezza &#xD;&#xA;della sintassi/semantica. Nella stringa &amp;egrave; possibile indicare dei segnaposto&#xD;&#xA;nella forma &amp;quot;&lt;i>:nome_parametro&lt;/i>&amp;quot;.&#xD;&#xA;La sostituzione dei valori va fatta nel codice relativo al &lt;b>Finder&lt;/i>."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+</ecore:EPackage>
