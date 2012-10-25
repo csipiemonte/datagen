@@ -145,7 +145,7 @@ e le limitazioni secondo i termini della Licenza.
 	«IF body-»
 	{
 		try {
-			«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"queryandvalues", this.name)»
+			«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(dao.name+"finder"+this.name+"queryandvalues", model.name)»
 			// personalizzare la query SQL relativa al finder
 			String queryString = "SELECT * from «dao.mainTable.name»";
 			
