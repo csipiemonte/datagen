@@ -269,140 +269,12 @@ public class «getDaoImplClassName()» extends AbstractDAO implements «getDaoCl
 	);
 	«ENDIF»
 «ENDDEFINE»
-«DEFINE rowMapperInnerClassEmpty FOR DataAccessObject»
-	/// flexible row mapper. 
-	public class «getDaoClassName()»RowMapper implements org.springframework.jdbc.core.RowMapper {
-	}
-	«ENDDEFINE»
 
 
-«DEFINE rowMapperInnerClass FOR DataAccessObject»
-	/** 
-	 * RowMapper relativo al DAO «getDaoClassName()»
-	 */
-	public static class «getDaoClassName()»RowMapper implements org.springframework.jdbc.core.RowMapper {
-	
-		
-		/**
-		 * conterra' l'elenco delle colonne su cui il row mapper opera (sottoinsieme delle colonne totali)
-		 */
-		private final java.util.Map<String,String> columnsToReadMap = new java.util.HashMap<String, String>();
-		
-		/**
-		 * se vale true allor ail row mapper opera su tutte le colonne (in questo caso il contenuto della
-		 * mappa 'columnsToReadMap' e' ignorato). 
-		 */
-		private boolean mapAllColumns = true;
-		
-		/**
-		 * La classe del DTO su cui opera il row mapper
-		 */
-		private final Class dtoClass;
-		
-		/**
-		 * Costruttore di default: permette di inizalizzare l'elenco delle colonne che il 
-		 * row mapper dovra' gestire e l'informazione relativa alla classe su cui opera il row
-		 * mapper.
-		 * @param columnsToRead elenco delle colonne da includere nel mapping (per query
-		 *        incomplete, esempio distinct, custom select...)
-		 * @param dtoClass la classe su cui il row mapper opera
-		 */
-		public «getDaoClassName()»RowMapper(String[] columnsToRead, Class dtoClass) {
-			if (columnsToRead != null) {
-				mapAllColumns = false;
-				for (int i=0; i<columnsToRead.length; i++)
-					columnsToReadMap.put(columnsToRead[i], columnsToRead[i]);
-			}
-			this.dtoClass=dtoClass;
-		}
-		
-		/**
-		 * Effettua il mapping necessario per ricostruire l'oggetto risultato («getDtoClassName()»).
-		 * 
-		 * @param rs il result set risultato della query
-		 * @param row l'indice della riga del result set da mappare
-		 * @return «getDtoClassName()»
-		 * @throws SQLException
-		 * @generated
-		 */
-		public Object mapRow(ResultSet rs, int row) throws SQLException
-		{
-			«REM»comment«getDtoClassName()» dto = new «getDtoClassName()»();
-			dto = mapRow_internal(dto, rs, row);
-			return dto;«ENDREM»
-			Object dto = null;
-			try {
-				dto = dtoClass.newInstance();
-			} catch (InstantiationException e) {
-				e.printStackTrace();
-				throw new RuntimeException("Impossibile istanziare la classe " + dtoClass.getName()+" ,"+e.getCause());
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-				throw new RuntimeException("Impossibile accedere alla classe " + dtoClass.getName()+" ,"+e.getCause());
-			}
-			
-			if(dto instanceof «getDtoClassName()»){
-				return mapRow_internal((«getDtoClassName()»)dto, rs, row);
-			}
-			
-			«REM»espando il mapping per i custom finder per tutti i dto specifici definiti all'interno del dao con Qdef«ENDREM»
-			«LET this.finders.finders.typeSelect(CustomFinder).select(f|f.queryDefinition!=null) AS customJoinFinders»
-				«IF customJoinFinders!=null && customJoinFinders.size>0»
-					«EXPAND CustomFinderQdefMapping(this) FOREACH customJoinFinders »
-				«ENDIF»
-			«ENDLET»
-			
-			return dto;
-		}
-			
-		/**
-		 * metodo di mapping specifico del DTO «getDtoClassName()»
-		 * @param objectToFill il DTO da popolare
-		 * @rs il resultset
-		 * @row l'indice della riga del result set da cui prendere i dati 
-		 */ 
-		public «getDtoClassName()» mapRow_internal(
-			«getDtoClassName()» objectToFill, 
-			ResultSet rs, 
-			int row) throws SQLException
-		
-		{	
-			«getDtoClassName()» dto = objectToFill;
-			«FOREACH mainTable.columns AS currCol ITERATOR i»
-			«REM»per ogni colonna della tabella verifico se e' una FK associata al resolver, «ENDREM»
-			«IF currCol.isForeignKey!=null && currCol.isForeignKey && this.lookupResolvers != null && this.lookupResolvers.resolvers.select(r|r.foreignKey.includedColumns.contains(currCol)).size >0-»
-			
-			«ELSE»
-			
-			if (mapAllColumns || columnsToReadMap.get("«currCol.name»") != null)
-				dto.set«javaPropertyNameFromColumn(currCol).toFirstUpper()-»(
-			«IF !isBlobOrClob(currCol)-»
-				«getValueFromRSByColName(currCol)-»
-			«ELSE-»
-				«getValueFromRS(currCol, i.counter1)»
-			«ENDIF-»			
-				);
-			«ENDIF-»
-			«ENDFOREACH-»
-			
-			
-			«REM»expand sui resolvers, se ci sono«ENDREM»
-			«IF this.lookupResolvers!=null && this.lookupResolvers.resolvers.size >0-»
-				«EXPAND lookupResolverRowMapping FOREACH this.lookupResolvers.resolvers-»
-			«ENDIF»
-			return dto;
-		}
-		
-		
-		«LET this.finders.finders.typeSelect(CustomFinder).select(f|f.queryDefinition!=null) AS customJoinFinders»
-				«IF customJoinFinders!=null && customJoinFinders.size>0»
-					«EXPAND mapRowInternalQDef(this) FOREACH customJoinFinders »
-				«ENDIF»
-			«ENDLET»
-		
-	}
-	
-«ENDDEFINE»
+
+
+
+
 
 
 «DEFINE mapRowInternalQDef(DataAccessObject dao) FOR CustomFinder»
@@ -1309,8 +1181,8 @@ public class CacheElement {
 «ENDDEFINE»
 
 «DEFINE CustomFinderQdefMapping(DataAccessObject dao) FOR CustomFinder-»
-	if(dto instanceof «getDtoCustomQdefClassName(dao,this)»){
-			return mapRow_internal((«getDtoCustomQdefClassName(dao,this)»)dto, rs, row);
+	if(dtoInstance instanceof «getDtoCustomQdefClassName(dao,this)»){
+			return mapRow_internal((«getDtoCustomQdefClassName(dao,this)»)dtoInstance, rs, row);
 	}
 «ENDDEFINE»
 
@@ -1347,10 +1219,6 @@ public class BaseDaoRowMapper
 	 * @generated
 	 */
 	public Class dtoClass;
-	/**
-	 * @generated
-	 */
-	public Object dtoInstance;
 	
 	/**
 	 * @generated
@@ -1366,17 +1234,16 @@ public class BaseDaoRowMapper
 				columnsToReadMap.put(columnsToRead[i], columnsToRead[i]);
 		}
 		this.dtoClass = dtoClass;
-		setDtoInstance();
 	}
-	
-	
 	/**
 	 * @generated
 	 */
-	public void setDtoInstance()
-	{
+	public Object getNewDto() {
+		Object dtoInstance = null;
+		
 		try {
 			dtoInstance = dtoClass.newInstance();
+			return dtoInstance;
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 			throw new RuntimeException("Impossibile istanziare la classe "
@@ -1432,7 +1299,7 @@ public class «getDaoClassName().toFirstUpper()»RowMapper extends BaseDaoRowMap
 		 */
 		public Object mapRow(ResultSet rs, int row) throws SQLException
 		{
-			
+			Object dtoInstance = getNewDto();
 			
 			if(dtoInstance instanceof «getDtoClassName()»){
 				return mapRow_internal((«getDtoClassName()»)dtoInstance, rs, row);
