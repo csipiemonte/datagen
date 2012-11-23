@@ -260,13 +260,12 @@ public class «getDaoImplClassName()» extends AbstractDAO implements «getDaoCl
 	«REM»se si tratta di un custom finder con qDef si deve istanziare la classe RowMapper passando come argomento il dto specificatamente creato«ENDREM»
 	«IF this.metaType==CustomFinder && ((CustomFinder)this).queryDefinition!=null»
 		protected «getDaoClassName(dao)»RowMapper «name»RowMapper = new «getDaoClassName(dao)»RowMapper(
-		null,«getDtoCustomQdefClassName(dao,(CustomFinder)this)».class);
+		null,«getDtoCustomQdefClassName(dao,(CustomFinder)this)».class, this);
 	«ELSE»
 		protected «getDaoClassName(dao)»RowMapper «name»RowMapper = new «getDaoClassName(dao)»RowMapper(
 	«IF distinctColumns == null || distinctColumns.size==0-»null
 	«ELSE-»new String[]{«FOREACH distinctColumns AS currCol SEPARATOR ","»"«currCol.name»"«ENDFOREACH»}
-	«ENDIF-», «getDtoClassName(dao)».class
-	);
+	«ENDIF-», «getDtoClassName(dao)».class, this);
 	«ENDIF»
 «ENDDEFINE»
 
@@ -1112,9 +1111,9 @@ public class CacheElement {
 	if (mapAllColumns ||«FOREACH this.foreignKey.includedColumns AS includedColumn SEPARATOR "&&"» columnsToReadMap.get(«getValueFromRSByColName(includedColumn)») != null «ENDFOREACH»){
 		«this.supplierDAO.getDtoClassName()» «this.supplierDAO.getDtoClassName().toFirstLower()» = null;
 				try {
-					«this.supplierDAO.getDtoClassName().toFirstLower()»   = «this.supplierDAO.getDaoClassName().toFirstLower()».findByPrimaryKey(new «this.supplierDAO.getPkClassName()»(«FOREACH this.foreignKey.includedColumns AS includedColumn SEPARATOR ","» «getValueFromRSByColName(includedColumn)»«ENDFOREACH»));
+					«this.supplierDAO.getDtoClassName().toFirstLower()»   = dao.get«this.supplierDAO.getDaoClassName()»().findByPrimaryKey(new «this.supplierDAO.getPkClassName()»(«FOREACH this.foreignKey.includedColumns AS includedColumn SEPARATOR ","» «getValueFromRSByColName(includedColumn)»«ENDFOREACH»));
 				} catch («this.supplierDAO.getDaoExcClassName()» e) {
-					log.error("Si e' verificato un errore nella chiamata al dao supplier: " +  «this.supplierDAO.getDaoClassName().toFirstLower()» + " : "+e);
+					log.error("Si e' verificato un errore nella chiamata al dao supplier: «this.supplierDAO.getDaoClassName().toFirstLower()» : "+e);
 					e.printStackTrace();
 				}
 		dto.set«getLookedUpPropertyName(this).toFirstUpper()»(«this.supplierDAO.getDtoClassName().toFirstLower()»);
@@ -1263,12 +1262,16 @@ public class BaseDaoRowMapper
 «DEFINE daoRowMapper(DBAccessModel model) FOR DataAccessObject»
 «LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-»
 «FILE getDaoMapperFullPath(this, model)»package «pkgPackage».dao.mapper;
+«LET this.getAllDistinctSuppliers() AS allsupplierDao-»
 
 
 import «pkgPackage».dto.*;
+import «pkgPackage».dao.*;
+import «pkgPackage».dao.impl.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+«FOREACH allsupplierDao AS currSupp-»import «getDaoExcFQN(currSupp,model)»;
+«ENDFOREACH-»
 
 /**
  * RowMapper specifico del DAO «getDaoClassName()»
@@ -1276,16 +1279,20 @@ import java.sql.SQLException;
  */
 public class «getDaoClassName().toFirstUpper()»RowMapper extends BaseDaoRowMapper implements org.springframework.jdbc.core.RowMapper {
 	
-		
-		
+		/**
+		 * Dao associato al RowMapper. Serve per i supplier DAO
+		 * @generated
+		 */
+		«getDaoImplClassName()» dao;
 		
 		/**
 		 * costruttore
 		 * @param columnsToRead elenco delle colonne da includere nel mapping (per query
 		 *        incomplete, esempio distinct, custom select...) nella classe padre
 		 */
-		public «getDaoClassName().toFirstUpper()»RowMapper(String[] columnsToRead, Class dtoClass) {
+		public «getDaoClassName().toFirstUpper()»RowMapper(String[] columnsToRead, Class dtoClass, «getDaoClassName()» dao) {
 			super(columnsToRead, dtoClass);
+			this.dao = («getDaoImplClassName()»)dao;
 		}
 		
 		/**
@@ -1357,6 +1364,7 @@ public class «getDaoClassName().toFirstUpper()»RowMapper extends BaseDaoRowMap
 		
 	}
 
+«ENDLET-»
 «ENDFILE-»
 «ENDLET-»
 «ENDDEFINE»
