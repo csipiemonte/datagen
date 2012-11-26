@@ -51,19 +51,18 @@ import java.util.List;
  */
 public class «getMetadataClassName()» extends DAOMetadata{
 	
+	private final String[] propertyNames;
 	private final String[] columnNames;	
 	
 	public «getMetadataClassName()»(){
 		columnNames = new String[]{«FOREACH mainTable.columns AS currCol SEPARATOR ','-»"«currCol.name»"«ENDFOREACH-»};		
+		propertyNames = new String[]{«FOREACH mainTable.columns AS currCol SEPARATOR ','-»"«javaPropertyNameFromColumn(currCol)»"«ENDFOREACH-»};
 		for (int i = 0; i < columnNames.length; i++) {
-			columnsNamesMap.put(columnNames[i], columnNames[i]);
+			columnsNamesMap.put(propertyNames[i], columnNames[i]);
 			
 		}
 	}
 	
-	public «getMetadataClassName()»(String[] columnNames){
-		this.columnNames = columnNames;		
-	}
 	
 	/**
 	 * Method 'getTableName'
