@@ -55,8 +55,16 @@ public class «getMetadataClassName()» extends DAOMetadata{
 	private final String[] columnNames;	
 	
 	public «getMetadataClassName()»(){
-		columnNames = new String[]{«FOREACH mainTable.columns AS currCol SEPARATOR ','-»"«currCol.name»"«ENDFOREACH-»};		
-		propertyNames = new String[]{«FOREACH mainTable.columns AS currCol SEPARATOR ','-»"«javaPropertyNameFromColumn(currCol)»"«ENDFOREACH-»};
+		columnNames = new String[]{«FOREACH mainTable.columns AS currCol SEPARATOR ','-»"«currCol.name»"«ENDFOREACH-»
+		«IF this.lookupResolvers!=null && this.lookupResolvers.resolvers.size >0-»
+		,«EXPAND metadataColumnNames4Resolver(this) FOREACH this.lookupResolvers.resolvers-»
+		«ENDIF-»
+		};		
+		propertyNames = new String[]{«FOREACH mainTable.columns AS currCol SEPARATOR ','-»"«javaPropertyNameFromColumn(currCol)»"«ENDFOREACH-»
+		«IF this.lookupResolvers!=null && this.lookupResolvers.resolvers.size >0-»
+		,«EXPAND metadataPropNames4Resolver(this) FOREACH this.lookupResolvers.resolvers-»
+		«ENDIF-»
+		};
 		for (int i = 0; i < columnNames.length; i++) {
 			columnsNamesMap.put(propertyNames[i], columnNames[i]);
 			
@@ -89,6 +97,18 @@ public class «getMetadataClassName()» extends DAOMetadata{
 }
 «ENDFILE-»
 «ENDLET-»
+«ENDDEFINE»
+
+«DEFINE metadataPropNames4Resolver(DataAccessObject dao) FOR LookupResolver-»
+«FOREACH this.foreignKey.includedColumns AS currFKColumn ITERATOR i SEPARATOR ","-»
+		"«javaPropertyPathForResolvedColumn(this, this.foreignKey,i.counter0)»"
+«ENDFOREACH-»
+«ENDDEFINE»
+
+«DEFINE metadataColumnNames4Resolver(DataAccessObject dao) FOR LookupResolver-»
+«FOREACH this.foreignKey.includedColumns AS currFKColumn ITERATOR i SEPARATOR ","-»
+		"«currFKColumn.name»"
+«ENDFOREACH-»
 «ENDDEFINE»
 
 «DEFINE metadataCase4Resolver(DataAccessObject dao) FOR LookupResolver-»
