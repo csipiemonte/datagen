@@ -445,7 +445,8 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c
 	public void insert(«getDtoClassName()» dto)
 	«ENDIF»	
 	«IF body-»
-	{
+	{	
+		log.debug("[«getDaoImplClassName()»::insert] START");
 		«IF mainTable.primaryKey!=null && pkGenerator!=null-»
 		«EXPAND incrementerUse FOR this.mainTable.primaryKey.includedColumns.first()»
 		«ENDIF-»
@@ -483,6 +484,7 @@ StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		«REM»se chiave multipla non funziona!!«ENDREM»
 		«EXPAND fillPKFields("dto", "newKey") FOREACH this.mainTable.primaryKey.includedColumns-»
 		«ENDIF-»
+		log.debug("[«getDaoImplClassName()»::insert] END");
 		return dto.createPk();
 		«ENDIF»	
 		
@@ -568,9 +570,11 @@ import java.sql.*;
 import org.springframework.jdbc.support.incrementer.DataFieldMaxValueIncrementer;
 
 import «getDALayerBasePkg(model)».util.*;
+import org.apache.log4j.Logger;
 import it.csi.util.performance.StopWatch;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+
 
 
 /**
@@ -580,6 +584,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
  */
 public abstract class AbstractDAO
 {
+	protected static final Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
 	/**
 	 * @generated
 	 */
@@ -608,17 +613,19 @@ public abstract class AbstractDAO
 	 */
 	public void insert(NamedParameterJdbcTemplate jdbcTemplate,String sql,MapSqlParameterSource params)
 	{
+		String actualDaoClassName = this.getClass().getSimpleName();
+		log.debug("[AbstractDAO::insert] START ("+actualDaoClassName+")");
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
 			stopWatch.start();
 			jdbcTemplate.update(sql.toString(), params);
 		} catch (RuntimeException ex) {
-			//log.error("[PazienteLowDaoImpl::insert] esecuzione query", ex);
+			log.error("[AbstractDAO::insert] ERROR ("+actualDaoClassName+") esecuzione query", ex);
 			throw ex;
 		} finally {
-			stopWatch.dumpElapsed("PazienteLowDaoImpl", "insert",
+			stopWatch.dumpElapsed("AbstractDAO", "insert",
 					"esecuzione query", sql);
-			//log.debug("[PazienteLowDaoImpl::insert] END");
+			log.debug("[AbstractDAO::insert] END ("+actualDaoClassName+")");
 		}
 	}
 	
@@ -630,17 +637,19 @@ public abstract class AbstractDAO
 	 */
 	public void update(NamedParameterJdbcTemplate jdbcTemplate,String sql,MapSqlParameterSource params)
 	{
+		String actualDaoClassName = this.getClass().getSimpleName();
+		log.debug("[AbstractDAO::update] START ("+actualDaoClassName+")");
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
 			stopWatch.start();
 			jdbcTemplate.update(sql.toString(), params);
 		} catch (RuntimeException ex) {
-			//log.error("[PazienteLowDaoImpl::insert] esecuzione query", ex);
+			log.error("[AbstractDAO::update] ERROR ("+actualDaoClassName+") esecuzione query", ex);
 			throw ex;
 		} finally {
-			stopWatch.dumpElapsed("PazienteLowDaoImpl", "insert",
+			stopWatch.dumpElapsed("AbstractDAO", "update",
 					"esecuzione query", sql);
-			//log.debug("[PazienteLowDaoImpl::insert] END");
+			log.debug("[AbstractDAO::update] END ("+actualDaoClassName+")");
 		}
 	}
 	
@@ -652,17 +661,19 @@ public abstract class AbstractDAO
 	 */
 	public void delete(NamedParameterJdbcTemplate jdbcTemplate,String sql,MapSqlParameterSource params)
 	{
+		String actualDaoClassName = this.getClass().getSimpleName();
+		log.debug("[AbstractDAO::delete] START ("+actualDaoClassName+")");
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
 			stopWatch.start();
 			jdbcTemplate.update(sql.toString(), params);
 		} catch (RuntimeException ex) {
-			//log.error("[PazienteLowDaoImpl::insert] esecuzione query", ex);
+			log.error("[AbstractDAO::delete] ERROR ("+actualDaoClassName+") esecuzione query", ex);
 			throw ex;
 		} finally {
-			stopWatch.dumpElapsed("PazienteLowDaoImpl", "insert",
+			stopWatch.dumpElapsed("AbstractDAO", "delete",
 					"esecuzione query", sql);
-			//log.debug("[PazienteLowDaoImpl::insert] END");
+			log.debug("[AbstractDAO::delete] END ("+actualDaoClassName+")");
 		}
 	}
 	

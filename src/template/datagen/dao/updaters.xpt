@@ -81,11 +81,12 @@ e le limitazioni secondo i termini della Licenza.
 	 */
 	public void updateColumns«name.toFirstUpper()»(«getDtoClassName(dao)» dto) throws «getDaoExcClassName(dao)»
 	«IF body-»
-	{
+	{	
+		log.debug("[«getDaoImplClassName(dao)»::updateColumns«name.toFirstUpper()»] START");
 		final String sql = "UPDATE " + getTableName() + " «EXPAND template::datagen::dao::daoFiles::setColumnSetValuePlaceholderList(dao) FOR this.columns-» WHERE «EXPAND template::datagen::dao::daoFiles::setColumnEqPlaceholderList(" AND ") FOR dao.mainTable.primaryKey.includedColumns»";
 		
 		if(«FOREACH dao.mainTable.primaryKey.includedColumns AS currCol SEPARATOR "||"-»dto.get«javaPropertyNameFromColumn(currCol).toFirstUpper()»() == null «ENDFOREACH-»){
-			log.error("[«getDaoImplClassName(dao)»::update] chiave primaria non impostata");
+			log.error("[«getDaoImplClassName(dao)»::updateColumns«name.toFirstUpper()»] ERROR chiave primaria non impostata");
 			throw new «getDaoExcClassName(dao)»("Chiave primaria non impostata");
 		}
 		
@@ -112,6 +113,7 @@ e le limitazioni secondo i termini della Licenza.
 		}
 		«ENDREM»
 		update(jdbcTemplate, sql.toString(), params);
+		log.debug("[«getDaoImplClassName(dao)»::updateColumns«name.toFirstUpper()»] END");
 	}
 	«ELSE-»
 	;
@@ -125,11 +127,12 @@ e le limitazioni secondo i termini della Licenza.
 	 */
 	public void update(«getDtoClassName(dao)» dto) throws «getDaoExcClassName(dao)»
 	«IF body-»
-	{
+	{	
+		log.debug("[«getDaoImplClassName(dao)»::update] START");
 		final String sql = "UPDATE " + getTableName() + " «EXPAND template::datagen::dao::daoFiles::setColumnSetValuePlaceholderList(dao) FOR dao.mainTable.columns-» WHERE «EXPAND template::datagen::dao::daoFiles::setColumnEqPlaceholderList(" AND ") FOR dao.mainTable.primaryKey.includedColumns»";
 		
 		if(«FOREACH dao.mainTable.primaryKey.includedColumns AS currCol SEPARATOR "||"-»dto.get«javaPropertyNameFromColumn(currCol).toFirstUpper()»() == null «ENDFOREACH-»){
-			log.error("[«getDaoImplClassName(dao)»::update] chiave primaria non impostata");
+			log.error("[«getDaoImplClassName(dao)»::update] ERROR chiave primaria non impostata");
 			throw new «getDaoExcClassName(dao)»("Chiave primaria non impostata");
 		}
 		
@@ -153,6 +156,7 @@ e le limitazioni secondo i termini della Licenza.
 		}
 		«ENDREM»
 		update(jdbcTemplate, sql.toString(), params);
+		log.debug("[«getDaoImplClassName(dao)»::update] END");
 	}
 	«ELSE-»
 	;

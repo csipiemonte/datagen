@@ -78,11 +78,12 @@ e le limitazioni secondo i termini della Licenza.
 	
 	public void delete(«getPkClassName(dao)» pk) throws «getDaoExcClassName(dao)»
 	«IF body-»
-	{
+	{	
+		log.debug("[«getDaoImplClassName(dao)»::delete] START");
 		final String sql = "DELETE FROM " + getTableName() + " WHERE «EXPAND template::datagen::dao::daoFiles::setColumnEqPlaceholderList(" AND ") FOR dao.mainTable.primaryKey.includedColumns»";
 		
 		if(pk == null){
-			log.error("[«getDaoImplClassName(dao)»::delete] chiave primaria non impostata");
+			log.error("[«getDaoImplClassName(dao)»::delete] ERROR chiave primaria non impostata");
 			throw new «getDaoExcClassName(dao)»("Chiave primaria non impostata");
 		}
 		
@@ -102,6 +103,7 @@ e le limitazioni secondo i termini della Licenza.
 		}
 		«ENDREM»
 		delete(jdbcTemplate, sql.toString(), params);
+		log.debug("[«getDaoImplClassName(dao)»::delete] END");
 	}
 	«ELSE-»
 	;

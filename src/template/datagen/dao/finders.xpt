@@ -44,7 +44,7 @@ e le limitazioni secondo i termini della Licenza.
 	public «getDtoClassName(dao)» findByPrimaryKey(«getPkClassName(dao)» pk) throws «getDaoExcClassName(dao)»
 	«IF body-»
 	{
-		
+		log.debug("[«getDaoImplClassName(dao)»::findByPrimaryKey] START");
 		final StringBuilder sql = new StringBuilder("SELECT «EXPAND template::datagen::dao::daoFiles::columnNameList(false) FOR dao.mainTable.columns» FROM " + getTableName() + " WHERE «EXPAND template::datagen::dao::daoFiles::setColumnEqPlaceholderList(" AND ") FOR dao.mainTable.primaryKey.includedColumns»");
 		
 		MapSqlParameterSource params = new MapSqlParameterSource();
@@ -70,15 +70,13 @@ e le limitazioni secondo i termini della Licenza.
 			}
 			«ENDIF-»	
 		} catch (RuntimeException ex) {
-			log.error("[«getDaoImplClassName(dao)»::findByPrimaryKey] esecuzione query",ex);
+			log.error("[«getDaoImplClassName(dao)»::findByPrimaryKey] ERROR esecuzione query",ex);
 			throw new «getDaoExcClassName(dao)»("Query failed", ex);
 		} finally {
 			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "findByPrimaryKey","esecuzione query", sql.toString());
 			log.debug("[«getDaoImplClassName(dao)»::findByPrimaryKey] END");
 		}
-
 		return list.size() == 0 ? null : list.get(0);
-		
 	}
 	«ELSE-»
 	;
@@ -94,7 +92,8 @@ e le limitazioni secondo i termini della Licenza.
 	 @SuppressWarnings("unchecked")
 	public List<«getDtoClassName(dao)»> «this.name»() throws «getDaoExcClassName(dao)»
 	«IF body-»
-	{		
+	{	
+		log.debug("[«getDaoImplClassName(dao)»::findAll] START");	
 		final StringBuilder sql = new StringBuilder("SELECT «IF this.distinct==null || this.distinct.isEmpty-»«EXPAND template::datagen::dao::daoFiles::columnNameList(false) FOR dao.mainTable.columns-»«ELSE-»«EXPAND template::datagen::dao::daoFiles::columnNameList(true) FOR this.distinct-»«ENDIF-» FROM " + getTableName());
 		«EXPAND template::datagen::dao::daoFiles::orderByClause FOR this.orderSpecs-»
 		
@@ -120,15 +119,13 @@ e le limitazioni secondo i termini della Licenza.
 			}
 			«ENDIF-»	
 		} catch (RuntimeException ex) {
-			log.error("[«getDaoImplClassName(dao)»::findAll] esecuzione query",ex);
+			log.error("[«getDaoImplClassName(dao)»::findAll] ERROR esecuzione query",ex);
 			throw new «getDaoExcClassName(dao)»("Query failed", ex);
 		} finally {
 			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "findAll","esecuzione query", sql.toString());
 			log.debug("[«getDaoImplClassName(dao)»::findAll] END");
 		}
-
 		return list;
-		
 	}
 	«ELSE-»
 	;
@@ -147,7 +144,8 @@ e le limitazioni secondo i termini della Licenza.
 «LET isNullOrEmpty(filterClassFQN) ? "java.lang.Object" : (filterClassFQN=="$dto" ? getDtoFQN(dao, model) : (filterClassFQN=="$dto[]"? "java.util.ArrayList<"+getDtoFQN(dao, model)+">" : filterClassFQN) ) AS filterJavaType-»
 	public List<«getDtoClassName(dao)»> find«name.toFirstUpper()»(«filterJavaType» input) throws «getDaoExcClassName(dao)»
 	«IF body-»
-	{
+	{	
+		log.debug("[«getDaoImplClassName(dao)»::find«name.toFirstUpper()»] START");
 		StringBuilder sql = new StringBuilder();
 		MapSqlParameterSource paramMap = new MapSqlParameterSource();
 		«IF customSelect-»
@@ -214,7 +212,7 @@ e le limitazioni secondo i termini della Licenza.
 public List<«getDtoCustomQdefClassName((DataAccessObject)this.eContainer.eContainer, this)»> find«name.toFirstUpper()»(«filterJavaType» input) throws «getDaoExcClassName(dao)»
 	«IF body-»
 	{
-	
+	log.debug("[«getDaoImplClassName(dao)»::find«name.toFirstUpper()»] START");
 	StringBuilder sql = new StringBuilder();
 	MapSqlParameterSource paramMap = new MapSqlParameterSource();	
 	
@@ -238,7 +236,7 @@ public List<«getDtoCustomQdefClassName((DataAccessObject)this.eContainer.eConta
 			stopWatch.start();
 			list = jdbcTemplate.query(sql.toString(), paramMap, «name»RowMapper);	
 		} catch (RuntimeException ex) {
-			log.error("[«getDaoImplClassName(dao)»::find«name.toFirstUpper()»] esecuzione query",ex);
+			log.error("[«getDaoImplClassName(dao)»::find«name.toFirstUpper()»] ERROR esecuzione query",ex);
 			throw new «getDaoExcClassName(dao)»("Query failed", ex);
 		} finally {
 			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "find«name.toFirstUpper()»","esecuzione query", sql.toString());
@@ -269,7 +267,8 @@ public List<«getDtoCustomQdefClassName((DataAccessObject)this.eContainer.eConta
 «LET (DaoPackage)(dao.eContainer) AS pkg-»
 	public List<«getDtoClassName(dao)»> «!isNullOrEmpty(this.name)?"findByExamples_"+this.name:"findByExamples"»(ArrayList<«getQbeExFQN(dao,model)»> positive, ArrayList<«getQbeExFQN(dao,model)»> negative) throws «getDaoExcClassName(dao)»
 	«IF body-»
-	{
+	{	
+		log.debug("[«getDaoImplClassName(dao)»::«!isNullOrEmpty(this.name)?"findByExamples_"+this.name:"findByExamples"»] START");
 		//verifiche consistenza esempi
 		if (positive == null) {
 			throw new «getDaoExcClassName(dao)»(
@@ -304,11 +303,11 @@ public List<«getDtoCustomQdefClassName((DataAccessObject)this.eContainer.eConta
 			list = jdbcTemplate.query(sql.toString(), new HashMap(), «name»RowMapper);
 			
 		} catch (RuntimeException ex) {
-			log.error("[«getDaoImplClassName(dao)»::«!isNullOrEmpty(this.name)?"findByExamples_"+this.name:"findByExamples"»]esecuzione query",ex);
+			log.error("[«getDaoImplClassName(dao)»::«!isNullOrEmpty(this.name)?"findByExamples_"+this.name:"findByExamples"»] ERROR esecuzione query",ex);
 			throw new «getDaoExcClassName(dao)»("Query failed", ex);
 		} finally {
 			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "«!isNullOrEmpty(this.name)?"findByExamples_"+this.name:"findByExamples"»","esecuzione query", sql.toString());
-			log.debug("[«getDaoImplClassName(dao)»::findByExamples] END");
+			log.debug("[«getDaoImplClassName(dao)»::«!isNullOrEmpty(this.name)?"findByExamples_"+this.name:"findByExamples"»] END");
 		}
 		return list;	
 	}
