@@ -42,7 +42,8 @@ e le limitazioni secondo i termini della Licenza.
 	 */	
 	public void customDeleter«name.toFirstUpper()»(«filterJavaType» filter) throws «getDaoExcClassName(dao)»
 	«IF body-»
-	{
+	{	
+		log.debug("[«getDaoImplClassName(dao)»::customDeleter«name.toFirstUpper()»] START");
 		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(getDaoImplFQN(dao, model)+"customDeleter"+name.toFirstUpper(), this.name)»
 		//***scrivere la custom query
 		final String sql = "DELETE FROM " + getTableName() + " WHERE ";
@@ -63,6 +64,7 @@ e le limitazioni secondo i termini della Licenza.
 		}
 		«ENDREM»
 		delete(jdbcTemplate, sql.toString(), params);
+		log.debug("[«getDaoImplClassName(dao)»::customDeleter«name.toFirstUpper()»] END");
 	}
 	«ELSE-»
 	;

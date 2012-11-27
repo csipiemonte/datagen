@@ -43,7 +43,8 @@ e le limitazioni secondo i termini della Licenza.
 	 */
 	public void customUpdater«name.toFirstUpper()»(«filterJavaType» filter, «valueJavaType» value) throws «getDaoExcClassName(dao)»
 	«IF body-»
-	{
+	{	
+		log.debug("[«getDaoImplClassName(dao)»::customUpdater«name.toFirstUpper()»] START");
 		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(getDaoImplFQN(dao, model)+"customUpdater"+name.toFirstUpper(), model.name)»
 		//***scrivere la custom query
 		final String sql = "UPDATE " + getTableName() + " SET ";
@@ -64,8 +65,8 @@ e le limitazioni secondo i termini della Licenza.
 			log.debug("[«getDaoImplClassName(dao)»::updateColumns«name.toFirstUpper()»] END");
 		}
 		«ENDREM»
-		
 		update(jdbcTemplate, sql.toString(), params);
+		log.debug("[«getDaoImplClassName(dao)»::customUpdater«name.toFirstUpper()»] END");
 	}
 	«ELSE-»
 	;
