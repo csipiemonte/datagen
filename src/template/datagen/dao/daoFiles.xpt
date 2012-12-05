@@ -1201,7 +1201,8 @@ public class CacheElement {
 «LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-»
 «FILE getBaseDaoMapperFullPath(this, model)»package «pkgPackage».dao.mapper;
 
-
+import java.io.*;
+import java.sql.*;
 import «getDALayerBasePkg(model)».util.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -1264,6 +1265,8 @@ public class BaseDaoRowMapper
 					+ dtoClass.getName() + " ," + e.getCause());
 		}
 	}
+	
+	«EXPAND abstractDAODBMSSpecificCode FOR (DaoPackage)(this.eContainer)»
 }
 
 «ENDFILE-»
