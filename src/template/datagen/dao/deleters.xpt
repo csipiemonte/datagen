@@ -44,7 +44,7 @@ e le limitazioni secondo i termini della Licenza.
 	«IF body-»
 	{	
 		log.debug("[«getDaoImplClassName(dao)»::customDeleter«name.toFirstUpper()»] START");
-		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(getDaoImplFQN(dao, model)+"customDeleter"+name.toFirstUpper(), this.name)»
+		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(getDaoImplFQN(dao, model)+"customDeleter"+name.toFirstUpper(), model.name)»
 		//***scrivere la custom query
 		final String sql = "DELETE FROM " + getTableName() + " WHERE ";
 		MapSqlParameterSource params = new MapSqlParameterSource();
