@@ -241,7 +241,7 @@ public class «getDaoImplClassName()» extends AbstractDAO implements «getDaoCl
 «ENDDEFINE»
 
 «DEFINE rowMapperObject(DataAccessObject dao) FOR FindAll-»
-	«EXPAND rowMapperObject_internal(dao, this.distinct) FOR this-»
+	«EXPAND rowMapperObject_internal(dao, this.distinct) FOR this-» 
 «ENDDEFINE»
 
 «DEFINE rowMapperObject(DataAccessObject dao) FOR FindByPK-»
@@ -820,7 +820,7 @@ public class NamedParameterJdbcTemplateWithQueryDebug
 		try {
 			logSql(sql, paramSource);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("Si e' verificato un errore nella chiamata al dao supplier: ", e);			
 		}
 		return super.update(sql, paramSource);
 	}
@@ -834,7 +834,7 @@ public class NamedParameterJdbcTemplateWithQueryDebug
 		try {
 			logSql(sql, paramSource);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("Si e' verificato un errore nella chiamata al dao supplier: ", e);
 		}
 		return super.query(sql, paramSource, rowMapper);
 	}
@@ -1124,8 +1124,7 @@ public class CacheElement {
 				try {
 					«this.supplierDAO.getDtoClassName().toFirstLower()»   = dao.get«this.supplierDAO.getDaoClassName()»().findByPrimaryKey(new «this.supplierDAO.getPkClassName()»(«FOREACH this.foreignKey.includedColumns AS includedColumn SEPARATOR ","» «getValueFromRSByColName(includedColumn)»«ENDFOREACH»));
 				} catch («this.supplierDAO.getDaoExcClassName()» e) {
-					log.error("Si e' verificato un errore nella chiamata al dao supplier: «this.supplierDAO.getDaoClassName().toFirstLower()» : "+e);
-					e.printStackTrace();
+					log.error("Si e' verificato un errore nella chiamata al dao supplier: «this.supplierDAO.getDaoClassName().toFirstLower()» : ", e);					
 				}
 		dto.set«getLookedUpPropertyName(this).toFirstUpper()»(«this.supplierDAO.getDtoClassName().toFirstLower()»);
 	}
@@ -1256,11 +1255,11 @@ public class BaseDaoRowMapper
 			dtoInstance = dtoClass.newInstance();
 			return dtoInstance;
 		} catch (InstantiationException e) {
-			e.printStackTrace();
+			log.error("Si e' verificato un errore nella chiamata al dao supplier: ", e);
 			throw new RuntimeException("Impossibile istanziare la classe "
 					+ dtoClass.getName() + " ," + e.getCause());
 		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+			log.error("Si e' verificato un errore nella chiamata al dao supplier: ", e);
 			throw new RuntimeException("Impossibile accedere alla classe "
 					+ dtoClass.getName() + " ," + e.getCause());
 		}
