@@ -45,7 +45,7 @@ public class RdbmdlFactoryImpl extends EFactoryImpl implements RdbmdlFactory {
 	 */
 	public static RdbmdlFactory init() {
 		try {
-			RdbmdlFactory theRdbmdlFactory = (RdbmdlFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.csi.it/mddtools/rdbmdl"); 
+			RdbmdlFactory theRdbmdlFactory = (RdbmdlFactory)EPackage.Registry.INSTANCE.getEFactory(RdbmdlPackage.eNS_URI);
 			if (theRdbmdlFactory != null) {
 				return theRdbmdlFactory;
 			}

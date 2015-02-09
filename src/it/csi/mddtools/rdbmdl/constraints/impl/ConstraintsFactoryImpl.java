@@ -45,7 +45,7 @@ public class ConstraintsFactoryImpl extends EFactoryImpl implements ConstraintsF
 	 */
 	public static ConstraintsFactory init() {
 		try {
-			ConstraintsFactory theConstraintsFactory = (ConstraintsFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.csi.it/mddtools/rdbmdl/constraints"); 
+			ConstraintsFactory theConstraintsFactory = (ConstraintsFactory)EPackage.Registry.INSTANCE.getEFactory(ConstraintsPackage.eNS_URI);
 			if (theConstraintsFactory != null) {
 				return theConstraintsFactory;
 			}

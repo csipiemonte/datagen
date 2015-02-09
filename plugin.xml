@@ -19,6 +19,19 @@
             uri="http://www.csi.it/mddtools/datagen">
       </package>
    </extension>
+
+   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
+      <!-- @generated datagen -->
+      <factory
+            uri="http://www.csi.it/mddtools/datagen"
+            class="it.csi.mddtools.datagen.provider.DatagenItemProviderAdapterFactory"
+            supportedTypes=
+              "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
+               org.eclipse.emf.edit.provider.IStructuredItemContentProvider
+               org.eclipse.emf.edit.provider.ITreeItemContentProvider
+               org.eclipse.emf.edit.provider.IItemLabelProvider
+               org.eclipse.emf.edit.provider.IItemPropertySource"/>
+   </extension>
    <extension
          point="org.eclipse.emf.ecore.generated_package">
       <package
@@ -46,6 +59,58 @@
             class="it.csi.mddtools.rdbmdl.view.ViewPackage"
             uri="http://www.csi.it/mddtools/rdbmdl/view">
       </package>
+   </extension>
+
+   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
+      <!-- @generated rdbmdl -->
+      <factory
+            uri="http://www.csi.it/mddtools/rdbmdl"
+            class="it.csi.mddtools.rdbmdl.provider.RdbmdlItemProviderAdapterFactory"
+            supportedTypes=
+              "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
+               org.eclipse.emf.edit.provider.IStructuredItemContentProvider
+               org.eclipse.emf.edit.provider.ITreeItemContentProvider
+               org.eclipse.emf.edit.provider.IItemLabelProvider
+               org.eclipse.emf.edit.provider.IItemPropertySource"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
+      <!-- @generated rdbmdl -->
+      <factory
+            uri="http://www.csi.it/mddtools/rdbmdl/constraints"
+            class="it.csi.mddtools.rdbmdl.constraints.provider.ConstraintsItemProviderAdapterFactory"
+            supportedTypes=
+              "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
+               org.eclipse.emf.edit.provider.IStructuredItemContentProvider
+               org.eclipse.emf.edit.provider.ITreeItemContentProvider
+               org.eclipse.emf.edit.provider.IItemLabelProvider
+               org.eclipse.emf.edit.provider.IItemPropertySource"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
+      <!-- @generated rdbmdl -->
+      <factory
+            uri="http://www.csi.it/mddtools/rdbmdl/datatypes"
+            class="it.csi.mddtools.rdbmdl.datatypes.provider.DatatypesItemProviderAdapterFactory"
+            supportedTypes=
+              "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
+               org.eclipse.emf.edit.provider.IStructuredItemContentProvider
+               org.eclipse.emf.edit.provider.ITreeItemContentProvider
+               org.eclipse.emf.edit.provider.IItemLabelProvider
+               org.eclipse.emf.edit.provider.IItemPropertySource"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
+      <!-- @generated rdbmdl -->
+      <factory
+            uri="http://www.csi.it/mddtools/rdbmdl/view"
+            class="it.csi.mddtools.rdbmdl.view.provider.ViewItemProviderAdapterFactory"
+            supportedTypes=
+              "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
+               org.eclipse.emf.edit.provider.IStructuredItemContentProvider
+               org.eclipse.emf.edit.provider.ITreeItemContentProvider
+               org.eclipse.emf.edit.provider.IItemLabelProvider
+               org.eclipse.emf.edit.provider.IItemPropertySource"/>
    </extension>
    <extension
          point="org.eclipse.epsilon.ewl.emf.wizards">

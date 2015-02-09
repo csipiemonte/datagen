@@ -46,7 +46,7 @@ public class DatagenFactoryImpl extends EFactoryImpl implements DatagenFactory {
 	 */
 	public static DatagenFactory init() {
 		try {
-			DatagenFactory theDatagenFactory = (DatagenFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.csi.it/mddtools/datagen"); 
+			DatagenFactory theDatagenFactory = (DatagenFactory)EPackage.Registry.INSTANCE.getEFactory(DatagenPackage.eNS_URI);
 			if (theDatagenFactory != null) {
 				return theDatagenFactory;
 			}

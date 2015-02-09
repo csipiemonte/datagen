@@ -42,13 +42,7 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
  * @generated
  */
 public class QTableColumnItemProvider
-	extends QResultColumnItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource {
+	extends QResultColumnItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -172,8 +166,8 @@ public class QTableColumnItemProvider
 	}
 
 	/**
-	 * se l'alias della tabella è specificato: <alias_tabella>.<nome_colonna> {AS <alias_colonna>}
-	 * se l'alias della tabella non è specificato: <nome_tabella>.<nome_colonna> {AS <alias_colonna>}
+	 * se l'alias della tabella ï¿½ specificato: <alias_tabella>.<nome_colonna> {AS <alias_colonna>}
+	 * se l'alias della tabella non ï¿½ specificato: <nome_tabella>.<nome_colonna> {AS <alias_colonna>}
 	 * @param qtc
 	 * @return
 	 * @generated NOT

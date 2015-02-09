@@ -51,13 +51,7 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
  * @generated
  */
 public class UpdateColumnsItemProvider
-	extends UpdaterItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource {
+	extends UpdaterItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
