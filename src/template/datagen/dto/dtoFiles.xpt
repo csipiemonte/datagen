@@ -231,7 +231,7 @@ public class «getDtoClassName()» implements Serializable {
 	 * @generated
 	 */
 	public void set«javaPropertyNameFromColumn().toFirstUpper()» («javaPropertyTypeFromColumn()» val){
-		_«javaPropertyNameFromColumn()» = val;
+		«EXPAND setPropertyValueStmt(dao) FOR this»
 	}
 	
 	/**
@@ -239,12 +239,39 @@ public class «getDtoClassName()» implements Serializable {
 	 * @generated
 	 */
 	public «javaPropertyTypeFromColumn()» get«javaPropertyNameFromColumn().toFirstUpper()»(){
-		return _«javaPropertyNameFromColumn()»;
+		«EXPAND returnPropertyValueStmt(dao) FOR this»
 	}
 	«ENDIF-»
 	
 	
 «ENDDEFINE»
+
+«DEFINE returnPropertyValueStmt(DataAccessObject dao) FOR TableColumn»
+«IF this.type.type == PrimitiveTypeCodes::DATE || this.type.type == PrimitiveTypeCodes::TIMESTAMP || this.type.type == PrimitiveTypeCodes::TIME-»
+if (_«javaPropertyNameFromColumn()» != null){
+  return new «javaPropertyTypeFromColumn()»(_«javaPropertyNameFromColumn()».getTime());
+}
+else{
+  return null;
+ }
+«ELSE-»
+	return _«javaPropertyNameFromColumn()»;
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE setPropertyValueStmt(DataAccessObject dao) FOR TableColumn»
+«IF this.type.type == PrimitiveTypeCodes::DATE || this.type.type == PrimitiveTypeCodes::TIMESTAMP || this.type.type == PrimitiveTypeCodes::TIME-»
+if (val != null){
+  _«javaPropertyNameFromColumn()» = new «javaPropertyTypeFromColumn()»(val.getTime());
+}
+else{
+  _«javaPropertyNameFromColumn()» = null;
+ }
+«ELSE-»
+	_«javaPropertyNameFromColumn()» = val;
+«ENDIF-»
+«ENDDEFINE»
+
 
 
 «DEFINE lookupResolverProperty FOR LookupResolver»
