@@ -91,7 +91,7 @@ public class «getPkClassName()» implements Serializable {
 	)
 	{
 		«FOREACH mainTable.primaryKey.includedColumns AS currPKCol»
-		this._«javaPropertyNameFromColumn(currPKCol)» = «javaPropertyNameFromColumn(currPKCol)»;
+		this.set«javaPropertyNameFromColumn(currPKCol).toFirstUpper()»(«javaPropertyNameFromColumn(currPKCol)»);
 		«ENDFOREACH»
 	}
 

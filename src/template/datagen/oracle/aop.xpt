@@ -107,7 +107,7 @@ e le limitazioni secondo i termini della Licenza.
             }
         }
         catch (IOException e) {
-            throw new SQLException( "Failed to read BLOB column due to IOException: " + e.getMessage() );
+            throw new SQLException( "Failed to read BLOB column due to IOException: " + e.getMessage(), e );
         }
     }
 
@@ -154,7 +154,7 @@ e le limitazioni secondo i termini della Licenza.
             }
         }
         catch (IOException e) {
-            throw new SQLException( "Failed to read CLOB column due to IOException: " + e.getMessage() );
+            throw new SQLException( "Failed to read CLOB column due to IOException: " + e.getMessage(), e );
         }
     }
 

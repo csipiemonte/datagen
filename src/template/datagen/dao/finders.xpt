@@ -290,9 +290,9 @@ public List<«getDtoCustomQdefClassName((DataAccessObject)this.eContainer.eConta
 		try{
 			sql = new StringBuilder(builder.createFromExamples(positive, negative,«IF this.distinct!=null && !this.distinct.isEmpty-»true«ELSE-»false«ENDIF-»));
 		}catch (StringIndexOutOfBoundsException e) {
-			throw new «getDaoExcClassName(dao)»("E' stato valorizzato almeno un esempio senza nessun FieldCheck associato.Impossibile creare la query.");
+			throw new «getDaoExcClassName(dao)»("E' stato valorizzato almeno un esempio senza nessun FieldCheck associato.Impossibile creare la query.", e);
 		} catch (IllegalArgumentException e) {
-			throw new «getDaoExcClassName(dao)»("E' stato valorizzato un campo di un esempio complesso non corrispondente alla PK della tabella di lookup.");
+			throw new «getDaoExcClassName(dao)»("E' stato valorizzato un campo di un esempio complesso non corrispondente alla PK della tabella di lookup.", e);
 		}
 		«EXPAND template::datagen::dao::daoFiles::orderByClause FOR this.orderSpecs-»
 		
