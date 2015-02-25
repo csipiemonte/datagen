@@ -91,7 +91,7 @@ public class «getMetadataClassName()» extends DAOMetadata{
 	 */
 	public String[] getColumnNames()
 	{
-		return this.columnNames;
+		return java.util.Arrays.copyOf(this.columnNames, this.columnNames.length);
 	}
 		
 }
