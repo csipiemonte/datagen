@@ -106,9 +106,11 @@ e le limitazioni secondo i termini della Licenza.
                 return bos.toByteArray();
             }
         }
-        catch (IOException e) {
-            throw new SQLException( "Failed to read BLOB column due to IOException: " + e.getMessage(), e );
-        }
+        catch (IOException e) { «noSonarTag("JDK COMP")»
+            throw new SQLException( «noSonarTag("JDK COMP")»
+            	"Failed to read BLOB column due to IOException: " + «noSonarTag("JDK COMP")»
+            	 e.getMessage() ); «noSonarTag("JDK COMP")»
+        } «noSonarTag("JDK COMP")»
     }
 
 	/**
@@ -153,9 +155,11 @@ e le limitazioni secondo i termini della Licenza.
                 return ret.toString();
             }
         }
-        catch (IOException e) {
-            throw new SQLException( "Failed to read CLOB column due to IOException: " + e.getMessage(), e );
-        }
+        catch (IOException e) { «noSonarTag("JDK COMP")»
+            throw new SQLException( «noSonarTag("JDK COMP")»
+            	"Failed to read CLOB column due to IOException: " + «noSonarTag("JDK COMP")»
+            	 e.getMessage());«noSonarTag("JDK COMP")»
+        } «noSonarTag("JDK COMP")»
     }
 
 	/**

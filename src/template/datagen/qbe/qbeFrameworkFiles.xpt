@@ -179,15 +179,22 @@ public class InSetChk extends FieldChk{
 	 * @param items insieme degli elementi dell'insieme di riferimento 
 	 * @generated
 	 */
-	public InSetChk(Object [] items){
-		assert items != null && items.length>0;
-		_items=items;
-	}	
+	public InSetChk(Object[] items) {
+		assert items != null && items.length > 0;
+		_items = new Object[items.length];
+		for (int i = 0; i < items.length; i++) {
+			_items[i] = items[i];
+		}
+	}
 	/**
 	 * @generated
 	 */
-	public Object[] getItems(){
-		return _items;
+	public Object[] getItems() {
+		Object ris [] = new Object[_items.length];
+		for (int i = 0; i < _items.length; i++) {
+			ris[i] = _items[i];
+		}
+		return ris;
 	}
 }
 «ENDFILE»

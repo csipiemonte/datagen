@@ -25,6 +25,13 @@ import rdbmdl;
 import rdbmdl::datatypes;
 import rdbmdl::constraints;
 
+String noSonarTag(String reason) :
+	let noNoSonar = getProperty("datagen.noNOSONAR"):
+	if (noNoSonar == null || noNoSonar != "true") then
+	"//NOSONAR  Reason:"+reason
+	else
+	"";
+
 String javaSrcRoot() :
 	"src/java";
 
