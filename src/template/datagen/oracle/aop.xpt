@@ -139,7 +139,7 @@ e le limitazioni secondo i termini della Licenza.
                 return null;
             }
 
-            StringBuffer ret = new StringBuffer();
+            StringBuilder ret = new StringBuilder();
             InputStream is = clob.getAsciiStream();
 
             if (is == null) {

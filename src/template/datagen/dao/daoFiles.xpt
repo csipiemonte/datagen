@@ -924,8 +924,8 @@ public class NamedParameterJdbcTemplateWithQueryDebug
 	 * @generated
 	 */
 	private static String parseDate(java.util.Date date) {
-		StringBuffer retValue = new StringBuffer("");
-		StringBuffer retvalueBuff = new StringBuffer("");
+		StringBuilder retValue = new StringBuilder("");
+		StringBuilder retvalueBuff = new StringBuilder("");
 		java.util.Calendar cal = java.util.Calendar.getInstance();
 		cal.setTime(date);
 		

@@ -152,7 +152,7 @@ public class «getPkClassName()» implements Serializable {
 	 */
 	public String toString()
 	{
-		StringBuffer ret = new StringBuffer();
+		StringBuilder ret = new StringBuilder();
 		«FOREACH mainTable.primaryKey.includedColumns AS currPKCol»
 		ret.append( "«pkgPackage».dto.«getPkClassName()»: " );
 		ret.append( "«javaPropertyNameFromColumn(currPKCol)»=" + «javaPropertyNameFromColumn(currPKCol)» );
