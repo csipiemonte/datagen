@@ -119,7 +119,7 @@ public class «getPkClassName()» implements Serializable {
 		final «getPkClassName()» _cast = («getPkClassName()») _other;
 		
 		«FOREACH mainTable.primaryKey.includedColumns AS currPKCol»
-		if (_«javaPropertyNameFromColumn(currPKCol)» == null ? _cast.get«javaPropertyNameFromColumn(currPKCol).toFirstUpper()»() != null : !_«javaPropertyNameFromColumn(currPKCol)».equals( _cast.get«javaPropertyNameFromColumn(currPKCol).toFirstUpper()»() )) {
+		if («javaPropertyNameFromColumn(currPKCol)» == null ? _cast.get«javaPropertyNameFromColumn(currPKCol).toFirstUpper()»() != null : !«javaPropertyNameFromColumn(currPKCol)».equals( _cast.get«javaPropertyNameFromColumn(currPKCol).toFirstUpper()»() )) {
 			return false;
 		}
 		«ENDFOREACH»
@@ -137,8 +137,8 @@ public class «getPkClassName()» implements Serializable {
 		int _hashCode = 0;
 		
 		«FOREACH mainTable.primaryKey.includedColumns AS currPKCol»
-		if (_«javaPropertyNameFromColumn(currPKCol)» != null) {
-			_hashCode = 29 * _hashCode + _«javaPropertyNameFromColumn(currPKCol)».hashCode();
+		if («javaPropertyNameFromColumn(currPKCol)» != null) {
+			_hashCode = 29 * _hashCode + «javaPropertyNameFromColumn(currPKCol)».hashCode();
 		}
 		«ENDFOREACH»
 		
@@ -155,7 +155,7 @@ public class «getPkClassName()» implements Serializable {
 		StringBuffer ret = new StringBuffer();
 		«FOREACH mainTable.primaryKey.includedColumns AS currPKCol»
 		ret.append( "«pkgPackage».dto.«getPkClassName()»: " );
-		ret.append( "_«javaPropertyNameFromColumn(currPKCol)»=" + _«javaPropertyNameFromColumn(currPKCol)» );
+		ret.append( "«javaPropertyNameFromColumn(currPKCol)»=" + «javaPropertyNameFromColumn(currPKCol)» );
 		«ENDFOREACH»
 		return ret.toString();
 	}
@@ -199,7 +199,7 @@ public class «getDtoClassName()» implements Serializable {
 	{
 		return new «getPkClassName()»(
 		«FOREACH this.mainTable.primaryKey.includedColumns AS pkColumn SEPARATOR ","-»
-			_«javaPropertyNameFromColumn(pkColumn)»
+			«javaPropertyNameFromColumn(pkColumn)»
 		«ENDFOREACH-»
 		);
 	}
@@ -223,7 +223,7 @@ public class «getDtoClassName()» implements Serializable {
 	 * store della proprieta' associata alla colonna «name»
 	 * @generated
 	 */
-	private «javaPropertyTypeFromColumn()» _«javaPropertyNameFromColumn()»;
+	private «javaPropertyTypeFromColumn()» «javaPropertyNameFromColumn()»;
 	
 	/**
 	 * Imposta il valore della proprieta' «javaPropertyNameFromColumn()» associata alla
@@ -248,27 +248,27 @@ public class «getDtoClassName()» implements Serializable {
 
 «DEFINE returnPropertyValueStmt(DataAccessObject dao) FOR TableColumn»
 «IF this.type.type == PrimitiveTypeCodes::DATE || this.type.type == PrimitiveTypeCodes::TIMESTAMP || this.type.type == PrimitiveTypeCodes::TIME-»
-if (_«javaPropertyNameFromColumn()» != null){
-  return new «javaPropertyTypeFromColumn()»(_«javaPropertyNameFromColumn()».getTime());
+if («javaPropertyNameFromColumn()» != null){
+  return new «javaPropertyTypeFromColumn()»(«javaPropertyNameFromColumn()».getTime());
 }
 else{
   return null;
  }
 «ELSE-»
-	return _«javaPropertyNameFromColumn()»;
+	return «javaPropertyNameFromColumn()»;
 «ENDIF-»
 «ENDDEFINE»
 
 «DEFINE setPropertyValueStmt(DataAccessObject dao) FOR TableColumn»
 «IF this.type.type == PrimitiveTypeCodes::DATE || this.type.type == PrimitiveTypeCodes::TIMESTAMP || this.type.type == PrimitiveTypeCodes::TIME-»
 if (val != null){
-  _«javaPropertyNameFromColumn()» = new «javaPropertyTypeFromColumn()»(val.getTime());
+  «javaPropertyNameFromColumn()» = new «javaPropertyTypeFromColumn()»(val.getTime());
 }
 else{
-  _«javaPropertyNameFromColumn()» = null;
+  «javaPropertyNameFromColumn()» = null;
  }
 «ELSE-»
-	_«javaPropertyNameFromColumn()» = val;
+	«javaPropertyNameFromColumn()» = val;
 «ENDIF-»
 «ENDDEFINE»
 
@@ -278,14 +278,14 @@ else{
     /**
 	 * @generated
 	 */
-	private «getDtoClassName(this.supplierDAO)» _«getLookedUpPropertyName()»;
+	private «getDtoClassName(this.supplierDAO)» «getLookedUpPropertyName()»;
 	
 	/**
 	 * Imposta il valore della proprieta' di lookup «getLookedUpPropertyName()». 
 	 * @generated
 	 */
 	public void set«getLookedUpPropertyName().toFirstUpper()» («getDtoClassName(this.supplierDAO)» val){
-		_«getLookedUpPropertyName()» = val;
+		«getLookedUpPropertyName()» = val;
 	}
 	
 	/**
@@ -293,7 +293,7 @@ else{
 	 * @generated
 	 */
 	public «getDtoClassName(this.supplierDAO)» get«getLookedUpPropertyName().toFirstUpper()»(){
-		return _«getLookedUpPropertyName()»;
+		return «getLookedUpPropertyName()»;
 	}
 
 «ENDDEFINE»

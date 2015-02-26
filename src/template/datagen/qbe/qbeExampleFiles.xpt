@@ -70,20 +70,20 @@ public class «getQbeExClassName()» extends AbstractExample
 	/**
 	 * @generated
 	 */
-	private «getDALayerBasePkg(model)».qbe.FieldChk _«javaPropertyNameFromColumn()»;
+	private «getDALayerBasePkg(model)».qbe.FieldChk «javaPropertyNameFromColumn()»;
 	
 	/**
 	 * @generated
 	 */
 	public void set«javaPropertyNameFromColumn().toFirstUpper()» («getDALayerBasePkg(model)».qbe.FieldChk chk){
-		_«javaPropertyNameFromColumn()» = chk;
+		«javaPropertyNameFromColumn()» = chk;
 	}
 	
 	/**
 	 * @generated
 	 */
 	public «getDALayerBasePkg(model)».qbe.FieldChk get«javaPropertyNameFromColumn().toFirstUpper()»(){
-		return _«javaPropertyNameFromColumn()»;
+		return «javaPropertyNameFromColumn()»;
 	}
 «ENDIF»
 «ENDDEFINE»
@@ -94,19 +94,19 @@ public class «getQbeExClassName()» extends AbstractExample
 	/**
 	 * @generated
 	 */
-	private «getQbeExClassName(this.supplierDAO)»  _«getLookedUpPropertyName().toFirstLower()»;
+	private «getQbeExClassName(this.supplierDAO)»  «getLookedUpPropertyName().toFirstLower()»;
 	
 	/**
 	 * @generated
 	 */
 	public void set«getLookedUpPropertyName().toFirstLower().toFirstUpper()» («getQbeExClassName(this.supplierDAO)» val){
-		_«getLookedUpPropertyName().toFirstLower()» = val;
+		«getLookedUpPropertyName().toFirstLower()» = val;
 	}
 	
 	/**
 	 * @generated
 	 */
 	public «getQbeExClassName(this.supplierDAO)» get«getLookedUpPropertyName().toFirstLower().toFirstUpper()»(){
-		return _«getLookedUpPropertyName().toFirstLower()»;
+		return «getLookedUpPropertyName().toFirstLower()»;
 	}
 «ENDDEFINE»

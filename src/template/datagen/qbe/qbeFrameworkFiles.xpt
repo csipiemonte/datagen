@@ -64,7 +64,7 @@ public abstract class FieldChk {
 	 * @generated
 	 */
 	public FieldChk mustBeTrue(){
-		this._negate=false;
+		this.negate=false;
 		return this;
 	}
 
@@ -72,27 +72,27 @@ public abstract class FieldChk {
 	 * @generated
 	 */
 	public FieldChk mustBeFalse(){
-		this._negate=true;
+		this.negate=true;
 		return this;
 	} 
 	
 	/**
 	 * @generated
 	 */
-	protected boolean _negate=false;
+	protected boolean negate=false;
 	
 	/**
 	 * @generated
 	 */
 	public void setNegate(boolean val){
-		_negate=val;
+		negate=val;
 	}
 	
 	/**
 	 * @generated
 	 */
 	public boolean isNegate(){
-		return _negate;
+		return negate;
 	}
 }
 «ENDFILE»
@@ -108,8 +108,8 @@ public abstract class FieldChk {
  */
 public class EqChk extends FieldChk{
 	
-	private final Object _exVal;
-	private final boolean _ignoreCase;
+	private final Object exVal;
+	private final boolean ignoreCase;
 	
 	/**
 	 * @param equalsTo valore di confronto 
@@ -117,18 +117,18 @@ public class EqChk extends FieldChk{
 	 */
 	public EqChk(Object equalsTo){
 		assert equalsTo != null;
-		_exVal=equalsTo;
-		_ignoreCase=false;
+		exVal=equalsTo;
+		ignoreCase=false;
 	}
 	
 	/**
 	 * @generated
 	 */
 	public boolean valueHasWildcards(){
-		if (!(_exVal instanceof String))
+		if (!(exVal instanceof String))
 			return false;
 		else {
-			return (((String)_exVal).indexOf("%")>-1);
+			return (((String)exVal).indexOf("%")>-1);
 		}	
 	}
 	 
@@ -137,23 +137,23 @@ public class EqChk extends FieldChk{
 	 * @param ignoreCase ignora il case in caso di tipo stringa
 	 * @generated
 	 */
-	public EqChk(Object equalsTo, boolean ignoreCase){
+	public EqChk(Object equalsTo, boolean p_ignoreCase){
 		assert equalsTo != null;
-		_exVal=equalsTo;
-		_ignoreCase=ignoreCase;
+		exVal=equalsTo;
+		ignoreCase=p_ignoreCase;
 	}
 	/**
 	 * @generated
 	 */
 	public Object getExVal(){
-		return _exVal;
+		return exVal;
 	}
 	
 	/**
 	 * @generated
 	 */
 	 public boolean isIgnoreCase(){
-	 	return _ignoreCase;
+	 	return ignoreCase;
 	 }
 }
 «ENDFILE»
@@ -172,27 +172,27 @@ public class InSetChk extends FieldChk{
 	/**
 	 * @generated
 	 */
-	private final Object [] _items;
+	private final Object [] items;
 	
 	/**
 	 * 
 	 * @param items insieme degli elementi dell'insieme di riferimento 
 	 * @generated
 	 */
-	public InSetChk(Object[] items) {
-		assert items != null && items.length > 0;
-		_items = new Object[items.length];
-		for (int i = 0; i < items.length; i++) {
-			_items[i] = items[i];
+	public InSetChk(Object[] p_items) {
+		assert p_items != null && p_items.length > 0;
+		items = new Object[p_items.length];
+		for (int i = 0; i < p_items.length; i++) {
+			items[i] = p_items[i];
 		}
 	}
 	/**
 	 * @generated
 	 */
 	public Object[] getItems() {
-		Object ris [] = new Object[_items.length];
-		for (int i = 0; i < _items.length; i++) {
-			ris[i] = _items[i];
+		Object ris [] = new Object[items.length];
+		for (int i = 0; i < items.length; i++) {
+			ris[i] = items[i];
 		}
 		return ris;
 	}
@@ -213,22 +213,22 @@ public class RangeChk extends FieldChk{
 	/**
 	 * @generated
 	 */
-	private final Object _lowerBound;
+	private final Object lowerBound;
 	
 	/**
 	 * @generated
 	 */
-	private final Object _upperBound;
+	private final Object upperBound;
 	
 	/**
 	 * @generated
 	 */
-	private final boolean _includeLB;
+	private final boolean includeLB;
 	
 	/**
 	 * @generated
 	 */
-	private final boolean _includeUB;
+	private final boolean includeUB;
 	
 	
 	/**
@@ -238,40 +238,40 @@ public class RangeChk extends FieldChk{
 	 * @param includeUB include o meno l'upperbound tra i valori ammessi 
 	 * @generated
 	 */
-	public RangeChk(Object lowerBound, Object upperBound, boolean includeLB, boolean includeUB){
-		assert lowerBound != null || upperBound!=null;
-		_lowerBound=lowerBound;
-		_upperBound=upperBound;
-		_includeLB=includeLB;
-		_includeUB=includeUB;
+	public RangeChk(Object p_lowerBound, Object p_upperBound, boolean p_includeLB, boolean p_includeUB){
+		assert p_lowerBound != null || p_upperBound!=null;
+		lowerBound=p_lowerBound;
+		upperBound=p_upperBound;
+		includeLB=p_includeLB;
+		includeUB=p_includeUB;
 	}	
 	
 	/**
 	 * @generated
 	 */
 	public Object getLowerBound(){
-		return _lowerBound;
+		return lowerBound;
 	}
 	
 	/**
 	 * @generated
 	 */
 	public Object getUpperBound(){
-		return _upperBound;
+		return upperBound;
 	}
 	
 	/**
 	 * @generated
 	 */
 	public boolean isLBIncluded(){
-		return _includeLB;
+		return includeLB;
 	}
 	
 	/**
 	 * @generated
 	 */
 	public boolean isUBIncluded(){
-		return _includeUB;
+		return includeUB;
 	}
 }
 
@@ -291,22 +291,22 @@ public class RegexpChk extends FieldChk{
 	/**
 	 * @generated
 	 */
-	private final String _regexp;
+	private final String regexp;
 	
 	/**
 	 * @param equalsTo valore di confronto 
 	 * @generated
 	 */
-	public RegexpChk(String regexp){
-		assert regexp != null && regexp.length()>0;
-		_regexp=regexp;
+	public RegexpChk(String p_regexp){
+		assert p_regexp != null && p_regexp.length()>0;
+		regexp=p_regexp;
 	}
 
 	/**
 	 * @generated
 	 */
 	public String getRegexp(){
-		return _regexp;
+		return regexp;
 	}
 }
 
@@ -359,14 +359,14 @@ protected static final Logger log = Logger.getLogger(Constants.APPLICATION_CODE)
 	/**
 	 * @generated
 	 */
-	private final DAOMetadata _metadata;
+	private final DAOMetadata metadata;
 
 	/**
 	 * @generated
 	 * @param metadata i metadati del DAO
 	 */
-	public QBEQueryBuilder(DAOMetadata metadata) {
-		this._metadata = metadata;
+	public QBEQueryBuilder(DAOMetadata p_metadata) {
+		this.metadata = p_metadata;
 	}
 
 	private String formatColumnNames(DAOMetadata md) {
@@ -411,8 +411,8 @@ protected static final Logger log = Logger.getLogger(Constants.APPLICATION_CODE)
 			boolean usesDistinct) {
 		
 		String sql = "SELECT " + (usesDistinct ? "DISTINCT " : "")
-				+ formatColumnNames(_metadata) + " FROM "
-				+ _metadata.getTableName() + " WHERE ";
+				+ formatColumnNames(metadata) + " FROM "
+				+ metadata.getTableName() + " WHERE ";
 		StringBuffer sqlSelect = new StringBuffer(sql);
 		
 		
@@ -603,7 +603,7 @@ protected static final Logger log = Logger.getLogger(Constants.APPLICATION_CODE)
 
 	public String createTerm4FieldChk(EqChk chk, PropertyDescriptor pd,
 			String prefixPropName) {
-		String colName = _metadata.getColumnName(prefixPropName, pd.getName());
+		String colName = metadata.getColumnName(prefixPropName, pd.getName());
 		StringBuffer term = new StringBuffer("");
 		term.append("(");
 		String lside = chk.isIgnoreCase() ? "UPPER(" + colName + ")" : colName;
@@ -622,7 +622,7 @@ protected static final Logger log = Logger.getLogger(Constants.APPLICATION_CODE)
 
 	public String createTerm4FieldChk(NullChk chk, PropertyDescriptor pd,
 			String prefixPropName) {
-		String colName = _metadata.getColumnName(prefixPropName, pd.getName());
+		String colName = metadata.getColumnName(prefixPropName, pd.getName());
 		StringBuffer term = new StringBuffer("");
 		term.append("(");
 		term.append(colName + " IS " + (chk.isNegate() ? " NOT" : "") + " NULL");
@@ -632,7 +632,7 @@ protected static final Logger log = Logger.getLogger(Constants.APPLICATION_CODE)
 
 	public String createTerm4FieldChk(RangeChk chk, PropertyDescriptor pd,
 			String prefixPropName) {
-		String colName = _metadata.getColumnName(prefixPropName, pd.getName());
+		String colName = metadata.getColumnName(prefixPropName, pd.getName());
 		StringBuffer term = new StringBuffer("");
 		term.append("(");
 		if (chk.isNegate())

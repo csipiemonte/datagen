@@ -986,7 +986,7 @@ public class SimpleCache {
 	/**
 	 * @generated
 	 */
-	int ttl_minutes = 0;
+	int ttlMinutes = 0;
 	
 	/**
 	 * @generated
@@ -998,7 +998,7 @@ public class SimpleCache {
 	 * @generated
 	 */
 	public SimpleCache(int ttl, boolean updateAccessTime){
-		this.ttl_minutes=ttl;
+		this.ttlMinutes=ttl;
 		this.updateAccessTime=updateAccessTime;
 	}
 	
@@ -1021,8 +1021,8 @@ public class SimpleCache {
 	public Object get(Object key){
 		CacheElement el = map.get(key);
 		if (el != null){
-			if ((System.currentTimeMillis() - el.getLastAccess())>(ttl_minutes*60000)){
-				log.debug("elemento trovato ma scaduto... (impostato TTL pari a "+ttl_minutes+" minuti");
+			if ((System.currentTimeMillis() - el.getLastAccess())>(ttlMinutes*60000)){
+				log.debug("elemento trovato ma scaduto... (impostato TTL pari a "+ttlMinutes+" minuti");
 				map.remove(key);
 				return null;
 			}
