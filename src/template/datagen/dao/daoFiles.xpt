@@ -289,8 +289,7 @@ public class «getDaoImplClassName()» extends AbstractDAO implements «getDaoCl
 	 */
 
 	public «getDtoCustomQdefClassName(dao,this)» mapRow_internal(
-			«getDtoCustomQdefClassName(dao,this)» objectToFill, ResultSet rs, int row) throws SQLException
-	{	
+			«getDtoCustomQdefClassName(dao,this)» objectToFill, ResultSet rs, int row) throws SQLException {
 			«getDtoCustomQdefClassName(dao,this)» dto = objectToFill;
 			«FOREACH this.queryDefinition.selectClause.columns.select(c|c.metaType==QTableColumn) AS currCol ITERATOR  i-»
 				«EXPAND singleMapRowInternalQDef(i.counter1) FOR currCol-»
@@ -1339,9 +1338,7 @@ public class «getDaoClassName().toFirstUpper()»RowMapper extends BaseDaoRowMap
 		public «getDtoClassName()» mapRow_internal(
 			«getDtoClassName()» objectToFill, 
 			ResultSet rs, 
-			int row) throws SQLException
-		
-		{	
+			int row) throws SQLException {	
 			«getDtoClassName()» dto = objectToFill;
 			«FOREACH mainTable.columns AS currCol ITERATOR i»
 			«REM»per ogni colonna della tabella verifico se e' una FK associata al resolver, «ENDREM»
