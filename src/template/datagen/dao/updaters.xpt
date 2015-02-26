@@ -44,7 +44,7 @@ e le limitazioni secondo i termini della Licenza.
 	public void customUpdater«name.toFirstUpper()»(«filterJavaType» filter, «valueJavaType» value) throws «getDaoExcClassName(dao)»
 	«IF body-»
 	{	
-		log.debug("[«getDaoImplClassName(dao)»::customUpdater«name.toFirstUpper()»] START");
+		LOG.debug("[«getDaoImplClassName(dao)»::customUpdater«name.toFirstUpper()»] START");
 		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(getDaoImplFQN(dao, model)+"customUpdater"+name.toFirstUpper(), model.name)»
 		//***scrivere la custom query
 		final String sql = "UPDATE " + getTableName() + " SET ";
@@ -58,15 +58,15 @@ e le limitazioni secondo i termini della Licenza.
 			stopWatch.start();
 			jdbcTemplate.update(sql.toString(), params);
 		} catch (RuntimeException ex) {
-			log.error("[«getDaoImplClassName(dao)»::updateColumns«name.toFirstUpper()»] esecuzione query",ex);
+			LOG.error("[«getDaoImplClassName(dao)»::updateColumns«name.toFirstUpper()»] esecuzione query",ex);
 			throw new «getDaoExcClassName(dao)»("Query failed", ex);
 		} finally {
 			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "updateColumns«name.toFirstUpper()»","esecuzione query", sql);
-			log.debug("[«getDaoImplClassName(dao)»::updateColumns«name.toFirstUpper()»] END");
+			LOG.debug("[«getDaoImplClassName(dao)»::updateColumns«name.toFirstUpper()»] END");
 		}
 		«ENDREM»
 		update(jdbcTemplate, sql.toString(), params);
-		log.debug("[«getDaoImplClassName(dao)»::customUpdater«name.toFirstUpper()»] END");
+		LOG.debug("[«getDaoImplClassName(dao)»::customUpdater«name.toFirstUpper()»] END");
 	}
 	«ELSE-»
 	;
@@ -83,11 +83,11 @@ e le limitazioni secondo i termini della Licenza.
 	public void updateColumns«name.toFirstUpper()»(«getDtoClassName(dao)» dto) throws «getDaoExcClassName(dao)»
 	«IF body-»
 	{	
-		log.debug("[«getDaoImplClassName(dao)»::updateColumns«name.toFirstUpper()»] START");
+		LOG.debug("[«getDaoImplClassName(dao)»::updateColumns«name.toFirstUpper()»] START");
 		final String sql = "UPDATE " + getTableName() + " «EXPAND template::datagen::dao::daoFiles::setColumnSetValuePlaceholderList(dao) FOR this.columns-» WHERE «EXPAND template::datagen::dao::daoFiles::setColumnEqPlaceholderList(" AND ") FOR dao.mainTable.primaryKey.includedColumns»";
 		
 		if(«FOREACH dao.mainTable.primaryKey.includedColumns AS currCol SEPARATOR "||"-»dto.get«javaPropertyNameFromColumn(currCol).toFirstUpper()»() == null «ENDFOREACH-»){
-			log.error("[«getDaoImplClassName(dao)»::updateColumns«name.toFirstUpper()»] ERROR chiave primaria non impostata");
+			LOG.error("[«getDaoImplClassName(dao)»::updateColumns«name.toFirstUpper()»] ERROR chiave primaria non impostata");
 			throw new «getDaoExcClassName(dao)»("Chiave primaria non impostata");
 		}
 		
@@ -106,15 +106,15 @@ e le limitazioni secondo i termini della Licenza.
 			stopWatch.start();
 			jdbcTemplate.update(sql.toString(), params);
 		} catch (RuntimeException ex) {
-			log.error("[«getDaoImplClassName(dao)»::updateColumns«name.toFirstUpper()»] esecuzione query",ex);
+			LOG.error("[«getDaoImplClassName(dao)»::updateColumns«name.toFirstUpper()»] esecuzione query",ex);
 			throw new «getDaoExcClassName(dao)»("Query failed", ex);
 		} finally {
 			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "updateColumns«name.toFirstUpper()»","esecuzione query", sql);
-			log.debug("[«getDaoImplClassName(dao)»::updateColumns«name.toFirstUpper()»] END");
+			LOG.debug("[«getDaoImplClassName(dao)»::updateColumns«name.toFirstUpper()»] END");
 		}
 		«ENDREM»
 		update(jdbcTemplate, sql.toString(), params);
-		log.debug("[«getDaoImplClassName(dao)»::updateColumns«name.toFirstUpper()»] END");
+		LOG.debug("[«getDaoImplClassName(dao)»::updateColumns«name.toFirstUpper()»] END");
 	}
 	«ELSE-»
 	;
@@ -129,11 +129,11 @@ e le limitazioni secondo i termini della Licenza.
 	public void update(«getDtoClassName(dao)» dto) throws «getDaoExcClassName(dao)»
 	«IF body-»
 	{	
-		log.debug("[«getDaoImplClassName(dao)»::update] START");
+		LOG.debug("[«getDaoImplClassName(dao)»::update] START");
 		final String sql = "UPDATE " + getTableName() + " «EXPAND template::datagen::dao::daoFiles::setColumnSetValuePlaceholderList(dao) FOR dao.mainTable.columns-» WHERE «EXPAND template::datagen::dao::daoFiles::setColumnEqPlaceholderList(" AND ") FOR dao.mainTable.primaryKey.includedColumns»";
 		
 		if(«FOREACH dao.mainTable.primaryKey.includedColumns AS currCol SEPARATOR "||"-»dto.get«javaPropertyNameFromColumn(currCol).toFirstUpper()»() == null «ENDFOREACH-»){
-			log.error("[«getDaoImplClassName(dao)»::update] ERROR chiave primaria non impostata");
+			LOG.error("[«getDaoImplClassName(dao)»::update] ERROR chiave primaria non impostata");
 			throw new «getDaoExcClassName(dao)»("Chiave primaria non impostata");
 		}
 		
@@ -149,15 +149,15 @@ e le limitazioni secondo i termini della Licenza.
 			stopWatch.start();
 			jdbcTemplate.update(sql.toString(), params);
 		} catch (RuntimeException ex) {
-			log.error("[«getDaoImplClassName(dao)»::update] esecuzione query",ex);
+			LOG.error("[«getDaoImplClassName(dao)»::update] esecuzione query",ex);
 			throw new «getDaoExcClassName(dao)»("Query failed", ex);
 		} finally {
 			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "update","esecuzione query", sql);
-			log.debug("[«getDaoImplClassName(dao)»::update] END");
+			LOG.debug("[«getDaoImplClassName(dao)»::update] END");
 		}
 		«ENDREM»
 		update(jdbcTemplate, sql.toString(), params);
-		log.debug("[«getDaoImplClassName(dao)»::update] END");
+		LOG.debug("[«getDaoImplClassName(dao)»::update] END");
 	}
 	«ELSE-»
 	;

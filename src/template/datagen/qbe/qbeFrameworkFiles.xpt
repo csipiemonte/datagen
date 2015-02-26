@@ -354,7 +354,7 @@ import «getDALayerBasePkg(this)».util.*;
  */
 public class QBEQueryBuilder<TEX extends AbstractExample> {
 
-protected static final Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
+protected static final Logger LOG = Logger.getLogger(Constants.APPLICATION_CODE);
 
 	/**
 	 * @generated
@@ -518,15 +518,15 @@ protected static final Logger log = Logger.getLogger(Constants.APPLICATION_CODE)
 			clause = new StringBuffer(clause.substring(0, clause.length() - 5));
 		} catch (IntrospectionException e) {
 			// TODO
-			log.error("[QBEQueryBuilder::createSubClause4Example] creazione sotto-clausola",e);
+			LOG.error("[QBEQueryBuilder::createSubClause4Example] creazione sotto-clausola",e);
 			
 		} catch (IllegalAccessException e) {
 			// TODO Auto-generated catch block
-			log.error("[QBEQueryBuilder::createSubClause4Example] creazione sotto-clausola",e);
+			LOG.error("[QBEQueryBuilder::createSubClause4Example] creazione sotto-clausola",e);
 			
 		} catch (InvocationTargetException e) {
 			// TODO Auto-generated catch block
-			log.error("[QBEQueryBuilder::createSubClause4Example] creazione sotto-clausola",e);
+			LOG.error("[QBEQueryBuilder::createSubClause4Example] creazione sotto-clausola",e);
 			
 		}
 		return "(" + clause.toString() + ")";

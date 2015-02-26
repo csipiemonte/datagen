@@ -43,7 +43,7 @@ e le limitazioni secondo i termini della Licenza.
 	public void customDeleter«name.toFirstUpper()»(«filterJavaType» filter) throws «getDaoExcClassName(dao)»
 	«IF body-»
 	{	
-		log.debug("[«getDaoImplClassName(dao)»::customDeleter«name.toFirstUpper()»] START");
+		LOG.debug("[«getDaoImplClassName(dao)»::customDeleter«name.toFirstUpper()»] START");
 		«PROTECT CSTART '/*' CEND '*/' ID getRegionUID(getDaoImplFQN(dao, model)+"customDeleter"+name.toFirstUpper(), model.name)»
 		//***scrivere la custom query
 		final String sql = "DELETE FROM " + getTableName() + " WHERE ";
@@ -56,15 +56,15 @@ e le limitazioni secondo i termini della Licenza.
 			stopWatch.start();
 			jdbcTemplate.update(sql.toString(), params);
 		} catch (RuntimeException ex) {
-			log.error("[«getDaoImplClassName(dao)»::delete] esecuzione query",ex);
+			LOG.error("[«getDaoImplClassName(dao)»::delete] esecuzione query",ex);
 			throw new «getDaoExcClassName(dao)»("Query failed", ex);
 		} finally {
 			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "delete","esecuzione query", sql);
-			log.debug("[«getDaoImplClassName(dao)»::delete] END");
+			LOG.debug("[«getDaoImplClassName(dao)»::delete] END");
 		}
 		«ENDREM»
 		delete(jdbcTemplate, sql.toString(), params);
-		log.debug("[«getDaoImplClassName(dao)»::customDeleter«name.toFirstUpper()»] END");
+		LOG.debug("[«getDaoImplClassName(dao)»::customDeleter«name.toFirstUpper()»] END");
 	}
 	«ELSE-»
 	;
@@ -81,11 +81,11 @@ e le limitazioni secondo i termini della Licenza.
 	public void delete(«getPkClassName(dao)» pk) throws «getDaoExcClassName(dao)»
 	«IF body-»
 	{	
-		log.debug("[«getDaoImplClassName(dao)»::delete] START");
+		LOG.debug("[«getDaoImplClassName(dao)»::delete] START");
 		final String sql = "DELETE FROM " + getTableName() + " WHERE «EXPAND template::datagen::dao::daoFiles::setColumnEqPlaceholderList(" AND ") FOR dao.mainTable.primaryKey.includedColumns»";
 		
 		if(pk == null){
-			log.error("[«getDaoImplClassName(dao)»::delete] ERROR chiave primaria non impostata");
+			LOG.error("[«getDaoImplClassName(dao)»::delete] ERROR chiave primaria non impostata");
 			throw new «getDaoExcClassName(dao)»("Chiave primaria non impostata");
 		}
 		
@@ -97,15 +97,15 @@ e le limitazioni secondo i termini della Licenza.
 			stopWatch.start();
 			jdbcTemplate.update(sql.toString(), params);
 		} catch (RuntimeException ex) {
-			log.error("[«getDaoImplClassName(dao)»::delete] esecuzione query",ex);
+			LOG.error("[«getDaoImplClassName(dao)»::delete] esecuzione query",ex);
 			throw new «getDaoExcClassName(dao)»("Query failed", ex);
 		} finally {
 			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "delete","esecuzione query", sql);
-			log.debug("[«getDaoImplClassName(dao)»::delete] END");
+			LOG.debug("[«getDaoImplClassName(dao)»::delete] END");
 		}
 		«ENDREM»
 		delete(jdbcTemplate, sql.toString(), params);
-		log.debug("[«getDaoImplClassName(dao)»::delete] END");
+		LOG.debug("[«getDaoImplClassName(dao)»::delete] END");
 	}
 	«ELSE-»
 	;

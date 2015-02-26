@@ -151,7 +151,7 @@ import java.util.TreeMap;
  */
 public class «getDaoImplClassName()» extends AbstractDAO implements «getDaoClassName()»
 {
-	protected static final Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
+	protected static final Logger LOG = Logger.getLogger(Constants.APPLICATION_CODE);
 	/**
 	 * Il DAO utilizza JDBC template per l'implementazione delle query.
 	 * @generated
@@ -446,7 +446,7 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c
 	«ENDIF»	
 	«IF body-»
 	{	
-		log.debug("[«getDaoImplClassName()»::insert] START");
+		LOG.debug("[«getDaoImplClassName()»::insert] START");
 		«IF mainTable.primaryKey!=null && pkGenerator!=null-»
 		«EXPAND incrementerUse FOR this.mainTable.primaryKey.includedColumns.first()»
 		«ENDIF-»
@@ -468,11 +468,11 @@ StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 			stopWatch.start();
 			jdbcTemplate.update(sql.toString(), params);
 		} catch (RuntimeException ex) {
-			log.error("[«getDaoImplClassName()»::insert] esecuzione query",ex);
+			LOG.error("[«getDaoImplClassName()»::insert] esecuzione query",ex);
 			throw ex;
 		} finally {
 			stopWatch.dumpElapsed("«getDaoImplClassName()»", "insert","esecuzione query", sql);
-			log.debug("[«getDaoImplClassName()»::insert] END");
+			LOG.debug("[«getDaoImplClassName()»::insert] END");
 		}
 
 «ENDREM»
@@ -484,7 +484,7 @@ StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		«REM»se chiave multipla non funziona!!«ENDREM»
 		«EXPAND fillPKFields("dto", "newKey") FOREACH this.mainTable.primaryKey.includedColumns-»
 		«ENDIF-»
-		log.debug("[«getDaoImplClassName()»::insert] END");
+		LOG.debug("[«getDaoImplClassName()»::insert] END");
 		return dto.createPk();
 		«ENDIF»	
 		
@@ -584,7 +584,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
  */
 public abstract class AbstractDAO
 {
-	protected static final Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
+	protected static final Logger LOG = Logger.getLogger(Constants.APPLICATION_CODE);
 	/**
 	 * @generated
 	 */
@@ -614,18 +614,18 @@ public abstract class AbstractDAO
 	public void insert(NamedParameterJdbcTemplate jdbcTemplate,String sql,MapSqlParameterSource params)
 	{
 		String actualDaoClassName = this.getClass().getSimpleName();
-		log.debug("[AbstractDAO::insert] START ("+actualDaoClassName+")");
+		LOG.debug("[AbstractDAO::insert] START ("+actualDaoClassName+")");
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
 			stopWatch.start();
 			jdbcTemplate.update(sql.toString(), params);
 		} catch (RuntimeException ex) {
-			log.error("[AbstractDAO::insert] ERROR ("+actualDaoClassName+") esecuzione query", ex);
+			LOG.error("[AbstractDAO::insert] ERROR ("+actualDaoClassName+") esecuzione query", ex);
 			throw ex;
 		} finally {
 			stopWatch.dumpElapsed("AbstractDAO", "insert",
 					"esecuzione query", sql);
-			log.debug("[AbstractDAO::insert] END ("+actualDaoClassName+")");
+			LOG.debug("[AbstractDAO::insert] END ("+actualDaoClassName+")");
 		}
 	}
 	
@@ -638,18 +638,18 @@ public abstract class AbstractDAO
 	public void update(NamedParameterJdbcTemplate jdbcTemplate,String sql,MapSqlParameterSource params)
 	{
 		String actualDaoClassName = this.getClass().getSimpleName();
-		log.debug("[AbstractDAO::update] START ("+actualDaoClassName+")");
+		LOG.debug("[AbstractDAO::update] START ("+actualDaoClassName+")");
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
 			stopWatch.start();
 			jdbcTemplate.update(sql.toString(), params);
 		} catch (RuntimeException ex) {
-			log.error("[AbstractDAO::update] ERROR ("+actualDaoClassName+") esecuzione query", ex);
+			LOG.error("[AbstractDAO::update] ERROR ("+actualDaoClassName+") esecuzione query", ex);
 			throw ex;
 		} finally {
 			stopWatch.dumpElapsed("AbstractDAO", "update",
 					"esecuzione query", sql);
-			log.debug("[AbstractDAO::update] END ("+actualDaoClassName+")");
+			LOG.debug("[AbstractDAO::update] END ("+actualDaoClassName+")");
 		}
 	}
 	
@@ -662,18 +662,18 @@ public abstract class AbstractDAO
 	public void delete(NamedParameterJdbcTemplate jdbcTemplate,String sql,MapSqlParameterSource params)
 	{
 		String actualDaoClassName = this.getClass().getSimpleName();
-		log.debug("[AbstractDAO::delete] START ("+actualDaoClassName+")");
+		LOG.debug("[AbstractDAO::delete] START ("+actualDaoClassName+")");
 		StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 		try {
 			stopWatch.start();
 			jdbcTemplate.update(sql.toString(), params);
 		} catch (RuntimeException ex) {
-			log.error("[AbstractDAO::delete] ERROR ("+actualDaoClassName+") esecuzione query", ex);
+			LOG.error("[AbstractDAO::delete] ERROR ("+actualDaoClassName+") esecuzione query", ex);
 			throw ex;
 		} finally {
 			stopWatch.dumpElapsed("AbstractDAO", "delete",
 					"esecuzione query", sql);
-			log.debug("[AbstractDAO::delete] END ("+actualDaoClassName+")");
+			LOG.debug("[AbstractDAO::delete] END ("+actualDaoClassName+")");
 		}
 	}
 	
@@ -782,7 +782,7 @@ public class NamedParameterJdbcTemplateWithQueryDebug
 	/**
 	 * @generated
 	 */
-	protected static final Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
+	protected static final Logger LOG = Logger.getLogger(Constants.APPLICATION_CODE);
 
 	/**
 	 * @generated
@@ -820,7 +820,7 @@ public class NamedParameterJdbcTemplateWithQueryDebug
 		try {
 			logSql(sql, paramSource);
 		} catch (Exception e) {
-			log.error("Si e' verificato un errore nella chiamata al dao supplier: ", e);			
+			LOG.error("Si e' verificato un errore nella chiamata al dao supplier: ", e);			
 		}
 		return super.update(sql, paramSource);
 	}
@@ -834,7 +834,7 @@ public class NamedParameterJdbcTemplateWithQueryDebug
 		try {
 			logSql(sql, paramSource);
 		} catch (Exception e) {
-			log.error("Si e' verificato un errore nella chiamata al dao supplier: ", e);
+			LOG.error("Si e' verificato un errore nella chiamata al dao supplier: ", e);
 		}
 		return super.query(sql, paramSource, rowMapper);
 	}
@@ -847,10 +847,10 @@ public class NamedParameterJdbcTemplateWithQueryDebug
 	 * @generated
 	 */
 	private void logSql(String sql, SqlParameterSource paramSource) {
-		if(log.isDebugEnabled()){
+		if(LOG.isDebugEnabled()){
 			sql = buildSqlWithParameters(sql, paramSource);
 		}
-		log.debug(sql);
+		LOG.debug(sql);
 	}
 
 	/**
@@ -976,7 +976,7 @@ public class SimpleCache {
 	/**
 	 * @generated
 	 */
-	protected static final Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
+	protected static final Logger LOG = Logger.getLogger(Constants.APPLICATION_CODE);
 	
 	/**
 	 * @generated
@@ -1022,13 +1022,13 @@ public class SimpleCache {
 		CacheElement el = map.get(key);
 		if (el != null){
 			if ((System.currentTimeMillis() - el.getLastAccess())>(ttlMinutes*60000)){
-				log.debug("elemento trovato ma scaduto... (impostato TTL pari a "+ttlMinutes+" minuti");
+				LOG.debug("elemento trovato ma scaduto... (impostato TTL pari a "+ttlMinutes+" minuti");
 				map.remove(key);
 				return null;
 			}
 		
 		else{
-				log.debug("elemento trovato");
+				LOG.debug("elemento trovato");
 				if(updateAccessTime){
 					el.setLastAccess(System.currentTimeMillis());
 				}
@@ -1038,7 +1038,7 @@ public class SimpleCache {
 			}
 		}
 		else {
-			log.debug("elemento non trovato");
+			LOG.debug("elemento non trovato");
 			return null;
 		}
 			
@@ -1053,7 +1053,7 @@ public class SimpleCache {
 		while(it.hasNext()){
 			Object currK = it.next();
 			CacheElement el = map.get(currK);
-			log.debug("key:"+currK+", val:"+el.getValue()+", lastAccess:"+el.getLastAccess());
+			LOG.debug("key:"+currK+", val:"+el.getValue()+", lastAccess:"+el.getLastAccess());
 		}
 	}
 }
@@ -1124,7 +1124,7 @@ public class CacheElement {
 				try {
 					«this.supplierDAO.getDtoClassName().toFirstLower()»   = dao.get«this.supplierDAO.getDaoClassName()»().findByPrimaryKey(new «this.supplierDAO.getPkClassName()»(«FOREACH this.foreignKey.includedColumns AS includedColumn SEPARATOR ","» «getValueFromRSByColName(includedColumn)»«ENDFOREACH»));
 				} catch («this.supplierDAO.getDaoExcClassName()» e) {
-					log.error("Si e' verificato un errore nella chiamata al dao supplier: «this.supplierDAO.getDaoClassName().toFirstLower()» : ", e);					
+					LOG.error("Si e' verificato un errore nella chiamata al dao supplier: «this.supplierDAO.getDaoClassName().toFirstLower()» : ", e);					
 				}
 		dto.set«getLookedUpPropertyName(this).toFirstUpper()»(«this.supplierDAO.getDtoClassName().toFirstLower()»);
 	}
@@ -1216,7 +1216,7 @@ import org.apache.log4j.Logger;
  */
 public class BaseDaoRowMapper 
 {
-	protected static final Logger log = Logger.getLogger(Constants.APPLICATION_CODE);
+	protected static final Logger LOG = Logger.getLogger(Constants.APPLICATION_CODE);
 	/**
 	 * @generated
 	 */
@@ -1255,11 +1255,11 @@ public class BaseDaoRowMapper
 			dtoInstance = dtoClass.newInstance();
 			return dtoInstance;
 		} catch (InstantiationException e) {
-			log.error("Si e' verificato un errore nella chiamata al dao supplier: ", e);
+			LOG.error("Si e' verificato un errore nella chiamata al dao supplier: ", e);
 			throw new RuntimeException("Impossibile istanziare la classe "
 					+ dtoClass.getName() + " ," + e.getCause());
 		} catch (IllegalAccessException e) {
-			log.error("Si e' verificato un errore nella chiamata al dao supplier: ", e);
+			LOG.error("Si e' verificato un errore nella chiamata al dao supplier: ", e);
 			throw new RuntimeException("Impossibile accedere alla classe "
 					+ dtoClass.getName() + " ," + e.getCause());
 		}
