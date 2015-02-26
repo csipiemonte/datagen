@@ -182,18 +182,14 @@ public class InSetChk extends FieldChk{
 	public InSetChk(Object[] p_items) {
 		assert p_items != null && p_items.length > 0;
 		items = new Object[p_items.length];
-		for (int i = 0; i < p_items.length; i++) {
-			items[i] = p_items[i];
-		}
+		System.arraycopy(p_items, 0, items, 0, p_items.length);
 	}
 	/**
 	 * @generated
 	 */
 	public Object[] getItems() {
 		Object ris [] = new Object[items.length];
-		for (int i = 0; i < items.length; i++) {
-			ris[i] = items[i];
-		}
+		System.arraycopy(items, 0, ris, 0, items.length);
 		return ris;
 	}
 }
