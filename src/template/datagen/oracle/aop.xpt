@@ -105,14 +105,14 @@ e le limitazioni secondo i termini della Licenza.
 
             Blob blob = rs.getBlob( columnIndex );
             if (blob == null) {
-                return null;
+                return null; «noSonarTag("")»
             }
 
             InputStream is = blob.getBinaryStream();
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
             if (is == null) {
-                return null;
+                return null; «noSonarTag("")»
             }
             else {
                 byte buffer[] = new byte[ 64 ];
