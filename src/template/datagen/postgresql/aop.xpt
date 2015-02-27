@@ -29,7 +29,7 @@ e le limitazioni secondo i termini della Licenza.
   </bean>-->
 «ENDAROUND»
 
-«AROUND template::datagen::dao::daoFiles::abstractDAODBMSSpecificCode FOR DaoPackage»
+«AROUND template::datagen::dao::daoFiles::abstractDAODBMSSpecificCode FOR DBAccessModel»
 	// there is no specific code for POSGRESQL
 «ENDAROUND»
 

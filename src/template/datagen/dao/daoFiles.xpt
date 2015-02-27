@@ -27,12 +27,12 @@ e le limitazioni secondo i termini della Licenza.
 «DEFINE daoFiles FOR DBAccessModel»
 «EXPAND daoFiles(this) FOREACH daopkgs»
 «EXPAND utilFiles FOR this»
+«EXPAND commonDaoFiles FOR this»
 «ENDDEFINE»
 
 «DEFINE daoFiles (DBAccessModel model) FOR DaoPackage»
 «EXPAND commonDaoFiles(model) FOR this»
 «EXPAND daoFiles(model) FOREACH dao»
-«EXPAND baseDaoRowMapper(model) FOREACH dao»
 «ENDDEFINE»
 
 «DEFINE daoFiles(DBAccessModel model) FOR DataAccessObject»
@@ -128,6 +128,7 @@ import «pkgPackage».dto.*;
 import «pkgPackage».qbe.*;
 import «pkgPackage».metadata.*;
 import «pkgPackage».exceptions.*;
+import «getDALayerBasePkg(model)».impl.*;
 import «getDALayerBasePkg(model)».util.*;
 import «getDALayerBasePkg(model)».qbe.*;
 import java.util.*;
@@ -592,16 +593,16 @@ StopWatch stopWatch = new StopWatch(Constants.APPLICATION_CODE);
 	
 «ENDDEFINE»
 
-
-«DEFINE commonDaoFiles(DBAccessModel model) FOR DaoPackage»
-«FILE getPkgDir(this, model)+"/dao/impl/AbstractDAO.java"»package «getPkgPackage(this, model)».dao.impl;
+«REM»file comuni a tutti i dao package (esclusi i file di utilita')«ENDREM»
+«DEFINE commonDaoFiles FOR DBAccessModel»
+«FILE getDALayerBaseDir()+"/impl/AbstractDAO.java"»package «getDALayerBasePkg()».impl;
 
 import java.io.*;
 import java.sql.*;
 
 import org.springframework.jdbc.support.incrementer.DataFieldMaxValueIncrementer;
 
-import «getDALayerBasePkg(model)».util.*;
+import «getDALayerBasePkg(this)».util.*;
 import org.apache.log4j.Logger;
 import it.csi.util.performance.StopWatch;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -794,6 +795,12 @@ public abstract class AbstractDAO
 }
 «ENDFILE»
 
+«EXPAND baseDaoRowMapper FOR this»
+«ENDDEFINE»
+
+«DEFINE commonDaoFiles(DBAccessModel model) FOR DaoPackage»
+
+
 «FILE getPkgDir(this, model)+"/exceptions/DaoException.java"»package «getPkgPackage(this, model)».exceptions;
 
 /**
@@ -846,7 +853,7 @@ public class DaoException extends RuntimeException
 «ENDFILE»
 «ENDDEFINE»
 
-«DEFINE abstractDAODBMSSpecificCode FOR DaoPackage»
+«DEFINE abstractDAODBMSSpecificCode FOR DBAccessModel»
 «ERROR "abstractDAODBMSSpecificCode: aop non risolta"»
 «ENDDEFINE»
 
@@ -864,7 +871,7 @@ public final class Constants {
 	public static final String APPLICATION_CODE = "«this.codComponente»";
 	
 	«PROTECT CSTART '/*' CEND '*/' ID getRegionUID("DaoConstants", this.name)»
-	
+	 
 	«ENDPROTECT»
 }
 «ENDFILE»
@@ -1342,13 +1349,12 @@ public class CacheElement {
 «ENDDEFINE»
 
 
-«DEFINE baseDaoRowMapper(DBAccessModel model) FOR DataAccessObject»
-«LET getPkgPackage((DaoPackage)(this.eContainer), model) AS pkgPackage-»
-«FILE getBaseDaoMapperFullPath(this, model)»package «pkgPackage».dao.mapper;
+«DEFINE baseDaoRowMapper FOR DBAccessModel»
+«FILE getBaseDaoMapperFullPath()»package «getDALayerBasePkg()».impl;
 
 import java.io.*;
 import java.sql.*;
-import «getDALayerBasePkg(model)».util.*;
+import «getDALayerBasePkg()».util.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.apache.log4j.Logger;
@@ -1441,11 +1447,10 @@ public class BaseDaoRowMapper
 		}
 	}
 	
-	«EXPAND abstractDAODBMSSpecificCode FOR (DaoPackage)(this.eContainer)»
+	«EXPAND abstractDAODBMSSpecificCode FOR this»
 }
 
 «ENDFILE-»
-«ENDLET-»
 «ENDDEFINE»
 
 «DEFINE daoRowMapper(DBAccessModel model) FOR DataAccessObject»
@@ -1456,6 +1461,7 @@ public class BaseDaoRowMapper
 
 import «pkgPackage».dto.*;
 import «pkgPackage».dao.*;
+import «getDALayerBasePkg(model)».impl.BaseDaoRowMapper;
 import «pkgPackage».dao.impl.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;

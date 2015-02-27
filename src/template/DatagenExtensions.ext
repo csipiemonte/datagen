@@ -104,8 +104,8 @@ String getDaoExcFullPath(DataAccessObject dao, DBAccessModel model) :
 String getDaoMapperFullPath(DataAccessObject dao, DBAccessModel model) :
 	getPkgDir((DaoPackage)(dao.eContainer), model)+"/dao/mapper/"+getDaoMapperClassName(dao)+".java";
 	
-String getBaseDaoMapperFullPath(DataAccessObject dao, DBAccessModel model) :
-	getPkgDir((DaoPackage)(dao.eContainer), model)+"/dao/mapper/BaseDaoRowMapper.java";
+String getBaseDaoMapperFullPath(DBAccessModel model) :
+	getDALayerBaseDir(model)+"/impl/BaseDaoRowMapper.java";
 	
 
 
