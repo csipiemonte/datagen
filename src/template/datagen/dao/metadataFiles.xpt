@@ -51,9 +51,23 @@ import java.util.List;
  */
 public class «getMetadataClassName()» extends DAOMetadata{
 	
+	/**
+	 * contiene l'elenco dei nomi delle property del DTO associato al DAO a cui
+	 * questi metadati fanno riferimento
+	 */
 	private final String[] propertyNames;
+	
+	/**
+	 * contiene l'elenco dei nomi delle colonne della tabella associata al DAO a cui
+	 * questi metadati fanno riferimento
+	 */
 	private final String[] columnNames;	
 	
+	/**
+	 * Contiene i metadati relativi a:
+	 * DAO: [«this.name»]
+	 * tabella: [«this.mainTable.name»].
+	 */
 	public «getMetadataClassName()»(){
 		columnNames = new String[]{«FOREACH mainTable.columns AS currCol SEPARATOR ','-»"«currCol.name»"«ENDFOREACH-»
 		«IF this.lookupResolvers!=null && this.lookupResolvers.resolvers.size >0-»
@@ -74,7 +88,8 @@ public class «getMetadataClassName()» extends DAOMetadata{
 	
 	/**
 	 * Method 'getTableName'
-	 * 
+	 * Restituisce il nome della tabella a cui il DAO [«this.name»] fa riferimento
+	 * («this.mainTable.name»).
 	 * @return String
 	 * @generated
 	 */
@@ -85,7 +100,7 @@ public class «getMetadataClassName()» extends DAOMetadata{
 	
 	/**
 	 * Method 'getColumnNames'
-	 * 
+	 * Restutuisce l'insieme dei nomi delle colonne gestite dal DAO.
 	 * @return String[]
 	 * @generated
 	 */
@@ -114,6 +129,7 @@ public class «getMetadataClassName()» extends DAOMetadata{
 
 «DEFINE metadataCase4Resolver(DataAccessObject dao) FOR LookupResolver-»
 «FOREACH this.foreignKey.includedColumns AS currFKColumn ITERATOR i-»
+		// [«javaPropertyPathForResolvedColumn(this, this.foreignKey,i.counter0)»] -> [«currFKColumn.name»]
 		if ("«javaPropertyPathForResolvedColumn(this, this.foreignKey,i.counter0)»".equalsIgnoreCase(propName)){
 			return "«currFKColumn.name»";
 		}
@@ -121,6 +137,17 @@ public class «getMetadataClassName()» extends DAOMetadata{
 «ENDDEFINE»
 
 «DEFINE getColumnNameMethod(DataAccessObject dao) FOR Table»
+	/**
+	 * Restituisce il nome della colonna a cui fa riferimento una particolare 
+	 * property del DTO.
+	 * La colonna puo' appartenere alla tabella gestita direttamente dal DAO, 
+	 * oppure puo' essere una colonna di una tabella "satellite" (caso di foreign key).
+	 * @param prefixPropName se presente indica un path di ricorsione all'interno del DTO
+	 * @param propName il nome della property di cui serve ottenere la colonna relativa
+	 * @return il nome della colonna associata a propName, visto anche il prefisso eventuale
+	 * prefixPropName
+	 * @generated
+	 */
 	public String getColumnName(String prefixPropName, String propName){
 		if (prefixPropName!=null && prefixPropName.length()>0)
 			return getColumnName(prefixPropName+"."+propName);
@@ -129,22 +156,25 @@ public class «getMetadataClassName()» extends DAOMetadata{
 	}
 
 	/**
-	 * Method 'getColumnName'
-	 * 
-	 * @param propName
-	 * @return String
+ 	 * Restituisce il nome della colonna a cui fa riferimento una particolare 
+	 * property del DTO.
+	 * @param propName il nome della property di cui serve ottenere la colonna relativa
+	 * @return il nome della colonna associata a propName
 	 * @generated
 	 */
 	public String getColumnName(String propName){
+		// proprieta' "dirette" del DTO
 		«FOREACH columns AS currCol-»
 		«IF currCol.isForeignKey!=null && currCol.isForeignKey && dao.lookupResolvers != null && dao.lookupResolvers.resolvers.select(r|r.foreignKey.includedColumns.contains(currCol)).size >0-»
 		«ELSE-»
+		// [«javaPropertyNameFromColumn(currCol)»] -> [«currCol.name»] 
 		if ("«javaPropertyNameFromColumn(currCol)»".equalsIgnoreCase(propName)){
 			return "«currCol.name»";
 		}
 		«ENDIF-»
 		«ENDFOREACH-»
 		«IF dao.lookupResolvers!=null && dao.lookupResolvers.resolvers.size >0-»
+		// proprieta' indirette del DAO (legate a LookupResolver)
 		«EXPAND metadataCase4Resolver(dao) FOREACH dao.lookupResolvers.resolvers-»
 		«ENDIF-»
 		/// se non trovato
@@ -160,8 +190,9 @@ import java.sql.*;
 
 
 /**
- * abstract class for DAO Metadata.
- *
+ * Classe astratta per i DAO Metadata.
+ * Per ogni DAO deve essere definita una sottoclasse di questa classe astratta
+ * che conterra' i metadati relativi alla tabella gestita dal DAO. 
  * @generated
  */
 public abstract class DAOMetadata
@@ -170,11 +201,14 @@ public abstract class DAOMetadata
 	
 	public DAOMetadata()
 	{
+		// costruttore intenzionalmente vuoto
 	}
 	
 	/**
 	 * Method 'getTableName'
-	 * 
+	 * Restituisce il nome della tabella a cui fanno riferimento i metadati.
+	 * Questo metodo astratto deve essere definito nelle sottoclassi e restituire
+	 * il nome della tabella gestita dallo specifico DAO.
 	 * @return String
 	 * @generated
 	 */
@@ -219,7 +253,10 @@ public abstract class DAOMetadata
 	
 	/**
 	 * Method 'getColumnNames'
-	 * 
+	 * Restituisce l'elenco dei nomi di tutte le colonne gestite dal DAO 
+	 * (ovvero l'elenco di tutte le colonne della tabella).
+	 * Deve essere sovrascritto nelle sottoclassi specifiche in modo da restituire
+	 * i nomi effettivi.
 	 * @return String[]
 	 * @generated
 	 */

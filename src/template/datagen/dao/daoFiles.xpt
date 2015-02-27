@@ -94,6 +94,8 @@ import java.sql.SQLException;
 
 /**
  * Interfaccia pubblica del DAO «name».
+ * Espone le operazioni che possono essere eseguite per la gestione 
+ * della tabella [«this.mainTable»]
  * @generated
  */
 public interface «getDaoClassName()» {
@@ -146,7 +148,35 @@ import java.util.TreeMap;
 «ENDPROTECT»
 
 /**
- * Implemenrazione del DAO «name»
+ * Implementazione del DAO «name».
+ * Il DAO implementa le seguenti operazioni:
+ «IF this.inserter != null-»
+ * - INSERTER: 
+ *   - (insert di default)
+ «ENDIF-»
+  * - FINDERS:
+ «IF this.finders!=null-»
+ «FOREACH finders.finders AS f-»
+ *   - «f.name» («f.metaType.name»)
+ «ENDFOREACH-»«ELSE»
+ *    --
+ «ENDIF-»
+  * - UPDATERS:
+ «IF this.updaters!=null-»
+ «FOREACH updaters.updaters AS u-»
+ *   - «u.name» («u.metaType.name»)
+ «ENDFOREACH-»«ELSE»
+ *    --
+ «ENDIF-»
+ * - DELETERS:
+ «IF this.deleters!=null-»
+ «FOREACH deleters.deleters AS d-»
+ *   - «d.name» («d.metaType.name»)
+ «ENDFOREACH-»«ELSE»
+ *    --
+ «ENDIF-»
+ *
+ * Le query sono realizzate utiulizzando spring-JDBCTemplate.
  * @generated
  */
 public class «getDaoImplClassName()» extends AbstractDAO implements «getDaoClassName()»
@@ -331,6 +361,7 @@ public class «getDaoImplClassName()» extends AbstractDAO implements «getDaoCl
 
 «IF isNullOrEmpty(this.alias)-»
 	«IF isNullOrEmpty(this.qtable.aliasName)»
+		// lettura colonna [«this.column.name»]
 		if (mapAllColumns || columnsToReadMap.get("«this.column.name»") != null)
 			dto.set«javaPropertyNameFromColumn(this.column).toFirstUpper()»(«IF !isBlobOrClob(this.column)-»
 				«getValueFromRSByColName(this.column)-»
@@ -391,6 +422,7 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c
 «FOREACH this AS currCol-»
 	«IF currCol.isForeignKey!=null && currCol.isForeignKey && dao.lookupResolvers != null && dao.lookupResolvers.resolvers.select(r|r.foreignKey.includedColumns.contains(currCol)).size >0-»
 	«ELSE»	
+	// valorizzazione paametro relativo a colonna [«((TableColumn)currCol).name»]
 	params.addValue("«((TableColumn)currCol).name»", «dtoVarName».get«javaPropertyNameFromColumn(currCol).toFirstUpper()»(), «javaSqlTypeForJDBCBinding(currCol.type)-» );	
 	«ENDIF»
 «ENDFOREACH-»
@@ -406,6 +438,7 @@ SET «FOREACH this.select(c|!dao.mainTable.primaryKey.includedColumns.contains(c
 «FOREACH this AS currCol-»
 «IF currCol.isForeignKey!=null && currCol.isForeignKey && dao.lookupResolvers != null && dao.lookupResolvers.resolvers.select(r|r.foreignKey.includedColumns.contains(currCol)).size >0-»
 «ELSE»
+	// valorizzazione paametro relativo a colonna [«((TableColumn)currCol).name»]
 	params.addValue("«((TableColumn)currCol).name»", «currCol==pkCol?" newKey ":dtoVarName+".get"+javaPropertyNameFromColumn(currCol).toFirstUpper()+"()"» , «javaSqlTypeForJDBCBinding(currCol.type)-» );
 «ENDIF»
 «ENDFOREACH-»
@@ -577,19 +610,33 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 
 /**
- * Base class for Oracle DAO classes.
- *
+ * Classe di base per tutti i DAO.
+ * Le sottoclassi sono specifiche dei vari DataAccessObject e devono implementare tutti i 
+ * metodi specifici
+ * - finder
+ * - updater
+ * - deleter
+ * Sono previsti dei metodi generici per:
+ * - inserimento
+ * - update
+ * - cancellazione
+ * Possono essere utilizzati per la definizione dei metodi specifici (i metodi sono parametrici
+ * per quanto riguarda l'SQL).
  * @generated
  */
 public abstract class AbstractDAO
 {
 	protected static final Logger LOG = Logger.getLogger(Constants.APPLICATION_CODE);
 	/**
+	 * contiene, se previsto dall'operativita' del DAO, l'incrementer utilizzato
+	 * per ottenere il valore della PK numerica dell'elemento che si sta per inserire
 	 * @generated
 	 */
 	protected DataFieldMaxValueIncrementer incrementer;
 	
 	/**
+	 * Permette di impostare, se previsto, l'oggetto incrementer utilizzato
+	 * per ottenere il valore della PK numerica dell'elemento che si sta per inserire
 	 * @generated
 	 */   
 	public void setIncrementer(DataFieldMaxValueIncrementer incrementer) {
@@ -597,8 +644,9 @@ public abstract class AbstractDAO
 	}
 
 	/**
-	 * Method 'getTableName'
-	 * 
+	 * Restituisce il nome della tabella specifica a cui il DAO fa riferimento.
+	 * Deve essere implementato da ciascun DAO in modo da restituire la stringa
+	 * che rappresenta il nome della tabella gestita dallo specifico DAO.
 	 * @return String
 	 * @generated
 	 */
@@ -606,6 +654,36 @@ public abstract class AbstractDAO
 	
 	/**
 	 * Metodo di generico di inserimento (opera su qualsiasi specifico DAO).
+	 * Esempio di codice del metodo specifico:
+	 * 	public BandieraPk insert(BandieraDto dto){
+	 *	  LOG.debug("[BandieraDaoImpl::insert] START");
+	 *	  java.math.BigDecimal newKey = java.math.BigDecimal.valueOf(incrementer
+	 *			.nextLongValue());
+
+	 *	  final String sql = "INSERT INTO "
+	 *			+ getTableName()
+	 *			+ " ( 	ID_BANDIERA,DENOMINAZIONE,DATA_INSERIMENTO,DATA_FINE_VALIDITA ) VALUES (  :ID_BANDIERA , :DENOMINAZIONE , :DATA_INSERIMENTO , :DATA_FINE_VALIDITA  )";
+
+	 *	  MapSqlParameterSource params = new MapSqlParameterSource();
+
+	 *	  params.addValue("ID_BANDIERA", newKey, java.sql.Types.DECIMAL);
+
+	 *	  params.addValue("DENOMINAZIONE", dto.getDenominazione(),
+	 *			java.sql.Types.VARCHAR);
+
+	 *	  params.addValue("DATA_INSERIMENTO", dto.getDataInserimento(),
+	 *			java.sql.Types.DATE);
+
+	 *	  params.addValue("DATA_FINE_VALIDITA", dto.getDataFineValidita(),
+	 *			java.sql.Types.DATE);
+
+	 *	  insert(jdbcTemplate, sql.toString(), params);
+
+	 *	  dto.setIdBandiera(newKey);
+	 *	  LOG.debug("[BandieraDaoImpl::insert] END");
+	 *	  return dto.createPk();
+     *  }
+     *
 	 * @param jdbcTemplate
 	 * @param sql
 	 * @param params  
@@ -630,6 +708,25 @@ public abstract class AbstractDAO
 	
 	/**
 	 * Metodo di generico di aggiornamento dati (opera su qualsiasi specifico DAO).
+	 * Esempio di codice della sottoclasse:
+	 * public void updateColumnsUpdate(BandieraDto dto)
+	 *		throws BandieraDaoException {
+	 *	LOG.debug("[BandieraDaoImpl::updateColumnsUpdate] START");
+	 *	final String sql = "UPDATE "
+	 *			+ getTableName()
+	 *			+ " SET DENOMINAZIONE = :DENOMINAZIONE  WHERE ID_BANDIERA = :ID_BANDIERA ";
+	 *	if (dto.getIdBandiera() == null) {
+	 *		LOG.error("[BandieraDaoImpl::updateColumnsUpdate] ERROR chiave primaria non impostata");
+	 *		throw new BandieraDaoException("Chiave primaria non impostata");
+	 *	}
+     *  MapSqlParameterSource params = new MapSqlParameterSource();
+	 *	params.addValue("DENOMINAZIONE", dto.getDenominazione(),
+	 *			java.sql.Types.VARCHAR);
+	 *	params.addValue("ID_BANDIERA", dto.getIdBandiera(),
+	 *			java.sql.Types.DECIMAL);
+	 *	update(jdbcTemplate, sql.toString(), params);
+	 *	LOG.debug("[BandieraDaoImpl::updateColumnsUpdate] END");
+	 * }
 	 * @param jdbcTemplate
 	 * @param sql
 	 * @param params  
@@ -654,6 +751,21 @@ public abstract class AbstractDAO
 	
 	/**
 	 * Metodo di generico di cancellazione (opera su qualsiasi specifico DAO).
+	 * Esempio di codice della implementazione specifica:
+	 *	public void delete(BandieraPk pk) throws BandieraDaoException {
+	 *	LOG.debug("[BandieraDaoImpl::delete] START");
+	 *	final String sql = "DELETE FROM " + getTableName()
+	 *			+ " WHERE ID_BANDIERA = :ID_BANDIERA ";
+	 *	if (pk == null) {
+	 *		LOG.error("[BandieraDaoImpl::delete] ERROR chiave primaria non impostata");
+	 *		throw new BandieraDaoException("Chiave primaria non impostata");
+	 *	}
+	 *	MapSqlParameterSource params = new MapSqlParameterSource();
+	 *	params.addValue("ID_BANDIERA", pk.getIdBandiera(),
+	 *			java.sql.Types.DECIMAL);
+	 *	delete(jdbcTemplate, sql.toString(), params);
+	 *	LOG.debug("[BandieraDaoImpl::delete] END");
+	 * }
 	 * @param jdbcTemplate
 	 * @param sql
 	 * @param params  
@@ -771,7 +883,8 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 /**
- * Implementazione di NamedParameterJdbcTemplate con l'aggiunta del log dell'SQL che viene eseguito.
+ * Implementazione di NamedParameterJdbcTemplate con l'aggiunta del log 
+ * dell'SQL che viene eseguito.
  * @generated
  */
 public class NamedParameterJdbcTemplateWithQueryDebug
@@ -784,17 +897,20 @@ public class NamedParameterJdbcTemplateWithQueryDebug
 	protected static final Logger LOG = Logger.getLogger(Constants.APPLICATION_CODE);
 
 	/**
+	 * carattere che nella query prefigge i placeholder
 	 * @generated
 	 */
 	private static String PLACEHOLDER = ":";
 
 	/**
+	 * caratteri che delimitano la fine del parametro
 	 * @generated
 	 */
 	private static String[] terminatoriParametro = new String[]{" ","=",")","|","(",">","<","+","-","*","/"}; 
 	
 	/**
-	 * costruttore
+	 * Costruttore
+	 * @param dataSource
 	 * @generated
 	 */
 	public NamedParameterJdbcTemplateWithQueryDebug(DataSource dataSource) {
@@ -803,6 +919,7 @@ public class NamedParameterJdbcTemplateWithQueryDebug
 
     /** 
      * costruttore
+     * @param classicJdbcTemplate
      * @generated
      */
 	public NamedParameterJdbcTemplateWithQueryDebug(
@@ -811,6 +928,10 @@ public class NamedParameterJdbcTemplateWithQueryDebug
 	}
 
 	/**
+	 * aggiunge la logica di log della query alla logica della superclasse
+	 * @param sql la query da eseguire
+	 * @param paramSource i parametri da utilizzare nella query
+	 * @throws DAOException
 	 * @generated
 	 */
 	@Override
@@ -825,6 +946,12 @@ public class NamedParameterJdbcTemplateWithQueryDebug
 	}
 
 	/**
+	 * aggiunge la logica di log della query alla logica della superclasse
+	 * @param sql la query da eseguire
+	 * @param paramSource i parametri da utilizzare nella query
+	 * @rowMapper il mapper da utilizzare per ricostruire il risultato
+	 * @return la lista di risultati
+	 * @throws DAOException
 	 * @generated
 	 */
 	@Override
@@ -839,7 +966,8 @@ public class NamedParameterJdbcTemplateWithQueryDebug
 	}
 
 	/**
-	 * stampa su log la query con i valori dei parametri impostati al posto dei placeholder
+	 * stampa su log (a livello DEBUG) la query con i valori dei parametri impostati
+	 * al posto dei placeholder
 	 * 
 	 * @param sql query con i placeholder 
 	 * @param paramSource  mappa contenente i parametri e loro valori
@@ -967,7 +1095,8 @@ import java.util.Iterator;
 import org.apache.log4j.Logger;
 
 /**
- * Implementazione di cache di DTO. Utilizzata dai DAO se specificato.
+ * Implementazione di cache di DTO. 
+ * Utilizzata dai DAO se specificato.
  * @generated
  */
 public class SimpleCache {
@@ -978,11 +1107,17 @@ public class SimpleCache {
 	protected static final Logger LOG = Logger.getLogger(Constants.APPLICATION_CODE);
 	
 	/**
+	 * contiene gli elementi in cache.
+	 * - la key della mappa coincide con la primary key dell'oggetto in cache
+	 * - come valore invece e' inserito un oggetto CacheElement che, oltre al valore
+	 *   da mantenere in cache, contiene anche l'indicazione dell'istante di inserimento
+	 *   in cache (utilizzato per determinere il TTL). 
 	 * @generated
 	 */
 	HashMap<Object, CacheElement> map = new HashMap<Object, CacheElement>();
 	
 	/**
+	 * Time To Live degli elementi in cache
 	 * @generated
 	 */
 	int ttlMinutes = 0;
@@ -994,6 +1129,8 @@ public class SimpleCache {
 	
 	/**
 	 * costruttore
+	 * @param ttl
+	 * @param updateAccessTime
 	 * @generated
 	 */
 	public SimpleCache(int ttl, boolean updateAccessTime){
@@ -1004,6 +1141,8 @@ public class SimpleCache {
 	/**
 	 * inserimento del dato nella cache (con valorizzazione dell'istante di inserimento
 	 * che serve per determinare lo svecchiamento).
+	 * @param key la PK dell'oggetto da inserire in cache
+	 * @param value il record da inserire in cache
 	 * @generated
 	 */
 	public void put(Object key, Object value){
@@ -1015,6 +1154,9 @@ public class SimpleCache {
 	
 	/**
 	 * Restituisce l'elemento della cache identificato dalla chiave.
+	 * @param key la chiave (PK) dell'elemento da cercare in cache
+	 * @return l'elemento in cache corrispondente alla chiave key, se presente,
+	 *         altrimenti null.
 	 * @generated
 	 */
 	public Object get(Object key){
@@ -1046,6 +1188,7 @@ public class SimpleCache {
 	
 	/**
 	 * dump per debug
+	 * @generated
 	 */
 	public void dumpCache(){
 		Iterator<Object> it = map.keySet().iterator();
@@ -1067,17 +1210,19 @@ public class SimpleCache {
  */
 public class CacheElement {
 	   /**
+	    * istante di ultimo accesso all'elemento
 	 	* @generated
 	 	*/
 		long lastAccess = 0;
 	
 	   /**
+	    * il valore mantenuto in cache
 	 	* @generated
 	 	*/
 		Object value = null;
 		
 	   /**
-	    * restituisce l'istante di ultimo accesso all'oggetto
+	    * @return l'istante di ultimo accesso all'oggetto
 	 	* @generated
 	 	*/
 		public long getLastAccess() {
@@ -1086,6 +1231,7 @@ public class CacheElement {
 		
 		/**
 		 * imposta l'istante di ultimo accesso all'oggetto
+		 * @param lastAccess l'istante di ultimo accesso all'oggetto
 		 * @generated
 		 */
 		public void setLastAccess(long lastAccess) {
@@ -1093,7 +1239,7 @@ public class CacheElement {
 		}
 		
 		/**
-		 * restituisce il valore dell'elemento di cache
+		 * @return il valore dell'elemento di cache
 		 * @generated
 		 */
 		public Object getValue() {
@@ -1102,6 +1248,7 @@ public class CacheElement {
 		
 		/**
 		 * imposta il valore dell'elemento di cache
+		 * @param value il valore da conservare in cache
 		 * @generated
 		 */
 		public void setValue(Object value) {
@@ -1215,26 +1362,53 @@ import org.apache.log4j.Logger;
  */
 public class BaseDaoRowMapper 
 {
-	protected static final Logger LOG = Logger.getLogger(Constants.APPLICATION_CODE);
 	/**
+	 * @generated
+	 */
+	protected static final Logger LOG = Logger.getLogger(Constants.APPLICATION_CODE);
+	
+	/**
+	 * Contiene l'elenco di tutte le colonne da leggere.
+	 * Viene inizializzato nelle singole sottoclassi con l'elenco effettivo
+	 * di colonne della colonna relativa.
+	 * Serve poiche', pe rogni DAO, e' possibile utilizzare lo stesso mapper in piu' 
+	 * contesti di finder:
+	 * - in un finder che restituisce tutte le colonne
+	 * - in un finder che restituisce (popola) solo un sottoinsieme di colonne
+	 * Serve per evitare la proliferazione di classi Mapper: una singola classe
+	 * puo' essere utilizzata in differenti contesti.
 	 * @generated
 	 */
 	public final java.util.Map<String, String> columnsToReadMap = new java.util.HashMap<String, String>();
+	
 	/**
+	 * questo flag, se impostato a true nell'istanza del mapper, fa in modo che
+	 * siano lette tutte le colonne.
+	 * Serve per ottimizzare la logica ed evitare che vengano testate inutilmente
+	 * le condizioni sulle varie colonne effettive.
 	 * @generated
 	 */
 	public boolean mapAllColumns = true;
+	
 	/**
+	 * La classe del DTO che il mapper deve istanziare durante la ricostruzione del
+	 * risultato
 	 * @generated
 	 */
 	public Class dtoClass;
 	
+	
 	/**
+	 * Costruttore del RowMapper. 
+	 * Permette di specificare:
+	 * - l'elenco delle colonne da in cludere nel mapping (per query incomplete,
+	 *   esempio: distinct, custom select, ....)
+	 * - la classe del DTO da istanziare al momento della ricostruzione del risultato
 	 * @generated
-	 */
-	/**
 	 * @param columnsToRead elenco delle colonne da includere nel mapping (per query
 	 *        incomplete, esempio distinct, custom select...)
+	 * @param dtoClass la classe del DTO da istanziare al momento della ricostruzione del 
+	 *        risultato
 	 */
 	public BaseDaoRowMapper(String[] columnsToRead, Class dtoClass) {
 		if (columnsToRead != null) {
@@ -1245,6 +1419,9 @@ public class BaseDaoRowMapper
 		this.dtoClass = dtoClass;
 	}
 	/**
+	 * Istanzia un DTO nuovo (vuoto) del tipo specificato al momento della creazione del 
+	 * RowMapper
+	 * @return l'oggetto istanziato (del tipo specificato in dtoClass)
 	 * @generated
 	 */
 	public Object getNewDto() {
@@ -1345,7 +1522,7 @@ public class «getDaoClassName().toFirstUpper()»RowMapper extends BaseDaoRowMap
 			«IF currCol.isForeignKey!=null && currCol.isForeignKey && this.lookupResolvers != null && this.lookupResolvers.resolvers.select(r|r.foreignKey.includedColumns.contains(currCol)).size >0-»
 			
 			«ELSE»
-			
+			// colonna [«currCol.name»]
 			if (mapAllColumns || columnsToReadMap.get("«currCol.name»") != null)
 				dto.set«javaPropertyNameFromColumn(currCol).toFirstUpper()-»(
 			«IF !isBlobOrClob(currCol)-»

@@ -34,6 +34,12 @@ e le limitazioni secondo i termini della Licenza.
 	// ORACLE specific code
 	
 	/**
+	 * Metodo specifico del DBMS Oracle per l'aggiornamento del valore di un campo di tipo
+	 * CLOB.
+	 * @param clob l'oggetto CLOB da aggiornare
+	 * @param data il valore da assegnare al CLOB
+	 * @throws IOException
+	 * @throws SQLException 
 	 * @generated
 	 */
     public static void updateClob(Clob clob, String data) throws IOException, SQLException 
@@ -53,6 +59,12 @@ e le limitazioni secondo i termini della Licenza.
     }
 
 	/**
+	 * Metodo specifico del DBMS Oracle per l'aggiornamento di una colonna
+	 * di tipo BLOB
+	 * @param blob l'oggetto BLOB da aggiornare
+	 * @param data il valore da assegnare al BLOB
+	 * @throws IOException
+	 * @throws SQLException
 	 * @generated
 	 */
     public static void updateBlob(Blob blob, byte[] data) throws IOException, SQLException
@@ -73,6 +85,12 @@ e le limitazioni secondo i termini della Licenza.
     }
 
 	/**
+	 * Metodo specifico del DBMS Oracle per la lettura di una colonna 
+	 * di tipo BLOB.
+	 * @param rs il result set d acui leggere i dati del BLOB
+	 * @param columnIndex l'indice della colonna (all'interno del result set)
+	 *        da cui occorre leggere i dati del BLOB
+	 * @throws SQLException 
 	 * @generated
 	 */
     public static byte[] getBlobColumn(ResultSet rs, int columnIndex)
@@ -114,6 +132,13 @@ e le limitazioni secondo i termini della Licenza.
     }
 
 	/**
+	 * Metodo specifico del DBMS Oracle per la scrittura di una colonna
+	 * di tipo BLOB
+	 * @param stmt per scrivere un valore BLOB occorre utilizzare un prepared statement
+	 * @param parameterIndex l'indice del parametro del prepared statement in cui dovra'
+	 *        essere inserito il valore del BLOB
+	 * @param value il valore (bytes) da inserire nella colonna BLOB)
+	 * @throws SQLException
 	 * @generated
 	 */
     public static void setBlobColumn(PreparedStatement stmt, int parameterIndex, byte[] value)
@@ -128,6 +153,12 @@ e le limitazioni secondo i termini della Licenza.
     }
 
 	/**
+	 * Metodo specifico del DBMS Oracle per la lettura di una colonna 
+	 * di tipo CLOB.
+	 * @param rs il result set da cui leggere i dati del CLOB
+	 * @param columnIndex l'indice della colonna (all'interno del result set)
+	 *        da cui occorre leggere i dati del CLOB
+	 * @throws SQLException
 	 * @generated
 	 */
     public static String getClobColumn(ResultSet rs, int columnIndex)
@@ -163,6 +194,13 @@ e le limitazioni secondo i termini della Licenza.
     }
 
 	/**
+	 * Metodo specifico del DBMS Oracle per la gestione della scrittura di una colonna
+	 * di tipo CLOB
+	 * @param stmt per scrivere un valore CLOB occorre utilizzare un prepared statement
+	 * @param parameterIndex l'indice del parametro del prepared statement in cui dovra'
+	 *        essere inserito il valore del CLOB
+	 * @param value il valore (bytes) da inserire nella colonna CLOB)
+	 * @throws SQLException
 	 * @generated
 	 */
     public static void setClobColumn(PreparedStatement stmt, int parameterIndex, String value)

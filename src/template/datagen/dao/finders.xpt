@@ -86,7 +86,7 @@ e le limitazioni secondo i termini della Licenza.
 
 «DEFINE finder(DBAccessModel model, DataAccessObject dao, boolean body) FOR FindAll»
 	/** 
-	 * Returns all rows from the «dao.mainTable.name» table that match the criteria ''.
+	 * Restituisce tutte le righe della tabella «dao.mainTable.name».
 	 * @generated
 	 */
 	 @SuppressWarnings("unchecked")
