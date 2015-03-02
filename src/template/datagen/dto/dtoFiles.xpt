@@ -75,8 +75,7 @@ public class «getPkClassName()» implements Serializable {
 	 * Costruttore di una chiave primaria vuota
 	 * @generated 
 	 */
-	public «getPkClassName()»()
-	{
+	public «getPkClassName()»(){
 		//empty constructor
 	}
 
@@ -88,8 +87,7 @@ public class «getPkClassName()» implements Serializable {
 		«FOREACH mainTable.primaryKey.includedColumns AS currPKCol SEPARATOR ","»
 		final «javaPropertyTypeFromColumn(currPKCol)» «javaPropertyNameFromColumn(currPKCol)»
 		«ENDFOREACH»
-	)
-	{
+	){
 		«FOREACH mainTable.primaryKey.includedColumns AS currPKCol»
 		this.set«javaPropertyNameFromColumn(currPKCol).toFirstUpper()»(«javaPropertyNameFromColumn(currPKCol)»);
 		«ENDFOREACH»
@@ -102,8 +100,7 @@ public class «getPkClassName()» implements Serializable {
 	 * @param _other
 	 * @return boolean se i due oggetti sono uguali
 	 */
-	public boolean equals(Object _other)
-	{
+	public boolean equals(Object _other){
 		if (_other == null) {
 			return false;
 		}
@@ -132,8 +129,7 @@ public class «getPkClassName()» implements Serializable {
 	 * 
 	 * @return int
 	 */
-	public int hashCode()
-	{
+	public int hashCode(){
 		int _hashCode = 0;
 		
 		«FOREACH mainTable.primaryKey.includedColumns AS currPKCol»
@@ -150,8 +146,7 @@ public class «getPkClassName()» implements Serializable {
 	 * 
 	 * @return String
 	 */
-	public String toString()
-	{
+	public String toString(){
 		StringBuilder ret = new StringBuilder();
 		«FOREACH mainTable.primaryKey.includedColumns AS currPKCol»
 		ret.append( "«pkgPackage».dto.«getPkClassName()»: " );
@@ -195,8 +190,7 @@ public class «getDtoClassName()» implements Serializable {
 	 * @return «getPkClassName()»
 	 * @generated
 	 */
-	public «getPkClassName()» createPk()
-	{
+	public «getPkClassName()» createPk(){
 		return new «getPkClassName()»(
 		«FOREACH this.mainTable.primaryKey.includedColumns AS pkColumn SEPARATOR ","-»
 			«javaPropertyNameFromColumn(pkColumn)»
@@ -314,8 +308,7 @@ import java.util.*;
  * DTO specifico della query modellata nel finder «name».
  * @generated
  */
-public class «getDtoCustomQdefClassName((DataAccessObject)this.eContainer.eContainer,this)»  implements Serializable
-{
+public class «getDtoCustomQdefClassName((DataAccessObject)this.eContainer.eContainer,this)»  implements Serializable {
 
 	«EXPAND columnJavaPropertyQdef FOREACH this.queryDefinition.selectClause.columns.typeSelect(QTableColumn)»
 	«EXPAND QCalculatedColumnJavaPropertyQdef FOREACH this.queryDefinition.selectClause.columns.typeSelect(QCalculatedColumn)»
@@ -327,8 +320,7 @@ public class «getDtoCustomQdefClassName((DataAccessObject)this.eContainer.eCont
 	 * @return boolean
 	 * @generated
 	 */
-	public boolean equals(Object _other)
-	{ 
+	public boolean equals(Object _other){ 
 		return super.equals(_other);
 	}
 
@@ -338,8 +330,7 @@ public class «getDtoCustomQdefClassName((DataAccessObject)this.eContainer.eCont
 	 * @return int
 	 * @generated
 	 */
-	public int hashCode()
-	{
+	public int hashCode(){
 		return super.hashCode();
 	}
 

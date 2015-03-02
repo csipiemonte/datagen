@@ -345,6 +345,10 @@ import org.apache.log4j.Logger;
 import «getDALayerBasePkg(this)».util.*;
 
 /**
+ * Classe per la costruzione dinamica delle query basate sugli esempi.
+ * La classe e' generica e viene istanziata in ogni DataAccessObject
+ * in modo da gestire le query relativamente ad un particolare tipo di 
+ * esempi. 
  * @generated
  * @param <TEX> classe degli esempi
  */
@@ -353,11 +357,14 @@ public class QBEQueryBuilder<TEX extends AbstractExample> {
 protected static final Logger LOG = Logger.getLogger(Constants.APPLICATION_CODE);
 
 	/**
+	 * I metadati relativi al DataAccesObject a cui e' associato
+	 * il query builder.
 	 * @generated
 	 */
 	private final DAOMetadata metadata;
 
 	/**
+	 * Costruttore della classe QBEQueryBuilder.
 	 * @generated
 	 * @param metadata i metadati del DAO
 	 */
@@ -365,6 +372,13 @@ protected static final Logger LOG = Logger.getLogger(Constants.APPLICATION_CODE)
 		this.metadata = p_metadata;
 	}
 
+	/**
+	 * Metodo di utilita' che produce una lista dei nomi delle colonne
+	 * previste dalla tabella associata al DataAccessObject.
+	 * Le informazioni sono prese dall'oggetto DAOMetadata fornito in input.
+	 * @param md i metadati della tabella associata al DataAccessObject
+	 * @return una stringa contenente i nomi dei parametri separati da ","
+	 */
 	private String formatColumnNames(DAOMetadata md) {
 		if (md != null) {
 			String[] names = md.getColumnNames();
@@ -385,7 +399,7 @@ protected static final Logger LOG = Logger.getLogger(Constants.APPLICATION_CODE)
 	}
 
 	/**
-	 * 
+	 * (Per future evoluzioni)
 	 * @param propName
 	 * @param pkClass
 	 * @return true se la property <propName> e' una property di PK all'interno del DTO
@@ -398,10 +412,36 @@ protected static final Logger LOG = Logger.getLogger(Constants.APPLICATION_CODE)
 	}
 
 	/**
+	 * Crea la query a partire dagli esempi forniti in input.
+	 * Gli esempi forniti in input sono suddivisi in due insiemi:
+	 * - gli esempi positivi
+	 * - gli esempi negativi
+	 * la query e' costruita in modo che vadano in output i record che 
+	 * soddisfano almeno uno degli esempi positivi e che non soddisfano 
+	 * nessuno degli esempi negativi.
+	 * Relativamente a ciascun esempio un record soddisfa tale esempio
+	 * se soddisfa tutti i FieldCheck in esso valorizzati. I FieldCheck 
+	 * non valorizzati non conocorrono a costruire la query.
+	 * Nel caso di DataAccessObject con LookupResolver, sono gestiti anche
+	 * esempi con criteri su DTO di secondo livello (quelli relativi alle 
+	 * tabelle gestite dai LookupResolver).
+	 * In aggiunta, se il parametro usesDistinct e' valorizzato a true,
+	 * viene inserita una clausola distinct.
+	 * (N.B: l'utilita' di questa modalita' e' da verificare in quanto
+	 * la keyword DISTINCT viene inserita davanti alla lista completa di 
+	 * colonne...).
+	 * N.B: a causa della forte dinamicita' della struttura della query, la query
+	 * risultante non e' un prepared statement ma una query testuale
+	 * gia' completa. questo rappresenta una potenziale fonte di problemi di sicurezza
+	 * (SQL Injection). Il problema si elimina se vengono filtrati a monte i
+	 * valori che vanno a finire nei filed check degli esempi (es. filtrando
+	 * i campi della UI da cui tali valori derivano).   
 	 * @generated
-	 * @param posEx
-	 * @param negEx
-	 * @return
+	 * @param posEx la lista degli esempi positivi
+	 * @param negEx la lista degli esempi negativi
+	 * @param usesDistinct se true inserisce la keyword DISTINCT in testa alla
+	 *        clausola SELECT
+	 * @return la stringa corrispondente alla query.
 	 */
 	public String createFromExamples(List<TEX> posEx, List<TEX> negEx,
 			boolean usesDistinct) {
@@ -440,7 +480,7 @@ protected static final Logger LOG = Logger.getLogger(Constants.APPLICATION_CODE)
 	/**
 	 * 
 	 * @param examples lista di esempi
-	 * @param conjunctive se true le singolke clausole sono unite dall'operatore AND, 
+	 * @param conjunctive se true le singolk clausole sono unite dall'operatore AND, 
 	 * se false da OR.
 	 * @return la clausola derivante dalla concatenazione delle singole espressioni
 	 * relative agli esempi, concatenate con AND o OR a seconda del valore del parametro
@@ -576,8 +616,12 @@ protected static final Logger LOG = Logger.getLogger(Constants.APPLICATION_CODE)
 	}
 
 	/**
-	 * 
-	 * @param chk
+	 * Crea il singolo termine della clausola WHERE per il singolo FieldCheck.
+	 * Delega l'esecuzione a metodi specifici per i vari tipi di check.
+	 * @param chk il check d ainserire nella clausola WHERE
+	 * @param pd il property descriptor associato al check
+	 * @param prefixPropName il prefisso per raggiungere la property (utilizzato
+	 *        in caso di esempi annidati)
 	 * @return
 	 */
 	public String createTerm4FieldChk(FieldChk chk, PropertyDescriptor pd,
@@ -597,6 +641,20 @@ protected static final Logger LOG = Logger.getLogger(Constants.APPLICATION_CODE)
 					+ chk.getClass());
 	}
 
+	/**
+	 * Crea il singolo temrine della clausola WHERE, relativamente al check
+	 * di tipo EqChk.
+	 * - se il check ha il flag ignoreCase valorizzato a true il termine viene 
+	 *   costruito secondo il pattern UPPER(lhs) = UPPER(rhs)
+	 * - se il check contiene delle wildcard il termine viene costruito secondo 
+	 *   il pattern lhs LIKE(rhs)
+	 * - se il check e' negato il termine viene modificato di conseguenza  
+	 * @param chk il check da inserire nella clausola WHERE
+	 * @param pd il property descriptor associato al check
+	 * @param prefixPropName il prefisso per raggiungere la property (utilizzato
+	 *        in caso di esempi annidati)
+	 * @return
+	 */
 	public String createTerm4FieldChk(EqChk chk, PropertyDescriptor pd,
 			String prefixPropName) {
 		String colName = metadata.getColumnName(prefixPropName, pd.getName());
@@ -616,6 +674,15 @@ protected static final Logger LOG = Logger.getLogger(Constants.APPLICATION_CODE)
 		return term.toString();
 	}
 
+	/**
+	 * Crea il singolo temrine della clausola WHERE, relativamente al check
+	 * di tipo NullChk.
+	 * @param chk il check da inserire nella clausola WHERE
+	 * @param pd il property descriptor associato al check
+	 * @param prefixPropName il prefisso per raggiungere la property (utilizzato
+	 *        in caso di esempi annidati)
+	 * @return
+	 */
 	public String createTerm4FieldChk(NullChk chk, PropertyDescriptor pd,
 			String prefixPropName) {
 		String colName = metadata.getColumnName(prefixPropName, pd.getName());
@@ -626,6 +693,17 @@ protected static final Logger LOG = Logger.getLogger(Constants.APPLICATION_CODE)
 		return term.toString();
 	}
 
+	/**
+	 * Crea il singolo temrine della clausola WHERE, relativamente al check
+	 * di tipo RangeChk.
+	 * - se il check include o meno il lowerbound/upperbound, il termine viene 
+	 *   modificato di conseguenza con l'eventuale utilizzo della clausola BETWEEN 
+	 * @param chk il check d ainserire nella clausola WHERE
+	 * @param pd il property descriptor associato al check
+	 * @param prefixPropName il prefisso per raggiungere la property (utilizzato
+	 *        in caso di esempi annidati)
+	 * @return
+	 */
 	public String createTerm4FieldChk(RangeChk chk, PropertyDescriptor pd,
 			String prefixPropName) {
 		String colName = metadata.getColumnName(prefixPropName, pd.getName());
