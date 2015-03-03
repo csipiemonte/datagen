@@ -173,11 +173,12 @@ import java.util.*;
  * Data transfer object relativo al DAO «getDaoClassName()».
  * @generated
  */
-public class «getDtoClassName()» implements Serializable {
+public class «getDtoClassName()» «IF this.mainTable.primaryKey!=null»extends «getPkClassName()»«ELSE»implements Serializable«ENDIF» {
 
 	private static final long serialVersionUID = 1L;
-	
-	«EXPAND columnJavaProperty(this) FOREACH this.mainTable.columns»
+	«LET this.mainTable.primaryKey == null ? this.mainTable.columns : this.mainTable.columns.reject(c|mainTable.primaryKey.includedColumns.uid.contains(c.uid)) AS notPKColumns-»
+	«EXPAND columnJavaProperty(this) FOREACH notPKColumns»
+	«ENDLET-»
 	«REM»verificare se non ci sono resolvers«ENDREM»
 	«IF this.lookupResolvers!=null && this.lookupResolvers.resolvers.size >0»
 		«EXPAND lookupResolverProperty FOREACH this.lookupResolvers.resolvers»
@@ -196,6 +197,26 @@ public class «getDtoClassName()» implements Serializable {
 			«javaPropertyNameFromColumn(pkColumn)»
 		«ENDFOREACH-»
 		);
+	}
+	
+	/**
+	 * la semantica dell'equals del DTO e' la stessa della PK
+	 * (ovvero della superclasse).
+	 * @param other l'oggetto con cui effettuare il confronto
+	 * @return true se i due oggetti sono semanticamente da considerarsi uguali
+	 */
+	public boolean equals(Object other){
+		return super.equals(other);
+	}
+	
+	/**
+	 * la semantica dell'hashCode del DTO e' la stessa della PK
+	 * (ovvero della superclasse).
+	 * 
+	 * @return int
+	 */
+	public int hashCode() {
+		return super.hashCode();
 	}
 	«ENDIF»
 
@@ -217,7 +238,7 @@ public class «getDtoClassName()» implements Serializable {
 	 * store della proprieta' associata alla colonna «name»
 	 * @generated
 	 */
-	private «javaPropertyTypeFromColumn()» «javaPropertyNameFromColumn()»;
+	protected «javaPropertyTypeFromColumn()» «javaPropertyNameFromColumn()»;
 	
 	/**
 	 * Imposta il valore della proprieta' «javaPropertyNameFromColumn()» associata alla
@@ -272,7 +293,7 @@ else{
     /**
 	 * @generated
 	 */
-	private «getDtoClassName(this.supplierDAO)» «getLookedUpPropertyName()»;
+	protected «getDtoClassName(this.supplierDAO)» «getLookedUpPropertyName()»;
 	
 	/**
 	 * Imposta il valore della proprieta' di lookup «getLookedUpPropertyName()». 
