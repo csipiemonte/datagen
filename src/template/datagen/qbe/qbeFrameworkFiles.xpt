@@ -455,10 +455,10 @@ protected static final Logger LOG = Logger.getLogger(Constants.APPLICATION_CODE)
 		StringBuilder where = new StringBuilder("");
 		String posExClause = "";
 		String negExClause = "";
-		if (posEx != null && posEx.size() > 0) {
+		if (posEx != null && !posEx.isEmpty()) {
 			posExClause = createFromExamples(posEx, false);
 		}
-		if (negEx != null && negEx.size() > 0) {
+		if (negEx != null && !negEx.isEmpty()) {
 			negExClause = createFromExamples(negEx, false);
 		}
 		if (posExClause.length() > 0 && negExClause.length() > 0) {

@@ -76,7 +76,7 @@ e le limitazioni secondo i termini della Licenza.
 			stopWatch.dumpElapsed("«getDaoImplClassName(dao)»", "findByPrimaryKey","esecuzione query", sql.toString());
 			LOG.debug("[«getDaoImplClassName(dao)»::findByPrimaryKey] END");
 		}
-		return list.size() == 0 ? null : list.get(0);
+		return list.isEmpty() ? null : list.get(0);
 	}
 	«ELSE-»
 	;
@@ -279,7 +279,7 @@ public List<«getDtoCustomQdefClassName((DataAccessObject)this.eContainer.eConta
 					"Il set degli esempi negativi e' null. Impossibile costruire la query.");
 		}
 		
-		if (positive.size() == 0 && negative.size() == 0) {
+		if (positive.isEmpty() && negative.isEmpty()) {
 			throw new «getDaoExcClassName(dao)»(
 					"Il set degli esempi positivi e negativi e' vuoto. Impossibile costruire la query.");
 		}
