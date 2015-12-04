@@ -246,7 +246,7 @@ public class «getDtoClassName()» «IF this.mainTable.primaryKey!=null»extends
 	 * @generated
 	 */
 	public void set«javaPropertyNameFromColumn().toFirstUpper()» («javaPropertyTypeFromColumn()» val){
-		«EXPAND setPropertyValueStmt(dao) FOR this»
+		«EXPAND setPropertyValueStmt_internal(javaPropertyNameFromColumn(), type) FOR type»
 	}
 	
 	/**
@@ -254,13 +254,14 @@ public class «getDtoClassName()» «IF this.mainTable.primaryKey!=null»extends
 	 * @generated
 	 */
 	public «javaPropertyTypeFromColumn()» get«javaPropertyNameFromColumn().toFirstUpper()»(){
-		«EXPAND returnPropertyValueStmt(dao) FOR this»
+		«EXPAND returnPropertyValueStmt_internal(javaPropertyNameFromColumn(), type) FOR type»
 	}
 	«ENDIF-»
 	
 	
 «ENDDEFINE»
 
+«REM»
 «DEFINE returnPropertyValueStmt(DataAccessObject dao) FOR TableColumn»
 «IF this.type.type == PrimitiveTypeCodes::DATE || this.type.type == PrimitiveTypeCodes::TIMESTAMP || this.type.type == PrimitiveTypeCodes::TIME-»
 if («javaPropertyNameFromColumn()» != null){
@@ -286,7 +287,39 @@ else{
 	«javaPropertyNameFromColumn()» = val;
 «ENDIF-»
 «ENDDEFINE»
+«ENDREM»
 
+«REM»
+**************************************************
+setter e getter delle property dei DTO di querydef
+**************************************************
+«ENDREM»
+
+«DEFINE returnPropertyValueStmt_internal(String javaPropertyName, PrimitiveDataType type) FOR PrimitiveDataType»
+«IF type.type == PrimitiveTypeCodes::DATE || type.type == PrimitiveTypeCodes::TIMESTAMP || type.type == PrimitiveTypeCodes::TIME-»
+if («javaPropertyName» != null){
+  return new «javaTypeFromSQLType(type)»(«javaPropertyName».getTime());
+}
+else{
+  return null;
+ }
+«ELSE-»
+	return «javaPropertyName»;
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE setPropertyValueStmt_internal(String javaPropertyName, PrimitiveDataType type) FOR PrimitiveDataType»
+«IF type.type == PrimitiveTypeCodes::DATE || type.type == PrimitiveTypeCodes::TIMESTAMP || type.type == PrimitiveTypeCodes::TIME-»
+if (val != null){
+  «javaPropertyName» = new «javaTypeFromSQLType(type)»(val.getTime());
+}
+else{
+  «javaPropertyName» = null;
+ }
+«ELSE-»
+	«javaPropertyName» = val;
+«ENDIF-»
+«ENDDEFINE»
 
 
 «DEFINE lookupResolverProperty FOR LookupResolver»
@@ -386,14 +419,14 @@ public class «getDtoCustomQdefClassName((DataAccessObject)this.eContainer.eCont
 			 * @generated
 			 */
 			public void set«javaPropertyNameFromColumn(this.column).toFirstUpper()» («javaPropertyTypeFromColumn(this.column)» val){
-				«javaPropertyNameFromColumn(this.column)» = val;
+				«EXPAND setPropertyValueStmt_internal(javaPropertyNameFromColumn(this.column), this.column.type) FOR this.column.type»
 			}
 			
 			/**
 			 * @generated
 			 */
 			public «javaPropertyTypeFromColumn(this.column)» get«javaPropertyNameFromColumn(this.column).toFirstUpper()»(){
-				return «javaPropertyNameFromColumn(this.column)»;
+				«EXPAND returnPropertyValueStmt_internal(javaPropertyNameFromColumn(this.column), this.column.type) FOR this.column.type»
 			}
 			
 			«ELSE»
@@ -406,13 +439,13 @@ public class «getDtoCustomQdefClassName((DataAccessObject)this.eContainer.eCont
 			 * @generated
 			 */
 			public void set«this.qtable.aliasName.toFirstUpper()»«javaPropertyNameFromColumn(this.column).toFirstUpper()» («javaPropertyTypeFromColumn(this.column)» val){
-				«this.qtable.aliasName.toFirstLower()»«javaPropertyNameFromColumn(this.column).toFirstUpper()» = val;
+				«EXPAND setPropertyValueStmt_internal(this.qtable.aliasName.toFirstLower()+javaPropertyNameFromColumn(this.column).toFirstUpper(), this.column.type) FOR this.column.type»
 			}
 			/**
 			 * @generated
 			 */
 			public «javaPropertyTypeFromColumn(this.column)» get«this.qtable.aliasName.toFirstUpper()»«javaPropertyNameFromColumn(this.column).toFirstUpper()»(){
-				return «this.qtable.aliasName.toLowerCase()»«javaPropertyNameFromColumn(this.column).toFirstUpper()»;
+				«EXPAND returnPropertyValueStmt_internal(this.qtable.aliasName.toLowerCase()+javaPropertyNameFromColumn(this.column).toFirstUpper(), this.column.type) FOR this.column.type»
 			}
 			«ENDIF»
 		«ELSE»
@@ -425,13 +458,13 @@ public class «getDtoCustomQdefClassName((DataAccessObject)this.eContainer.eCont
 			 * @generated
 			 */
 			public void set«this.alias.toFirstUpper()» («javaPropertyTypeFromColumn(this.column)» val){
-				«this.alias» = val;
+				«EXPAND setPropertyValueStmt_internal(this.alias, this.column.type) FOR this.column.type»
 			}
 			/**
 			 * @generated
 			 */
 			public «javaPropertyTypeFromColumn(this.column)» get«this.alias.toFirstUpper()»(){
-				return «this.alias»;
+				«EXPAND returnPropertyValueStmt_internal(this.alias, this.column.type) FOR this.column.type»
 			}
 		«ENDIF»
 «ENDDEFINE»
@@ -448,13 +481,13 @@ public class «getDtoCustomQdefClassName((DataAccessObject)this.eContainer.eCont
 		* @generated
 		*/
 		public void set«this.alias.toFirstUpper()» («javaTypeFromSQLType(this.calculatedType)» val){
-		«this.alias» = val;
+			«EXPAND setPropertyValueStmt_internal(this.alias, this.calculatedType) FOR this.calculatedType»
 		}
 		/**
 		* @generated
 		*/
 		public «javaTypeFromSQLType(this.calculatedType)» get«this.alias.toFirstUpper()»(){
-			return «this.alias»;
+			«EXPAND returnPropertyValueStmt_internal(this.alias, this.calculatedType) FOR this.calculatedType»
 		}
 			
 «ENDDEFINE»
