@@ -209,9 +209,9 @@ switch(pdt.type){
 		case PrimitiveTypeCodes::LONGVARBINARY :
 			"byte[]" 
 		case PrimitiveTypeCodes::OTHER :
-			"String" 
+			"Object" 
 		case PrimitiveTypeCodes::JAVA_OBJECT :
-			"Class" 
+			"Object" 
 		case PrimitiveTypeCodes::DISTINCT :
 			"Object" 
 		case PrimitiveTypeCodes::STRUCT :
@@ -277,7 +277,7 @@ String getValueFromRS(TableColumn col, int i) :
 		case PrimitiveTypeCodes::LONGVARBINARY :
 			"rs.getBytes("+i+")" 
 		case PrimitiveTypeCodes::OTHER :
-			"getClobColumn(rs, "+i+")"  
+			"rs.getObject("+i+")" 
 		case PrimitiveTypeCodes::JAVA_OBJECT :
 			"rs.getObject("+i+")" 
 		case PrimitiveTypeCodes::DISTINCT :
@@ -411,7 +411,7 @@ String getValueFromRSByColName(PrimitiveDataType pt, String resultSetName) :
 		case PrimitiveTypeCodes::LONGVARBINARY :
 			"rs.getBytes(\""+resultSetName+"\")" 
 		case PrimitiveTypeCodes::OTHER :
-			"getClobColumn(rs, \""+resultSetName+"\")"  
+			"rs.getObject(\""+resultSetName+"\")"  
 		case PrimitiveTypeCodes::JAVA_OBJECT :
 			"rs.getObject(\""+resultSetName+"\")" 
 		case PrimitiveTypeCodes::DISTINCT :
