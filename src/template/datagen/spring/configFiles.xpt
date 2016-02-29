@@ -44,7 +44,7 @@ e le limitazioni secondo i termini della Licenza.
 	-->
 	«EXPAND localDatasourceSample FOR this»
   
-  <bean id="myDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+  <bean id="«getDataSourceBeanName()»" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName" value="siceeweb/jdbc/SiceeDS" />
 		<property name="proxyInterface" value="javax.sql.DataSource" />
 	</bean>
@@ -63,8 +63,8 @@ e le limitazioni secondo i termini della Licenza.
 
 «ENDPROTECT»
 	
-		<bean id="namedJdbcTemplate" class="«getDALayerBasePkg(this)».util.NamedParameterJdbcTemplateWithQueryDebug">
-			<constructor-arg ref="myDataSource" />
+		<bean id="«getJDBCTemplateBeanName()»" class="«getDALayerBasePkg(this)».util.NamedParameterJdbcTemplateWithQueryDebug">
+			<constructor-arg ref="«getDataSourceBeanName()»" />
 		</bean>
 	
 	«REM»STDMDD-898:aggiunta dichiarazione dei bean di cache se richiesto da modello e referenza del daoImpl alla cache dichiarata«ENDREM»
@@ -94,7 +94,7 @@ e le limitazioni secondo i termini della Licenza.
   	«ENDIF-»
   	
 	<bean id="«getDaoIdName(currDao)»" class="«getDaoImplFQN(currDao, this)»">
-    	<property name="jdbcTemplate" ref="namedJdbcTemplate" />
+    	<property name="jdbcTemplate" ref="«getJDBCTemplateBeanName()»" />
     	«IF currDao.cacheability==CacheabilityTypes::ALMOST_STABLE_DATA-»
     	<property name="cache" ref="simpleCache_«currDao.getDaoClassName()»" />
     	«ENDIF»

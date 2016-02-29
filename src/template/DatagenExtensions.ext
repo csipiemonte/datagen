@@ -625,4 +625,9 @@ String javaSqlTypeForJDBCBinding(PrimitiveDataType pdt):
 	else
 	"java.sql.Types."+pdt.type;
 	
-			
+/// nomi dei beans
+String getDataSourceBeanName(DBAccessModel model) :
+	model.name.isNullOrEmpty() ? "myDataSource" : "myDataSource"+model.name.toFirstUpper();		
+
+String getJDBCTemplateBeanName(DBAccessModel model) :
+	model.name.isNullOrEmpty() ? "namedJdbcTemplate" : "namedJdbcTemplate"+model.name.toFirstUpper();		
