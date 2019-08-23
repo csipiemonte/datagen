@@ -1,4 +1,4 @@
-«REM»
+Â«REMÂ»
 C) Copyright 2011 CSI-PIEMONTE;                                             
                                                                             
 Concesso in licenza a norma dell'EUPL, esclusivamente versione 1.1;         
@@ -13,31 +13,31 @@ distribuito "TAL QUALE", SENZA GARANZIE O CONDIZIONI DI ALCUN TIPO,
 esplicite o implicite.                                                      
 Si veda la Licenza per la lingua specifica che disciplina le autorizzazioni 
 e le limitazioni secondo i termini della Licenza.                           
-«ENDREM»
+Â«ENDREMÂ»
 
-«IMPORT ecore»
-«IMPORT datagen»
-«IMPORT rdbmdl»
-«IMPORT rdbmdl::constraints»
-«IMPORT rdbmdl::datatypes»
-«IMPORT rdbmdl::view»
+Â«IMPORT ecoreÂ»
+Â«IMPORT datagenÂ»
+Â«IMPORT rdbmdlÂ»
+Â«IMPORT rdbmdl::constraintsÂ»
+Â«IMPORT rdbmdl::datatypesÂ»
+Â«IMPORT rdbmdl::viewÂ»
 
-«EXTENSION template::DatagenExtensions»
+Â«EXTENSION template::DatagenExtensionsÂ»
 
-«DEFINE main(String daoBeansFileName, String basePkg) FOR DBAccessModel»
+Â«DEFINE main(String daoBeansFileName, String basePkg) FOR DBAccessModelÂ»
 
-«dumpProperties()»
-«backupProperties()»
-«setProperty("basePackage",basePkg)»
-«dumpProperties()»
+Â«dumpProperties()Â»
+Â«backupProperties()Â»
+Â«setProperty("basePackage",basePkg)Â»
+Â«dumpProperties()Â»
 
-«EXPAND template::datagen::dto::dtoFiles::dtoFiles FOR this»
-«EXPAND template::datagen::qbe::qbeExampleFiles::qbeExamplesFiles FOR this»
-«EXPAND template::datagen::dao::daoFiles::daoFiles FOR this»
-«EXPAND template::datagen::dao::metadataFiles::metadataFiles FOR this»
-«EXPAND template::datagen::qbe::qbeFrameworkFiles::frameworkFiles FOR this»
-«EXPAND template::datagen::spring::configFiles::daoBeansFile(daoBeansFileName) FOR this»
-«EXPAND template::datagen::spring::configFiles::configFiles FOR this»
-«restoreProperties()»
-«dumpProperties()»
-«ENDDEFINE»
+Â«EXPAND template::datagen::dto::dtoFiles::dtoFiles FOR thisÂ»
+Â«EXPAND template::datagen::qbe::qbeExampleFiles::qbeExamplesFiles FOR thisÂ»
+Â«EXPAND template::datagen::dao::daoFiles::daoFiles FOR thisÂ»
+Â«EXPAND template::datagen::dao::metadataFiles::metadataFiles FOR thisÂ»
+Â«EXPAND template::datagen::qbe::qbeFrameworkFiles::frameworkFiles FOR thisÂ»
+Â«EXPAND template::datagen::spring::configFiles::daoBeansFile(daoBeansFileName) FOR thisÂ»
+Â«EXPAND template::datagen::spring::configFiles::configFiles FOR thisÂ»
+Â«restoreProperties()Â»
+Â«dumpProperties()Â»
+Â«ENDDEFINEÂ»
